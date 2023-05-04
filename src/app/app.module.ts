@@ -52,11 +52,11 @@ const appRoutes: Routes = [
         loadChildren: () =>
             import("./main/setup/setup.module").then((m) => m.SetupModule),
     },
-    {
-        path: "opd",
-        loadChildren: () =>
-            import("./main/opd/opd.module").then((m) => m.OPDModule),
-    },
+    // {
+    //     path: "opd",
+    //     loadChildren: () =>
+    //         import("./main/opd/opd.module").then((m) => m.OPDModule),
+    // },
     {
         path: '**',
         redirectTo: 'auth/login'
