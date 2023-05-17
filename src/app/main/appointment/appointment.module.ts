@@ -1,60 +1,59 @@
+import { AppointmentComponent } from './appointment.component';
 import { NgModule } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatRippleModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSortModule } from '@angular/material/sort';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule, Routes } from '@angular/router';
-import { FuseConfirmDialogModule, FuseSidebarModule } from '@fuse/components';
-import { FuseSharedModule } from '@fuse/shared.module';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DatePipe } from '@angular/common';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatDialogModule } from '@angular/material/dialog';
-import {MatGridListModule} from '@angular/material/grid-list';
-import { NotificationServiceService } from 'app/core/notification-service.service';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatFormFieldModule } from '@angular/material/form-field';
-
-import { MatTooltipModule } from '@angular/material/tooltip';
-
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatIconModule } from '@angular/material/icon';
+import { MatRippleModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
+import { FuseSharedModule } from '@fuse/shared.module';
+import { FuseConfirmDialogModule, FuseSidebarModule } from '@fuse/components';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { RouterModule, Routes } from '@angular/router';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NewAppointmentComponent } from './new-appointment/new-appointment.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { SharedModule } from 'app/main/shared/shared.module';
-import { RegisterService } from './register.service';
-import { RegisterComponent } from './register.component';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { EditAppointmentComponent } from './edit-appointment/edit-appointment.component';
+import { NewScheduledApppointmentComponent } from './new-scheduled-apppointment/new-scheduled-apppointment.component';
+// import { SharedModule } from 'app/main/shared/shared.module';
 
 const routes: Routes = [
     {
-        path: 'registration',
-        component: RegisterComponent,
+        path: '**',
+        component: AppointmentComponent,
     },
 ];
 @NgModule({
     declarations: [
-        RegisterComponent,
+        AppointmentComponent,
+        NewAppointmentComponent,
+        EditAppointmentComponent,
+        NewScheduledApppointmentComponent,
       
     ],
     imports: [
         RouterModule.forChild(routes),
-        
-        // MatTableExporterModule,
         MatButtonModule,
         MatCheckboxModule,
         MatDatepickerModule,
@@ -77,7 +76,7 @@ const routes: Routes = [
         FuseConfirmDialogModule,
         FuseSidebarModule,
         MatDialogModule,
-        MatGridListModule,
+        MatListModule,
         MatSnackBarModule,
         MatSlideToggleModule ,
         MatDividerModule,
@@ -92,19 +91,17 @@ const routes: Routes = [
         MatProgressSpinnerModule,
         SharedModule,
         NgxMatSelectSearchModule,
-        MatBadgeModule,
+        MatCardModule,
+        MatListModule,
         MatTooltipModule,
-        MatExpansionModule
- 
+        MatExpansionModule,
+        MatListModule,
     ],
     providers: [
-        RegisterService,
-                DatePipe
+        DatePipe
     ],
     entryComponents: [
-        RegisterComponent,
-        NotificationServiceService
-        
+        AppointmentComponent,
     ]
 })
-export class RegisterModule { }
+export class AppointmentModule { }

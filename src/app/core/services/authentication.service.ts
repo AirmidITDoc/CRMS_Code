@@ -77,6 +77,7 @@ export class AuthenticationService {
 
 
     getNavigationData(){
+        debugger;
        if(this._fuseNavigationService.getNavigation("main1")){
            console.log("already exist")
            return;

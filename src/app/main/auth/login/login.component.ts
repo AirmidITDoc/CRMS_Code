@@ -5,6 +5,7 @@ import { FuseConfigService } from "@fuse/services/config.service";
 import { fuseAnimations } from "@fuse/animations";
 import { Router, ActivatedRoute } from "@angular/router";
 import { AuthenticationService } from "app/core/services/authentication.service";
+import Swal from "sweetalert2";
 
 @Component({
     selector: "login",
@@ -73,7 +74,8 @@ export class LoginComponent implements OnInit {
 
         // get return url from route parameters or default to '/'
         // this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/dashboard";
-        this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/opd/registration";
+        this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/dashboard";
+        Swal.fire("Login")
     }
 
     // convenience getter for easy access to form fields
