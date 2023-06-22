@@ -319,9 +319,20 @@ export class AppointmentService {
     return this._httpClient.post("Generic/GetByProc?procName=Retrieve_RegbyRegID", employee)
   }
 
-
+public CaseDetailInsert(employee){
+  return this._httpClient.post("OutPatient/CaseDetailSave", employee);
+}
 
   populateFormpersonal(employee) {
     // this.personalFormGroup.patchValue(employee);
   }
+
+  public getCaseIDCombo(){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CasedetailId", {});
+  }
+
+  public getCaseDetailPrint(employee){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CasedetailId",employee);
+  }
 }
+

@@ -1,0 +1,194 @@
+<div fxlayout="row" fxFlex.gt-sm="100%" fxFlex class="page-layout simple right-sidebar"
+    style="height: 530px !important;">
+    <div class="center" fusePerfectScrollbar style="overflow: auto;">
+          
+
+        <mat-toolbar matDialogTitle class="mat-accent m-0">
+            <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
+                style="background-color:rgb(18, 87, 134) !important;">
+                <h3>Case Details </h3>
+                <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+        <div style="padding:10px; height: 100%;" fxLayoutGap="2px">
+            <div class="dialog-content-wrapper" style="align-items: flex-end;margin-right:10px;">
+               
+                <form [formGroup]="personalFormGroup">
+                    <div style="float: right;">
+                        <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
+                        </app-common-date>
+                    </div>
+                    <ng-template matStepLabel>Personal</ng-template>
+
+                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+
+                        <mat-form-field appearance="outline" style="width: 25%;font-weight: bolder;">
+                            <mat-label>CaseTitle</mat-label>
+                            <input name="CaseTitle" formControlName="CaseTitle" placeholder="CaseTitle" matInput
+                                [ngModel]="registerObj.CaseTitle" (ngModelChange)="registerObj.CaseTitle = $event">
+                            <!-- <mat-error *ngIf="personalFormGroup.get('AgeDay').invalid && personalFormGroup.get('AgeDay').touched">
+              Please enter Age Day </mat-error> -->
+                        </mat-form-field>
+                    </div>
+                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>CaseDescription</mat-label>
+                            <textarea name="CaseDescription" formControlName="CaseDescription"
+                                placeholder="CaseDescription" matInput [(ngModel)]="registerObj.CaseDescription">
+
+                        </textarea>
+
+                        </mat-form-field>
+
+
+                    </div>
+                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+
+
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>CaseStart Date</mat-label>
+                            <input name="CaseStartDate" matInput [matDatepicker]="picker"
+                                formControllName="CaseStartDate" [value]="registerObj.CaseStartDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                           
+                        </mat-form-field>
+
+                    
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>TotalSubjects</mat-label>
+                            <input name="TotalSubjects" formControlName="TotalSubjects" placeholder="TotalSubjects"
+                                matInput [ngModel]="registerObj.TotalSubjects"
+                                (ngModelChange)="registerObj.TotalSubjects = $event" type="number">
+                            <!-- <mat-error *ngIf="personalFormGroup.get('AgeDay').invalid && personalFormGroup.get('AgeDay').touched">
+            Please enter Age Day </mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>TotalVisits</mat-label>
+                            <input name="TotalVisits" formControlName="TotalVisits" placeholder="TotalVisits" matInput
+                                min="0" [ngModel]="registerObj.TotalVisits"
+                                (ngModelChange)="registerObj.TotalVisits = $event" type="number">
+                            <!-- <mat-error
+            *ngIf="personalFormGroup.get('AgeMonth').invalid && personalFormGroup.get('AgeMonth').touched">
+            Please enter Age Month </mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>VisitFrequency</mat-label>
+                            <input name="VisitFrequency" formControlName="VisitFrequency" placeholder="VisitFrequency"
+                                matInput (ngModelChange)="registerObj.VisitFrequency = $event">
+                            <!-- <mat-error
+              *ngIf="personalFormGroup.get('AgeMonth').invalid && personalFormGroup.get('AgeMonth').touched">
+              Please enter Age Month </mat-error> -->
+                        </mat-form-field>
+
+                    </div>
+
+                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>CaseEnd Date</mat-label>
+                            <input name="CaseEndDate" matInput [matDatepicker]="picker1" formControllName="CaseEndDate"
+                                [value]="registerObj.CaseEndDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>CaseStatus</mat-label>
+                            <input matInput type="text" name="CaseStatus" formControlName="CaseStatus"
+                                placeholder="CaseStatus" [ngModel]="registerObj.CaseStatus">
+
+                            <!-- <mat-error class="error"
+            *ngIf="personalFormGroup.get('AadharCardNo').invalid && personalFormGroup.get('AadharCardNo').touched">
+            12 digits
+            AadharCardNo is
+            required</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>CompanyName</mat-label>
+                            <input matInput type="text" name="CompanyName" formControlName="CompanyName"
+                                placeholder="CompanyName" [ngModel]="registerObj.CompanyName">
+
+                            <!-- <mat-error class="error"
+              *ngIf="personalFormGroup.get('AadharCardNo').invalid && personalFormGroup.get('AadharCardNo').touched">
+              12 digits
+              AadharCardNo is
+              required</mat-error> -->
+                        </mat-form-field>
+
+
+
+                    </div>
+
+
+
+                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+
+                    
+
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>CaseRepresentative</mat-label>
+                            <input name="CaseRepresentative" formControlName="CaseRepresentative"
+                                placeholder="CaseRepresentative" matInput [(ngModel)]="registerObj.CaseRepresentative">
+                            <!-- <mat-error class="error"
+                                *ngIf="personalFormGroup.get('PhoneNo').invalid && personalFormGroup.get('PhoneNo').touched">10
+                                Degits
+                                number is required
+                            </mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>HospitalRepresentative</mat-label>
+                            <input name="HospitalRepresentative" formControlName="HospitalRepresentative"
+                                placeholder="HospitalRepresentative" matInput required
+                                [(ngModel)]="registerObj.HospitalRepresentative">
+                            <!-- <mat-error class="error"
+                                *ngIf="personalFormGroup.get('MobileNo').invalid && personalFormGroup.get('MobileNo').touched">10
+                                digits Mobile number is
+                                required</mat-error> -->
+                        </mat-form-field>
+                    </div>
+
+
+                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>AgreementFileName</mat-label>
+                            <input name="AgreementFileName" formControlName="AgreementFileName"
+                                placeholder="AgreementFileName" matInput required
+                                [(ngModel)]="registerObj.AgreementFileName">
+                            <!-- <mat-error class="error"
+                                *ngIf="personalFormGroup.get('MobileNo').invalid && personalFormGroup.get('MobileNo').touched">10
+                                digits Mobile number is
+                                required</mat-error> -->
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;">
+
+                        <div style="float: right;margin-top: 20px;">
+                            <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()"
+                                [disabled]="personalFormGroup.invalid">Save</button>
+                            <!--              
+              <button (click)="isDisabled = !isDisabled">
+                {{ isDisabled ? 'Edit' : 'Save' }}
+            </button> -->
+
+                            <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="snackbar">{{snackmessage}}</div>

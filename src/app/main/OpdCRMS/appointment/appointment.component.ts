@@ -1,21 +1,23 @@
-import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { AppointmentService } from './appointment.service';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DatePipe, Time } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { NewAppointmentComponent } from './new-appointment/new-appointment.component';
-import { NewScheduledApppointmentComponent } from './new-scheduled-apppointment/new-scheduled-apppointment.component';
 import { EditAppointmentComponent } from './edit-appointment/edit-appointment.component';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-appointment',
   templateUrl: './appointment.component.html',
-  styleUrls: ['./appointment.component.scss']
+  styleUrls: ['./appointment.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class AppointmentComponent implements OnInit {
 
@@ -77,7 +79,7 @@ export class AppointmentComponent implements OnInit {
         }
 
 
-    this.getVisitList();
+    // this.getVisitList();
     // this.dataSource.data.refresh();
 
   }
@@ -95,20 +97,20 @@ export class AppointmentComponent implements OnInit {
       "To_Dt": this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
       "IsMark": this._AppointmentSreviceService.myFilterform.get("IsMark").value || 0,
     }
-    setTimeout(() => {
-      this.sIsLoading = 'loading-data';
-      this._AppointmentSreviceService.getAppointmentList(D_data).subscribe(Visit => {
-        this.dataSource.data = Visit as VisitMaster[];
-        console.log(this.dataSource.data);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-        this.sIsLoading = '';
-        console.log(this.dataSource.data)
-      },
-        error => {
-          this.sIsLoading = '';
-        });
-    }, 1000);
+    // setTimeout(() => {
+    //   this.sIsLoading = 'loading-data';
+    //   this._AppointmentSreviceService.getAppointmentList(D_data).subscribe(Visit => {
+    //     this.dataSource.data = Visit as VisitMaster[];
+    //     console.log(this.dataSource.data);
+    //     this.dataSource.sort = this.sort;
+    //     this.dataSource.paginator = this.paginator;
+    //     this.sIsLoading = '';
+    //     console.log(this.dataSource.data)
+    //   },
+    //     error => {
+    //       this.sIsLoading = '';
+    //     });
+    // }, 1000);
 
   }
 
@@ -245,19 +247,19 @@ export class AppointmentComponent implements OnInit {
           "RegTime": this.dataArray[0].RegTime
         }
         this._AppointmentSreviceService.populateFormpersonal(m_data);
-        const dialogRef = this._matDialog.open(NewScheduledApppointmentComponent,
-          {
-            maxWidth: "85vw",
-            height: '550px',
-            width: '100%',
-            data: {
-              registerObj: m_data,
-            }
-          });
-        dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed - Insert Action', result);
-          this.getVisitList();
-        });
+        // const dialogRef = this._matDialog.open(NewScheduledApppointmentComponent,
+        //   {
+        //     maxWidth: "85vw",
+        //     height: '550px',
+        //     width: '100%',
+        //     data: {
+        //       registerObj: m_data,
+        //     }
+        //   });
+        // dialogRef.afterClosed().subscribe(result => {
+        //   console.log('The dialog was closed - Insert Action', result);
+        //   this.getVisitList();
+        // });
       },
         error => {
           this.sIsLoading = '';
@@ -268,7 +270,9 @@ export class AppointmentComponent implements OnInit {
   }
 
   newappointment() {
-    const dialogRef = this._matDialog.open(NewScheduledApppointmentComponent,
+
+    debugger;
+    const dialogRef = this._matDialog.open(NewAppointmentComponent,
       {
         maxWidth: "95vw",
         height: '700px',
@@ -488,7 +492,7 @@ export class AppointmentComponent implements OnInit {
     };
     // this.advanceDataStored.storage = new RegInsert(xx);
 
-    const dialogRef = this._matDialog.open(NewScheduledApppointmentComponent,
+    const dialogRef = this._matDialog.open(NewAppointmentComponent,
       {
         maxWidth: "95vw",
         height: '700px',
@@ -508,7 +512,7 @@ export class VisitMaster {
   RegNoWithPrefix: number;
   PatientName: string;
   VisitDate: Date;
-  VisitTime: Time;
+  VisitTime: Date;
   HospitalID: number;
   HospitalName: string;
   PatientTypeID: number;
@@ -576,7 +580,7 @@ export class VisitMaster {
 export class RegInsert {
   RegId: Number;
   RegDate: Date;
-  RegTime: Time;
+  RegTime: Date;
   PrefixId: number;
   PrefixID: number;
   FirstName: string;

@@ -1,4 +1,3 @@
-import { AppointmentComponent } from './appointment.component';
 import { NgModule } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,7 +17,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { RouterModule, Routes } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { NewAppointmentComponent } from './new-appointment/new-appointment.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
@@ -34,22 +32,25 @@ import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { SharedModule } from 'app/main/shared/shared.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { EditAppointmentComponent } from './edit-appointment/edit-appointment.component';
-import { NewScheduledApppointmentComponent } from './new-scheduled-apppointment/new-scheduled-apppointment.component';
+import { MatNestedTreeNode, MatTree, MatTreeModule } from '@angular/material/tree';
+import { NewCaseDetailComponent } from './new-case-detail/new-case-detail.component';
+import { CaseDetailComponent } from './case-detail.component';
+import { CasedetailService } from './casedetail.service';
+import { EditCasedetailComponent } from './edit-casedetail/edit-casedetail.component';
+
 // import { SharedModule } from 'app/main/shared/shared.module';
 
 const routes: Routes = [
     {
         path: '**',
-        component: AppointmentComponent,
+        component: CaseDetailComponent,
     },
 ];
 @NgModule({
     declarations: [
-        AppointmentComponent,
-        NewAppointmentComponent,
-        EditAppointmentComponent,
-        NewScheduledApppointmentComponent,
+        CaseDetailComponent,
+        NewCaseDetailComponent,
+        EditCasedetailComponent
       
     ],
     imports: [
@@ -96,12 +97,15 @@ const routes: Routes = [
         MatTooltipModule,
         MatExpansionModule,
         MatListModule,
+        // TreeViewComponent,
+        MatTreeModule,
     ],
     providers: [
+        CasedetailService,
         DatePipe
     ],
     entryComponents: [
-        AppointmentComponent,
+        CaseDetailComponent
     ]
 })
-export class AppointmentModule { }
+export class CasedetailModule { }

@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { RegInsert, VisitMaster } from '../appointment.component';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
 import { MatStepper } from '@angular/material/stepper';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { AppointmentService } from '../appointment.service';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -13,13 +13,14 @@ import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import Swal from 'sweetalert2';
-import { AdvanceDataStored } from '../advance';
-import { NewScheduledApppointmentComponent } from '../new-scheduled-apppointment/new-scheduled-apppointment.component';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-new-appointment',
   templateUrl: './new-appointment.component.html',
-  styleUrls: ['./new-appointment.component.scss']
+  styleUrls: ['./new-appointment.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class NewAppointmentComponent implements OnInit {
 
@@ -56,8 +57,7 @@ export class NewAppointmentComponent implements OnInit {
   Doctor1List: any = [];
   Doctor2List: any = [];
   WardList: any = [];
-  BedList: any = [];
-  BedClassList: any = [];
+  
   ConfigCityId = 2;
   ConfigcityList: any = [];
   _cityList: any = [];
@@ -74,7 +74,7 @@ export class NewAppointmentComponent implements OnInit {
   sIsLoading: string = '';
   selectedGender = "";
   selectedGenderID: any;
-  capturedImage: any;
+
   isLinear = true;
   personalFormGroup: FormGroup;
   VisitFormGroup: FormGroup;
@@ -85,7 +85,7 @@ export class NewAppointmentComponent implements OnInit {
   dataArray = {};
   HospitalList1: any = [];
   Patientnewold:any  = 1;
-
+  CaseIdList:any = [];
   
   IsPathRad: any;
   PatientName: any = '';
@@ -102,6 +102,11 @@ export class NewAppointmentComponent implements OnInit {
   AnestheticsDr:any;
   OTTableName :any;
 
+  
+  isLoadings = false;
+  isOpen = false;
+  loadID = 0;
+  savedValue: number = null;
 
 
   // prefix filter
@@ -180,7 +185,7 @@ export class NewAppointmentComponent implements OnInit {
     public dialogRef: MatDialogRef<NewAppointmentComponent>,
     public datePipe: DatePipe,
     private formBuilder: FormBuilder,
-    private advanceDataStored: AdvanceDataStored,
+    // private advanceDataStored: AdvanceDataStored,
     private router: Router
   ) {
     // dialogRef.disableClose = true;
@@ -195,6 +200,7 @@ export class NewAppointmentComponent implements OnInit {
     this.searchFormGroup = this.createSearchForm();
     this.searchFormGroup.markAllAsTouched();
 
+    this.CaseListCombo();
     this.getHospitalList1();
     this.getHospitalList();
     this.getPrefixList();
@@ -206,7 +212,7 @@ export class NewAppointmentComponent implements OnInit {
     this.getcityList();
     // this.getGendorMasterList();
     this.getCompanyList();
-    this.getSubTPACompList();
+    // this.getSubTPACompList();
     this.getDepartmentList();
     this.getDoctor1List();
     this.getDoctor2List();
@@ -370,15 +376,22 @@ export class NewAppointmentComponent implements OnInit {
       RefDocName: '',
       ClassId: '',
       PurposeId: '',
-
+      CaseId:['', [
+        Validators.required]],
 
       IsMark: '',
-      IsXray: '',
+      
       Comments: '',
       Intime: '',
       OutTime: ''
     });
   }
+
+
+  CaseListCombo(){
+    this._opappointmentService.getCaseIDCombo().subscribe(data => { this.CaseIdList = data; })
+    }
+
   createSearchForm() {
     return this.formBuilder.group({
       regRadio: ['registration'],
@@ -480,6 +493,7 @@ export class NewAppointmentComponent implements OnInit {
   getDepartmentList() {
     this._opappointmentService.getDepartmentCombo().subscribe(data => {
       this.DepartmentList = data;
+      console.log(data);
       this.filteredDepartment.next(this.DepartmentList.slice());
     });
   }
@@ -780,11 +794,11 @@ export class NewAppointmentComponent implements OnInit {
     this._opappointmentService.initializeFormGroup();
   }
 
-  OnChangeDoctorList(departmentObj) {
-    //debugger;
-    console.log(departmentObj);
-    this._opappointmentService.getDoctorMasterCombo(departmentObj.Departmentid).subscribe(data => { this.DoctorList = data; })
-  }
+  // OnChangeDoctorList(departmentObj) {
+  //   //debugger;
+  //   console.log(departmentObj);
+  //   this._opappointmentService.getDoctorMasterCombo(departmentObj.Departmentid).subscribe(data => { this.DoctorList = data; })
+  // }
 
   getDoctor1List() {
     // this._opappointmentService.getDoctorMaster1Combo().subscribe(data => { this.Doctor1List = data; })
@@ -799,6 +813,28 @@ export class NewAppointmentComponent implements OnInit {
     // console.log(this.VisitFormGroup.get('DoctorIdOne').value.reset(''));
    
   this.getDoctor1List();
+  }
+
+  openChanged(event) {
+    this.isOpen = event;
+    this.isLoading = event;
+    if (event) {
+      this.savedValue = this.departmentFilterCtrl.value;
+      this.options = [];
+      this.departmentFilterCtrl.reset();
+      this._opappointmentService.getDepartmentCombo();
+    }
+  }
+
+  OnChangeDoctorList(departmentObj) {
+    // debugger;
+    
+    this._opappointmentService.getDoctorMasterCombo(departmentObj.Departmentid).subscribe(
+      data => {
+        this.DoctorList = data;
+        console.log(this.DoctorList);
+        this.filteredDoctor.next(this.DoctorList.slice());
+      })
   }
 
 
@@ -964,8 +1000,8 @@ export class NewAppointmentComponent implements OnInit {
       let tokenNumberWithDoctorWiseInsert = {};
       
       registrationSave['regId'] = 0;
-      registrationSave['regDate'] = this.dateTimeObj.date //this.registerObj.RegDate;
-      registrationSave['regTime'] = this.dateTimeObj.time;
+      registrationSave['regDate'] = '2023-06-22T09:52:54.616Z';//this.dateTimeObj.date //this.registerObj.RegDate;
+      registrationSave['regTime'] = '2023-06-22T09:52:54.616Z';//this.dateTimeObj.time;
       registrationSave['prefixId'] = this.personalFormGroup.get('PrefixID').value.PrefixID;
       registrationSave['firstName'] = this.registerObj.FirstName;
       registrationSave['middleName'] = this.registerObj.MiddleName;
@@ -975,10 +1011,10 @@ export class NewAppointmentComponent implements OnInit {
       registrationSave['pinNo'] = '';
       registrationSave['dateOfBirth'] = this.datePipe.transform(this.registerObj.DateofBirth,"MM-dd-yyyy"), //this.personalFormGroup.get('DateofBirth').value.DateofBirth;
       registrationSave['age'] = this.registerObj.AgeYear;//this.registerObj.Age;
-      registrationSave['genderID'] = this.personalFormGroup.get('GenderId').value.GenderId;
+      registrationSave['genderId'] = this.personalFormGroup.get('GenderId').value.GenderId;
       registrationSave['phoneNo'] = this.personalFormGroup.get('PhoneNo').value || 0;
       registrationSave['mobileNo'] = this.registerObj.MobileNo;
-      registrationSave['addedBy'] = this.accountService.currentUserValue.user.id;
+      registrationSave['createdBy'] = this.accountService.currentUserValue.user.id;
     // registrationSave['RegNo'] = 0;//this.registerObj.RegId;
       registrationSave['ageYear'] = this.registerObj.AgeYear;
       registrationSave['ageMonth'] = this.registerObj.AgeMonth;
@@ -987,7 +1023,7 @@ export class NewAppointmentComponent implements OnInit {
       registrationSave['stateId'] = this.personalFormGroup.get('StateId').value.StateId;
       registrationSave['cityId'] = this.personalFormGroup.get('CityId').value.CityId;
       registrationSave['maritalStatusId'] = this.personalFormGroup.get('MaritalStatusId').value ? this.personalFormGroup.get('MaritalStatusId').value.MaritalStatusId : 0;
-      registrationSave['isCharity'] = false;
+     
       registrationSave['religionId'] = this.personalFormGroup.get('ReligionId').value ? this.personalFormGroup.get('ReligionId').value.ReligionId : 0;
       registrationSave['areaId'] = this.personalFormGroup.get('AreaId').value ? this.personalFormGroup.get('AreaId').value.AreaId : 0;
      registrationSave['isSeniorCitizen'] = false; //this.personalFormGroup.get('isSeniorCitizen').value ? this.personalFormGroup.get('VillageId').value.VillageId : 0; //this.registerObj.VillageId;
@@ -998,9 +1034,9 @@ export class NewAppointmentComponent implements OnInit {
 
       visitSave['VisitId'] = 0;
       visitSave['RegID'] = 0;
-      visitSave['VisitDate'] = this.dateTimeObj.date;
-      visitSave['VisitTime'] = this.dateTimeObj.time;
-
+      visitSave['VisitDate'] = '2023-06-22T09:52:54.616Z';
+      visitSave['VisitTime'] = '2023-06-22T09:52:54.616Z';
+      visitSave['CaseID'] = this.VisitFormGroup.get('CaseId').value.CaseId ? this.VisitFormGroup.get('CaseId').value.CaseId : 0;
       visitSave['UnitId'] = this.VisitFormGroup.get('HospitalId').value.HospitalId ? this.VisitFormGroup.get('HospitalId').value.HospitalId : 0;
       visitSave['PatientTypeId'] = this.VisitFormGroup.get('PatientTypeID').value.PatientTypeId || 0;//.PatientTypeID;//? this.VisitFormGroup.get('PatientTypeID').value.PatientTypeID : 0;
       visitSave['ConsultantDocId'] = this.VisitFormGroup.get('DoctorID').value.DoctorId || 0;//? this.VisitFormGroup.get('DoctorId').value.DoctorId : 0;
@@ -1008,26 +1044,24 @@ export class NewAppointmentComponent implements OnInit {
 
       visitSave['TariffId'] = this.VisitFormGroup.get('TariffId').value.TariffId ? this.VisitFormGroup.get('TariffId').value.TariffId : 0;
       visitSave['CompanyId'] = this.VisitFormGroup.get('CompanyId').value.CompanyId ? this.VisitFormGroup.get('CompanyId').value.CompanyId : 0;
-      visitSave['AddedBy'] = this.accountService.currentUserValue.user.id;
+      visitSave['createdBy'] = this.accountService.currentUserValue.user.id;
       visitSave['updatedBy'] = 0,//this.VisitFormGroup.get('RelationshipId').value.RelationshipId ? this.VisitFormGroup.get('RelationshipId').value.RelationshipId : 0;
       visitSave['IsCancelled'] = 0;
       visitSave['IsCancelledBy'] = 0;
-      visitSave['IsCancelledDate'] = this.dateTimeObj.date;
+      visitSave['IsCancelledDate'] = '2023-06-22T09:52:54.616Z';
 
       visitSave['ClassId'] = 1; // this.VisitFormGroup.get('ClassId').value.ClassId ? this.VisitFormGroup.get('ClassId').value.ClassId : 0;
       visitSave['DepartmentId'] = this.VisitFormGroup.get('DoctorID').value.DepartmentId;//? this.VisitFormGroup.get('DepartmentId').value.DepartmentId : 0;
-      debugger;
-     console.log(this.Patientnewold);
+   
       visitSave['PatientOldNew'] = this.Patientnewold;
       visitSave['FirstFollowupVisit'] = 0,// this.VisitFormGroup.get('RelativeAddress').value ? this.VisitFormGroup.get('RelativeAddress').value : '';
       visitSave['appPurposeId'] = this.VisitFormGroup.get('PurposeId').value.PurposeId;// ? this.VisitFormGroup.get('RelativeAddress').value : '';
-      visitSave['FollowupDate'] = this.dateTimeObj.date;// this.personalFormGroup.get('PhoneNo').value ? this.personalFormGroup.get('PhoneNo').value : '';
+      visitSave['FollowupDate'] = "2023-06-22T09:52:54.616Z";
       visitSave['IsMark'] = 0,// this.VisitFormGroup.get('RelatvieMobileNo').value ? this.personalFormGroup.get('MobileNo').value : '';
-      
-    visitSave['IsXray'] = 0;
+ 
     visitSave['Comments'] = this.VisitFormGroup.get('Comments').value ? this.VisitFormGroup.get('Comments').value : '';
-    visitSave['Intime'] = this.dateTimeObj.date;
-    visitSave['Intime'] = this.dateTimeObj.date;
+    visitSave['Intime'] = '2023-06-22T09:52:54.616Z';
+    visitSave['outTime'] = '2023-06-22T09:52:54.616Z';
 
 
       submissionObj['visitSave'] = visitSave;
@@ -1089,8 +1123,8 @@ export class NewAppointmentComponent implements OnInit {
       // visit detail
       visitUpdate['VisitId'] = 0;
       visitUpdate['RegID'] = this.registerObj.RegId;
-      visitUpdate['VisitDate'] = this.dateTimeObj.date;
-      visitUpdate['VisitTime'] = this.dateTimeObj.time;
+      visitUpdate['VisitDate'] = '2023-06-22T09:52:54.616Z',// this.dateTimeObj.date;
+      visitUpdate['VisitTime'] = '2023-06-22T09:52:54.616Z',//this.dateTimeObj.time;
 
       visitUpdate['UnitId'] = this.VisitFormGroup.get('HospitalId').value.HospitalId ? this.VisitFormGroup.get('HospitalId').value.HospitalId : 0; // this.VisitFormGroup.get('UnitId').value.UnitId ? this.VisitFormGroup.get('UnitId').value.UnitId: 0;
       visitUpdate['PatientTypeId'] = this.VisitFormGroup.get('PatientTypeID').value.PatientTypeId;//.PatientTypeID;//? this.VisitFormGroup.get('PatientTypeID').value.PatientTypeID : 0;
@@ -1246,19 +1280,19 @@ export class NewAppointmentComponent implements OnInit {
       // VisitId:contact.VisitId,
       // opD_IPD_Type :contact.opD_IPD_Type,
     };
-    this.advanceDataStored.storage = new RegInsert(xx);
+    // this.advanceDataStored.storage = new RegInsert(xx);
 
-    const dialogRef = this._matDialog.open(NewScheduledApppointmentComponent,
-      {
-        maxWidth: "95vw",
-        height: '400px',
-        width: '100%',
-        // height: "100%"
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed - Insert Action', result);
-      this.getVisitList();
-    });
+    // const dialogRef = this._matDialog.open(NewScheduledApppointmentComponent,
+    //   {
+    //     maxWidth: "95vw",
+    //     height: '400px',
+    //     width: '100%',
+    //     // height: "100%"
+    //   });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   // console.log('The dialog was closed - Insert Action', result);
+    //   this.getVisitList();
+    // });
   }
 
 }

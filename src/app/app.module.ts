@@ -27,6 +27,14 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { JwtInterceptor } from "./core/jwt.interceptor";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { SpinnerInterceptor } from "./core/spinner.interceptor";
+import { AppointmentComponent } from './main/OpdCRMS/appointment/appointment.component';
+import { CaseDetailComponent } from './main/OpdCRMS/case-detail/case-detail.component';
+import { NewAppointmentComponent } from './main/OpdCRMS/appointment/new-appointment/new-appointment.component';
+import { ViewAppointmentComponent } from './main/OpdCRMS/appointment/view-appointment/view-appointment.component';
+import { EditAppointmentComponent } from './main/OpdCRMS/appointment/edit-appointment/edit-appointment.component';
+import { NewCaseDetailComponent } from './main/OpdCRMS/case-detail/new-case-detail/new-case-detail.component';
+import { EditCasedetailComponent } from './main/OpdCRMS/case-detail/edit-casedetail/edit-casedetail.component';
+import { ViewCasedetailComponent } from './main/OpdCRMS/case-detail/view-casedetail/view-casedetail.component';
 
 const appRoutes: Routes = [
     {
@@ -52,11 +60,11 @@ const appRoutes: Routes = [
         loadChildren: () =>
             import("./main/setup/setup.module").then((m) => m.SetupModule),
     },
-    // {
-    //     path: "opd",
-    //     loadChildren: () =>
-    //         import("./main/opd/opd.module").then((m) => m.OPDModule),
-    // },
+    {
+        path: "opd",
+        loadChildren: () =>
+            import("./main/OpdCRMS/opd-crms.module").then((m) => m.OPDCRMSModule),
+    },
     {
         path: '**',
         redirectTo: 'auth/login'
@@ -87,8 +95,8 @@ export const PICK_FORMATS = {
 
 @NgModule({
     declarations: [
-        AppComponent,
-               
+        AppComponent      
+                     
         
     ],
     imports: [
