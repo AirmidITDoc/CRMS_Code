@@ -118,7 +118,7 @@ registerObj = new CaseDetail({});
         this.isLoading = 'submit';
     
       var m_data = {
-        "registrationUpdate": {
+        "updateCaseDetail": {
           "CaseId": this.personalFormGroup.get('CaseId').value.CaseId || 0,
           "CaseTitle": this.personalFormGroup.get('CaseTitle').value || '',
           "CaseDescription": this.personalFormGroup.get('CaseDescription').value || '',
@@ -132,12 +132,14 @@ registerObj = new CaseDetail({});
           "CaseRepresentative": this.personalFormGroup.get('CaseRepresentative').value || '',
           "HospitalRepresentative": this.personalFormGroup.get('HospitalRepresentative').value || '',
           "AgreementFileName": this.personalFormGroup.get('AgreementFileName').value || '',
-          "createdBy": this.accountService.currentUserValue.user.id
+          "createdBy": this.accountService.currentUserValue.user.id,
+          "IsActive":1,
+          "UpdatedBy": this.accountService.currentUserValue.user.id
           
         }
       }
       console.log(m_data);
-      this._registerService.CaseDetailInsert(m_data).subscribe(response => {
+      this._registerService.CaseDetailUpdate(m_data).subscribe(response => {
         if (response) {
           this.myFunction("CaseDetail Data Updated Successfully !");
           // const dialogRef = this._matDialog.open(CaseDetailListComponent,

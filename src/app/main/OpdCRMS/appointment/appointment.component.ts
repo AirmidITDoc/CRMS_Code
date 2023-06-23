@@ -11,6 +11,8 @@ import { DatePipe } from '@angular/common';
 import { NewAppointmentComponent } from './new-appointment/new-appointment.component';
 import { EditAppointmentComponent } from './edit-appointment/edit-appointment.component';
 import { fuseAnimations } from '@fuse/animations';
+import { BillDetailComponent, SearchInforObj } from './bill-detail/bill-detail.component';
+import { AdvanceDataStored } from '../advance';
 
 @Component({
   selector: 'app-appointment',
@@ -61,7 +63,7 @@ export class AppointmentComponent implements OnInit {
     public _AppointmentSreviceService: AppointmentService,
     private _ActRoute: Router,
     private _fuseSidebarService: FuseSidebarService,
-    
+    private advanceDataStored: AdvanceDataStored,
     public _matDialog: MatDialog,
     public datePipe: DatePipe,
     // private advanceDataStored: AdvanceDataStored
@@ -72,10 +74,9 @@ export class AppointmentComponent implements OnInit {
   ngOnInit(): void {
 
     if (this._ActRoute.url == '/opd/appointment') {
-      // this.menuActions.push('One');
-      this.menuActions.push('CasePaper Print');
+            
       this.menuActions.push('Update Registration');
-      this.menuActions.push('New Schdule');
+      this.menuActions.push('Bill');
         }
 
 
@@ -93,24 +94,24 @@ export class AppointmentComponent implements OnInit {
       "L_Name": this._AppointmentSreviceService.myFilterform.get("LastName").value.trim() + '%' || '%',
       "Reg_No": this._AppointmentSreviceService.myFilterform.get("RegNo").value || 0,
       "Doctor_Id": this._AppointmentSreviceService.myFilterform.get("DoctorId").value || 0,
-      "From_Dt": this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "To_Dt": this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "IsMark": this._AppointmentSreviceService.myFilterform.get("IsMark").value || 0,
+      "From_Dt":'01/01/1900',// this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
+      "To_Dt":'01/01/1900',// this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
+      
     }
-    // setTimeout(() => {
-    //   this.sIsLoading = 'loading-data';
-    //   this._AppointmentSreviceService.getAppointmentList(D_data).subscribe(Visit => {
-    //     this.dataSource.data = Visit as VisitMaster[];
-    //     console.log(this.dataSource.data);
-    //     this.dataSource.sort = this.sort;
-    //     this.dataSource.paginator = this.paginator;
-    //     this.sIsLoading = '';
-    //     console.log(this.dataSource.data)
-    //   },
-    //     error => {
-    //       this.sIsLoading = '';
-    //     });
-    // }, 1000);
+    setTimeout(() => {
+      this.sIsLoading = 'loading-data';
+      this._AppointmentSreviceService.getAppointmentList(D_data).subscribe(Visit => {
+        this.dataSource.data = Visit as VisitMaster[];
+        console.log(this.dataSource.data);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        this.sIsLoading = '';
+        console.log(this.dataSource.data)
+      },
+        error => {
+          this.sIsLoading = '';
+        });
+    }, 1000);
 
   }
 
@@ -191,7 +192,7 @@ export class AppointmentComponent implements OnInit {
         const dialogRef = this._matDialog.open(EditAppointmentComponent,
           {
             maxWidth: "85vw",
-            height: '550px',
+            height: '500px',
             width: '100%',
             data: {
               registerObj: m_data,
@@ -205,61 +206,44 @@ export class AppointmentComponent implements OnInit {
         error => {
           this.sIsLoading = '';
         });
-    }else if (m == "New Schdule") {
+    }else if (m == "Bill") {
       console.log(contact);
       var D_data = {
         "RegId": contact.RegId,
       }
       this._AppointmentSreviceService.getregisterListByRegId(D_data).subscribe(reg => {
-        this.dataArray = reg;
-        console.log(this.dataArray);
-        var m_data = {
-          "RegNo": this.dataArray[0].RegNo,
-          "RegId": this.dataArray[0].RegId,
-          "PrefixID": this.dataArray[0].PrefixId,
-          "PrefixName": this.dataArray[0].PrefixName,
-          "FirstName": this.dataArray[0].FirstName,
-          "MiddleName": this.dataArray[0].MiddleName,
-          "LastName": this.dataArray[0].LastName,
-          "PatientName": this.dataArray[0].PatientName,
-          "DateofBirth": this.dataArray[0].DateofBirth,
-          "MaritalStatusId": this.dataArray[0].MaritalStatusId,
-          "AadharCardNo": this.dataArray[0].AadharCardNo || 0,
-          "Age": this.dataArray[0].Age.trim(),
-          "AgeDay": this.dataArray[0].AgeDay,
-          "AgeMonth": this.dataArray[0].AgeMonth,
-          "AgeYear": this.dataArray[0].AgeYear,
-          "Address": this.dataArray[0].Address,
-          "AreaId": this.dataArray[0].AreaId,
-          "City": this.dataArray[0].City,
-          "CityId": this.dataArray[0].CityId,
-          "StateId": this.dataArray[0].StateId,
-          "CountryId": this.dataArray[0].CountryId,
-          "PhoneNo": this.dataArray[0].PhoneNo,
-          "MobileNo": this.dataArray[0].MobileNo,
-          "GenderId": this.dataArray[0].GenderId,
-          "GenderName": this.dataArray[0].GenderName,
-          "ReligionId": this.dataArray[0].ReligionId,
-          "IsCharity": 0,
-          "PinNo": this.dataArray[0].PinNo,
-          "RegDate": this.dataArray[0].RegDate,
-          "RegNoWithPrefix": this.dataArray[0].RegNoWithPrefix,
-          "RegTime": this.dataArray[0].RegTime
-        }
-        this._AppointmentSreviceService.populateFormpersonal(m_data);
-        // const dialogRef = this._matDialog.open(NewScheduledApppointmentComponent,
-        //   {
-        //     maxWidth: "85vw",
-        //     height: '550px',
-        //     width: '100%',
-        //     data: {
-        //       registerObj: m_data,
-        //     }
-        //   });
-        // dialogRef.afterClosed().subscribe(result => {
-        //   console.log('The dialog was closed - Insert Action', result);
-        //   this.getVisitList();
-        // });
+        // this.dataArray = reg;
+        // console.log(this.dataArray);
+        let xx = {
+          RegNo: contact.RegId,
+          RegId: contact.RegId,
+          AdmissionID: contact.VisitId,
+          PatientName: contact.PatientName,
+          Doctorname: contact.Doctorname,
+          AdmDateTime: contact.AdmDateTime,
+          AgeYear: contact.AgeYear,
+          ClassId: contact.ClassId,
+          ClassName: contact.ClassName,
+          TariffName: contact.TariffName,
+          TariffId: contact.TariffId,
+          VisitId:contact.VisitId,
+          VistDateTime:contact.VistDateTime
+        };
+        // this._AppointmentSreviceService.populateFormpersonal(xx);
+        this.advanceDataStored.storage = new SearchInforObj(xx);
+        const dialogRef = this._matDialog.open(BillDetailComponent,
+          {
+            maxWidth: "95vw",
+            height: '600px',
+            width: '100%',
+            data: {
+              registerObj: xx,
+            }
+          });
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed - Insert Action', result);
+          this.getVisitList();
+        });
       },
         error => {
           this.sIsLoading = '';
@@ -277,8 +261,7 @@ export class AppointmentComponent implements OnInit {
         maxWidth: "95vw",
         height: '700px',
         width: '100%',
-        
-        // height: "100%"
+       
       });
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed - Insert Action', result);
@@ -473,25 +456,7 @@ export class AppointmentComponent implements OnInit {
    
   newappointmentSchdule() {
 
-    let xx = {
-      // RegNo: contact.RegId,
-      // AdmissionID: contact.VisitId,
-      // PatientName: contact.PatientName,
-      // Doctorname: contact.Doctorname,
-      // AdmDateTime: contact.AdmDateTime,
-      // AgeYear: contact.AgeYear,
-      // ClassName: contact.ClassName,
-      // WardName:contact.RoomName,
-      // BedName:contact.BedName,
-      // IPDNo:contact.IPDNo,
-      // TariffName: contact.TariffName,
-      // TariffId: contact.TariffId,
-      // PatientType:contact.PatientType,
-      // VisitId:contact.VisitId,
-      // opD_IPD_Type :contact.opD_IPD_Type,
-    };
-    // this.advanceDataStored.storage = new RegInsert(xx);
-
+    
     const dialogRef = this._matDialog.open(NewAppointmentComponent,
       {
         maxWidth: "95vw",
@@ -662,3 +627,134 @@ export class RegInsert {
   }
 }
 
+export class ChargesList{
+  ChargesId: number;
+  ServiceId: number;
+  ServiceName : String;
+  Price:number;
+  Qty: number;
+  TotalAmt: number;
+  DiscPer: number;
+  DiscAmt: number;
+  NetAmount: number;
+  DoctorId:number;
+  ChargeDoctorName: String;
+  ChargesDate: Date;
+  IsPathology:boolean;
+  IsRadiology:boolean;
+  ClassId:number;
+  ClassName: string;
+  ChargesAddedName: string;
+
+  constructor(ChargesList){
+          this.ChargesId = ChargesList.ChargesId || '';
+          this.ServiceId = ChargesList.ServiceId || '';
+          this.ServiceName = ChargesList.ServiceName || '';
+          this.Price = ChargesList.Price || '';
+          this.Qty = ChargesList.Qty || '';
+          this.TotalAmt = ChargesList.TotalAmt || '';
+          this.DiscPer = ChargesList.DiscPer || '';
+          this.DiscAmt = ChargesList.DiscAmt || '';
+          this.NetAmount = ChargesList.NetAmount || '';
+          this.DoctorId=ChargesList.DoctorId || 0;
+          this.ChargeDoctorName = ChargesList.ChargeDoctorName || '';
+          this.ChargesDate = ChargesList.ChargesDate || '';
+          this.IsPathology = ChargesList.IsPathology || '';
+          this.IsRadiology = ChargesList.IsRadiology || '';
+          this.ClassId=ChargesList.ClassId || 0;
+          this.ClassName = ChargesList.ClassName || '';
+          this.ChargesAddedName = ChargesList.ChargesAddedName || '';
+  }
+} 
+
+
+
+export class BrowseOPDBill {
+  BillNo: Number;
+  RegId: number;
+  RegNo: number;
+  PatientName: string;
+  FirstName: string;
+  Middlename: string;
+  LastName: string;
+  TotalAmt: number;
+  ConcessionAmt: number;
+  NetPayableAmt: number;
+  BillDate: any;
+  IPDNo: number;
+  ServiceName: String;
+  Price: number;
+  Qty: number;
+  ChargesTotalAmount: number;
+  NetAmount: number;
+  PaidAmount: number;
+  HospitalName: string;
+  HospitalAddress: string;
+  Phone: number;
+  EmailId:any;
+  ChargesDoctorName: string;
+  TotalBillAmount: number;
+  ConsultantDocName: string;
+  DepartmentName: string;
+  IsCancelled: boolean;
+  OPD_IPD_Type: number;
+  PBillNo: string;
+  BDate: Date;
+  VisitDate: Date;
+  BalanceAmt: number;
+  AddedByName: string;
+Department:any;
+Address:any;
+MobileNo:any;
+  //PayTMAmount:number;
+  //NEFTPayAmount:number;
+  /**
+   * Constructor
+   *
+   * @param BrowseOPDBill
+   */
+  constructor(BrowseOPDBill) {
+    {
+      this.BillNo = BrowseOPDBill.BillNo || '';
+      this.RegId = BrowseOPDBill.RegId || '';
+      this.RegNo = BrowseOPDBill.RegNo || '';
+      this.PatientName = BrowseOPDBill.PatientName || '';
+      this.FirstName = BrowseOPDBill.FirstName || '';
+      this.Middlename = BrowseOPDBill.MiddleName || '';
+      this.LastName = BrowseOPDBill.LastName || '';
+      this.TotalAmt = BrowseOPDBill.TotalAmt || '';
+      this.ConcessionAmt = BrowseOPDBill.ConcessionAmt || '';
+      this.NetPayableAmt = BrowseOPDBill.NetPayableAmt || '';
+      this.BillDate = BrowseOPDBill.BillDate || '';
+      this.IPDNo = BrowseOPDBill.IPDNo || '';
+      this.IsCancelled = BrowseOPDBill.IsCancelled || '';
+      this.OPD_IPD_Type = BrowseOPDBill.OPD_IPD_Type || '';
+      this.PBillNo = BrowseOPDBill.PBillNo || '';
+      this.BDate = BrowseOPDBill.BDate || '';
+      this.PaidAmount = BrowseOPDBill.PaidAmount || '';
+      this.BalanceAmt = BrowseOPDBill.BalanceAmt || '';
+      this.ServiceName = BrowseOPDBill.ServiceName || '';
+      this.Price = BrowseOPDBill.Price || '';
+      this.Qty = BrowseOPDBill.Qty || '';
+      this.ChargesTotalAmount = BrowseOPDBill.ChargesTotalAmount || '';
+      this.NetAmount = BrowseOPDBill.NetAmount || '';
+      this.HospitalName = BrowseOPDBill.HospitalName || '';
+      this.HospitalAddress = BrowseOPDBill.HospitalAddress || '';
+      this.ChargesTotalAmount = BrowseOPDBill.ChargesTotalAmount || '';
+      this.Phone = BrowseOPDBill.Phone || '';
+      this.EmailId = BrowseOPDBill.EmailId || '';
+      this.ConsultantDocName = BrowseOPDBill.ConsultantDocName || '';
+      this.DepartmentName = BrowseOPDBill.DepartmentName || '';
+      this.TotalBillAmount = BrowseOPDBill.TotalBillAmount || '';
+      this.ChargesDoctorName = BrowseOPDBill.ChargesDoctorName || '';
+      this.VisitDate = BrowseOPDBill.VisitDate || '';
+      this.AddedByName = BrowseOPDBill.AddedByName || '';
+      this.TotalAmt = BrowseOPDBill.TotalAmt || '';
+
+      this.Address = BrowseOPDBill.Address || '';
+      this.Department = BrowseOPDBill.Department || '';
+      this.MobileNo=BrowseOPDBill.MobileNo || '';
+    }
+  }
+
+}

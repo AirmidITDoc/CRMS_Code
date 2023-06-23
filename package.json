@@ -31,6 +31,7 @@
     "@angular/platform-browser": "11.0.5",
     "@angular/platform-browser-dynamic": "11.0.5",
     "@angular/router": "11.0.5",
+    "@material/chips": "14.0.0",
     "@ngrx/effects": "8.6.0",
     "@ngrx/router-store": "8.6.0",
     "@ngrx/store": "8.6.0",

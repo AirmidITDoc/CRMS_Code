@@ -35,9 +35,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { SharedModule } from 'app/main/shared/shared.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EditAppointmentComponent } from './edit-appointment/edit-appointment.component';
-
+import { MatChipsModule } from '@angular/material/chips';
 import { MatNestedTreeNode, MatTree, MatTreeModule } from '@angular/material/tree';
 import { AppointmentService } from './appointment.service';
+import { BillDetailComponent } from './bill-detail/bill-detail.component';
+import { PaymentDetailComponent } from './payment-detail/payment-detail.component';
 
 // import { SharedModule } from 'app/main/shared/shared.module';
 
@@ -52,6 +54,8 @@ const routes: Routes = [
         AppointmentComponent,
         NewAppointmentComponent,
         EditAppointmentComponent,
+        BillDetailComponent,
+        PaymentDetailComponent,
       
       
     ],
@@ -96,11 +100,12 @@ const routes: Routes = [
         NgxMatSelectSearchModule,
         MatCardModule,
         MatListModule,
+        MatChipsModule,
         MatTooltipModule,
+        MatChipsModule,
         MatExpansionModule,
         MatListModule,
-        // TreeViewComponent,
-        MatTreeModule,
+        MatTreeModule
     ],
     providers: [
         AppointmentService,

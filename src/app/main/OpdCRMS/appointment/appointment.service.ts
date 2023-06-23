@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -153,7 +153,7 @@ export class AppointmentService {
 
   // update registration
   public regUpdate(employee) {
-    return this._httpClient.post("OutPatient/OPDAppointmentInsert", employee);
+    return this._httpClient.post("OutPatient/RegistrationUpdate", employee);
   }
 
   // Add new Appointment
@@ -169,7 +169,7 @@ export class AppointmentService {
   // display Appointment list
   public getAppointmentList(employee) {
     // return this._httpClient.post("Generic/GetByProc?procName=ps_Rtrv_VisitDetailsList", employee)
-    return this._httpClient.post("Generic/GetByProc?procName=RetrieveVisitDetailsList_1", employee)
+    return this._httpClient.post("Generic/GetByProc?procName=RetrieveT_VisitDetailsList", employee)
   }
   // Doctor Master Combobox List
   public getAdmittedDoctorCombo() {
@@ -334,5 +334,38 @@ public CaseDetailInsert(employee){
   public getCaseDetailPrint(employee){
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CasedetailId",employee);
   }
+  public getchargesList(data) {
+    return this._httpClient.post("Generic/GetBySelectQuery?query=" + data, {})
+  }
+
+  public InsertOPAddCharges(employee) {
+    return this._httpClient.post("OutPatient/OPDAddCharges", employee);
+  }
+   // Get billing Service List 
+   public getBillingServiceList(employee) {
+    return this._httpClient.post("Generic/GetByProc?procName=RetrieveServices", employee)
+  }
+  public InsertOPBilling(employee) : Observable<any> {
+    return this._httpClient.post("OutPatient/OPBilling", employee)
+  }
+
+  public getBillPrint(BillNo) {
+    return this._httpClient.post("Generic/GetByProc?procName=rptBillPrint", BillNo)
+  } 
+  public getClassCombo() {
+    return this._httpClient.post("Generic/GetByProc?procName=Retrieve_ClassName", {})
+  }
+public getConcessionCombo()
+{
+  return this._httpClient.post("Generic/GetByProc?procName=Retrieve_ConcessionReasonMasterForCombo", {});
+}
+public getBankMasterCombo() {
+  return this._httpClient.post("Generic/GetByProc?procName=RetrieveBankMasterForCombo", {})
+}
+
+public getVisitDateCombo(Id){
+  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_VisitDateTime", Id)
+}
+
 }
 
