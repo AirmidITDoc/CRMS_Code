@@ -160,11 +160,12 @@
                                                 [matTooltipDisabled]="!registeredForm.invalid"
                                                 [matTooltipPosition]="'above'">
                                                 <button mat-raised-button fxLayoutAlign="center center" id="btnAdd"
-                                                    (click)="onSaveEntry()" [disabled]="registeredForm.invalid"
+                                                    (click)="onSaveEntry()" 
                                                     style="background-color: blue; color: white; width: 70px; ">
                                                     <mat-icon> add </mat-icon> &nbsp;Add
                                                 </button>
                                             </div>
+                                            <!-- [disabled]="registeredForm.invalid" -->
                                         </div>
                                     </form>
                                 </mat-card>
@@ -175,9 +176,9 @@
                     <div fxLayout="row" style="width: 100%;">
 
                         <div fxFlex="100" fxFlex.gt-sm="20" fxLayout="row" fxLayout.gt-xs="column"
-                            style="width:10%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
+                            style="width:15%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
 
-                            <mat-form-field appearance="outline"
+                            <!-- <mat-form-field appearance="outline"
                                 style="width:200px;font-weight:bold;float: left;padding-top: 10px;padding-right: 10px;padding-left: 10px;">
                                 <mat-label>Visit Date Time</mat-label>
                                 <mat-select formControlName="VisitDate" name="VisitDate" style="color: blue;" required>
@@ -186,8 +187,26 @@
                                         {{m.VisitDate}}
                                     </mat-option>
                                 </mat-select>
-                            </mat-form-field>
+                            </mat-form-field> -->
 
+                            <mat-tree [dataSource]="dataSource11" [treeControl]="treeControl">
+                                <!-- This is the tree node template for leaf nodes -->
+                                <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+                                  <!-- use a disabled button to provide padding for tree leaf -->
+                                  <button mat-icon-button disabled></button>
+                                  {{node.name}}
+                                </mat-tree-node>
+                                <!-- This is the tree node template for expandable nodes -->
+                                <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+                                  <button mat-icon-button matTreeNodeToggle
+                                          [attr.aria-label]="'toggle ' + node.name">
+                                    <mat-icon class="mat-icon-rtl-mirror">
+                                      {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                    </mat-icon>
+                                  </button>
+                                  {{node.name}}
+                                </mat-tree-node>
+                              </mat-tree>
 
                         </div>
 
@@ -543,7 +562,7 @@
                             </div>
                             <div fxLayout="row">
 
-                                <button class="next-btn" (click)="onInsertAddCharges()" style="border-radius: 16px;"
+                                <button class="next-btn" (click)="onSaveOPBill()" style="border-radius: 16px;"
                                     [disabled]="click">Save</button>
 
                                 <button class="footer-btn" (click)="onClose()"

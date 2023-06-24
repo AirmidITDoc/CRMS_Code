@@ -34,24 +34,19 @@ interface FoodNode {
   name: string;
   children?: FoodNode[];
 }
+// const TREE_DATA: FoodNode[] = [
+//   {
+//     name: 'Visit Date Schdule',
+//     children: [{ name: 'Apple' }, { name: 'Banana' }, { name: 'Fruit loops' },]
+//   },
 
-const TREE_DATA: FoodNode[] = [
-  {
-    name: 'Appointment Date',
-    children: [
-      {name: 'Appointment Date 1:01/01/2023'},
-      {name: 'Appointment Date 2:15/01/2023'},
-      {name: 'Appointment Date 3:30/01/2023'},
-      {name: 'Appointment Date 4:15/02/2023'},
-    ]
-  }
-];
+// ];
+/** Flat node with expandable and level information */
 interface ExampleFlatNode {
   expandable: boolean;
   name: string;
   level: number;
 }
-
 
 @Component({
   selector: 'app-bill-detail',
@@ -63,25 +58,6 @@ interface ExampleFlatNode {
 
 
 export class BillDetailComponent implements OnInit {
-
-  private transformer = (node: FoodNode, level: number) => {
-    return {
-      expandable: !!node.children && node.children.length > 0,
-      name: node.name,
-      level: level,
-    };
-  }
-
-  treeControl = new FlatTreeControl<ExampleFlatNode>(
-      node => node.level, node => node.expandable);
-
-  treeFlattener = new MatTreeFlattener(
-      this.transformer, node => node.level, node => node.expandable, node => node.children);
-
-  dataSource1 = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-
-
-
 
 
   click: boolean = false;
@@ -124,7 +100,7 @@ export class BillDetailComponent implements OnInit {
     'action'
   ];
 
-  
+
   dataSource = new MatTableDataSource<ChargesList>();
   myControl = new FormControl();
   filteredOptions: any;
@@ -133,7 +109,7 @@ export class BillDetailComponent implements OnInit {
 
   isDoctor: boolean = true;
   Consession: boolean = true;
- VisitDateList:any = [];
+  VisitDateList: any = [];
   ConcessionReasonList: any = [];
   FinalAmt: any;
   DoctorFinalId = 'N';
@@ -159,7 +135,7 @@ export class BillDetailComponent implements OnInit {
   formDiscPersc: any;
   serviceId: number;
   serviceName: String;
-  b_TotalChargesAmount:any;
+  b_TotalChargesAmount: any;
   DoctornewId: any;
   ChargesDoctorname: any;
   finalAmt: any;
@@ -210,6 +186,24 @@ export class BillDetailComponent implements OnInit {
 
   resBillId: Post;
 
+  Vist1:any;
+  Vist2:any;
+  Vist3:any;
+
+  // private _transformer = (node: FoodNode, level: number) => {
+  //   return {
+  //     expandable: !!node.children && node.children.length > 0,
+  //     name: node.name,
+  //     level: level,
+  //   };
+  // }
+  // treeControl = new FlatTreeControl<ExampleFlatNode>(
+  //   node => node.level, node => node.expandable);
+  // treeFlattener = new MatTreeFlattener(
+  //   this._transformer, node => node.level, node => node.expandable, node => node.children);
+  // dataSource11 = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
+
 
   constructor(
     private _fuseSidebarService: FuseSidebarService,
@@ -227,12 +221,10 @@ export class BillDetailComponent implements OnInit {
     public _httpClient: HttpClient,
     private formBuilder: FormBuilder) { }
 
+  // hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
   ngOnInit(): void {
 
-    
-
-
-
+    // this.dataSource11.data = TREE_DATA;
     this.createForm();
 
     if (this.advanceDataStored.storage) {
@@ -240,7 +232,7 @@ export class BillDetailComponent implements OnInit {
       console.log(this.selectedAdvanceObj)
     }
 
-    if(this.data){
+    if (this.data) {
 
     }
 
@@ -259,16 +251,53 @@ export class BillDetailComponent implements OnInit {
         this.filterDoctor();
       });
   }
-
-  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
   
-  VisitListCombo(){
-
+  VisitListCombo() {
+debugger;
     var m = {
       "RegId": 17,//this.selectedAdvanceObj.RegId
     }
-    this._opappointmentService.getVisitDateCombo(m).subscribe(data => { this.VisitDateList = data; })
+    this._opappointmentService.getVisitDateCombo(m).subscribe(data => { this.VisitDateList = data; 
+      console.log(this.VisitDateList)
+      
+      // this.Vist1=data.valueOf()
+      // this.Vist2=data[1][0];
+      // this.Vist3=data[2][0];
+      // console.log(this.Vist1)
+    })
+   
+   
+    
   }
+
+ TREE_DATA: FoodNode[] = [
+    {
+      name: 'Visit Date Schdule',
+      
+      // children: [{ name: this.VisitDateList[0].value }, { name: this.VisitDateList[1].VisitDate }, { name: this.VisitDateList[2].VisitDate },]
+    },
+  
+  ];
+  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
+  
+  private _transformer = (node: FoodNode, level: number) => {
+    return {
+      expandable: !!node.children && node.children.length > 0,
+      name: node.name,
+      level: level,
+    };
+    this.dataSource11.data = this.TREE_DATA;
+  }
+  treeControl = new FlatTreeControl<ExampleFlatNode>(
+    node => node.level, node => node.expandable);
+  treeFlattener = new MatTreeFlattener(
+    this._transformer, node => node.level, node => node.expandable, node => node.children);
+    
+  dataSource11 = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
+
+
+
 
   focusNextPrice() {
     this.renderer.selectRootElement('#Price').focus();
@@ -519,7 +548,7 @@ export class BillDetailComponent implements OnInit {
     this.totalAmtOfNetAmt = netAmt;
     this.netPaybleAmt = netAmt;
     // this.TotalnetPaybleAmt = netAmt;
-    this.b_TotalChargesAmount=netAmt;
+    this.b_TotalChargesAmount = netAmt;
     // console.log(this.b_TotalChargesAmount);
     // this.TotalnetPaybleAmt= this.netPaybleAmt.toString();
 
@@ -649,6 +678,201 @@ export class BillDetailComponent implements OnInit {
   }
   //Save Billing 
 
+  // onSaveOPBill() {
+  //   this.click = true;
+  //   let disamt = this.registeredForm.get('concessionAmt').value;
+  //   debugger;
+  //   if (this.concessionDiscPer > 0 || this.concessionAmtOfNetAmt > 0) {
+  //     this.FinalAmt = this.TotalnetPaybleAmt; //this.registeredForm.get('FinalAmt').value;
+  //     this.netPaybleAmt1 = this.TotalnetPaybleAmt;
+  //   }
+  //   else {
+  //     this.FinalAmt = this.TotalnetPaybleAmt;
+  //     this.netPaybleAmt1 = this.TotalnetPaybleAmt;
+  //   }
+
+
+  //   this.isLoading = 'submit';
+
+  //   let Pathreporthsarr = [];
+  //   this.dataSource.data.forEach((element) => {
+  //     if (element['IsPathology']) {
+  //       let PathologyReportHeaderObj = {};
+  //       PathologyReportHeaderObj['PathDate'] = this.dateTimeObj.date;
+  //       PathologyReportHeaderObj['PathTime'] = this.dateTimeObj.time;
+  //       PathologyReportHeaderObj['OPD_IPD_Type'] = 0;
+  //       PathologyReportHeaderObj['OPD_IPD_Id'] = this.selectedAdvanceObj.AdmissionID,
+  //         PathologyReportHeaderObj['PathTestID'] = element.ServiceId;
+  //       PathologyReportHeaderObj['AddedBy'] = this.accountService.currentUserValue.user.id,
+  //         PathologyReportHeaderObj['ChargeID'] = element.ChargesId;
+  //       PathologyReportHeaderObj['IsCompleted'] = 0;
+  //       PathologyReportHeaderObj['IsPrinted'] = 0;
+  //       PathologyReportHeaderObj['IsSampleCollection'] = 0;
+  //       PathologyReportHeaderObj['TestType'] = 0;
+  //       Pathreporthsarr.push(PathologyReportHeaderObj);
+  //     }
+  //   });
+
+  //   let Redioreporthsarr = [];
+  //   this.dataSource.data.forEach((element) => {
+  //     if (element['IsRadiology']) {
+  //       let RadiologyReportHeaderObj = {};
+  //       RadiologyReportHeaderObj['RadDate'] = this.dateTimeObj.date;
+  //       RadiologyReportHeaderObj['RadTime'] = this.dateTimeObj.time;
+  //       RadiologyReportHeaderObj['OPD_IPD_Type'] = 0;
+  //       RadiologyReportHeaderObj['OPD_IPD_Id'] = this.selectedAdvanceObj.AdmissionID,
+  //         RadiologyReportHeaderObj['RadTestID'] = element.ServiceId;
+  //       RadiologyReportHeaderObj['AddedBy'] = this.accountService.currentUserValue.user.id,
+  //         RadiologyReportHeaderObj['ChargeID'] = element.ChargesId;
+  //       RadiologyReportHeaderObj['IsCompleted'] = 0;
+  //       RadiologyReportHeaderObj['IsPrinted'] = 0;
+  //       RadiologyReportHeaderObj['TestType'] = 0;
+  //       Redioreporthsarr.push(RadiologyReportHeaderObj);
+  //     }
+  //   });
+
+  //   let OPDoctorShareGroupAdmChargeObj = {};
+  //   OPDoctorShareGroupAdmChargeObj['BillNo'] = 0;
+
+  //   // let Cal_DiscAmount_OPBillObj = {};
+  //   // Cal_DiscAmount_OPBillObj['BillNo'] = 0;
+
+  //   let Billdetsarr = [];
+  //   this.dataSource.data.forEach((element) => {
+  //     let BillDetailsInsertObj = {};
+  //     BillDetailsInsertObj['BillNo'] = 0;
+  //     BillDetailsInsertObj['ChargesId'] = element.ChargesId;
+  //     Billdetsarr.push(BillDetailsInsertObj);
+  //   });
+
+
+  //   let PatientHeaderObj = {};
+
+  //   PatientHeaderObj['Date'] = this.dateTimeObj.date;
+  //   PatientHeaderObj['VisitId'] = this.selectedAdvanceObj.VisitId;
+  //   PatientHeaderObj['PatientName'] = this.selectedAdvanceObj.PatientName;
+  //   PatientHeaderObj['OPD_IPD_Id'] = this.selectedAdvanceObj.AdmissionID;
+  //   PatientHeaderObj['NetPayAmount'] = this.FinalAmt; //this.netPaybleAmt1; //this.registeredForm.get('FinalAmt').value;//this.TotalnetPaybleAmt,//this.FinalAmt || 0,//
+
+  //   // const opCalDiscAmountBill = new Cal_DiscAmount(Cal_DiscAmount_OPBillObj);
+
+
+  //   const dialogRef = this._matDialog.open(PaymentDetailComponent,
+  //     {
+  //       maxWidth: "85vw",
+  //       height: '540px',
+  //       width: '100%',
+  //       data: {
+  //         advanceObj: PatientHeaderObj,
+  //         FromName: "OP-Bill"
+  //       }
+  //     });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     let Data = {
+  //       "opInsertPayment": result.submitDataPay.ipPaymentInsert
+  //     };
+  //     this.paidamt = result.submitDataPay.ipPaymentInsert.PaidAmt;
+  //     this.balanceamt = result.submitDataPay.ipPaymentInsert.BalanceAmt;
+  //     this.flagSubmit = result.IsSubmitFlag
+  //     let InsertBillUpdateBillNoObj = {};
+  //     if (this.concessionDiscPer > 0) {
+  //       this.FinalAmt = this.totalAmtOfNetAmt - this.concessionAmtOfNetAmt;
+  //     } else {
+  //       this.FinalAmt = this.TotalnetPaybleAmt;
+  //     }
+
+  //     let InterimOrFinal = 1;
+
+  //     InsertBillUpdateBillNoObj['BillNo'] = 0;
+  //     InsertBillUpdateBillNoObj['OPD_IPD_ID'] = this.selectedAdvanceObj.AdmissionID;
+  //     InsertBillUpdateBillNoObj['TotalAmt'] = this.totalAmtOfNetAmt;
+  //     InsertBillUpdateBillNoObj['ConcessionAmt'] = this.concessionAmtOfNetAmt;
+  //     InsertBillUpdateBillNoObj['NetPayableAmt'] = this.FinalAmt; //this.netPaybleAmt1;
+  //     InsertBillUpdateBillNoObj['PaidAmt'] = this.paidamt;
+  //     InsertBillUpdateBillNoObj['BalanceAmt'] = this.balanceamt;
+  //     InsertBillUpdateBillNoObj['BillDate'] = this.dateTimeObj.date;
+  //     InsertBillUpdateBillNoObj['OPD_IPD_Type'] = 0;
+  //     InsertBillUpdateBillNoObj['AddedBy'] = this.accountService.currentUserValue.user.id,
+  //       InsertBillUpdateBillNoObj['TotalAdvanceAmount'] = 0,
+  //       InsertBillUpdateBillNoObj['BillTime'] = this.dateTimeObj.date;
+  //     InsertBillUpdateBillNoObj['ConcessionReasonId'] = this.registeredForm.get('ConcessionReasonId').value || 0;
+  //     InsertBillUpdateBillNoObj['IsSettled'] = 0;
+  //     InsertBillUpdateBillNoObj['IsPrinted'] = 0;
+  //     InsertBillUpdateBillNoObj['IsFree'] = 0;
+  //     InsertBillUpdateBillNoObj['CompanyId'] = 0;
+  //     InsertBillUpdateBillNoObj['TariffId'] = this.selectedAdvanceObj.TariffId || 0;
+  //     InsertBillUpdateBillNoObj['UnitId'] = this.selectedAdvanceObj.UnitId || 0;
+  //     InsertBillUpdateBillNoObj['InterimOrFinal'] = InterimOrFinal;
+  //     InsertBillUpdateBillNoObj['CompanyRefNo'] = 0;
+  //     InsertBillUpdateBillNoObj['ConcessionAuthorizationName'] = '';
+  //     InsertBillUpdateBillNoObj['TaxPer'] = 0;
+  //     InsertBillUpdateBillNoObj['TaxAmount'] = 0; //1000;//this.taxAmt;
+  //     // InsertBillUpdateBillNoObj['CompDiscAmt'] = 0; //1000;//this.taxAmt;
+  //     InsertBillUpdateBillNoObj['CashCounterId'] = 0;
+  //     InsertBillUpdateBillNoObj['DiscComments'] = 'Remark';// 
+  //     //
+  //     if (this.flagSubmit == true) {
+  //       console.log("Procced with Payment Option");
+  //       const insertBillUpdateBillNo = new Bill(InsertBillUpdateBillNoObj);
+  //       let submitData = {
+  //         "insertPathologyReportHeader": Pathreporthsarr,
+  //         "insertRadiologyReportHeader": Redioreporthsarr,
+  //         "insertBillupdatewithbillno": insertBillUpdateBillNo,
+  //         "opBillDetailsInsert": Billdetsarr,
+  //         // "opCalDiscAmountBill": Cal_DiscAmount_OPBillObj,
+  //         "opInsertPayment": result.submitDataPay.ipPaymentInsert
+  //       };
+  //       console.log(submitData);
+  //       this._opappointmentService.InsertOPBilling(submitData).subscribe(response => {
+  //         if (response) {
+  //           Swal.fire('OP Bill With Payment!', 'Bill Generated Successfully !', 'success').then((result) => {
+  //             if (result.isConfirmed) {
+  //               let m = response;
+  //               this.getPrint(m);
+  //               this._matDialog.closeAll();
+  //             }
+  //           });
+  //         } else {
+  //           Swal.fire('Error !', 'OP Billing data not saved', 'error');
+  //         }
+  //         this.isLoading = '';
+  //       });
+  //     }
+  //     else {
+  //       console.log("Procced with Credit bill");
+  //       InterimOrFinal = 0;
+  //       InsertBillUpdateBillNoObj['PaidAmt'] = 0;
+  //       InsertBillUpdateBillNoObj['BalanceAmt'] = this.FinalAmt;
+  //       const insertBillUpdateBillNo = new Bill(InsertBillUpdateBillNoObj);
+  //       let submitData = {
+  //         "insertPathologyReportHeadercredit": Pathreporthsarr,
+  //         "insertRadiologyReportHeadercredit": Redioreporthsarr,
+  //         "insertBillcreditupdatewithbillno": insertBillUpdateBillNo,
+  //         "opBillDetailscreditInsert": Billdetsarr,
+  //         // "opCalDiscAmountBillcredit": Cal_DiscAmount_OPBillObj,
+  //         // "opInsertPayment": result.submitDataPay.ipPaymentInsert
+  //       };
+  //       console.log(submitData);
+  //       // this._opappointmentService.InsertOPBillingCredit(submitData).subscribe(response => {
+  //       //   if (response) {
+  //       //     Swal.fire('OP Bill Credit !', 'Bill Generated Successfully!', 'success').then((result) => {
+  //       //       if (result.isConfirmed) {
+  //       //         let m = response;
+  //       //         this.getPrint(m);
+  //       //         this._matDialog.closeAll();
+
+  //       //       }
+  //       //     });
+  //       //   } else {
+  //       //     Swal.fire('Error !', 'OP Billing data not saved', 'error');
+  //       //   }
+  //       //   this.isLoading = '';
+  //       // });
+  //     }
+  //   });
+  // }
+
   onSaveOPBill() {
     this.click = true;
     let disamt = this.registeredForm.get('concessionAmt').value;
@@ -663,50 +887,6 @@ export class BillDetailComponent implements OnInit {
     }
 
 
-    this.isLoading = 'submit';
-
-    let Pathreporthsarr = [];
-    this.dataSource.data.forEach((element) => {
-      if (element['IsPathology']) {
-        let PathologyReportHeaderObj = {};
-        PathologyReportHeaderObj['PathDate'] = this.dateTimeObj.date;
-        PathologyReportHeaderObj['PathTime'] = this.dateTimeObj.time;
-        PathologyReportHeaderObj['OPD_IPD_Type'] = 0;
-        PathologyReportHeaderObj['OPD_IPD_Id'] = this.selectedAdvanceObj.AdmissionID,
-        PathologyReportHeaderObj['PathTestID'] = element.ServiceId;
-        PathologyReportHeaderObj['AddedBy'] = this.accountService.currentUserValue.user.id,
-        PathologyReportHeaderObj['ChargeID'] = element.ChargesId;
-        PathologyReportHeaderObj['IsCompleted'] = 0;
-        PathologyReportHeaderObj['IsPrinted'] = 0;
-        PathologyReportHeaderObj['IsSampleCollection'] = 0;
-        PathologyReportHeaderObj['TestType'] = 0;
-        Pathreporthsarr.push(PathologyReportHeaderObj);
-      }
-    });
-
-    let Redioreporthsarr = [];
-    this.dataSource.data.forEach((element) => {
-      if (element['IsRadiology']) {
-        let RadiologyReportHeaderObj = {};
-        RadiologyReportHeaderObj['RadDate'] = this.dateTimeObj.date;
-        RadiologyReportHeaderObj['RadTime'] = this.dateTimeObj.time;
-        RadiologyReportHeaderObj['OPD_IPD_Type'] = 0;
-        RadiologyReportHeaderObj['OPD_IPD_Id'] = this.selectedAdvanceObj.AdmissionID,
-          RadiologyReportHeaderObj['RadTestID'] = element.ServiceId;
-        RadiologyReportHeaderObj['AddedBy'] = this.accountService.currentUserValue.user.id,
-          RadiologyReportHeaderObj['ChargeID'] = element.ChargesId;
-        RadiologyReportHeaderObj['IsCompleted'] = 0;
-        RadiologyReportHeaderObj['IsPrinted'] = 0;
-        RadiologyReportHeaderObj['TestType'] = 0;
-        Redioreporthsarr.push(RadiologyReportHeaderObj);
-      }
-    });
-
-    let OPDoctorShareGroupAdmChargeObj = {};
-    OPDoctorShareGroupAdmChargeObj['BillNo'] = 0;
-
-    // let Cal_DiscAmount_OPBillObj = {};
-    // Cal_DiscAmount_OPBillObj['BillNo'] = 0;
 
     let Billdetsarr = [];
     this.dataSource.data.forEach((element) => {
@@ -765,8 +945,8 @@ export class BillDetailComponent implements OnInit {
       InsertBillUpdateBillNoObj['BillDate'] = this.dateTimeObj.date;
       InsertBillUpdateBillNoObj['OPD_IPD_Type'] = 0;
       InsertBillUpdateBillNoObj['AddedBy'] = this.accountService.currentUserValue.user.id,
-      InsertBillUpdateBillNoObj['TotalAdvanceAmount'] = 0,
-      InsertBillUpdateBillNoObj['BillTime'] = this.dateTimeObj.date;
+        InsertBillUpdateBillNoObj['TotalAdvanceAmount'] = 0,
+        InsertBillUpdateBillNoObj['BillTime'] = this.dateTimeObj.date;
       InsertBillUpdateBillNoObj['ConcessionReasonId'] = this.registeredForm.get('ConcessionReasonId').value || 0;
       InsertBillUpdateBillNoObj['IsSettled'] = 0;
       InsertBillUpdateBillNoObj['IsPrinted'] = 0;
@@ -783,15 +963,59 @@ export class BillDetailComponent implements OnInit {
       InsertBillUpdateBillNoObj['CashCounterId'] = 0;
       InsertBillUpdateBillNoObj['DiscComments'] = 'Remark';// 
       //
+
+      let InsertAdddetArr = [];
+      let chargesDetailInsert = {};
+
+      this.dataSource.data.forEach((element) => {
+        let chargesDetailInsert = {};
+        chargesDetailInsert['ChargeID'] = 0,
+        chargesDetailInsert['ChargesDate'] = this.datePipe.transform(this.currentDate, "MM-dd-yyyy"),
+        chargesDetailInsert['opD_IPD_Type'] = 0,
+        chargesDetailInsert['opD_IPD_Id'] = this.selectedAdvanceObj.AdmissionID,
+        chargesDetailInsert['serviceId'] = element.ServiceId,
+        chargesDetailInsert['price'] = element.Price,
+        chargesDetailInsert['qty'] = element.Qty,
+        chargesDetailInsert['totalAmt'] = element.TotalAmt,
+        chargesDetailInsert['concessionPercentage'] = element.DiscPer || 0,
+        chargesDetailInsert['concessionAmount'] = element.DiscAmt || 0,
+        chargesDetailInsert['netAmount'] = element.NetAmount,
+        chargesDetailInsert['doctorId'] = element.DoctorId,// this.registeredForm.get('DoctorID').value.DoctorID;
+        chargesDetailInsert['docPercentage'] = 0,// this.registeredForm.get('DoctorId').value;
+        chargesDetailInsert['docAmt'] = 0,
+        chargesDetailInsert['hospitalAmt'] = element.NetAmount,
+        chargesDetailInsert['isGenerated'] = 0,
+        chargesDetailInsert['addedBy'] = this.accountService.currentUserValue.user.id,
+        chargesDetailInsert['isCancelled'] = 0,
+        chargesDetailInsert['isCancelledBy'] = 0,
+        chargesDetailInsert['isCancelledDate'] = "01/01/1900",
+        chargesDetailInsert['isPathology'] = element.IsPathology,
+        chargesDetailInsert['isRadiology'] = element.IsRadiology,
+        chargesDetailInsert['isPackage'] = 0,
+        chargesDetailInsert['packageMainChargeID'] = 0,
+        chargesDetailInsert['isSelfOrCompanyService'] = false,
+        chargesDetailInsert['packageId'] = 0,
+        chargesDetailInsert['chargeTime'] = this.datePipe.transform(this.currentDate, "MM-dd-yyyy HH:mm:ss"),
+        chargesDetailInsert['classId'] = this.selectedAdvanceObj.ClassId,// this.registeredForm.get('ClassId').value;
+
+        chargesDetailInsert['BillNo'] = 0;
+        chargesDetailInsert['ChargeID'] = 0;
+
+          InsertAdddetArr.push(chargesDetailInsert);
+        // console.log(InsertAdddetArr.length);
+      })
+
+
+      
+//..................
       if (this.flagSubmit == true) {
         console.log("Procced with Payment Option");
         const insertBillUpdateBillNo = new Bill(InsertBillUpdateBillNoObj);
         let submitData = {
-          "insertPathologyReportHeader": Pathreporthsarr,
-          "insertRadiologyReportHeader": Redioreporthsarr,
+         
           "insertBillupdatewithbillno": insertBillUpdateBillNo,
+          "chargesDetailInsert":InsertAdddetArr,
           "opBillDetailsInsert": Billdetsarr,
-          // "opCalDiscAmountBill": Cal_DiscAmount_OPBillObj,
           "opInsertPayment": result.submitDataPay.ipPaymentInsert
         };
         console.log(submitData);
@@ -817,8 +1041,7 @@ export class BillDetailComponent implements OnInit {
         InsertBillUpdateBillNoObj['BalanceAmt'] = this.FinalAmt;
         const insertBillUpdateBillNo = new Bill(InsertBillUpdateBillNoObj);
         let submitData = {
-          "insertPathologyReportHeadercredit": Pathreporthsarr,
-          "insertRadiologyReportHeadercredit": Redioreporthsarr,
+         
           "insertBillcreditupdatewithbillno": insertBillUpdateBillNo,
           "opBillDetailscreditInsert": Billdetsarr,
           // "opCalDiscAmountBillcredit": Cal_DiscAmount_OPBillObj,
@@ -844,18 +1067,19 @@ export class BillDetailComponent implements OnInit {
     });
   }
 
+  
   onSaveEntry() {
     debugger;
     if (this.registeredForm.get("DoctorID").value) {
       this.DoctornewId = this.registeredForm.get("DoctorID").value.DoctorID;
-      this.ChargesDoctorname = this.registeredForm.get("DoctorID").value.DoctorName.toString()
+      // this.ChargesDoctorname = this.registeredForm.get("DoctorID").value.DoctorName.toString()
     } else {
       this.DoctornewId = 0;
       this.ChargesDoctorname = '';
     }
     this.isLoading = 'save';
 
-    if (this.SrvcName && (parseInt(this.b_price) != 0) && this.b_qty) {
+    // if (this.SrvcName && (parseInt(this.b_price) != 0) && this.b_qty) {
       this.isLoading = 'save';
       this.dataSource.data = [];
       this.chargeslist.push(
@@ -870,7 +1094,7 @@ export class BillDetailComponent implements OnInit {
           DiscAmt: this.b_disAmount || 0,
           NetAmount: this.b_netAmount || 0,
           ClassId: this.selectedAdvanceObj.ClassId || 0,
-          DoctorId: this.DoctornewId,// (this.registeredForm.get("DoctorID").value.DoctorName).toString() || '',
+          DoctorId: 2,//this.DoctornewId,// (this.registeredForm.get("DoctorID").value.DoctorName).toString() || '',
           DoctorName: this.ChargesDoctorname,
           ChargesDate: this.dateTimeObj.date,
           IsPathology: this.b_isPath,
@@ -884,7 +1108,7 @@ export class BillDetailComponent implements OnInit {
       console.log(this.dataSource.data);
       this.changeDetectorRefs.detectChanges();
 
-    }
+    // }
     this.onClearServiceAddList();
     this.getTotalNetAmount();
   }
@@ -1014,25 +1238,25 @@ export class BillDetailComponent implements OnInit {
     let d = this.registeredForm.get('concessionAmt').value;
     this.Consession = false;
     this.disamt = this.registeredForm.get('concessionAmt').value;
-    if(this.concessionAmtOfNetAmt < this.totalAmtOfNetAmt){
-    if (parseInt(this.disamt) > 0) {
-      let tot = 0;
-      if (this.b_TotalChargesAmount > 0) {
-        tot = parseInt(this.b_TotalChargesAmount) - parseInt(this.disamt);
-        this.TotalnetPaybleAmt = tot;
-        this.registeredForm.get('FinalAmt').setValue(tot);
+    if (this.concessionAmtOfNetAmt < this.totalAmtOfNetAmt) {
+      if (parseInt(this.disamt) > 0) {
+        let tot = 0;
+        if (this.b_TotalChargesAmount > 0) {
+          tot = parseInt(this.b_TotalChargesAmount) - parseInt(this.disamt);
+          this.TotalnetPaybleAmt = tot;
+          this.registeredForm.get('FinalAmt').setValue(tot);
+        }
       }
+      else if (d == null) {
+        this.registeredForm.get('FinalAmt').setValue(this.TotalnetPaybleAmt);
+        this.registeredForm.get('ConcessionId').setValidators([Validators.required]);
+        this.registeredForm.get('ConcessionId').disable;
+        this.Consession = true;
+        this.registeredForm.get('ConcessionId').reset();
+      }
+    } else {
+      Swal.fire("Discount Amount Schoud be Less than Total Amount")
     }
-    else if (d == null) {
-      this.registeredForm.get('FinalAmt').setValue(this.TotalnetPaybleAmt);
-      this.registeredForm.get('ConcessionId').setValidators([Validators.required]);
-      this.registeredForm.get('ConcessionId').disable;
-      this.Consession = true;
-      this.registeredForm.get('ConcessionId').reset();
-    }
-  }else{
-    Swal.fire("Discount Amount Schoud be Less than Total Amount")
-  }
   }
 
   onKeydown(event) {
@@ -1652,81 +1876,80 @@ function takeWhileInclusive(arg0: (p: any) => boolean): import("rxjs").OperatorF
 // exec rptBillPrint 611755
 
 
-export class SearchInforObj
-{
-    RegNo : Number;
-    AdmissionID: Number;
-    PatientName: string;
-    Doctorname: string;
-    AdmDateTime: string;
-    AgeYear: number;
-    ClassId: number;
-    ClassName:String;
-    TariffName: String;
-    TariffId : number;
-    IsDischarged:boolean;
-    opD_IPD_Type:number;
-    PatientType:any;
-    PatientTypeID:any;
-    VisitId:any;
-    AdmissionId:number;
-    IPDNo:any;
-    DoctorId:number;
-    BedId:any;
-    BedName:String;
-    WardName:String;
-    CompanyId:string;
-    SubCompanyId:any;
-    IsBillGenerated:any;
-    UnitId:any;
-    RegId:number;
-    RefId:number;
-     OPD_IPD_ID:any;
-     storage: any;
-     IsMLC:any;
-     NetPayableAmt:any;
-     VistDateTime:any;
+export class SearchInforObj {
+  RegNo: Number;
+  AdmissionID: Number;
+  PatientName: string;
+  Doctorname: string;
+  AdmDateTime: string;
+  AgeYear: number;
+  ClassId: number;
+  ClassName: String;
+  TariffName: String;
+  TariffId: number;
+  IsDischarged: boolean;
+  opD_IPD_Type: number;
+  PatientType: any;
+  PatientTypeID: any;
+  VisitId: any;
+  AdmissionId: number;
+  IPDNo: any;
+  DoctorId: number;
+  BedId: any;
+  BedName: String;
+  WardName: String;
+  CompanyId: string;
+  SubCompanyId: any;
+  IsBillGenerated: any;
+  UnitId: any;
+  RegId: number;
+  RefId: number;
+  OPD_IPD_ID: any;
+  storage: any;
+  IsMLC: any;
+  NetPayableAmt: any;
+  VistDateTime: any;
 
-     /**
-     * Constructor
-     *
-     * @param SearchInforObj
-     */
-      constructor(SearchInforObj) {
-        {
-           this.RegNo = SearchInforObj.RegNo || '';
-           this.RegId = SearchInforObj.RegId || '';
-           this.AdmissionID = SearchInforObj.AdmissionID || '';
-           this.PatientName = SearchInforObj.PatientName || '';
-           this.Doctorname = SearchInforObj.Doctorname || '';
-           this.AdmDateTime = SearchInforObj.AdmDateTime || '';
-           this.AgeYear = SearchInforObj.AgeYear || '';
-           this.ClassId = SearchInforObj.ClassId || '';
-           this.ClassName = SearchInforObj.ClassName || '';
-           this.TariffName = SearchInforObj.TariffName || '';
-           this.TariffId = SearchInforObj.TariffId || '';
-           this.IsDischarged =SearchInforObj.IsDischarged || 0 ;
-           this.opD_IPD_Type = SearchInforObj.opD_IPD_Type | 0;
-           this.PatientType = SearchInforObj.PatientType || 0;
-           this.VisitId = SearchInforObj.VisitId || '';
-           this.AdmissionId = SearchInforObj.AdmissionId || '';
-           this.IPDNo = SearchInforObj.IPDNo || '';
-           this.BedName = SearchInforObj.BedName || '';
-           this.WardName = SearchInforObj.WardName || '';
-           this.CompanyId = SearchInforObj.CompanyId || '';
-           this.IsBillGenerated = SearchInforObj.IsBillGenerated || 0;
-           this.UnitId = SearchInforObj.UnitId || 0;
-           this.RefId = SearchInforObj.RefId || 0;
-            this.DoctorId = SearchInforObj.DoctorId || 0;
-            this.OPD_IPD_ID = SearchInforObj.OPD_IPD_ID || 0;
-            this.IsMLC = SearchInforObj.IsMLC || 0;
-            this.BedId = SearchInforObj.BedId || 0;
-            this.SubCompanyId =SearchInforObj.SubCompanyId || 0;
-            this.PatientTypeID =SearchInforObj.PatientTypeID || 0;
-           this.NetPayableAmt =SearchInforObj.NetPayableAmt || 0;
-           this.VistDateTime=SearchInforObj.VistDateTime || '';
+  /**
+  * Constructor
+  *
+  * @param SearchInforObj
+  */
+  constructor(SearchInforObj) {
+    {
+      this.RegNo = SearchInforObj.RegNo || '';
+      this.RegId = SearchInforObj.RegId || '';
+      this.AdmissionID = SearchInforObj.AdmissionID || '';
+      this.PatientName = SearchInforObj.PatientName || '';
+      this.Doctorname = SearchInforObj.Doctorname || '';
+      this.AdmDateTime = SearchInforObj.AdmDateTime || '';
+      this.AgeYear = SearchInforObj.AgeYear || '';
+      this.ClassId = SearchInforObj.ClassId || '';
+      this.ClassName = SearchInforObj.ClassName || '';
+      this.TariffName = SearchInforObj.TariffName || '';
+      this.TariffId = SearchInforObj.TariffId || '';
+      this.IsDischarged = SearchInforObj.IsDischarged || 0;
+      this.opD_IPD_Type = SearchInforObj.opD_IPD_Type | 0;
+      this.PatientType = SearchInforObj.PatientType || 0;
+      this.VisitId = SearchInforObj.VisitId || '';
+      this.AdmissionId = SearchInforObj.AdmissionId || '';
+      this.IPDNo = SearchInforObj.IPDNo || '';
+      this.BedName = SearchInforObj.BedName || '';
+      this.WardName = SearchInforObj.WardName || '';
+      this.CompanyId = SearchInforObj.CompanyId || '';
+      this.IsBillGenerated = SearchInforObj.IsBillGenerated || 0;
+      this.UnitId = SearchInforObj.UnitId || 0;
+      this.RefId = SearchInforObj.RefId || 0;
+      this.DoctorId = SearchInforObj.DoctorId || 0;
+      this.OPD_IPD_ID = SearchInforObj.OPD_IPD_ID || 0;
+      this.IsMLC = SearchInforObj.IsMLC || 0;
+      this.BedId = SearchInforObj.BedId || 0;
+      this.SubCompanyId = SearchInforObj.SubCompanyId || 0;
+      this.PatientTypeID = SearchInforObj.PatientTypeID || 0;
+      this.NetPayableAmt = SearchInforObj.NetPayableAmt || 0;
+      this.VistDateTime = SearchInforObj.VistDateTime || '';
 
 
-        }
     }
+  }
 }

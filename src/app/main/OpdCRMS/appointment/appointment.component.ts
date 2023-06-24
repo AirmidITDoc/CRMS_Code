@@ -233,7 +233,7 @@ export class AppointmentComponent implements OnInit {
         this.advanceDataStored.storage = new SearchInforObj(xx);
         const dialogRef = this._matDialog.open(BillDetailComponent,
           {
-            maxWidth: "95vw",
+            maxWidth: "90%",
             height: '600px',
             width: '100%',
             data: {

@@ -4,7 +4,7 @@
 }
 
 
-app-op-billing {
+app-bill-detail {
     display: flex;
     flex: 1 1 auto;
     width: 100%;
@@ -56,7 +56,7 @@ app-op-billing {
 }
 
 
-app-op-billing{
+app-bill-detail{
 
     // .tables-contianer {
     //     padding: 0 15px;
@@ -845,9 +845,9 @@ padding-bottom: 2px;
 
 button:disabled {
     color: white;
-   background-color: #7bd3ff  !important;
+   background-color: #32566c  !important;
    //background-color: #b7e6fd ;
-    border-radius: 2px;
+    border-radius: 1px;
    // border: 1px solid #CCCCCC;
    border: 1px solid  #b7e6fd ;
 }
