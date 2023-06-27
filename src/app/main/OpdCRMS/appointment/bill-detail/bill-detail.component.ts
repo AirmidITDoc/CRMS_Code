@@ -37,7 +37,7 @@ interface FoodNode {
 // const TREE_DATA: FoodNode[] = [
 //   {
 //     name: 'Visit Date Schdule',
-//     children: [{ name: 'Apple' }, { name: 'Banana' }, { name: 'Fruit loops' },]
+//     children: [{ name: 'Visit1' }, { name: 'Visit2' }, { name: 'Visit3' },]
 //   },
 
 // ];
@@ -186,22 +186,22 @@ export class BillDetailComponent implements OnInit {
 
   resBillId: Post;
 
-  Vist1:any;
-  Vist2:any;
-  Vist3:any;
+  Vist1:any='2/05/2023';
+  Vist2:any='3/05/2023';
+  Vist3:any='4/05/2023';
 
-  // private _transformer = (node: FoodNode, level: number) => {
-  //   return {
-  //     expandable: !!node.children && node.children.length > 0,
-  //     name: node.name,
-  //     level: level,
-  //   };
-  // }
-  // treeControl = new FlatTreeControl<ExampleFlatNode>(
-  //   node => node.level, node => node.expandable);
-  // treeFlattener = new MatTreeFlattener(
-  //   this._transformer, node => node.level, node => node.expandable, node => node.children);
-  // dataSource11 = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+  private _transformer = (node: FoodNode, level: number) => {
+    return {
+      expandable: !!node.children && node.children.length > 0,
+      name: node.name,
+      level: level,
+    };
+  }
+  treeControl = new FlatTreeControl<ExampleFlatNode>(
+    node => node.level, node => node.expandable);
+  treeFlattener = new MatTreeFlattener(
+    this._transformer, node => node.level, node => node.expandable, node => node.children);
+  dataSource11 = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
 
 
@@ -221,10 +221,10 @@ export class BillDetailComponent implements OnInit {
     public _httpClient: HttpClient,
     private formBuilder: FormBuilder) { }
 
-  // hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
+  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
   ngOnInit(): void {
 
-    // this.dataSource11.data = TREE_DATA;
+  
     this.createForm();
 
     if (this.advanceDataStored.storage) {
@@ -250,6 +250,19 @@ export class BillDetailComponent implements OnInit {
       .subscribe(() => {
         this.filterDoctor();
       });
+
+
+      console.log(this.Vist1);
+      
+      // const TREE_DATA: FoodNode[] = [
+      //   {
+      //     name: 'Visit Date Schdule',
+      //     children: [{ name: this.Vist1 }, { name: this.Vist2 }, { name: this.Vist3 },]
+      //   },
+      
+      // ];
+
+      //   this.dataSource11.data = TREE_DATA;
   }
   
   VisitListCombo() {
@@ -260,40 +273,49 @@ debugger;
     this._opappointmentService.getVisitDateCombo(m).subscribe(data => { this.VisitDateList = data; 
       console.log(this.VisitDateList)
       
-      // this.Vist1=data.valueOf()
-      // this.Vist2=data[1][0];
-      // this.Vist3=data[2][0];
-      // console.log(this.Vist1)
+      this.Vist1=this.VisitDateList[0].VisitDate;
+      this.Vist2=data[1].VisitDate;
+      this.Vist3=data[2].VisitDate;
+      console.log(this.Vist1)
     })
-   
+    
+    const TREE_DATA: FoodNode[] = [
+      {
+        name: 'Visit Date Schdule',
+        children: [{ name: this.Vist1 }, { name: this.Vist2 }, { name: this.Vist3 },]
+      },
+    
+    ];
+
+      this.dataSource11.data = TREE_DATA;
    
     
   }
 
- TREE_DATA: FoodNode[] = [
-    {
-      name: 'Visit Date Schdule',
+//  TREE_DATA: FoodNode[] = [
+//     {
+//       name: 'Visit Date Schdule',
       
-      // children: [{ name: this.VisitDateList[0].value }, { name: this.VisitDateList[1].VisitDate }, { name: this.VisitDateList[2].VisitDate },]
-    },
+//       children: [{ name: 'this.Vist1' }, { name: 'this.Vist2' }, { name: 'this.Vist3' },]
+//     },
   
-  ];
-  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
+//   ];
+//   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
   
-  private _transformer = (node: FoodNode, level: number) => {
-    return {
-      expandable: !!node.children && node.children.length > 0,
-      name: node.name,
-      level: level,
-    };
-    this.dataSource11.data = this.TREE_DATA;
-  }
-  treeControl = new FlatTreeControl<ExampleFlatNode>(
-    node => node.level, node => node.expandable);
-  treeFlattener = new MatTreeFlattener(
-    this._transformer, node => node.level, node => node.expandable, node => node.children);
+//   private _transformer = (node: FoodNode, level: number) => {
+//     return {
+//       expandable: !!node.children && node.children.length > 0,
+//       name: node.name,
+//       level: level,
+//     };
+//     this.dataSource11.data = this.TREE_DATA;
+//   }
+//   treeControl = new FlatTreeControl<ExampleFlatNode>(
+//     node => node.level, node => node.expandable);
+//   treeFlattener = new MatTreeFlattener(
+//     this._transformer, node => node.level, node => node.expandable, node => node.children);
     
-  dataSource11 = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+//   dataSource11 = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
 
 
@@ -908,24 +930,26 @@ debugger;
     // const opCalDiscAmountBill = new Cal_DiscAmount(Cal_DiscAmount_OPBillObj);
 
 
-    const dialogRef = this._matDialog.open(PaymentDetailComponent,
-      {
-        maxWidth: "85vw",
-        height: '540px',
-        width: '100%',
-        data: {
-          advanceObj: PatientHeaderObj,
-          FromName: "OP-Bill"
-        }
-      });
+    // const dialogRef = this._matDialog.open(PaymentDetailComponent,
+    //   {
+    //     maxWidth: "85vw",
+    //     height: '540px',
+    //     width: '100%',
+    //     data: {
+    //       advanceObj: PatientHeaderObj,
+    //       FromName: "OP-Bill"
+    //     }
+    //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      let Data = {
-        "opInsertPayment": result.submitDataPay.ipPaymentInsert
-      };
-      this.paidamt = result.submitDataPay.ipPaymentInsert.PaidAmt;
-      this.balanceamt = result.submitDataPay.ipPaymentInsert.BalanceAmt;
-      this.flagSubmit = result.IsSubmitFlag
+    // dialogRef.afterClosed().subscribe(result => {
+    //   let Data = {
+    //     "opInsertPayment": result.submitDataPay.ipPaymentInsert
+    //   };
+    //   this.paidamt = result.submitDataPay.ipPaymentInsert.PaidAmt;
+    //   this.balanceamt = result.submitDataPay.ipPaymentInsert.BalanceAmt;
+    //   this.flagSubmit = result.IsSubmitFlag
+
+
       let InsertBillUpdateBillNoObj = {};
       if (this.concessionDiscPer > 0) {
         this.FinalAmt = this.totalAmtOfNetAmt - this.concessionAmtOfNetAmt;
@@ -933,7 +957,7 @@ debugger;
         this.FinalAmt = this.TotalnetPaybleAmt;
       }
 
-      let InterimOrFinal = 1;
+      let InterimOrFinal = 0;
 
       InsertBillUpdateBillNoObj['BillNo'] = 0;
       InsertBillUpdateBillNoObj['OPD_IPD_ID'] = this.selectedAdvanceObj.AdmissionID;
@@ -989,8 +1013,8 @@ debugger;
         chargesDetailInsert['isCancelled'] = 0,
         chargesDetailInsert['isCancelledBy'] = 0,
         chargesDetailInsert['isCancelledDate'] = "01/01/1900",
-        chargesDetailInsert['isPathology'] = element.IsPathology,
-        chargesDetailInsert['isRadiology'] = element.IsRadiology,
+        chargesDetailInsert['isPathology'] = 0,
+        chargesDetailInsert['isRadiology'] = 0,
         chargesDetailInsert['isPackage'] = 0,
         chargesDetailInsert['packageMainChargeID'] = 0,
         chargesDetailInsert['isSelfOrCompanyService'] = false,
@@ -1008,7 +1032,7 @@ debugger;
 
       
 //..................
-      if (this.flagSubmit == true) {
+      // if (this.flagSubmit == true) {
         console.log("Procced with Payment Option");
         const insertBillUpdateBillNo = new Bill(InsertBillUpdateBillNoObj);
         let submitData = {
@@ -1016,7 +1040,7 @@ debugger;
           "insertBillupdatewithbillno": insertBillUpdateBillNo,
           "chargesDetailInsert":InsertAdddetArr,
           "opBillDetailsInsert": Billdetsarr,
-          "opInsertPayment": result.submitDataPay.ipPaymentInsert
+          // "opInsertPayment": result.submitDataPay.ipPaymentInsert
         };
         console.log(submitData);
         this._opappointmentService.InsertOPBilling(submitData).subscribe(response => {
@@ -1024,7 +1048,7 @@ debugger;
             Swal.fire('OP Bill With Payment!', 'Bill Generated Successfully !', 'success').then((result) => {
               if (result.isConfirmed) {
                 let m = response;
-                this.getPrint(m);
+                // this.getPrint(m);
                 this._matDialog.closeAll();
               }
             });
@@ -1033,38 +1057,38 @@ debugger;
           }
           this.isLoading = '';
         });
-      }
-      else {
-        console.log("Procced with Credit bill");
-        InterimOrFinal = 0;
-        InsertBillUpdateBillNoObj['PaidAmt'] = 0;
-        InsertBillUpdateBillNoObj['BalanceAmt'] = this.FinalAmt;
-        const insertBillUpdateBillNo = new Bill(InsertBillUpdateBillNoObj);
-        let submitData = {
+      
+      // else {
+      //   console.log("Procced with Credit bill");
+      //   InterimOrFinal = 0;
+      //   InsertBillUpdateBillNoObj['PaidAmt'] = 0;
+      //   InsertBillUpdateBillNoObj['BalanceAmt'] = this.FinalAmt;
+      //   const insertBillUpdateBillNo = new Bill(InsertBillUpdateBillNoObj);
+      //   let submitData = {
          
-          "insertBillcreditupdatewithbillno": insertBillUpdateBillNo,
-          "opBillDetailscreditInsert": Billdetsarr,
-          // "opCalDiscAmountBillcredit": Cal_DiscAmount_OPBillObj,
-          // "opInsertPayment": result.submitDataPay.ipPaymentInsert
-        };
-        console.log(submitData);
-        // this._opappointmentService.InsertOPBillingCredit(submitData).subscribe(response => {
-        //   if (response) {
-        //     Swal.fire('OP Bill Credit !', 'Bill Generated Successfully!', 'success').then((result) => {
-        //       if (result.isConfirmed) {
-        //         let m = response;
-        //         this.getPrint(m);
-        //         this._matDialog.closeAll();
+      //     "insertBillcreditupdatewithbillno": insertBillUpdateBillNo,
+      //     "opBillDetailscreditInsert": Billdetsarr,
+      //     // "opCalDiscAmountBillcredit": Cal_DiscAmount_OPBillObj,
+      //     // "opInsertPayment": result.submitDataPay.ipPaymentInsert
+      //   };
+      //   console.log(submitData);
+      //   this._opappointmentService.InsertOPBilling(submitData).subscribe(response => {
+      //     if (response) {
+      //       Swal.fire('OP Bill Credit !', 'Bill Generated Successfully!', 'success').then((result) => {
+      //         if (result.isConfirmed) {
+      //           let m = response;
+      //           this.getPrint(m);
+      //           this._matDialog.closeAll();
 
-        //       }
-        //     });
-        //   } else {
-        //     Swal.fire('Error !', 'OP Billing data not saved', 'error');
-        //   }
-        //   this.isLoading = '';
-        // });
-      }
-    });
+      //         }
+      //       });
+      //     } else {
+      //       Swal.fire('Error !', 'OP Billing data not saved', 'error');
+      //     }
+      //     this.isLoading = '';
+      //   });
+      // }
+    
   }
 
   

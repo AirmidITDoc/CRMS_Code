@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AuthenticationService } from 'app/core/services/authentication.service';
@@ -6,11 +6,14 @@ import { ReplaySubject, Subject } from 'rxjs';
 import { AppointmentService } from '../appointment.service';
 import { takeUntil } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-payment-detail',
   templateUrl: './payment-detail.component.html',
-  styleUrls: ['./payment-detail.component.scss']
+  styleUrls: ['./payment-detail.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class PaymentDetailComponent implements OnInit {
 
@@ -95,13 +98,7 @@ export class PaymentDetailComponent implements OnInit {
     this.advanceData = data;
     console.log(this.advanceData.advanceObj);
 
-    if (this.advanceData.FromName == "Advance-Refund") {
-      this.netPayAmt = parseInt(this.advanceData.advanceObj.RefundAmount);
-      this.cashAmt = parseInt(this.advanceData.advanceObj.RefundAmount);
-      this.paidAmt = parseInt(this.advanceData.advanceObj.RefundAmount);
-      this.billNo = parseInt(this.advanceData.advanceObj.BillId);
-
-    }
+   
     if (this.advanceData.FromName == "OP-Bill") {
       this.netPayAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
       this.cashAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
@@ -109,19 +106,11 @@ export class PaymentDetailComponent implements OnInit {
       this.billNo = parseInt(this.advanceData.advanceObj.BillId);
 
     }
-    if (this.advanceData.FromName == "IP-Bill") {
-      this.netPayAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
-      this.cashAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
-      this.paidAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
-      this.billNo = parseInt(this.advanceData.advanceObj.BillId);
-      this.PatientName = this.advanceData.advanceObj.PatientName;
-      this.BillDate = this.advanceData.advanceObj.Date;
-
-    }
+   
     else {
-      this.netPayAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
-      this.cashAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
-      this.paidAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
+      this.netPayAmt =11,// parseInt(this.advanceData.advanceObj.NetPayAmount);
+      this.cashAmt = 22,//parseInt(this.advanceData.advanceObj.NetPayAmount);
+      this.paidAmt =33,// parseInt(this.advanceData.advanceObj.NetPayAmount);
       this.getBalanceAmt();
     }
   }

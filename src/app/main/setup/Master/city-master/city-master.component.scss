@@ -1,56 +1,56 @@
-  
-.p-sm-24 {
-    padding: 10px !important;
-}
-
-app-department{
+app-state-master {
     .mat-header-row {
         width: 800px;
         max-width: 800px;
-        min-width: 800px;   
-        font-weight: bold;      
+        min-width: 800px;
+        font-weight: bold;
     }
-    
+
     .mat-row {
         width: 800px;
         max-width: 800px;
-        min-width: 800px;            
+        min-width: 800px;
     }
-    
-    .mat-column-DepartmentId {
+
+    .mat-column-CITYID {
         width: 70px;
         max-width: 70px;
         min-width: 70px;
     }
-    
-    .mat-column-DepartmentName {
-        width:450px;
+
+    .mat-column-CITYNAME {
+        width: 450px;
         max-width: 450px;
         min-width: 450px;
     }
-   
-    .mat-column-AddedByName {
+
+    .mat-column-STATENAME {
         width: 100px;
         max-width: 100px;
         min-width: 100px;
-    }   
-    
-    .mat-column-IsDeleted {
+    }
+
+    .mat-column-AddedBy {
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+    }
+
+    .mat-column-ISDELETED {
         width: 100px;
         max-width: 100px;
         min-width: 100px;
         text-align: center;
-        justify-content:center;
+        justify-content: center;
     }
-    
 
     .mat-column-action {
         // color: white !important;
-        width:70px;
+        width: 70px;
         max-width: 70px;
         min-width: 70px;
         text-align: right;
-        justify-content:right;
+        justify-content: right;
     }
     .mat-icon-button {
         padding: 0;
@@ -61,6 +61,18 @@ app-department{
         line-height: 20px;
         border-radius: 50%;
     }
-}
+    // .mat-radio-label-content {
+    //     padding-left: 1px;
+    //     padding-right: 4px;
+    //     font-size: 12px;
+    //     margin: 1px 10px 0px 1px;
+    // }
 
-  
+    // .mat-raised-button {
+    //     margin: 5px;
+    //     line-height: 30px;
+    //     height: 40px;
+    //     border-radius: 4px;
+    //     overflow: visible;
+    // }
+}

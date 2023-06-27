@@ -96,7 +96,7 @@
 
                         <mat-form-field appearance="outline" fxFlex>
                             <mat-label>VisitFrequency</mat-label>
-                            <input name="VisitFrequency" formControlName="VisitFrequency" placeholder="VisitFrequency"
+                            <input name="VisitFrequency" formControlName="VisitFrequency" placeholder="VisitFrequency" [ngModel]="registerObj.VisitFrequency"
                                 matInput (ngModelChange)="registerObj.VisitFrequency = $event">
                             <!-- <mat-error
               *ngIf="personalFormGroup.get('AgeMonth').invalid && personalFormGroup.get('AgeMonth').touched">

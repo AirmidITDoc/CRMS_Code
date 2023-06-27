@@ -34,7 +34,7 @@
                 <mat-select formControlName="CaseId" name="CaseId" style="color: blue;" required>
                     <mat-option></mat-option>
                     <mat-option *ngFor="let m of CaseIdList" [value]="m">
-                        {{m.CaseId}}
+                       CaseId {{m.CaseId}} ||  {{m.CaseTitle}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

@@ -1,4 +1,3 @@
-import { AppointmentComponent } from './appointment.component';
 import { NgModule } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,7 +17,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { RouterModule, Routes } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { NewAppointmentComponent } from './new-appointment/new-appointment.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
@@ -34,33 +32,22 @@ import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { SharedModule } from 'app/main/shared/shared.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { EditAppointmentComponent } from './edit-appointment/edit-appointment.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatNestedTreeNode, MatTree, MatTreeModule } from '@angular/material/tree';
-import { AppointmentService } from './appointment.service';
-import { BillDetailComponent } from './bill-detail/bill-detail.component';
-import { PaymentDetailComponent } from './payment-detail/payment-detail.component';
-import { EditVisitDateComponent } from './edit-visit-date/edit-visit-date.component';
-import { NewVistDateComponent } from './new-vist-date/new-vist-date.component';
-
+import { BrowseCreditPaymentComponent } from './browse-credit-payment.component';
+import { CreditPaymentService } from './credit-payment.service';
 // import { SharedModule } from 'app/main/shared/shared.module';
 
 const routes: Routes = [
     {
         path: '**',
-        component: AppointmentComponent,
+        component: BrowseCreditPaymentComponent,
     },
 ];
 @NgModule({
     declarations: [
-        AppointmentComponent,
-        NewAppointmentComponent,
-        EditAppointmentComponent,
-        BillDetailComponent,
-        PaymentDetailComponent,
-        EditVisitDateComponent,
-        NewVistDateComponent,
-      
+        BrowseCreditPaymentComponent,
+             
       
     ],
     imports: [
@@ -113,11 +100,11 @@ const routes: Routes = [
         
     ],
     providers: [
-        AppointmentService,
+        CreditPaymentService,
         DatePipe
     ],
     entryComponents: [
-        AppointmentComponent,
+        BrowseCreditPaymentComponent,
     ]
 })
-export class AppointmentModule { }
+export class CreditPaymentModule { }

@@ -35,7 +35,6 @@ import { EditAppointmentComponent } from './main/OpdCRMS/appointment/edit-appoin
 import { NewCaseDetailComponent } from './main/OpdCRMS/case-detail/new-case-detail/new-case-detail.component';
 import { EditCasedetailComponent } from './main/OpdCRMS/case-detail/edit-casedetail/edit-casedetail.component';
 import { ViewCasedetailComponent } from './main/OpdCRMS/case-detail/view-casedetail/view-casedetail.component';
-
 const appRoutes: Routes = [
     {
         path: "auth",
@@ -95,8 +94,8 @@ export const PICK_FORMATS = {
 
 @NgModule({
     declarations: [
-        AppComponent      
-                     
+        AppComponent
+                          
         
     ],
     imports: [

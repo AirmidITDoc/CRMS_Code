@@ -41,7 +41,7 @@ export class CasedetailService {
   }
 
   public CaseDetailUpdate(employee){
-    return this._httpClient.post("OutPatient/RegistrationUpdate", employee);
+    return this._httpClient.post("OutPatient/CaseDetailUpdate", employee);
   }
   public getCaseIDCombo(){
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CasedetailId", {});

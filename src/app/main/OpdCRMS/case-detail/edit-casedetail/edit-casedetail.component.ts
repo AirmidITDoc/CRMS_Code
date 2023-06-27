@@ -24,19 +24,7 @@ export class EditCasedetailComponent implements OnInit {
   CaseIdList:any = [];
 snackmessage:any;
 
-// CaseId: any;
-// CaseTitle: any;
-// CaseDescription: any;
-// TotalSubjects: number;
-// TotalVisits: number;
-// VisitFrequency: string;
-// CaseStartDate: Date;
-// CaseEndDate: Date;
-// CaseStatus: string;
-// CompanyName: string;
-// CaseRepresentative: string;
-// HospitalRepresentative: string;
-// AgreementFileName: String;
+
 registerObj = new CaseDetail({});
 
   private _onDestroy = new Subject<void>();
@@ -114,12 +102,12 @@ registerObj = new CaseDetail({});
 
 
   onSubmit() {
-
+debugger
         this.isLoading = 'submit';
     
       var m_data = {
         "updateCaseDetail": {
-          "CaseId": this.personalFormGroup.get('CaseId').value.CaseId || 0,
+          "CaseId": this.registerObj.CaseId,
           "CaseTitle": this.personalFormGroup.get('CaseTitle').value || '',
           "CaseDescription": this.personalFormGroup.get('CaseDescription').value || '',
           "TotalSubjects": this.personalFormGroup.get('TotalSubjects').value || 0,
@@ -142,17 +130,10 @@ registerObj = new CaseDetail({});
       this._registerService.CaseDetailUpdate(m_data).subscribe(response => {
         if (response) {
           this.myFunction("CaseDetail Data Updated Successfully !");
-          // const dialogRef = this._matDialog.open(CaseDetailListComponent,
-          //   {
-          //     maxWidth: "95%",
-          //     height: '700px',
-          //     width: '100%',
-          //     // height: "100%"
-          //   });
+          
           this._matDialog.closeAll();
         } else {
           this.myFunction("CaseDetail Data  not Updated', 'error !");
-          // Swal.fire('Error !', 'Register Data  not saved', 'error');
         }
       });
     

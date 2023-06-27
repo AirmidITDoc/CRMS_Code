@@ -9,13 +9,9 @@
                 style="color: white;">account_box
             </mat-icon>
             <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                Appointment
+               Credited Payment List
             </span>
 
-            <button mat-raised-button (click)="newappointmentSchdule()" fxLayoutAlign="center center"
-                style="margin-left: 1300px;">
-                <mat-icon color="Primary" title=" Appointment Form ">how_to_reg</mat-icon>
-            </button>
         </div>
 
 
@@ -263,7 +259,7 @@
                                     <mat-footer-row *matFooterRowDef="['noData']"
                                         [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
                                 </mat-table>
-                                <mat-paginator [pageSizeOptions]="[20, 25, 50, 100]" [pageSize]="16"
+                                <mat-paginator [pageSizeOptions]="[20, 25, 50, 100]" [pageSize]="20"
                                     showFirstLastButtons>
                                 </mat-paginator>
                             </div>

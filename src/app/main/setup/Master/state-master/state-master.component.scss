@@ -1,0 +1,78 @@
+app-state-master {
+    .mat-header-row {
+        width: 900px;
+        max-width: 900px;
+        min-width: 900px;
+        font-weight: bold;
+    }
+
+    .mat-row {
+        width: 900px;
+        max-width: 900px;
+        min-width: 900px;
+    }
+
+    .mat-column-StateId {
+        width: 70px;
+        max-width: 70px;
+        min-width: 70px;
+    }
+
+    .mat-column-StateName {
+        width: 300px;
+        max-width: 300px;
+        min-width: 300px;
+    }
+
+    .mat-column-CountryName {
+        width: 200px;
+        max-width: 200px;
+        min-width: 200px;
+    }
+
+    .mat-column-AddedByName {
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+    }
+
+    .mat-column-IsDeleted {
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .mat-column-action {
+        // color: white !important;
+        width: 110px;
+        max-width: 110px;
+        min-width: 110px;
+        text-align: right;
+        justify-content: right;
+    }
+    .mat-icon-button {
+        padding: 0;
+        min-width: 0;
+        width: 40px;
+        height: 20px;
+        flex-shrink: 0;
+        line-height: 20px;
+        border-radius: 50%;
+    }
+    // .mat-radio-label-content {
+    //     padding-left: 1px;
+    //     padding-right: 4px;
+    //     font-size: 12px;
+    //     margin: 1px 10px 0px 1px;
+    // }
+
+    // .mat-raised-button {
+    //     margin: 5px;
+    //     line-height: 30px;
+    //     height: 40px;
+    //     border-radius: 4px;
+    //     overflow: visible;
+    // }
+}

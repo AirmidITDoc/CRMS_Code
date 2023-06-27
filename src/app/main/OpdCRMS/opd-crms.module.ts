@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+
 const appRoutes: Routes = [
   // {
   //   path: "phone-appointment",
@@ -41,6 +42,11 @@ const appRoutes: Routes = [
 //     loadChildren: () => import("./op-search-list/opsearchlist.module").then((m) => m.opseachlistModule),
 // },
 
+{
+  path: "payment",
+  // loadChildren: () =>import("./op-search-list/outstanding-payment/outstanding.module").then((m) => m.OutstandingModule),
+  loadChildren: () =>import("./browse-credit-payment/credit-payment.module").then((m) => m.CreditPaymentModule),
+},
 
 ];
 @NgModule({

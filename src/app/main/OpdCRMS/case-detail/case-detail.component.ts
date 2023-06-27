@@ -128,124 +128,10 @@ export class CaseDetailComponent implements OnInit {
     );
   }
 
-  getRecord(contact,m): void {
-    ;
-console.log(contact);
-console.log(m);
-    if (m == "Bill") {
-      console.log(contact);
-      let xx = {
-        RegNo: contact.RegId,
-        // RegId: contact.RegId,
-        AdmissionID: contact.VisitId,
-        PatientName: contact.PatientName,
-        Doctorname: contact.Doctorname,
-        AdmDateTime: contact.AdmDateTime,
-        AgeYear: contact.AgeYear,
-        ClassId: contact.ClassId,
-        ClassName: contact.ClassName,
-        TariffName: contact.TariffName,
-        TariffId: contact.TariffId
-      };
-      // this.advanceDataStored.storage = new AdvanceDetailObj(xx);
-
-      // this._ActRoute.navigate(['opd/new-OpdBilling']);
-      //   const dialogRef = this._matDialog.open(OPBillingComponent, 
-      //    {  maxWidth: "90%",
-      //   //  height: '495px !important',
-
-      //   height: '695px !important',
-      //   // width: '100%',
-      //  });
-      //  dialogRef.afterClosed().subscribe(result => {
-      //    console.log('The dialog was closed - Insert Action', result);
-      //   //  this.getRadiologytemplateMasterList();
-      // });
-    }
-    
-    else if(m == "View Case Detail") {
-        console.log(" This is for View Case Detail pop : " + m);
-        let xx = {
-        
-          CaseId:contact.CaseId,
-          CaseTitle:contact.CaseTitle,
-          CaseDescription: contact.CaseDescription,
-          TotalSubjects:contact.TotalSubjects,
-          TotalVisits:contact.TotalVisits,
-          VisitFrequency:contact.VisitFrequency,
-          CaseStartDate: contact.CaseStartDate,
-          CaseEndDate:contact.CaseEndDate,
-          CaseStatus: contact.CaseStatus,
-          CompanyName:contact.CompanyName,
-          CaseRepresentative: contact.CaseRepresentative,
-          HospitalRepresentative: contact.HospitalRepresentative,
-          AgreementFileName: contact.AgreementFileName,
-        };
-        // this.advanceDataStored.storage = new CaseDetail(xx);
-        // console.log( this.advanceDataStored.storage);
-         console.log(xx);
-        debugger;
-        const dialogRef = this._matDialog.open(ViewCasedetailComponent,
-          {
-            maxWidth: "95%",
-            height: '95%',
-            width: '100%',
-            //width: '100%', height: "100%"
-          });
-        dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed - Insert Action', result);
-          //  this.getRadiologytemplateMasterList();
-        });
-      }
-    
-
-    if (m == "Update Case Detail") {
-
-      console.log(" This is for Update Case Detail pop : " + m);
-      let xx = {
-      
-        CaseId:contact.CaseId,
-        CaseTitle:contact.CaseTitle,
-        CaseDescription: contact.CaseDescription,
-        TotalSubjects:contact.TotalSubjects,
-        TotalVisits:contact.TotalVisits,
-        VisitFrequency:contact.VisitFrequency,
-        CaseStartDate: contact.CaseStartDate,
-        CaseEndDate:contact.CaseEndDate,
-        CaseStatus: contact.CaseStatus,
-        CompanyName:contact.CompanyName,
-        CaseRepresentative: contact.CaseRepresentative,
-        HospitalRepresentative: contact.HospitalRepresentative,
-        AgreementFileName: contact.AgreementFileName,
-
-      };
-      // this.advanceDataStored.storage = new CaseDetail(xx);
-      // this._AppointmentSreviceService.populateFormpersonal(xx);
-    
-console.log(xx);
-      this._ActRoute.navigate(['/opd/registration']);
-      const dialogRef = this._matDialog.open(NewCaseDetailComponent,
-        {
-          maxWidth: "85%",
-          height: '560px',
-          width: '100%',
-          data : {
-            registerObj : xx,
-          }
-        });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed - Insert Action', result);
-        //  this.getRadiologytemplateMasterList();
-      });
-    }
-
-   
-    
-  
-  }
-
+ 
   onEdit(contact){
-    
+    console.log(contact)
+
     console.log(" This is for Update Case Detail pop : " + contact);
     let xx = {
     
@@ -280,7 +166,7 @@ console.log(xx);
       });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed - Insert Action', result);
-      //  this.getRadiologytemplateMasterList();
+       this.getCaseList();
     });
   }
 
@@ -296,7 +182,7 @@ console.log(xx);
       });
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed - Insert Action', result);
-      // this.getVisitList();
+      this.getCaseList();
     });
   }
 
