@@ -28,13 +28,13 @@ const appRoutes: Routes = [
     //         import("./product-type-master/product-type-master.module").then((m) => m.ProductTypeMasterModule),
     // },
 
-    {
-        path: "bank-master",
-        loadChildren: () =>
-            import("./bank-master/bank-master.module").then(
-                (m) => m.BankMasterModule
-            ),
-    },
+    // {
+    //     path: "bank-master",
+    //     loadChildren: () =>
+    //         import("./bank-master/bank-master.module").then(
+    //             (m) => m.BankMasterModule
+    //         ),
+    // },
 ];
 
 @NgModule({

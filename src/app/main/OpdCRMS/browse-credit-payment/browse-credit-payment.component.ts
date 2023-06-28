@@ -11,7 +11,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { SearchInforObj } from '../appointment/bill-detail/bill-detail.component';
 import { PaymentDetailComponent } from '../appointment/payment-detail/payment-detail.component';
-import { NewVistDateComponent } from '../appointment/new-vist-date/new-vist-date.component';
 import { fuseAnimations } from '@fuse/animations';
 
 @Component({

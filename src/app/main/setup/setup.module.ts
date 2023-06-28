@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DoctorTypeMasterComponent } from './Doctor/doctor-type-master/doctor-type-master.component';
+
 
 const appRoutes: Routes = [
     {

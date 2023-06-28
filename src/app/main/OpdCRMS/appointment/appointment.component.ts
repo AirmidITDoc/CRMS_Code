@@ -13,8 +13,8 @@ import { EditAppointmentComponent } from './edit-appointment/edit-appointment.co
 import { fuseAnimations } from '@fuse/animations';
 import { BillDetailComponent, SearchInforObj } from './bill-detail/bill-detail.component';
 import { AdvanceDataStored } from '../advance';
-import { EditVisitDateComponent } from './edit-visit-date/edit-visit-date.component';
-import { NewVistDateComponent } from './new-vist-date/new-vist-date.component';
+// import { EditVisitDateComponent } from './edit-visit-date/edit-visit-date.component';
+// import { NewVistDateComponent } from './new-vist-date/new-vist-date.component';
 
 @Component({
   selector: 'app-appointment',
@@ -295,19 +295,19 @@ if(contact.Age !=null || contact.AgeDay !=null || contact.AgeMonth !=null || con
             "RegTime": contact.RegTime
           }
           this._AppointmentSreviceService.populateFormpersonal(m_data);
-          const dialogRef = this._matDialog.open(EditVisitDateComponent,
-            {
-              maxWidth: "85vw",
-              height: '500px',
-              width: '100%',
-              data: {
-                registerObj: m_data,
-              }
-            });
-          dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed - Insert Action', result);
-            this.getVisitList();
-          });
+          // const dialogRef = this._matDialog.open(EditVisitDateComponent,
+          //   {
+          //     maxWidth: "85vw",
+          //     height: '500px',
+          //     width: '100%',
+          //     data: {
+          //       registerObj: m_data,
+          //     }
+          //   });
+          // dialogRef.afterClosed().subscribe(result => {
+          //   console.log('The dialog was closed - Insert Action', result);
+          //   this.getVisitList();
+          // });
         },
           error => {
             this.sIsLoading = '';
@@ -354,19 +354,19 @@ if(contact.Age !=null || contact.AgeDay !=null || contact.AgeMonth !=null || con
             "RegTime": contact.RegTime
           }
           this._AppointmentSreviceService.populateFormpersonal(m_data);
-          const dialogRef = this._matDialog.open(NewVistDateComponent,
-            {
-              maxWidth: "85vw",
-              height: '500px',
-              width: '100%',
-              data: {
-                registerObj: m_data,
-              }
-            });
-          dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed - Insert Action', result);
-            this.getVisitList();
-          });
+          // const dialogRef = this._matDialog.open(NewVistDateComponent,
+          //   {
+          //     maxWidth: "85vw",
+          //     height: '500px',
+          //     width: '100%',
+          //     data: {
+          //       registerObj: m_data,
+          //     }
+          //   });
+          // dialogRef.afterClosed().subscribe(result => {
+          //   console.log('The dialog was closed - Insert Action', result);
+          //   this.getVisitList();
+          // });
         },
           error => {
             this.sIsLoading = '';
