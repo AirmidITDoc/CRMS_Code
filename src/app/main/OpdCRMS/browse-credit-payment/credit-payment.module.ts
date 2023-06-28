@@ -36,6 +36,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatNestedTreeNode, MatTree, MatTreeModule } from '@angular/material/tree';
 import { BrowseCreditPaymentComponent } from './browse-credit-payment.component';
 import { CreditPaymentService } from './credit-payment.service';
+import { ViewBillPaymentComponent } from './view-bill-payment/view-bill-payment.component';
 // import { SharedModule } from 'app/main/shared/shared.module';
 
 const routes: Routes = [
@@ -47,6 +48,7 @@ const routes: Routes = [
 @NgModule({
     declarations: [
         BrowseCreditPaymentComponent,
+        ViewBillPaymentComponent,
              
       
     ],

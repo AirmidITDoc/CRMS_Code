@@ -1,1 +1,197 @@
-<p>new-vist-date works!</p>
+<mat-dialog-content>
+  <div class="main-content" style="overflow: auto;">
+
+    <div class="form-section">
+
+      <div fxLayout="row" fxLayoutAlign="start center" class="accent" style="width:100% ; height:37px;color: white;">
+
+        <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
+          <button mat-icon-button class="sidebar-toggle mr-12">
+            <mat-icon>menu</mat-icon>
+          </button>
+
+          <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
+            style="width: 80%;font-size: 16px;">
+            Visit Detail
+            || ( {{registerObj.RegNo}} ) {{registerObj.PatientName}} (
+            {{registerObj.AgeYear}}) Yrs | {{registerObj.Doctorname}} | Visit Id
+            {{registerObj.VisitId}} | Visit Date {{registerObj.VistDateTime}}
+
+          </span>
+
+          <div fxLayout="row" fxLayoutAlign="start center" style="float: right; margin-right: 5px;  ">
+            <diV style="margin-top:21px;">
+              <span style="margin-right: 40px;color: black;font-weight: bold;">
+                <app-common-date [screenFrom]="screenFromString"
+                  (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
+              </span>
+            </diV>&nbsp;&nbsp;
+            <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
+              close
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-div">
+        <!-- //Personal -->
+
+        <div>
+          <mat-card>
+
+
+
+            <form [formGroup]="VisitFormGroup">
+
+
+
+              <div class="redio-container">
+                <mat-radio-group aria-label="Select an option" formControlName="regRadio" name="regRadio"
+                  (change)="onChangeReg($event)">
+                  <mat-radio-button value="NewVisit" style="margin-bottom: 7px;" [checked]="1">New VisitDetail
+                  </mat-radio-button> /
+                  <mat-radio-button value="UpdateVisit">Update VisitDetail</mat-radio-button>
+                </mat-radio-group>
+              </div>
+
+
+              <div style="padding: 7px;">
+
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+
+                  <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Visit Date</mat-label>
+                    <input name="VisitDate" matInput [matDatepicker]="picker" formControllName="VisitDate"
+                      [value]="registerObj.VisitDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+
+                  </mat-form-field>
+
+<!-- 
+                  <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Visit Time</mat-label>
+                    <input name="VisitTime" matInput [matDatepicker]="picker1" formControllName="VisitTime"
+                      [value]="registerObj.VisitTime">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+
+                  </mat-form-field> -->
+
+                 
+
+                  <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
+                    <mat-label>Department</mat-label>
+                    <mat-select formControlName="Departmentid" placeholder="Bank" #singleSelect required
+                      (selectionChange)="OnChangeDoctorList($event.value)">
+                      <mat-option>
+                        <ngx-mat-select-search [formControl]="departmentFilterCtrl" [placeholderLabel]="'Search'"
+                          [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option *ngFor="let element of filteredDepartment | async" [value]="element">
+                        {{element.departmentName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
+                    <mat-label>Doctor Name</mat-label>
+                    <mat-select formControlName="DoctorID" placeholder="Bank" #singleSelect>
+                      <mat-option>
+                        <ngx-mat-select-search [formControl]="doctorFilterCtrl" [placeholderLabel]="'Search'"
+                          [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option *ngFor="let element of filteredDoctor | async" [value]="element">
+                        {{element.Doctorname}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+
+                </div>
+              </div>
+              <div class="footer-navigation" style="text-align: right;">
+                <div class="next-div">
+                  <button class="next-btn" (click)="VisitUpdate()" style="border-radius: 16px;"   [disabled]="IsUpdatevisit">
+                    Update
+                  </button>
+                </div>
+              </div>
+            </form>
+          </mat-card>
+
+          <mat-card>
+            <form [formGroup]="VisitFormGroup">
+
+              <!-- <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
+                style=" height: 35px;background-color: rgb(18, 87, 134)">
+                <span style="font-size:18px; font-weight: 500; color:white;padding:5px;">Visit Details </span>
+  
+              </div> -->
+
+              <div style="padding: 7px;">
+
+                <!--   
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+  
+                  <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
+                    <mat-label>Department</mat-label>
+                    <mat-select formControlName="Departmentid" placeholder="Bank" #singleSelect required
+                      (selectionChange)="OnChangeDoctorList($event.value)">
+                      <mat-option>
+                        <ngx-mat-select-search [formControl]="departmentFilterCtrl" [placeholderLabel]="'Search'"
+                          [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option *ngFor="let element of filteredDepartment | async" [value]="element">
+                        {{element.departmentName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+  
+                  <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
+                    <mat-label>Doctor Name</mat-label>
+                    <mat-select formControlName="DoctorID" placeholder="Bank" #singleSelect>
+                      <mat-option>
+                        <ngx-mat-select-search [formControl]="doctorFilterCtrl" [placeholderLabel]="'Search'"
+                          [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option *ngFor="let element of filteredDoctor | async" [value]="element">
+                        {{element.Doctorname}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+  
+                
+  
+                  <br>
+  
+                </div> -->
+
+              </div>
+
+
+              <div class="footer-navigation" style="text-align: left;">
+                <div class="next-div">
+                  <button class="next-btn" (click)="VisitAdd()"
+                    style="border-radius: 16px;width: max-content !important;margin-right: 10px;margin-top: 50px;"
+                    [disabled]="IsNewvisit">
+                    Add New Visit
+                  </button>
+
+                  <button class="footer-btn" (click)="onClose()">Cancel</button>
+                </div>
+              </div>
+
+
+            </form>
+          </mat-card>
+        </div>
+
+
+
+      </div>
+
+
+    </div>
+  </div>

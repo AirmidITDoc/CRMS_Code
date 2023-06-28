@@ -167,11 +167,7 @@ export class EditAppointmentComponent implements OnInit {
 
       // this.AgeYear = this.data.PatObj.AgeYear;
       this.Prefix = this.data.registerObj.PrefixID;
-      // this.PatientName=this.data.PatObj.PatientName;
-      // this.AdmissionDate=this.data.PatObj.AdmissionDate;
-      // this.RelativeName= this.data.PatObj.RelativeName;
-      // this.RelativeAddress= this.data.PatObj.RelativeAddress;
-      // this.RelatvieMobileNo= this.data.PatObj.RelatvieMobileNo;
+     
       this.setDropdownObjs1();
     }
 

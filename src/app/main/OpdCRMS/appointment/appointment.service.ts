@@ -367,5 +367,14 @@ public getVisitDateCombo(Id){
   return this._httpClient.post("Generic/GetByProc?procName=Rtrv_VisitDateTime", Id)
 }
 
+public VisitInsert(employee){
+  return this._httpClient.post("OutPatient/VisitAddSave", employee)
+}
+
+
+public VisitUpdate(employee){
+  return this._httpClient.post("OutPatient/VisitUpdate", employee)
+}
+
 }
 

@@ -16,31 +16,28 @@ const appRoutes: Routes = [
   //   path: "browse-opd-bills",
   //   loadChildren: () => import("./browse-opbill/browse-opbill.module").then((m) => m.BrowseOPBillModule),
   // },
-  // {
-  //   path: "bill",
-  //   loadChildren: () => import("./op-search-list/opsearchlist.module").then((m) => m.opseachlistModule),
-  // },
+  {
+    path: "bill",
+    loadChildren: () => import("./appointment/appointment.module").then((m) => m.AppointmentModule),
+  },
    
   {
     path: "registration",
     loadChildren: () => import("./case-detail/casedetail.module").then((m) => m.CasedetailModule),
   },
-// {
-//     path: "browse-opd-bills",
-//     loadChildren: () => import("./browse-opbill/browse-opbill.module").then((m) => m.BrowseOPBillModule),
-// },
+{
+    path: "browse-opd-bills",
+    loadChildren: () =>import("./browse-credit-payment/credit-payment.module").then((m) => m.CreditPaymentModule),
+},
 // {
 //     path: "browse-opd-payment-receipt",
 //     loadChildren: () => import("./browse-payment-list/browsepayment.module").then((m) => m.browsepaymentModule),
 // },
-// {
-//     path: "medicalrecords",
-//     loadChildren: () => import("./op-search-list/opsearchlist.module").then((m) => m.opseachlistModule),
-// },
-// {
-//     path: "bill",
-//     loadChildren: () => import("./op-search-list/opsearchlist.module").then((m) => m.opseachlistModule),
-// },
+{
+    path: "medicalrecords",
+    loadChildren: () => import("./appointment/appointment.module").then((m) => m.AppointmentModule),
+},
+
 
 {
   path: "payment",

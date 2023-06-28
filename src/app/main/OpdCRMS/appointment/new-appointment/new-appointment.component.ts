@@ -185,6 +185,7 @@ export class NewAppointmentComponent implements OnInit {
     public dialogRef: MatDialogRef<NewAppointmentComponent>,
     public datePipe: DatePipe,
     private formBuilder: FormBuilder,
+    
     // private advanceDataStored: AdvanceDataStored,
     private router: Router
   ) {
@@ -336,7 +337,7 @@ export class NewAppointmentComponent implements OnInit {
       CityId: '',
       StateId: '',
       CountryId: '',
-
+      CaseId:'',
       RationCardNo: '',
     IsMember: ''
 
@@ -376,8 +377,7 @@ export class NewAppointmentComponent implements OnInit {
       RefDocName: '',
       ClassId: '',
       PurposeId: '',
-      CaseId:['', [
-        Validators.required]],
+      CaseId:'',
 
       IsMark: '',
       
@@ -991,7 +991,7 @@ export class NewAppointmentComponent implements OnInit {
 
   submitAppointForm() {
 
-    if (this.searchFormGroup.get('regRadio').value == "registration") {
+ 
 
       this.isLoading = 'submit';
       let submissionObj = {};
@@ -1032,11 +1032,13 @@ export class NewAppointmentComponent implements OnInit {
    
       submissionObj['registrationSave'] = registrationSave;
 
+      debugger;
+
       visitSave['VisitId'] = 0;
       visitSave['RegID'] = 0;
       visitSave['VisitDate'] = '2023-06-22T09:52:54.616Z';
       visitSave['VisitTime'] = '2023-06-22T09:52:54.616Z';
-      visitSave['CaseID'] = this.VisitFormGroup.get('CaseId').value.CaseId ? this.VisitFormGroup.get('CaseId').value.CaseId : 0;
+      visitSave['CaseID'] = this.personalFormGroup.get('CaseId').value.CaseId ? this.personalFormGroup.get('CaseId').value.CaseId : 0;
       visitSave['UnitId'] = this.VisitFormGroup.get('HospitalId').value.HospitalId ? this.VisitFormGroup.get('HospitalId').value.HospitalId : 0;
       visitSave['PatientTypeId'] = this.VisitFormGroup.get('PatientTypeID').value.PatientTypeId || 0;//.PatientTypeID;//? this.VisitFormGroup.get('PatientTypeID').value.PatientTypeID : 0;
       visitSave['ConsultantDocId'] = this.VisitFormGroup.get('DoctorID').value.DoctorId || 0;//? this.VisitFormGroup.get('DoctorId').value.DoctorId : 0;
@@ -1086,92 +1088,7 @@ export class NewAppointmentComponent implements OnInit {
         this.isLoading = '';
         
       });
-    }
-    else {
-     
-      this.isLoading = 'submit';
-      let submissionObj = {};
-      let registrationUpdate = {};
-      let visitUpdate = {};
-
-      let tokenNumberWithDoctorWiseUpdate = {};
-
-      registrationUpdate['regId'] = this.registerObj.RegId;
-      registrationUpdate['prefixId'] = this.personalFormGroup.get('PrefixID').value.PrefixID;
-      registrationUpdate['firstName'] = this.registerObj.FirstName;
-      registrationUpdate['middleName'] = this.registerObj.MiddleName;
-      registrationUpdate['lastName'] = this.registerObj.LastName;
-      registrationUpdate['address'] = this.registerObj.Address;
-      registrationUpdate['City'] = this.personalFormGroup.get('CityId').value.CityName;
-      registrationUpdate['pinNo'] = '';
-      registrationUpdate['dateOfBirth'] =  this.datePipe.transform(this.registerObj.DateofBirth,"MM-dd-yyyy"); //this.personalFormGroup.get('DateofBirth').value.DateofBirth;
-      registrationUpdate['age'] = this.registerObj.AgeYear;//this.registerObj.Age;
-      registrationUpdate['genderID'] = this.personalFormGroup.get('GenderId').value.GenderId;
-      registrationUpdate['phoneNo'] = this.personalFormGroup.get('PhoneNo').value || 0;
-      registrationUpdate['mobileNo'] = this.registerObj.MobileNo;
-      registrationUpdate['updatedBy'] = this.accountService.currentUserValue.user.id;
-      registrationUpdate['ageYear'] = this.registerObj.AgeYear;
-      registrationUpdate['ageMonth'] = this.registerObj.AgeMonth;
-      registrationUpdate['ageDay'] = this.registerObj.AgeDay;
-      registrationUpdate['countryId'] = this.personalFormGroup.get('CountryId').value.CountryId;
-      registrationUpdate['stateId'] = this.personalFormGroup.get('StateId').value.StateId;
-      registrationUpdate['cityId'] = this.personalFormGroup.get('CityId').value.CityId;
-      registrationUpdate['maritalStatusId'] = this.personalFormGroup.get('MaritalStatusId').value ? this.personalFormGroup.get('MaritalStatusId').value.MaritalStatusId : 0;
-      registrationUpdate['isCharity'] = false;
-    
-      submissionObj['registrationUpdate'] = registrationUpdate;
-      // visit detail
-      visitUpdate['VisitId'] = 0;
-      visitUpdate['RegID'] = this.registerObj.RegId;
-      visitUpdate['VisitDate'] = '2023-06-22T09:52:54.616Z',// this.dateTimeObj.date;
-      visitUpdate['VisitTime'] = '2023-06-22T09:52:54.616Z',//this.dateTimeObj.time;
-
-      visitUpdate['UnitId'] = this.VisitFormGroup.get('HospitalId').value.HospitalId ? this.VisitFormGroup.get('HospitalId').value.HospitalId : 0; // this.VisitFormGroup.get('UnitId').value.UnitId ? this.VisitFormGroup.get('UnitId').value.UnitId: 0;
-      visitUpdate['PatientTypeId'] = this.VisitFormGroup.get('PatientTypeID').value.PatientTypeId;//.PatientTypeID;//? this.VisitFormGroup.get('PatientTypeID').value.PatientTypeID : 0;
-      visitUpdate['ConsultantDocId'] = this.VisitFormGroup.get('DoctorID').value.DoctorId;//? this.VisitFormGroup.get('DoctorId').value.DoctorId : 0;
-      visitUpdate['RefDocId'] = this.VisitFormGroup.get('DoctorIdOne').value.DoctorId;// ? this.VisitFormGroup.get('DoctorIdOne').value.DoctorIdOne : 0;
-
-      visitUpdate['TariffId'] = this.VisitFormGroup.get('TariffId').value.TariffId ? this.VisitFormGroup.get('TariffId').value.TariffId : 0;
-      visitUpdate['CompanyId'] = this.VisitFormGroup.get('CompanyId').value.CompanyId ? this.VisitFormGroup.get('CompanyId').value.CompanyId : 0;
-      visitUpdate['AddedBy'] = this.accountService.currentUserValue.user.id;
-      visitUpdate['updatedBy'] = 0,//this.VisitFormGroup.get('RelationshipId').value.RelationshipId ? this.VisitFormGroup.get('RelationshipId').value.RelationshipId : 0;
-      visitUpdate['IsCancelled'] = 0;
-      visitUpdate['IsCancelledBy'] = 0;
-      visitUpdate['IsCancelledDate'] = this.dateTimeObj.date;
-
-      visitUpdate['ClassId'] = 1; // this.VisitFormGroup.get('ClassId').value.ClassId ? this.VisitFormGroup.get('ClassId').value.ClassId : 0;
-      visitUpdate['DepartmentId'] = this.VisitFormGroup.get('DoctorID').value.DepartmentId;//? this.VisitFormGroup.get('DepartmentId').value.DepartmentId : 0;
-      debugger;
-      console.log(this.Patientnewold);
-      
-      visitUpdate['PatientOldNew'] = this.Patientnewold;
-      visitUpdate['FirstFollowupVisit'] = 0,// this.VisitFormGroup.get('RelativeAddress').value ? this.VisitFormGroup.get('RelativeAddress').value : '';
-      visitUpdate['appPurposeId'] = this.VisitFormGroup.get('PurposeId').value.PurposeId;// ? this.VisitFormGroup.get('RelativeAddress').value : '';
-      visitUpdate['FollowupDate'] = this.dateTimeObj.date;// this.personalFormGroup.get('PhoneNo').value ? this.personalFormGroup.get('PhoneNo').value : '';
    
-      submissionObj['visitUpdate'] = visitUpdate;
-
-      
-      tokenNumberWithDoctorWiseUpdate['patVisitID'] = 0;
-      submissionObj['tokenNumberWithDoctorWiseUpdate'] = tokenNumberWithDoctorWiseUpdate;
-
-      console.log(submissionObj);
-      this._opappointmentService.appointregupdate(submissionObj).subscribe(response => {
-        console.log(response);
-        if (response) {
-          Swal.fire('Congratulations !', 'Registered Appoinment Saved Successfully  !', 'success').then((result) => {
-            if (result.isConfirmed) {
-              this._matDialog.closeAll();
-            }
-            this.getVisitList();
-          });
-        } else {
-          Swal.fire('Error !', 'Appointment not Updated', 'error');
-        }
-        this.isLoading = '';
-      });
-      
-    }
   }
 
   onClose() {

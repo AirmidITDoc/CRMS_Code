@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,8 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { SearchInforObj } from '../appointment/bill-detail/bill-detail.component';
 import { PaymentDetailComponent } from '../appointment/payment-detail/payment-detail.component';
-import { NewVistDateComponent } from '../appointment/new-vist-date/new-vist-date.component';
 import { fuseAnimations } from '@fuse/animations';
+import { ViewBillPaymentComponent } from './view-bill-payment/view-bill-payment.component';
 
 @Component({
   selector: 'app-browse-credit-payment',
@@ -23,234 +23,223 @@ import { fuseAnimations } from '@fuse/animations';
 })
 export class BrowseCreditPaymentComponent implements OnInit {
 
-  msg: any;
-  sIsLoading: string = '';
-  isLoading = true;
-  isRateLimitReached = false;
+  @Output() showClicked = new EventEmitter();
+  click: boolean = false;
+  MouseEvent = true;
   hasSelectedContacts: boolean;
-  currentDate=new Date();
-  subscriptions: Subscription[] = [];
-  // reportPrintObj: CasepaperVisitDetails;
-  printTemplate: any;
-  // reportPrintObjList: CasepaperVisitDetails[] = [];
+  sIsLoading: string = '';
+  dataArray = {};
+  dataSource = new MatTableDataSource<BrowseOPDBill>();
+  reportPrintObj: BrowseOPDBill;
   subscriptionArr: Subscription[] = [];
+  printTemplate: any;
+  reportPrintObjList: BrowseOPDBill[] = [];
+  currentDate = new Date();
 
-  VisitID:any;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Input() dataArray: any;
+  // @ViewChild(MatPaginator) PathTestpaginator: MatPaginator;
+
+  selectedAdvanceObj: BrowseOPDBill;
+  numberInWords!: string;
+  // lang: SUPPORTED_LANGUAGE = 'en';
+  value = 123;
+  BrowseOPDBillsList: any;
+  msg: any;
+
+  isLoading = true;
 
   displayedColumns = [
-    'PatientOldNew',
-    'MPbillNo',
-    'RegNoWithPrefix',
+    'BillDate',
+    'BillNo',
+    'RegNo',
     'PatientName',
-    'DVisitDate',
-    'VisitTime',
-    'OPDNo',
-    'Doctorname',
-    'RefDocName',
-    'PatientType',
-    // 'HospitalName',
-    'buttons',
-
+    'TotalAmt',
+    'ConcessionAmt',
+    'NetPayableAmt',
+    'PaidAmount',
+    'BalanceAmt',
+    'chkBalanceAmt',
+    'action'
   ];
-  dataSource = new MatTableDataSource<VisitMaster>();
-  menuActions: Array<string> = [];
-  //datePipe: any;
 
-  constructor(
-    public _AppointmentSreviceService: CreditPaymentService,
-    private _ActRoute: Router,
-    private _fuseSidebarService: FuseSidebarService,
-    private advanceDataStored: AdvanceDataStored,
-    public _matDialog: MatDialog,
+
+  showSpinner = false;
+  tablehide = false;
+  tableshow = true;
+
+
+
+
+  constructor(private _fuseSidebarService: FuseSidebarService,
+    public _BrowseOPDBillsService: CreditPaymentService,
     public datePipe: DatePipe,
-    // private advanceDataStored: AdvanceDataStored
-  ) {
-    this.getVisitList();
-  }
+    // public fuseSplashScreenService:FuseSplashScreenService,
+    public _matDialog: MatDialog,
+    private advanceDataStored: AdvanceDataStored,
+    // private ngxNumToWordsService: NgxNumToWordsService,
+
+  ) { }
 
   ngOnInit(): void {
 
-    if (this._ActRoute.url == '/opd/payment') {
-            
-      // this.menuActions.push('Update Registration');
-      // this.menuActions.push('Update Visit Date');
-      // this.menuActions.push('Add New Visit Date');
-      this.menuActions.push('Payment');
-        }
-
-
-    // this.getVisitList();
-    // this.dataSource.data.refresh();
-
-  }
-
-  // VisitList 
-
-  getVisitList() {
-    this.sIsLoading = 'loading-data';
+    debugger;
     var D_data = {
-      "F_Name": this._AppointmentSreviceService.myFilterform.get("FirstName").value.trim() + '%' || '%',
-      "L_Name": this._AppointmentSreviceService.myFilterform.get("LastName").value.trim() + '%' || '%',
-      "Reg_No": this._AppointmentSreviceService.myFilterform.get("RegNo").value || 0,
-      "Doctor_Id": this._AppointmentSreviceService.myFilterform.get("DoctorId").value || 0,
-      "From_Dt":'01/01/1900',// this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "To_Dt":'01/01/1900',// this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      
+      "F_Name": "%",
+      "L_Name": "%",
+      "From_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("start").value, "MM-dd-yyyy"),
+      "To_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("end").value, "MM-dd-yyyy"),
+      "Reg_No": 0,
+      "PBillNo": 0,
     }
+    console.log(D_data);
+
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
-      this._AppointmentSreviceService.getAppointmentList(D_data).subscribe(Visit => {
-        this.dataSource.data = Visit as VisitMaster[];
-        console.log(this.dataSource.data);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-        this.sIsLoading = '';
-        console.log(this.dataSource.data)
-      },
-        error => {
-          this.sIsLoading = '';
-        });
+      // this._BrowseOPDBillsService.getBrowseBillsList(D_data).subscribe(Visit => {
+      //   this.dataSource.data = Visit as BrowseOPDBill[];
+      //   this.dataSource.sort = this.sort;
+      //   console.log(this.dataSource.data);
+      //   this.dataSource.paginator = this.paginator;
+      //   this.sIsLoading = '';
+      //   this.click = false;
+      // },
+      //   error => {
+      //     this.sIsLoading = '';
+      //   });
     }, 1000);
 
+    this.onClear();
   }
 
-  // toggle sidebar
+
   toggleSidebar(name): void {
     this._fuseSidebarService.getSidebar(name).toggleOpen();
   }
 
-  onClear() {
-    this._AppointmentSreviceService.myFilterform.reset(
+
+  onShow(event: MouseEvent) {
+    // this.click = false;// !this.click;
+    this.click = !this.click;
+    // this. showSpinner = true;
+
+    setTimeout(() => {
       {
-        start: [],
-        end: []
+        this.sIsLoading = 'loading-data';
+
+        this.getBrowseOPDBillsList();
       }
-    );
-  }
 
-  ngOnChanges(changes: SimpleChanges) {
-    // changes.prop contains the old and the new value...
-    // console.log(changes.dataArray.currentValue, 'new arrrrrrr');
-    // this.isLoading = true;
-    this.dataSource.data = changes.dataArray.currentValue as VisitMaster[];
-    this.isLoading = false;
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    // this.isLoading = false;
-  }
-
-  getRecord(contact, m): void {
-    debugger;
-    this.VisitID=contact.VisitID;
-  
-     if (m == "Payment") {
-      console.log(contact);
-    
-     
-        let xx = {
-          RegNo: contact.RegId,
-          RegId: contact.RegId,
-          AdmissionID: contact.VisitId,
-          PatientName: contact.PatientName,
-          Doctorname: contact.Doctorname,
-          AdmDateTime: contact.AdmDateTime,
-          AgeYear: contact.AgeYear,
-          ClassId: contact.ClassId,
-          ClassName: contact.ClassName,
-          TariffName: contact.TariffName,
-          TariffId: contact.TariffId,
-          VisitId:contact.VisitId,
-          VistDateTime:contact.VistDateTime
-        };
-        // this._AppointmentSreviceService.populateFormpersonal(xx);
-        this.advanceDataStored.storage = new SearchInforObj(xx);
-        const dialogRef = this._matDialog.open(PaymentDetailComponent,
-          {
-            maxWidth: "85%",
-            height: '650px',
-            width: '100%',
-            data: {
-              registerObj: xx,
-            }
-          });
-        dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed - Insert Action', result);
-          // this.getVisitList();
-        });
-      }
-         
-   
-  // /   this._ActRoute.navigate(['opd/appointment/op_bill'], {queryParams:{id:this.selectedID}})
+    }, 1000);
+    this.MouseEvent = true;
+    this.click = true;
 
   }
 
 
+
+  onClear() {
+
+    this._BrowseOPDBillsService.myFilterform.get('FirstName').reset('');
+    this._BrowseOPDBillsService.myFilterform.get('LastName').reset('');
+    this._BrowseOPDBillsService.myFilterform.get('RegNo').reset('');
+    this._BrowseOPDBillsService.myFilterform.get('PBillNo').reset('');
+  }
+
+
+
+  getBrowseOPDBillsList() {
+    this.sIsLoading = 'loading-data';
+
+    var D_data = {
+      "F_Name": (this._BrowseOPDBillsService.myFilterform.get("FirstName").value).trim() + '%' || "%",
+      "L_Name": (this._BrowseOPDBillsService.myFilterform.get("LastName").value).trim() + '%' || "%",
+      "From_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("start").value, "MM-dd-yyyy"),
+      "To_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("end").value, "MM-dd-yyyy"),
+      "Reg_No": this._BrowseOPDBillsService.myFilterform.get("RegNo").value || 0,
+      "PBillNo": this._BrowseOPDBillsService.myFilterform.get("PBillNo").value || 0,
+    }
+    // console.log(D_data);
+
+    setTimeout(() => {
+      this.sIsLoading = 'loading-data';
+      // this._BrowseOPDBillsService.getBrowseOPDBillsList(D_data).subscribe(Visit => {
+      //   this.dataSource.data = Visit as BrowseOPDBill[];
+      //   this.dataSource.sort = this.sort;
+      //   console.log(this.dataSource.data);
+      //   this.dataSource.paginator = this.paginator;
+      //   this.sIsLoading = '';
+      //   this.click = false;
+      // },
+      //   error => {
+      //     this.sIsLoading = '';
+      //   });
+    }, 1000);
+
+    this.onClear();
+  }
 
 
 
   onExport(exprtType) {
-    // debugger;
-    // let columnList = [];
-    // if (this.dataSource.data.length == 0) {
+    // let columnList=[];
+    // if(this.dataSource.data.length == 0){
     //   // this.toastr.error("No Data Found");
     //   Swal.fire('Error !', 'No Data Found', 'error');
     // }
-    // else {
+    // else{
     //   var excelData = [];
-    //   var a = 1;
-    //   for (var i = 0; i < this.dataSource.data.length; i++) {
+    //   var a=1;
+    //   for(var i=0;i<this.dataSource.data.length;i++){
     //     let singleEntry = {
     //       // "Sr No":a+i,
-    //       "Reg No": this.dataSource.data[i]["RegNoWithPrefix"],
-    //       "PatientOldNew": this.dataSource.data[i]["PatientOldNew"] ? this.dataSource.data[i]["PatientOldNew"] : "N/A",
-    //       "Patient Name": this.dataSource.data[i]["PatientName"] ? this.dataSource.data[i]["PatientName"] : "N/A",
-    //       "VisitDate": this.dataSource.data[i]["DVisitDate"] ? this.dataSource.data[i]["DVisitDate"] : "N/A",
-    //       "Visit Time": this.dataSource.data[i]["VisitTime"] ? this.dataSource.data[i]["VisitTime"] : "N/A",
-    //       "OPDNo": this.dataSource.data[i]["OPDNo"] ? this.dataSource.data[i]["OPDNo"] : "N/A",
-    //       "Doctorname": this.dataSource.data[i]["Doctorname"] ? this.dataSource.data[i]["Doctorname"] : "N/A",
-    //       "RefDocName": this.dataSource.data[i]["RefDocName"] ? this.dataSource.data[i]["RefDocName"] : "N/A",
-    //       "PatientType": this.dataSource.data[i]["PatientType"] ? this.dataSource.data[i]["PatientType"] : "N/A",
-
-
+    //       "Bill Date" :this.dataSource.data[i]["BillDate"],
+    //       "PBill No" :this.dataSource.data[i]["PBillNo"] ? this.dataSource.data[i]["PBillNo"]:"N/A",
+    //       "RegNo " :this.dataSource.data[i]["RegNo"] ? this.dataSource.data[i]["RegNo"] :"N/A",
+    //       "Patient Name" :this.dataSource.data[i]["PatientName"] ? this.dataSource.data[i]["PatientName"] : "N/A",
+    //       "Total Amt" :this.dataSource.data[i]["TotalAmt"] ? this.dataSource.data[i]["TotalAmt"]:"N/A",
+    //       "Concession Amt" :this.dataSource.data[i]["ConcessionAmt"] ? this.dataSource.data[i]["ConcessionAmt"]:"N/A",
+    //       "NetPayable Amt" :this.dataSource.data[i]["NetPayableAmt"] ? this.dataSource.data[i]["NetPayableAmt"]:"N/A",
+    //       "PaidAmount" :this.dataSource.data[i]["PaidAmount"] ? this.dataSource.data[i]["PaidAmount"]:"N/A",
+    //       "BalanceAmt" :this.dataSource.data[i]["BalanceAmt"]?this.dataSource.data[i]["BalanceAmt"]:"N/A",
+    //       "chkBalanceAmt" :this.dataSource.data[i]["chkBalanceAmt"]?this.dataSource.data[i]["chkBalanceAmt"]:"N/A"
     //     };
     //     excelData.push(singleEntry);
     //   }
-    //   var fileName = "OutDoor-Appointment-Patient-List " + new Date() + ".xlsx";
-    //   if (exprtType == "Excel") {
-    //     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(excelData);
+    //   var fileName = "OutDoor-Bill-List " + new Date() +".xlsx";
+    //   if(exprtType =="Excel"){
+    //     const ws: XLSX.WorkSheet=XLSX.utils.json_to_sheet(excelData);
     //     var wscols = [];
-    //     if (excelData.length > 0) {
-    //       var columnsIn = excelData[0];
-    //       for (var key in columnsIn) {
-    //         let headerLength = { wch: (key.length + 1) };
+    //     if(excelData.length > 0){ 
+    //       var columnsIn = excelData[0]; 
+    //       console.log(columnsIn);
+    //       for(var key in columnsIn){
+    //         let headerLength = {wch:(key.length+1)};
     //         let columnLength = headerLength;
-    //         try {
-    //           columnLength = { wch: Math.max(...excelData.map(o => o[key].length), 0) + 1 };
+    //         try{
+    //           columnLength = {wch: Math.max(...excelData.map(o => o[key].length), 0)+1}; 
     //         }
-    //         catch {
+    //         catch{
     //           columnLength = headerLength;
     //         }
-    //         if (headerLength["wch"] <= columnLength["wch"]) {
+    //         if(headerLength["wch"] <= columnLength["wch"]){
     //           wscols.push(columnLength)
     //         }
-    //         else {
+    //         else{
     //           wscols.push(headerLength)
     //         }
-    //       }
+    //       } 
     //     }
     //     ws['!cols'] = wscols;
     //     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     //     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     //     XLSX.writeFile(wb, fileName);
-    //   } else {
-    //     let doc = new jsPDF('p', 'pt', 'a4');
+    //   }else{
+    //     let doc = new jsPDF('p','pt', 'a4');
     //     doc.page = 0;
-    //     var col = [];
+    //     var col=[];
     //     for (var k in excelData[0]) col.push(k);
-    //     console.log(col.length)
+    //       console.log(col.length)
     //     var rows = [];
     //     excelData.forEach(obj => {
     //       console.log(obj)
@@ -261,13 +250,12 @@ export class BrowseCreditPaymentComponent implements OnInit {
     //       rows.push(arr);
     //     });
 
-    //     doc.autoTable(col, rows, {
-    //       margin: { left: 5, right: 5, top: 5 },
-    //       theme: "grid",
+    //     doc.autoTable(col, rows,{
+    //       margin:{left:5,right:5,top:5},
+    //       theme:"grid",
     //       styles: {
     //         fontSize: 3
-    //       }
-    //     });
+    //       }});
     //     doc.setFontSize(3);
     //     // doc.save("Indoor-Patient-List.pdf");
     //     window.open(URL.createObjectURL(doc.output("blob")))
@@ -275,44 +263,90 @@ export class BrowseCreditPaymentComponent implements OnInit {
     // }
   }
 
-  // field validation 
-  get f() { return this._AppointmentSreviceService.myFilterform.controls; }
-  selectRow(row) {
-    this.selectRow = row;
+  ngOnChanges(changes: SimpleChanges) {
+    // changes.prop contains the old and the new value...
+    // console.log(changes.dataArray.currentValue, 'new arrrrrrr');
+    this.dataSource.data = changes.dataArray.currentValue as BrowseOPDBill[];
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
 
 
+
   getTemplate() {
-    debugger;
+    let query = 'select TempId,TempDesign,TempKeys as TempKeys from Tg_Htl_Tmp where TempId=2';
+    this._BrowseOPDBillsService.getTemplate(query).subscribe((resData: any) => {
 
-
-
-    let query = 'select TempId,TempDesign,TempKeys as TempKeys from Tg_Htl_Tmp where TempId=12';
-    console.log(query);
-    this._AppointmentSreviceService.getTemplate(query).subscribe((resData: any) => {
-      console.log(resData);
       this.printTemplate = resData[0].TempDesign;
-      console.log(this.printTemplate);
-      let keysArray = ['RegNo', 'PrecriptionId', 'PatientName', 'OPDNo', 'Diagnosis', 'PatientName', 'Weight', 'Pluse', 'BP', 'BSL', 'DoseName', 'Days', 'GenderName', 'AgeYear', 'DrugName', 'ConsultantDocName', 'SecondRefDoctorName', 'MobileNo', 'Address', 'VisitDate']; // resData[0].TempKeys;
+      let keysArray = ['HospitalName', 'HospitalAddress', 'Phone','EmailId', 'PhoneNo', 'RegNo', 'BillNo', 'AgeYear', 'AgeDay', 'AgeMonth', 'PBillNo', 'PatientName', 'BillDate', 'VisitDate', 'ConsultantDocName', 'DepartmentName', 'ServiceName', 'ChargesDoctorName', 'Price', 'Qty', 'ChargesTotalAmount', 'TotalBillAmount', 'NetPayableAmt', 'NetAmount', 'ConcessionAmt', 'PaidAmount', 'BalanceAmt', 'AddedByName','Address','MobileNo']; // resData[0].TempKeys;
 
       for (let i = 0; i < keysArray.length; i++) {
         let reString = "{{" + keysArray[i] + "}}";
         let re = new RegExp(reString, "g");
-        // this.printTemplate = this.printTemplate.replace(re, this.reportPrintObj[keysArray[i]]);
+        this.printTemplate = this.printTemplate.replace(re, this.reportPrintObj[keysArray[i]]);
       }
+      var strrowslist = "";
+      for (let i = 1; i <= this.reportPrintObjList.length; i++) {
+        var objreportPrint = this.reportPrintObjList[i - 1];
 
+        console.log(objreportPrint);
+        // Chargedocname
+        let docname;
+        if (objreportPrint.ChargesDoctorName)
+          docname = objreportPrint.ChargesDoctorName;
+        else
+          docname = '';
 
-      // this.printTemplate = this.printTemplate.replace('StrVisitDate', this.transform2(this.reportPrintObj.VisitDate));
+          // <hr style="border-color:white" >
+        var strabc = ` <div style="display:flex;margin:8px 0">
+        <div style="display:flex;width:60px;margin-left:20px;">
+            <div>`+ i + `</div> <!-- <div>BLOOD UREA</div> -->
+        </div>
+        <div style="display:flex;width:300px;margin-left:10px;text-align:left;">
+            <div>`+ objreportPrint.ServiceName + `</div> <!-- <div>BLOOD UREA</div> -->
+        </div>
+        <div style="display:flex;width:300px;margin-left:10px;text-align:left;">
+        <div>`+ docname + `</div> <!-- <div>BLOOD UREA</div> -->
+        </div>
+        <div style="display:flex;width:100px;text-align:left;justify-content: right;">
+            <div>`+ '₹' + objreportPrint.Price.toFixed(2) + `</div> <!-- <div>450</div> -->
+        </div>
+        <div style="display:flex;width:60px;margin-left:40px;">
+            <div>`+ objreportPrint.Qty + `</div> <!-- <div>1</div> -->
+        </div>
+        <div style="display:flex;width:80px;justify-content: right;">
+            <div>`+ '₹' + objreportPrint.NetAmount.toFixed(2) + `</div> <!-- <div>450</div> -->
+        </div>
+        </div>`;
+        strrowslist += strabc;
+      }
+      var objPrintWordInfo = this.reportPrintObjList[0];
+
+      this.printTemplate = this.printTemplate.replace('StrTotalPaidAmountInWords', this.convertToWord(objPrintWordInfo.PaidAmount));
+
+      // this.printTemplate = this.printTemplate.replace('StrBalanceAmt', '₹' + (objPrintWordInfo.BalanceAmt.toFixed(2)));
+      // this.printTemplate = this.printTemplate.replace('StrTotalBillAmount', '₹' + (objPrintWordInfo.TotalBillAmount.toFixed(2)));
+      // this.printTemplate = this.printTemplate.replace('StrConcessionAmt', '₹' + (objPrintWordInfo.ConcessionAmt.toFixed(2)));
+      // this.printTemplate = this.printTemplate.replace('StrNetPayableAmt', '₹' + (objPrintWordInfo.NetPayableAmt.toFixed(2)));
+      // this.printTemplate = this.printTemplate.replace('StrPaidAmount', '₹' + (objPrintWordInfo.PaidAmount.toFixed(2)));
+      // this.printTemplate = this.printTemplate.replace('StrPrintDate', this.transform2(objPrintWordInfo.BillDate));
       this.printTemplate = this.printTemplate.replace('StrPrintDate', this.transform2(this.currentDate.toString()));
-      // this.printTemplate = this.printTemplate.replace('StrConsultantDr', (this.reportPrintObj.ConsultantDocName));
-      // this.printTemplate = this.printTemplate.replace('StrOPDDate', this.transform1(this.reportPrintObj.VisitDate));
-
+      // this.printTemplate = this.printTemplate.replace('StrBillDate', this.transform1(objPrintWordInfo.BillDate));
+      this.printTemplate = this.printTemplate.replace('SetMultipleRowsDesign', strrowslist);
+      // this.printTemplate = this.printTemplate.replace('StrBillDate', this.transformBilld(this.reportPrintObj.BillDate));
       this.printTemplate = this.printTemplate.replace(/{{.*}}/g, '');
       setTimeout(() => {
         this.print();
       }, 1000);
     });
+  }
+
+
+  transform(value: string) {
+    var datePipe = new DatePipe("en-US");
+    value = datePipe.transform(value, 'dd/MM/yyyy ');
+    return value;
   }
 
   transform1(value: string) {
@@ -326,37 +360,47 @@ export class BrowseCreditPaymentComponent implements OnInit {
     value = datePipe.transform((new Date), 'dd/MM/yyyy h:mm a');
     return value;
   }
+  transformBilld(value: string) {
+    var datePipe = new DatePipe("en-US");
+    value = datePipe.transform(this.reportPrintObj.BillDate, 'dd/MM/yyyy');
+    return value;
+  }
+  convertToWord(e) {
+    // this.numberInWords= converter.toWords(this.mynumber);
+    // return converter.toWords(e);
+  }
+  // GET DATA FROM DATABASE 
 
 
-  getPrint() {
+  getPrint(el) {
     debugger;
     var D_data = {
-      "VisitId": 82973,//this.selectedAdvanceObj.AdmissionID || 0,
-      "PatientType": 0,//this.selectedAdvanceObj.PatientType || 0
-
+      "BillNo": el.BillNo,
+      // "BillNo":111,
     }
-    // el.bgColor = 'red';
-    console.log(D_data);
-    let printContents;
+    el.bgColor = 'red';
+    //console.log(el);
+    let printContents; //`<div style="padding:20px;height:550px"><div><div style="display:flex"><img src="http://localhost:4200/assets/images/logos/Airmid_NewLogo.jpeg" width="90"><div><div style="font-weight:700;font-size:16px">YASHODHARA SUPER SPECIALITY HOSPITAL PVT. LTD.</div><div style="color:#464343">6158, Siddheshwar peth, near zilla parishad, solapur-3 phone no.: (0217) 2323001 / 02</div><div style="color:#464343">www.yashodharahospital.org</div></div></div><div style="border:1px solid grey;border-radius:16px;text-align:center;padding:8px;margin-top:5px"><span style="font-weight:700">IP ADVANCE RECEIPT</span></div></div><hr style="border-color:#a0a0a0"><div><div style="display:flex;justify-content:space-between"><div style="display:flex"><div style="width:100px;font-weight:700">Advance No</div><div style="width:10px;font-weight:700">:</div><div>6817</div></div><div style="display:flex"><div style="width:60px;font-weight:700">Reg. No</div><div style="width:10px;font-weight:700">:</div><div>117399</div></div><div style="display:flex"><div style="width:60px;font-weight:700">Date</div><div style="width:10px;font-weight:700">:</div><div>26/06/2019&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:15:49PM</div></div></div><div style="display:flex;margin:8px 0"><div style="display:flex;width:477px"><div style="width:100px;font-weight:700">Patient Name</div><div style="width:10px;font-weight:700">:</div><div>Mrs. Suglabai Dhulappa Waghmare</div></div><div style="display:flex"><div style="width:60px;font-weight:700">IPD No</div><div style="width:10px;font-weight:700">:</div><div>IP/53757/2019</div></div></div><div style="display:flex;margin:8px 0"><div style="display:flex"><div style="width:100px;font-weight:700">DOA</div><div style="width:10px;font-weight:700">:</div><div>30/10/2019</div></div></div><div style="display:flex"><div style="display:flex"><div style="width:100px;font-weight:700">Patient Type</div><div style="width:10px;font-weight:700">:</div><div>Self</div></div></div></div><hr style="border-color:#a0a0a0"><div><div style="display:flex"><div style="display:flex"><div style="width:150px;font-weight:700">Advacne Amount</div><div style="width:10px;font-weight:700">:</div><div>4,000.00</div></div></div><div style="display:flex;margin:8px 0"><div style="display:flex"><div style="width:150px;font-weight:700">Amount in Words</div><div style="width:10px;font-weight:700">:</div><div>FOUR THOUSANDS RUPPEE ONLY</div></div></div><div style="display:flex"><div style="display:flex"><div style="width:150px;font-weight:700">Reason of Advance</div><div style="width:10px;font-weight:700">:</div><div></div></div></div></div><div style="position:relative;top:100px;text-align:right"><div style="font-weight:700;font-size:16px">YASHODHARA SUPER SPECIALITY HOSPITAL PVT. LTD.</div><div style="font-weight:700;font-size:16px">Cashier</div><div>Paresh Manlor</div></div></div>`;
     this.subscriptionArr.push(
-      // this._AppointmentSreviceService.getOPDPrecriptionPrint(D_data).subscribe(res => {
-      //   console.log(res);
-      //   this.reportPrintObjList = res as CasepaperVisitDetails[];
-      //   console.log(this.reportPrintObjList);
-      //   this.reportPrintObj = res[0] as CasepaperVisitDetails;
+      this._BrowseOPDBillsService.getBillPrint(D_data).subscribe(res => {
 
-      //   this.getTemplate();
+        this.reportPrintObjList = res as BrowseOPDBill[];
+        console.log(this.reportPrintObjList);
+        this.reportPrintObj = res[0] as BrowseOPDBill;
 
-      //   console.log(D_data);
-      // })
+        this.getTemplate();
+
+
+      })
     );
   }
 
   // PRINT 
   print() {
-    
+    // HospitalName, HospitalAddress, AdvanceNo, PatientName
     let popupWin, printContents;
-    
+    // printContents =this.printTemplate; // document.getElementById('print-section').innerHTML;
+
     popupWin = window.open('', '_blank', 'top=0,left=0,height=800px !important,width=auto,width=2200px !important');
     // popupWin.document.open();
     popupWin.document.write(` <html>
@@ -372,200 +416,176 @@ export class BrowseCreditPaymentComponent implements OnInit {
   }
 
 
+
+
+
+  getViewbill(contact) {
+    console.log(contact);
+    let xx = {
+
+      RegNo: contact.RegId,
+      AdmissionID: contact.VisitId,
+      PatientName: contact.PatientName,
+      Doctorname: contact.Doctorname,
+      AdmDateTime: contact.AdmDateTime,
+      AgeYear: contact.AgeYear,
+      ClassId: contact.ClassId,
+      TariffName: contact.TariffName,
+      TariffId: contact.TariffId,
+      HospitalAddress: contact.HospitalAddress,
+      BDate: contact.BDate,
+      BalanceAmt: contact.BalanceAmt,
+      TotalAmt: contact.TotalAmt,
+      BillDate: contact.BillDate,
+      BillNo: contact.BillNo,
+      ConcessionAmt: contact.ConcessionAmt,
+      HospitalName: contact.HospitalName,
+      NetPayableAmt: contact.NetPayableAmt,
+      OPD_IPD_ID: contact.OPD_IPD_ID,
+      OPD_IPD_Type: contact.OPD_IPD_Type,
+      PBillNo: contact.PBillNo,
+      PaidAmount: contact.PaidAmount,
+      VisitDate: contact.VisitDate,
+      TotalBillAmount: contact.TotalBillAmount,
+      TransactionType: contact.TransactionType,
+      ConsultantDocName: contact.ConsultantDocName,
+      DepartmentName: contact.DepartmentName,
+      AddedByName: contact.AddedByName,
+      NetAmount: contact.NetAmount,
+      ServiceName: contact.ServiceName,
+      Price: contact.Price,
+      Qty: contact.Qty,
+
+
+
+    };
+    this.advanceDataStored.storage = new BrowseOPDBill(xx);
+    const dialogRef = this._matDialog.open(ViewBillPaymentComponent,
+      {
+        maxWidth: "80vw",
+        maxHeight: "100vh", width: '100%', height: "100%"
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed - Insert Action', result);
+    });
+  }
+
+
+
+  getRecord(el, i) {
+    // console.log(el,i);
+    // this._matDialog.open(SmsEmailTemplateComponent, {
+    //   data: i,
+    //   width: '40%',
+    //   height: "fit-content",
+    //   autoFocus: false
+    // });
+
+  }
+
+
 }
 
-export class VisitMaster {
-  VisitId: Number;
-  PrefixId: number;
-  RegNoWithPrefix: number;
-  PatientName: string;
-  VisitDate: Date;
-  VisitTime: Date;
-  HospitalID: number;
-  HospitalName: string;
-  PatientTypeID: number;
-  PatientTypeId: number;
-  PatientType: string;
-  CompanyId: number;
-  OPDNo: string;
-  TariffId: number;
-  TariffName: string;
-  ConsultantDocId: number;
-  RefDocId: number;
-  Doctorname: string;
-  RefDocName: string;
-  DepartmentId: number;
-  appPurposeId: number;
-  patientOldNew: Boolean;
-  isMark: boolean;
-  isXray: boolean;
-  AddedBy: number;
-  MPbillNo: number;
+export class ReportPrintObj {
+  AdvanceNo: any;
+  Address: any;
+  HospitalName: any;
   RegNo: any;
-
-  IsMark: any;
-  IsXray: any;
-  Comments: any;
-  Intime: any;
-  OutTime: any;
-
-
-  /**
-   * Constructor
-   *
-   * @param VisitMaster
-   */
-  constructor(VisitMaster) {
-    {
-      this.VisitId = VisitMaster.VisitId || '';
-      this.PrefixId = VisitMaster.PrefixId || '',
-        this.RegNoWithPrefix = VisitMaster.RegNoWithPrefix || '';
-      this.PatientName = VisitMaster.PatientName || '';
-      this.VisitDate = VisitMaster.VisitDate || '';
-      this.VisitTime = VisitMaster.VisitTime || '';
-      this.HospitalID = VisitMaster.HospitalID || '';
-      this.HospitalName = VisitMaster.HospitalName || '';
-      this.PatientTypeID = VisitMaster.PatientTypeID || '';
-      this.PatientTypeId = VisitMaster.PatientTypeId || '';
-      this.PatientType = VisitMaster.PatientType || '';
-      this.CompanyId = VisitMaster.CompanyId || '';
-      this.TariffId = VisitMaster.TariffId || '';
-      this.OPDNo = VisitMaster.OPDNo || '';
-      this.ConsultantDocId = VisitMaster.ConsultantDocId || '';
-      this.Doctorname = VisitMaster.Doctorname || '';
-      this.RefDocId = VisitMaster.VisitTime || '';
-      this.RefDocName = VisitMaster.RefDocName || '';
-      this.DepartmentId = VisitMaster.DepartmentId || '';
-      this.patientOldNew = VisitMaster.patientOldNew || '';
-      this.isXray = VisitMaster.isXray || '';
-      this.AddedBy = VisitMaster.AddedBy || '';
-      this.MPbillNo = VisitMaster.MPbillNo || '';
-      this.RegNo = VisitMaster.RegNo || '';
-    }
-  }
+  PatientName: any;
+  IPDNo: any;
+  Date: any;
+  PatientType: any;
+  AdvanceAmount: any;
 }
 
-export class RegInsert {
-  RegId: Number;
-  RegDate: Date;
-  RegTime: Date;
-  PrefixId: number;
-  PrefixID: number;
+
+
+export class BrowseOPDBill {
+  BillNo: Number;
+  RegId: number;
+  RegNo: number;
+  PatientName: string;
   FirstName: string;
-  MiddleName: string;
+  Middlename: string;
   LastName: string;
-  Address: string;
-  City: string;
-  PinNo: string;
-  RegNo: string;
-  DateofBirth: Date;
-  Age: any;
-  GenderId: Number;
-  PhoneNo: string;
-  MobileNo: string;
-  AddedBy: number;
-  AgeYear: any;
-  AgeMonth: any;
-  AgeDay: any;
-  CountryId: number;
-  StateId: number;
-  CityId: number;
-  MaritalStatusId: number;
-  IsCharity: Boolean;
-  ReligionId: number;
-  AreaId: number;
-  VillageId: number;
-  TalukaId: number;
-  PatientWeight: number;
-  AreaName: string;
-  AadharCardNo: string;
-  PanCardNo: string;
-  currentDate = new Date();
-  RationCardNo:any;
-  IsMember:any;
+  TotalAmt: number;
+  ConcessionAmt: number;
+  NetPayableAmt: number;
+  BillDate: any;
+  IPDNo: number;
+  ServiceName: String;
+  Price: number;
+  Qty: number;
+  ChargesTotalAmount: number;
+  NetAmount: number;
+  PaidAmount: number;
+  HospitalName: string;
+  HospitalAddress: string;
+  Phone: number;
+  EmailId:any;
+  ChargesDoctorName: string;
+  TotalBillAmount: number;
+  ConsultantDocName: string;
+  DepartmentName: string;
+  IsCancelled: boolean;
+  OPD_IPD_Type: number;
+  PBillNo: string;
+  BDate: Date;
+  VisitDate: Date;
+  BalanceAmt: number;
+  AddedByName: string;
+Department:any;
+Address:any;
+MobileNo:any;
+  //PayTMAmount:number;
+  //NEFTPayAmount:number;
   /**
    * Constructor
    *
-   * @param RegInsert
+   * @param BrowseOPDBill
    */
-
-  constructor(RegInsert) {
+  constructor(BrowseOPDBill) {
     {
-      this.RegId = RegInsert.RegId || '';
-      this.RegDate = RegInsert.RegDate || '';
-      this.RegTime = RegInsert.RegTime || '';
-      this.PrefixId = RegInsert.PrefixId || '';
-      this.PrefixID = RegInsert.PrefixID || '';
-      this.FirstName = RegInsert.FirstName || '';
-      this.MiddleName = RegInsert.MiddleName || '';
-      this.LastName = RegInsert.LastName || '';
-      this.Address = RegInsert.Address || '';
-      this.City = RegInsert.City || '';
-      this.PinNo = RegInsert.PinNo || '';
-      this.DateofBirth = RegInsert.DateofBirth || this.currentDate;
-      this.Age = RegInsert.Age || '';
-      this.GenderId = RegInsert.GenderId || '';
-      this.PhoneNo = RegInsert.PhoneNo || '';
-      this.MobileNo = RegInsert.MobileNo || '';
-      this.AddedBy = RegInsert.AddedBy || '';
-      this.AgeYear = RegInsert.AgeYear || '';
-      this.AgeMonth = RegInsert.AgeMonth || '';
-      this.AgeDay = RegInsert.AgeDay || '';
-      this.CountryId = RegInsert.CountryId || '';
-      this.StateId = RegInsert.StateId || '';
-      this.CityId = RegInsert.CityId || '';
-      this.MaritalStatusId = RegInsert.MaritalStatusId || '';
-      this.IsCharity = RegInsert.IsCharity || '';
-      this.ReligionId = RegInsert.ReligionId || '';
-      this.AreaId = RegInsert.AreaId || '';
-      this.VillageId = RegInsert.VillageId || '';
-      this.TalukaId = RegInsert.TalukaId || '';
-      this.PatientWeight = RegInsert.PatientWeight || '';
-      this.AreaName = RegInsert.AreaName || '';
-      this.AadharCardNo = RegInsert.AadharCardNo || '';
-      this.PanCardNo = RegInsert.PanCardNo || '';
-      this.RationCardNo=RegInsert.RationCardNo || '';
-      this.IsMember=RegInsert.IsMember || 0;
+      this.BillNo = BrowseOPDBill.BillNo || '';
+      this.RegId = BrowseOPDBill.RegId || '';
+      this.RegNo = BrowseOPDBill.RegNo || '';
+      this.PatientName = BrowseOPDBill.PatientName || '';
+      this.FirstName = BrowseOPDBill.FirstName || '';
+      this.Middlename = BrowseOPDBill.MiddleName || '';
+      this.LastName = BrowseOPDBill.LastName || '';
+      this.TotalAmt = BrowseOPDBill.TotalAmt || '';
+      this.ConcessionAmt = BrowseOPDBill.ConcessionAmt || '';
+      this.NetPayableAmt = BrowseOPDBill.NetPayableAmt || '';
+      this.BillDate = BrowseOPDBill.BillDate || '';
+      this.IPDNo = BrowseOPDBill.IPDNo || '';
+      this.IsCancelled = BrowseOPDBill.IsCancelled || '';
+      this.OPD_IPD_Type = BrowseOPDBill.OPD_IPD_Type || '';
+      this.PBillNo = BrowseOPDBill.PBillNo || '';
+      this.BDate = BrowseOPDBill.BDate || '';
+      this.PaidAmount = BrowseOPDBill.PaidAmount || '';
+      this.BalanceAmt = BrowseOPDBill.BalanceAmt || '';
+      this.ServiceName = BrowseOPDBill.ServiceName || '';
+      this.Price = BrowseOPDBill.Price || '';
+      this.Qty = BrowseOPDBill.Qty || '';
+      this.ChargesTotalAmount = BrowseOPDBill.ChargesTotalAmount || '';
+      this.NetAmount = BrowseOPDBill.NetAmount || '';
+      this.HospitalName = BrowseOPDBill.HospitalName || '';
+      this.HospitalAddress = BrowseOPDBill.HospitalAddress || '';
+      this.ChargesTotalAmount = BrowseOPDBill.ChargesTotalAmount || '';
+      this.Phone = BrowseOPDBill.Phone || '';
+      this.EmailId = BrowseOPDBill.EmailId || '';
+      this.ConsultantDocName = BrowseOPDBill.ConsultantDocName || '';
+      this.DepartmentName = BrowseOPDBill.DepartmentName || '';
+      this.TotalBillAmount = BrowseOPDBill.TotalBillAmount || '';
+      this.ChargesDoctorName = BrowseOPDBill.ChargesDoctorName || '';
+      this.VisitDate = BrowseOPDBill.VisitDate || '';
+      this.AddedByName = BrowseOPDBill.AddedByName || '';
+      this.TotalAmt = BrowseOPDBill.TotalAmt || '';
+
+      this.Address = BrowseOPDBill.Address || '';
+      this.Department = BrowseOPDBill.Department || '';
+      this.MobileNo=BrowseOPDBill.MobileNo || '';
     }
   }
+
 }
-
-export class ChargesList{
-  ChargesId: number;
-  ServiceId: number;
-  ServiceName : String;
-  Price:number;
-  Qty: number;
-  TotalAmt: number;
-  DiscPer: number;
-  DiscAmt: number;
-  NetAmount: number;
-  DoctorId:number;
-  ChargeDoctorName: String;
-  ChargesDate: Date;
-  IsPathology:boolean;
-  IsRadiology:boolean;
-  ClassId:number;
-  ClassName: string;
-  ChargesAddedName: string;
-
-  constructor(ChargesList){
-          this.ChargesId = ChargesList.ChargesId || '';
-          this.ServiceId = ChargesList.ServiceId || '';
-          this.ServiceName = ChargesList.ServiceName || '';
-          this.Price = ChargesList.Price || '';
-          this.Qty = ChargesList.Qty || '';
-          this.TotalAmt = ChargesList.TotalAmt || '';
-          this.DiscPer = ChargesList.DiscPer || '';
-          this.DiscAmt = ChargesList.DiscAmt || '';
-          this.NetAmount = ChargesList.NetAmount || '';
-          this.DoctorId=ChargesList.DoctorId || 0;
-          this.ChargeDoctorName = ChargesList.ChargeDoctorName || '';
-          this.ChargesDate = ChargesList.ChargesDate || '';
-          this.IsPathology = ChargesList.IsPathology || '';
-          this.IsRadiology = ChargesList.IsRadiology || '';
-          this.ClassId=ChargesList.ClassId || 0;
-          this.ClassName = ChargesList.ClassName || '';
-          this.ChargesAddedName = ChargesList.ChargesAddedName || '';
-  }
-} 

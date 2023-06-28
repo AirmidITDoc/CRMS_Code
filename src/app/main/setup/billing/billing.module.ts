@@ -12,21 +12,12 @@ const appRoutes: Routes = [
     //     loadChildren: () =>
     //         import("./group-master/group-master.module").then((m) => m.GroupMasterModule),
     // },
-    // {
-    //     path: "bank-master",
-    //     loadChildren: () =>
-    //         import("./bank-master/bank-master.module").then((m) => m.BankMasterModule),
-    // },
-    // {
-    //     path: "vendor-master",
-    //     loadChildren: () =>
-    //         import("./vendor-master/vendor-master.module").then((m) => m.VendorMasterModule),
-    // },
-    // {
-    //     path: "product-type-master",
-    //     loadChildren: () =>
-    //         import("./product-type-master/product-type-master.module").then((m) => m.ProductTypeMasterModule),
-    // },
+    {
+        path: "bank-master",
+        loadChildren: () =>
+            import("./bank-master/bank-master.module").then((m) => m.BankMasterModule),
+    },
+   
 ];
 
 @NgModule({
