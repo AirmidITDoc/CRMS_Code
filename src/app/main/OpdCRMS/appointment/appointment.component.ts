@@ -14,7 +14,11 @@ import { fuseAnimations } from '@fuse/animations';
 import { BillDetailComponent, SearchInforObj } from './bill-detail/bill-detail.component';
 import { AdvanceDataStored } from '../advance';
 // import { EditVisitDateComponent } from './edit-visit-date/edit-visit-date.component';
+<<<<<<< HEAD
 import { NewVistDateComponent } from './new-vist-date/new-vist-date.component';
+=======
+// import { NewVistDateComponent } from './new-vist-date/new-vist-date.component';
+>>>>>>> 4d8345f49c5829627e611e7b1695d14b23b8d814
 
 @Component({
   selector: 'app-appointment',
