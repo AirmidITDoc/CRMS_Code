@@ -328,7 +328,7 @@ public CaseDetailInsert(employee){
   }
 
   public getCaseIDCombo(){
-    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CasedetailId", {});
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CaseCombo", {});
   }
 
   public getCaseDetailPrint(employee){

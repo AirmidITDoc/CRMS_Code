@@ -1,18 +1,7 @@
 <div fxlayout="row" fxFlex.gt-sm="100%" fxFlex class="page-layout simple right-sidebar"
   style="height: 530px !important;">
   <div class="center" fusePerfectScrollbar style="overflow: auto;">
-    <!-- <mat-toolbar  style="background-color:  #039be5 !important; height:50px; justify-content: space-between;width: 100%;" >
-    <div fxLayout="row"  fxLayout="row" fxLayoutAlign="space-between center" >
-   
-  <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-    <h3>Registration </h3>
-  </span>
-  <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog" style="width: 10%;float: right;">
-    <mat-icon>close</mat-icon>
-  </button>
-  </div>
-  
-  </mat-toolbar> -->
+
     <mat-toolbar matDialogTitle class="mat-accent m-0">
       <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
         <h3>Edit Registration </h3>
@@ -24,58 +13,10 @@
 
     <div style="padding:10px; height: 100%;" fxLayoutGap="2px">
       <div class="dialog-content-wrapper" style="align-items: flex-end;margin-right:10px;">
-        <!-- <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)"  >
-    </app-common-date > -->
-
-        <!-- <button class="back-btn" id="auto_trigger" (click)="setDropdownObjs1()" style="border-radius: 16px;display:none;">
-      Show
-    </button> -->
-
-        <!-- <form [formGroup]="searchFormGroup" fxLayoutAlign="space-between start">
-          <div class="register-container" fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
-            <div class="redio-container">
-              <mat-radio-group aria-label="Select an option" formControlName="regRadio" name="regRadio"
-                (change)="onChangeReg($event)">
-                <mat-radio-button value="registration" style="margin-bottom: 5px;">New Registration
-                </mat-radio-button><br>
-                <mat-radio-button value="registrered">Registered</mat-radio-button>
-              </mat-radio-group>
-            </div>
-
-
-            <mat-form-field appearance="outline" style="width:45%">
-              <input type="text" name="RegId" formControlName="RegId" placeholder="RegNo" matInput
-                [matAutocomplete]="auto" (input)="getSearchList()">
-
-              <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText"
-                (optionSelected)='getSelectedObj($event.option.value)'>
-                <mat-option *ngFor="let option of filteredOptions" [value]="option">
-                  {{option.FirstName}} {{option.LastName}} ({{option.RegId}})
-                </mat-option>
-              </mat-autocomplete>
-
-              <mat-hint>
-                <span *ngIf="!noOptionFound">Select one of the name from auto suggestions.</span>
-                <span *ngIf="noOptionFound" style="color: #f44336;">No data Found</span>
-              </mat-hint>
-
-            </mat-form-field>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <div class="search-button-div">
-              <button mat-raised-button style="background-color: #FBF8EF;margin-top: 5px;margin-right: 100px;"
-                (click)="searchRegList()" [disabled]="isRegSearchDisabled">Search
-
-                <mat-icon>search</mat-icon>
-              </button>
-            </div>
-
-            <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
-            </app-common-date>
-
-          </div>
-        </form> -->
-
+        <div style="float: right;">
+          <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
+          </app-common-date>
+        </div>
 
         <br>
 
@@ -163,15 +104,15 @@
             <mat-form-field appearance="outline" fxFlex>
               <mat-label>Age (D)</mat-label>
               <input name="AgeDay" formControlName="AgeDay" placeholder="Age (D)" matInput
-                [ngModel]="registerObj.AgeDay"  type="number"  maxlength=2 >
+                [ngModel]="registerObj.AgeDay" type="number" maxlength=2>
               <!-- <mat-error *ngIf="personalFormGroup.get('AgeDay').invalid && personalFormGroup.get('AgeDay').touched">
           Please enter Age Day </mat-error> -->
             </mat-form-field>
 
             <mat-form-field appearance="outline" fxFlex>
               <mat-label>Age (M)</mat-label>
-              <input name="AgeMonth" formControlName="AgeMonth" placeholder="Age (M)" matInput 
-                [ngModel]="registerObj.AgeMonth"  type="number">
+              <input name="AgeMonth" formControlName="AgeMonth" placeholder="Age (M)" matInput
+                [ngModel]="registerObj.AgeMonth" type="number">
               <!-- <mat-error
           *ngIf="personalFormGroup.get('AgeMonth').invalid && personalFormGroup.get('AgeMonth').touched">
           Please enter Age Month </mat-error> -->
@@ -179,8 +120,8 @@
 
             <mat-form-field appearance="outline" fxFlex>
               <mat-label>Age (Y)</mat-label>
-              <input name="AgeYear" formControlName="AgeYear" placeholder="Age (Y)" matInput
-                [ngModel]="registerObj.Age" (ngModelChange)="registerObj.AgeYear = $event" type="number">
+              <input name="AgeYear" formControlName="AgeYear" placeholder="Age (Y)" matInput [ngModel]="registerObj.Age"
+                (ngModelChange)="registerObj.AgeYear = $event" type="number">
               <mat-error
                 *ngIf="personalFormGroup.get('AgeYear').invalid && personalFormGroup.get('AgeYear').touched">Please
                 enter Age Year </mat-error>
@@ -327,7 +268,7 @@
 
             <mat-form-field appearance="outline" fxFlex>
               <mat-label>Phone Number</mat-label>
-              <input name="PhoneNo" formControlName="PhoneNo" placeholder="Phone Number" matInput 
+              <input name="PhoneNo" formControlName="PhoneNo" placeholder="Phone Number" matInput
                 [(ngModel)]="registerObj.PhoneNo" type="number">
               <mat-error class="error"
                 *ngIf="personalFormGroup.get('PhoneNo').invalid && personalFormGroup.get('PhoneNo').touched">10 Degits
@@ -337,7 +278,7 @@
 
             <mat-form-field appearance="outline" fxFlex>
               <mat-label>Mobile Number</mat-label>
-              <input name="MobileNo" formControlName="MobileNo" placeholder="Mobile Number" matInput required 
+              <input name="MobileNo" formControlName="MobileNo" placeholder="Mobile Number" matInput required
                 [(ngModel)]="registerObj.MobileNo" type="number">
               <mat-error class="error"
                 *ngIf="personalFormGroup.get('MobileNo').invalid && personalFormGroup.get('MobileNo').touched">10
@@ -347,15 +288,15 @@
           </div>
 
           <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;">
-        
-          
+
+
             <div style="float: right;margin-top: 20px;">
-              <mat-slide-toggle name="IsCharity" (change)="onChangeIsactive($event)" checked formControlName="IsCharity" style="padding-right: 10px;">
+              <mat-slide-toggle name="IsCharity" (change)="onChangeIsactive($event)" checked formControlName="IsCharity"
+                style="padding-right: 10px;">
                 IsCharity</mat-slide-toggle>
-  
-  
-              <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()"
-               >Update</button>
+
+
+              <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()">Update</button>
 
               <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
 

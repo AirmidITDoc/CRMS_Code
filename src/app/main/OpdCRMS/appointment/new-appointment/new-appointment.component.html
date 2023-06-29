@@ -5,8 +5,8 @@
 
       <div class="header-container" fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between" style="background-color:rgb(18, 87, 134) !important;" >
         <span style="font-size: 22px; font-weight: 500; color: #fff;">New Appointment</span>
-        <!-- <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
-        </app-common-date> -->
+        <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
+        </app-common-date>
         <span class="material-icons" style="cursor: pointer;float: right; color: #fff;float: right;" (click)="onClose()">
           close
         </span>

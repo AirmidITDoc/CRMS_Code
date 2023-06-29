@@ -581,63 +581,14 @@ export class EditAppointmentComponent implements OnInit {
     let reg = this.registerObj.RegId;
     this.isLoading = 'submit';
 
-    if (!reg) {
-      var m_data = {
-        "registrationUpdate": {
-          "RegId": 0,
-          "RegDate": this.dateTimeObj.date, //this.datePipe.transform(this.dateTimeObj.date,"yyyy-Mm-dd") || opdRegistrationSave"2021-03-31",// this.dateTimeObj.date,//
-          "RegTime": this.dateTimeObj.time, // this._registerService.mySaveForm.get("RegTime").value || "2021-03-31T12:27:24.771Z",
-          "PrefixId": this.personalFormGroup.get('PrefixID').value.PrefixID,
-          "FirstName": this.registerObj.FirstName || "",
-          "MiddleName": this.registerObj.MiddleName || "",
-          "LastName": this.registerObj.LastName || "",
-          "Address": this.registerObj.Address || "",
-          "City": this.personalFormGroup.get('CityId').value.CityId || 0,
-          "PinNo": '222',// this._registerService.mySaveForm.get("PinNo").value || "0",
-          "DateOfBirth": this.datePipe.transform(this.registerObj.DateofBirth, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
-          "Age": this.registerObj.AgeYear || 0,//this._registerService.mySaveForm.get("Age").value || "0",
-          "GenderId": this.personalFormGroup.get('GenderId').value.GenderId || 0,
-          "PhoneNo": this.registerObj.PhoneNo || "",// this._registerService.mySaveForm.get("PhoneNo").value || "0",
-          "MobileNo": this.registerObj.MobileNo || "",// this._registerService.mySaveForm.get("MobileNo").value || "0",
-          "UpdatedBy":  this.accountService.currentUserValue.user.id,
-          "AgeYear": this.registerObj.AgeYear || "0",// this._registerService.mySaveForm.get("AgeYear").value.trim() || "%",
-          "AgeMonth": this.registerObj.AgeMonth || "0",// this._registerService.mySaveForm.get("AgeMonth").value.trim() || "%",
-          "AgeDay": this.registerObj.AgeDay || "0",// this._registerService.mySaveForm.get("AgeDay").value.trim() || "%",
-          "CountryId": this.personalFormGroup.get('CountryId').value.CountryId,
-          "StateId": this.personalFormGroup.get('StateId').value.StateId,
-          "CityId": this.personalFormGroup.get('CityId').value.CityId,
-          "MaritalStatusId": this.personalFormGroup.get('MaritalStatusId').value ? this.personalFormGroup.get('MaritalStatusId').value.MaritalStatusId : 0,
-          "IsCharity": false,// Boolean(JSON.parse(this.personalFormGroup.get("IsCharity").value)) || "0",
-          "ReligionId": this.personalFormGroup.get('ReligionId').value ? this.personalFormGroup.get('ReligionId').value.ReligionId : 0,
-          "AreaId": this.personalFormGroup.get('AreaId').value ? this.personalFormGroup.get('AreaId').value.AreaId : 0,
-          "isSeniorCitizen": 0,
-          // "aadharcardno": this.personalFormGroup.get('AadharCardNo').value ? this.personalFormGroup.get('AadharCardNo').value : 0,
-          // "pancardno": this.personalFormGroup.get('PanCardNo').value ? this.personalFormGroup.get('PanCardNo').value : 0,
-        }
-      }
-      console.log(m_data);
-      this._registerService.regUpdate(m_data).subscribe(response => {
-        if (response) {
-          this.myFunction("Register Data Updated Successfully !");
-
-          setTimeout(() => {
-            this._matDialog.closeAll();
-          }, 1000);
-
-        } else {
-          Swal.fire('Error !', 'Register Data  not saved', 'error');
-        }
-
-      });
-    }
-    else {
+  
       debugger;
       var m_data1 = {
 
         "registrationUpdate": {
           "RegId": this.registerObj.RegId,
-          "RegDate":  "2023-04-26T11:13:30.638Z", //this.datePipe.transform(this.dateTimeObj.date,"yyyy-Mm-dd") || opdRegistrationSave"2021-03-31",// this.dateTimeObj.date,//
-          "RegTime":  "2023-04-26T11:13:30.638Z",
+          "RegDate": this.datePipe.transform(this.dateTimeObj.date ,"MM-dd-yyyy"),
+          "RegTime": this.dateTimeObj.time,
           "PrefixId": this.personalFormGroup.get('PrefixID').value.PrefixID,
           "FirstName": this.registerObj.FirstName || "",
           "MiddleName": this.registerObj.MiddleName || "",
@@ -645,7 +596,7 @@ export class EditAppointmentComponent implements OnInit {
           "Address": this.registerObj.Address || "",
           "City": this.personalFormGroup.get('CityId').value.CityName || 0,
           "PinNo": '222',// this._registerService.mySaveForm.get("PinNo").value || "0",
-          "DateOfBirth": "2023-04-26T11:13:30.638Z",//this.datePipe.transform(this.registerObj.DateofBirth, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
+          "DateOfBirth":  this.registerObj.DateofBirth || "2021-03-31",
           "Age": this.registerObj.AgeYear || 0,//this._registerService.mySaveForm.get("Age").value || "0",
           "GenderId": this.personalFormGroup.get('GenderId').value.GenderId || 0,
           "PhoneNo": this.registerObj.PhoneNo || "",// this._registerService.mySaveForm.get("PhoneNo").value || "0",
@@ -660,10 +611,7 @@ export class EditAppointmentComponent implements OnInit {
           "MaritalStatusId": this.personalFormGroup.get('MaritalStatusId').value ? this.personalFormGroup.get('MaritalStatusId').value.MaritalStatusId : 0,
           "IsCharity": false,// Boolean(JSON.parse(this.personalFormGroup.get("IsCharity").value)) || "0",
           "RationCardNo": '99',// this.personalFormGroup.get('ReligionId').value ? this.personalFormGroup.get('ReligionId').value.ReligionId : 0,
-          // "AreaId": this.personalFormGroup.get('AreaId').value ? this.personalFormGroup.get('AreaId').value.AreaId : 0,
-          // "isSeniorCitizen":0,
-          // "aadharcardno": this.personalFormGroup.get('AadharCardNo').value ? this.personalFormGroup.get('AadharCardNo').value : 0,
-          // "pancardno": this.personalFormGroup.get('PanCardNo').value ? this.personalFormGroup.get('PanCardNo').value : 0,
+         
         }
       }
       console.log(m_data1);
@@ -679,7 +627,7 @@ export class EditAppointmentComponent implements OnInit {
         }
 
       });
-    }
+    
 
 
     // console.log(this.personalFormGroup.invalid && this.IsSave);

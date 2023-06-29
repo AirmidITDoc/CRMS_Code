@@ -194,6 +194,8 @@ export class NewAppointmentComponent implements OnInit {
 
   ngOnInit(): void {
 
+  
+
     this.personalFormGroup = this.createPesonalForm();
     this.personalFormGroup.markAllAsTouched();
     this.VisitFormGroup = this.createVisitdetailForm();
@@ -389,7 +391,8 @@ export class NewAppointmentComponent implements OnInit {
 
 
   CaseListCombo(){
-    this._opappointmentService.getCaseIDCombo().subscribe(data => { this.CaseIdList = data; })
+
+       this._opappointmentService.getCaseIDCombo().subscribe(data => { this.CaseIdList = data; })
     }
 
   createSearchForm() {
@@ -1000,8 +1003,8 @@ export class NewAppointmentComponent implements OnInit {
       let tokenNumberWithDoctorWiseInsert = {};
       
       registrationSave['regId'] = 0;
-      registrationSave['regDate'] = '2023-06-22T09:52:54.616Z';//this.dateTimeObj.date //this.registerObj.RegDate;
-      registrationSave['regTime'] = '2023-06-22T09:52:54.616Z';//this.dateTimeObj.time;
+      registrationSave['regDate'] = this.datePipe.transform(this.dateTimeObj.date ,"MM-dd-yyyy");//this.dateTimeObj.date //this.registerObj.RegDate;
+      registrationSave['regTime'] = this.dateTimeObj.time;
       registrationSave['prefixId'] = this.personalFormGroup.get('PrefixID').value.PrefixID;
       registrationSave['firstName'] = this.registerObj.FirstName;
       registrationSave['middleName'] = this.registerObj.MiddleName;
@@ -1027,7 +1030,7 @@ export class NewAppointmentComponent implements OnInit {
       registrationSave['religionId'] = this.personalFormGroup.get('ReligionId').value ? this.personalFormGroup.get('ReligionId').value.ReligionId : 0;
       registrationSave['areaId'] = this.personalFormGroup.get('AreaId').value ? this.personalFormGroup.get('AreaId').value.AreaId : 0;
      registrationSave['isSeniorCitizen'] = false; //this.personalFormGroup.get('isSeniorCitizen').value ? this.personalFormGroup.get('VillageId').value.VillageId : 0; //this.registerObj.VillageId;
-     registrationSave['RationCardNo'] =this.registerObj.AadharCardNo; // this.personalFormGroup.get('Aadharcardno').value || '';
+     registrationSave['RationCardNo'] = "";
      registrationSave['IsMember'] =1;// this.personalFormGroup.get('IsMember').value || '';
    
       submissionObj['registrationSave'] = registrationSave;
@@ -1036,18 +1039,18 @@ export class NewAppointmentComponent implements OnInit {
 
       visitSave['VisitId'] = 0;
       visitSave['RegID'] = 0;
-      visitSave['VisitDate'] = '2023-06-22T09:52:54.616Z';
-      visitSave['VisitTime'] = '2023-06-22T09:52:54.616Z';
+      visitSave['VisitDate'] =  this.datePipe.transform(this.dateTimeObj.date ,"MM-dd-yyyy");
+      visitSave['VisitTime'] = this.dateTimeObj.time;
       visitSave['CaseID'] = this.personalFormGroup.get('CaseId').value.CaseId ? this.personalFormGroup.get('CaseId').value.CaseId : 0;
       visitSave['UnitId'] = this.VisitFormGroup.get('HospitalId').value.HospitalId ? this.VisitFormGroup.get('HospitalId').value.HospitalId : 0;
-      visitSave['PatientTypeId'] = this.VisitFormGroup.get('PatientTypeID').value.PatientTypeId || 0;//.PatientTypeID;//? this.VisitFormGroup.get('PatientTypeID').value.PatientTypeID : 0;
-      visitSave['ConsultantDocId'] = this.VisitFormGroup.get('DoctorID').value.DoctorId || 0;//? this.VisitFormGroup.get('DoctorId').value.DoctorId : 0;
-      visitSave['RefDocId'] = this.VisitFormGroup.get('DoctorIdOne').value.DoctorId ||0;// ? this.VisitFormGroup.get('DoctorIdOne').value.DoctorIdOne : 0;
+      visitSave['PatientTypeId'] = this.VisitFormGroup.get('PatientTypeID').value.PatientTypeId || 0;
+      visitSave['ConsultantDocId'] = this.VisitFormGroup.get('DoctorID').value.DoctorId || 0;
+      visitSave['RefDocId'] = this.VisitFormGroup.get('DoctorIdOne').value.DoctorId ||0;
 
       visitSave['TariffId'] = this.VisitFormGroup.get('TariffId').value.TariffId ? this.VisitFormGroup.get('TariffId').value.TariffId : 0;
       visitSave['CompanyId'] = this.VisitFormGroup.get('CompanyId').value.CompanyId ? this.VisitFormGroup.get('CompanyId').value.CompanyId : 0;
       visitSave['createdBy'] = this.accountService.currentUserValue.user.id;
-      visitSave['updatedBy'] = 0,//this.VisitFormGroup.get('RelationshipId').value.RelationshipId ? this.VisitFormGroup.get('RelationshipId').value.RelationshipId : 0;
+      visitSave['updatedBy'] =this.accountService.currentUserValue.user.id;
       visitSave['IsCancelled'] = 0;
       visitSave['IsCancelledBy'] = 0;
       visitSave['IsCancelledDate'] = '2023-06-22T09:52:54.616Z';
@@ -1056,20 +1059,20 @@ export class NewAppointmentComponent implements OnInit {
       visitSave['DepartmentId'] = this.VisitFormGroup.get('DoctorID').value.DepartmentId;//? this.VisitFormGroup.get('DepartmentId').value.DepartmentId : 0;
    
       visitSave['PatientOldNew'] = this.Patientnewold;
-      visitSave['FirstFollowupVisit'] = 0,// this.VisitFormGroup.get('RelativeAddress').value ? this.VisitFormGroup.get('RelativeAddress').value : '';
-      visitSave['appPurposeId'] = this.VisitFormGroup.get('PurposeId').value.PurposeId;// ? this.VisitFormGroup.get('RelativeAddress').value : '';
-      visitSave['FollowupDate'] = "2023-06-22T09:52:54.616Z";
-      visitSave['IsMark'] = 0,// this.VisitFormGroup.get('RelatvieMobileNo').value ? this.personalFormGroup.get('MobileNo').value : '';
+      visitSave['FirstFollowupVisit'] = 0;
+      visitSave['appPurposeId'] = this.VisitFormGroup.get('PurposeId').value.PurposeId;
+      visitSave['FollowupDate'] = '2023-06-22T09:52:54.616Z';
+      visitSave['IsMark'] = 0,
  
     visitSave['Comments'] = this.VisitFormGroup.get('Comments').value ? this.VisitFormGroup.get('Comments').value : '';
-    visitSave['Intime'] = '2023-06-22T09:52:54.616Z';
+    visitSave['Intime'] ='2023-06-22T09:52:54.616Z';
     visitSave['outTime'] = '2023-06-22T09:52:54.616Z';
 
 
       submissionObj['visitSave'] = visitSave;
 
       tokenNumberWithDoctorWiseInsert['patVisitID'] = 0;
-      // submissionObj['tokenNumberWithDoctorWiseSave'] = tokenNumberWithDoctorWiseInsert;
+      
       console.log(submissionObj);
       this._opappointmentService.appointregInsert(submissionObj).subscribe(response => {
         console.log(response);

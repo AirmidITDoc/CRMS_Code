@@ -327,8 +327,8 @@ export class NewVistDateComponent implements OnInit {
    
       visitMasterUpdate['VisitId'] = this.registerObj.VisitId;
     
-      visitMasterUpdate['VisitDate'] = this.datePipe.transform(this.registerObj.VisitDate,"MM-dd-yyyy");
-      visitMasterUpdate['VisitTime'] = this.datePipe.transform(this.registerObj.VisitTime,"MM-dd-yyyy");
+      visitMasterUpdate['VisitDate'] = this.datePipe.transform(this.VisitFormGroup.get('VisitDate').value.value,"MM-dd-yyyy");
+      visitMasterUpdate['VisitTime'] =this.datePipe.transform(this.VisitFormGroup.get('VisitTime').value.value,"shortTime");
       visitMasterUpdate['ConsultantDocId'] = this.VisitFormGroup.get('DoctorID').value.DoctorId || 0;//? this.VisitFormGroup.get('DoctorId').value.DoctorId : 0;
    
       visitMasterUpdate['createdBy'] = this.accountService.currentUserValue.user.id;
@@ -364,15 +364,15 @@ export class NewVistDateComponent implements OnInit {
       let submissionObj = {};
         let visitMasterAdd = {};
            
-     
+        // https://stackoverflow.com/questions/48649987/angular-material-datetime-picker-component?
       visitMasterAdd['VisitId'] = 0;
       visitMasterAdd['RegID'] = this.registerObj.RegNo;
-      visitMasterAdd['VisitDate'] = this.datePipe.transform(this.registerObj.VisitDate,"MM-dd-yyyy");
-      visitMasterAdd['VisitTime'] = this.datePipe.transform(this.registerObj.VisitTime,"MM-dd-yyyy");
+      visitMasterAdd['VisitDate'] = this.datePipe.transform(this.VisitFormGroup.get('VisitDate').value.value,"MM-dd-yyyy");
+      visitMasterAdd['VisitTime'] = this.datePipe.transform(this.VisitFormGroup.get('VisitTime').value.value,"HH-mm-ss");
       visitMasterAdd['CaseID'] = 0;
       visitMasterAdd['UnitId'] = 1;
       visitMasterAdd['PatientTypeId'] = this.registerObj.PatientTypeId;
-      visitMasterAdd['ConsultantDocId'] = this.VisitFormGroup.get('DoctorID').value.DoctorId || 0;//? this.VisitFormGroup.get('DoctorId').value.DoctorId : 0;
+      visitMasterAdd['ConsultantDocId'] = this.VisitFormGroup.get('DoctorID').value.DoctorId || 0;
       visitMasterAdd['RefDocId'] = this.registerObj.RefDocId;
 
       visitMasterAdd['TariffId'] = this.registerObj.TariffId;
@@ -384,7 +384,7 @@ export class NewVistDateComponent implements OnInit {
       visitMasterAdd['IsCancelledDate'] = '2023-06-22T09:52:54.616Z';
 
       visitMasterAdd['ClassId'] = 1;
-      visitMasterAdd['DepartmentId'] = this.VisitFormGroup.get('DoctorID').value.DepartmentId;//? this.VisitFormGroup.get('DepartmentId').value.DepartmentId : 0;
+      visitMasterAdd['DepartmentId'] = this.VisitFormGroup.get('DoctorID').value.DepartmentId;
    
       visitMasterAdd['PatientOldNew'] = this.Patientnewold;
       visitMasterAdd['FirstFollowupVisit'] = 0,

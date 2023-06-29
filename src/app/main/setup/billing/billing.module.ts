@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
-    // {
-    //     path: "service-master",
-    //     loadChildren: () =>
-    //         import("./service-master/service-master.module").then((m) => m.ServiceMasterModule),
-    // },
+    {
+        path: "service-master",
+        loadChildren: () =>
+            import("./service-master/service-master.module").then((m) => m.ServiceMasterModule),
+    },
     // {
     //     path: "group-master",
     //     loadChildren: () =>

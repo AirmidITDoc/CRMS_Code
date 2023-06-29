@@ -96,17 +96,17 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
-      // this._BrowseOPDBillsService.getBrowseBillsList(D_data).subscribe(Visit => {
-      //   this.dataSource.data = Visit as BrowseOPDBill[];
-      //   this.dataSource.sort = this.sort;
-      //   console.log(this.dataSource.data);
-      //   this.dataSource.paginator = this.paginator;
-      //   this.sIsLoading = '';
-      //   this.click = false;
-      // },
-      //   error => {
-      //     this.sIsLoading = '';
-      //   });
+      this._BrowseOPDBillsService.getBrowseBillsList(D_data).subscribe(Visit => {
+        this.dataSource.data = Visit as BrowseOPDBill[];
+        this.dataSource.sort = this.sort;
+        console.log(this.dataSource.data);
+        this.dataSource.paginator = this.paginator;
+        this.sIsLoading = '';
+        this.click = false;
+      },
+        error => {
+          this.sIsLoading = '';
+        });
     }, 1000);
 
     this.onClear();

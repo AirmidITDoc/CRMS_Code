@@ -24,12 +24,15 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { DashboardService } from './dashboard.service';
 import { DailyDashboardComponent } from './daily-dashboard/daily-dashboard.component';
+
 
 
 @NgModule({
   declarations: [
     DailyDashboardComponent
+    
   ],
   imports: [
     CommonModule,
@@ -53,6 +56,7 @@ import { DailyDashboardComponent } from './daily-dashboard/daily-dashboard.compo
     MatPaginatorModule,
   ],
   providers: [
+    DashboardService,
     DatePipe
   ],
   entryComponents: [DailyDashboardComponent]

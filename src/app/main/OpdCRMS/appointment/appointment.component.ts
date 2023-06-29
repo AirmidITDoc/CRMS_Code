@@ -14,11 +14,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { BillDetailComponent, SearchInforObj } from './bill-detail/bill-detail.component';
 import { AdvanceDataStored } from '../advance';
 // import { EditVisitDateComponent } from './edit-visit-date/edit-visit-date.component';
-<<<<<<< HEAD
 import { NewVistDateComponent } from './new-vist-date/new-vist-date.component';
-=======
-// import { NewVistDateComponent } from './new-vist-date/new-vist-date.component';
->>>>>>> 4d8345f49c5829627e611e7b1695d14b23b8d814
 
 @Component({
   selector: 'app-appointment',
@@ -47,8 +43,8 @@ export class AppointmentComponent implements OnInit {
   @Input() dataArray: any;
 
   displayedColumns = [
-    'PatientOldNew',
-    'MPbillNo',
+    // 'PatientOldNew',
+    // 'MPbillNo',
     'RegNoWithPrefix',
     'PatientName',
     'DVisitDate',
@@ -85,6 +81,8 @@ export class AppointmentComponent implements OnInit {
       // this.menuActions.push('Update Visit Date');
       this.menuActions.push('Add New Visit Date');
       this.menuActions.push('Bill');
+    }else if(this._ActRoute.url == '/opd/bill'){
+      this.menuActions.push('New Bill');
     }
 
 
@@ -216,6 +214,49 @@ export class AppointmentComponent implements OnInit {
       }
     }
     else if (m == "Bill") {
+      console.log(contact);
+      var D_data = {
+        "RegId": contact.RegId,
+      }
+      this._AppointmentSreviceService.getregisterListByRegId(D_data).subscribe(reg => {
+        // this.dataArray = reg;
+        // console.log(this.dataArray);
+        let xx = {
+          RegNo: contact.RegId,
+          RegId: contact.RegId,
+          AdmissionID: contact.VisitId,
+          PatientName: contact.PatientName,
+          Doctorname: contact.Doctorname,
+          AdmDateTime: contact.AdmDateTime,
+          AgeYear: contact.AgeYear,
+          ClassId: contact.ClassId,
+          ClassName: contact.ClassName,
+          TariffName: contact.TariffName,
+          TariffId: contact.TariffId,
+          VisitId: contact.VisitId,
+          VistDateTime: contact.VistDateTime
+        };
+        // this._AppointmentSreviceService.populateFormpersonal(xx);
+        this.advanceDataStored.storage = new SearchInforObj(xx);
+        const dialogRef = this._matDialog.open(BillDetailComponent,
+          {
+            maxWidth: "99%",
+            height: '700px',
+            width: '100%',
+            data: {
+              registerObj: xx,
+            }
+          });
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed - Insert Action', result);
+          this.getVisitList();
+        });
+      },
+        error => {
+          this.sIsLoading = '';
+        });
+    }
+    else if (m == "New Bill") {
       console.log(contact);
       var D_data = {
         "RegId": contact.RegId,

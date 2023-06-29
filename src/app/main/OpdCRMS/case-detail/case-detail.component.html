@@ -41,7 +41,7 @@
                 <!-- SIDEBAR CONTENT -->
                 <div>
                     <div class="nav material2">
-                        <form [formGroup]="_AppointmentSreviceService.myFilterform" style="padding: 6px 6px 5px 5px;"
+                        <form [formGroup]="_CasedetailService.myFilterform" style="padding: 6px 6px 5px 5px;"
                             fusePerfectScrollbar>
                             <div fxLayout="column" fxLayoutAlign="start none">
                                 <br />
@@ -56,13 +56,19 @@
                                 </mat-form-field>
 
                                 <mat-form-field appearance="outline" fxFlex>
-                                    <mat-label>First Name</mat-label>
-                                    <input name="FirstName" formControlName="FirstName" matInput>
+                                    <mat-label>Case Id</mat-label>
+                                    <input name="CaseId" formControlName="CaseId" matInput>
                                     <!-- <span class="error" *ngIf="f.FirstName.invalid && f.FirstName.touched">FirstName is
                                         required Enter only Alphabets</span> -->
                                 </mat-form-field>
 
 
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>Case Name</mat-label>
+                                    <input name="CaseName" formControlName="CaseName" matInput>
+                                    <!-- <span class="error" *ngIf="f.FirstName.invalid && f.FirstName.touched">FirstName is
+                                        required Enter only Alphabets</span> -->
+                                </mat-form-field>
 
                                 <div style="margin-top: 10px;">
                                     <button mat-raised-button (click)="onClear()" class="clearbutton"

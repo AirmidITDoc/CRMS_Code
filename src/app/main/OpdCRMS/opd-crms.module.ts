@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowsePaymentReceiptComponent } from './browse-payment-receipt/browse-payment-receipt.component';
 
 
 const appRoutes: Routes = [
@@ -29,10 +30,10 @@ const appRoutes: Routes = [
     path: "browse-opd-bills",
     loadChildren: () =>import("./browse-credit-payment/credit-payment.module").then((m) => m.CreditPaymentModule),
 },
-// {
-//     path: "browse-opd-payment-receipt",
-//     loadChildren: () => import("./browse-payment-list/browsepayment.module").then((m) => m.browsepaymentModule),
-// },
+{
+    path: "browse-opd-payment-receipt",
+    loadChildren: () => import("./browse-payment-receipt/browse-paymentreceipt.module").then((m) => m.BrowsePaymentreceiptModule),
+},
 {
     path: "medicalrecords",
     loadChildren: () => import("./appointment/appointment.module").then((m) => m.AppointmentModule),
@@ -42,7 +43,7 @@ const appRoutes: Routes = [
 {
   path: "payment",
   // loadChildren: () =>import("./op-search-list/outstanding-payment/outstanding.module").then((m) => m.OutstandingModule),
-  loadChildren: () =>import("./browse-credit-payment/credit-payment.module").then((m) => m.CreditPaymentModule),
+  loadChildren: () =>import("./browse-payment-receipt/browse-paymentreceipt.module").then((m) => m.BrowsePaymentreceiptModule),
 },
 
 ];

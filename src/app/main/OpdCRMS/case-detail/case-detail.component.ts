@@ -61,7 +61,7 @@ export class CaseDetailComponent implements OnInit {
   //datePipe: any;
 
   constructor(
-    public _AppointmentSreviceService: CasedetailService,
+    public _CasedetailService: CasedetailService,
     private _ActRoute: Router,
     private _fuseSidebarService: FuseSidebarService,
     // private advanceDataStored: AdvanceDataStored,
@@ -92,14 +92,14 @@ export class CaseDetailComponent implements OnInit {
   getCaseList() {
     this.sIsLoading = 'loading-data';
     var D_data = {
-      "Doctor_Id": this._AppointmentSreviceService.myFilterform.get("DoctorId").value || 0,
-      "From_Dt": this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "To_Dt": this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
+      "CaseId": 0,//this._CasedetailService.myFilterform.get("CaseId").value || 0,
+      "From_Dt":'01/01/1900',// this.datePipe.transform(this._CasedetailService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
+      "To_Dt": '01/01/1900',//this.datePipe.transform(this._CasedetailService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
       
     }
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
-      this._AppointmentSreviceService.getCaseIDCombo().subscribe(Visit => {
+      this._CasedetailService.getCaseIDCombo(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as CaseDetail[];
         console.log(this.dataSource.data);
         this.dataSource.sort = this.sort;
@@ -120,7 +120,7 @@ export class CaseDetailComponent implements OnInit {
   }
 
   onClear() {
-    this._AppointmentSreviceService.myFilterform.reset(
+    this._CasedetailService.myFilterform.reset(
       {
         start: [],
         end: []
@@ -151,7 +151,7 @@ export class CaseDetailComponent implements OnInit {
 
     };
     // this.advanceDataStored.storage = new CaseDetail(xx);
-    // this._AppointmentSreviceService.populateFormpersonal(xx);
+    // this._CasedetailService.populateFormpersonal(xx);
   
 console.log(xx);
     // this._ActRoute.navigate(['/opd/registration']);
@@ -273,7 +273,7 @@ console.log(xx);
   }
 
   // field validation 
-  get f() { return this._AppointmentSreviceService.myFilterform.controls; }
+  get f() { return this._CasedetailService.myFilterform.controls; }
   selectRow(row) {
     this.selectRow = row;
   }

@@ -21,15 +21,15 @@ export class CasedetailService {
   filterForm(): FormGroup {
     return this._formBuilder.group({
       RegNo:'',
-      FirstName:['', [
+      CaseId:['', [
         Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
       ]],
-      LastName:['', [
+      CaseName:['', [
         Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
       ]],
-      DoctorId:'',
-      DoctorName:'',
-      IsMark: 2,
+      // DoctorId:'',
+      // DoctorName:'',
+      // IsMark: 2,
       start: [(new Date()).toISOString()],
       end: [(new Date()).toISOString()],
 
@@ -43,8 +43,8 @@ export class CasedetailService {
   public CaseDetailUpdate(employee){
     return this._httpClient.post("OutPatient/CaseDetailUpdate", employee);
   }
-  public getCaseIDCombo(){
-    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CasedetailId", {});
+  public getCaseIDCombo(D_data){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CasedetailId", D_data);
   }
 
   public getCaseDetailPrint(employee){

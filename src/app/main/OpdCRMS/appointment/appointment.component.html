@@ -114,7 +114,7 @@
                                 <!-- sppinner -->
                                 <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
                                     class="table1">
-                                    <ng-container matColumnDef="PatientOldNew">
+                                    <!-- <ng-container matColumnDef="PatientOldNew">
                                         <mat-header-cell *matHeaderCellDef fxShow.gt-sm
                                             style="color: white;">Patient</mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
@@ -127,8 +127,8 @@
                                                 *ngIf="contact.PatientOldNew=='1' " matTooltip="PatientOld"
                                                 class=" orange-600 s-16">circle</mat-icon>
                                         </mat-cell>
-                                    </ng-container>
-                                    <ng-container matColumnDef="MPbillNo">
+                                    </ng-container> -->
+                                    <!-- <ng-container matColumnDef="MPbillNo">
                                         <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: white;">
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
@@ -142,7 +142,7 @@
                                                 class=" white-600 s-16">
                                                 circle</mat-icon>
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
                                     <ng-container matColumnDef="RegNoWithPrefix">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Reg
                                             No</mat-header-cell>

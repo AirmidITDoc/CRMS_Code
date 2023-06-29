@@ -68,18 +68,27 @@
                     <mat-datepicker #picker></mat-datepicker>
 
                   </mat-form-field>
-
 <!-- 
+                  <div fxLayout="row">
+                   
+                      <mat-form-field>
+                        <input matInput [ngxTimepicker]="endTime" [format]="24"  placeholder="{{placeholderTime}}" formControlName="endTime" />
+                      </mat-form-field>
+                      <ngx-material-timepicker #endTime (timeSet)="timeChange($event)" [minutesGap]="10"></ngx-material-timepicker>
+                    </div>
+                    <div>
+                      <mat-form-field>
+                        <input id="pickerId" matInput [matDatepicker]="datepicker" placeholder="{{placeholderDate}}" [formControl]="dateForm"
+                               [min]="config.minDate" [max]="config.maxDate" (dateChange)="dateChange($event)">
+                        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #datepicker [disabled]="disabled" startView="{{config.startView}}"></mat-datepicker>
+                      </mat-form-field>
+                    
+                  </div> -->
+
                   <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Visit Time</mat-label>
-                    <input name="VisitTime" matInput [matDatepicker]="picker1" formControllName="VisitTime"
-                      [value]="registerObj.VisitTime">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-
-                  </mat-form-field> -->
-
-                 
+                    <input matInput type="datetime-local" placeholder="start date" formControllName="VisitTime">
+                  </mat-form-field>
 
                   <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
                     <mat-label>Department</mat-label>

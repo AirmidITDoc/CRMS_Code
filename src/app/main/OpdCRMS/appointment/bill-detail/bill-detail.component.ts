@@ -84,10 +84,7 @@ export class BillDetailComponent implements OnInit {
     'DiscPer',
     'DiscAmt',
     'NetAmount',
-    // 'DoctorName',
-
     'ChargeDoctorName',
-    //'ClassId',
     'ClassName',
     'ChargesAddedName',
     'action'
@@ -160,15 +157,7 @@ export class BillDetailComponent implements OnInit {
   netPaybleAmt: any;
   netPaybleAmt1: any;
   TotalnetPaybleAmt: any;
-  drugList1: any = [];
-  filteredDrugs$: Observable<ILookup[]>;
-  filteredDrugs1$: Observable<ILookup[]>;
-  public filteredDose: ReplaySubject<any> = new ReplaySubject<any>(1);
-  public filteredDrug: ReplaySubject<any> = new ReplaySubject<any>(1);
-  public historyFilterCtrl: FormControl = new FormControl();
-  public diagnosisFilterCtrl: FormControl = new FormControl();
-  public doseFilterCtrl: FormControl = new FormControl();
-  public drugFilterCtrl: FormControl = new FormControl();
+
   private lookups: ILookup[] = [];
   private nextPage$ = new Subject();
   noOptionFound: boolean = false;
@@ -238,7 +227,7 @@ export class BillDetailComponent implements OnInit {
 
 
     this.VisitListCombo();
-
+debugger;
     const TREE_DATA: FoodNode[] = [
       {
         name: 'Visit Date Schdule',
@@ -249,7 +238,7 @@ export class BillDetailComponent implements OnInit {
 
     this.dataSource11.data = TREE_DATA;
 
-    // this.getServiceListCombobox();
+    this.getServiceListCombobox();
     this.getAdmittedDoctorCombo();
     // this.getChargesList();
     // this.getChargesList1();
@@ -276,14 +265,30 @@ export class BillDetailComponent implements OnInit {
     //   this.dataSource11.data = TREE_DATA;
   }
 
+  // openChanged(event) {
+  //   // this.isOpen = event;
+  //   this.isLoading = event;
+  //   if (event) {
+  //     // this.savedValue = this.departmentFilterCtrl.value;
+  //     // this.options = [];
+  //     // this.departmentFilterCtrl.reset();
+  //     this._opappointmentService.getVisitDateCombo(17);
+  //   }
+  // }
+
+
   VisitListCombo() {
     debugger;
     var m = {
       "RegId": 17,//this.selectedAdvanceObj.RegId
     }
     this._opappointmentService.getVisitDateCombo(m).subscribe(data => {
-      this.VisitDateList = data;
-      console.log(this.VisitDateList)
+
+      setTimeout(() => {
+        this.VisitDateList = data;
+        console.log(this.VisitDateList)
+      }, 1000);
+     
 
       this.Vist1 = this.VisitDateList[0].VisitDate;
       this.Vist2 = data[1].VisitDate;
@@ -438,14 +443,16 @@ export class BillDetailComponent implements OnInit {
   }
 
   getServiceListCombobox() {
+
+    debugger;
     let tempObj;
     var m_data = {
       SrvcName: `${this.registeredForm.get('SrvcName').value}%`,
-      TariffId: this.selectedAdvanceObj.TariffId,
-      ClassId: this.selectedAdvanceObj.ClassId
+      TariffId: 1,//this.selectedAdvanceObj.TariffId,
+      ClassId: 1,//this.selectedAdvanceObj.ClassId
     };
-    // console.log(m_data);
-    if (this.registeredForm.get('SrvcName').value.length >= 1) {
+    console.log(m_data);
+    // if (this.registeredForm.get('SrvcName').value.length >= 1) {
       this._opappointmentService.getBillingServiceList(m_data).subscribe(data => {
         console.log(data);
         this.filteredOptions = data;
@@ -457,7 +464,7 @@ export class BillDetailComponent implements OnInit {
         }
       });
       // });
-    }
+    // }
   }
 
   getOptionText(option) {
@@ -500,35 +507,6 @@ export class BillDetailComponent implements OnInit {
     }
   }
 
-  drugChange(event) {
-    // console.log(event);
-    // this.dataSource.data.forEach((element, index1) => {
-    //   if(element.drugName && index == index1) {
-    //     element.drugName = event ? event : {};
-    //   }
-    // });
-    const filter$ = this.registeredForm.get(`drugController$`).valueChanges.pipe(
-      startWith(''),
-      debounceTime(200),
-      filter(q => typeof q === "string"));
-
-    this.filteredDrugs$ = filter$.pipe(
-      switchMap(filter => {
-        //Note: Reset the page with every new seach text
-        let currentPage = 1;
-        return this.nextPage$.pipe(
-          startWith(currentPage),
-          //Note: Until the backend responds, ignore NextPage requests.
-          exhaustMap(_ => this.getDrugs(filter, currentPage)),
-          tap(() => currentPage++),
-
-          //Note: This is a custom operator because we also need the last emitted value.
-          //Note: Stop if there are no more pages, or no results at all for the current search text.
-          takeWhileInclusive(p => p.length > 0),
-          scan((allProducts, newProducts) => allProducts.concat(newProducts), []),
-        );
-      }));
-  }
   getTotalAmount(element) {
     // debugger
     if (element.Price && element.Qty) {
@@ -931,28 +909,7 @@ export class BillDetailComponent implements OnInit {
     PatientHeaderObj['OPD_IPD_Id'] = this.selectedAdvanceObj.AdmissionID;
     PatientHeaderObj['NetPayAmount'] = this.FinalAmt; //this.netPaybleAmt1; //this.registeredForm.get('FinalAmt').value;//this.TotalnetPaybleAmt,//this.FinalAmt || 0,//
 
-    // const opCalDiscAmountBill = new Cal_DiscAmount(Cal_DiscAmount_OPBillObj);
-
-
-    // const dialogRef = this._matDialog.open(PaymentDetailComponent,
-    //   {
-    //     maxWidth: "85vw",
-    //     height: '540px',
-    //     width: '100%',
-    //     data: {
-    //       advanceObj: PatientHeaderObj,
-    //       FromName: "OP-Bill"
-    //     }
-    //   });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   let Data = {
-    //     "opInsertPayment": result.submitDataPay.ipPaymentInsert
-    //   };
-    //   this.paidamt = result.submitDataPay.ipPaymentInsert.PaidAmt;
-    //   this.balanceamt = result.submitDataPay.ipPaymentInsert.BalanceAmt;
-    //   this.flagSubmit = result.IsSubmitFlag
-
+   
 
     let InsertBillUpdateBillNoObj = {};
     if (this.concessionDiscPer > 0) {
@@ -982,7 +939,7 @@ export class BillDetailComponent implements OnInit {
     InsertBillUpdateBillNoObj['CompanyId'] = 0;
     InsertBillUpdateBillNoObj['TariffId'] = this.selectedAdvanceObj.TariffId || 0;
     InsertBillUpdateBillNoObj['UnitId'] = this.selectedAdvanceObj.UnitId || 0;
-    InsertBillUpdateBillNoObj['InterimOrFinal'] = InterimOrFinal;
+    InsertBillUpdateBillNoObj['InterimOrFinal'] = 0;
     InsertBillUpdateBillNoObj['CompanyRefNo'] = 0;
     InsertBillUpdateBillNoObj['ConcessionAuthorizationName'] = '';
     InsertBillUpdateBillNoObj['TaxPer'] = 0;
@@ -1035,63 +992,29 @@ export class BillDetailComponent implements OnInit {
 
 
 
-    //..................
-    // if (this.flagSubmit == true) {
-    console.log("Procced with Payment Option");
     const insertBillUpdateBillNo = new Bill(InsertBillUpdateBillNoObj);
     let submitData = {
 
       "insertBillupdatewithbillno": insertBillUpdateBillNo,
       "chargesDetailInsert": InsertAdddetArr,
-      "opBillDetailsInsert": Billdetsarr,
-      // "opInsertPayment": result.submitDataPay.ipPaymentInsert
+      "opBillDetailsInsert": Billdetsarr
+     
     };
     console.log(submitData);
     this._opappointmentService.InsertOPBilling(submitData).subscribe(response => {
       if (response) {
-        Swal.fire('OP Bill With Payment!', 'Bill Generated Successfully !', 'success').then((result) => {
+        Swal.fire('Credit Bill With !', 'Bill Generated Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {
             let m = response;
-            // this.getPrint(m);
+            this.getPrint(m);
             this._matDialog.closeAll();
           }
         });
       } else {
-        Swal.fire('Error !', 'OP Billing data not saved', 'error');
+        Swal.fire('Error !', ' Billing data not saved', 'error');
       }
       this.isLoading = '';
     });
-
-    // else {
-    //   console.log("Procced with Credit bill");
-    //   InterimOrFinal = 0;
-    //   InsertBillUpdateBillNoObj['PaidAmt'] = 0;
-    //   InsertBillUpdateBillNoObj['BalanceAmt'] = this.FinalAmt;
-    //   const insertBillUpdateBillNo = new Bill(InsertBillUpdateBillNoObj);
-    //   let submitData = {
-
-    //     "insertBillcreditupdatewithbillno": insertBillUpdateBillNo,
-    //     "opBillDetailscreditInsert": Billdetsarr,
-    //     // "opCalDiscAmountBillcredit": Cal_DiscAmount_OPBillObj,
-    //     // "opInsertPayment": result.submitDataPay.ipPaymentInsert
-    //   };
-    //   console.log(submitData);
-    //   this._opappointmentService.InsertOPBilling(submitData).subscribe(response => {
-    //     if (response) {
-    //       Swal.fire('OP Bill Credit !', 'Bill Generated Successfully!', 'success').then((result) => {
-    //         if (result.isConfirmed) {
-    //           let m = response;
-    //           this.getPrint(m);
-    //           this._matDialog.closeAll();
-
-    //         }
-    //       });
-    //     } else {
-    //       Swal.fire('Error !', 'OP Billing data not saved', 'error');
-    //     }
-    //     this.isLoading = '';
-    //   });
-    // }
 
   }
 
