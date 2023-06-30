@@ -6,8 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   providedIn: 'root'
 })
 export class DoctorMasterService {
-
-  myform: FormGroup;
+    myform: FormGroup;
     myformSearch: FormGroup;
 
     constructor(
@@ -113,7 +112,7 @@ export class DoctorMasterService {
 
     public getDoctorMasterList(m_data) {
         return this._httpClient.post(
-            "Generic/GetByProc?procName=ps_Rtrv_Doctor_DoctorMaster_by_Name",
+            "Generic/GetByProc?procName=Rtrv_DoctorMaster_List_Dtls",
             m_data
         );
     }
@@ -132,11 +131,11 @@ export class DoctorMasterService {
         );
     }
 
-  
-  public getGenderCombo(Id) {
-    return this._httpClient.post("Generic/GetByProc?procName=Retrieve_SexMasterForCombo_Conditional", {"Id":Id})
+ //Gender Combobox List
+ public getGenderCombo(Id) {
+    return this._httpClient.post("Generic/GetByProc?procName=Retrieve_SexMasterForCombo_Conditional", { "Id": Id })
   }
-    
+
 
     public getPrefixMasterCombo() {
         return this._httpClient.post(
@@ -147,14 +146,14 @@ export class DoctorMasterService {
 
     public getGenderMasterCombo() {
         return this._httpClient.post(
-            "Generic/GetByProc?procName=ps_Retrieve_GenderMasterForCombo",
+            "Generic/GetByProc?procName=RetrieveGenderMasterForCombo",
             {}
         );
     }
 
     public getDoctortypeMasterCombo() {
         return this._httpClient.post(
-            "Generic/GetByProc?procName=Retrieve_DoctortypeMasterForCombo",
+            "Generic/GetByProc?procName=RetrieveDoctorTypeMasterForCombo",
             {}
         );
     }
@@ -179,4 +178,3 @@ export class DoctorMasterService {
         this.myform.patchValue(param);
     }
 }
-

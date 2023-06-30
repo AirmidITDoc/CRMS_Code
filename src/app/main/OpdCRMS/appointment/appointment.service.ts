@@ -376,5 +376,8 @@ public VisitUpdate(employee){
   return this._httpClient.post("OutPatient/VisitUpdate", employee)
 }
 
+public PaymentInsert(employee){
+return this._httpClient.post("OutPatient/PaymentSave", employee)
 }
 
+}

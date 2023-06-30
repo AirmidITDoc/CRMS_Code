@@ -12,6 +12,10 @@
             <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                 Browse OPD Payment Receipt
             </span>
+            <button mat-icon-button (click)="getPrint($event)" matTooltip="print" style="margin-left: 1100px;">
+                <mat-icon>print</mat-icon>
+            </button>
+
         </div>
 
         <!-- <div class="ml-sm-32" fxLayout="row" fxFlexEnd>
@@ -65,7 +69,8 @@
                                             <mat-label>Enter a date range</mat-label>
                                             <mat-date-range-input [rangePicker]="picker">
                                                 <input matStartDate formControlName="start" placeholder="Start date">
-                                                <input matEndDate formControlName="end" placeholder="End date" (dateChange)="onShow($event)">
+                                                <input matEndDate formControlName="end" placeholder="End date"
+                                                    (dateChange)="onShow($event)">
                                             </mat-date-range-input>
                                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                             <mat-date-range-picker #picker></mat-date-range-picker>
@@ -326,3 +331,5 @@
     </div>
     <!-- / CONTENT-->
 </div>
+
+//

@@ -59,6 +59,8 @@
     "ngx-cookie-service": "2.3.0",
     "ngx-mat-select-search": "3.3.1",
     "ngx-material-timepicker": "13.1.0",
+    "num-words": "1.2.3",
+    "number-to-words": "1.2.4",
     "perfect-scrollbar": "1.4.0",
     "prismjs": "1.19.0",
     "rxjs": "6.5.4",

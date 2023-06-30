@@ -20,10 +20,13 @@ export class DoctorTypeMasterComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
-    displayedColumns: string[] = ["Id", "DoctorType", "IsDeleted", "action"];
+    displayedColumns: string[] = ["Id", "DoctorType", "action"];
 
     DSDoctorTypeMasterList = new MatTableDataSource<DoctortypeMaster>();
 
+
+
+    
     constructor(public _doctortypeService: DoctorTypeService) {}
 
     ngOnInit(): void {
@@ -31,8 +34,12 @@ export class DoctorTypeMasterComponent implements OnInit {
     }
 
     getDoctortypeMasterList() {
-        this._doctortypeService.getDoctortypeMasterList().subscribe((Menu) => {
+        var m = {
+            "DoctorType":this._doctortypeService.myformSearch.get('DoctorTypeSearch').value + '%' || 0
+        };
+        this._doctortypeService.getDoctortypeMasterList(m).subscribe((Menu) => {
             this.DSDoctorTypeMasterList.data = Menu as DoctortypeMaster[];
+            console.log(Menu);
             this.DSDoctorTypeMasterList.sort = this.sort;
             this.DSDoctorTypeMasterList.paginator = this.paginator;
         });
@@ -60,7 +67,7 @@ export class DoctorTypeMasterComponent implements OnInit {
                         doctorType: this._doctortypeService.myform
                             .get("DoctorType")
                             .value.trim(),
-                        isDeleted: Boolean(
+                        IsActive: Boolean(
                             JSON.parse(
                                 this._doctortypeService.myform.get("IsDeleted")
                                     .value
@@ -82,7 +89,7 @@ export class DoctorTypeMasterComponent implements OnInit {
                         doctorType:
                             this._doctortypeService.myform.get("DoctorType")
                                 .value,
-                        isDeleted: Boolean(
+                                IsActive: Boolean(
                             JSON.parse(
                                 this._doctortypeService.myform.get("IsDeleted")
                                     .value

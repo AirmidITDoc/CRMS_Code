@@ -70,13 +70,8 @@ export class DepartmentMasterComponent implements OnInit {
                         departmentName: this._departmentService.myform
                             .get("DepartmentName")
                             .value.trim(),
-                        addedBy: 1,
-                        isDeleted: Boolean(
-                            JSON.parse(
-                                this._departmentService.myform.get("IsDeleted")
-                                    .value
-                            )
-                        ),
+                        CreatedBy: 1,
+                       
                     },
                 };
 
@@ -89,18 +84,13 @@ export class DepartmentMasterComponent implements OnInit {
             } else {
                 var m_dataUpdate = {
                     departmentMasterUpdate: {
-                        departmentID:
+                        departmentId:
                             this._departmentService.myform.get("DepartmentId")
                                 .value,
                         departmentName: this._departmentService.myform
                             .get("DepartmentName")
                             .value.trim(),
-                        isDeleted: Boolean(
-                            JSON.parse(
-                                this._departmentService.myform.get("IsDeleted")
-                                    .value
-                            )
-                        ),
+                       
                         updatedBy: 1,
                     },
                 };

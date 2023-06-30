@@ -67,7 +67,12 @@ const appRoutes: Routes = [
     {
         path: '**',
         redirectTo: 'auth/login'
-    }
+    },
+    {
+        path: "administration",
+        loadChildren: () =>
+            import("./main/administration/administration.module" ).then((m) => m.AdministrationModule),
+    },
 ];
 
 

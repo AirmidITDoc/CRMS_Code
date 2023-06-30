@@ -13,6 +13,7 @@ import { SearchInforObj } from '../appointment/bill-detail/bill-detail.component
 import { PaymentDetailComponent } from '../appointment/payment-detail/payment-detail.component';
 import { fuseAnimations } from '@fuse/animations';
 import { ViewBillPaymentComponent } from './view-bill-payment/view-bill-payment.component';
+// import * as converter from 'number-to-words';
 
 @Component({
   selector: 'app-browse-credit-payment',
@@ -67,14 +68,14 @@ export class BrowseCreditPaymentComponent implements OnInit {
   showSpinner = false;
   tablehide = false;
   tableshow = true;
-
+  menuActions: Array<string> = [];
 
 
 
   constructor(private _fuseSidebarService: FuseSidebarService,
     public _BrowseOPDBillsService: CreditPaymentService,
     public datePipe: DatePipe,
-    // public fuseSplashScreenService:FuseSplashScreenService,
+    private _ActRoute: Router,
     public _matDialog: MatDialog,
     private advanceDataStored: AdvanceDataStored,
     // private ngxNumToWordsService: NgxNumToWordsService,
@@ -83,6 +84,10 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
   ngOnInit(): void {
 
+     if (this._ActRoute.url == '/opd/payment') {
+      this.menuActions.push('Payment');
+    }
+
     debugger;
     var D_data = {
       "F_Name": "%",
@@ -90,7 +95,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
       "From_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("start").value, "MM-dd-yyyy"),
       "To_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("end").value, "MM-dd-yyyy"),
       "Reg_No": 0,
-      "PBillNo": 0,
+      "PBillNo": '%',
     }
     console.log(D_data);
 
@@ -157,23 +162,23 @@ export class BrowseCreditPaymentComponent implements OnInit {
       "From_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("start").value, "MM-dd-yyyy"),
       "To_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("end").value, "MM-dd-yyyy"),
       "Reg_No": this._BrowseOPDBillsService.myFilterform.get("RegNo").value || 0,
-      "PBillNo": this._BrowseOPDBillsService.myFilterform.get("PBillNo").value || 0,
+      "PBillNo": this._BrowseOPDBillsService.myFilterform.get("PBillNo").value || '%',
     }
     // console.log(D_data);
 
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
-      // this._BrowseOPDBillsService.getBrowseOPDBillsList(D_data).subscribe(Visit => {
-      //   this.dataSource.data = Visit as BrowseOPDBill[];
-      //   this.dataSource.sort = this.sort;
-      //   console.log(this.dataSource.data);
-      //   this.dataSource.paginator = this.paginator;
-      //   this.sIsLoading = '';
-      //   this.click = false;
-      // },
-      //   error => {
-      //     this.sIsLoading = '';
-      //   });
+      this._BrowseOPDBillsService.getBrowseBillsList(D_data).subscribe(Visit => {
+        this.dataSource.data = Visit as BrowseOPDBill[];
+        this.dataSource.sort = this.sort;
+        console.log(this.dataSource.data);
+        this.dataSource.paginator = this.paginator;
+        this.sIsLoading = '';
+        this.click = false;
+      },
+        error => {
+          this.sIsLoading = '';
+        });
     }, 1000);
 
     this.onClear();
@@ -471,20 +476,72 @@ export class BrowseCreditPaymentComponent implements OnInit {
   }
 
 
+  getRecord(contact, m): void {
+    debugger;
+    console.log(contact);
 
-  getRecord(el, i) {
-    // console.log(el,i);
-    // this._matDialog.open(SmsEmailTemplateComponent, {
-    //   data: i,
-    //   width: '40%',
-    //   height: "fit-content",
-    //   autoFocus: false
-    // });
+    // this.VisitID = contact.VisitId;
+    let AgeDay, AgeMonth, AgeYear, Age
+    if (contact.Age != null || contact.AgeDay != null || contact.AgeMonth != null || contact.AgeYear != null) {
+      Age = contact.Age.trim();
+      AgeDay = contact.AgeDay.trim();
+      AgeMonth = contact.AgeMonth.trim();
+      AgeYear = contact.AgeYear.trim();
+    }
 
-  }
+    // if (m == "Payment") {
+      console.log(contact);
+     let xx = {
+          RegNo: contact.RegId,
+          RegId: contact.RegId,
+          AdmissionID: contact.VisitId,
+          PatientName: contact.PatientName,
+          Doctorname: contact.Doctorname,
+          AdmDateTime: contact.AdmDateTime,
+          AgeYear: contact.AgeYear,
+          ClassId: contact.ClassId,
+          ClassName: contact.ClassName,
+          TariffName: contact.TariffName,
+          TariffId: contact.TariffId,
+          VisitId: contact.VisitId,
+          VisitDate: contact.VisitDate,
+          BillNo:contact.BillNo
+        };
+
+        let PatientHeaderObj = {};
+
+        PatientHeaderObj['Date'] = contact.VisitDate
+        PatientHeaderObj['PatientName'] =contact.PatientName,
+        PatientHeaderObj['OPD_IPD_Id'] =contact.RegId,
+        PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt
+        PatientHeaderObj['BillNo'] = contact.BillNo
+        //  PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt
+        // this._AppointmentSreviceService.populateFormpersonal(xx);
+        this.advanceDataStored.storage = new SearchInforObj(xx);
+        const dialogRef = this._matDialog.open(PaymentDetailComponent,
+          {
+            maxWidth: "90%",
+            height: '600px',
+            width: '100%',
+            data: {
+              advanceObj: PatientHeaderObj,
+              FromName: "OP-Bill"
+            }
+          });
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed - Insert Action', result);
+          // this.getVisitList();
+        });
+      }
+       
+    }
+ 
+    // /   this._ActRoute.navigate(['opd/appointment/op_bill'], {queryParams:{id:this.selectedID}})
+
+  // }
 
 
-}
+
 
 export class ReportPrintObj {
   AdvanceNo: any;
@@ -560,7 +617,7 @@ MobileNo:any;
       this.IPDNo = BrowseOPDBill.IPDNo || '';
       this.IsCancelled = BrowseOPDBill.IsCancelled || '';
       this.OPD_IPD_Type = BrowseOPDBill.OPD_IPD_Type || '';
-      this.PBillNo = BrowseOPDBill.PBillNo || '';
+      this.PBillNo = BrowseOPDBill.PBillNo || '%';
       this.BDate = BrowseOPDBill.BDate || '';
       this.PaidAmount = BrowseOPDBill.PaidAmount || '';
       this.BalanceAmt = BrowseOPDBill.BalanceAmt || '';

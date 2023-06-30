@@ -40,7 +40,7 @@
                                 <div class="dialog-content-wrapper">
                                     <mat-form-field class="mr-sm-12" fxFlex>
                                         <input matInput placeholder="Search --> DoctorType" autocomplete="off"
-                                            name="DoctorTypeSearch" formControlName="DoctorTypeSearch" />
+                                            name="DoctorTypeSearch" formControlName="DoctorTypeSearch" (keyup)="onSearch()" />
                                         <button mat-button matSuffix mat-icon-button aria-label="Clear"
                                             (click)="onSearchClear()">
                                             <mat-icon>close</mat-icon>
@@ -82,7 +82,7 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="IsDeleted">
+                                    <!-- <ng-container matColumnDef="IsDeleted">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm> IsActive
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
@@ -91,7 +91,7 @@
                                             <mat-icon *ngIf="element.IsDeleted"
                                                 class="active-icon red-500 s-16">close</mat-icon>
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
 
                                     <ng-container matColumnDef="action" stickyEnd>

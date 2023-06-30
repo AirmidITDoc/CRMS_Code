@@ -110,8 +110,8 @@ getBrowseOpdPaymentReceiptList(){
     "From_Dt" : this.datePipe.transform(this._BrowseOpdPaymentReceiptService.myFilterform.get("start").value,"MM-dd-yyyy") || "01/01/1900",
     "To_Dt" : this.datePipe.transform(this._BrowseOpdPaymentReceiptService.myFilterform.get("end").value,"MM-dd-yyyy") || "01/01/1900",
     "Reg_No":this._BrowseOpdPaymentReceiptService.myFilterform.get("RegNo").value || 0,
-    "PBillNo":this._BrowseOpdPaymentReceiptService.myFilterform.get("PBillNo").value || 0,
-    "ReceiptNo":this._BrowseOpdPaymentReceiptService.myFilterform.get("ReceiptNo").value || 0,
+    "PBillNo":this._BrowseOpdPaymentReceiptService.myFilterform.get("PBillNo").value || '%',
+    "ReceiptNo":this._BrowseOpdPaymentReceiptService.myFilterform.get("ReceiptNo").value || '%',
 
   }
    console.log(D_data);

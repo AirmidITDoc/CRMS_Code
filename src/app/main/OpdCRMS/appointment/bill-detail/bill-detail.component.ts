@@ -19,7 +19,7 @@ import { AdvanceDataStored } from '../../advance';
 import { fuseAnimations } from '@fuse/animations';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-// import * as converter from 'number-to-words';
+import * as converter from 'number-to-words';
 
 type NewType = Observable<any[]>;
 export class ILookup {
@@ -46,6 +46,7 @@ interface ExampleFlatNode {
   expandable: boolean;
   name: string;
   level: number;
+  VisitDate: any;
 }
 
 @Component({
@@ -227,7 +228,7 @@ export class BillDetailComponent implements OnInit {
 
 
     this.VisitListCombo();
-debugger;
+    debugger;
     const TREE_DATA: FoodNode[] = [
       {
         name: 'Visit Date Schdule',
@@ -235,6 +236,7 @@ debugger;
       },
 
     ];
+
 
     this.dataSource11.data = TREE_DATA;
 
@@ -288,7 +290,7 @@ debugger;
         this.VisitDateList = data;
         console.log(this.VisitDateList)
       }, 1000);
-     
+
 
       this.Vist1 = this.VisitDateList[0].VisitDate;
       this.Vist2 = data[1].VisitDate;
@@ -453,17 +455,17 @@ debugger;
     };
     console.log(m_data);
     // if (this.registeredForm.get('SrvcName').value.length >= 1) {
-      this._opappointmentService.getBillingServiceList(m_data).subscribe(data => {
-        console.log(data);
-        this.filteredOptions = data;
-        console.log(this.filteredOptions);
-        if (this.filteredOptions.length == 0) {
-          this.noOptionFound = true;
-        } else {
-          this.noOptionFound = false;
-        }
-      });
-      // });
+    this._opappointmentService.getBillingServiceList(m_data).subscribe(data => {
+      console.log(data);
+      this.filteredOptions = data;
+      console.log(this.filteredOptions);
+      if (this.filteredOptions.length == 0) {
+        this.noOptionFound = true;
+      } else {
+        this.noOptionFound = false;
+      }
+    });
+    // });
     // }
   }
 
@@ -619,8 +621,8 @@ debugger;
           InsertAddChargesObj['packageMainChargeID'] = 0,
           InsertAddChargesObj['isSelfOrCompanyService'] = false,
           InsertAddChargesObj['packageId'] = 0,
-          InsertAddChargesObj['chargeTime'] = this.datePipe.transform(this.currentDate, "MM-dd-yyyy HH:mm:ss"),
-          InsertAddChargesObj['classId'] = this.selectedAdvanceObj.ClassId,// this.registeredForm.get('ClassId').value;
+          InsertAddChargesObj['chargeTime'] = this.dateTimeObj.time;
+        InsertAddChargesObj['classId'] = this.selectedAdvanceObj.ClassId,// this.registeredForm.get('ClassId').value;
 
           InsertAdddetArr.push(InsertAddChargesObj);
         // console.log(InsertAdddetArr.length);
@@ -909,7 +911,7 @@ debugger;
     PatientHeaderObj['OPD_IPD_Id'] = this.selectedAdvanceObj.AdmissionID;
     PatientHeaderObj['NetPayAmount'] = this.FinalAmt; //this.netPaybleAmt1; //this.registeredForm.get('FinalAmt').value;//this.TotalnetPaybleAmt,//this.FinalAmt || 0,//
 
-   
+
 
     let InsertBillUpdateBillNoObj = {};
     if (this.concessionDiscPer > 0) {
@@ -931,7 +933,7 @@ debugger;
     InsertBillUpdateBillNoObj['OPD_IPD_Type'] = 0;
     InsertBillUpdateBillNoObj['AddedBy'] = this.accountService.currentUserValue.user.id,
       InsertBillUpdateBillNoObj['TotalAdvanceAmount'] = 0,
-      InsertBillUpdateBillNoObj['BillTime'] = this.dateTimeObj.date;
+      InsertBillUpdateBillNoObj['BillTime'] = this.dateTimeObj.time;
     InsertBillUpdateBillNoObj['ConcessionReasonId'] = this.registeredForm.get('ConcessionReasonId').value || 0;
     InsertBillUpdateBillNoObj['IsSettled'] = 0;
     InsertBillUpdateBillNoObj['IsPrinted'] = 0;
@@ -998,7 +1000,7 @@ debugger;
       "insertBillupdatewithbillno": insertBillUpdateBillNo,
       "chargesDetailInsert": InsertAdddetArr,
       "opBillDetailsInsert": Billdetsarr
-     
+
     };
     console.log(submitData);
     this._opappointmentService.InsertOPBilling(submitData).subscribe(response => {
@@ -1386,7 +1388,7 @@ debugger;
 
   convertToWord(e) {
 
-    // return converter.toWords(e);
+    return converter.toWords(e);
   }
 
   transform1(value: string) {

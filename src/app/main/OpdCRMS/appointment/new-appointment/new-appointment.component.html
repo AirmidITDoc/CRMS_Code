@@ -486,7 +486,7 @@
               <!-- <button class="next-btn"  *ngIf="isLoading=='submit'" [color]="white" [diameter]="20"  (click)="onSubmit()" [disabled]="personalFormGroup.invalid" style="border-radius: 16px;" >Save
                           </button> -->
 
-              <button class="next-btn" color="accent" (click)="nextClicked(VisitFormGroup)"
+              <button class="next-btn" color="accent" (click)="submitAppointForm()"
                 [disabled]="personalFormGroup.invalid || VisitFormGroup.invalid" style="border-radius: 16px;">
                 <span style="display: flex;justify-content: center;">
                   <!-- <mat-spinner *ngIf="isLoading=='submit'" [color]="white" [diameter]="20"></mat-spinner> -->

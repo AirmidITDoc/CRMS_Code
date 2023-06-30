@@ -42,8 +42,7 @@ const appRoutes: Routes = [
 
 {
   path: "payment",
-  // loadChildren: () =>import("./op-search-list/outstanding-payment/outstanding.module").then((m) => m.OutstandingModule),
-  loadChildren: () =>import("./browse-payment-receipt/browse-paymentreceipt.module").then((m) => m.BrowsePaymentreceiptModule),
+  loadChildren: () =>import("./browse-credit-payment/credit-payment.module").then((m) => m.CreditPaymentModule),
 },
 
 ];

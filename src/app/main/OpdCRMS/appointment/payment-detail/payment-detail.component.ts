@@ -1,12 +1,13 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import { ReplaySubject, Subject } from 'rxjs';
 import { AppointmentService } from '../appointment.service';
 import { takeUntil } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { fuseAnimations } from '@fuse/animations';
+import { VisitMaster } from '../appointment.component';
 
 @Component({
   selector: 'app-payment-detail',
@@ -33,6 +34,7 @@ export class PaymentDetailComponent implements OnInit {
   paymentForm: FormGroup;
   billNo: number;
   advanceData: any = {};
+  // advanceData: VisitMaster;
   now: Date;
   netPayAmt: number = 0;
   cashAmt: number = 0;
@@ -91,12 +93,13 @@ export class PaymentDetailComponent implements OnInit {
     private accountService: AuthenticationService,
     private dialogRef: MatDialogRef<PaymentDetailComponent>,
     private authServie: AuthenticationService,
-
+    public _matDialog: MatDialog,
   ) {
     dialogRef.disableClose = true;
     // debugger;
     this.advanceData = data;
-    console.log(this.advanceData.advanceObj);
+    console.log(this.advanceData);
+
 
    
     if (this.advanceData.FromName == "OP-Bill") {
@@ -685,84 +688,9 @@ debugger;
     debugger
     if(this.balanceAmt==0){
     let Paymentobj = {};
-    if (this.advanceData.FromName == "OP-Payment") {
-      // Paymentobj['PaymentId'] = 0;
-      Paymentobj['BillNo'] = this.billNo;
-      Paymentobj['ReceiptNo'] = '';
-      Paymentobj['PaymentDate'] = this.dateTimeObj.date;
-      Paymentobj['PaymentTime'] = this.dateTimeObj.date;
-      Paymentobj['CashPayAmount'] = parseInt(this.cashAmt.toString());
-      Paymentobj['ChequePayAmount'] = parseInt(this.chequeAmt.toString());
-      Paymentobj['ChequeNo'] = this.chequeNo;
-      Paymentobj['BankName'] = this.paymentForm.get('chequeBankNameController').value.BankName;
-      Paymentobj['ChequeDate'] = this.dateTimeObj.date;
-      Paymentobj['CardPayAmount'] = parseInt(this.cardAmt.toString());
-      Paymentobj['CardNo'] = this.cardNo;
-      Paymentobj['CardBankName'] = this.paymentForm.get('cardBankNameController').value.BankName;
-      Paymentobj['CardDate'] = this.dateTimeObj.date;
-      Paymentobj['AdvanceUsedAmount'] = 0;
-      Paymentobj['AdvanceId'] = 0;
-      Paymentobj['RefundId'] = 0;
-      Paymentobj['TransactionType'] = 0;
-      Paymentobj['Remark'] = this.paymentForm.get('commentsController').value;
-      Paymentobj['AddBy'] = this.accountService.currentUserValue.user.id,
-      Paymentobj['IsCancelled'] = 0;
-      Paymentobj['IsCancelledBy'] = 0;
-      Paymentobj['IsCancelledDate'] = this.dateTimeObj.date;
-      Paymentobj['CashCounterId'] = 0;
-      Paymentobj['IsSelfORCompany'] = 0;
-      Paymentobj['CompanyId'] = 0;
-      Paymentobj['NEFTPayAmount'] = parseInt(this.neftAmt.toString());
-      Paymentobj['NEFTNo'] = this.neftNo;
-      Paymentobj['NEFTBankMaster'] = this.paymentForm.get('neftBankNameController').value.BankName;
-      Paymentobj['NEFTDate'] = this.dateTimeObj.date;
-      Paymentobj['PayTMAmount'] = parseInt(this.paytmAmt.toString());
-      Paymentobj['PayTMTranNo'] = this.paytmTransNo;
-      Paymentobj['PayTMDate'] = this.dateTimeObj.date;
-      Paymentobj['PaidAmt'] = this.paymentForm.get('paidAmountController').value;
-      Paymentobj['BalanceAmt'] = this.paymentForm.get('balanceAmountController').value;
-    }
-    else if (this.advanceData.FromName == "OP-Bill") {
-        // Paymentobj['PaymentId'] = 0;
-        Paymentobj['BillNo'] = this.billNo;
-        Paymentobj['ReceiptNo'] = '';
-        Paymentobj['PaymentDate'] = this.dateTimeObj.date;
-        Paymentobj['PaymentTime'] = this.dateTimeObj.time;
-        Paymentobj['CashPayAmount'] = parseInt(this.cashAmt.toString());
-        Paymentobj['ChequePayAmount'] = parseInt(this.chequeAmt.toString());
-        Paymentobj['ChequeNo'] = this.chequeNo;
-        Paymentobj['BankName'] = this.paymentForm.get('chequeBankNameController').value.BankName;
-        Paymentobj['ChequeDate'] = this.dateTimeObj.date;
-        Paymentobj['CardPayAmount'] = parseInt(this.cardAmt.toString());
-        Paymentobj['CardNo'] = this.cardNo;
-        Paymentobj['CardBankName'] = this.paymentForm.get('cardBankNameController').value.BankName;
-        Paymentobj['CardDate'] = this.dateTimeObj.date;
-        Paymentobj['AdvanceUsedAmount'] = 0;
-        Paymentobj['AdvanceId'] = 0;
-        Paymentobj['RefundId'] = 0;
-        Paymentobj['TransactionType'] = 0;
-        Paymentobj['Remark'] = this.paymentForm.get('commentsController').value;
-        Paymentobj['AddBy'] = this.accountService.currentUserValue.user.id,
-        Paymentobj['IsCancelled'] = 0;
-        Paymentobj['IsCancelledBy'] = 0;
-        Paymentobj['IsCancelledDate'] = this.dateTimeObj.date;
-        Paymentobj['CashCounterId'] = 0;
-        Paymentobj['IsSelfORCompany'] = 0;
-        Paymentobj['CompanyId'] = 0;
-        Paymentobj['NEFTPayAmount'] = parseInt(this.neftAmt.toString());
-        Paymentobj['NEFTNo'] = this.neftNo;
-        Paymentobj['NEFTBankMaster'] = this.paymentForm.get('neftBankNameController').value.BankName;
-        Paymentobj['NEFTDate'] = this.dateTimeObj.date;
-        Paymentobj['PayTMAmount'] = parseInt(this.paytmAmt.toString());
-        Paymentobj['PayTMTranNo'] = this.paytmTransNo;
-        Paymentobj['PayTMDate'] = this.dateTimeObj.date;
-        Paymentobj['PaidAmt'] = this.paymentForm.get('paidAmountController').value;
-        Paymentobj['BalanceAmt'] = this.paymentForm.get('balanceAmountController').value;
-    }
-    else if (this.advanceData.FromName == "Advance") {
-      // Paymentobj['PaymentId'] = 0;
-      Paymentobj['BillNo'] = this.billNo;
-      Paymentobj['ReceiptNo'] = '';
+         // Paymentobj['PaymentId'] = 0;
+      Paymentobj['BillNo'] = this.data.advanceObj.BillNo;
+      Paymentobj['ReceiptNo'] = 'Rec1';
       Paymentobj['PaymentDate'] = this.dateTimeObj.date;
       Paymentobj['PaymentTime'] = this.dateTimeObj.time;
       Paymentobj['CashPayAmount'] = parseInt(this.cashAmt.toString());
@@ -783,7 +711,7 @@ debugger;
       Paymentobj['IsCancelled'] = 0;
       Paymentobj['IsCancelledBy'] = 0;
       Paymentobj['IsCancelledDate'] = this.dateTimeObj.date;
-      Paymentobj['CashCounterId'] = 0;
+      Paymentobj['CashCounterId'] = 1;
       Paymentobj['IsSelfORCompany'] = 0;
       Paymentobj['CompanyId'] = 0;
       Paymentobj['NEFTPayAmount'] = parseInt(this.neftAmt.toString());
@@ -795,58 +723,34 @@ debugger;
       Paymentobj['PayTMDate'] = this.dateTimeObj.date;
       Paymentobj['PaidAmt'] = this.paymentForm.get('paidAmountController').value;
       Paymentobj['BalanceAmt'] = this.paymentForm.get('balanceAmountController').value;
-  }
-  else if (this.advanceData.FromName == "Advance-Refund") {
-    // Paymentobj['PaymentId'] = 0;
-    Paymentobj['BillNo'] = this.billNo;
-    Paymentobj['ReceiptNo'] = '';
-    Paymentobj['PaymentDate'] = this.dateTimeObj.date;
-    Paymentobj['PaymentTime'] = this.dateTimeObj.time;
-    Paymentobj['CashPayAmount'] = parseInt(this.cashAmt.toString());
-    Paymentobj['ChequePayAmount'] = parseInt(this.chequeAmt.toString());
-    Paymentobj['ChequeNo'] = this.chequeNo;
-    Paymentobj['BankName'] = this.paymentForm.get('chequeBankNameController').value.BankName;
-    Paymentobj['ChequeDate'] = this.dateTimeObj.date;
-    Paymentobj['CardPayAmount'] = parseInt(this.cardAmt.toString());
-    Paymentobj['CardNo'] = this.cardNo;
-    Paymentobj['CardBankName'] = this.paymentForm.get('cardBankNameController').value.BankName;
-    Paymentobj['CardDate'] = this.dateTimeObj.date;
-    Paymentobj['AdvanceUsedAmount'] = 0;
-    Paymentobj['AdvanceId'] = 0;
-    Paymentobj['RefundId'] = 0;
-    Paymentobj['TransactionType'] = 0;
-    Paymentobj['Remark'] = this.paymentForm.get('commentsController').value;
-    Paymentobj['AddBy'] = this.accountService.currentUserValue.user.id,
-    Paymentobj['IsCancelled'] = 0;
-    Paymentobj['IsCancelledBy'] = 0;
-    Paymentobj['IsCancelledDate'] = this.dateTimeObj.date;
-    Paymentobj['CashCounterId'] = 0;
-    Paymentobj['IsSelfORCompany'] = 0;
-    Paymentobj['CompanyId'] = 0;
-    Paymentobj['NEFTPayAmount'] = parseInt(this.neftAmt.toString());
-    Paymentobj['NEFTNo'] = this.neftNo;
-    Paymentobj['NEFTBankMaster'] = this.paymentForm.get('neftBankNameController').value.BankName;
-    Paymentobj['NEFTDate'] = this.dateTimeObj.date;
-    Paymentobj['PayTMAmount'] = parseInt(this.paytmAmt.toString());
-    Paymentobj['PayTMTranNo'] = this.paytmTransNo;
-    Paymentobj['PayTMDate'] = this.dateTimeObj.date;
-    Paymentobj['PaidAmt'] = this.paymentForm.get('paidAmountController').value;
-    Paymentobj['BalanceAmt'] = this.paymentForm.get('balanceAmountController').value;
-}
+   
 
-    const ipPaymentInsert = new IpPaymentInsert(Paymentobj);
-    let submitDataPay = {
-      ipPaymentInsert,
-    };
+    const opInsertPayment = new IpPaymentInsert(Paymentobj);
+    // let submitDataPay = {
+    //   opInsertPayment,
+    // };
     let IsSubmit = {
-      "submitDataPay": submitDataPay,
-      // "submitDataAdvancePay":ipAdvanceInsert,
-      "IsSubmitFlag": true
+      "opInsertPayment": opInsertPayment,
+     
     }
     console.log(IsSubmit);
-    this.dialogRef.close(IsSubmit);
-    // console.log('======================= Payment ======');
-    // console.log(IsSubmit);
+    this.ipSearchService.PaymentInsert(IsSubmit).subscribe(response => {
+      console.log(response);
+      if (response) {
+        Swal.fire('Congratulations !', 'New Payment save Successfully !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+            // debugger;
+          // this.getVisitList();
+          }
+         
+        });
+      } else {
+        Swal.fire('Error !', 'Payment not saved', 'error');
+      }
+      this.isLoading = '';
+      
+    });
   }
   else{
     Swal.fire('Error !', 'Balance Amount Have to Zero', 'error')
@@ -894,15 +798,34 @@ debugger;
       Paymentobj['BalanceAmt'] = this.paymentForm.get('balanceAmountController').value;
 
     const ipPaymentInsert = new IpPaymentInsert(Paymentobj);
-    let submitDataPay1 = {
-      ipPaymentInsert,
-    };
+    // let submitDataPay1 = {
+    //   ipPaymentInsert,
+    // };
 
     let IsSubmit = {
-      "submitDataPay": submitDataPay1,
-      "IsSubmitFlag": false
+      "IpPaymentInsert": ipPaymentInsert,
+      // "IsSubmitFlag": false
     }
-    this.dialogRef.close(IsSubmit);
+
+    this.ipSearchService.PaymentInsert(IsSubmit).subscribe(response => {
+      console.log(response);
+      if (response) {
+        Swal.fire('Congratulations !', 'New Payment save Successfully !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            // this._matDialog.closeAll();
+            // debugger;
+          // this.getVisitList();
+          }
+         
+        });
+      } else {
+        Swal.fire('Error !', 'Payment not saved', 'error');
+      }
+      this.isLoading = '';
+      
+    });
+
+    // this.dialogRef.close(IsSubmit);
   }
 
   onClose1() {
