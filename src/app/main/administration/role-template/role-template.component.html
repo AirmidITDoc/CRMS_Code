@@ -1,0 +1,202 @@
+<div id="contacts" style="background-color:rgba(196, 164, 164, 0);"
+    class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+
+    <!-- HEADER -->
+
+    <mat-toolbar
+        style="height:50px; justify-content: space-between;width: 100%;background-color:rgb(18, 87, 134) !important;">
+
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+
+            <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm style="color: white;">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
+                style="color: white;">account_box
+            </mat-icon>
+            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                Role Template Master
+            </span>
+        </div>
+
+    </mat-toolbar>
+
+    <div class="content" style="width: 100%;">
+        <div fxFlex.gt-sm="70%" fxFlex class="table-container"
+            style="width:70%;margin-right:10px;margin-top: 10px;margin-left: 20px;">
+            <mat-table #table matSort [dataSource]="dataSource1" [@animateStagger]="{value:'50'}"
+                style="overflow:auto;">
+
+                <ng-container matColumnDef="RoleId" sticky>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Role Code</mat-header-cell>
+                    <mat-cell *matCellDef="let contact">
+                        {{contact.RoleId}}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="RoleName" sticky>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Role Name</mat-header-cell>
+                    <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                        {{contact.RoleName}}
+                    </mat-cell>
+                </ng-container>
+                <!-- <ng-container matColumnDef="action" stickyEnd>
+                        <mat-header-cell *matHeaderCellDef class="table-actions"> Action </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <button mat-icon-button (click)="onEdit(row)"><mat-icon title="Edit Menu">launch</mat-icon></button>
+                            <button mat-icon-button (click)="onDeactive(row.RegId)" color="warn"><mat-icon>delete_outline</mat-icon></button>      
+                            <button mat-icon-button (click)="onDeactive(row.RegId)" color="warn"><mat-icon>delete_outline</mat-icon></button>      
+                        </mat-cell>
+                    </ng-container> -->
+
+                <ng-container matColumnDef="action" stickyEnd>
+                    <mat-header-cell *matHeaderCellDef class="table-actions" style="color: white;"> Action
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+
+                        <mat-checkbox [checked]>
+                        </mat-checkbox>
+                        <button mat-icon-button (click)="onEdit(row)"><mat-icon
+                                title="Edit Menu">launch</mat-icon></button>
+                    </mat-cell>
+                </ng-container>
+
+
+                <!-- <ng-container matColumnDef="action" stickyEnd>
+                    <mat-header-cell *matHeaderCellDef class="table-actions">Is Active</mat-header-cell>
+                    <mat-cell *matCellDef="let contact">
+                        <div fxFlex="row">
+                            <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
+                                (click)="$event.stopPropagation();">
+                                <mat-icon class="secondary-text">more_vert</mat-icon>
+                            </button>
+                            <mat-menu #moreMenu="matMenu">
+                                <ng-container *ngFor="let m of menuActions, let n of menuActions">
+                                    <div fxFlex="row" fxLayoutAlign="center center">
+                                        <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
+                                            (click)="$event.stopPropagation();">
+                                            <mat-icon class="secondary-text">more_vert</mat-icon>
+                                        </button>
+                                        <mat-menu #moreMenu="matMenu">
+                                            <ng-container *ngFor="let m of menuActions, let i=index">
+                                                <button mat-menu-item aria-label="remove" (click)="getRecord(contact,m)">
+                                                    <span>{{m}}</span>
+                                                </button>
+                                            </ng-container>
+                                        </mat-menu>
+                                    </div>
+                                </ng-container>
+                            </mat-menu>
+                        </div>
+                    </mat-cell>
+                </ng-container> -->
+
+                <ng-container matColumnDef="loading">
+                    <mat-footer-cell *matFooterCellDef colspan="6">
+                        <mat-spinner [diameter]="20"></mat-spinner>
+                    </mat-footer-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="noData">
+                    <mat-footer-cell *matFooterCellDef colspan="6">
+                        no data found...
+                    </mat-footer-cell>
+                </ng-container>
+
+                <mat-header-row class="accent" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                <mat-row *matRowDef="let contact; columns: displayedColumns;" class="contact"
+                    [@animate]="{value:'*',params:{y:'100%'}}" (click)="onRowClick(contact)"></mat-row>
+                <!-- <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':tableDataSource!=null}"> -->
+                <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide': !(sIsLoading == 'loading-data')}">
+                </mat-footer-row>
+                <mat-footer-row *matFooterRowDef="['noData']"
+                    [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
+            </mat-table>
+        </div>
+
+
+        <div fxFlex.gt-sm="40%" fxFlex style="width:40%;height: 90%;">
+            <div class="tree-container" style="width: 100%;height: 250px !important; margin-top: 10px;">
+
+                <mat-tree [dataSource]="treeDataSource" [treeControl]="treeControl"
+                    *ngIf="treeDataSource && treeDataSource != null">
+                    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+                        <button mat-icon-button disabled></button>
+                        <mat-checkbox class="checklist-leaf-node" [checked]="checklistSelection.isSelected(node)"
+                            (change)="todoLeafItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+                    </mat-tree-node>
+
+                    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.item">
+                            <mat-icon class="mat-icon-rtl-mirror">
+                                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                            </mat-icon>
+                        </button>
+                        <mat-checkbox [checked]="descendantsAllSelected(node)"
+                            [indeterminate]="descendantsPartiallySelected(node)"
+                            (change)="todoItemSelectionToggle(node)">
+                            {{node.item}}</mat-checkbox>
+                    </mat-tree-node>
+                </mat-tree>
+                <div *ngIf="treeDataSource == null">
+                    <mat-spinner [diameter]="30"></mat-spinner>
+                </div>
+            </div>
+            <mat-card>
+                <div class="bottom-container" style="margin-top:10px">
+                    <div>
+                        <span style="font-size: 15px;font-weight: bold;">Role Details:</span>
+                    </div>
+                    <div class="role-content">
+
+                        <div style="width: 400px;margin-bottom: 30px;">Role Name</div>
+                        <Form [formGroup]="TemplateForm">
+                            <div class="role-name">
+                                <mat-form-field appearance="outline" style="width:350px;">
+                                    <input name="FirstName" placeholder="First Name" formControlName="FirstName"
+                                        matInput>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-slide-toggle [(ngModel)]="isChecked"
+                                    formControlName="IsDeleted">Active</mat-slide-toggle>
+                                <!-- <mat-checkbox class="remember-me" aria-label="Remember Me">
+                        Active
+                    </mat-checkbox> -->
+                            </div>
+                        </Form>
+
+
+                    </div>
+                </div>
+               
+
+                <div style="float: right;margin-top: 20px;">
+
+                    <button class="next-btn" color="accent" (click)="onSave()" style="border-radius: 16px;">
+                        <span style="display: flex;justify-content: center;">
+
+                            <span style="margin-left: 6px;">New</span>
+                        </span>
+                    </button>
+
+
+                    <button class="next-btn" color="accent" (click)="onSave()" style="border-radius: 16px;">
+                        <span style="display: flex;justify-content: center;">
+
+                            <span style="margin-left: 6px;">Save</span>
+                        </span>
+                    </button>
+
+                    <button class="footer-btn" (click)="onClose()">Cancel</button>
+                    &nbsp;
+                </div>
+            </mat-card>
+
+        </div>
+    </div>
+
+
+</div>

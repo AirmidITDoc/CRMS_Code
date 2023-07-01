@@ -1,22 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowsePaymentReceiptComponent } from './browse-payment-receipt/browse-payment-receipt.component';
+import { BillSettlementComponent } from './bill-settlement/bill-settlement.component';
 
 
 const appRoutes: Routes = [
   // {
   //   path: "phone-appointment",
-  //   loadChildren: () => import("./phoneappointment/phoneappointment.module").then((m) => m.phoneappointmentModule),
+  //   loadChildren: () => import("./main/adminstation/").then((m) => m.phoneappointmentModule),
   // },
   {
     path: "appointment",
     loadChildren: () => import("./appointment/appointment.module").then((m) => m.AppointmentModule),
   },
-  // {
-    
-  //   path: "browse-opd-bills",
-  //   loadChildren: () => import("./browse-opbill/browse-opbill.module").then((m) => m.BrowseOPBillModule),
-  // },
+  
   {
     path: "bill",
     loadChildren: () => import("./appointment/appointment.module").then((m) => m.AppointmentModule),
@@ -42,7 +39,7 @@ const appRoutes: Routes = [
 
 {
   path: "payment",
-  loadChildren: () =>import("./browse-credit-payment/credit-payment.module").then((m) => m.CreditPaymentModule),
+  loadChildren: () =>import("./bill-settlement/bill-settlement.module").then((m) => m.BillSettlementModule),
 },
 
 ];

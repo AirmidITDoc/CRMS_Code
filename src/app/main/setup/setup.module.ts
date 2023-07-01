@@ -27,6 +27,11 @@ const appRoutes: Routes = [
         loadChildren: () =>
             import("./Doctor/dcotor-master.module").then((m) => m.DcotorMasterModule),
     },
+    // {
+    //     path: "pathology",
+    //     loadChildren: () =>
+    //         import("../administration/administration-routing-module.module").then((m) => m.AdministrationRoutingModuleModule),
+    // },
 ];
 
 @NgModule({

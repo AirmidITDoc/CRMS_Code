@@ -21,6 +21,8 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 // import { CreateUserComponent } from "app/main/administration/create-user/create-user.component";
 // import { UserDetailsComponent } from "app/main/administration/user-details/user-details.component";
 import { MyprofileComponent } from "app/main/administration/myprofile/myprofile.component";
+import { ChangePasswordComponent } from "app/main/administration/create-user/change-password/change-password.component";
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -208,6 +210,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
 
     addNewProfile() {
+        debugger;
+
+        Swal.fire("Profile")
         const dialogRef = this._matDialog.open(MyprofileComponent,
           {
             maxWidth: "52vw",

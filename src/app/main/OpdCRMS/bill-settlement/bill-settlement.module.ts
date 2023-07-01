@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
-import { CreateUserComponent } from './create-user.component';
-import { RouterModule, Routes } from '@angular/router';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
@@ -15,44 +11,47 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatCardModule } from '@angular/material/card';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseConfirmDialogModule, FuseSidebarModule } from '@fuse/components';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatListModule } from '@angular/material/list';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { SharedModule } from 'app/main/shared/shared.module';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { RouterModule, Routes } from '@angular/router';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { CreateUserService } from './create-user.service';
-import { MyprofileComponent } from '../myprofile/myprofile.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import { UserDetailComponent } from '../user-detail/user-detail.component';
+import { SharedModule } from 'app/main/shared/shared.module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatNestedTreeNode, MatTree, MatTreeModule } from '@angular/material/tree'
+import { BillSettlementComponent } from './bill-settlement.component';
+import { BillSettlementService } from './bill-settlement.service';
+// import { SharedModule } from 'app/main/shared/shared.module';
 
 const routes: Routes = [
-  {
-      path: '**',
-      component: CreateUserComponent
-  },
+    {
+        path: '**',
+        component: BillSettlementComponent,
+    },
 ];
-
 @NgModule({
-  declarations: [CreateUserComponent,
-    MyprofileComponent,
-    UserDetailComponent,
-    ChangePasswordComponent],
-  imports: [
-    RouterModule.forChild(routes),
-    MatButtonModule,
+    declarations: [
+      BillSettlementComponent
+      
+    ],
+    imports: [
+        RouterModule.forChild(routes),
+        MatButtonModule,
         MatCheckboxModule,
         MatDatepickerModule,
         MatFormFieldModule,
@@ -68,7 +67,7 @@ const routes: Routes = [
         MatRadioModule,
         MatTabsModule,
         MatCardModule,
-        MatDividerModule,
+        MatDividerModule,  
         MatProgressSpinnerModule,
         FuseSharedModule,
         FuseConfirmDialogModule,
@@ -76,7 +75,7 @@ const routes: Routes = [
         MatDialogModule,
         MatListModule,
         MatSnackBarModule,
-        MatSlideToggleModule,
+        MatSlideToggleModule ,
         MatDividerModule,
         MatDialogModule,
         FuseSharedModule,
@@ -90,15 +89,21 @@ const routes: Routes = [
         SharedModule,
         NgxMatSelectSearchModule,
         MatCardModule,
+        MatListModule,
+        MatChipsModule,
         MatTooltipModule,
+        MatChipsModule,
         MatExpansionModule,
-  ],
-  // providers: [
-  //   CreateUserService,
-  //     DatePipe
-  // ],
-  entryComponents: [
-    CreateUserComponent
-]
+        MatListModule,
+        MatTreeModule
+        
+    ],
+    providers: [
+      BillSettlementService,
+        DatePipe
+    ],
+    entryComponents: [
+      BillSettlementComponent,
+    ]
 })
-export class CreateUserModule { }
+export class BillSettlementModule { }

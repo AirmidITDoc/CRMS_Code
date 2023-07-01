@@ -24,7 +24,7 @@ import { FuseNavigation } from "@fuse/types";
 })
 export class AppComponent implements OnInit, OnDestroy {
     fuseConfig: any;
-    navigation: any;
+    navigation: any;z
 
     // Private
     private _unsubscribeAll: Subject<any>;

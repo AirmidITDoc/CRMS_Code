@@ -230,8 +230,8 @@ $matHues: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, A100, A200, A400, A70
     }
 
     .#{$colorName}#{$hue} {
-        background-color: $color !important;
-        color: $contrastColor !important;
+        background-color:rgb(13, 67, 102);// !important;
+        color: 00b4d8;//!important;
 
         &[disabled] {
             background-color: rgba($color, .12) !important;

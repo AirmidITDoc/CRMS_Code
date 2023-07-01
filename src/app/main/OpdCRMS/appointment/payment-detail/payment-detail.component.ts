@@ -758,72 +758,7 @@ debugger;
   }
 
   onClose() {
-    debugger
-
-    let Paymentobj = {};
-    // Paymentobj['PaymentId'] = 0;
-    Paymentobj['BillNo'] = 0,// this.billNo;
-      Paymentobj['ReceiptNo'] = '',//'RE';
-      Paymentobj['PaymentDate'] = '',//this.dateTimeObj.date;
-      Paymentobj['PaymentTime'] = '',//this.dateTimeObj.time;
-      Paymentobj['CashPayAmount'] = 0,// parseInt(this.cashAmt.toString());
-      Paymentobj['ChequePayAmount'] = 0,// parseInt(this.chequeAmt.toString());
-      Paymentobj['ChequeNo'] = 0,//this.chequeNo;
-      Paymentobj['BankName'] = '',//this.paymentForm.get('chequeBankNameController').value.BankName;
-      Paymentobj['ChequeDate'] = '',//this.dateTimeObj.date;
-      Paymentobj['CardPayAmount'] = '',//parseInt(this.cardAmt.toString());
-      Paymentobj['CardNo'] = '',//this.cardNo;
-      Paymentobj['CardBankName'] = '',// this.paymentForm.get('cardBankNameController').value.BankName;
-      Paymentobj['CardDate'] = '',//this.dateTimeObj.date;
-      Paymentobj['AdvanceUsedAmount'] = 0;
-    Paymentobj['AdvanceId'] = 0;
-    Paymentobj['RefundId'] = 0;
-    Paymentobj['TransactionType'] = 2;
-    Paymentobj['Remark'] = '',//'REMArk';
-      Paymentobj['AddBy'] = '',// this.accountService.currentUserValue.user.id,
-      Paymentobj['IsCancelled'] = 0;
-    Paymentobj['IsCancelledBy'] = 0;
-    Paymentobj['IsCancelledDate'] = '',//this.dateTimeObj.date;
-      Paymentobj['CashCounterId'] = 0;
-    Paymentobj['IsSelfORCompany'] = 0;
-    Paymentobj['CompanyId'] = 0;
-    Paymentobj['NEFTPayAmount'] = '',//parseInt(this.neftAmt.toString());
-      Paymentobj['NEFTNo'] = '',// this.neftNo;
-      Paymentobj['NEFTBankMaster'] = '',//this.paymentForm.get('neftBankNameController').value.BankName;
-      Paymentobj['NEFTDate'] = '',//this.dateTimeObj.date;
-      Paymentobj['PayTMAmount'] = '',//parseInt(this.paytmAmt.toString());
-      Paymentobj['PayTMTranNo'] = '',// this.paytmTransNo;
-      Paymentobj['PayTMDate'] = '',// this.dateTimeObj.date;
-      Paymentobj['PaidAmt'] = 0,//this.paymentForm.get('paidAmountController').value;
-      Paymentobj['BalanceAmt'] = this.paymentForm.get('balanceAmountController').value;
-
-    const ipPaymentInsert = new IpPaymentInsert(Paymentobj);
-    // let submitDataPay1 = {
-    //   ipPaymentInsert,
-    // };
-
-    let IsSubmit = {
-      "IpPaymentInsert": ipPaymentInsert,
-      // "IsSubmitFlag": false
-    }
-
-    this.ipSearchService.PaymentInsert(IsSubmit).subscribe(response => {
-      console.log(response);
-      if (response) {
-        Swal.fire('Congratulations !', 'New Payment save Successfully !', 'success').then((result) => {
-          if (result.isConfirmed) {
-            // this._matDialog.closeAll();
-            // debugger;
-          // this.getVisitList();
-          }
-         
-        });
-      } else {
-        Swal.fire('Error !', 'Payment not saved', 'error');
-      }
-      this.isLoading = '';
-      
-    });
+    this.dialogRef.close();
 
     // this.dialogRef.close(IsSubmit);
   }

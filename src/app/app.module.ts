@@ -35,6 +35,7 @@ import { EditAppointmentComponent } from './main/OpdCRMS/appointment/edit-appoin
 import { NewCaseDetailComponent } from './main/OpdCRMS/case-detail/new-case-detail/new-case-detail.component';
 import { EditCasedetailComponent } from './main/OpdCRMS/case-detail/edit-casedetail/edit-casedetail.component';
 import { ViewCasedetailComponent } from './main/OpdCRMS/case-detail/view-casedetail/view-casedetail.component';
+import Swal from 'sweetalert2';
 const appRoutes: Routes = [
     {
         path: "auth",
@@ -73,8 +74,11 @@ const appRoutes: Routes = [
         loadChildren: () =>
             import("./main/administration/administration.module" ).then((m) => m.AdministrationModule),
     },
+    {
+        path: '**',
+        redirectTo: 'auth/login'
+    }
 ];
-
 
 
 export const PICK_FORMATS = {

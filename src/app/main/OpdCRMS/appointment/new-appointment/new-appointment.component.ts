@@ -1094,7 +1094,7 @@ export class NewAppointmentComponent implements OnInit {
   }
 
   onClose() {
-    this._opappointmentService.mySaveForm.reset();
+    // this._opappointmentService.mySaveForm.reset();
      this.dialogRef.close();
   }
 
