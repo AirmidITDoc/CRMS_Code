@@ -1,13 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { BankMasterService } from './bank-master.service';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-bank-master',
   templateUrl: './bank-master.component.html',
-  styleUrls: ['./bank-master.component.scss']
+  styleUrls: ['./bank-master.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class BankMasterComponent implements OnInit {
 

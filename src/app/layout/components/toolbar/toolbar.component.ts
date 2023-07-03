@@ -18,6 +18,8 @@ import { NotificationServiceService } from 'app/core/notification-service.servic
 // import { ProfieComponent } from '../../../main/administration/profie/profie.component';
 // import { ChangePasswordComponent } from '../../../main/administration/change-password/change-password.component';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+import { ChangePasswordComponent } from "app/main/administration/create-user/change-password/change-password.component";
+import { MyprofileComponent } from "app/main/administration/myprofile/myprofile.component";
 // import { CreateUserComponent } from "app/main/administration/create-user/create-user.component";
 // import { UserDetailsComponent } from "app/main/administration/user-details/user-details.component";
 // import { MyprofileComponent } from "app/main/administration/myprofile/myprofile.component";
@@ -135,29 +137,32 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     logout() {
         this.accountService.logout();
     }
-    navigateToDash() {
+    navigateToDailyDashboard() {
         this.router.navigate(['/dashboard']);
     }
 
-    navigateToDialyDash() {
-        this.router.navigate(['/dashboard/daily-dashboard']);
-    }
+    // navigateToDialyDash() {
+    //     this.router.navigate(['/dashboard/daily-dashboard']);
+    // }
 
-    navigateToFinancDash() {
-        // this.accountService.logout();
-        this.router.navigate(['/dashboard/Inventory-dashboard']);
-    }
-
-    navigateToPathDash() {
+    navigateToPathologyDashboard() {
         // this.accountService.logout();
         this.router.navigate(['/dashboard/Pathology-dashboard']);
+    }
+
+    navigateToRadiologyDashboard() {
+        // this.accountService.logout();
+        this.router.navigate(['/dashboard/Radiology-dashboard']);
     }
 
     navigateToCashlessDashboard() {
         // this.accountService.logout();
         this.router.navigate(['/dashboard/Cashless-dashboard']);
     }
-    
+    navigateToPharmacyDashboard() {
+        // this.accountService.logout();
+        this.router.navigate(['/dashboard/Pharmacy-dashboard']);
+    }
     
     /**
      * On destroy
@@ -204,27 +209,27 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         this._translateService.use(lang.id);
     }
 
-    // addNewProfile() {
-    //     const dialogRef = this._matDialog.open(MyprofileComponent,
-    //       {
-    //         maxWidth: "52vw",
-    //           maxHeight: "93vh", width: '100%',
-    //       });
-    //     dialogRef.afterClosed().subscribe(result => {
+    addNewProfile() {
+        const dialogRef = this._matDialog.open(MyprofileComponent,
+          {
+            maxWidth: "52vw",
+              maxHeight: "93vh", width: '100%',
+          });
+        dialogRef.afterClosed().subscribe(result => {
           
-    //     });
-    //   }
+        });
+      }
 
-    //   addchangePassword() {
-    //     const dialogRef = this._matDialog.open(ChangePasswordComponent,
-    //       {
-    //         maxWidth: "50vw",
-    //         maxHeight: "60vh", 
-    //       });
-    //     dialogRef.afterClosed().subscribe(result => {
+      addchangePassword() {
+        const dialogRef = this._matDialog.open(ChangePasswordComponent,
+          {
+            maxWidth: "50vw",
+            maxHeight: "60vh", 
+          });
+        dialogRef.afterClosed().subscribe(result => {
           
-    //     });
-    //   }
+        });
+      }
     
 
 

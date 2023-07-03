@@ -59,11 +59,13 @@ const appRoutes: Routes = [
         path: "setup",
         loadChildren: () =>
             import("./main/setup/setup.module").then((m) => m.SetupModule),
+            
     },
     {
         path: "opd",
         loadChildren: () =>
             import("./main/OpdCRMS/opd-crms.module").then((m) => m.OPDCRMSModule),
+            
     },
     {
         path: '**',

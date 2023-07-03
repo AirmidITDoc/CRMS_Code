@@ -30,7 +30,7 @@
     <div class="content">
         <!-- SIDEBAR -->
         <fuse-sidebar name="app-main" position="left" lockedOpen="gt-sm" style="width:30%; border-radius:4px;
-        margin-left:12px; background-color: white;height:90%;">
+        margin-left:12px; background-color: white;height:100%;">
             <div>
                 <!-- SIDEBAR HEADER -->
                 <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center" style="margin-top: 3%;background-color: rgb(13, 67, 102) !important;">
@@ -48,7 +48,7 @@
                                 <mat-form-field appearance="outline" style="margin-left: 2%;">
                                     <mat-label>Enter a date range</mat-label>
                                     <mat-date-range-input [rangePicker]="picker">
-                                        <input matStartDate formControlName="start" placeholder="Start date">
+                                        <input matStartDate formControlName="start" placeholder="Start date" (dateChange)="getVisitList()">
                                         <input matEndDate formControlName="end" placeholder="End date">
                                     </mat-date-range-input>
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

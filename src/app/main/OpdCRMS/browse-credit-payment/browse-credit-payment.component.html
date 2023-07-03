@@ -47,7 +47,7 @@
                     <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center" style="margin-top: 3%;background-color: rgb(13, 67, 102) !important;">
                         <!-- USER -->
                         <!-- <img [src]="user.avatar" class="avatar mr-16" [alt]="user.name" /> -->
-                        <span class="h5" style="color: aliceblue;">Search Facility</span>
+                        <span class="h5" style="color: aliceblue;font-size: 17px;">Search Facility</span>
                         <!-- / USER -->
                     </div>
                     <!-- / SIDEBAR HEADER -->
@@ -125,7 +125,7 @@
                                     <div class="spinner-border text-danger"></div>
 
                                 </div>
-                                <mat-table #table matSort table="table1" [dataSource]="dataSource"
+                                <mat-table #table matSort class="table1" [dataSource]="dataSource"
                                     [@animateStagger]="{value:'50'}" style="overflow: auto;width: 100%;">
 
                                     <ng-container matColumnDef="BillDate">
@@ -233,7 +233,7 @@
                                             </button>
                                             <button mat-icon-button class="material-icons"
                                                 (click)="getRecord(contact,'Payment')" matTooltip="email">
-                                                <mat-icon>payment</mat-icon>
+                                                <mat-icon>approval</mat-icon>
                                             </button>
                                             <!-- <button mat-icon-buttmenton class="material-icons"
                                                 (click)="getRecord(contact,'SMS')" matTooltip="message">

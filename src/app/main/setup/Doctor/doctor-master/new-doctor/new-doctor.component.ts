@@ -9,11 +9,11 @@ import { fuseAnimations } from '@fuse/animations';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new-doctor',
-  templateUrl: './new-doctor.component.html',
-  styleUrls: ['./new-doctor.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  animations: fuseAnimations
+    selector: 'app-new-doctor',
+    templateUrl: './new-doctor.component.html',
+    styleUrls: ['./new-doctor.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: fuseAnimations
 })
 export class NewDoctorComponent implements OnInit {
 
@@ -43,7 +43,7 @@ export class NewDoctorComponent implements OnInit {
         private accountService: AuthenticationService,
         // public notification: NotificationServiceService,
         public dialogRef: MatDialogRef<NewDoctorComponent>
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         // this.editor = new Editor();

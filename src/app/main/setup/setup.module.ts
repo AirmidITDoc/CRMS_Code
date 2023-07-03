@@ -26,6 +26,8 @@ const appRoutes: Routes = [
         path: "doctor",
         loadChildren: () =>
             import("./Doctor/dcotor-master.module").then((m) => m.DcotorMasterModule),
+
+            
     },
     // {
     //     path: "pathology",

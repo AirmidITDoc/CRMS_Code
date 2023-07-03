@@ -13,6 +13,7 @@ import { SearchInforObj } from '../appointment/bill-detail/bill-detail.component
 import { PaymentDetailComponent } from '../appointment/payment-detail/payment-detail.component';
 import { fuseAnimations } from '@fuse/animations';
 import { ViewBillPaymentComponent } from './view-bill-payment/view-bill-payment.component';
+import { BillApproveComponent } from './bill-approve/bill-approve.component';
 // import * as converter from 'number-to-words';
 
 @Component({
@@ -85,7 +86,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
   ngOnInit(): void {
 
      if (this._ActRoute.url == '/opd/payment') {
-      this.menuActions.push('Payment');
+      this.menuActions.push('Approval');
     }
 
     debugger;
@@ -489,7 +490,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
       AgeYear = contact.AgeYear.trim();
     }
 
-    // if (m == "Payment") {
+    if (m == "Approval") {
       console.log(contact);
      let xx = {
           RegNo: contact.RegId,
@@ -518,7 +519,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
         //  PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt
         // this._AppointmentSreviceService.populateFormpersonal(xx);
         this.advanceDataStored.storage = new SearchInforObj(xx);
-        const dialogRef = this._matDialog.open(PaymentDetailComponent,
+        const dialogRef = this._matDialog.open(BillApproveComponent,
           {
             maxWidth: "90%",
             height: '600px',
@@ -538,7 +539,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
  
     // /   this._ActRoute.navigate(['opd/appointment/op_bill'], {queryParams:{id:this.selectedID}})
 
-  // }
+  }
 
 
 

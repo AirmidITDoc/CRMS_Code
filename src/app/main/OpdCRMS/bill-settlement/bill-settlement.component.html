@@ -36,7 +36,7 @@
 
         <!-- SIDEBAR -->
         <fuse-sidebar class="sidebar" name="app-main" position="left" lockedOpen="gt-sm" style="background-color: white;
-        height:100%; margin-top: 10px;">
+        height:98%; margin-top: 10px;">
 
             <!-- SIDEBAR CONTENT -->
             <div class="sidebar-content">
@@ -47,7 +47,7 @@
                     <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center" style="margin-top: 3%;background-color: rgb(13, 67, 102) !important;">
                         <!-- USER -->
                         <!-- <img [src]="user.avatar" class="avatar mr-16" [alt]="user.name" /> -->
-                        <span class="h5" style="color: aliceblue;">Search Facility</span>
+                        <span class="h5" style="color: aliceblue;font-size: 17px;">Search Facility</span>
                         <!-- / USER -->
                     </div>
                     <!-- / SIDEBAR HEADER -->
@@ -125,8 +125,8 @@
                                     <div class="spinner-border text-danger"></div>
 
                                 </div>
-                                <mat-table #table matSort table="table1" [dataSource]="dataSource"
-                                    [@animateStagger]="{value:'50'}" style="overflow: auto;width: 100%;">
+                                <mat-table #table matSort class="table1" [dataSource]="dataSource"
+                                    [@animateStagger]="{value:'50'}" style="overflow: auto;width: 100%;height: 600px !important;">
 
                                     <ng-container matColumnDef="BillDate">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Bill Date

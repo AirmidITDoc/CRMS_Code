@@ -45,11 +45,11 @@ export class BankMasterService {
   }
 
   public bankMasterInsert(param) {
-      return this._httpClient.post("Billing/BankMasterSave", param);
+      return this._httpClient.post("Master/BankSave", param);
   }
 
   public bankMasterUpdate(param) {
-      return this._httpClient.post("Billing/BankUpdate", param);
+      return this._httpClient.post("Master/BankUpdate", param);
   }
 
   populateForm(param) {

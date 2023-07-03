@@ -34,6 +34,9 @@ const appRoutes: Routes = [
 {
     path: "medicalrecords",
     loadChildren: () => import("./appointment/appointment.module").then((m) => m.AppointmentModule),
+    // loadChildren: () =>
+    // import("../administration/administration.module" ).then((m) => m.AdministrationModule),
+
 },
 
 

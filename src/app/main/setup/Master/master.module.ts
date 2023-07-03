@@ -11,20 +11,20 @@ const appRoutes: Routes = [
                 (m) => m.CityMasterModule
             ),
     },
-    // {
-    //     path: "prefix-master",
-    //     loadChildren: () =>
-    //         import("./prefix-master/prefix-master.module").then(
-    //             (m) => m.PrefixMasterModule
-    //         ),
-    // },
-    // {
-    //     path: "gender-master",
-    //     loadChildren: () =>
-    //         import("./gender-master/gender-master.module").then(
-    //             (m) => m.GenderMasterModule
-    //         ),
-    // },
+    {
+        path: "prefix-master",
+        loadChildren: () =>
+            import("./prefix-master/prefix-master.module").then(
+                (m) => m.PrefixMasterModule
+            ),
+    },
+    {
+        path: "gender-master",
+        loadChildren: () =>
+            import("./gender-master/gender-master.module").then(
+                (m) => m.GenderMasterModule
+            ),
+    },
     {
         path: "patient-type-master",
         loadChildren: () =>
@@ -39,13 +39,13 @@ const appRoutes: Routes = [
                 (m) => m.RelatioshioMasterModule
             ),
     },
-    // {
-    //     path: "marital-master",
-    //     loadChildren: () =>
-    //         import("./maritalstatus-master/maritalstatus-master.module").then(
-    //             (m) => m.MaritalstatusMasterModule
-    //         ),
-    // },
+    {
+        path: "marital-master",
+        loadChildren: () =>
+            import("./maritalstatus-master/maritalstatus-master.module").then(
+                (m) => m.MaritalstatusMasterModule
+            ),
+    },
     {
         path: "religion-master",
         loadChildren: () =>

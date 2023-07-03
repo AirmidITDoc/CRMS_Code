@@ -16,6 +16,16 @@ const appRoutes: Routes = [
             import("./doctor-master/doctor.module").then(
                 (m) => m.DoctorModule
             ),
+
+    },
+
+    {
+        path: "department",
+        loadChildren: () =>
+            import("../Department/department/department-master/department-master.module").then(
+                (m) => m.DepartmentMasterModule
+            ),
+
     },
 ];
 

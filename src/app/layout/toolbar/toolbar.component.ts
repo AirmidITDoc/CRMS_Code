@@ -137,8 +137,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     logout() {
         this.accountService.logout();
     }
+    
     navigateToDash() {
-        this.router.navigate(['/dashboard']);
+        // this.router.navigate(['/dashboard']);
     }
 
     navigateToDialyDash() {
@@ -147,21 +148,21 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     navigateToFinancDash() {
         // this.accountService.logout();
-        this.router.navigate(['/dashboard/Inventory-dashboard']);
+        // this.router.navigate(['/dashboard/Inventory-dashboard']);
     }
 
     navigateToPathDash() {
         // this.accountService.logout();
-        this.router.navigate(['/dashboard/Pathology-dashboard']);
+        // this.router.navigate(['/dashboard/Pathology-dashboard']);
     }
 
     navigateToCashlessDashboard() {
         // this.accountService.logout();
-        this.router.navigate(['/dashboard/Cashless-dashboard']);
+        // this.router.navigate(['/dashboard/Cashless-dashboard']);
     }
     navigateToPharmacyDashboard() {
         // this.accountService.logout();
-        this.router.navigate(['/dashboard/Pharmacy-dashboard']);
+        // this.router.navigate(['/dashboard/Pharmacy-dashboard']);
     }
     
     /**
