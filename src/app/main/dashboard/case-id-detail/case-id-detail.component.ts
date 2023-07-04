@@ -1,29 +1,26 @@
-import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { CaseDetail, NewCaseDetailComponent } from './new-case-detail/new-case-detail.component';
-import { ViewCasedetailComponent } from './view-casedetail/view-casedetail.component';
-import { Subscription } from 'rxjs';
+import { Component, Inject, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { CasedetailService } from './casedetail.service';
-import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+import { Subscription } from 'rxjs';
+import { AdministrationService } from '../../administration/administration.service';
 import { Router } from '@angular/router';
+import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+import { CaseDetail } from 'app/main/OpdCRMS/case-detail/new-case-detail/new-case-detail.component';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
-import { MatDialog } from '@angular/material/dialog';
 import { fuseAnimations } from '@fuse/animations';
-import { EditCasedetailComponent } from './edit-casedetail/edit-casedetail.component';
-import { CaseIdDetailComponent } from 'app/main/dashboard/case-id-detail/case-id-detail.component';
+import { DashboardService } from '../dashboard.service';
 
 @Component({
-  selector: 'app-case-detail',
-  templateUrl: './case-detail.component.html',
-  styleUrls: ['./case-detail.component.scss'],
+  selector: 'app-case-id-detail',
+  templateUrl: './case-id-detail.component.html',
+  styleUrls: ['./case-id-detail.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations
 })
-export class CaseDetailComponent implements OnInit {
+export class CaseIdDetailComponent implements OnInit {
 
-  
   msg: any;
   sIsLoading: string = '';
   isLoading = true;
@@ -35,7 +32,8 @@ export class CaseDetailComponent implements OnInit {
   printTemplate: any;
   
   subscriptionArr: Subscription[] = [];
-
+  StudyId:0;
+  totalAmtOfNetAmt: any;
   VisitID:any;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -44,17 +42,12 @@ export class CaseDetailComponent implements OnInit {
   displayedColumns = [
     'CaseId',
     'CaseTitle',
-    'CaseDescription',
-    'TotalSubjects',
-    'TotalVisits',
-    'VisitFrequency',
-    'CaseStartDate',
-    'CaseStatus',
-    'CompanyName',
-    'CaseRepresentative',
-    'HospitalRepresentative',
-    'AgreementFileName',
-    'action',
+    'PatientName',
+    'RegNo',
+    'MobileNo',
+    'AgeYear',
+    'TotalBillAmt',
+   'action',
 
   ];
   dataSource = new MatTableDataSource<CaseDetail>();
@@ -62,10 +55,10 @@ export class CaseDetailComponent implements OnInit {
   //datePipe: any;
 
   constructor(
-    public _CasedetailService: CasedetailService,
+    public _CasedetailService: DashboardService,
     private _ActRoute: Router,
     private _fuseSidebarService: FuseSidebarService,
-    // private advanceDataStored: AdvanceDataStored,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public _matDialog: MatDialog,
     public datePipe: DatePipe,
     // private advanceDataStored: AdvanceDataStored
@@ -75,14 +68,13 @@ export class CaseDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (this._ActRoute.url == '/opd/registration') {
-      // this.menuActions.push('One');
-      // this.menuActions.push('New Case Detail');
-      this.menuActions.push('Update Case Detail');
-      this.menuActions.push('View Case Detail');
-        }
 
-
+    if(this.data)
+    {
+      console.log(this.data);
+      this.StudyId=this.data.StudyId;
+    }
+   
     this.getCaseList();
     // this.dataSource.data.refresh();
 
@@ -93,10 +85,7 @@ export class CaseDetailComponent implements OnInit {
   getCaseList() {
     this.sIsLoading = 'loading-data';
     var D_data = {
-      "CaseId": 0,//this._CasedetailService.myFilterform.get("CaseId").value || 0,
-      "From_Dt":'01/01/1900',// this.datePipe.transform(this._CasedetailService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "To_Dt": '01/01/1900',//this.datePipe.transform(this._CasedetailService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      
+      "StudyId": this.StudyId            
     }
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
@@ -121,71 +110,71 @@ export class CaseDetailComponent implements OnInit {
   }
 
   onClear() {
-    this._CasedetailService.myFilterform.reset(
-      {
-        start: [],
-        end: []
-      }
-    );
+    // this._CasedetailService.myFilterform.reset(
+    //   {
+    //     start: [],
+    //     end: []
+    //   }
+    // );
   }
 
  
-  onEdit(contact){
-    console.log(contact)
+//   onEdit(contact){
+//     console.log(contact)
 
-    console.log(" This is for Update Case Detail pop : " + contact);
-    let xx = {
+//     console.log(" This is for Update Case Detail pop : " + contact);
+//     let xx = {
     
-      CaseId:contact.CaseId,
-      CaseTitle:contact.CaseTitle,
-      CaseDescription: contact.CaseDescription,
-      TotalSubjects:contact.TotalSubjects,
-      TotalVisits:contact.TotalVisits,
-      VisitFrequency:contact.VisitFrequency,
-      CaseStartDate: contact.CaseStartDate,
-      CaseEndDate:contact.CaseEndDate,
-      CaseStatus: contact.CaseStatus,
-      CompanyName:contact.CompanyName,
-      CaseRepresentative: contact.CaseRepresentative,
-      HospitalRepresentative: contact.HospitalRepresentative,
-      AgreementFileName: contact.AgreementFileName,
+//       CaseId:contact.CaseId,
+//       CaseTitle:contact.CaseTitle,
+//       CaseDescription: contact.CaseDescription,
+//       TotalSubjects:contact.TotalSubjects,
+//       TotalVisits:contact.TotalVisits,
+//       VisitFrequency:contact.VisitFrequency,
+//       CaseStartDate: contact.CaseStartDate,
+//       CaseEndDate:contact.CaseEndDate,
+//       CaseStatus: contact.CaseStatus,
+//       CompanyName:contact.CompanyName,
+//       CaseRepresentative: contact.CaseRepresentative,
+//       HospitalRepresentative: contact.HospitalRepresentative,
+//       AgreementFileName: contact.AgreementFileName,
 
-    };
-    // this.advanceDataStored.storage = new CaseDetail(xx);
-    // this._CasedetailService.populateFormpersonal(xx);
+//     };
+//     // this.advanceDataStored.storage = new CaseDetail(xx);
+//     // this._CasedetailService.populateFormpersonal(xx);
   
-console.log(xx);
-    // this._ActRoute.navigate(['/opd/registration']);
-    const dialogRef = this._matDialog.open(EditCasedetailComponent,
-      {
-        maxWidth: "75vw",
-        height: '560px',
-        width: '100%',
-        data : {
-          registerObj : xx,
-        }
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed - Insert Action', result);
-       this.getCaseList();
-    });
-  }
+// console.log(xx);
+//     // this._ActRoute.navigate(['/opd/registration']);
+//     const dialogRef = this._matDialog.open(EditCasedetailComponent,
+//       {
+//         maxWidth: "75vw",
+//         height: '560px',
+//         width: '100%',
+//         data : {
+//           registerObj : xx,
+//         }
+//       });
+//     dialogRef.afterClosed().subscribe(result => {
+//       console.log('The dialog was closed - Insert Action', result);
+//        this.getCaseList();
+//     });
+//   }
 
 
-  newCaseDetail() {
+  // newCaseDetail() {
 
-    const dialogRef = this._matDialog.open(NewCaseDetailComponent,
-      {
-        maxWidth: "75vw",
-        height: '560px',
-        width: '100%',
+  //   const dialogRef = this._matDialog.open(NewCaseDetailComponent,
+  //     {
+  //       maxWidth: "75vw",
+  //       height: '560px',
+  //       width: '100%',
         
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed - Insert Action', result);
-      this.getCaseList();
-    });
-  }
+  //     });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     // console.log('The dialog was closed - Insert Action', result);
+  //     this.getCaseList();
+  //   });
+  // }
 
 
 
@@ -274,12 +263,23 @@ console.log(xx);
   }
 
   // field validation 
-  get f() { return this._CasedetailService.myFilterform.controls; }
+  // get f() { return this._CasedetailService.myFilterform.controls; }
   selectRow(row) {
     this.selectRow = row;
   }
 
 
+  getNetAmtSum(element) {
 
+    let netAmt;
+    netAmt = element.reduce((sum, { TotalBillAmt }) => sum += +(TotalBillAmt || 0), 0);
+    this.totalAmtOfNetAmt = netAmt;
+   console.log(netAmt);
+    return netAmt
+  }
+
+  onClose() {
+    this._matDialog.closeAll();
+  }
    
 }

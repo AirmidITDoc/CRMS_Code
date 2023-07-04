@@ -4,7 +4,7 @@
     <!-- HEADER -->
 
   
-    <mat-toolbar style="background-color: #039be5 !important; height:50px; justify-content: space-between;width: 100%;">
+    <mat-toolbar style="background-color: #039be5 !important; height:50px; justify-content: space-between;width: 100%;background-color: rgb(13, 67, 102)">
         
 
         <div fxLayout="row"  fxLayoutAlign="start center"  >
@@ -59,31 +59,31 @@
                                </h2>
                              </div>
                                <mat-table #table matSort [dataSource]="dataSource"  [@animateStagger]="{value:'50'}"
-                                style="overflow:auto;width: 100%;height: 120px!important;">
+                                style="overflow:auto;width: 100%;" class="table1">
   
 
 
                                 <ng-container matColumnDef="MandatoryFirstName">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header  fxShow.gt-sm>  First Name</mat-header-cell>
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header  fxShow.gt-sm> FirstName</mat-header-cell>
                                     <mat-cell *matCellDef="let contact"  fxShow.gt-sm>
                                         {{contact.MandatoryFirstName}}
                                     </mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="MandatoryMiddleName">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header   fxShow.gt-sm>  Middle Name</mat-header-cell>
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header   fxShow.gt-sm>MiddleName</mat-header-cell>
                                     <mat-cell *matCellDef="let contact"  fxShow.gt-sm>
                                         {{contact.MandatoryMiddleName}}
                                     </mat-cell>
                                 </ng-container>
 
                                  <ng-container matColumnDef="MandatoryLastName">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header   fxShow.gt-sm>  Last Name</mat-header-cell>
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header   fxShow.gt-sm>LastName</mat-header-cell>
                                     <mat-cell *matCellDef="let contact"  fxShow.gt-sm>
                                         {{contact.MandatoryLastName}}
                                     </mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="MandatoryAddress">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header  fxShow.gt-sm>  Address</mat-header-cell>
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header  fxShow.gt-sm>Address</mat-header-cell>
                                     <mat-cell *matCellDef="let contact"   fxShow.gt-sm>
                                         {{contact.MandatoryAddress}}
                                     </mat-cell>
@@ -120,13 +120,13 @@
                                     </mat-cell>
                                 </ng-container> 
                                 <ng-container matColumnDef="OPReceiptCounter">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header  fxHide fxShow.gt-md>OP Receipt </mat-header-cell>
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header  fxHide fxShow.gt-md>OP Receipt</mat-header-cell>
                                     <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                         {{contact.OPReceiptCounter}}
                                     </mat-cell>
                                 </ng-container> 
                                 <ng-container matColumnDef="OPRefundOfBillCounter">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header  fxHide fxShow.gt-md>OP Refund Of Bill </mat-header-cell>
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header  fxHide fxShow.gt-md>Refund Counter</mat-header-cell>
                                     <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                         {{contact.OPRefundOfBillCounter}}
                                     </mat-cell>
@@ -219,7 +219,7 @@
                                     [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
                             </mat-table>
                               
-                                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons>
+                                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons>
                                 </mat-paginator>
                             </div>
                         </div>
@@ -256,7 +256,7 @@
                        </h2>
                      </div>
                        <mat-table #table matSort [dataSource]="dataSource1"  class="table2" [@animateStagger]="{value:'50'}"
-                        style="overflow:auto;width: 100%;height: 120px!important;">
+                        style="overflow:auto;width: 100%;">
 
                        
                         <ng-container matColumnDef="ScheduleExecuteType">
@@ -336,7 +336,7 @@
                             [ngClass]="{'hide':!(dataSource1!=null && dataSource1.data.length==0)}"></mat-footer-row>
                     </mat-table>
                       
-                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons>
                         </mat-paginator>
                     </div>
                    </div>

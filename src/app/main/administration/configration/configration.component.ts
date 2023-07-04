@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -7,11 +7,14 @@ import { AdministrationService } from '../administration.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { NewConfigrationComponent } from './new-configration/new-configration.component';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-configration',
   templateUrl: './configration.component.html',
-  styleUrls: ['./configration.component.scss']
+  styleUrls: ['./configration.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class ConfigrationComponent implements OnInit {
 

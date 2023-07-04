@@ -282,4 +282,29 @@ export class AdministrationService {
 public getRoleElementDetails(Id) {
   return this._httpClient.post("Generic/GetByProc?procName=ps_Rtrv_RoleListWithId", {"RoleId": Id});
 }
+
+
+public getRoleCombobox() {
+  return this._httpClient.post("Generic/GetByProc?procName=Retrieve_RoleMasterForCombo", {})
+}
+
+public getStoreCombo() {
+  return this._httpClient.post("Generic/GetByProc?procName=Retrieve_StoreNameForCombo", {})
+}
+
+
+public getDoctorMasterCombo() {
+  return this._httpClient.post("Generic/GetByProc?procName=RetrieveConsultantDoctorMasterForCombo", {})
+}
+
+ 
+public UserInsert(employee) {
+  return this._httpClient.post("DoctorMaster/DoctorSave", employee);
+}
+
+public UserUpdate(employee) {
+  return this._httpClient.post("DoctorMaster/DoctorUpdate", employee);
+}
+
+
 }

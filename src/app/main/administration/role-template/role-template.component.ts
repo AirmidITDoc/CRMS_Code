@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
@@ -9,6 +9,7 @@ import { AdministrationService } from '../administration.service';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import Swal from 'sweetalert2';
 import { MatDialogRef } from '@angular/material/dialog';
+import { fuseAnimations } from '@fuse/animations';
 export class TodoItemNode {
   children: TodoItemNode[];
   item: string;
@@ -30,7 +31,10 @@ var TREE_DATA = {
 @Component({
   selector: 'app-role-template',
   templateUrl: './role-template.component.html',
-  styleUrls: ['./role-template.component.scss']
+  styleUrls: ['./role-template.component.scss'],
+  // encapsulation: ViewEncapsulation.None,
+  // animations: fuseAnimations
+
 })
 export class RoleTemplateComponent implements OnInit {
 
@@ -80,7 +84,7 @@ export class RoleTemplateComponent implements OnInit {
   constructor(public _registerService: AdministrationService,
     private accountService: AuthenticationService,
     private _fuseNavigationService: FuseNavigationService,
-    public dialogRef: MatDialogRef<RoleTemplateComponent>,
+    // public dialogRef: MatDialogRef<RoleTemplateComponent>,
     private formBuilder: FormBuilder
   ) {
     this.resetTree();
@@ -89,17 +93,17 @@ export class RoleTemplateComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.getSstempletemasterList();
-    //  this.tableDataSource.data = [
-    //    {RegId: 41369, RegDate: "2021-07-07T00:00:00", RegTime: "2021-07-07T12:24:38", PrefixID: 11}
-    //   ];
-    //   var D_data = {
-    //     "Reg_No": '0',
-    //     "F_Name": '%',
-    //     "L_Name": '%',
-    //     "From_Dt": '01/01/1900',
-    //     "To_Dt": '01/01/1900',
-    //   }
-    //   this.tableDataSource.data = [{ RegNo: 41369, FirstName: "2021-07-07T00:00:00", RegTime: "2021-07-07T12:24:38", PrefixID: 11 }];
+     this.tableDataSource.data = [
+       {RegId: 41369, RegDate: "2021-07-07T00:00:00", RegTime: "2021-07-07T12:24:38", PrefixID: 11}
+      ];
+      var D_data = {
+        "Reg_No": '0',
+        "F_Name": '%',
+        "L_Name": '%',
+        "From_Dt": '01/01/1900',
+        "To_Dt": '01/01/1900',
+      }
+      this.tableDataSource.data = [{ RegNo: 41369, FirstName: "2021-07-07T00:00:00", RegTime: "2021-07-07T12:24:38", PrefixID: 11 }];
   }
 
   buildFileTree(obj: { [key: string]: any }, level: number): TodoItemNode[] {
@@ -525,7 +529,7 @@ export class RoleTemplateComponent implements OnInit {
   }
 
   onClose(){
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 }
 

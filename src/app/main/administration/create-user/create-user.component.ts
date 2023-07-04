@@ -257,12 +257,12 @@ export class CreateUserComponent implements OnInit {
       {
         maxWidth: "75vw",
         // maxHeight: "95vh", 
-        height: "75vh",
+        height: "60vh",
         width: '100%',
         // height: "100%"
       });
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed - Insert Action', result);
+      console.log('The dialog was closed - Insert Action', result);
       // this.getAdmittedPatientList();
     });
   }

@@ -23,4 +23,9 @@ export class DashboardService {
   // {
   //   return this._httpClient.post("Generic/GetByProc?procName=rptIP_DepartmentChart_Range", params)
   // }
+
+  
+public getCaseIDCombo(D_data){
+  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CaseWisePatientSummary", D_data);
+}
 }

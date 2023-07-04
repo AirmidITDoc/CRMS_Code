@@ -13,7 +13,7 @@
             </span>
 
             <button mat-raised-button (click)="newCaseDetail()" fxLayoutAlign="center center"
-                style="margin-left: 1300px;">
+                style="margin-left:800px;">
                 <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
             </button>
         </div>
@@ -48,7 +48,7 @@
                                 <mat-form-field appearance="outline" style="margin-left: 2%;">
                                     <mat-label>Enter a date range</mat-label>
                                     <mat-date-range-input [rangePicker]="picker">
-                                        <input matStartDate formControlName="start" placeholder="Start date">
+                                        <input matStartDate formControlName="start" placeholder="Start date" (dateChange)="getCaseList()">
                                         <input matEndDate formControlName="end" placeholder="End date">
                                     </mat-date-range-input>
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -111,7 +111,7 @@
 
                                     <ng-container matColumnDef="CaseId">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header
-                                            fxShow.gt-sm>CaseId</mat-header-cell>
+                                            fxShow.gt-sm>Case Id</mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                             {{contact.CaseId}}
                                         </mat-cell>
@@ -119,7 +119,7 @@
 
 
                                     <ng-container matColumnDef="CaseTitle">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>CaseTitle
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Case Title
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm style="margin-top: 1px;">
                                             {{contact.CaseTitle}}
@@ -128,7 +128,7 @@
 
                                     <ng-container matColumnDef="CaseDescription">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>CaseDescription
+                                            fxShow.gt-md>Case Description
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.CaseDescription }}
@@ -137,7 +137,7 @@
 
                                     <ng-container matColumnDef="TotalSubjects">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>TotalSubjects
+                                            fxShow.gt-md>Total Subjects
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.TotalSubjects}}
@@ -146,7 +146,7 @@
 
                                     <ng-container matColumnDef="TotalVisits">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>TotalVisits
+                                            fxShow.gt-md>Total Visits
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.TotalVisits}}
@@ -164,7 +164,7 @@
 
                                     <ng-container matColumnDef="CaseStartDate">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>CaseStartDate</mat-header-cell>
+                                            fxShow.gt-md>Case StartDate</mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
                                             style="margin-top: 1px;">
                                             {{contact.CaseStartDate | date:'shortDate'}}
@@ -173,7 +173,7 @@
 
                                     <ng-container matColumnDef="CaseStatus">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>CaseStatus
+                                            fxShow.gt-md>Case Status
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.CaseStatus}}
@@ -182,7 +182,7 @@
 
                                     <ng-container matColumnDef="CompanyName">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>CompanyName
+                                            fxShow.gt-md>Company Name
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
                                             style="margin-top: 1px;">
@@ -192,7 +192,7 @@
 
                                     <ng-container matColumnDef="CaseRepresentative">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>CaseRepresentative
+                                            fxShow.gt-md>Case Representative
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.CaseRepresentative}}
@@ -201,7 +201,7 @@
 
                                     <ng-container matColumnDef="HospitalRepresentative">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>HospitalRepresentative
+                                            fxShow.gt-md>Hospital Representative
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
                                             style="margin-top: 1px;">
@@ -211,7 +211,7 @@
 
                                     <ng-container matColumnDef="AgreementFileName">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>AgreementFileName
+                                            fxShow.gt-md>Agreement FileName
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
                                             style="margin-top: 1px;">

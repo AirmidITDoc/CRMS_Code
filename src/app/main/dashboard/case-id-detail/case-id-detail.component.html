@@ -1,0 +1,139 @@
+<div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <mat-toolbar class="accent" style="height:50px; justify-content: space-between;width: 100%;background-color:rgb(18, 87, 134) !important;">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <!-- <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm (click)="toggleSidebar('app-main')"
+                style="color: white;">
+                <mat-icon>menu</mat-icon>
+            </button> -->
+            <!-- <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
+                style="color: white;" style="color: aliceblue;">account_box
+            </mat-icon> -->
+            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" style="color: aliceblue;margin-right: 550px;">
+                Case Detail List
+            </span>
+        
+            <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
+            </app-common-date>
+       
+            <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
+                <mat-icon style="color: aliceblue;">close</mat-icon>
+            </button>
+           
+        </div>
+
+    </mat-toolbar>
+
+<mat-card>
+    <div >
+  
+
+        <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
+        class="table1">
+
+        <ng-container matColumnDef="CaseId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header
+                fxShow.gt-sm>Case Id</mat-header-cell>
+            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                {{contact.CaseId}}
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="CaseTitle">
+            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Case Title
+            </mat-header-cell>
+            <mat-cell *matCellDef="let contact" fxShow.gt-sm style="margin-top: 1px;">
+                {{contact.CaseTitle}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="PatientName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                fxShow.gt-md>Patient Name
+            </mat-header-cell>
+            <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                {{contact.PatientName }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="RegNo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                fxShow.gt-md>Reg No
+            </mat-header-cell>
+            <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                {{contact.RegNo}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="MobileNo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                fxShow.gt-md>Mobile No
+            </mat-header-cell>
+            <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                {{contact.MobileNo}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="AgeYear">
+            <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                fxShow.gt-md>Age Year</mat-header-cell>
+            <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
+                style="margin-top: 1px;">
+                {{contact.AgeYear}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="TotalBillAmt">
+            <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                fxShow.gt-md>TotalBillAmt</mat-header-cell>
+            <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
+                style="margin-top: 1px;">
+                {{contact.TotalBillAmt}}
+            </mat-cell>
+        </ng-container>
+
+     
+        <ng-container matColumnDef="action" stickyEnd>
+            <mat-header-cell *matHeaderCellDef style="color: white;"> Action
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <button mat-icon-button (click)="onEdit(row)"><mat-icon
+                        title="Edit Menu">launch</mat-icon></button>
+
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="loading">
+            <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
+            </mat-header-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+                no data found...
+            </mat-footer-cell>
+        </ng-container>
+
+        <mat-header-row class="accent" *matHeaderRowDef="displayedColumns; sticky: true">
+        </mat-header-row>
+        <mat-row *matRowDef="let contact; columns: displayedColumns;" class="contact"
+            [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']"
+            [ngClass]="{'hide': !(sIsLoading == 'loading-data')}">
+        </mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']"
+            [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[20, 25, 50, 100]" [pageSize]="20"
+        showFirstLastButtons>
+    </mat-paginator>
+    <hr>
+    <div>
+        <span style="font-weight: bolder;font-size: larger;margin-left:680px;padding-right: 10px;">Total Amount : </span>&nbsp;<span style="font-weight: bolder;"
+            class="net-amt-value">{{getNetAmtSum(dataSource.data)}}</span>
+    </div>
+    </div>
+   
+</mat-card>
+</div>

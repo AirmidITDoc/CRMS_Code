@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ConfigSettingParams } from 'app/core/models/config';
 import { ReplaySubject, Subject } from 'rxjs';
@@ -7,11 +7,14 @@ import { DatePipe } from '@angular/common';
 import { takeUntil } from 'rxjs/operators';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-new-configration',
   templateUrl: './new-configration.component.html',
-  styleUrls: ['./new-configration.component.scss']
+  styleUrls: ['./new-configration.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class NewConfigrationComponent implements OnInit {
 

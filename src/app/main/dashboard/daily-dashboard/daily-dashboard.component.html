@@ -29,7 +29,7 @@
 
 
                     <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
-                        fxFlex="100"   fxFlex.gt-xs="50" fxFlex.gt-md="20" *ngFor="let element of dashbardCardData">
+                        fxFlex="100"   fxFlex.gt-xs="50" fxFlex.gt-md="20" *ngFor="let element of dashbardCardData" (click)="newCaseDetail(element)">
 
                         <!-- Front -->
                         <div class="fuse-widget-front">
@@ -42,7 +42,7 @@
                             </button> -->
                             </div>
 
-                            <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
+                            <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center" >
                                 <div
                                     [ngClass]="element.Title == 'IPD' ? 'orange-fg red-fg title-class line-height-50' : 'blue-grey-fg red-fg title-class line-height-50'">
                                     <!-- {{widgets.widget2.data.count}} -->

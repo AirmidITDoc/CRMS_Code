@@ -141,9 +141,41 @@ h1, .h1 {
     }
 }
 
+app-role-template {
+  
+    .table1{
+        height:390px !important;
+    }
+  .mat-header-row {
+    width: 100%;
+    max-width: 700px;
+    min-width: 7cqi;  
+    min-height: 20px;     
+    background-color: rgb(13, 67, 102) !important;
+  }
+  
+  .mat-row {
+    width: 100%;
+    max-width: 700px;
+    min-width: 700px;      
+    min-height: 20px;            
+  }
+  
+  .mat-column-RoleId {
+    width:120px;
+    max-width: 120px;
+    min-width: 120px;
+    text-align: left;
+  }
+  .mat-column-RoleName {
+    width: 210px; 
+    max-width:210px;
+    min-width: 210px;
+    text-align: center;
+  }
+  
 
-
-
+}
 .footer-btn {
     width: 100px;
     font-size: 16px;

@@ -207,6 +207,11 @@ export class CaseDetail {
   HospitalRepresentative: string;
   AgreementFileName: String;
   currentDate = new Date();
+  PatientName:any;
+  RegNo:any;
+  MobileNo:any;
+  AgeYear:any;
+  TotalBillAmt:any;
  
   /**
    * Constructor
@@ -228,6 +233,12 @@ export class CaseDetail {
       this.CompanyName = CaseDetail.CompanyName || '';
       this.CaseRepresentative = CaseDetail.CaseRepresentative || '';
       this.AgreementFileName = CaseDetail.AgreementFileName || '';
+
+      this.PatientName = CaseDetail.PatientName || '';
+      this.RegNo = CaseDetail.RegNo || '';
+      this.MobileNo = CaseDetail.MobileNo || '';
+      this.AgeYear = CaseDetail.AgeYear || '';
+      this.TotalBillAmt = CaseDetail.TotalBillAmt || '';
     
     }
   }

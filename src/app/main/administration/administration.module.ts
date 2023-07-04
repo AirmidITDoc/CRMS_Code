@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { CaseIdDetailComponent } from '../dashboard/case-id-detail/case-id-detail.component';
 
 
 
@@ -19,7 +20,6 @@ const appRoutes: Routes = [
   },
  
 ];
-
 
 @NgModule({
   declarations: [],

@@ -126,6 +126,15 @@ app-configration{
     
 }
 
+.table1{
+    height:250px !important;
+}
+
+.table2{
+    height: 250px !important;
+}
+
+
 .mat-row {
     width:100%;
     max-width: 3700px;
@@ -135,17 +144,17 @@ app-configration{
 
 
 .mat-column-MandatoryFirstName {
-    width: 160px;
-    max-width:160px;
-    min-width:160px;
+    width: 100px;
+    max-width:100px;
+    min-width:100px;
     text-align: left;
     justify-content:left;
 }
 
 .mat-column-MandatoryMiddleName {
-    width: 150px;
-    max-width:150px;
-    min-width:150px;
+    width: 100px;
+    max-width:100px;
+    min-width:100px;
     text-align: left;
     justify-content:left;
     white-space: nowrap; 
@@ -158,9 +167,9 @@ app-configration{
 }
 
 .mat-column-MandatoryLastName {
-    width: 150px;
-    max-width:150px;
-    min-width:150px;
+    width: 100px;
+    max-width:100px;
+    min-width:100px;
     text-align: left;
     justify-content:left;
     white-space: nowrap; 
@@ -172,21 +181,7 @@ app-configration{
     margin-right: 15px;   
 }
 
-.mat-column-MandatoryAddress {
-    width: 140px;
-    max-width:140px;
-    min-width:140px;
-    text-align: left;
-    justify-content:left;
-    white-space: nowrap; 
-    overflow: hidden;
-    text-overflow: ellipsis; 
-    overflow: hidden !important;
-    display: inline-block;
-    margin-top: 7px;
-    margin-right: 15px;   
-   
-}
+
 .mat-column-MandatoryAddress {
     width: 180px;
     max-width:180px;
@@ -203,13 +198,28 @@ app-configration{
    
 }
 .mat-column-MandatoryCity {
-    width: 180px;
-    max-width:180px;
-    min-width:180px;
+    width: 100px;
+    max-width:100px;
+    min-width:100px;
     text-align: left;
     justify-content:left;
 }
 .mat-column-MandatoryAge {
+    width: 80px;
+    max-width:80px;
+    min-width:80px;
+    text-align: left;
+    justify-content:left;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    overflow: hidden !important;
+    display: inline-block;
+    margin-top: 7px;
+    margin-right: 15px;   
+}
+
+.mat-column-MandatoryPhoneNo {
     width: 100px;
     max-width:100px;
     min-width:100px;
@@ -223,8 +233,20 @@ app-configration{
     margin-top: 7px;
     margin-right: 15px;   
 }
-
-.mat-column-MandatoryPhoneNo {
+.mat-column-OPBillCounter {
+    width: 110px;
+    max-width:110px;
+    min-width:110px;
+    text-align: left;
+    justify-content:left;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    overflow: hidden !important;
+    display: inline-block;
+    margin-top: 7px;
+    margin-right: 15px;   
+}
+.mat-column-IPReceiptCounter {
     width: 120px;
     max-width:120px;
     min-width:120px;
@@ -238,37 +260,10 @@ app-configration{
     margin-top: 7px;
     margin-right: 15px;   
 }
-.mat-column-OPBillCounter {
-    width: 190px;
-    max-width:190px;
-    min-width:190px;
-    text-align: left;
-    justify-content:left;
-    overflow: hidden;
-    text-overflow: ellipsis; 
-    overflow: hidden !important;
-    display: inline-block;
-    margin-top: 7px;
-    margin-right: 15px;   
-}
-.mat-column-IPReceiptCounter {
-    width: 190px;
-    max-width:190px;
-    min-width:190px;
-    text-align: left;
-    justify-content:left;
-    white-space: nowrap; 
-    overflow: hidden;
-    text-overflow: ellipsis; 
-    overflow: hidden !important;
-    display: inline-block;
-    margin-top: 7px;
-    margin-right: 15px;   
-}
 .mat-column-OPReceiptCounter {
-    width: 190px;
-    max-width:190px;
-    min-width:190px;
+    width: 200px;
+    max-width:200px;
+    min-width:200px;
     text-align: left;
     justify-content:center;
     overflow: hidden;
@@ -280,9 +275,9 @@ app-configration{
 }
 
 .mat-column-IPAdvanceCounter {
-    width: 230px;
-    max-width:230px;
-    min-width:230px;
+    width: 150px;
+    max-width:150px;
+    min-width:150px;
     text-align: left;
     justify-content:center;
     overflow: hidden;
@@ -295,9 +290,9 @@ app-configration{
 
 
 .mat-column-IPBillCounter {
-    width: 230px;
-    max-width:230px;
-    min-width:230px;
+    width: 150px;
+    max-width:150px;
+    min-width:150px;
     text-align: left;
     justify-content:center;
     overflow: hidden;
@@ -308,9 +303,9 @@ app-configration{
     margin-right: 15px;   
 }
 .mat-column-IPReceiptCounter {
-    width: 170px;
-    max-width:170px;
-    min-width:170px;
+    width: 150px;
+    max-width:150px;
+    min-width:150px;
     text-align: left;
     justify-content:center;
     overflow: hidden;
@@ -321,9 +316,9 @@ app-configration{
     margin-right: 15px;   
 }
 .mat-column-IPRefundBillCounter {
-    width: 250px;
-    max-width:250px;
-    min-width:250px;
+    width: 150px;
+    max-width:150px;
+    min-width:150px;
     text-align: left;
     justify-content:center;
     overflow: hidden;
@@ -334,9 +329,9 @@ app-configration{
     margin-right: 15px;   
 }
 .mat-column-IPRefofAdvCounter {
-    width: 230px;
-    max-width:230px;
-    min-width:230px;
+    width: 150px;
+    max-width:150px;
+    min-width:150px;
     text-align: left;
     justify-content:center;
     overflow: hidden;
@@ -348,9 +343,9 @@ app-configration{
 }
 
 .mat-column-PrintRegAfterReg {
-    width: 230px;
-    max-width:230px;
-    min-width:230px;
+    width: 150px;
+    max-width:150px;
+    min-width:150px;
     text-align: left;
     justify-content:center;
     overflow: hidden;
@@ -452,16 +447,16 @@ app-configration{
 .table2{
     mat-header-row {
         width: 100%;
-        max-width: 1270px;
-        min-width: 1270px;  
+        max-width: 1500px;
+        min-width: 1500px;  
         min-height: 25px;  
         
     }
     
     .mat-row {
         width:100%;
-        max-width: 1270px;
-        min-width: 1270px;  
+        max-width: 1500px;
+        min-width: 1500px;  
         min-height: 25px;             
     }
     

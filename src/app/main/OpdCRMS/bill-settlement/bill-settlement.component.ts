@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
@@ -11,11 +11,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { PaymentDetailComponent } from '../appointment/payment-detail/payment-detail.component';
 import { SearchInforObj } from '../appointment/bill-detail/bill-detail.component';
 import { MatSort } from '@angular/material/sort';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-bill-settlement',
   templateUrl: './bill-settlement.component.html',
-  styleUrls: ['./bill-settlement.component.scss']
+  styleUrls: ['./bill-settlement.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class BillSettlementComponent implements OnInit {
 

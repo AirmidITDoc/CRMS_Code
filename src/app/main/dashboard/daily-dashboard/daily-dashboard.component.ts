@@ -3,6 +3,8 @@ import { fuseAnimations } from '@fuse/animations';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import { DashboardService } from '../dashboard.service';
 import { Observable, Subject } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { CaseIdDetailComponent } from '../case-id-detail/case-id-detail.component';
 
 @Component({
   selector: 'app-daily-dashboard',
@@ -26,7 +28,8 @@ export class DailyDashboardComponent implements OnInit {
   
   constructor(
     public _dashboardServices: DashboardService,
-    public _accountServices: AuthenticationService
+    public _accountServices: AuthenticationService,
+    public _matDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +57,23 @@ export class DailyDashboardComponent implements OnInit {
   }
 
   
+  
+  newCaseDetail(element) {
+    console.log(element);
+    const dialogRef = this._matDialog.open(CaseIdDetailComponent,
+      {
+        maxWidth: "65vw",
+        height: '600px',
+        width: '100%',
+        data : {
+          StudyId : element.Title,
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed - Insert Action', result);
+      
+    });
+  }
  
 }
 

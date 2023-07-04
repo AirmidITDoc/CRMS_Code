@@ -40,7 +40,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 const routes: Routes = [
     {
         path: '**',
-        component: RoleTemplateComponent,
+        component: RoleTemplateComponent
     },
 ];
 @NgModule({
@@ -102,7 +102,7 @@ const routes: Routes = [
         DatePipe
     ],
     entryComponents: [
-      RoleTemplateComponent,
+      RoleTemplateComponent
     ]
 })
 export class RoleTemplateModule { }

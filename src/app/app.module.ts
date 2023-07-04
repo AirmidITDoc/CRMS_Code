@@ -36,16 +36,27 @@ import { NewCaseDetailComponent } from './main/OpdCRMS/case-detail/new-case-deta
 import { EditCasedetailComponent } from './main/OpdCRMS/case-detail/edit-casedetail/edit-casedetail.component';
 import { ViewCasedetailComponent } from './main/OpdCRMS/case-detail/view-casedetail/view-casedetail.component';
 import Swal from 'sweetalert2';
+
+
 const appRoutes: Routes = [
     {
         path: "auth",
         loadChildren: () =>
             import("./main/auth/auth.module").then((m) => m.AuthModule),
     },
+    
     {
         path: "dashboard",
         loadChildren: () =>
             import("./main/dashboard/dashboard.module").then((m) => m.DashboardModule),
+    },
+
+
+    {
+        path: "administration",
+        loadChildren: () =>
+            import("./main/administration/administration.module").then((m) => m.AdministrationModule),
+            
     },
     // {
     //     path: 'dashboards/analytics',
@@ -71,18 +82,14 @@ const appRoutes: Routes = [
         path: '**',
         redirectTo: 'auth/login'
     },
-    {
-        path: "administration",
-        loadChildren: () =>
-            import("./main/administration/administration.module" ).then((m) => m.AdministrationModule),
-    },
+  
     {
         path: '**',
         redirectTo: 'auth/login'
     }
 ];
 
-
+// administration/roletemplatemaster
 export const PICK_FORMATS = {
     parse: {dateInput: {month: 'short', year: 'numeric', day: 'numeric'}},
     display: {
