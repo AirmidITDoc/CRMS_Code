@@ -12,17 +12,65 @@
                 Case Detail List
             </span>
         
-            <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
-            </app-common-date>
-       
+                 
             <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
-                <mat-icon style="color: aliceblue;">close</mat-icon>
+                <mat-icon style="color: aliceblue;margin-left: 100px;">close</mat-icon>
             </button>
            
         </div>
 
     </mat-toolbar>
 
+    <div class="content-card">
+        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="5px">
+            <!-- <form [formGroup]="_opappointmentService.myShowDischargeSummaryForm" style="width: 100%;"> -->
+                <div fxFlex.gt-sm="100%" fxFlex>
+                    <div fxlayout="row" style="background-color: white; padding: 5px 5px 5px 5px;">
+                        <!-- ================================ LABEL HEADER  -->
+                        <mat-card fxFlex.gt-sm="100%" fxFlex style="padding: 0 9px; height: fit-content;">
+                            <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="space-between">
+                                <h3 style="font-weight: bold; font-size: 13px; margin: 0 0 0px;">Detail Information
+                                </h3>
+                            </div>
+                            <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="space-between"
+                                style="align-items: baseline;">
+
+                                <span class="label">CompanyLbl :</span>
+                                <span
+                                    class="data_input">{{selectedAdvanceObj.CompanyLbl}}</span>
+
+                                <span class="label"> Compay Count: </span>
+                                <span class="data_input">
+                                    {{selectedAdvanceObj.CompayCnt}}</span>
+
+                                <span class="label">Self Count : </span>
+                                <span
+                                    class="data_input">{{selectedAdvanceObj.SelfCnt}}</span>
+
+                                    <span class="label">Self Lable :</span>
+                                    <span class="data_input">{{selectedAdvanceObj.SelfLbl}}
+                                    </span>
+
+                                    <span class="label">Title : </span>
+                                    <span class="data_input">{{selectedAdvanceObj.Title}}</span>
+
+                                        <span class="label">Count : </span>
+                                        <span class="data_input">{{selectedAdvanceObj.count}}
+                                   </span>
+
+
+                                <app-common-date [screenFrom]="screenFromString"
+                                    (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
+                            </div>
+                        </mat-card>
+                        <!-- ================================ LABEL HEADER  -->
+                    </div>
+
+                </div>
+            <!-- </form> -->
+        </div>
+    </div>
+    
 <mat-card>
     <div >
   
@@ -129,10 +177,10 @@
         showFirstLastButtons>
     </mat-paginator>
     <hr>
-    <div>
+    <!-- <div>
         <span style="font-weight: bolder;font-size: larger;margin-left:680px;padding-right: 10px;">Total Amount : </span>&nbsp;<span style="font-weight: bolder;"
             class="net-amt-value">{{getNetAmtSum(dataSource.data)}}</span>
-    </div>
+    </div> -->
     </div>
    
 </mat-card>

@@ -20,27 +20,17 @@ export class CompanyMasterService {
         return this._formBuilder.group({
             CompanyId: [""],
             CompanyName: [""],
-            CompTypeId: [""],
-            TypeName: [""],
             Address: ["", Validators.required],
-            City: [
+            State: [
                 "",
                 [
                     Validators.required,
                     Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
                 ],
             ],
-            PinNo: ["", [Validators.minLength(6), Validators.maxLength(6)]],
-            PhoneNo: [
-                "",
-                [
-                    Validators.required,
-                    Validators.pattern("^[- +()]*[0-9][- +()0-9]*$"),
-                    Validators.minLength(10),
-                    Validators.maxLength(15),
-                ],
-            ],
-            MobileNo: [
+            StateCode: [""],
+            PinCode: ["", [Validators.minLength(6), Validators.maxLength(6)]],
+            ContactNo: [
                 "",
                 [
                     Validators.required,
@@ -49,16 +39,13 @@ export class CompanyMasterService {
                     Validators.maxLength(10),
                 ],
             ],
-            FaxNo: [
-                ''
-            ],
-            TariffId: [""],
-            TariffName: [""],
-            IsCancelled: [""],
-            IsCancelledBy: ["", Validators.pattern("[0-9]+")],
-            IsCancelledDate: [""],
-            AddedByName: [""],
-            IsDeleted: ["false"],
+
+            GSTIN: [""],
+            SAC: [""],
+            PAN: [""],
+            PlaceOfSupply: ["", Validators.pattern("[0-9]+")],
+            CreatedBy: [""],
+
         });
     }
     createSearchForm(): FormGroup {
@@ -78,19 +65,14 @@ export class CompanyMasterService {
         );
     }
 
-    public getCompanytypeMasterCombo() {
+    public getStateList() {
         return this._httpClient.post(
-            "Generic/GetByProc?procName=RetrieveCompanyTypeMasterForCombo",
+            "Generic/GetByProc?procName=Retrieve_StateMaster",
             {}
         );
     }
 
-    public getTariffMasterCombo() {
-        return this._httpClient.post(
-            "Generic/GetByProc?procName=RetrieveTariffMasterForCombo",
-            {}
-        );
-    }
+  
 
     public companyMasterInsert(param) {
         return this._httpClient.post("Master/CompanySave", param);

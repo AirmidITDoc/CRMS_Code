@@ -66,7 +66,7 @@ export class DailyDashboardComponent implements OnInit {
         height: '600px',
         width: '100%',
         data : {
-          StudyId : element.Title,
+          element : element,
         }
       });
     dialogRef.afterClosed().subscribe(result => {
@@ -109,4 +109,40 @@ export class PieChartOPData {
     title: '',
     count: 0
   };
+}
+
+
+
+
+
+export class DashboardCaseDetails
+{
+  
+CompanyLbl:any;
+CompayCnt:any;
+SelfCnt:any;
+SelfLbl:any;
+Title:any;
+count:any;
+label:any;
+
+   
+    /**
+     * Constructor
+     *
+     * @param DashboardCaseDetails
+     */
+    constructor(DashboardCaseDetails) {
+        {
+            this.CompanyLbl = DashboardCaseDetails.CompanyLbl || '';
+            this.CompayCnt = DashboardCaseDetails.CompayCnt || '';
+            this.SelfCnt = DashboardCaseDetails.SelfCnt || '';
+            this.SelfLbl = DashboardCaseDetails.SelfLbl || '';
+            this.Title = DashboardCaseDetails.Title || '';
+            this.count = DashboardCaseDetails.count || '';
+            this.label = DashboardCaseDetails.label || '';
+          
+        }
+
+    }
 }

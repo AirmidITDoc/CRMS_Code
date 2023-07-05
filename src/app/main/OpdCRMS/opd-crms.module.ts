@@ -4,6 +4,7 @@ import { BrowsePaymentReceiptComponent } from './browse-payment-receipt/browse-p
 import { BillSettlementComponent } from './bill-settlement/bill-settlement.component';
 
 
+
 const appRoutes: Routes = [
   // {
   //   path: "phone-appointment",

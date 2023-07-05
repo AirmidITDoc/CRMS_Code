@@ -380,4 +380,17 @@ public PaymentInsert(employee){
 return this._httpClient.post("OutPatient/PaymentSave", employee)
 }
 
+
+public InvoiceBillMappingInsert(employee){
+  return this._httpClient.post("OutPatient/CaseDetailSave", employee);
+}
+
+public InvoiceBillMappingUpdate(employee){
+  return this._httpClient.post("OutPatient/CaseDetailUpdate", employee);
+}
+
+public getBrowseBillsList(employee){
+  return this._httpClient.post("Generic/GetByProc?procName=Retrieve_RegistrationList", employee)
+}
+
 }

@@ -142,7 +142,13 @@ app-browse-credit-payment {
         min-width: 1240px;
         display: flex;
     }
-
+    .mat-column-checkbox {
+        width:80px;
+        max-width:80px;
+        min-width:80px;
+        text-align:left;
+        justify-content: left;
+    }
     .mat-column-BillDate {
         width: 100px;
         max-width: 100px;

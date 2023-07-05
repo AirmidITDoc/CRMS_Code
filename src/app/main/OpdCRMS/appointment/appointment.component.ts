@@ -16,6 +16,8 @@ import { AdvanceDataStored } from '../advance';
 // import { EditVisitDateComponent } from './edit-visit-date/edit-visit-date.component';
 import { NewVistDateComponent } from './new-vist-date/new-vist-date.component';
 import { PaymentDetailComponent } from './payment-detail/payment-detail.component';
+import { InvoiceBillMappingComponent } from './invoice-bill-mapping/invoice-bill-mapping.component';
+
 
 @Component({
   selector: 'app-appointment',
@@ -82,6 +84,8 @@ export class AppointmentComponent implements OnInit {
       // this.menuActions.push('Update Visit Date');
       this.menuActions.push('Add New Visit Date');
       this.menuActions.push('Bill');
+
+      this.menuActions.push('Invoice Bill');
     } else if (this._ActRoute.url == '/opd/bill') {
       this.menuActions.push('New Bill');
     }
@@ -257,7 +261,41 @@ export class AppointmentComponent implements OnInit {
           this.sIsLoading = '';
         });
     }
-    else if (m == "New Bill") {
+    else if (m == "Invoice Bill") {
+      console.log(contact);
+
+
+      let xx = {
+        RegNo: contact.RegId,
+        RegId: contact.RegId,
+        AdmissionID: contact.VisitId,
+        PatientName: contact.PatientName,
+        Doctorname: contact.Doctorname,
+        AdmDateTime: contact.AdmDateTime,
+        AgeYear: contact.AgeYear,
+        ClassId: contact.ClassId,
+        ClassName: contact.ClassName,
+        TariffName: contact.TariffName,
+        TariffId: contact.TariffId,
+        VisitId: contact.VisitId,
+        VistDateTime: contact.VistDateTime
+      };
+      // this._AppointmentSreviceService.populateFormpersonal(xx);
+      this.advanceDataStored.storage = new SearchInforObj(xx);
+      const dialogRef = this._matDialog.open(InvoiceBillMappingComponent,
+        {
+          maxWidth: "99%",
+          height: '700px',
+          width: '100%',
+          data: {
+            registerObj: xx,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+        this.getVisitList();
+      });
+    } else if (m == "New Bill") {
       console.log(contact);
       var D_data = {
         "RegId": contact.RegId,
@@ -327,9 +365,9 @@ export class AppointmentComponent implements OnInit {
         let PatientHeaderObj = {};
 
         PatientHeaderObj['Date'] = contact.VisitDate
-        PatientHeaderObj['PatientName'] =contact.PatientName,
-        PatientHeaderObj['OPD_IPD_Id'] =contact.VisitId,
-        PatientHeaderObj['NetPayAmount'] = contact.TotalAmt
+        PatientHeaderObj['PatientName'] = contact.PatientName,
+          PatientHeaderObj['OPD_IPD_Id'] = contact.VisitId,
+          PatientHeaderObj['NetPayAmount'] = contact.TotalAmt
 
         // this._AppointmentSreviceService.populateFormpersonal(xx);
         this.advanceDataStored.storage = new SearchInforObj(xx);
@@ -863,7 +901,7 @@ export class BrowseOPDBill {
   OPD_IPD_Type: number;
   PBillNo: string;
   BDate: Date;
-  VisitId:any;
+  VisitId: any;
   VisitDate: Date;
   BalanceAmt: number;
   AddedByName: string;
@@ -882,7 +920,7 @@ export class BrowseOPDBill {
       this.BillNo = BrowseOPDBill.BillNo || '';
       this.RegId = BrowseOPDBill.RegId || '';
       this.RegNo = BrowseOPDBill.RegNo || '';
-      this.VisitId=BrowseOPDBill.VisitId || 0;
+      this.VisitId = BrowseOPDBill.VisitId || 0;
       this.PatientName = BrowseOPDBill.PatientName || '';
       this.FirstName = BrowseOPDBill.FirstName || '';
       this.Middlename = BrowseOPDBill.MiddleName || '';

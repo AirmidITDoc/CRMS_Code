@@ -1,6 +1,7 @@
 <div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
     <!-- HEADER -->
-    <mat-toolbar class="accent" style="height:50px; justify-content: space-between;width: 100%;background-color:rgb(18, 87, 134) !important;">
+    <mat-toolbar class="accent"
+        style="height:50px; justify-content: space-between;width: 100%;background-color:rgb(18, 87, 134) !important;">
         <div fxLayout="row" fxLayoutAlign="start center">
             <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm (click)="toggleSidebar('app-main')"
                 style="color: white;">
@@ -9,7 +10,8 @@
             <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
                 style="color: white;">account_box
             </mat-icon>
-            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" style="color: aliceblue;">
+            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
+                style="color: aliceblue;">
                 Browse OP Bill
             </span>
         </div>
@@ -24,6 +26,11 @@
                 <span class="material-icons red-color">picture_as_pdf </span>
             </button>
         </div> -->
+
+        <button mat-raised-button (click)="InvoiceGenerate()" fxLayoutAlign="center center"
+            style="margin-left:800px;">InvoiceGenerate
+            <!-- <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon> -->
+        </button>
     </mat-toolbar>
     <!-- / HEADER -->
 
@@ -44,7 +51,8 @@
                 <div class="card">
 
                     <!-- SIDEBAR HEADER -->
-                    <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center" style="margin-top: 3%;background-color: rgb(13, 67, 102) !important;">
+                    <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
+                        style="margin-top: 3%;background-color: rgb(13, 67, 102) !important;">
                         <!-- USER -->
                         <!-- <img [src]="user.avatar" class="avatar mr-16" [alt]="user.name" /> -->
                         <span class="h5" style="color: aliceblue;font-size: 17px;">Search Facility</span>
@@ -127,6 +135,21 @@
                                 </div>
                                 <mat-table #table matSort class="table1" [dataSource]="dataSource"
                                     [@animateStagger]="{value:'50'}" style="overflow: auto;width: 100%;">
+
+                                    <ng-container matColumnDef="checkbox" sticky>
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            <span class="material-icons" (click)="getBrowseOPDBillsList()">
+                                                checkbox
+                                            </span>
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact">
+                                            <mat-checkbox aria-label="Checked"
+                                                (change)="tableElementChecked($event, contact)">
+                                            </mat-checkbox>
+                                        </mat-cell>
+                                    </ng-container>
+
+
 
                                     <ng-container matColumnDef="BillDate">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Bill Date
@@ -285,5 +308,3 @@
 
 
 //
-
-

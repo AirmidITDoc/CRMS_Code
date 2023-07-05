@@ -42,6 +42,7 @@ import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { PaymentDetailComponent } from './payment-detail/payment-detail.component';
 // import { EditVisitDateComponent } from './edit-visit-date/edit-visit-date.component';
 import { NewVistDateComponent } from './new-vist-date/new-vist-date.component';
+import { InvoiceBillMappingComponent } from './invoice-bill-mapping/invoice-bill-mapping.component';
 
 // import { SharedModule } from 'app/main/shared/shared.module';
 
@@ -60,6 +61,7 @@ const routes: Routes = [
         PaymentDetailComponent,
         // EditVisitDateComponent,
         NewVistDateComponent,
+        InvoiceBillMappingComponent,
       
       
     ],

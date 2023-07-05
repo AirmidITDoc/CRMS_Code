@@ -2,11 +2,12 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ReplaySubject, Subject } from "rxjs";
 import { CompanyMasterService } from "../company-master.service";
-import { CompanyMasterComponent } from "../company-master.component";
+import { CompanyMaster, CompanyMasterComponent } from "../company-master.component";
 import { MatDialogRef } from "@angular/material/dialog";
 import { takeUntil } from "rxjs/operators";
 import { fuseAnimations } from "@fuse/animations";
 import Swal from "sweetalert2";
+import { AuthenticationService } from "app/core/services/authentication.service";
 
 @Component({
     selector: "app-company-master-list",
@@ -17,110 +18,57 @@ import Swal from "sweetalert2";
 })
 export class CompanyMasterListComponent implements OnInit {
     submitted = false;
-    CompanytypecmbList: any = [];
-    TariffcmbList: any = [];
-    // SubGroupcmbList:any=[];
-
+   
     msg: any;
     dataArray = {};
     isLoading = true;
+    stateList: any = [];
+    selectedState:any;
+    registerObj:CompanyMaster;
 
-    //company filter
-    public companytypeFilterCtrl: FormControl = new FormControl();
-    public filteredCompanytype: ReplaySubject<any> = new ReplaySubject<any>(1);
-
-    //tariff filter
-    public tariffFilterCtrl: FormControl = new FormControl();
-    public filteredTariff: ReplaySubject<any> = new ReplaySubject<any>(1);
+    StateCode:any;
 
     private _onDestroy = new Subject<void>();
 
     constructor(
         public _companyService: CompanyMasterService,
-
+        private accountService: AuthenticationService,
         public dialogRef: MatDialogRef<CompanyMasterComponent>
-    ) {}
+    ) { }
 
     ngOnInit(): void {
-        this.geCompanytypeNameCombobox();
-        this.geTariffNameCombobox();
-        //this.geSubgroupNameCombobox();
-
-        this.tariffFilterCtrl.valueChanges
-            .pipe(takeUntil(this._onDestroy))
-            .subscribe(() => {
-                this.filterTariff();
-            });
-
-        this.companytypeFilterCtrl.valueChanges
-            .pipe(takeUntil(this._onDestroy))
-            .subscribe(() => {
-                this.filterCompanytype();
-            });
+     this.getStateList();
     }
 
     get f() {
         return this._companyService.myform.controls;
     }
 
-    private filterTariff() {
-        if (!this.TariffcmbList) {
-            return;
-        }
-        // get the search keyword
-        let search = this.tariffFilterCtrl.value;
-        if (!search) {
-            this.filteredTariff.next(this.TariffcmbList.slice());
-            return;
-        } else {
-            search = search.toLowerCase();
-        }
-        // filter the banks
-        this.filteredTariff.next(
-            this.TariffcmbList.filter(
-                (bank) => bank.TariffName.toLowerCase().indexOf(search) > -1
-            )
-        );
-    }
 
-    private filterCompanytype() {
-        // debugger;
-        if (!this.CompanytypecmbList) {
-            return;
-        }
-        // get the search keyword
-        let search = this.companytypeFilterCtrl.value;
-        if (!search) {
-            this.filteredCompanytype.next(this.CompanytypecmbList.slice());
-            return;
-        } else {
-            search = search.toLowerCase();
-        }
-        // filter
-        this.filteredCompanytype.next(
-            this.CompanytypecmbList.filter(
-                (bank) => bank.TypeName.toLowerCase().indexOf(search) > -1
-            )
-        );
-    }
-
-    geCompanytypeNameCombobox() {
-        this._companyService.getCompanytypeMasterCombo().subscribe((data) => {
-            this.CompanytypecmbList = data;
-            this._companyService.myform
-                .get("CompTypeId")
-                .setValue(this.CompanytypecmbList[0]);
+    onChangeStateList(CityId) {
+        // if (CityId > 0) {
+        //   this._opappointmentService.getStateList(CityId).subscribe(data => {
+        //     this.stateList = data;
+        //     this.selectedState = this.stateList[0].StateName;
+        //     //  this._AdmissionService.myFilterform.get('StateId').setValue(this.selectedState);
+        //   });
+        // }
+      }
+    
+      getStateList() {
+       
+        this._companyService.getStateList().subscribe(data => {
+          this.stateList = data;
+          this.selectedState = this.stateList[0].StateName;
+          
         });
+      
     }
 
-    geTariffNameCombobox() {
-        this._companyService.getTariffMasterCombo().subscribe((data) => {
-            this.TariffcmbList = data;
-            this._companyService.myform
-                .get("TariffId")
-                .setValue(this.TariffcmbList[0]);
-        });
+onChangeCountryList(event){
+this.StateCode=event.StateId;
     }
+
     getCompanyMaster() {
         var data = {
             compTypeId: this._companyService.myform.get("CompTypeId").value,
@@ -163,35 +111,30 @@ export class CompanyMasterListComponent implements OnInit {
                         address: this._companyService.myform
                             .get("Address")
                             .value.trim(),
-                        city: this._companyService.myform
-                            .get("City")
+                        ContactNo: this._companyService.myform
+                            .get("ContactNo")
                             .value.trim(),
-                        pinNo: this._companyService.myform
-                            .get("PinNo")
+                        PinCode: this._companyService.myform
+                            .get("PinCode")
                             .value.trim(),
-                        phoneNo: this._companyService.myform
-                            .get("PhoneNo")
+                        State: this._companyService.myform
+                            .get("State")
                             .value.trim(),
-                        mobileNo: this._companyService.myform
-                            .get("MobileNo")
+                        StateCode: this._companyService.myform
+                            .get("StateCode")
                             .value.trim(),
-                        faxNo: this._companyService.myform
-                            .get("FaxNo")
+                        GSTIN: this._companyService.myform
+                            .get("GSTIN")
                             .value.trim(),
-                        tariffId:
-                            this._companyService.myform.get("TariffId").value
-                                .TariffId,
-                                isActive: Boolean(
-                            JSON.parse(
-                                this._companyService.myform.get("IsDeleted")
-                                    .value
-                            )
-                        ),
-                        addedBy: 10,
-                        updatedBy: 0,
-                        isCancelled: false,
-                        isCancelledBy: 0,
-                        isCancelledDate: "01/01/1900",
+                        SAC:
+                            this._companyService.myform.get("SAC").value
+                        ,
+                        PAN:
+                            this._companyService.myform.get("PAN").value
+                        ,
+                        PlaceOfSupply:  this._companyService.myform.get("PlaceOfSupply").value,
+                        CreatedBy:this.accountService.currentUserValue.user.id
+                     
                     },
                 };
                 console.log(m_data);
@@ -212,7 +155,7 @@ export class CompanyMasterListComponent implements OnInit {
                         } else {
                             Swal.fire(
                                 "Error !",
-                                "Appoinment not saved",
+                                "Company Data not saved",
                                 "error"
                             );
                         }
@@ -221,46 +164,39 @@ export class CompanyMasterListComponent implements OnInit {
             } else {
                 var m_dataUpdate = {
                     companyMasterUpdate: {
-                        companyId:
-                            this._companyService.myform.get("CompanyId").value,
                         compTypeId:
-                            this._companyService.myform.get("CompTypeId").value
-                                .CompanyTypeId,
-                        companyName: this._companyService.myform
-                            .get("CompanyName")
-                            .value.trim(),
-                        address: this._companyService.myform
-                            .get("Address")
-                            .value.trim(),
-                        city: this._companyService.myform
-                            .get("City")
-                            .value.trim(),
-                        pinNo: this._companyService.myform
-                            .get("PinNo")
-                            .value.trim(),
-                        phoneNo: this._companyService.myform
-                            .get("PhoneNo")
-                            .value.trim(),
-                        mobileNo: this._companyService.myform
-                            .get("MobileNo")
-                            .value.trim(),
-                        faxNo: this._companyService.myform
-                            .get("FaxNo")
-                            .value.trim(),
-                        tariffId:
-                            this._companyService.myform.get("TariffId").value
-                                .TariffId,
-                        isActive: Boolean(
-                            JSON.parse(
-                                this._companyService.myform.get("IsDeleted")
-                                    .value
-                            )
-                        ),
-                        addedBy: 10,
-                        updatedBy: 1,
-                        isCancelled: false,
-                        isCancelledBy: 0,
-                        isCancelledDate: "01/01/1900",
+                        this._companyService.myform.get("CompTypeId").value
+                            .CompanyTypeId,
+                    companyName: this._companyService.myform
+                        .get("CompanyName")
+                        .value.trim(),
+                    address: this._companyService.myform
+                        .get("Address")
+                        .value.trim(),
+                    ContactNo: this._companyService.myform
+                        .get("ContactNo")
+                        .value.trim(),
+                    PinCode: this._companyService.myform
+                        .get("PinCode")
+                        .value.trim(),
+                    State: this._companyService.myform
+                        .get("State")
+                        .value.trim(),
+                    StateCode: this._companyService.myform
+                        .get("StateCode")
+                        .value.trim(),
+                    GSTIN: this._companyService.myform
+                        .get("GSTIN")
+                        .value.trim(),
+                    SAC:
+                        this._companyService.myform.get("SAC").value
+                    ,
+                    PAN:
+                        this._companyService.myform.get("PAN").value
+                    ,
+                    PlaceOfSupply:  this._companyService.myform.get("PlaceOfSupply").value,
+                    updatedBy: this.accountService.currentUserValue.user.id,
+                    isActive:1
                     },
                 };
 

@@ -14,6 +14,8 @@ import { PaymentDetailComponent } from '../appointment/payment-detail/payment-de
 import { fuseAnimations } from '@fuse/animations';
 import { ViewBillPaymentComponent } from './view-bill-payment/view-bill-payment.component';
 import { BillApproveComponent } from './bill-approve/bill-approve.component';
+import { InvoiceBillMappingComponent } from '../appointment/invoice-bill-mapping/invoice-bill-mapping.component';
+
 // import * as converter from 'number-to-words';
 
 @Component({
@@ -37,7 +39,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
   printTemplate: any;
   reportPrintObjList: BrowseOPDBill[] = [];
   currentDate = new Date();
-
+  interimArray: any = [];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ViewChild(MatPaginator) PathTestpaginator: MatPaginator;
@@ -52,6 +54,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
   isLoading = true;
 
   displayedColumns = [
+    'checkbox',
     'BillDate',
     'BillNo',
     'RegNo',
@@ -142,6 +145,17 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
   }
 
+   
+  tableElementChecked(event, element) {
+    if (event.checked) {
+      this.interimArray.push(element);
+    } else if (this.interimArray.length > 0) {
+      let index = this.interimArray.indexOf(element);
+      if (index !== -1) {
+        this.interimArray.splice(index, 1);
+      }
+    }
+  }
 
 
   onClear() {
@@ -476,6 +490,38 @@ export class BrowseCreditPaymentComponent implements OnInit {
     });
   }
 
+  InvoiceGenerate(){
+    // let xx = {
+    //   RegNo: contact.RegId,
+    //   RegId: contact.RegId,
+    //   AdmissionID: contact.VisitId,
+    //   PatientName: contact.PatientName,
+    //   Doctorname: contact.Doctorname,
+    //   AdmDateTime: contact.AdmDateTime,
+    //   AgeYear: contact.AgeYear,
+    //   ClassId: contact.ClassId,
+    //   ClassName: contact.ClassName,
+    //   TariffName: contact.TariffName,
+    //   TariffId: contact.TariffId,
+    //   VisitId: contact.VisitId,
+    //   VisitDate: contact.VisitDate,
+    //   BillNo:contact.BillNo
+    // };
+
+    const dialogRef = this._matDialog.open(InvoiceBillMappingComponent,
+      {
+        maxWidth: "99%",
+        height: '700px',
+        width: '100%',
+        data: {
+          registerObj: this.dataSource
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed - Insert Action', result);
+      // this.getVisitList();
+    });
+  }
 
   getRecord(contact, m): void {
     debugger;

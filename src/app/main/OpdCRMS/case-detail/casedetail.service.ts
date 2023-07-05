@@ -55,4 +55,13 @@ export class CasedetailService {
     // this.personalFormGroup.patchValue(employee);
   }
 
+  public getVisitFrequencyCList(D_data){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_Constants", D_data);
+  }
+
+   //company Combobox List
+   public getCompanyCombo() {
+    return this._httpClient.post("Generic/GetByProc?procName=Retrieve_CompanyDetailsForCombo", {})
+  }
+
 }

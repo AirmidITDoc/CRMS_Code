@@ -26,19 +26,19 @@ export class CompanyMasterComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
     displayedColumns: string[] = [
-        "CompanyId",
-        "CompanyName",
-        "TypeName",
-        "Address",
-        "City",
-        "PinNo",
-        "PhoneNo",
-        "MobileNo",
-        "FaxNo",
-        "TariffName",
-        "AddedByName",
-        "IsDeleted",
-        "action",
+    'CompanyId',
+    'CompTypeId',
+    'CompanyName',
+    'Address',
+    'ContactNo',
+    'PinCode',
+    'State',
+    'StateCode',
+    'GSTIN',
+    'SAC',
+    'PAN',
+    'PlaceOfSupply',
+    'action'
     ];
 
     DSCompanyMasterList = new MatTableDataSource<CompanyMaster>();
@@ -139,19 +139,15 @@ export class CompanyMaster {
     CompTypeId: number;
     CompanyName: string;
     Address: string;
-    City: String;
-    PinNo: String;
-    PhoneNo: String;
-    MobileNo: String;
-    FaxNo: String;
-    TariffId: number;
-    IsDeleted: boolean;
-    AddedBy: number;
-    UpdatedBy: number;
-    IsCancelled: boolean;
-    IsCancelledBy: number;
-    IsCancelledDate: Date;
-    AddedByName: string;
+    ContactNo: any;
+    PinCode:  any;
+    State:  any;;
+    StateCode:  any;
+    GSTIN:  any;
+    SAC:  any;
+    PAN:  any;
+    PlaceOfSupply: any;
+       
     /**
    * Constructor
    *
@@ -165,19 +161,16 @@ export class CompanyMaster {
             this.CompTypeId = CompanyMaster.CompTypeId || "";
             this.CompanyName = CompanyMaster.CompanyName || "";
             this.Address = CompanyMaster.Address || "";
-            this.City = CompanyMaster.City || "";
-            this.PinNo = CompanyMaster.PinNo || "";
-            this.PhoneNo = CompanyMaster.PhoneNo || "";
-            this.MobileNo = CompanyMaster.MobileNo || "";
-            this.FaxNo = CompanyMaster.FaxNo || "";
-            this.TariffId = CompanyMaster.TariffId || "";
-            this.AddedBy = CompanyMaster.AddedBy || "";
-            this.IsDeleted = CompanyMaster.IsDeleted || "false";
-            this.UpdatedBy = CompanyMaster.UpdatedBy || "";
-            this.IsCancelled = CompanyMaster.IsCancelled || "false";
-            this.IsCancelledBy = CompanyMaster.IsCancelledBy || "";
-            this.IsCancelledDate = CompanyMaster.IsCancelledDate || "";
-            this.AddedByName = CompanyMaster.AddedByName || "";
+            this.ContactNo = CompanyMaster.ContactNo || "";
+            this.PinCode = CompanyMaster.PinCode || "";
+            this.State = CompanyMaster.State || "";
+            this.StateCode = CompanyMaster.StateCode || "";
+            this.GSTIN = CompanyMaster.GSTIN || "";
+            this.SAC = CompanyMaster.SAC || "";
+            this.PAN = CompanyMaster.PAN || "";
+            this.PlaceOfSupply = CompanyMaster.PlaceOfSupply || "";
+            
+           
         }
     }
 }

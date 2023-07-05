@@ -11,6 +11,7 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { fuseAnimations } from '@fuse/animations';
 import { DashboardService } from '../dashboard.service';
+import { DashboardCaseDetails } from '../daily-dashboard/daily-dashboard.component';
 
 @Component({
   selector: 'app-case-id-detail',
@@ -28,13 +29,15 @@ export class CaseIdDetailComponent implements OnInit {
   hasSelectedContacts: boolean;
   currentDate=new Date();
   subscriptions: Subscription[] = [];
-  
+  screenFromString = 'admission-form';
   printTemplate: any;
-  
+  DashboardCaseDetails
   subscriptionArr: Subscription[] = [];
   StudyId:0;
   totalAmtOfNetAmt: any;
   VisitID:any;
+  selectedAdvanceObj: DashboardCaseDetails;
+
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() dataArray: any;
@@ -72,7 +75,10 @@ export class CaseIdDetailComponent implements OnInit {
     if(this.data)
     {
       console.log(this.data);
-      this.StudyId=this.data.StudyId;
+      this.StudyId=this.data.element.Title;
+
+      this.selectedAdvanceObj = this.data.element;
+      console.log(this.selectedAdvanceObj)
     }
    
     this.getCaseList();
@@ -107,6 +113,12 @@ export class CaseIdDetailComponent implements OnInit {
   // toggle sidebar
   toggleSidebar(name): void {
     this._fuseSidebarService.getSidebar(name).toggleOpen();
+  }
+
+  dateTimeObj: any;
+  getDateTime(dateTimeObj) {
+    // console.log('dateTimeObj==', dateTimeObj);
+    this.dateTimeObj = dateTimeObj;
   }
 
   onClear() {

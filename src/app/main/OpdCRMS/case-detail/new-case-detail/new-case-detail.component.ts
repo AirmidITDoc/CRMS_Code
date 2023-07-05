@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ReplaySubject, Subject } from 'rxjs';
 import { CasedetailService } from '../casedetail.service';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import { CaseDetailComponent } from '../case-detail.component';
@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-case-detail',
@@ -43,7 +44,20 @@ CaseRepresentative: string;
 HospitalRepresentative: string;
 AgreementFileName: String;
 registerObj = new CaseDetail({});
-// Today: new Date();
+VisitFrequencyList: any = [];
+
+CompanyList:any=[];
+DocumentList:any=[];
+
+//company filter
+public companyFilterCtrl: FormControl = new FormControl();
+public filteredCompany: ReplaySubject<any> = new ReplaySubject<any>(1);
+
+//Document filter
+public documentFilterCtrl: FormControl = new FormControl();
+public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
+
+
 
   private _onDestroy = new Subject<void>();
   // private _onDestroy1 = new Subject<void>();
@@ -88,8 +102,21 @@ registerObj = new CaseDetail({});
         // this.AgreementFileName=this.data.AgreementFileName;
       
       }
+      this.getCompanyList();
+     this.VisitFrequencyComboList();
+     this.DocumentComboList();
 
-     
+     this.companyFilterCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterCompany();
+      });
+
+      this.documentFilterCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterDocument();
+      });
   }
 
   closeDialog() {
@@ -120,6 +147,84 @@ registerObj = new CaseDetail({});
   }
 
 
+
+  // company filter code  
+  private filterCompany() {
+
+    if (!this.CompanyList) {
+      return;
+    }
+    // get the search keyword
+    let search = this.companyFilterCtrl.value;
+    if (!search) {
+      this.filteredCompany.next(this.CompanyList.slice());
+      return;
+    }
+    else {
+      search = search.toLowerCase();
+    }
+    // filter
+    this.filteredCompany.next(
+      this.CompanyList.filter(bank => bank.CompanyName.toLowerCase().indexOf(search) > -1)
+    );
+
+  }
+
+
+    // Document filter code  
+    private filterDocument() {
+
+      if (!this.DocumentList) {
+        return;
+      }
+      // get the search keyword
+      let search = this.documentFilterCtrl.value;
+      if (!search) {
+        this.filteredDocument.next(this.DocumentList.slice());
+        return;
+      }
+      else {
+        search = search.toLowerCase();
+      }
+      // filter
+      this.filteredDocument.next(
+        this.DocumentList.filter(bank => bank.Name.toLowerCase().indexOf(search) > -1)
+      );
+  
+    }
+  
+  getCompanyList() {
+    this._registerService.getCompanyCombo().subscribe(data => {
+      this.CompanyList = data;
+      this.filteredCompany.next(this.CompanyList.slice());
+    });
+  }
+
+  VisitFrequencyComboList(){
+    var mdata ={
+      ConstanyType:"VisitFrequency"
+    };
+       
+    this._registerService.getVisitFrequencyCList(mdata).subscribe(data => {
+      this.VisitFrequencyList = data;
+      console.log( this.VisitFrequencyList );
+      // this.filteredCity.next(this.VisitFrequencyList.slice());
+    });
+  }
+
+
+  DocumentComboList(){
+    var mdata ={
+      ConstanyType:"CaseDocuments"
+    };
+       
+    this._registerService.getVisitFrequencyCList(mdata).subscribe(data => {
+      this.DocumentList = data;
+      console.log( this.VisitFrequencyList );
+      this.filteredDocument.next(this.DocumentList.slice());
+    });
+  }
+
   addEmptyRow() { }
  
   
@@ -145,7 +250,7 @@ registerObj = new CaseDetail({});
           "VisitFrequency": this.personalFormGroup.get('VisitFrequency').value || '',
           "CaseStartDate": this.registerObj.CaseStartDate,//this.datePipe.transform(this.personalFormGroup.get('CaseStartDate').value, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
           "CaseEndDate":this.registerObj.CaseEndDate,// this.datePipe.transform(this.personalFormGroup.get('CaseEndDate').value, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
-          "CaseStatus": this.personalFormGroup.get('CaseStatus').value || '',
+          "CaseStatus":1,// this.personalFormGroup.get('CaseStatus').value || '',
           "CompanyName": this.personalFormGroup.get('CompanyName').value || 0,
           "CaseRepresentative": this.personalFormGroup.get('CaseRepresentative').value || '',
           "HospitalRepresentative": this.personalFormGroup.get('HospitalRepresentative').value || '',
