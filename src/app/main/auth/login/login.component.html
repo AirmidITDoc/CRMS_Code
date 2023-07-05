@@ -1,22 +1,18 @@
 <div id="login" class="inner-scroll" fxLayout="row" fxLayoutAlign="start">
     <div id="login-intro" fxFlex fxHide fxShow.gt-xs>
         <div  [@animate]="{ value: '*', params: { scale: '0.2' } }">
-            <img src="assets/images/logos/CRMS.jpg" style="width:80%;" />
+            <img src="assets/images/logos/Airmid_NewLogo.jpeg" style="width: 10%;" />
         </div>
 
         <div
             class="title"
             [@animate]="{ value: '*', params: { delay: '50ms', y: '25px' } }"
         >
-            <!-- Welcome to the Anther !!!! -->
+        Welcome to the AirMid Technologies
         </div>
 
         <div class="description" [@animate]="{ value: '*', params: { delay: '100ms', y: '25px' } }">
-            <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-            ullamcorper nisl erat, vel convallis elit fermentum pellentesque.
-            Sed mollis velit facilisis facilisis viverra. -->
-
-          
+           We care healthcare ....
         </div>
     </div>
 
@@ -26,7 +22,7 @@
             <div class="logo" fxHide.gt-xs>
                 <!-- <img src="assets/images/logos/CRMS.jpeg" /> -->
             </div>
-            <div class="title" style="font-weight: bolder;font-family: sans-serif;font-size: 20px;">CRMS</div>
+            <!-- <div class="title" style="font-weight: bolder;font-family: sans-serif;font-size: 20px;">CRMS</div> -->
             <div class="title" style="font-family: sans-serif;">LOGIN TO YOUR ACCOUNT</div>
 
             <form name="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>

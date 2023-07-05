@@ -39,13 +39,8 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit(): void {
     this.changePasswordFormGroup = this.createchangePasswordForm();
     this.fname = this.accountService.currentUserValue.user.firstName;
-    console.log(this.fname);
     this.lname = this.accountService.currentUserValue.user.lastName;
-    console.log(this.lname);
     this.Uname = this.accountService.currentUserValue.user.userName;
-    console.log(this.Uname);
-
-
   }
   toggleSidebar(name): void {
     this._fuseSidebarService.getSidebar(name).toggleOpen();
@@ -60,17 +55,13 @@ export class ChangePasswordComponent implements OnInit {
       lname: '',
       Uname: '',
       password: '',
-
-
     });
   }
 
   changepassword() {
-    debugger;
     let pass = this.changePasswordFormGroup.get('password').value;
     let id = this.accountService.currentUserValue.user.id;
     let UpdateUserPassword = "update LoginManager set Password ='" + pass + "' where UserId=" + id 
-    console.log(UpdateUserPassword);
     this._AdministrationService.getpasswwordupdate(UpdateUserPassword).subscribe(data => {
       if (data) {
         Swal.fire('Pasword Changed!', 'Record updated Successfully !', 'success').then((result) => {
