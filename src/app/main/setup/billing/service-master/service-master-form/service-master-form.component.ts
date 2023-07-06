@@ -267,8 +267,6 @@ export class ServiceMasterFormComponent implements OnInit {
           "serviceDetailInsert": serviceDetailInsertarray,
 
         };
-
-
         console.log(submitData);
         this._serviceMasterService.serviceMasterUpdate(submitData).subscribe(data => {
           this.msg = data;
