@@ -42,14 +42,14 @@ export class CaseDetailComponent implements OnInit {
   @Input() dataArray: any;
 
   displayedColumns = [
-    'CaseId',
+    // 'CaseId',
     'CaseTitle',
     'CaseDescription',
     'TotalSubjects',
     'TotalVisits',
     'VisitFrequency',
     'CaseStartDate',
-    'CaseStatus',
+    // 'CaseStatus',
     'CompanyName',
     'CaseRepresentative',
     'HospitalRepresentative',
