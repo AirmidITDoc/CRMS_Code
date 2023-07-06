@@ -56,14 +56,14 @@ export class InvoiceBillMappingComponent implements OnInit {
   displayedColumns = [
     'checkbox',
     'BillNo',
-    'CaseId',
-    'CaseTitle',
+    // 'CaseId',
+    // 'CaseTitle',
     'PatientName',
     'RegNo',
-    'MobileNo',
-    'AgeYear',
+    // 'MobileNo',
+    // 'AgeYear',
     'TotalBillAmt',
-    'action',
+    // 'action',
 
   ];
 
