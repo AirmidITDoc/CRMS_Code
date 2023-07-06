@@ -20,6 +20,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import * as converter from 'number-to-words';
+import { MatSelect } from '@angular/material/select';
 
 type NewType = Observable<any[]>;
 export class ILookup {
@@ -143,6 +144,8 @@ export class BillDetailComponent implements OnInit {
   @ViewChild('Price') inputEl: ElementRef;
   @ViewChild(MatAccordion) accordion: MatAccordion;
   @ViewChild('drawer') public drawer: MatDrawer;
+
+  @ViewChild('DoctorId') DoctorId: MatSelect;
 
   isLoading: String = '';
   selectedAdvanceObj: SearchInforObj;
@@ -491,7 +494,7 @@ export class BillDetailComponent implements OnInit {
     // this.registerObj = new AdmissionPersonlModel({});
     // this.registerObj = obj;
     // this.setDropdownObjs();
-
+debugger;
 
     if (obj.IsDocEditable) {
 
@@ -501,11 +504,15 @@ export class BillDetailComponent implements OnInit {
       this.registeredForm.get('DoctorID').enable();
       // this.isDoctor = true;
     } else {
-      this.registeredForm.get('DoctorID').reset();
-      this.registeredForm.get('DoctorID').clearValidators();
-      this.registeredForm.get('DoctorID').updateValueAndValidity();
-      this.registeredForm.get('DoctorID').disable();
-      // this.isDoctor = false;
+      // this.registeredForm.get('DoctorID').reset();
+      // this.registeredForm.get('DoctorID').clearValidators();
+      // this.registeredForm.get('DoctorID').updateValueAndValidity();
+      // this.registeredForm.get('DoctorID').disable();
+      // this.isDoctor = true;
+
+      this.DoctorId.close();
+
+      // this.color.hide()
     }
   }
 

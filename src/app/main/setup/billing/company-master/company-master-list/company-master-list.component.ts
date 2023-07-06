@@ -25,7 +25,7 @@ export class CompanyMasterListComponent implements OnInit {
     stateList: any = [];
     selectedState:any;
     registerObj:CompanyMaster;
-
+    PinCode:any;
     StateCode:any;
 
     private _onDestroy = new Subject<void>();
@@ -98,13 +98,11 @@ this.StateCode=event.StateId;
     }
 
     onSubmit() {
-        if (this._companyService.myform.valid) {
+        // if (this._companyService.myform.valid) {
             if (!this._companyService.myform.get("CompanyId").value) {
                 var m_data = {
-                    companyMasterInsert: {
-                        compTypeId:
-                            this._companyService.myform.get("CompTypeId").value
-                                .CompanyTypeId,
+                    companyInsert: {
+                        companyId:0,
                         companyName: this._companyService.myform
                             .get("CompanyName")
                             .value.trim(),
@@ -113,19 +111,19 @@ this.StateCode=event.StateId;
                             .value.trim(),
                         ContactNo: this._companyService.myform
                             .get("ContactNo")
-                            .value.trim(),
+                            .value,
                         PinCode: this._companyService.myform
                             .get("PinCode")
                             .value.trim(),
                         State: this._companyService.myform
                             .get("State")
-                            .value.trim(),
+                            .value.StateId,
                         StateCode: this._companyService.myform
                             .get("StateCode")
-                            .value.trim(),
+                            .value,
                         GSTIN: this._companyService.myform
                             .get("GSTIN")
-                            .value.trim(),
+                            .value,
                         SAC:
                             this._companyService.myform.get("SAC").value
                         ,
@@ -159,42 +157,42 @@ this.StateCode=event.StateId;
                                 "error"
                             );
                         }
-                        // this.getCompanyMaster();
+                        this.getCompanyMaster();
                     });
             } else {
                 var m_dataUpdate = {
-                    companyMasterUpdate: {
-                        compTypeId:
-                        this._companyService.myform.get("CompTypeId").value
-                            .CompanyTypeId,
-                    companyName: this._companyService.myform
-                        .get("CompanyName")
-                        .value.trim(),
-                    address: this._companyService.myform
-                        .get("Address")
-                        .value.trim(),
-                    ContactNo: this._companyService.myform
-                        .get("ContactNo")
-                        .value.trim(),
-                    PinCode: this._companyService.myform
-                        .get("PinCode")
-                        .value.trim(),
-                    State: this._companyService.myform
-                        .get("State")
-                        .value.trim(),
-                    StateCode: this._companyService.myform
-                        .get("StateCode")
-                        .value.trim(),
-                    GSTIN: this._companyService.myform
-                        .get("GSTIN")
-                        .value.trim(),
-                    SAC:
-                        this._companyService.myform.get("SAC").value
-                    ,
-                    PAN:
-                        this._companyService.myform.get("PAN").value
-                    ,
-                    PlaceOfSupply:  this._companyService.myform.get("PlaceOfSupply").value,
+                    companyUpdate: {
+                        companyId:
+                        this._companyService.myform.get("CompanyId").value.CompanyId,
+                          
+                            companyName: this._companyService.myform
+                                .get("CompanyName")
+                                .value.trim(),
+                            address: this._companyService.myform
+                                .get("Address")
+                                .value.trim(),
+                            ContactNo: this._companyService.myform
+                                .get("ContactNo")
+                                .value,
+                            PinCode: this._companyService.myform
+                                .get("PinCode")
+                                .value.trim(),
+                            State: this._companyService.myform
+                                .get("State")
+                                .value.StateId,
+                            StateCode: this._companyService.myform
+                                .get("StateCode")
+                                .value,
+                            GSTIN: this._companyService.myform
+                                .get("GSTIN")
+                                .value,
+                            SAC:
+                                this._companyService.myform.get("SAC").value
+                            ,
+                            PAN:
+                                this._companyService.myform.get("PAN").value
+                            ,
+                            PlaceOfSupply:  this._companyService.myform.get("PlaceOfSupply").value,
                     updatedBy: this.accountService.currentUserValue.user.id,
                     isActive:1
                     },
@@ -223,7 +221,7 @@ this.StateCode=event.StateId;
                         }
                         //  this.getCompanyMaster();
                     });
-            }
+            // }
             this.onClose();
         }
     }

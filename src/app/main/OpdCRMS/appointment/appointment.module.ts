@@ -43,7 +43,9 @@ import { PaymentDetailComponent } from './payment-detail/payment-detail.componen
 // import { EditVisitDateComponent } from './edit-visit-date/edit-visit-date.component';
 import { NewVistDateComponent } from './new-vist-date/new-vist-date.component';
 import { InvoiceBillMappingComponent } from './invoice-bill-mapping/invoice-bill-mapping.component';
-
+import { UploadDocumentComponent } from './upload-document/upload-document.component';
+import { ViewFinancialSummarybudgetComponent } from './invoice-bill-mapping/view-financial-summarybudget/view-financial-summarybudget.component';
+import { BrowseInvoiceListComponent } from './browse-invoice-list/browse-invoice-list.component';
 // import { SharedModule } from 'app/main/shared/shared.module';
 
 const routes: Routes = [
@@ -62,7 +64,9 @@ const routes: Routes = [
         // EditVisitDateComponent,
         NewVistDateComponent,
         InvoiceBillMappingComponent,
-      
+        UploadDocumentComponent,
+        ViewFinancialSummarybudgetComponent,
+          
       
     ],
     imports: [

@@ -173,7 +173,7 @@
                         <mat-form-field appearance="outline" fxFlex>
                             <mat-label>AgreementFileName</mat-label>
                             <input name="AgreementFileName" formControlName="AgreementFileName"
-                                placeholder="AgreementFileName" matInput required
+                                placeholder="AgreementFileName" matInput (click)="UploadDoc()"
                                 [(ngModel)]="registerObj.AgreementFileName">
                             <!-- <mat-error class="error"
                                 *ngIf="personalFormGroup.get('MobileNo').invalid && personalFormGroup.get('MobileNo').touched">10

@@ -34,22 +34,20 @@ import { SharedModule } from 'app/main/shared/shared.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatNestedTreeNode, MatTree, MatTreeModule } from '@angular/material/tree';
-import { BrowseCreditPaymentComponent } from './browse-credit-payment.component';
-import { CreditPaymentService } from './credit-payment.service';
-import { ViewBillPaymentComponent } from './view-bill-payment/view-bill-payment.component';
-// import { SharedModule } from 'app/main/shared/shared.module';
+import { InvoiceBillService } from './invoice-bill.service';
+import { BrowseInvoiceListComponent } from './browse-invoice-list.component';
+
 
 const routes: Routes = [
     {
         path: '**',
-        component: BrowseCreditPaymentComponent,
+        component: BrowseInvoiceListComponent
     },
 ];
 @NgModule({
     declarations: [
-        BrowseCreditPaymentComponent,
-        ViewBillPaymentComponent,
-                    
+      BrowseInvoiceListComponent
+       
       
     ],
     imports: [
@@ -98,15 +96,16 @@ const routes: Routes = [
         MatChipsModule,
         MatExpansionModule,
         MatListModule,
-        MatTreeModule
+        MatTreeModule,
+        // NgxMaterialTimepickerModule
         
     ],
     providers: [
-        CreditPaymentService,
+      InvoiceBillService,
         DatePipe
     ],
     entryComponents: [
-        BrowseCreditPaymentComponent,
+      BrowseInvoiceListComponent
     ]
 })
-export class CreditPaymentModule { }
+export class InvoiceBillModule { }

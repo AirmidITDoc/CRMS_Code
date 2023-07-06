@@ -43,9 +43,7 @@ export class CasedetailService {
   public CaseDetailUpdate(employee){
     return this._httpClient.post("OutPatient/CaseDetailUpdate", employee);
   }
-  public getCaseIDCombo(D_data){
-    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CasedetailId", D_data);
-  }
+
 
   public getCaseDetailPrint(employee){
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CasedetailId",employee);
@@ -62,6 +60,10 @@ export class CasedetailService {
    //company Combobox List
    public getCompanyCombo() {
     return this._httpClient.post("Generic/GetByProc?procName=Retrieve_CompanyDetailsForCombo", {})
+  }
+
+  public getAllCaseList(employee){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CasedetailId",employee);
   }
 
 }
