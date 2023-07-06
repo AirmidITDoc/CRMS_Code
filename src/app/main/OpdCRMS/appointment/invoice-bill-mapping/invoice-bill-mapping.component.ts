@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BrowseOPDBill, ChargesList } from '../appointment.component';
 import { Observable, ReplaySubject, Subject, Subscription, of } from 'rxjs';
@@ -15,6 +15,9 @@ import { AuthenticationService } from 'app/core/services/authentication.service'
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { takeUntil } from 'rxjs/operators';
+import { fuseAnimations } from '@fuse/animations';
+import { CaseDetail } from '../../case-detail/new-case-detail/new-case-detail.component';
+import { ViewFinancialSummarybudgetComponent } from './view-financial-summarybudget/view-financial-summarybudget.component';
 
 type NewType = Observable<any[]>;
 
@@ -22,29 +25,28 @@ type NewType = Observable<any[]>;
 @Component({
   selector: 'app-invoice-bill-mapping',
   templateUrl: './invoice-bill-mapping.component.html',
-  styleUrls: ['./invoice-bill-mapping.component.scss']
+  styleUrls: ['./invoice-bill-mapping.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class InvoiceBillMappingComponent implements OnInit {
 
- 
+
   click: boolean = false;
   hasSelectedContacts: boolean;
-  InvoiceId:any;
+  InvoiceId: any;
   CaseId: any;
-  InvoiceDate:any;
-  InvoiceTime:any;
-  TaxableAmount:any;
-  CGST:any;
-  SGST:any;
-  IGST:any; 
-  TotalAmount:any; 
-  ApprovalStatus:any;
-  ApprovedBy:any;
-  ApprovedDate: any;
-  InvoiceStatus:any;
-  CashCounterId:any;
-
-
+  InvoiceDate: any;
+  InvoiceTime: any;
+  TaxableAmount: any;
+  CGST: any;
+  SGST: any;
+  IGST: any;
+  TotalAmount: any;
+  caseList: any = [];
+  StudyId: any;
+  interimArray: any = [];
+  totalTotalBillAmt: any;
   registerObj: InvoiceBillMap;
   subscriptionArr: Subscription[] = [];
   printTemplate: any;
@@ -52,26 +54,25 @@ export class InvoiceBillMappingComponent implements OnInit {
   chargeslist: any = [];
   screenFromString = 'OP-billing';
   displayedColumns = [
-    // 'checkbox',
+    'checkbox',
+    'BillNo',
+    'CaseId',
+    'CaseTitle',
+    'PatientName',
+    'RegNo',
+    'MobileNo',
+    'AgeYear',
+    'TotalBillAmt',
+    'action',
 
-    'ChargesDate',
-    'ServiceName',
-    'Price',
-    'Qty',
-    'TotalAmt',
-    'DiscPer',
-    'DiscAmt',
-    'NetAmount',
-    'ChargeDoctorName',
-    'ClassName',
-    'ChargesAddedName',
-    'action'
   ];
 
 
 
 
-  dataSource = new MatTableDataSource<ChargesList>();
+  dataSource = new MatTableDataSource<CaseDetail>();
+  dataSource1 = new MatTableDataSource<CaseDetail>();
+
   myControl = new FormControl();
   filteredOptions: any;
   billingServiceList = [];
@@ -82,26 +83,29 @@ export class InvoiceBillMappingComponent implements OnInit {
   selectedAdvanceObj: InvoiceBillMap;
   isFilteredDateDisabled: boolean = true;
   currentDate = new Date();
-
+  reportPrintObjList: BrowseOPDBill[] = [];
   registeredForm: FormGroup;
-  
+  selectedcase: any;
   netPaybleAmt: any;
   netPaybleAmt1: any;
   TotalnetPaybleAmt: any;
-
+  sIsLoading: any;
+  reportPrintObj: BrowseOPDBill;
   // private lookups: ILookup[] = [];
   private nextPage$ = new Subject();
-  
+
   private _onDestroy = new Subject<void>();
 
   resBillId: Post;
+  sort: any;
+  paginator: any;
 
 
   constructor(
     private _fuseSidebarService: FuseSidebarService,
-    
+
     public _opappointmentService: AppointmentService,
-        public element: ElementRef<HTMLElement>,
+    public element: ElementRef<HTMLElement>,
     private _ActRoute: Router,
     public _matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -113,7 +117,7 @@ export class InvoiceBillMappingComponent implements OnInit {
     public _httpClient: HttpClient,
     private formBuilder: FormBuilder) { }
 
-  
+
   ngOnInit(): void {
 
 
@@ -128,27 +132,11 @@ export class InvoiceBillMappingComponent implements OnInit {
 
     }
 
-
-    }
-
-  VisitListCombo() {
-   
-  }
-
-
-  focusNextPrice() {
-    this.renderer.selectRootElement('#Price').focus();
-  }
-
-  focusNextQty() {
-    this.renderer.selectRootElement('#qty').focus();
-  }
-
-  focusNextbtnAdd() {
-    this.renderer.selectRootElement('#DoctorId').focus();
+    this.getCaseList();
+    this.getCasecombo();
 
   }
-  
+
 
   // Create registered form group
   createForm() {
@@ -156,21 +144,21 @@ export class InvoiceBillMappingComponent implements OnInit {
       InvoiceId: [''],
       CaseId: [''],
       InvoiceDate: [''],
-      InvoiceTime:  [''],
-      TaxableAmount:  [''],
-      CGST:  [''],
-      SGST:  [''], 
-      IGST: [''], 
-      TotalAmount: [''], 
+      InvoiceTime: [''],
+      TaxableAmount: [''],
+      CGST: [''],
+      SGST: [''],
+      IGST: [''],
+      TotalAmount: [''],
       ApprovalStatus: [''],
       ApprovedBy: [''],
-      ApprovedDate:  [''],
-      InvoiceStatus:  [''],
-      CashCounterId:  [''],
+      // ApprovedDate:[{ value: this.registerObj.ApprovedDate }],
+      InvoiceStatus: [''],
+      CashCounterId: [''],
     });
   }
 
- 
+
 
   //  ===================================================================================
   filterStates(name: string) {
@@ -185,7 +173,7 @@ export class InvoiceBillMappingComponent implements OnInit {
   }
 
   onOptionSelected(selectedItem) {
-  
+
   }
 
   updatedVal(e) {
@@ -194,20 +182,11 @@ export class InvoiceBillMappingComponent implements OnInit {
     } else {
       this.showAutocomplete = false;
     }
-  
-  }
-
- 
-
-  getOptionText(option) {
-    // debugger;
-    if (!option)
-      return '';
-    return option.ServiceName;  // + ' ' + option.Price ; //+ ' (' + option.TariffId + ')';
 
   }
 
- 
+
+
 
   getTotalAmount(element) {
     // debugger
@@ -216,7 +195,7 @@ export class InvoiceBillMappingComponent implements OnInit {
       totalAmt = parseInt(element.Price) * parseInt(element.Qty);
       element.TotalAmt = totalAmt;
       element.NetAmount = totalAmt;
-      
+
       this.getDiscAmount(element);
 
     }
@@ -244,31 +223,47 @@ export class InvoiceBillMappingComponent implements OnInit {
   }
 
   openBillInfo() {
-    
+
   }
+
+
+
 
   getNetAmtSum(element) {
 
+    let netAmt;
+    netAmt = element.reduce((sum, { TotalBillAmt }) => sum += +(TotalBillAmt || 0), 0);
+    this.TaxableAmount = netAmt;
+
+    console.log(this.TaxableAmount);
+
+    return netAmt
   }
+
+
   transform(value: string) {
     var datePipe = new DatePipe("en-US");
     value = datePipe.transform(value, 'dd/MM/yyyy hh:mm a');
     return value;
   }
   getTotalNetAmount() {
-    
+
   }
 
   tableElementChecked(event, element) {
 
-    // if (event.checked) {
-    //   this.interimArray.push(element);
-    // } else if (this.interimArray.length > 0) {
-    //   let index = this.interimArray.indexOf(element);
-    //   if (index !== -1) {
-    //     this.interimArray.splice(index, 1);
-    //   }
-    // }
+    if (event.checked) {
+      this.interimArray.push(element);
+      this.dataSource1.data = this.interimArray;
+
+    } else if (this.interimArray.length > 0) {
+      let index = this.interimArray.indexOf(element);
+      if (index !== -1) {
+        this.interimArray.splice(index, 1);
+      }
+    }
+
+    console.log(this.dataSource1.data);
   }
 
   getInterimData() {
@@ -277,66 +272,94 @@ export class InvoiceBillMappingComponent implements OnInit {
     //   { data: this.interimArray });
   }
 
-  
-  onSaveOPBill() {
-   
+  getCasecombo() {
 
+    this._opappointmentService.getCaseIDCombo().subscribe(data => {
+      this.caseList = data;
+      this.selectedcase = this.caseList[0].CaseId;
+
+    });
+
+  }
+
+
+
+  getCaseList() {
+    this.sIsLoading = 'loading-data';
+    var D_data = {
+      "StudyId": this.registeredForm.get('CaseId').value.CaseId || 0
+    }
+    setTimeout(() => {
+      this.sIsLoading = 'loading-data';
+      this._opappointmentService.getCaseIDList(D_data).subscribe(Visit => {
+        this.dataSource.data = Visit as CaseDetail[];
+        console.log(this.dataSource.data);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        this.sIsLoading = '';
+        console.log(this.dataSource.data)
+      },
+        error => {
+          this.sIsLoading = '';
+        });
+    }, 1000);
+
+  }
+
+  onSaveOPBill() {
+
+    debugger;
     let insertInvoiceDetail = {};
-    
-   
+
+
     insertInvoiceDetail['InvoiceId'] = 0;
-    insertInvoiceDetail['CaseId'] = this.registeredForm.get('CaseId ').value || '';
-    insertInvoiceDetail['InvoiceDate'] =  this.registerObj.InvoiceDate;
-    insertInvoiceDetail['InvoiceTime'] = this.registerObj.InvoiceTime;
-    insertInvoiceDetail['TaxableAmount'] = this.registeredForm.get('TaxableAmount').value || '';
-    insertInvoiceDetail['CGST'] =  this.registeredForm.get('CGST').value || 0;
-    insertInvoiceDetail['SGST'] =this.registeredForm.get('SGST').value || '';
-    insertInvoiceDetail['IGST'] = this.registeredForm.get('IGST ').value || '';
-    insertInvoiceDetail['TotalAmount'] =this.registeredForm.get('TotalAmount').value || '';
-    insertInvoiceDetail['ApprovalStatus'] =  this.registeredForm.get('ApprovalStatus').value || 0;
-      insertInvoiceDetail['ApprovedBy'] =this.registeredForm.get('ApprovedBy').value || '';
-      insertInvoiceDetail['ApprovedDate'] =this.registerObj.ApprovedDate;
-    insertInvoiceDetail['InvoiceStatus'] =this.registeredForm.get('InvoiceStatus ').value || '';
-    insertInvoiceDetail['CashCounterId'] = this.registeredForm.get('CashCounterId ').value || 0;
+    insertInvoiceDetail['CaseId'] = this.registeredForm.get('CaseId').value.CaseId || 0;
+    insertInvoiceDetail['InvoiceDate'] = this.dateTimeObj.date;// this.registerObj.InvoiceDate;
+    insertInvoiceDetail['InvoiceTime'] = this.dateTimeObj.time;
+    insertInvoiceDetail['TaxableAmount'] = this.registeredForm.get('TaxableAmount').value || 0;
+    insertInvoiceDetail['CGST'] = this.registeredForm.get('CGST').value || 0;
+    insertInvoiceDetail['SGST'] = this.registeredForm.get('SGST').value || 0;
+    insertInvoiceDetail['IGST'] = this.registeredForm.get('IGST').value || 0;
+    insertInvoiceDetail['TotalAmount'] = this.registeredForm.get('TotalAmount').value || 0;
+    insertInvoiceDetail['ApprovalStatus'] = 0,// this.registeredForm.get('ApprovalStatus').value || 0;
+      insertInvoiceDetail['ApprovedBy'] = "",//this.registeredForm.get('ApprovedBy').value || '';
+      insertInvoiceDetail['ApprovedDate'] = this.dateTimeObj.date;// this.dateTimeObj.date;//this.registerObj.ApprovedDate;
+    insertInvoiceDetail['InvoiceStatus'] = "";//this.registeredForm.get('InvoiceStatus').value || '';
+    insertInvoiceDetail['CashCounterId'] = 0;// this.registeredForm.get('CashCounterId').value || 0;
     insertInvoiceDetail['createdBy'] = this.accountService.currentUserValue.user.id;
- 
+
 
     let insertInvoiceBillDetailarray = [];
-    let chargesDetailInsert = {};
 
-    this.dataSource.data.forEach((element) => {
+    this.dataSource1.data.forEach((element) => {
       let InvoiceBillDetail = {};
       InvoiceBillDetail['InvoiceId'] = 0,
-      // InvoiceBillDetail['BillNo'] = this.registeredForm.get('CashCounterId ').value || 0;
-      InvoiceBillDetail['CreatedBy'] =this.accountService.currentUserValue.user.id;
- 
-    
+        InvoiceBillDetail['BillNo'] = element.BillNo || 0;
+      InvoiceBillDetail['CreatedBy'] = this.accountService.currentUserValue.user.id;
 
       insertInvoiceBillDetailarray.push(InvoiceBillDetail);
       // console.log(InsertAdddetArr.length);
     })
 
 
-
-  
     let submitData = {
 
       "insertInvoiceDetail": insertInvoiceDetail,
-      "insertInvoiceBillDetail": insertInvoiceBillDetailarray     
+      "insertInvoiceBillDetail": insertInvoiceBillDetailarray
 
     };
     console.log(submitData);
     this._opappointmentService.InvoiceBillMappingInsert(submitData).subscribe(response => {
       if (response) {
-        Swal.fire('Credit Bill With !', 'Invoice Bill Mapping Generated Successfully !', 'success').then((result) => {
+        Swal.fire('Invoice Bill  !', 'Invoice Bill Mapping Generated Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {
             let m = response;
-            // this.getPrint(m);
+            this.getPrint(m);
             this._matDialog.closeAll();
           }
         });
       } else {
-        Swal.fire('Error !', ' Billing data not saved', 'error');
+        Swal.fire('Error !', ' Invoice data not saved', 'error');
       }
       this.isLoading = '';
     });
@@ -345,29 +368,138 @@ export class InvoiceBillMappingComponent implements OnInit {
 
 
 
-  onSaveEntry() {
+  getPrint(el) {
     debugger;
-   
-    this.isLoading = 'save';
+    var D_data = {
+      "BillNo": 1,// el,
+    }
 
-    // if (this.SrvcName && (parseInt(this.b_price) != 0) && this.b_qty) {
-    this.isLoading = 'save';
-    this.dataSource.data = [];
-    this.chargeslist.push(
+    // let printContents; 
+    // this.subscriptionArr.push(
+    //   this._opappointmentService.getFinancialSummarybudgetPrint(D_data).subscribe(res => {
+
+    //     this.reportPrintObjList = res as BrowseOPDBill[];
+    //     console.log(this.reportPrintObjList);
+    //     this.reportPrintObj = res[0] as BrowseOPDBill;
+
+    //     this.getTemplate();
+
+    //   })
+    // );
+
+    const dialogRef = this._matDialog.open(ViewFinancialSummarybudgetComponent,
       {
-      
+        maxWidth: "75vw",
+        height: '1560px',
+        width: '100%',
+        // data : {
+        //   registerObj : xx,
+        // }
       });
-    this.isLoading = '';
-    console.log(this.chargeslist);
-    this.dataSource.data = this.chargeslist;
-    console.log(this.dataSource.data);
-    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed - Insert Action', result);
+      //  this.getCaseList();
+    });
 
-    // }
-    
-    this.getTotalNetAmount();
+
   }
+  getTemplate() {
+    let query = 'select TempId,TempDesign,TempKeys as TempKeys from Tg_Htl_Tmp where TempId=32';
+    this._opappointmentService.getTemplate(query).subscribe((resData: any) => {
 
+      this.printTemplate = resData[0].TempDesign;
+      let keysArray = ['HospitalName', 'HospitalAddress', 'Phone', 'EmailId', 'PhoneNo', 'RegNo', 'BillNo', 'AgeYear', 'AgeDay', 'AgeMonth', 'PBillNo', 'PatientName', 'BillDate', 'VisitDate', 'ConsultantDocName', 'DepartmentName', 'ServiceName', 'ChargesDoctorName', 'Price', 'Qty', 'ChargesTotalAmount', 'TotalBillAmount', 'NetPayableAmt', 'NetAmount', 'ConcessionAmt', 'PaidAmount', 'BalanceAmt', 'AddedByName']; // resData[0].TempKeys;
+      debugger;
+      for (let i = 0; i < keysArray.length; i++) {
+        let reString = "{{" + keysArray[i] + "}}";
+        let re = new RegExp(reString, "g");
+        this.printTemplate = this.printTemplate.replace(re, this.reportPrintObj[keysArray[i]]);
+      }
+      var strrowslist = "";
+      for (let i = 1; i <= this.reportPrintObjList.length; i++) {
+        console.log(this.reportPrintObjList);
+        var objreportPrint = this.reportPrintObjList[i - 1];
+
+        let docname;
+        if (objreportPrint.ChargesDoctorName)
+          docname = objreportPrint.ChargesDoctorName;
+        else
+          docname = '';
+
+        //   var strabc = `<hr style="border-color:white" >
+        //   <div style="display:flex;margin:8px 0">
+        //   <div style="display:flex;width:60px;margin-left:20px;">
+        //       <div>`+ i + `</div> <!-- <div>BLOOD UREA</div> -->
+        //   </div>
+        //   <div style="display:flex;width:370px;margin-left:10px;text-align:left;">
+        //       <div>`+ objreportPrint.ServiceName + `</div> <!-- <div>BLOOD UREA</div> -->
+        //   </div>
+        //   // <div style="display:flex;width:370px;margin-left:30px;text-align:left;">
+        //   // <div>`+ docname + `</div> <!-- <div>BLOOD UREA</div> -->
+        //   // </div>
+        //   <div style="display:flex;width:90px;margin-left:40px;text-align:right;">
+        //       <div>`+ '₹' + objreportPrint.Price.toFixed(2) + `</div> <!-- <div>450</div> -->
+        //   </div>
+        //   <div style="display:flex;width:60px;margin-left:40px;text-align:right;">
+        //       <div>`+ objreportPrint.Qty + `</div> <!-- <div>1</div> -->
+        //   </div>
+        //   <div style="display:flex;width:140px;margin-left:40px;text-align:left;">
+        //       <div>`+ '₹' + objreportPrint.NetAmount.toFixed(2) + `</div> <!-- <div>450</div> -->
+        //   </div>
+        //   </div>`;
+        //   strrowslist += strabc;
+        // }
+
+        var strabc = `<hr style="border-color:white" >
+        <div style="display:flex;margin:8px 0">
+        <div style="display:flex;width:60px;margin-left:20px;">
+            <div>`+ i + `</div> <!-- <div>BLOOD UREA</div> -->
+        </div>
+        <div style="display:flex;width:300px;margin-left:10px;text-align:left;">
+            <div>`+ objreportPrint.ServiceName + `</div> <!-- <div>BLOOD UREA</div> -->
+        </div>
+        <div style="display:flex;width:300px;margin-left:10px;text-align:left;">
+        <div>`+ docname + `</div> <!-- <div>BLOOD UREA</div> -->
+        </div>
+        <div style="display:flex;width:80px;margin-left:10px;text-align:left;">
+            <div>`+ '₹' + objreportPrint.Price.toFixed(2) + `</div> <!-- <div>450</div> -->
+        </div>
+        <div style="display:flex;width:80px;margin-left:10px;text-align:left;">
+            <div>`+ objreportPrint.Qty + `</div> <!-- <div>1</div> -->
+        </div>
+        <div style="display:flex;width:110px;margin-left:30px;text-align:center;">
+            <div>`+ '₹' + objreportPrint.NetAmount.toFixed(2) + `</div> <!-- <div>450</div> -->
+        </div>
+        </div>`;
+        strrowslist += strabc;
+      }
+      var objPrintWordInfo = this.reportPrintObjList[0];
+      let concessinamt;
+      // if (objPrintWordInfo.ConcessionAmt > 0) {
+      //   this.printTemplate = this.printTemplate.replace('StrConcessionAmt', '₹' + (objPrintWordInfo.ConcessionAmt.toFixed(2)));
+      // }
+      // else {
+      //   this.printTemplate = this.printTemplate.replace('StrConcessionAmt', '₹' + (objPrintWordInfo.ConcessionAmt.toFixed(2)));
+      // }
+
+      this.printTemplate = this.printTemplate.replace('StrTotalPaidAmountInWords', this.convertToWord(objPrintWordInfo.PaidAmount));
+      this.printTemplate = this.printTemplate.replace('StrPrintDate', this.transform2(this.currentDate.toString()));
+      this.printTemplate = this.printTemplate.replace('SetMultipleRowsDesign', strrowslist);
+      // this.printTemplate = this.printTemplate.replace('StrBalanceAmt', '₹' + (objPrintWordInfo.BalanceAmt.toFixed(2)));
+      // this.printTemplate = this.printTemplate.replace('StrTotalBillAmount', '₹' + (objPrintWordInfo.TotalBillAmount.toFixed(2)));
+      // this.printTemplate = this.printTemplate.replace('StrConcessionAmt', '₹' + (objPrintWordInfo.ConcessionAmt.toFixed(2)));
+      // this.printTemplate = this.printTemplate.replace('StrNetPayableAmt', '₹' + (objPrintWordInfo.NetPayableAmt.toFixed(2)));
+      // this.printTemplate = this.printTemplate.replace('StrPaidAmount', '₹' + (objPrintWordInfo.PaidAmount.toFixed(2)));
+      // this.printTemplate = this.printTemplate.replace('StrBillDate', this.transformBilld(this.reportPrintObj.BillDate));
+      this.printTemplate = this.printTemplate.replace('SetMultipleRowsDesign', strrowslist);
+
+
+      this.printTemplate = this.printTemplate.replace(/{{.*}}/g, '');
+      setTimeout(() => {
+        this.print();
+      }, 1000);
+    });
+  }
 
 
 
@@ -386,110 +518,118 @@ export class InvoiceBillMappingComponent implements OnInit {
     this.dateTimeObj = dateTimeObj;
   }
 
-  
 
-  calculateTotalAmt() {
-   
-  }
+  calculateCGST() {
+    let net;
 
-  calculatePersc() {
-  
-  }
-
-
-
-  calculatePersc1() {
-  
-  }
-
-  calculatechargesDiscamt() {
-  
-  }
-
-  calculateDiscamtfinal() {
-    
-  }
-
-  onKeydown(event) {
-    if (event.key === "Enter") {
-      // console.log(event);
+    if (this.TaxableAmount && this.CGST) {
+      net = Math.round(parseInt(this.TaxableAmount) * parseInt(this.CGST)).toString();
+      this.TotalAmount = net;
+    }
 
     }
-  }
 
 
-  deleteTableRow(element) {
+    calculateSGST(){
+      let net;
 
-    // debugger;
-    let index = this.chargeslist.indexOf(element);
-    if (index >= 0) {
-      this.chargeslist.splice(index, 1);
-      this.dataSource.data = [];
-      this.dataSource.data = this.chargeslist;
+      if (this.TaxableAmount && this.SGST) {
+        net = Math.round(parseInt(this.TotalAmount) + parseInt(this.SGST)).toString();
+        this.TotalAmount = net;
+      }
     }
-    Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
-  }
-
-  showAllFilter(event) {
-    console.log(event.value);
-    this.isFilteredDateDisabled = event.value;
-  }
-
-  backNavigate() {
-    // this._location.back();
-  }
 
 
 
-  
+    calculateIGST(){
+      let net;
 
-  convertToWord(e) {
+      if (this.TaxableAmount && this.IGST) {
+        net = Math.round(parseInt(this.TotalAmount) + parseInt(this.IGST)).toString();
+        this.TotalAmount = net;
+      }
+    }
 
-    // return converter.toWords(e);
-  }
+    onKeydown(event) {
+      if (event.key === "Enter") {
+        // console.log(event);
 
-  transform1(value: string) {
-    var datePipe = new DatePipe("en-US");
-    value = datePipe.transform(value, 'dd/MM/yyyy hh:mm a');
-    return value;
-  }
+      }
+    }
 
-  transform2(value: string) {
-    var datePipe = new DatePipe("en-US");
-    value = datePipe.transform((new Date), 'dd/MM/yyyy h:mm a');
-    return value;
-  }
 
-  transformBilld(value: string) {
-    // var datePipe = new DatePipe("en-US");
-    // value = datePipe.transform(this.reportPrintObj.BillDate, 'dd/MM/yyyy');
-    // return value;
-  }
-  // PRINT 
-  print() {
-    // HospitalName, HospitalAddress, AdvanceNo, PatientName
-    let popupWin, printContents;
-    // printContents =this.printTemplate; // document.getElementById('print-section').innerHTML;
+    deleteTableRow(element) {
 
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=800px !important,width=auto,width=2200px !important');
-    // popupWin.document.open();
-    popupWin.document.write(` <html>
+      // debugger;
+      let index = this.chargeslist.indexOf(element);
+      if (index >= 0) {
+        this.chargeslist.splice(index, 1);
+        this.dataSource.data = [];
+        this.dataSource.data = this.chargeslist;
+      }
+      Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
+    }
+
+    showAllFilter(event) {
+      console.log(event.value);
+      this.isFilteredDateDisabled = event.value;
+    }
+
+    backNavigate() {
+      // this._location.back();
+    }
+
+
+
+
+
+    convertToWord(e) {
+
+      // return converter.toWords(e);
+    }
+
+    transform1(value: string) {
+      var datePipe = new DatePipe("en-US");
+      value = datePipe.transform(value, 'dd/MM/yyyy hh:mm a');
+      return value;
+    }
+
+    transform2(value: string) {
+      var datePipe = new DatePipe("en-US");
+      value = datePipe.transform((new Date), 'dd/MM/yyyy h:mm a');
+      return value;
+    }
+
+    transformBilld(value: string) {
+      // var datePipe = new DatePipe("en-US");
+      // value = datePipe.transform(this.reportPrintObj.BillDate, 'dd/MM/yyyy');
+      // return value;
+    }
+    // PRINT 
+    print() {
+      // HospitalName, HospitalAddress, AdvanceNo, PatientName
+      let popupWin, printContents;
+      // printContents =this.printTemplate; // document.getElementById('print-section').innerHTML;
+
+      popupWin = window.open('', '_blank', 'top=0,left=0,height=800px !important,width=auto,width=2200px !important');
+      // popupWin.document.open();
+      popupWin.document.write(` <html>
     <head><style type="text/css">`);
-    popupWin.document.write(`
+      popupWin.document.write(`
       </style>
           <title></title>
       </head>
     `);
-    popupWin.document.write(`<body onload="window.print();window.close()">${this.printTemplate}</body>
+      popupWin.document.write(`<body onload="window.print();window.close()">${this.printTemplate}</body>
     </html>`);
-    popupWin.document.close();
-  }
+      popupWin.document.close();
+    }
 
-  onClose() {
-    this.dialogRef.close();
-  }
+    onClose() {
+      this.dialogRef.close();
+    }
 
-}
+  }
 
 
 export class Bill {
@@ -663,54 +803,54 @@ export class Post {
 
 
 export class InvoiceBillMap {
-  InvoiceId:any;
-   CaseId:any;
-   InvoiceDate :any;
-   InvoiceTime:any;
-   TaxableAmount:any;
-   CGST:any;  
-   SGST:any;  
-   IGST:any;  
-   TotalAmount:any;  
-   ApprovalStatus:any;
-   ApprovedBy:any;
-   ApprovedDate:any;
-   InvoiceStatus:any;
-   currentDate=new Date();
-   CashCounterId:any;
-   // CreatedBy    [b
-    
-  
-   /**
-    * Constructor
-    *
-    * @param InvoiceBillMap
-    */
- 
-   constructor(InvoiceBillMap) {
-     {
-       this.InvoiceId = InvoiceBillMap.InvoiceId || '';
-       this.CaseId = InvoiceBillMap.CaseId || '';
-       this.InvoiceDate = InvoiceBillMap.InvoiceDate ||  this.currentDate;
-       this.InvoiceTime = InvoiceBillMap.InvoiceTime || this.currentDate;
-       this.TaxableAmount = InvoiceBillMap.TaxableAmount || '';
-       this.CGST = InvoiceBillMap.CGST || 0;
-       this.SGST = InvoiceBillMap.SGST || '';
-       this.IGST = InvoiceBillMap.IGST || '';
-    
-       this.TotalAmount = InvoiceBillMap.TotalAmount || '';
-       this.ApprovalStatus = InvoiceBillMap.ApprovalStatus || '';
-       this.ApprovedBy = InvoiceBillMap.ApprovedBy || '';
-       this.ApprovedDate = InvoiceBillMap.ApprovedDate ||  this.currentDate;
- 
-       this.InvoiceStatus = InvoiceBillMap.InvoiceStatus || '';
-       this.CashCounterId = InvoiceBillMap.CashCounterId || '';
-      
-     }
-   }
- }
- 
- 
+  InvoiceId: any;
+  CaseId: any;
+  InvoiceDate: Date;
+  InvoiceTime: Date;
+  TaxableAmount: any;
+  CGST: any;
+  SGST: any;
+  IGST: any;
+  TotalAmount: any;
+  ApprovalStatus: any;
+  ApprovedBy: any;
+  ApprovedDate: any;
+  InvoiceStatus: any;
+  currentDate = new Date();
+  CashCounterId: any;
+  // CreatedBy    [b
+
+
+  /**
+   * Constructor
+   *
+   * @param InvoiceBillMap
+   */
+
+  constructor(InvoiceBillMap) {
+    {
+      this.InvoiceId = InvoiceBillMap.InvoiceId || '';
+      this.CaseId = InvoiceBillMap.CaseId || '';
+      this.InvoiceDate = InvoiceBillMap.InvoiceDate || this.currentDate;
+      this.InvoiceTime = InvoiceBillMap.InvoiceTime || this.currentDate;
+      this.TaxableAmount = InvoiceBillMap.TaxableAmount || '';
+      this.CGST = InvoiceBillMap.CGST || 0;
+      this.SGST = InvoiceBillMap.SGST || '';
+      this.IGST = InvoiceBillMap.IGST || '';
+
+      this.TotalAmount = InvoiceBillMap.TotalAmount || '';
+      this.ApprovalStatus = InvoiceBillMap.ApprovalStatus || '';
+      this.ApprovedBy = InvoiceBillMap.ApprovedBy || '';
+      this.ApprovedDate = InvoiceBillMap.ApprovedDate || this.currentDate;
+
+      this.InvoiceStatus = InvoiceBillMap.InvoiceStatus || '';
+      this.CashCounterId = InvoiceBillMap.CashCounterId || '';
+
+    }
+  }
+}
+
+
 
 
 

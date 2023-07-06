@@ -6,10 +6,7 @@ import { BillSettlementComponent } from './bill-settlement/bill-settlement.compo
 
 
 const appRoutes: Routes = [
-  // {
-  //   path: "phone-appointment",
-  //   loadChildren: () => import("./main/adminstation/").then((m) => m.phoneappointmentModule),
-  // },
+  
   {
     path: "appointment",
     loadChildren: () => import("./appointment/appointment.module").then((m) => m.AppointmentModule),
@@ -39,7 +36,10 @@ const appRoutes: Routes = [
     // import("../administration/administration.module" ).then((m) => m.AdministrationModule),
 
 },
-
+{
+    path: "refund",
+    loadChildren: () => import("../OpdCRMS/appointment/browse-invoice-list/invoice-bill.module").then((m) => m.InvoiceBillModule),
+  },
 
 {
   path: "payment",

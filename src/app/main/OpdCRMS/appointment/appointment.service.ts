@@ -382,15 +382,29 @@ return this._httpClient.post("OutPatient/PaymentSave", employee)
 
 
 public InvoiceBillMappingInsert(employee){
-  return this._httpClient.post("OutPatient/CaseDetailSave", employee);
+  return this._httpClient.post("OutPatient/InvoiceBillMappinngSave", employee);
 }
 
 public InvoiceBillMappingUpdate(employee){
-  return this._httpClient.post("OutPatient/CaseDetailUpdate", employee);
+  return this._httpClient.post("OutPatient/InvoiceBillMappinngUpdate", employee);
 }
 
-public getBrowseBillsList(employee){
-  return this._httpClient.post("Generic/GetByProc?procName=Retrieve_RegistrationList", employee)
+// public getBrowseBillsList(employee){
+//   return this._httpClient.post("Generic/GetByProc?procName=Rtrv_InvoiceBill", employee)
+// }
+
+public getBrowseBilldetailList(employee){
+  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_InvoiceBill", employee)
+}
+
+
+
+public getCaseIDList (D_data){
+  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CaseWisePatientSummary", D_data);
+}
+
+public getFinancialSummarybudgetPrint(employee){
+  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_VisitDateTime", employee)
 }
 
 }

@@ -100,7 +100,7 @@ export class CaseDetailComponent implements OnInit {
     }
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
-      this._CasedetailService.getCaseIDCombo(D_data).subscribe(Visit => {
+      this._CasedetailService.getAllCaseList(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as CaseDetail[];
         console.log(this.dataSource.data);
         this.dataSource.sort = this.sort;

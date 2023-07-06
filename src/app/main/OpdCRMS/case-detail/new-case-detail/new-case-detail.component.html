@@ -154,7 +154,7 @@
                         <mat-form-field appearance="outline" fxFlex>
                             <mat-label>Agreement File Name</mat-label>
                             <input name="AgreementFileName" formControlName="AgreementFileName"
-                                placeholder="AgreementFileName" matInput 
+                                placeholder="AgreementFileName" matInput (click)="UploadDoc()"
                                 [(ngModel)]="registerObj.AgreementFileName">
                         </mat-form-field>
 

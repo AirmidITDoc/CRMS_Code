@@ -26,22 +26,21 @@ export class CompanyMasterComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
     displayedColumns: string[] = [
-    'CompanyId',
-    'CompTypeId',
-    'CompanyName',
-    'Address',
-    'ContactNo',
-    'PinCode',
-    'State',
-    'StateCode',
-    'GSTIN',
-    'SAC',
-    'PAN',
-    'PlaceOfSupply',
-    'action'
+        "CompanyId",
+        "CompanyName",
+        "Address",
+        "ContactNo",
+        "PinCode",
+        "State",
+        "StateCode",
+        "GSTIN",
+        "SAC",
+        "PAN",
+        "PlaceOfSupply",
+        "action"
     ];
 
-    DSCompanyMasterList = new MatTableDataSource<CompanyMaster>();
+    datasource = new MatTableDataSource<CompanyMaster>();
 
     //doctorone filter
     public doctortwoFilterCtrl: FormControl = new FormControl();
@@ -72,10 +71,11 @@ export class CompanyMasterComponent implements OnInit {
         var param = { CompanyName: this._companyService.myformSearch.get('CompanyNameSearch').value + '%' || "%" };
         this._companyService.getCompanyMaster(param).subscribe(
             (Menu) => {
-                this.DSCompanyMasterList.data = Menu as CompanyMaster[];
+                this.datasource.data = Menu as CompanyMaster[];
+                console.log(this.datasource.data);
                 this.isLoading = false;
-                this.DSCompanyMasterList.sort = this.sort;
-                this.DSCompanyMasterList.paginator = this.paginator;
+                this.datasource.sort = this.sort;
+                this.datasource.paginator = this.paginator;
             },
             (error) => (this.isLoading = false)
         );
@@ -87,24 +87,23 @@ export class CompanyMasterComponent implements OnInit {
     }
 
     onEdit(row) {
+        debugger;
+       
         var m_data = {
             CompanyId: row.CompanyId,
             CompTypeId: row.CompTypeId,
-            CompanyName: row.CompanyName.trim(),
-            Address: row.Address.trim(),
-            City: row.City.trim(),
-            PinNo: row.PinNo.trim(),
-            PhoneNo: row.PhoneNo.trim(),
-            MobileNo: row.MobileNo.trim(),
-            FaxNo: row.FaxNo.trim(),
-            TariffId: row.TariffId,
-            IsDeleted: JSON.stringify(row.IsDeleted),
-            UpdatedBy: row.UpdatedBy,
-            IsCancelled: JSON.stringify(row.IsCancelled),
-            IsCancelledBy: row.IsCancelledBy,
-            IsCancelledDate: row.IsCancelledDate,
+            CompanyName: row.CompanyName,
+            Address: row.Address,
+            ContactNo:row.ContactNo,
+            PinCode:row.PinCode,
+            State: row.State,
+            StateCode: row.StateCode,
+            GSTIN:row.GSTIN,
+            SAC:row.SAC,
+            PAN: row.PAN,
+            PlaceOfSupply:row.PlaceOfSupply,
         };
-
+console.log(m_data);
         this._companyService.populateForm(m_data);
 
         const dialogRef = this._matDialog.open(CompanyMasterListComponent, {

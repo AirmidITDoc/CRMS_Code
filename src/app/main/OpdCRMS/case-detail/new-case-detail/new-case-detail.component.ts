@@ -10,6 +10,7 @@ import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { takeUntil } from 'rxjs/operators';
+import { UploadDocumentComponent } from '../../appointment/upload-document/upload-document.component';
 
 @Component({
   selector: 'app-new-case-detail',
@@ -225,7 +226,10 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
     });
   }
 
-  addEmptyRow() { }
+  addEmptyRow() {
+
+   
+   }
  
   
   dateTimeObj: any;
@@ -234,6 +238,20 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
     this.dateTimeObj = dateTimeObj;
   }
 
+  UploadDoc(){
+ 
+    const dialogRef = this._matDialog.open(UploadDocumentComponent,
+      {
+        maxWidth: "45vw",
+        height: '500px',
+        width: '100%',
+        // height: "100%"
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed - Insert Action', result);
+      // this.getVisitList();
+    });
+  }
  
   
   onSubmit() {
@@ -317,7 +335,7 @@ export class CaseDetail {
   MobileNo:any;
   AgeYear:any;
   TotalBillAmt:any;
- 
+ BillNo:any;
   /**
    * Constructor
    *
@@ -344,8 +362,8 @@ export class CaseDetail {
       this.MobileNo = CaseDetail.MobileNo || '';
       this.AgeYear = CaseDetail.AgeYear || '';
       this.TotalBillAmt = CaseDetail.TotalBillAmt || '';
-    
-    }
+      this.BillNo=CaseDetail.BillNo || 0;
   }
 }
 
+}

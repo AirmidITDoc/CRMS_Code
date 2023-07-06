@@ -21,10 +21,9 @@ export class CompanyMasterService {
             CompanyId: [""],
             CompanyName: [""],
             Address: ["", Validators.required],
-            State: [
-                "",
+            State: ["",
                 [
-                    Validators.required,
+                    // Validators.required,
                     Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
                 ],
             ],
@@ -75,11 +74,11 @@ export class CompanyMasterService {
   
 
     public companyMasterInsert(param) {
-        return this._httpClient.post("Master/CompanySave", param);
+        return this._httpClient.post("OutPatient/CompanyDetailSave", param);
     }
 
     public companyMasterUpdate(param) {
-        return this._httpClient.post("Master/CompanyUpdate", param);
+        return this._httpClient.post("OutPatient/CompanyDetailUpdate", param);
     }
 
     populateForm(param) {

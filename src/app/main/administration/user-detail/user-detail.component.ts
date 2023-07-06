@@ -195,9 +195,7 @@ private _onDestroy = new Subject<void>();
   {
     this.dialogRef.close();
   }
-  onSubmit() {
-
- 
+  Save() {
 
   var m_data = {
     "insertUserDetail": {

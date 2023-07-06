@@ -22,60 +22,56 @@ app-company-master {
         max-width: 250px;
         min-width: 250px;
     }
-    .mat-column-TypeName {
-        width: 150px;
-        max-width: 150px;
-        min-width: 150px;
-    }
+  
     .mat-column-Address {
         width: 250px;
         max-width: 250px;
         min-width: 250px;
     }
-    .mat-column-City {
+    .mat-column-ContactNo {
         width: 100px;
         max-width: 100px;
         min-width: 100px;
     }
-    .mat-column-PinNo {
+    .mat-column-PinCode {
         width: 70px;
         max-width: 70px;
         min-width: 70px;
     }
-    .mat-column-PhoneNo {
+    .mat-column-State {
+        width: 150px;
+        max-width: 150px;
+        min-width: 150px;
+    }
+
+    .mat-column-StateCode {
         width: 80px;
         max-width: 80px;
         min-width: 80px;
     }
 
-    .mat-column-MobileNo {
+    .mat-column-GSTIN {
         width: 80px;
         max-width: 80px;
         min-width: 80px;
     }
 
-    .mat-column-FaxNo {
-        width: 70px;
-        max-width: 70px;
-        min-width: 70px;
-    }
-
-    .mat-column-TariffName {
+    .mat-column-SAC {
         width: 100px;
         max-width: 100px;
         min-width: 100px;
     }
 
-    .mat-column-AddedByName {
+    .mat-column-PAN {
         width: 120px;
         max-width: 120px;
         min-width: 120px;
     }
 
-    .mat-column-IsDeleted {
-        width: 70px;
-        max-width: 70px;
-        min-width: 70px;
+    .mat-column-PlaceOfSupply {
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
         text-align: center;
         justify-content: center;
     }
