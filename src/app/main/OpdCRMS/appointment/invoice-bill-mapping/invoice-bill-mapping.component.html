@@ -71,7 +71,7 @@
 
                             <ng-template mat-tab-label style="color: black; font-size: 17px bold; height: 100px; ">
                                 <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
-                                Billlist
+                                Bill list
                             </ng-template>
                             <div>
                                 <div class="col-md-12">
@@ -101,22 +101,22 @@
                                             </mat-cell>
                                         </ng-container>
 
-                                        <ng-container matColumnDef="CaseId">
+                                        <!-- <ng-container matColumnDef="CaseId">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Case
                                                 Id</mat-header-cell>
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                                 {{contact.CaseId}}
                                             </mat-cell>
-                                        </ng-container>
+                                        </ng-container> -->
 
 
-                                        <ng-container matColumnDef="CaseTitle">
+                                        <!-- <ng-container matColumnDef="CaseTitle">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Case Title
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm style="margin-top: 1px;">
                                                 {{contact.CaseTitle}}
                                             </mat-cell>
-                                        </ng-container>
+                                        </ng-container> -->
 
                                         <ng-container matColumnDef="PatientName">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
@@ -136,7 +136,7 @@
                                             </mat-cell>
                                         </ng-container>
 
-                                        <ng-container matColumnDef="MobileNo">
+                                        <!-- <ng-container matColumnDef="MobileNo">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
                                                 fxShow.gt-md>Mobile No
                                             </mat-header-cell>
@@ -152,7 +152,7 @@
                                                 style="margin-top: 1px;">
                                                 {{contact.AgeYear}}
                                             </mat-cell>
-                                        </ng-container>
+                                        </ng-container> -->
 
                                         <ng-container matColumnDef="TotalBillAmt">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
@@ -164,15 +164,14 @@
                                         </ng-container>
 
 
-                                        <ng-container matColumnDef="action" stickyEnd>
+                                        <!-- <ng-container matColumnDef="action" stickyEnd>
                                             <mat-header-cell *matHeaderCellDef style="color: white;"> Action
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let row">
                                                 <button mat-icon-button (click)="onEdit(row)"><mat-icon
                                                         title="Edit Menu">launch</mat-icon></button>
-
                                             </mat-cell>
-                                        </ng-container>
+                                        </ng-container> -->
 
 
                                         <ng-container matColumnDef="loading">
@@ -294,21 +293,14 @@
 
 
                 <div style="float: right;">
-                    <!-- [disabled]="registeredForm.invalid" -->
-                    <button class="next-btn" color="accent" (click)="onSaveOPBill()" style="border-radius: 16px;width:200px !important;">
+                    <button class="next-btn" color="accent" (click)="onSaveOPBill()">
                         <span style="display: flex;justify-content: center;">
                             <!-- <mat-spinner *ngIf="isLoading=='submit'" [color]="white" [diameter]="20"></mat-spinner> -->
-                            <span style="margin-left: 6px;">GENERATE INVOICE</span>
+                            <span>Save</span>
                         </span>
                     </button>
 
                     <button class="footer-btn" (click)="onClose()">Cancel</button>
-
-                    <button class="next-btn"(click)="getPrint($event)">Print</button>
-                    &nbsp;
                 </div>
             </mat-card-content>
-            <!-- Final bill calculation -->
-
-
         </div>

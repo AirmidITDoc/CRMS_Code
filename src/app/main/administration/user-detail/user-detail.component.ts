@@ -167,26 +167,19 @@ private _onDestroy = new Subject<void>();
 }
 
   getstorelist(){
-    // this._UserService.getStoreCombo().subscribe(data =>this.StoreList =data);
-    
     this._UserService.getStoreCombo().subscribe(data => { this.StoreList = data; 
-      console.log(data);
       this.filteredStore.next(this.StoreList.slice());
     })
   }
 
   getRolelist(){
-    // this._UserService.getRoleCombobox().subscribe(data =>this.RoleList =data);
     this._UserService.getRoleCombobox().subscribe(data => { this.RoleList = data; 
-      console.log(data);
       this.filteredRole.next(this.RoleList.slice());
     })
   }
   
   getDoctorlist(){
-    // this._UserService.getDoctorMasterCombo().subscribe(data =>this.DoctortypecmbList =data);
     this._UserService.getDoctorMasterCombo().subscribe(data => { this.DoctortypecmbList = data; 
-      console.log(data);
       this.filteredDoctor.next(this.DoctortypecmbList.slice());
     })
   }
@@ -213,10 +206,8 @@ private _onDestroy = new Subject<void>();
       "Grnverify": this.UserForm.get('Grnverify').value || 0,
       "Indentverify": this.UserForm.get('Indentverify').value || 0,
       "IIverify": this.UserForm.get('IIverify').value || 0
-      
     }
   }
-  console.log(m_data);
   this._UserService.UserInsert(m_data).subscribe(response => {
     if (response) {
       this.myFunction("UserDetail Data  saved', 'error !");

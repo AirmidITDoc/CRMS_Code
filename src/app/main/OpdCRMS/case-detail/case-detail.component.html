@@ -9,7 +9,7 @@
                 style="color: white;" style="color: aliceblue;">account_box
             </mat-icon>
             <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" style="color: aliceblue;">
-                Case Detail List
+                Study Information
             </span>
 
             <button mat-raised-button (click)="newCaseDetail()" fxLayoutAlign="center center"
@@ -45,7 +45,7 @@
                             fusePerfectScrollbar>
                             <div fxLayout="column" fxLayoutAlign="start none">
                                 <br />
-                                <mat-form-field appearance="outline" style="margin-left: 2%;">
+                                <!-- <mat-form-field appearance="outline" style="margin-left: 2%;">
                                     <mat-label>Enter a date range</mat-label>
                                     <mat-date-range-input [rangePicker]="picker">
                                         <input matStartDate formControlName="start" placeholder="Start date" (dateChange)="getCaseList()">
@@ -53,21 +53,17 @@
                                     </mat-date-range-input>
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-date-range-picker #picker></mat-date-range-picker>
-                                </mat-form-field>
+                                </mat-form-field> -->
 
                                 <mat-form-field appearance="outline" fxFlex>
-                                    <mat-label>Case Id</mat-label>
+                                    <mat-label>Protocol Number</mat-label>
                                     <input name="CaseId" formControlName="CaseId" matInput>
-                                    <!-- <span class="error" *ngIf="f.FirstName.invalid && f.FirstName.touched">FirstName is
-                                        required Enter only Alphabets</span> -->
                                 </mat-form-field>
 
 
                                 <mat-form-field appearance="outline" fxFlex>
-                                    <mat-label>Case Name</mat-label>
+                                    <mat-label>Protocol Name</mat-label>
                                     <input name="CaseName" formControlName="CaseName" matInput>
-                                    <!-- <span class="error" *ngIf="f.FirstName.invalid && f.FirstName.touched">FirstName is
-                                        required Enter only Alphabets</span> -->
                                 </mat-form-field>
 
                                 <div style="margin-top: 10px;">
@@ -109,17 +105,16 @@
                                 <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
                                     class="table1">
 
-                                    <ng-container matColumnDef="CaseId">
+                                    <!-- <ng-container matColumnDef="CaseId">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header
                                             fxShow.gt-sm>Case Id</mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                             {{contact.CaseId}}
                                         </mat-cell>
-                                    </ng-container>
-
+                                    </ng-container> -->
 
                                     <ng-container matColumnDef="CaseTitle">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Case Title
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Protocol Number
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm style="margin-top: 1px;">
                                             {{contact.CaseTitle}}
@@ -128,7 +123,7 @@
 
                                     <ng-container matColumnDef="CaseDescription">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Case Description
+                                            fxShow.gt-md>Protocol Title
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.CaseDescription }}
@@ -155,7 +150,7 @@
 
                                     <ng-container matColumnDef="VisitFrequency">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>VisitFrequency</mat-header-cell>
+                                            fxShow.gt-md>Visit Frequency</mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
                                             style="margin-top: 1px;">
                                             {{contact.VisitFrequency}}
@@ -164,25 +159,25 @@
 
                                     <ng-container matColumnDef="CaseStartDate">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Case StartDate</mat-header-cell>
+                                            fxShow.gt-md>Study Start Date</mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
                                             style="margin-top: 1px;">
                                             {{contact.CaseStartDate | date:'shortDate'}}
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="CaseStatus">
+                                    <!-- <ng-container matColumnDef="CaseStatus">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
                                             fxShow.gt-md>Case Status
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.CaseStatus}}
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
                                     <ng-container matColumnDef="CompanyName">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Company Name
+                                            fxShow.gt-md>Sponsor Name
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
                                             style="margin-top: 1px;">
@@ -192,7 +187,7 @@
 
                                     <ng-container matColumnDef="CaseRepresentative">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Case Representative
+                                            fxShow.gt-md>Investigator
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.CaseRepresentative}}
@@ -201,7 +196,7 @@
 
                                     <ng-container matColumnDef="HospitalRepresentative">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Hospital Representative
+                                            fxShow.gt-md>Institution / Site
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
                                             style="margin-top: 1px;">

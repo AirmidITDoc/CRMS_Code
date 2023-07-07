@@ -137,32 +137,33 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     logout() {
         this.accountService.logout();
     }
+    
     navigateToDailyDashboard() {
         this.router.navigate(['/dashboard']);
     }
 
-    // navigateToDialyDash() {
-    //     this.router.navigate(['/dashboard/daily-dashboard']);
+    navigateToDash() {
+        this.router.navigate(['/dashboard/daily-dashboard']);
+    }
+
+    // navigateToPathologyDashboard() {
+    //     // this.accountService.logout();
+    //     this.router.navigate(['/dashboard/Pathology-dashboard']);
     // }
 
-    navigateToPathologyDashboard() {
-        // this.accountService.logout();
-        this.router.navigate(['/dashboard/Pathology-dashboard']);
-    }
+    // navigateToRadiologyDashboard() {
+    //     // this.accountService.logout();
+    //     this.router.navigate(['/dashboard/Radiology-dashboard']);
+    // }
 
-    navigateToRadiologyDashboard() {
-        // this.accountService.logout();
-        this.router.navigate(['/dashboard/Radiology-dashboard']);
-    }
-
-    navigateToCashlessDashboard() {
-        // this.accountService.logout();
-        this.router.navigate(['/dashboard/Cashless-dashboard']);
-    }
-    navigateToPharmacyDashboard() {
-        // this.accountService.logout();
-        this.router.navigate(['/dashboard/Pharmacy-dashboard']);
-    }
+    // navigateToCashlessDashboard() {
+    //     // this.accountService.logout();
+    //     this.router.navigate(['/dashboard/Cashless-dashboard']);
+    // }
+    // navigateToPharmacyDashboard() {
+    //     // this.accountService.logout();
+    //     this.router.navigate(['/dashboard/Pharmacy-dashboard']);
+    // }
     
     /**
      * On destroy

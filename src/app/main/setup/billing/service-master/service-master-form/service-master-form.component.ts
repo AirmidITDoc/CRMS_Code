@@ -309,8 +309,6 @@ getAdmittedDoctorCombo() {
           "serviceDetailInsert": serviceDetailInsertarray,
 
         };
-
-
         console.log(submitData);
         this._serviceMasterService.serviceDetailInsert(submitData).subscribe(data => {
           this.msg = data;
