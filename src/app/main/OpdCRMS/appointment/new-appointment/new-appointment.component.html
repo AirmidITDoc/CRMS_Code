@@ -450,37 +450,13 @@
                   </mat-select>
 
                 </mat-form-field>
-                <!-- <button mat-raised-button (click)="DocSelectdelete()"> <mat-icon
-                      style="width:2px;">close</mat-icon></button> -->
-
-
-                <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
-                  <mat-label>Purpose</mat-label>
-                  <mat-select formControlName="PurposeId" placeholder="Bank" #singleSelect>
-                    <mat-option>
-                      <ngx-mat-select-search [formControl]="purposeFilterCtrl" [placeholderLabel]="'Search'"
-                        [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
-                    </mat-option>
-                    <mat-option *ngFor="let element of filteredPurpose | async" [value]="element">
-                      {{element.PurposeName}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-
-                <!-- <label for="name">Name: </label>
-                      <input id="name" type="text" [formControl]="name"> -->
+              
 
                 <br>
 
               </div>
 
             </div>
-
-            <!-- <span class="label"> Value: </span>
-                  <span >{{ name.value}}</span> -->
-
-
-
 
             <div style="float: right;">
               <!-- <button class="next-btn"  *ngIf="isLoading=='submit'" [color]="white" [diameter]="20"  (click)="onSubmit()" [disabled]="personalFormGroup.invalid" style="border-radius: 16px;" >Save

@@ -58,7 +58,7 @@
                                                 <mat-form-field class="mr-sm-12" fxFlex>
                                                     <input matInput placeholder="Search --> Doctor First Name"
                                                         autocomplete="off" name="DoctorNameSearch"
-                                                        formControlName="DoctorNameSearch" keyup="onSearch()">
+                                                        formControlName="DoctorNameSearch" (keyup)="onSearch()">
 
                                                     <button mat-button matSuffix [ngStyle]="{'color':'white'}"
                                                         mat-icon-button aria-label="Clear" (click)="onSearchClear()">

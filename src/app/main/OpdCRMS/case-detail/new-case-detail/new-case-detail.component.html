@@ -169,17 +169,14 @@
 
                         </mat-form-field>
 
-
+<!-- 
                         <mat-form-field appearance="outline" fxFlex>
                             <mat-label>AgreementFileName</mat-label>
                             <input name="AgreementFileName" formControlName="AgreementFileName"
                                 placeholder="AgreementFileName" matInput (click)="UploadDoc()"
                                 [(ngModel)]="registerObj.AgreementFileName">
-                            <!-- <mat-error class="error"
-                                *ngIf="personalFormGroup.get('MobileNo').invalid && personalFormGroup.get('MobileNo').touched">10
-                                digits Mobile number is
-                                required</mat-error> -->
-                        </mat-form-field>
+                          
+                        </mat-form-field> -->
 
                     </div>
 
@@ -192,7 +189,8 @@
               <button (click)="isDisabled = !isDisabled">
                 {{ isDisabled ? 'Edit' : 'Save' }}
             </button> -->
-
+            <button class="next-btn"  id="btncancel" (click)="UploadDoc()">Uplaod File</button>
+            <button class="next-btn" id="btncancel" (click)="UploadImgage()">Upload Image</button>
                             <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
                         </div>
                     </div>

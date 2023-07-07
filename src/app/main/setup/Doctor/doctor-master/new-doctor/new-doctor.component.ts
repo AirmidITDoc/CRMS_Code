@@ -177,17 +177,19 @@ export class NewDoctorComponent implements OnInit {
     }
 
     onSubmit() {
+
+        debugger;
         if (this._doctorService.myform.valid) {
             if (!this._doctorService.myform.get("DoctorId").value) {
                 var data2 = [];
-                for (var val of this._doctorService.myform.get("Departmentid")
-                    .value) {
+                // for (var val of this._doctorService.myform.get("Departmentid")
+                //     .value.Departmentid) {
                     var data = {
-                        DepartmentId: val,
+                        DepartmentId:this._doctorService.myform.get("Departmentid").value.Departmentid,
                         DoctorId: 0,
                     };
                     data2.push(data);
-                }
+                // }
                 console.log(data2);
                 var m_data = {
                     insertDoctorMaster: {
@@ -203,13 +205,12 @@ export class NewDoctorComponent implements OnInit {
                                 .value.trim() || "%",
                         middleName: this._doctorService.myform
                             .get("MiddleName")
-                            .value.trim(),
+                            .value.trim() || "%",
                         lastName:
                             this._doctorService.myform
                                 .get("LastName")
                                 .value.trim() || "%",
-                        dateOfBirth:
-                            this._doctorService.myform.get("DateofBirth").value,
+                        dateOfBirth:this._doctorService.myform.get("DateofBirth").value || '01/0/1900',
                         address:
                             this._doctorService.myform
                                 .get("Address")
@@ -228,9 +229,9 @@ export class NewDoctorComponent implements OnInit {
                                 .value.trim() || "0",
                         mobile: this._doctorService.myform
                             .get("Mobile")
-                            .value.trim(),
+                            .value.trim() || "%",
                         genderId:
-                            this._doctorService.myform.get("GenderId").value,
+                            this._doctorService.myform.get("GenderId").value.GenderId || 0,
                         education:
                             this._doctorService.myform
                                 .get("Education")
@@ -311,7 +312,7 @@ export class NewDoctorComponent implements OnInit {
                         } else {
                             Swal.fire(
                                 "Error !",
-                                "Appoinment not saved",
+                                "Doctor not saved",
                                 "error"
                             );
                         }
@@ -338,14 +339,14 @@ export class NewDoctorComponent implements OnInit {
                             this._doctorService.myform.get("PrefixID").value,
                         FirstName: this._doctorService.myform
                             .get("FirstName")
-                            .value.trim(),
+                            .value.trim() || "%",
                         MiddleName:
                             this._doctorService.myform
                                 .get("MiddleName")
                                 .value.trim() || "%",
                         LastName: this._doctorService.myform
                             .get("LastName")
-                            .value.trim(),
+                            .value.trim() || "%",
                         DateofBirth:
                             this._doctorService.myform.get("DateofBirth").value,
                         Address:
@@ -368,7 +369,7 @@ export class NewDoctorComponent implements OnInit {
                             .get("Mobile")
                             .value.trim(),
                         GenderId:
-                            this._doctorService.myform.get("GenderId").value,
+                            this._doctorService.myform.get("GenderId").value.GenderId || 0,
                         Education:
                             this._doctorService.myform
                                 .get("Education")
@@ -403,7 +404,7 @@ export class NewDoctorComponent implements OnInit {
                                 .value.trim() || "0",
                         AgeDay: this._doctorService.myform
                             .get("AgeDay")
-                            .value.trim(),
+                            .value.trim() || "0" ,
                         PassportNo:
                             this._doctorService.myform
                                 .get("PassportNo")

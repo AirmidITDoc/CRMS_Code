@@ -1,15 +1,46 @@
-<div class="file is-primary">
-    <label class="file-label">
-        <input
-         type="file"
-         id="file"
-         (change)="handleFileInput($event.target.files)"
-         />
-         <span class="file-cta">
-             <span class="file-icon">
-                  <i class="fas fa-upload"></i>
-             </span>
-             <span class="file-label">Browse Files </span>
-         </span>
-     </label>
- </div>
+<div fxlayout="row" fxFlex.gt-sm="100%" fxFlex class="page-layout simple right-sidebar"
+    style="height: 530px !important;">
+    <div class="center" fusePerfectScrollbar style="overflow: auto;">
+
+
+        <mat-toolbar matDialogTitle class="mat-accent m-0">
+            <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
+                style="background-color:rgb(18, 87, 134) !important;">
+                <h3>File Upload </h3>
+                <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+
+<input type="file" class="file-input"
+       [accept]="requiredFileType"
+       (change)="onFileSelected($event)" #fileUpload>
+
+<div class="file-upload">
+
+   {{fileName || "No file uploaded yet."}}
+
+    <button mat-mini-fab color="primary" class="upload-btn"
+      (click)="fileUpload.click()">
+        <mat-icon>attach_file</mat-icon>
+
+    </button>
+
+</div>
+
+<div class="progress">
+
+  <mat-progress-bar class="progress-bar" mode="determinate"
+                    [value]="uploadProgress" *ngIf="uploadProgress">
+
+  </mat-progress-bar>
+
+  <mat-icon class="cancel-upload" (click)="cancelUpload()" 
+            *ngIf="uploadProgress">delete_forever</mat-icon>
+
+</div>
+</div>
+
+</div>

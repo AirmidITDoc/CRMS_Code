@@ -498,21 +498,14 @@ debugger;
 
     if (obj.IsDocEditable) {
 
-      // this.renderer.selectRootElement('#DoctorID').focus();
-      this.registeredForm.get('DoctorID').reset();
-      this.registeredForm.get('DoctorID').setValidators([Validators.required]);
-      this.registeredForm.get('DoctorID').enable();
-      // this.isDoctor = true;
+      
+      this.isDoctor = false;
     } else {
-      // this.registeredForm.get('DoctorID').reset();
-      // this.registeredForm.get('DoctorID').clearValidators();
-      // this.registeredForm.get('DoctorID').updateValueAndValidity();
-      // this.registeredForm.get('DoctorID').disable();
-      // this.isDoctor = true;
+     
+      this.isDoctor = true;
 
-      this.DoctorId.close();
+      // this.DoctorId.close();
 
-      // this.color.hide()
     }
   }
 
@@ -1071,6 +1064,8 @@ debugger;
     // }
     this.onClearServiceAddList();
     this.getTotalNetAmount();
+
+    this.isDoctor=true;
   }
 
 

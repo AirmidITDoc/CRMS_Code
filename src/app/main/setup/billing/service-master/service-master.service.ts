@@ -26,28 +26,29 @@ export class ServiceMasterService {
             ServiceShortDesc: [""],
             ServiceName: [""],
             Price: ["", Validators.pattern("[0-9]+")],
-            IsEditable: ["0"],
-            CreditedtoDoctor: ["0"],
-            IsPathology: ["0"],
-            IsRadiology: ["0"],
-            IsDeleted: ["0"],
+            IsEditable: [0],
+            CreditedtoDoctor: [0],
+            IsPathology: [0],
+            IsRadiology: [0],
+            IsActive: [1],
             PrintOrder: ["", Validators.pattern("[0-9]+")],
-            IsPackage: ["0"],
+            IsPackage: [0],
             SubGroupId: [""],
             DoctorId: [""],
             FirstName: ["", Validators.pattern("^[A-Za-z]*[a-zA-Z]*$")],
-            IsEmergency: ["0"],
+            IsEmergency: [0],
             EmgAmt: ["", Validators.pattern("[0-9]+")],
             EmgPer: ["", Validators.pattern("[0-9]+")],
-            IsDocEditable: ["0"],
+            IsDocEditable: [0],
             AddedBy: [""],
             UpdatedBy: [""],
             AddedByName: [""],
-
+            Emergencyamt:[''],
             ServiceDetailId: [""],
             TariffId: [""],
             ClassId: ["0"],
             ClassRate: ["0"],
+            DoctorID:[""],
             EffectiveDate:[{ value: this.registerObj.EffectiveDate }],
         });
     }
@@ -122,4 +123,16 @@ export class ServiceMasterService {
     populateForm(param) {
         this.myform.patchValue(param);
     }
+
+     // Doctor Master Combobox List
+  public getAdmittedDoctorCombo() {
+    return this._httpClient.post("Generic/GetByProc?procName=RetrieveConsultantDoctorMasterForCombo", {})
+  }
+
+  public getGroupMasterCombo() {
+    return this._httpClient.post(
+        "Generic/GetByProc?procName=Retrieve_GroupMasterForCombo",
+        {}
+    );
+}
 }

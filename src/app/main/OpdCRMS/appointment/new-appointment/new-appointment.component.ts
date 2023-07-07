@@ -326,11 +326,7 @@ export class NewAppointmentComponent implements OnInit {
       MobileNo: ['', [Validators.required,Validators.pattern("^((\\+91-?)|0)?[7-9]{1}[0-9]{9}$"),
       Validators.minLength(10),
       Validators.maxLength(10),]], 
-      AadharCardNo: ['', [
-        Validators.required,
-        Validators.pattern("^[- +()]*[0-9][- +()0-9]*$"),
-        Validators.minLength(12),
-        Validators.maxLength(12),]],
+      AadharCardNo:['',Validators.maxLength(10),Validators.minLength(1)],
       PanCardNo: '',
       MaritalStatusId: '',
       ReligionId: '',
@@ -1059,7 +1055,7 @@ export class NewAppointmentComponent implements OnInit {
    
       visitSave['PatientOldNew'] = this.Patientnewold;
       visitSave['FirstFollowupVisit'] = 0;
-      visitSave['appPurposeId'] = this.VisitFormGroup.get('PurposeId').value.PurposeId;
+      visitSave['appPurposeId'] = 0,//this.VisitFormGroup.get('PurposeId').value.PurposeId;
       visitSave['FollowupDate'] = '2023-06-22T09:52:54.616Z';
       visitSave['IsMark'] = 0,
  

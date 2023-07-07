@@ -46,6 +46,8 @@ import { InvoiceBillMappingComponent } from './invoice-bill-mapping/invoice-bill
 import { UploadDocumentComponent } from './upload-document/upload-document.component';
 import { ViewFinancialSummarybudgetComponent } from './invoice-bill-mapping/view-financial-summarybudget/view-financial-summarybudget.component';
 import { BrowseInvoiceListComponent } from './browse-invoice-list/browse-invoice-list.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 // import { SharedModule } from 'app/main/shared/shared.module';
 
 const routes: Routes = [
@@ -66,6 +68,8 @@ const routes: Routes = [
         InvoiceBillMappingComponent,
         UploadDocumentComponent,
         ViewFinancialSummarybudgetComponent,
+        FileUploadComponent,
+        ImageUploadComponent,
           
       
     ],

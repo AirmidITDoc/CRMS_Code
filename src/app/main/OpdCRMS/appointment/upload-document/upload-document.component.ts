@@ -9,8 +9,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { UploadDocumentService } from './upload-document.service';
+import { finalize } from 'rxjs/operators';
 
 export interface Fileload {
   Rollname: String;
@@ -27,23 +28,61 @@ export interface Fileload {
   styleUrls: ['./upload-document.component.scss']
 })
 export class UploadDocumentComponent implements OnInit {
-  fileToUpload: File | null;
-  files: File[] = [];
-  constructor(private fileUploadService: UploadDocumentService) {
+ 
+  @Input()
+  requiredFileType:string;
 
-   }
+  fileName = '';
+  FilePath ='';
+  uploadProgress:number;
+  uploadSub: Subscription;
 
-  ngOnInit(): void {
+    constructor(private http: HttpClient,
+      public dialogRef: MatDialogRef<UploadDocumentComponent>,) {}
+
+    ngOnInit(): void {}
+
+    
+    onFileSelected(event) {
+
+      console.log(event);
+        const file:File = event.target.files[0];
+      
+        if (file) {
+            this.fileName = file.name;
+            // this.FilePath=file.path;
+            const formData = new FormData();
+            formData.append("thumbnail", file);
+
+            const upload$ = this.http.post("/api/thumbnail-upload", formData, {
+                reportProgress: true,
+                observe: 'events'
+            })
+            .pipe(
+                finalize(() => this.reset())
+            );
+          
+            this.uploadSub = upload$.subscribe(event => {
+              if (event.type == HttpEventType.UploadProgress) {
+                this.uploadProgress = Math.round(100 * (event.loaded / event.total));
+              }
+            })
+        }
+    }
+
+    onClose() {
+      this.dialogRef.close();
+    }
+  
+
+  cancelUpload() {
+    this.uploadSub.unsubscribe();
+    this.reset();
   }
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
+
+  reset() {
+    this.uploadProgress = null;
+    this.uploadSub = null;
+  }
+
 }
-  uploadFileToActivity() {
-    // this.fileUploadService.postFile(this.fileToUpload).subscribe(data => {
-    //   // do something, if upload success
-    //   }, error => {
-    //     console.log(error);
-    //   });
-  }
-
-  }

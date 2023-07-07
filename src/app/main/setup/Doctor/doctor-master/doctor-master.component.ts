@@ -10,11 +10,11 @@ import { NewDoctorComponent } from './new-doctor/new-doctor.component';
 import { fuseAnimations } from '@fuse/animations';
 
 @Component({
-  selector: 'app-doctor-master',
-  templateUrl: './doctor-master.component.html',
-  styleUrls: ['./doctor-master.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  animations: fuseAnimations
+    selector: 'app-doctor-master',
+    templateUrl: './doctor-master.component.html',
+    styleUrls: ['./doctor-master.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: fuseAnimations
 })
 export class DoctorMasterComponent implements OnInit {
 
@@ -66,7 +66,7 @@ export class DoctorMasterComponent implements OnInit {
         private accountService: AuthenticationService,
         // public notification: NotificationServiceService,
         public _matDialog: MatDialog
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.getDoctorMasterList();
@@ -103,7 +103,10 @@ export class DoctorMasterComponent implements OnInit {
         );
     }
 
-    onEdit(row) {
+    onEdit(){}
+
+    onEdit1(row) {
+        console.log(row);
         var m_data = {
             DoctorId: row.DoctorId,
             PrefixID: row.PrefixID,
@@ -114,25 +117,25 @@ export class DoctorMasterComponent implements OnInit {
             Address: row.Address.trim(),
             City: row.City.trim(),
             Pin: row.Pin.trim(),
-            Phone: row.Phone.trim(),
-            Mobile: row.Mobile.trim(),
+            Phone: row.Phone,
+            Mobile: row.Mobile,
             GenderId: row.GenderId,
-            Education: row.Education.trim(),
+            Education: row.Education,
             IsConsultant: Boolean(JSON.stringify(row.IsConsultant)),
             IsRefDoc: JSON.stringify(row.IsRefDoc),
-            IsDeleted: Boolean(JSON.stringify(row.IsDeleted)),
+            IsActive: Boolean(JSON.stringify(row.IsDeleted)),
             DoctorTypeId: row.DoctorTypeId,
-            AgeYear: row.AgeYear.trim(),
-            AgeMonth: row.AgeMonth.trim(),
-            AgeDay: row.AgeDay.trim(),
-            PassportNo: row.PassportNo.trim(),
-            ESINO: row.ESINO.trim(),
-            RegNo: row.RegNo.trim(),
+            AgeYear: row.AgeYear,
+            AgeMonth: row.AgeMonth,
+            AgeDay: row.AgeDay,
+            PassportNo: row.PassportNo,
+            ESINO: row.ESINO,
+            RegNo: row.RegNo,
             RegDate: row.RegDate,
-            MahRegNo: row.MahRegNo.trim(),
+            MahRegNo: row.MahRegNo,
             MahRegDate: row.MahRegDate,
-            AddedByName: row.AddedByName.trim(),
-            RefDocHospitalName: row.RefDocHospitalName.trim(),
+            AddedByName: row.AddedByName,
+            RefDocHospitalName: row.RefDocHospitalName,
             UpdatedBy: row.UpdatedBy,
         };
 
@@ -200,7 +203,7 @@ export class DoctorMaster {
     UpdatedBy: number;
     RefDocHospitalName: string;
     AddedBy: String;
-  
+    currentDate=new Date();
     IsDeletedSearch: number;
     /**
      * Constructor
@@ -214,6 +217,7 @@ export class DoctorMaster {
             this.FirstName = DoctorMaster.FirstName || "";
             this.MiddleName = DoctorMaster.MiddleName || "";
             this.LastName = DoctorMaster.LastName || "";
+            this.DateofBirth =DoctorMaster.DateofBirth || this.currentDate;
             this.Address = DoctorMaster.Address || "";
             this.City = DoctorMaster.City || "";
             this.Pin = DoctorMaster.Pin || "";
@@ -231,12 +235,12 @@ export class DoctorMaster {
             this.PassportNo = DoctorMaster.PassportNo || "";
             this.ESINO = DoctorMaster.ESINO || "";
             this.RegNo = DoctorMaster.RegNo || "";
-            this.RegDate = DoctorMaster.RegDate || "";
+            this.RegDate = DoctorMaster.RegDate || this.currentDate;
             this.MahRegNo = DoctorMaster.MahRegNo || "";
-            this.MahRegDate = DoctorMaster.MahRegDate || "";
+            this.MahRegDate = DoctorMaster.MahRegDate || this.currentDate;
             this.UpdatedBy = DoctorMaster.UpdatedBy || "";
             this.AddedBy = DoctorMaster.AddedBy || "";
-          
+
             this.RefDocHospitalName = DoctorMaster.RefDocHospitalName || "";
             this.IsDeletedSearch = DoctorMaster.IsDeletedSearch || "";
         }

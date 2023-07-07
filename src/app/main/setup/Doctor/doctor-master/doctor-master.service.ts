@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class DoctorMasterService {
     myform: FormGroup;
     myformSearch: FormGroup;
-
+    currentDate=new Date();
     constructor(
         private _httpClient: HttpClient,
         private _formBuilder: FormBuilder
@@ -43,14 +43,13 @@ export class DoctorMasterService {
                     Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
                 ],
             ],
-            DateofBirth: [""],
+            DateofBirth:[{ value: this.currentDate }],
             Address: [""],
             City: ["", Validators.pattern("[a-zA-Z]+$")],
             Pin: ["", [Validators.minLength(6), Validators.maxLength(6)]],
             Phone: [
                 "",
                 [
-                    Validators.required,
                     Validators.pattern("^[- +()]*[0-9][- +()0-9]*$"),
                     Validators.minLength(10),
                     Validators.maxLength(15),
@@ -76,17 +75,18 @@ export class DoctorMasterService {
             AgeYear: ["", Validators.pattern("[0-9]+")],
             AgeMonth: ["", Validators.pattern("[0-9]+")],
             AgeDay: ["", Validators.pattern("[0-9]+")],
-            PassportNo: [
-                "",
-                Validators.pattern(
-                    "^[A-PR-WYa-pr-wy][1-9]\\d" + "\\s?\\d{4}[1-9]$"
-                ),
-            ],
+            PassportNo:[""],
+            //  [
+            //     "",
+            //     Validators.pattern(
+            //         "^[A-PR-WYa-pr-wy][1-9]\\d" + "\\s?\\d{4}[1-9]$"
+            //     ),
+            // ],
             ESINO: [""],
             RegNo: [""],
-            RegDate: [""],
+            RegDate:[{ value: this.currentDate}],
             MahRegNo: [""],
-            MahRegDate: [""],
+            MahRegDate:[{ value: this.currentDate }],
             RefDocHospitalName: [
                 "",
                 Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),

@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { takeUntil } from 'rxjs/operators';
 import { UploadDocumentComponent } from '../../appointment/upload-document/upload-document.component';
+import { FileUploadComponent } from '../../appointment/file-upload/file-upload.component';
+import { ImageUploadComponent } from '../../appointment/image-upload/image-upload.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new-case-detail',
@@ -140,6 +143,7 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
         CaseEndDate:[{ value: this.registerObj.CaseEndDate }],
         CaseStatus: '',
         CompanyName: '',
+        CompanyId:' ',
         CaseRepresentative: '',
         HospitalRepresentative: '',
         AgreementFileName: ''
@@ -240,20 +244,30 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
 
   UploadDoc(){
  
-    const dialogRef = this._matDialog.open(UploadDocumentComponent,
+    const dialogRef = this._matDialog.open(FileUploadComponent,
       {
-        maxWidth: "45vw",
-        height: '500px',
+        maxWidth: "25vw",
+        height: '25vw',
         width: '100%',
-        // height: "100%"
+       
       });
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed - Insert Action', result);
-      // this.getVisitList();
+      
     });
   }
  
-  
+  UploadImgage(){
+    const dialogRef = this._matDialog.open(ImageUploadComponent,
+      {
+        maxWidth: "45vw",
+        height: '45vw',
+        width: '100%',
+       
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      
+    });
+  }
   onSubmit() {
 
         this.isLoading = 'submit';
@@ -265,11 +279,11 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
           "CaseDescription": this.personalFormGroup.get('CaseDescription').value || '',
           "TotalSubjects": this.personalFormGroup.get('TotalSubjects').value || 0,
           "TotalVisits": this.personalFormGroup.get('TotalVisits').value || '',
-          "VisitFrequency": this.personalFormGroup.get('VisitFrequency').value || '',
+          "VisitFrequency": this.personalFormGroup.get('VisitFrequency').value.ConstantId || 0,
           "CaseStartDate": this.registerObj.CaseStartDate,//this.datePipe.transform(this.personalFormGroup.get('CaseStartDate').value, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
           "CaseEndDate":this.registerObj.CaseEndDate,// this.datePipe.transform(this.personalFormGroup.get('CaseEndDate').value, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
           "CaseStatus":1,// this.personalFormGroup.get('CaseStatus').value || '',
-          "CompanyName": this.personalFormGroup.get('CompanyName').value || 0,
+          "CompanyName": this.personalFormGroup.get('CompanyId').value.CompanyId || 0,
           "CaseRepresentative": this.personalFormGroup.get('CaseRepresentative').value || '',
           "HospitalRepresentative": this.personalFormGroup.get('HospitalRepresentative').value || '',
           "AgreementFileName": this.personalFormGroup.get('AgreementFileName').value || '',
@@ -280,18 +294,15 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
       console.log(m_data);
       this._registerService.CaseDetailInsert(m_data).subscribe(response => {
         if (response) {
-          this.myFunction("CaseDetail Data save Successfully !");
-          // const dialogRef = this._matDialog.open(CaseDetailListComponent,
-          //   {
-          //     maxWidth: "95%",
-          //     height: '700px',
-          //     width: '100%',
-          //     // height: "100%"
-          //   });
-          this._matDialog.closeAll();
+          Swal.fire('New CaseDetail Save !', ' CaseDetail Save Successfully !', 'success').then((result) => {
+            if (result.isConfirmed) {
+              this._matDialog.closeAll();
+  
+            }
+  
+          });
         } else {
-          this.myFunction("CaseDetail Data  not saved', 'error !");
-          // Swal.fire('Error !', 'Register Data  not saved', 'error');
+          Swal.fire('Error !', 'CaseDetail not saved', 'error');
         }
       });
     
@@ -309,7 +320,7 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
     console.log(this.snackmessage);
     var x = document.getElementById("snackbar");
     x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 15000);
   }
 }
 

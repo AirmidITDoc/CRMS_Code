@@ -50,6 +50,11 @@ export class InvoiceBillMappingComponent implements OnInit {
   registerObj: InvoiceBillMap;
   subscriptionArr: Subscription[] = [];
   printTemplate: any;
+  FianlamtSGST:any =0;
+  FianlamtCGST:any =0;
+  FianlamtIGST:any =0;
+  Fianlamt:any =0;
+
   // reportPrintObjList: BrowseOPDBill[] = [];
   chargeslist: any = [];
   screenFromString = 'OP-billing';
@@ -233,9 +238,9 @@ export class InvoiceBillMappingComponent implements OnInit {
 
     let netAmt;
     netAmt = element.reduce((sum, { TotalBillAmt }) => sum += +(TotalBillAmt || 0), 0);
-    this.TaxableAmount = netAmt;
+    // this.TaxableAmount = netAmt;
 
-    console.log(this.TaxableAmount);
+    // console.log(this.TaxableAmount);
 
     return netAmt
   }
@@ -250,11 +255,18 @@ export class InvoiceBillMappingComponent implements OnInit {
 
   }
 
-  tableElementChecked(event, element) {
-
+  tableElementChecked(event,element) {
+debugger;
     if (event.checked) {
       this.interimArray.push(element);
       this.dataSource1.data = this.interimArray;
+
+
+     let netAmt = this.Fianlamt + this.dataSource1.data[0].TotalBillAmt;
+      this.TaxableAmount = netAmt;
+      this.Fianlamt = netAmt;
+      // let total = Math.round(parseInt(this.TaxableAmount) * parseInt(this.CGST)).toString();
+       
 
     } else if (this.interimArray.length > 0) {
       let index = this.interimArray.indexOf(element);
@@ -523,8 +535,9 @@ export class InvoiceBillMappingComponent implements OnInit {
     let net;
 
     if (this.TaxableAmount && this.CGST) {
-      net = Math.round(parseInt(this.TaxableAmount) * parseInt(this.CGST)).toString();
+      net = this.FianlamtCGST + (Math.round(parseInt(this.TaxableAmount) * parseInt(this.CGST)) /100);
       this.TotalAmount = net;
+      this.FianlamtCGST =net;
     }
 
     }
@@ -534,7 +547,9 @@ export class InvoiceBillMappingComponent implements OnInit {
       let net;
 
       if (this.TaxableAmount && this.SGST) {
-        net = Math.round(parseInt(this.TotalAmount) + parseInt(this.SGST)).toString();
+        // net = Math.round(parseInt(this.TotalAmount) + parseInt(this.SGST)).toString();
+      net = this.FianlamtSGST + (Math.round(parseInt(this.TaxableAmount) * parseInt(this.CGST)) /100);
+      this.FianlamtSGST =net;
         this.TotalAmount = net;
       }
     }
@@ -545,8 +560,10 @@ export class InvoiceBillMappingComponent implements OnInit {
       let net;
 
       if (this.TaxableAmount && this.IGST) {
-        net = Math.round(parseInt(this.TotalAmount) + parseInt(this.IGST)).toString();
+        // net = Math.round(parseInt(this.TotalAmount) + parseInt(this.IGST)).toString();
+        net = this.FianlamtIGST + (Math.round(parseInt(this.TaxableAmount) * parseInt(this.CGST)) /100);
         this.TotalAmount = net;
+        this.FianlamtIGST =net;
       }
     }
 

@@ -159,7 +159,7 @@ console.log(xx);
     const dialogRef = this._matDialog.open(EditCasedetailComponent,
       {
         maxWidth: "75vw",
-        height: '560px',
+        height: '580px',
         width: '100%',
         data : {
           registerObj : xx,

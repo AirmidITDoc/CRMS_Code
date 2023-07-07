@@ -1,6 +1,7 @@
 <div class="dialog-content-wrapper">
     <mat-toolbar matDialogTitle class="mat-accent m-0">
-        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" style="background-color: rgb(18, 87, 134) !important;">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
+            style="background-color: rgb(18, 87, 134) !important;">
             <h3>{{_serviceMasterService.myform.controls.ServiceId.value?"Modify Service Master":"New
                 Service Master"}}</h3>
             <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
@@ -14,11 +15,9 @@
 <form [formGroup]="_serviceMasterService.myform">
     <input type="hidden" name="ServiceId" formControlName="ServiceId">
 
-    <br />
-    <br />
     <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
 
-        <!-- <mat-form-field appearance="outline" fxFlex>
+        <mat-form-field appearance="outline" style="width: 25%;">
             <mat-label>Group Name</mat-label>
             <mat-select formControlName="GroupId" placeholder="Bank" #singleSelect>
                 <mat-option>
@@ -31,7 +30,7 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" fxFlex>
+        <!--   <mat-form-field appearance="outline" fxFlex>
             <mat-label>SubGroup Name</mat-label>
             <mat-select formControlName="SubGroupId" placeholder="Bank" #singleSelect>
                 <mat-option>
@@ -46,7 +45,15 @@
     </div>
 
 
+
     <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+
+        <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+            <input name="ServiceName" placeholder="Select ServiceName" formControlName="ServiceName" matInput required>
+            <mat-error>Please enter ServiceName </mat-error>
+        </mat-form-field>
+
+
         <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
             <input name="ServiceShortDesc" placeholder="Select ServiceShortDesc" formControlName="ServiceShortDesc"
                 matInput>
@@ -54,10 +61,6 @@
         </mat-form-field>
 
 
-        <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
-            <input name="ServiceName" placeholder="Select ServiceName" formControlName="ServiceName" matInput required>
-            <mat-error>Please enter ServiceName </mat-error>
-        </mat-form-field>
 
         <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
             <input name="Price" placeholder="Select Price" formControlName="Price"
@@ -79,7 +82,7 @@
     <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
 
 
-        <mat-form-field appearance="outline" fxFlex>
+        <mat-form-field appearance="outline" fxFlex style="margin-right: 10px;">
             <mat-label>Tariff Name</mat-label>
             <mat-select formControlName="TariffId" placeholder="Bank" #singleSelect>
                 <mat-option>
@@ -92,15 +95,26 @@
             </mat-select>
         </mat-form-field>
 
-      
-        <mat-form-field appearance="outline" fxFlex>
-            <mat-label>Effective Date</mat-label>
-            <input name="EffectiveDate" matInput [matDatepicker]="picker"
-                formControllName="EffectiveDate" [value]="registerObj.EffectiveDate">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-           
+        <mat-form-field appearance="outline" fxFlex id="DoctorID" style="margin-right: 10px;">
+            <mat-label>Doctor Name</mat-label>
+            <mat-select formControlName="DoctorID" placeholder="Bank" #singleSelect [disabled]="IsDoctor">
+                <mat-option>
+                    <ngx-mat-select-search [formControl]="doctorFilterCtrl" [placeholderLabel]="'Search'"
+                        [noEntriesFoundLabel]="'No matching found'">
+                    </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let element of filteredDoctor | async" [value]="element">
+                    {{element.DoctorName}}
+                </mat-option>
+                <mat-hint>Plz Select Doctor Name</mat-hint>
+                <!-- <mat-error
+                    *ngIf="registeredForm.get('DoctorID').hasError('required')">
+                    Required field cannot be left blank
+                </mat-error> -->
+            </mat-select>
         </mat-form-field>
+
+
 
 
         <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
@@ -142,10 +156,28 @@
                                 <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.ClassName}} </mat-cell>
                             </ng-container>
 
-                            <!-- <ng-container matColumnDef="ClassRate">
+                            <ng-container matColumnDef="ClassRate">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Class Rate </mat-header-cell>
                                 <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.ClassRate}} </mat-cell>
-                            </ng-container> -->
+                            </ng-container>
+
+                            
+                            <ng-container matColumnDef="ChangeClassRate">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                    fxShow.gt-md>
+                                    NewClassRate
+                                </mat-header-cell>
+                              
+                                <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                    <mat-form-field appearance="legacy">
+                                        <input matInput [(ngModel)]="contact.ClassRate">
+                                    </mat-form-field>
+                                </mat-cell>
+
+                            </ng-container>
+
+
+
 
                             <ng-container matColumnDef="noData">
                                 <mat-footer-cell *matFooterCellDef colspan="6">
@@ -180,7 +212,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                         <section class="example-section">
                             <mat-checkbox class="example-margin" name="IsEditable" formControlName="IsEditable"
-                                value='true'>
+                                value='true' (change)="onEnableDoctorCheckboxChange($event)">
                                 IsEditable</mat-checkbox>
                         </section>
                         &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
@@ -198,8 +230,18 @@
                         &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                         <section class="example-section">
                             <mat-checkbox class="example-margin" name="IsEmergency" formControlName="IsEmergency"
-                                value='1'>
+                                value='1' (change)="onIsEmergencyCheckboxChange($event)">
                                 IsEmergency</mat-checkbox>
+
+
+                            <mat-form-field appearance="outline" style="width:40%;margin-left: 20px;">
+                                <input name="Emergencyamt" placeholder="Select EmgPer"
+                                    [ngClass]="{ 'is-invalid': submitted && f.Emergencyamt.errors }"
+                                    formControlName="Emergencyamt" matInput [disabled]="IsEmergency">
+                                <span class="error" *ngIf="f.Emergencyamt.invalid && f.Emergencyamt.touched">EmgPer
+                                    required only
+                                    Digits</span>
+                            </mat-form-field>
                         </section>
                         &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -215,44 +257,45 @@
                                 IsPathology</mat-checkbox>
                         </section>
 
-                    </div>
-                    <!-- <div fxFlex="60%">
+                        <section class="example-section">
 
-                        <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
-                            <mat-select placeholder="Select Tariff Name" name="DoctorId" formControlName="DoctorId"
-                                required>
-                                <mat-option *ngFor="let M of DoctorcmbList" [value]="M.DoctorId">
-                                    {{ M.FirstName }}
-                                </mat-option>
-                            </mat-select>
-                            <mat-error>Please Select Tariff Name </mat-error>
-                        </mat-form-field>
-                    </div> -->
+                            <mat-checkbox class="example-margin" name="IsActive" formControlName="IsActive" value='1'>
+                                IsActive</mat-checkbox>
+                        </section>
+
+                    </div>
+
 
                 </div>
             </div>
         </div>
     </div>
 
+    <div>
+
+
+        <mat-form-field appearance="outline" style="width: 20%;">
+            <mat-label>Effective Date</mat-label>
+            <input name="EffectiveDate" matInput [matDatepicker]="picker" formControllName="EffectiveDate"
+                [value]="registerObj.EffectiveDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+
+        </mat-form-field>
+    </div>
 
 </form>
 
 
-
-<mat-radio-group name="IsDeleted" formControlName="IsDeleted" value='false'>
-    <mat-radio-button value='false' class="mr-sm-12" fxFlex>IsActive</mat-radio-button>
-</mat-radio-group>
-
-
 <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;">
 
-    <div style="float: right;margin-top: 20px;">
-        <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()" [disabled]="butDisabled"
-            >Save</button>
-      
-            <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()" [disabled]="butDisabled1"
-            >Update</button>
-      
+    <div style="float: right;margin-top:5px;">
+        <!-- [disabled]="butDisabled" -->
+        <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()">Save</button>
+
+        <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()"
+            [disabled]="butDisabled1">Update</button>
+
         <button class="footer-btn" id="btncancel" (click)="onClear()">Cancel</button>
     </div>
 </div>

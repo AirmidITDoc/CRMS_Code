@@ -90,182 +90,10 @@ export class ServiceMasterComponent implements OnInit {
         this._serviceMasterService.initializeFormGroup();
     }
 
-    // onSubmit() {
-    //     if (this._serviceMasterService.myform.valid) {
-    //         if (!this._serviceMasterService.myform.get("ServiceId").value) {
-    //             var m_data = {
-    //                 serviceMasterInsert: {
-    //                     groupId: 1,
-    //                     serviceShortDesc:
-    //                         this._serviceMasterService.myform.get(
-    //                             "ServiceShortDesc"
-    //                         ).value,
-    //                     serviceName: this._serviceMasterService.myform
-    //                         .get("ServiceName")
-    //                         .value.trim(),
-    //                     price:
-    //                         this._serviceMasterService.myform.get("Price")
-    //                             .value || "0",
-    //                     isEditable: Boolean(
-    //                         JSON.parse(
-    //                             this._serviceMasterService.myform.get(
-    //                                 "IsEditable"
-    //                             ).value
-    //                         )
-    //                     ),
-    //                     creditedtoDoctor: Boolean(
-    //                         JSON.parse(
-    //                             this._serviceMasterService.myform.get(
-    //                                 "CreditedtoDoctor"
-    //                             ).value
-    //                         )
-    //                     ),
-    //                     isPathology:
-    //                         this._serviceMasterService.myform.get("IsPathology")
-    //                             .value,
-    //                     isRadiology:
-    //                         this._serviceMasterService.myform.get("IsRadiology")
-    //                             .value,
-    //                     isActive:
-    //                         this._serviceMasterService.myform.get("IsDeleted")
-    //                             .value,
-    //                     printOrder:
-    //                         this._serviceMasterService.myform.get("PrintOrder")
-    //                             .value || "0",
-    //                     isPackage:
-    //                         this._serviceMasterService.myform.get("IsPackage")
-    //                             .value,
-    //                     subgroupId:
-    //                         this._serviceMasterService.myform.get("SubGroupId")
-    //                             .value,
-    //                     doctorId:
-    //                         this._serviceMasterService.myform.get("DoctorId]")
-    //                             .value,
-    //                     isEmergency:
-    //                         Boolean(
-    //                             JSON.parse(
-    //                                 this._serviceMasterService.myform.get(
-    //                                     "IsEmergency"
-    //                                 ).value
-    //                             )
-    //                         ) || "0",
-    //                     emgAmt:
-    //                         this._serviceMasterService.myform.get("EmgAmt")
-    //                             .value || "0",
-    //                     emgPer:
-    //                         this._serviceMasterService.myform.get("EmgPer")
-    //                             .value || "0",
-    //                     isDocEditable:
-    //                         Boolean(
-    //                             JSON.parse(
-    //                                 this._serviceMasterService.myform.get(
-    //                                     "IsDocEditable"
-    //                                 ).value
-    //                             )
-    //                         ) || "0",
-    //                     serviceId:
-    //                         this._serviceMasterService.myform.get("ServiceId")
-    //                             .value,
-    //                 },
-    //             };
+    
 
-    //             this._serviceMasterService
-    //                 .serviceMasterInsert(m_data)
-    //                 .subscribe((data) => {
-    //                     this.msg = data;
-    //                     this.getServiceMasterList();
-    //                 });
-    //         } else {
-    //             var m_dataUpdate = {
-    //                 serviceMasterUpdate: {
-    //                     groupId: 1,
-
-    //                     serviceShortDesc:
-    //                         this._serviceMasterService.myform.get(
-    //                             "ServiceShortDesc"
-    //                         ).value || "%",
-    //                     serviceName: this._serviceMasterService.myform
-    //                         .get("ServiceName")
-    //                         .value.trim(),
-    //                     price:
-    //                         this._serviceMasterService.myform.get("Price")
-    //                             .value || "0",
-    //                     isEditable: Boolean(
-    //                         JSON.parse(
-    //                             this._serviceMasterService.myform.get(
-    //                                 "IsEditable"
-    //                             ).value
-    //                         )
-    //                     ),
-    //                     creditedtoDoctor: Boolean(
-    //                         JSON.parse(
-    //                             this._serviceMasterService.myform.get(
-    //                                 "CreditedtoDoctor"
-    //                             ).value
-    //                         )
-    //                     ),
-    //                     isPathology:
-    //                         this._serviceMasterService.myform.get("IsPathology")
-    //                             .value,
-    //                     isRadiology:
-    //                         this._serviceMasterService.myform.get("IsRadiology")
-    //                             .value,
-    //                     isActive: Boolean(
-    //                         JSON.parse(
-    //                             this._serviceMasterService.myform.get(
-    //                                 "IsDeleted"
-    //                             ).value
-    //                         )
-    //                     ),
-    //                     printOrder:
-    //                         this._serviceMasterService.myform.get("PrintOrder")
-    //                             .value || "0",
-    //                     isPackage:
-    //                         this._serviceMasterService.myform.get("IsPackage")
-    //                             .value,
-    //                     subgroupId:1,
-    //                         // this._serviceMasterService.myform.get("SubGroupId")
-    //                         //     .value,
-    //                     doctorId:
-    //                         this._serviceMasterService.myform.get("DoctorId]")
-    //                             .value,
-    //                     isEmergency:
-    //                         Boolean(
-    //                             JSON.parse(
-    //                                 this._serviceMasterService.myform.get(
-    //                                     "IsEmergency"
-    //                                 ).value
-    //                             )
-    //                         ) || "0",
-    //                     emgAmt:
-    //                         this._serviceMasterService.myform.get("EmgAmt")
-    //                             .value || "0",
-    //                     emgPer:
-    //                         this._serviceMasterService.myform.get("EmgPer")
-    //                             .value || "0",
-    //                     isDocEditable: Boolean(
-    //                         JSON.parse(
-    //                             this._serviceMasterService.myform.get(
-    //                                 "IsDocEditable"
-    //                             ).value
-    //                         )
-    //                     ),
-    //                     serviceId:
-    //                         this._serviceMasterService.myform.get("ServiceId")
-    //                             .value,
-    //                 },
-    //             };
-    //             this._serviceMasterService
-    //                 .serviceMasterUpdate(m_dataUpdate)
-    //                 .subscribe((data) => {
-    //                     this.msg = data;
-    //                     this.getServiceMasterList();
-    //                 });
-    //         }
-    //         this.onClear();
-    //     }
-    // }
-    onEdit(row) {
+    onEdit(){}
+    onEdit1(row) {
         var m_data = {
             ServiceId: row.ServiceId,
             ServiceShortDesc: row.ServiceShortDesc.trim(),
@@ -292,10 +120,9 @@ export class ServiceMasterComponent implements OnInit {
 
         const dialogRef = this._matDialog.open(ServiceMasterFormComponent, {
             maxWidth: "80vw",
-            maxHeight: "95vh",
+            maxHeight: "850px",
             width: "100%",
-            height: "100%",
-          
+                   
             data: {
                 ServiceId:row.ServiceId,
                 IsSubmitFlag: true,

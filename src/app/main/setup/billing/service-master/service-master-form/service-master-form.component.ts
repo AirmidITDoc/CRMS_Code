@@ -30,9 +30,11 @@ export class ServiceMasterFormComponent implements OnInit {
   Today = new Date();
   butDisabled: boolean = false;
   butDisabled1: boolean = true;
-
+  doctorNameCmbList: any = [];
   ServiceId:any=0;
-  // IsNewvisit: boolean = false;
+  IsDoctor: boolean = true;
+  IsEmergency: boolean = true;
+
 
   msg: any;
   DSServicedetailList = new MatTableDataSource<Servicedetail>();
@@ -50,6 +52,12 @@ export class ServiceMasterFormComponent implements OnInit {
   public subgroupnameFilterCtrl: FormControl = new FormControl();
   public filteredSubgroupname: ReplaySubject<any> = new ReplaySubject<any>(1);
 
+  
+  //doctorone filter
+  public doctorFilterCtrl: FormControl = new FormControl();
+  public filteredDoctor: ReplaySubject<any> = new ReplaySubject<any>(1);
+
+
   private _onDestroy = new Subject<void>();
 
   constructor(public _serviceMasterService: ServiceMasterService,
@@ -65,8 +73,9 @@ export class ServiceMasterFormComponent implements OnInit {
 
   displayedColumns: string[] = [
     'ClassId',
-    'ClassName'
-    // 'ClassRate',
+    'ClassName',
+    'ClassRate',
+    'ChangeClassRate',
   ];
 
   ngOnInit(): void {
@@ -79,7 +88,8 @@ export class ServiceMasterFormComponent implements OnInit {
       }
     }
 
-    //  this.getGroupNameCombobox();
+    this.getAdmittedDoctorCombo();
+     this.getGroupNameCombobox();
     this.getDoctorNameCombobox();
     //  this.getSubgroupNameCombobox();
     this.getClassList();
@@ -87,18 +97,18 @@ export class ServiceMasterFormComponent implements OnInit {
 
 
 
-    //  this.groupnameFilterCtrl.valueChanges
-    //  .pipe(takeUntil(this._onDestroy))
-    //  .subscribe(() => {
-    //    this.filterGroupname();
-    //  });
+     this.groupnameFilterCtrl.valueChanges
+     .pipe(takeUntil(this._onDestroy))
+     .subscribe(() => {
+       this.filterGroupname();
+     });
 
 
-    //  this.subgroupnameFilterCtrl.valueChanges
-    //  .pipe(takeUntil(this._onDestroy))
-    //  .subscribe(() => {
-    //    this.filterSubgroupname();
-    //  });
+     this.subgroupnameFilterCtrl.valueChanges
+     .pipe(takeUntil(this._onDestroy))
+     .subscribe(() => {
+       this.filterSubgroupname();
+     });
 
     this.tariffFilterCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
@@ -151,6 +161,29 @@ export class ServiceMasterFormComponent implements OnInit {
     );
   }
 
+
+  // doctorone filter code  
+  private filterDoctor() {
+
+    if (!this.doctorNameCmbList) {
+      return;
+    }
+    // get the search keyword
+    let search = this.doctorFilterCtrl.value;
+    if (!search) {
+      this.filteredDoctor.next(this.doctorNameCmbList.slice());
+      return;
+    }
+    else {
+      search = search.toLowerCase();
+    }
+    // filter
+    this.filteredDoctor.next(
+      this.doctorNameCmbList.filter(bank => bank.DoctorName.toLowerCase().indexOf(search) > -1)
+    );
+  }
+
+
   private filterTariff() {
 
     if (!this.TariffcmbList) {
@@ -170,7 +203,16 @@ export class ServiceMasterFormComponent implements OnInit {
     );
   }
 
+getAdmittedDoctorCombo() {
 
+    this._serviceMasterService.getAdmittedDoctorCombo().subscribe(data => {
+      this.doctorNameCmbList = data;
+      console.log(this.doctorNameCmbList);
+      this.filteredDoctor.next(this.doctorNameCmbList.slice());
+    })
+
+
+  }
 
   getClassList() {
     this._serviceMasterService.getClassMasterList().subscribe(Menu => {
@@ -181,15 +223,15 @@ export class ServiceMasterFormComponent implements OnInit {
 
   get f() { return this._serviceMasterService.myform.controls; }
 
-  // getGroupNameCombobox(){
-  //   // this._serviceService.getGroupMasterCombo().subscribe(data =>this.GroupcmbList =data);
+  getGroupNameCombobox(){
+    // this._serviceService.getGroupMasterCombo().subscribe(data =>this.GroupcmbList =data);
 
-  //   this._serviceMasterService.getGroupMasterCombo().subscribe(data => {
-  //     this.GroupcmbList = data;
-  //     this.filteredGroupname.next(this.GroupcmbList.slice());
-  //     this._serviceMasterService.myform.get('GroupId').setValue(this.GroupcmbList[0]);
-  //   });
-  // }
+    this._serviceMasterService.getGroupMasterCombo().subscribe(data => {
+      this.GroupcmbList = data;
+      this.filteredGroupname.next(this.GroupcmbList.slice());
+      this._serviceMasterService.myform.get('GroupId').setValue(this.GroupcmbList[0]);
+    });
+  }
 
   getDoctorNameCombobox() {
     this._serviceMasterService.getDoctorMasterCombo().subscribe(data => this.DoctorcmbList = data);
@@ -222,7 +264,7 @@ export class ServiceMasterFormComponent implements OnInit {
       if (this.ServiceId ==0) {
 
         let serviceMasterInsert = {};
-        serviceMasterInsert['groupId'] = 1;
+        serviceMasterInsert['groupId'] =this._serviceMasterService.myform.get("GroupId").value.GroupId || 0;
         serviceMasterInsert['ServiceShortDesc'] = this._serviceMasterService.myform.get("ServiceShortDesc").value || "";
         serviceMasterInsert['ServiceName'] = (this._serviceMasterService.myform.get("ServiceName").value).trim() || "";
         serviceMasterInsert['Price'] = this._serviceMasterService.myform.get("Price").value || "0";
@@ -231,12 +273,12 @@ export class ServiceMasterFormComponent implements OnInit {
         serviceMasterInsert['CreditedtoDoctor'] = Boolean(JSON.parse(this._serviceMasterService.myform.get("CreditedtoDoctor").value)) || 0;
         serviceMasterInsert['IsPathology'] = parseInt(this._serviceMasterService.myform.get("IsPathology").value) || 0;
         serviceMasterInsert['IsRadiology'] = parseInt(this._serviceMasterService.myform.get("IsRadiology").value) || 0;
-        serviceMasterInsert['IsDeleted'] = 0,//Boolean(JSON.parse(this._serviceMasterService.myform.get("IsDeleted").value)) ||0;
+        serviceMasterInsert['IsActive'] = Boolean(JSON.parse(this._serviceMasterService.myform.get("IsActive").value)) || 1;
           serviceMasterInsert['PrintOrder'] = this._serviceMasterService.myform.get("PrintOrder").value || 1;
 
         serviceMasterInsert['IsPackage'] = parseInt(this._serviceMasterService.myform.get("IsPackage").value) || 1;
         serviceMasterInsert['SubGroupId'] = 1;
-        serviceMasterInsert['DoctorId'] = this._serviceMasterService.myform.get("DoctorId").value || "0";
+        serviceMasterInsert['DoctorId'] = this._serviceMasterService.myform.get("DoctorID").value.DoctorId || 0;
         serviceMasterInsert['IsEmergency'] = Boolean(JSON.parse(this._serviceMasterService.myform.get("IsEmergency").value)) || 0;
         serviceMasterInsert['EmgAmt'] = this._serviceMasterService.myform.get("EmgAmt").value || "0";
 
@@ -253,9 +295,9 @@ export class ServiceMasterFormComponent implements OnInit {
         this.DSServicedetailList.data.forEach((element) => {
          
           serviceDetailInsert['ServiceId'] = 0;
-          serviceDetailInsert['TariffId'] = 1;
-          serviceDetailInsert['ClassId'] = 1;
-          serviceDetailInsert['ClassRate'] = 1;
+          serviceDetailInsert['TariffId'] = this._serviceMasterService.myform.get("TariffId").value.TariffId || 0;
+          serviceDetailInsert['ClassId'] = element.ClassId || 0;
+          serviceDetailInsert['ClassRate'] = 0,//element.ClassRate || 0;
           serviceDetailInsert['EffectiveDate'] =  this._serviceMasterService.myform.get("EffectiveDate").value.value || "01/01/1900",
 
           serviceDetailInsertarray.push(serviceDetailInsert);
@@ -270,7 +312,7 @@ export class ServiceMasterFormComponent implements OnInit {
 
 
         console.log(submitData);
-        this._serviceMasterService.serviceMasterUpdate(submitData).subscribe(data => {
+        this._serviceMasterService.serviceDetailInsert(submitData).subscribe(data => {
           this.msg = data;
         });
 
@@ -286,12 +328,12 @@ export class ServiceMasterFormComponent implements OnInit {
         serviceMasterUpdate['CreditedtoDoctor'] = Boolean(JSON.parse(this._serviceMasterService.myform.get("CreditedtoDoctor").value)) || 0;
         serviceMasterUpdate['IsPathology'] = parseInt(this._serviceMasterService.myform.get("IsPathology").value) || 0;
         serviceMasterUpdate['IsRadiology'] = parseInt(this._serviceMasterService.myform.get("IsRadiology").value) || 0;
-        serviceMasterUpdate['IsDeleted'] = 0,//Boolean(JSON.parse(this._serviceMasterService.myform.get("IsDeleted").value)) ||0;
-          serviceMasterUpdate['PrintOrder'] = this._serviceMasterService.myform.get("PrintOrder").value || 1;
+        serviceMasterUpdate['IsActive'] = 1,//Boolean(JSON.parse(this._serviceMasterService.myform.get("IsActive").value)) ||0;
+          serviceMasterUpdate['PrintOrder'] = 0,//this._serviceMasterService.myform.get("PrintOrder").value || 1;
 
         serviceMasterUpdate['IsPackage'] = parseInt(this._serviceMasterService.myform.get("IsPackage").value) || 1;
         serviceMasterUpdate['SubGroupId'] = 1;
-        serviceMasterUpdate['DoctorId'] = this._serviceMasterService.myform.get("DoctorId").value || "0";
+        serviceMasterUpdate['DoctorId'] = this._serviceMasterService.myform.get("DoctorID").value.DoctorId||  0;
         serviceMasterUpdate['IsEmergency'] = Boolean(JSON.parse(this._serviceMasterService.myform.get("IsEmergency").value)) || 0;
         serviceMasterUpdate['EmgAmt'] = this._serviceMasterService.myform.get("EmgAmt").value || "0";
 
@@ -332,6 +374,42 @@ export class ServiceMasterFormComponent implements OnInit {
       this.onClose();
     }
   }
+
+  onEnableDoctorCheckboxChange(event){
+    debugger;
+    console.log(event)
+    if (event.checked) {
+
+      this.IsDoctor = false;
+    } else {
+      this.IsDoctor = true;
+    }
+  }
+
+
+  
+
+  onIsEmergencyCheckboxChange(event){
+    if (event.checked) {
+
+      this.IsEmergency = false;
+    } else {
+      this.IsEmergency = true;
+    }
+  }
+
+
+  onCheckboxChange(event){
+    debugger;
+    console.log(event)
+    if (event.checked) {
+
+      this.IsDoctor = false;
+    } else {
+      this.IsDoctor = true;
+    }
+  }
+
 
 
   onClear() {
