@@ -104,10 +104,11 @@
                                             </mat-form-field>
 
                                             <div *ngIf="isDoctor" style="margin-right: 10px; width:200px;">
+                                                <!-- [disabled]="isDoctor" -->
                                                 <mat-form-field appearance="outline" fxFlex id="DoctorID" >
                                                     <mat-label>Doctor Name</mat-label>
                                                     <mat-select formControlName="DoctorID" placeholder="Bank" 
-                                                        #singleSelect required [disabled]="isDoctor">
+                                                        #singleSelect required >
                                                         <mat-option>
                                                             <ngx-mat-select-search [formControl]="doctorFilterCtrl"
                                                                 [placeholderLabel]="'Search'"

@@ -11,6 +11,11 @@
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     Service Master
                 </span>
+
+                <button mat-raised-button (click)="onAdd()" fxLayoutAlign="center center"
+                style="margin-left: 1300px;">
+                <mat-icon color="Primary" title=" Appointment Form ">how_to_reg</mat-icon>
+            </button>
             </div>
         </div>
         <!-- / APP TITLE -->
@@ -33,7 +38,7 @@
 
 
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
-                    <div fxFlex.gt-sm="80%" fxFlex>
+                    <div fxFlex.gt-sm="99%" fxFlex>
                         <div style="width: 100%;">
                             <mat-table #table matSort [dataSource]="DSServiceMasterList"
                                 [@animateStagger]="{value:'50'}" style="overflow:auto">
@@ -50,12 +55,25 @@
                                     <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.ServiceName}}
                                     </mat-cell>
                                 </ng-container>
-
+<!-- 
                                 <ng-container matColumnDef="GroupName">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>GroupName
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> {{element.GroupName}}
                                     </mat-cell>
+                                </ng-container> -->
+
+                              
+
+                                <!-- <ng-container matColumnDef="SubGroupName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> SubGroupName </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.SubGroupName}}
+                                    </mat-cell>
+                                </ng-container> -->
+
+                                <ng-container matColumnDef="ServiceShortDesc">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>ServiceShortDesc</mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.ServiceShortDesc}} </mat-cell>
                                 </ng-container>
 
                                 <ng-container matColumnDef="PrintOrder">
@@ -63,17 +81,6 @@
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> {{element.PrintOrder}}
                                     </mat-cell>
-                                </ng-container>
-
-                                <ng-container matColumnDef="SubGroupName">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header> SubGroupName </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.SubGroupName}}
-                                    </mat-cell>
-                                </ng-container>
-
-                                <ng-container matColumnDef="FirstName">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.FirstName}} </mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="EmgAmt">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header> EAmt </mat-header-cell>
@@ -127,12 +134,12 @@
 
 
                                 <ng-container matColumnDef="action" stickyEnd>
-                                    <mat-header-cell *matHeaderCellDef class="table-actions"> Action </mat-header-cell>
+                                    <mat-header-cell *matHeaderCellDef class="table-actions" style="color: aliceblue;"> Action </mat-header-cell>
                                     <mat-cell *matCellDef="let row">
-                                        <!-- <button mat-icon-button (click)="onEdit(row)"><mat-icon
-                                                title="Edit Menu">launch</mat-icon></button> -->
+                                        <button mat-icon-button (click)="onEdit(row)"><mat-icon
+                                                title="Edit Menu">launch</mat-icon></button>
                                         <!-- <button mat-icon-button (click)="onDeactive(row.ServiceId)"
-                                            color="warn"><mat-icon>delete_outline</mat-icon></button> -->
+                                            color="warn"><mat-icon>delete_outline</mat-icon></button>-->
 
                                     </mat-cell>
                                 </ng-container>
@@ -170,12 +177,12 @@
                         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"
                             showFirstLastButtons></mat-paginator>
                     </div>
-                    <div fxFlex.gt-sm="20%" fxFlex style="background-color: white;">
+                    <!-- <div fxFlex.gt-sm="20%" fxFlex style="background-color: white;">
                         <button mat-raised-button color="pine" (click)="onAdd()">Add
                             <mat-icon>add_to_photos</mat-icon>
                         </button>
 
-                    </div>
+                    </div> -->
 
                 </div>
             </div>

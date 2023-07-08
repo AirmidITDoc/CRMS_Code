@@ -1,14 +1,14 @@
 app-service-master {
     .mat-header-row {
-        width: 1200px;
-        max-width: 1200px;
-        min-width: 1200px;
+        width: 1500px;
+        max-width: 1500px;
+        min-width: 1500px;
         font-weight: bold;
     }
     .mat-row {
-        width: 1200px;
-        max-width: 1200px;
-        min-width: 1200px;
+        width: 1500px;
+        max-width: 1500px;
+        min-width: 1500px;
     }
 
     .mat-column-ServiceId {
@@ -18,9 +18,9 @@ app-service-master {
     }
 
     .mat-column-ServiceName {
-        width: 250px;
-        max-width: 250px;
-        min-width: 220px;
+        width: 450px;
+        max-width: 450px;
+        min-width: 420px;
     }
     .mat-column-GroupName {
         width: 90px;
@@ -48,10 +48,10 @@ app-service-master {
         min-width: 100px;
     }
 
-    .mat-column-FirstName {
-        width: 100px;
-        max-width: 100px;
-        min-width: 100px;
+    .mat-column-ServiceShortDesc {
+        width: 2%;
+        max-width: 200px;
+        min-width: 200px;
     }
 
     .mat-column-EmgAmt {

@@ -7,6 +7,8 @@ import { DoctorMasterService } from '../doctor-master.service';
 import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@fuse/animations';
 import Swal from 'sweetalert2';
+import { DoctorDepartmentDet, DoctorMaster } from '../doctor-master.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
     selector: 'app-new-doctor',
@@ -19,13 +21,23 @@ export class NewDoctorComponent implements OnInit {
 
     submitted = false;
     data1: [];
-
+    isLoading:any;
     PrefixcmbList: any = [];
     GendercmbList: any = [];
     DoctortypecmbList: any = [];
     DepartmentcmbList: any = [];
     selectedGenderID: any;
+    registerObj:DoctorMaster;
+    docobject:DoctorDepartmentDet;
     msg: any;
+
+    deptlist: any = [];
+
+    displayedColumns = [
+
+        'DeptId',
+        'DeptName'
+    ];
 
     public departmentFilterCtrl: FormControl = new FormControl();
     public filteredDepartment: ReplaySubject<any> = new ReplaySubject<any>(1);
@@ -38,6 +50,9 @@ export class NewDoctorComponent implements OnInit {
 
     private _onDestroy = new Subject<void>();
 
+        DeptSource = new MatTableDataSource<ChargesList>();
+
+        dataSource = new MatTableDataSource<ChargesList>();
     constructor(
         public _doctorService: DoctorMasterService,
         private accountService: AuthenticationService,
@@ -77,6 +92,40 @@ export class NewDoctorComponent implements OnInit {
         return this._doctorService.myform.controls;
     }
 
+    
+  setDropdownObjs1() {
+    debugger;
+
+    debugger;
+    const toSelect = this.PrefixcmbList.find(c => c.PrefixID == this.registerObj.PrefixID);
+    this._doctorService.myform.get('PrefixID').setValue(toSelect);
+
+    const toSelect1= this.DepartmentcmbList.find(c => c.Departmentid == this.docobject.DepartmentId);
+    this._doctorService.myform.get('Departmentid').setValue(toSelect1);
+
+    // const toSelectReligion = this.ReligionList.find(c => c.ReligionId == this.registerObj.ReligionId);
+    // this._doctorService.myform.get('ReligionId').setValue(toSelectReligion);
+
+    // const toSelectArea = this.AreaList.find(c => c.AreaId == this.registerObj.AreaId);
+    // this._doctorService.myform.get('AreaId').setValue(toSelectArea);
+
+    // const toSelectCity = this.cityList.find(c => c.CityId == this.registerObj.CityId);
+    // this._doctorService.myform.get('CityId').setValue(toSelectCity);
+
+    // const toSelectMat = this.cityList.find(c => c.CityId == this.registerObj.CityId);
+    // this._doctorService.myform.get('CityId').setValue(toSelectCity);
+
+
+    // this.onChangeGenderList(this._doctorService.myform.get('PrefixID').value);
+
+    // this.onChangeCityList(this.registerObj.CityId);
+
+    this._doctorService.myform.updateValueAndValidity();
+    // this.dialogRef.close();
+
+  }
+
+  
     private filterPrefix() {
         if (!this.PrefixcmbList) {
             return;
@@ -391,9 +440,9 @@ export class NewDoctorComponent implements OnInit {
                                     .value
                             )
                         ),
-                        DoctorTypeId:
-                            this._doctorService.myform.get("DoctorTypeId")
-                                .value,
+                        DoctorTypeId:0,
+                            // this._doctorService.myform.get("DoctorTypeId")
+                            //     .value,
                         AgeYear:
                             this._doctorService.myform
                                 .get("AgeYear")
@@ -528,4 +577,29 @@ export class NewDoctorComponent implements OnInit {
                 });
         }
     }
+
+SaveEnter(element){
+    debugger
+    this.isLoading = 'save';
+      this.dataSource.data = [];
+    this.deptlist.push(
+        {
+          DeptId:element.Departmentid,
+          DeptName: element.departmentName,
+        
+        });
+        this.dataSource.data = this.deptlist;
+        console.log(this.deptlist);
 }
+}
+
+
+export class ChargesList{
+    DeptId: number;
+    DeptName: number;
+   
+  
+    constructor(ChargesList){
+            this.DeptId = ChargesList.DeptId || '';
+            this.DeptName = ChargesList.DeptName || '';
+    }}

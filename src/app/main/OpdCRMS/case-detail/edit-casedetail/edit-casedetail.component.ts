@@ -87,7 +87,7 @@ export class EditCasedetailComponent implements OnInit {
       .subscribe(() => {
         this.filterDocument();
       });
-
+      this.setDropdownObjs1();
   }
 
   closeDialog() {
@@ -117,6 +117,30 @@ export class EditCasedetailComponent implements OnInit {
 
     });
   }
+
+
+  
+
+  setDropdownObjs1() {
+    debugger;
+
+    debugger;
+    const toSelect = this.VisitFrequencyList.find(c => c.ContactId == this.registerObj.VisitFrequency);
+    this.personalFormGroup.get('VisitFrequency').setValue(toSelect);
+
+    const toSelectMarital = this.DocumentList.find(c => c.ContactId == this.registerObj.AgreementFileName);
+    this.personalFormGroup.get('Document').setValue(toSelectMarital);
+
+    const toSelectReligion = this.CompanyList.find(c => c.CompanyId == this.registerObj.CompanyName);
+    this.personalFormGroup.get('CompanyId').setValue(toSelectReligion);
+
+  
+
+    this.personalFormGroup.updateValueAndValidity();
+    // this.dialogRef.close();
+
+  }
+
 
 
 
@@ -283,7 +307,8 @@ export class CaseDetail {
   CaseRepresentative: string;
   HospitalRepresentative: string;
   AgreementFileName: String;
-
+ContactId:any;
+CompanyId:any;
   /**
    * Constructor
    *
@@ -304,7 +329,8 @@ export class CaseDetail {
       this.CompanyName = CaseDetail.CompanyName || '';
       this.CaseRepresentative = CaseDetail.CaseRepresentative || '';
       this.AgreementFileName = CaseDetail.AgreementFileName || '';
-
+      this.ContactId = CaseDetail.ContactId || '';
+      this.CompanyId=CaseDetail.CompanyId ||0;
     }
   }
 }

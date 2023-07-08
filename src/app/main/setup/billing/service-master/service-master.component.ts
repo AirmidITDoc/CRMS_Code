@@ -28,10 +28,10 @@ export class ServiceMasterComponent implements OnInit {
     displayedColumns: string[] = [
         "ServiceId",
         "ServiceName",
-        "GroupName",
+        // "GroupName",
+        "ServiceShortDesc",
         "PrintOrder",
-        "SubGroupName",
-        "FirstName",
+        // "FirstName",
         "EmgAmt",
         "EmgPer",
         "AddedByName",
@@ -71,7 +71,7 @@ export class ServiceMasterComponent implements OnInit {
                      
                 "ServiceName":'%',       
                "TariffId":1,      
-               "GroupId":1      
+            //    "GroupId":1      
                  
         };
         this._serviceMasterService.getServiceMasterList(m).subscribe(
@@ -92,8 +92,10 @@ export class ServiceMasterComponent implements OnInit {
 
     
 
-    onEdit(){}
-    onEdit1(row) {
+    onEdit1(){}
+    onEdit(row) {
+        debugger;
+        console.log(row)
         var m_data = {
             ServiceId: row.ServiceId,
             ServiceShortDesc: row.ServiceShortDesc.trim(),
@@ -126,6 +128,7 @@ export class ServiceMasterComponent implements OnInit {
             data: {
                 ServiceId:row.ServiceId,
                 IsSubmitFlag: true,
+                registerObj:m_data
               }
         });
 
@@ -184,20 +187,20 @@ export class ServiceMaster {
             this.ServiceShortDesc = ServiceMaster.ServiceShortDesc || "";
             this.ServiceName = ServiceMaster.ServiceName || "";
             this.Price = ServiceMaster.Price || "";
-            this.IsEditable = ServiceMaster.IsEditable || "";
-            this.CreditedtoDoctor = ServiceMaster.CreditedtoDoctor || "";
+            this.IsEditable = ServiceMaster.IsEditable || 0;
+            this.CreditedtoDoctor = ServiceMaster.CreditedtoDoctor || 0;
             this.EffectiveDate = ServiceMaster.EffectiveDate || this.currentDate;
-            this.IsPathology = ServiceMaster.IsPathology || "";
-            this.IsRadiology = ServiceMaster.IsRadiology || "";
+            this.IsPathology = ServiceMaster.IsPathology || 0;
+            this.IsRadiology = ServiceMaster.IsRadiology || 0;
             this.IsDeleted = ServiceMaster.IsDeleted || "false";
             this.PrintOrder = ServiceMaster.PrintOrder || "";
-            this.IsPackage = ServiceMaster.IsPackage || "";
+            this.IsPackage = ServiceMaster.IsPackage || 0;
             this.SubGroupId = ServiceMaster.SubGroupId || "";
             this.DoctorId = ServiceMaster.DoctorId || "";
-            this.IsEmergency = ServiceMaster.IsEmergency || "";
+            this.IsEmergency = ServiceMaster.IsEmergency || 0;
             this.EmgAmt = ServiceMaster.EmgAmt || "";
             this.EmgPer = ServiceMaster.EmgPer || "";
-            this.IsDocEditable = ServiceMaster.DoctorId || "";
+            this.IsDocEditable = ServiceMaster.DoctorId || 0;
             this.AddedBy = ServiceMaster.AddedBy || "";
             this.UpdatedBy = ServiceMaster.UpdatedBy || "";
             this.AddedByName = ServiceMaster.AddedByName || "";
@@ -211,7 +214,7 @@ export class Servicedetail {
     TariffId: number;
     ClassId: number;
     ClassName:any;
-    // ClassRate: number;
+    ClassRate: number;
     EffectiveDate: Date;
     currentDate = new Date();
     constructor(Servicedetail) {
@@ -221,6 +224,7 @@ export class Servicedetail {
             this.TariffId = Servicedetail.TariffId || "";
             this.ClassId = Servicedetail.ClassId || "";
             this.ClassName = Servicedetail.ClassName || "";
+            this.ClassRate = Servicedetail.ClassRate || 0;
             this.EffectiveDate = Servicedetail.EffectiveDate || this.currentDate;
     }
 }

@@ -89,13 +89,21 @@ export class ServiceMasterService {
     //         {}
     //     );
     // }
-
-    public getClassMasterList() {
+    
+    // Retrive_servicedetails_classwise
+    public getServiceClassMasterList() {
         return this._httpClient.post(
-            "Generic/GetByProc?procName=RetrieveClassMasterForCombo",
+            "Generic/GetByProc?procName=Retrive_Classname",
             {}
         );
     }
+
+   public getServiceClassMasterUpdateList(emp){
+    return this._httpClient.post(
+        "Generic/GetByProc?procName=Retrive_servicedetails_classwise",
+    emp
+    );
+   }
 
     public getTariffMasterCombo() {
         return this._httpClient.post(

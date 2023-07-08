@@ -586,66 +586,66 @@ debugger;
     // this._matDialog.open(InterimComponentComponent,
     //   { data: this.interimArray });
   }
-  //Addcharges
-  onInsertAddCharges() {
-    this.isLoading = 'save';
-    let InsertAdddetArr = [];
+  // //Addcharges
+  // onInsertAddCharges() {
+  //   this.isLoading = 'save';
+  //   let InsertAdddetArr = [];
 
-    if (this.SrvcName && (Math.round(parseInt(this.b_price)) != 0) && this.b_qty) {
-      // console.log(this.dataSource.data.length);
-      this.dataSource.data.forEach((element) => {
-        let InsertAddChargesObj = {};
-        InsertAddChargesObj['ChargeID'] = 0,
-          InsertAddChargesObj['ChargesDate'] = this.datePipe.transform(this.currentDate, "MM-dd-yyyy"),
-          InsertAddChargesObj['opD_IPD_Type'] = 0,
-          InsertAddChargesObj['opD_IPD_Id'] = this.selectedAdvanceObj.AdmissionID,
-          InsertAddChargesObj['serviceId'] = element.ServiceId,
-          InsertAddChargesObj['price'] = element.Price,
-          InsertAddChargesObj['qty'] = element.Qty,
-          InsertAddChargesObj['totalAmt'] = element.TotalAmt,
-          InsertAddChargesObj['concessionPercentage'] = element.DiscPer || 0,
-          InsertAddChargesObj['concessionAmount'] = element.DiscAmt || 0,
-          InsertAddChargesObj['netAmount'] = element.NetAmount,
-          InsertAddChargesObj['doctorId'] = element.DoctorId,// this.registeredForm.get('DoctorID').value.DoctorID;
-          InsertAddChargesObj['docPercentage'] = 0,// this.registeredForm.get('DoctorId').value;
-          InsertAddChargesObj['docAmt'] = 0,
-          InsertAddChargesObj['hospitalAmt'] = element.NetAmount,
-          InsertAddChargesObj['isGenerated'] = 0,
-          InsertAddChargesObj['addedBy'] = this.accountService.currentUserValue.user.id,
-          InsertAddChargesObj['isCancelled'] = 0,
-          InsertAddChargesObj['isCancelledBy'] = 0,
-          InsertAddChargesObj['isCancelledDate'] = "01/01/1900",
-          InsertAddChargesObj['isPathology'] = element.IsPathology,
-          InsertAddChargesObj['isRadiology'] = element.IsRadiology,
-          InsertAddChargesObj['isPackage'] = 0,
-          InsertAddChargesObj['packageMainChargeID'] = 0,
-          InsertAddChargesObj['isSelfOrCompanyService'] = false,
-          InsertAddChargesObj['packageId'] = 0,
-          InsertAddChargesObj['chargeTime'] = this.dateTimeObj.time;
-        InsertAddChargesObj['classId'] = this.selectedAdvanceObj.ClassId,// this.registeredForm.get('ClassId').value;
+  //   if (this.SrvcName && (Math.round(parseInt(this.b_price)) != 0) && this.b_qty) {
+  //     // console.log(this.dataSource.data.length);
+  //     this.dataSource.data.forEach((element) => {
+  //       let InsertAddChargesObj = {};
+  //       InsertAddChargesObj['ChargeID'] = 0,
+  //         InsertAddChargesObj['ChargesDate'] = this.datePipe.transform(this.currentDate, "MM-dd-yyyy"),
+  //         InsertAddChargesObj['opD_IPD_Type'] = 0,
+  //         InsertAddChargesObj['opD_IPD_Id'] = this.selectedAdvanceObj.AdmissionID,
+  //         InsertAddChargesObj['serviceId'] = element.ServiceId,
+  //         InsertAddChargesObj['price'] = element.Price,
+  //         InsertAddChargesObj['qty'] = element.Qty,
+  //         InsertAddChargesObj['totalAmt'] = element.TotalAmt,
+  //         InsertAddChargesObj['concessionPercentage'] = element.DiscPer || 0,
+  //         InsertAddChargesObj['concessionAmount'] = element.DiscAmt || 0,
+  //         InsertAddChargesObj['netAmount'] = element.NetAmount,
+  //         InsertAddChargesObj['doctorId'] = element.DoctorId,// this.registeredForm.get('DoctorID').value.DoctorID;
+  //         InsertAddChargesObj['docPercentage'] = 0,// this.registeredForm.get('DoctorId').value;
+  //         InsertAddChargesObj['docAmt'] = 0,
+  //         InsertAddChargesObj['hospitalAmt'] = element.NetAmount,
+  //         InsertAddChargesObj['isGenerated'] = 0,
+  //         InsertAddChargesObj['addedBy'] = this.accountService.currentUserValue.user.id,
+  //         InsertAddChargesObj['isCancelled'] = 0,
+  //         InsertAddChargesObj['isCancelledBy'] = 0,
+  //         InsertAddChargesObj['isCancelledDate'] = "01/01/1900",
+  //         InsertAddChargesObj['isPathology'] = element.IsPathology,
+  //         InsertAddChargesObj['isRadiology'] = element.IsRadiology,
+  //         InsertAddChargesObj['isPackage'] = 0,
+  //         InsertAddChargesObj['packageMainChargeID'] = 0,
+  //         InsertAddChargesObj['isSelfOrCompanyService'] = false,
+  //         InsertAddChargesObj['packageId'] = 0,
+  //         InsertAddChargesObj['chargeTime'] = this.dateTimeObj.time;
+  //       InsertAddChargesObj['classId'] = this.selectedAdvanceObj.ClassId,// this.registeredForm.get('ClassId').value;
 
-          InsertAdddetArr.push(InsertAddChargesObj);
-        // console.log(InsertAdddetArr.length);
-      })
-      let submitData = {
-        "opdAddChargesInsert": InsertAdddetArr
-      }
-      this._opappointmentService.InsertOPAddCharges(submitData).subscribe(data => {
-        this.msg = data;
-        if (data) {
-          Swal.fire('Charges !', 'Record Saved Successfully !', 'success').then((result) => {
-            if (result.isConfirmed) {
-              this.getChargesList();
-            }
-          });
-        } else {
-          Swal.fire('Error !', 'OP Addcharges data not saved', 'error');
-        }
-      });
-      this.isLoading = '';
-    }
-    // console.log(InsertAdddetArr.length);
-  }
+  //         InsertAdddetArr.push(InsertAddChargesObj);
+  //       // console.log(InsertAdddetArr.length);
+  //     })
+  //     let submitData = {
+  //       "opdAddChargesInsert": InsertAdddetArr
+  //     }
+  //     this._opappointmentService.InsertOPAddCharges(submitData).subscribe(data => {
+  //       this.msg = data;
+  //       if (data) {
+  //         Swal.fire('Charges !', 'Record Saved Successfully !', 'success').then((result) => {
+  //           if (result.isConfirmed) {
+  //             this.getChargesList();
+  //           }
+  //         });
+  //       } else {
+  //         Swal.fire('Error !', 'OP Addcharges data not saved', 'error');
+  //       }
+  //     });
+  //     this.isLoading = '';
+  //   }
+  //   // console.log(InsertAdddetArr.length);
+  // }
 
   getChargesList1() {
     this.chargeslist = [];

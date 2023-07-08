@@ -103,9 +103,9 @@ export class DoctorMasterComponent implements OnInit {
         );
     }
 
-    onEdit(){}
+    onEdit1(){}
 
-    onEdit1(row) {
+    onEdit(row) {
         console.log(row);
         var m_data = {
             DoctorId: row.DoctorId,
