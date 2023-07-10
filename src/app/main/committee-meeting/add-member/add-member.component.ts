@@ -67,21 +67,6 @@ export class AddMemberComponent implements OnInit {
 
     if (this.data) {
       this.registerObj = this.data.registerObj;
-
-      // this.CaseId=this.data.CaseId;
-      // this.CaseTitle=this.data.CaseTitle;
-      // this.CaseDescription=this.data.CaseDescription;
-      // this.TotalSubjects=this.data.TotalSubjects;
-      // this.TotalVisits=this.data.TotalVisits;
-      // this.VisitFrequency=this.data.VisitFrequency;
-      // this.CaseStartDate=this.data.CaseStartDate;
-      // this.CaseEndDate=this.data.CaseEndDate;
-      // this.CaseStatus=this.data.CaseStatus;
-      // this.CompanyName=this.data.CompanyName;
-      // this.CaseRepresentative=this.data.CaseRepresentative;
-      // this.HospitalRepresentative=this.data.HospitalRepresentative;
-      // this.AgreementFileName=this.data.AgreementFileName;
-
     }
 
     this.getcityList();
@@ -149,12 +134,6 @@ export class AddMemberComponent implements OnInit {
 
 
 
-  addEmptyRow() {
-
-
-  }
-
-
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
     console.log('dateTimeObj ==', dateTimeObj);
@@ -167,7 +146,7 @@ export class AddMemberComponent implements OnInit {
     this.isLoading = 'submit';
 
     var m_data = {
-      "insertMemberDetail": {
+      "insertMemberMaster": {
         "MemberId":0,// this.personalFormGroup.get('MemberId').value.CaseId || 0,
         "FirstName": this.personalFormGroup.get('FirstName').value || '',
         "MiddleName": this.personalFormGroup.get('MiddleName').value || '',

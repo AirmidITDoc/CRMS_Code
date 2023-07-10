@@ -175,8 +175,8 @@ newMember() {
 
     const dialogRef = this._matDialog.open(CommitteeMasterMemberComponent,
       {
-        maxWidth: "75vw",
-        height: '560px',
+        maxWidth: "55vw",
+        height: '660px',
         width: '100%',
         
       });
@@ -192,7 +192,7 @@ newMember() {
     const dialogRef = this._matDialog.open(NewCommitteeMeetingComponent,
       {
         maxWidth: "75vw",
-        height: '560px',
+        height: '660px',
         width: '100%',
         
       });

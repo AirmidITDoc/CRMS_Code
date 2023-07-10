@@ -20,6 +20,7 @@ export class CommitteeMasterMemberComponent implements OnInit {
 
   registerObj = new MemberDetail({});
   personalFormGroup: FormGroup;
+  screenFromString = 'admission-form';
   
   constructor(  public _CommitteMeetingService: CommitteMeetingService,
     private accountService: AuthenticationService,
@@ -67,6 +68,7 @@ export class CommitteeMasterMemberComponent implements OnInit {
   
   createPesonalForm() {
     return this.formBuilder.group({
+      CommitteeId:'',
       CommitteeName: '',
       MemberId: '',
       Amount:''
@@ -102,7 +104,7 @@ getMemberNameCombobox() {
     
   };
 
-  this._CommitteMeetingService.getMemberMasterList().subscribe((data) => {
+  this._CommitteMeetingService.getMemberMasterList(m).subscribe((data) => {
       this.MembercmbList = data;
       console.log(data);
       this.filteredMember.next(this.MembercmbList.slice());
@@ -116,21 +118,11 @@ onSubmit() {
   this.isLoading = 'submit';
 
   var m_data = {
-    "insertMemberDetail": {
-      "MemberId":0,// this.personalFormGroup.get('MemberId').value.CaseId || 0,
-      "FirstName": this.personalFormGroup.get('FirstName').value || '',
-      "MiddleName": this.personalFormGroup.get('MiddleName').value || '',
-      "LastName": this.personalFormGroup.get('LastName').value || 0,
-      "Member_Address": this.personalFormGroup.get('Member_Address').value || '',
-      "CityId": this.personalFormGroup.get('CityId').value.CityId || 0,
-      "PinCode": this.personalFormGroup.get('PinCode').value || '',
-      "MobileNo": this.personalFormGroup.get('MobileNo').value || 0,
-      "EmailId": this.personalFormGroup.get('EmailId').value || '',
-      "StudyAmount": this.personalFormGroup.get('StudyAmount').value || '',
-
-      // "AgreementFileName": this.personalFormGroup.get('AgreementFileName').value || '',
+    "insertCommitteeMaster": {
+      "committeeId": 0,//this.personalFormGroup.get('CommitteeId').value.CommitteeId || 0,
+      "commiteeName": this.personalFormGroup.get('commiteeName').value.MemberId || 0,
       "createdBy": this.accountService.currentUserValue.user.id
-
+     
     }
   }
   console.log(m_data);
@@ -152,17 +144,16 @@ onSubmit() {
 }
 
 
-onSaveEntry() {
+onSaveEntry(element) {
   debugger;
- 
-  // if (this.SrvcName && (parseInt(this.b_price) != 0) && this.b_qty) {
-  // this.isLoading = 'save';
+ console.log(element);
+
   this.dataSource.data = [];
   this.chargeslist.push(
     {
      
-      MemberId: this.MemberId,
-      MemberName: this.MemberName,
+      MemberId: element.MemberId,
+      MemberName: element.FirstName
      
     });
   this.isLoading = '';

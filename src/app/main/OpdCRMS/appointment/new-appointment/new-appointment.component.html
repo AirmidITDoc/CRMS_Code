@@ -3,11 +3,13 @@
 
     <div class="form-section">
 
-      <div class="header-container" fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between" style="background-color:rgb(18, 87, 134) !important;" >
+      <div class="header-container" fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
+        style="background-color:rgb(18, 87, 134) !important;">
         <span style="font-size: 22px; font-weight: 500; color: #fff;">New Appointment</span>
         <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
         </app-common-date>
-        <span class="material-icons" style="cursor: pointer;float: right; color: #fff;float: right;" (click)="onClose()">
+        <span class="material-icons" style="cursor: pointer;float: right; color: #fff;float: right;"
+          (click)="onClose()">
           close
         </span>
 
@@ -25,27 +27,28 @@
 
         <div>
           <form [formGroup]="personalFormGroup">
-            
-              <div  fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-             
 
-              <mat-form-field appearance="outline" style="width:200px;font-weight:bold;float: left;padding-top: 10px;padding-right: 10px;padding-left: 10px;">
+            <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+
+
+              <mat-form-field appearance="outline"
+                style="width:200px;font-weight:bold;float: left;padding-top: 10px;padding-right: 10px;padding-left: 10px;">
                 <mat-label>Case ID</mat-label>
                 <mat-select formControlName="CaseId" name="CaseId" style="color: blue;" required>
-                    <mat-option></mat-option>
-                    <mat-option *ngFor="let m of CaseIdList" [value]="m">
-                       CaseId {{m.CaseId}} ||  {{m.CaseTitle}}
-                    </mat-option>
+                  <mat-option></mat-option>
+                  <mat-option *ngFor="let m of CaseIdList" [value]="m">
+                    CaseId {{m.CaseId}} || {{m.CaseTitle}}
+                  </mat-option>
                 </mat-select>
-            </mat-form-field>
-            
-           
-          
-          </div>
-           
+              </mat-form-field>
+
+
+
+            </div>
+
             <div style="padding: 7px;">
               <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-              
+
 
                 <mat-form-field appearance="outline" fxFlex>
                   <mat-label>Prefix</mat-label>
@@ -450,7 +453,7 @@
                   </mat-select>
 
                 </mat-form-field>
-              
+
 
                 <br>
 

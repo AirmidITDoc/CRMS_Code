@@ -6,151 +6,168 @@
         <mat-toolbar matDialogTitle class="mat-accent m-0">
             <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
                 style="background-color:rgb(18, 87, 134) !important;">
-                <h3>Create Study  </h3>
+                <h3>Create Study </h3>
                 <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
                     <mat-icon>close</mat-icon>
                 </button>
             </mat-toolbar-row>
         </mat-toolbar>
 
-        <div style="padding:10px; height: 100%;" fxLayoutGap="2px">
-            <div class="dialog-content-wrapper" style="align-items: flex-end;margin-right:10px;">
 
-                <form [formGroup]="personalFormGroup">
-                    <!-- <div style="float: right;">
+        <mat-tab-group mat-align-tabs="start" class="tabs-group" mat-stretch-tabs style="margin-right: 7px">
+            <mat-card>
+                <mat-tab label="Charges List" style="margin-left: 7px;">
+                    <ng-template mat-tab-label
+                        style="color: black; font-size: 17px bold; height: 100px;font-weight: bolder; ">
+                        <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
+                        Study Creation
+                    </ng-template>
+                    <div style="padding:10px; height: 100%;" fxLayoutGap="2px">
+                        <div class="dialog-content-wrapper" style="align-items: flex-end;margin-right:10px;">
+
+                            <form [formGroup]="personalFormGroup">
+                                <!-- <div style="float: right;">
                         <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
                         </app-common-date>
                     </div> -->
-                    <ng-template matStepLabel>Personal</ng-template>
+                                <ng-template matStepLabel>Personal</ng-template>
 
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
 
-                        <mat-form-field appearance="outline" style="width: 25%;font-weight: bolder;">
-                            <mat-label>Protocol Number</mat-label>
-                            <input name="CaseTitle" formControlName="CaseTitle" placeholder="Protocol Number" matInput
-                                [ngModel]="registerObj.CaseTitle" (ngModelChange)="registerObj.CaseTitle = $event" required>
-                        </mat-form-field>
+                                    <mat-form-field appearance="outline" style="width: 25%;font-weight: bolder;">
+                                        <mat-label>Protocol Number</mat-label>
+                                        <input name="CaseTitle" formControlName="CaseTitle"
+                                            placeholder="Protocol Number" matInput [ngModel]="registerObj.CaseTitle"
+                                            (ngModelChange)="registerObj.CaseTitle = $event" required>
+                                    </mat-form-field>
 
-                        
-                        <mat-form-field appearance="outline" style="width: 25%;font-weight: bolder;">
-                            <mat-label>Study Product</mat-label>
-                            <input name="CaseTitle" formControlName="CaseTitle" placeholder="Study Product" matInput
-                                [ngModel]="registerObj.CaseTitle" (ngModelChange)="registerObj.CaseTitle = $event" required>
-                        </mat-form-field>
-                    </div>
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Protocol Description</mat-label>
-                            <textarea name="CaseDescription" formControlName="CaseDescription"
-                                placeholder="CaseDescription" matInput [(ngModel)]="registerObj.CaseDescription" required>
+
+                                    <mat-form-field appearance="outline" style="width: 25%;font-weight: bolder;">
+                                        <mat-label>Study Product</mat-label>
+                                        <input name="CaseTitle" formControlName="CaseTitle" placeholder="Study Product"
+                                            matInput [ngModel]="registerObj.CaseTitle"
+                                            (ngModelChange)="registerObj.CaseTitle = $event" required>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Protocol Description</mat-label>
+                                        <textarea name="CaseDescription" formControlName="CaseDescription"
+                                            placeholder="CaseDescription" matInput
+                                            [(ngModel)]="registerObj.CaseDescription" required>
 
                         </textarea>
 
-                        </mat-form-field>
+                                    </mat-form-field>
 
 
-                    </div>
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                                </div>
+                                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
 
 
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Study Start Date</mat-label>
-                            <input name="CaseStartDate" matInput [matDatepicker]="picker"
-                                formControllName="CaseStartDate" [value]="registerObj.CaseStartDate">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Study Start Date</mat-label>
+                                        <input name="CaseStartDate" matInput [matDatepicker]="picker"
+                                            formControllName="CaseStartDate" [value]="registerObj.CaseStartDate">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
 
-                        </mat-form-field>
+                                    </mat-form-field>
 
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Study End Date</mat-label>
-                            <input name="CaseEndDate" matInput [matDatepicker]="picker1" formControllName="CaseEndDate"
-                                [value]="registerObj.CaseEndDate">
-                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                            <mat-datepicker #picker1></mat-datepicker>
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Study End Date</mat-label>
+                                        <input name="CaseEndDate" matInput [matDatepicker]="picker1"
+                                            formControllName="CaseEndDate" [value]="registerObj.CaseEndDate">
+                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
 
-                        </mat-form-field>
-
-                      
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Total Subjects</mat-label>
-                            <input name="TotalSubjects" formControlName="TotalSubjects" placeholder="TotalSubjects"
-                                matInput [ngModel]="registerObj.TotalSubjects"
-                                (ngModelChange)="registerObj.TotalSubjects = $event" type="number" required>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Total Visits</mat-label>
-                            <input name="TotalVisits" formControlName="TotalVisits" placeholder="TotalVisits" matInput
-                                min="0" [ngModel]="registerObj.TotalVisits"
-                                (ngModelChange)="registerObj.TotalVisits = $event" type="number" required>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Visit Frequency</mat-label>
-                            <mat-select formControlName="VisitFrequency" name="VisitFrequency" required>
-                                <mat-option></mat-option>
-                                <mat-option *ngFor="let m of VisitFrequencyList" [value]="m">
-                                    {{m.Name}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div> 
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-                        <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
-                            <mat-label>Sponsor </mat-label>
-                            <mat-select formControlName="CompanyId" placeholder="Bank" #singleSelect required>
-                                <mat-option>
-                                    <ngx-mat-select-search [formControl]="companyFilterCtrl"
-                                        [placeholderLabel]="'Search'"
-                                        [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
-                                </mat-option>
-                                <mat-option *ngFor="let element of filteredCompany | async" [value]="element">
-                                    {{element.CompanyName}}
-                                </mat-option>
-                            </mat-select>
-
-                        </mat-form-field>
+                                    </mat-form-field>
 
 
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Investigator</mat-label>
-                            <input name="CaseRepresentative" formControlName="CaseRepresentative"
-                                placeholder="Investigator" matInput [(ngModel)]="registerObj.CaseRepresentative" required>
-                        </mat-form-field>
+                                </div>
 
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Institution / Site </mat-label>
-                            <input name="HospitalRepresentative" formControlName="HospitalRepresentative"
-                                placeholder="Institution Name" matInput required
-                                [(ngModel)]="registerObj.HospitalRepresentative">
-                        </mat-form-field>
-                    </div>
+                                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Total Subjects</mat-label>
+                                        <input name="TotalSubjects" formControlName="TotalSubjects"
+                                            placeholder="TotalSubjects" matInput [ngModel]="registerObj.TotalSubjects"
+                                            (ngModelChange)="registerObj.TotalSubjects = $event" type="number" required>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Total Visits</mat-label>
+                                        <input name="TotalVisits" formControlName="TotalVisits"
+                                            placeholder="TotalVisits" matInput min="0"
+                                            [ngModel]="registerObj.TotalVisits"
+                                            (ngModelChange)="registerObj.TotalVisits = $event" type="number" required>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Visit Frequency</mat-label>
+                                        <mat-select formControlName="VisitFrequency" name="VisitFrequency" required>
+                                            <mat-option></mat-option>
+                                            <mat-option *ngFor="let m of VisitFrequencyList" [value]="m">
+                                                {{m.Name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                                    <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
+                                        <mat-label>Sponsor </mat-label>
+                                        <mat-select formControlName="CompanyId" placeholder="Bank" #singleSelect
+                                            required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [formControl]="companyFilterCtrl"
+                                                    [placeholderLabel]="'Search'"
+                                                    [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let element of filteredCompany | async"
+                                                [value]="element">
+                                                {{element.CompanyName}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
 
 
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Investigator</mat-label>
+                                        <input name="CaseRepresentative" formControlName="CaseRepresentative"
+                                            placeholder="Investigator" matInput
+                                            [(ngModel)]="registerObj.CaseRepresentative" required>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Institution / Site </mat-label>
+                                        <input name="HospitalRepresentative" formControlName="HospitalRepresentative"
+                                            placeholder="Institution Name" matInput required
+                                            [(ngModel)]="registerObj.HospitalRepresentative">
+                                    </mat-form-field>
+                                </div>
 
 
-                        <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
-                            <mat-label>Document Name </mat-label>
-                            <mat-select formControlName="Document" placeholder="Bank" #singleSelect>
-                                <mat-option>
-                                    <ngx-mat-select-search [formControl]="documentFilterCtrl"
-                                        [placeholderLabel]="'Search'"
-                                        [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
-                                </mat-option>
-                                <mat-option *ngFor="let element of filteredDocument | async" [value]="element">
-                                    {{element.Name}}
-                                </mat-option>
-                            </mat-select>
+                                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
 
-                        </mat-form-field>
 
-<!-- 
+                                    <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
+                                        <mat-label>Document Name </mat-label>
+                                        <mat-select formControlName="Document" placeholder="Bank" #singleSelect>
+                                            <mat-option>
+                                                <ngx-mat-select-search [formControl]="documentFilterCtrl"
+                                                    [placeholderLabel]="'Search'"
+                                                    [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let element of filteredDocument | async"
+                                                [value]="element">
+                                                {{element.Name}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                    <!-- 
                         <mat-form-field appearance="outline" fxFlex>
                             <mat-label>Agreement File Name</mat-label>
                             <input name="AgreementFileName" formControlName="AgreementFileName"
@@ -159,25 +176,264 @@
                           
                         </mat-form-field> -->
 
-                    </div>
+                                </div>
 
-                    <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;">
+                                <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;">
 
-                        <div style="float: right;margin-top: 20px;">
-                            <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()"
-                                [disabled]="personalFormGroup.invalid">Save</button>
-                            <!--              
+                                    <div style="float: right;margin-top: 20px;">
+                                        <button class="next-btn" color="accent" style="border-radius: 16px;"
+                                            (click)="onSubmit()" [disabled]="personalFormGroup.invalid">Save</button>
+                                        <!--              
               <button (click)="isDisabled = !isDisabled">
                 {{ isDisabled ? 'Edit' : 'Save' }}
             </button> -->
-            <button class="next-btn"  id="btncancel" (click)="UploadDoc()">Uplaod File</button>
-            <!-- <button class="next-btn" id="btncancel" (click)="UploadImgage()">Upload Image</button> -->
-                            <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
+                                        <button class="next-btn" id="btncancel" (click)="UploadDoc()">Uplaod
+                                            File</button>
+                                        <!-- <button class="next-btn" id="btncancel" (click)="UploadImgage()">Upload Image</button> -->
+                                        <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
+                </mat-tab>
+
+                <mat-tab>
+                    <ng-template mat-tab-label
+                        style="color: black; font-size: 17px bold; height: 100px;font-weight: bolder; ">
+                        <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
+                        Img Upload Doc
+                    </ng-template>
+
+                </mat-tab>
+
+
+                <mat-tab>
+                    <ng-template mat-tab-label
+                        style="color: black; font-size: 17px bold; height: 100px;font-weight: bolder; ">
+                        <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
+                        Study Schdule
+                    </ng-template>
+                    <div style="padding:10px; height: 100%;" fxLayoutGap="2px">
+                        <div class="dialog-content-wrapper" style="align-items: flex-end;margin-right:10px;">
+
+                            <form [formGroup]="personalFormGroup">
+
+                                <ng-template matStepLabel>Study Schdule </ng-template>
+
+                                <div fxLayout="column">
+
+                                    <div class="content-card"
+                                        style="width:100%;  margin-top: 2px; float: right;background-color: white; margin-right: 10px;margin-left: 10px;">
+                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="column" fxLayoutGap="3px">
+                                            <div fxlayout="row" style=" padding: 3px 3px 3px 1px; margin-right: 5px;">
+                                                <!-- ================================ LABEL HEADER  -->
+                
+                                                <mat-card fxFlex.gt-sm="100%" fxFlex
+                                                    style="padding: 0 5px; height: fit-content; background-color: white;">
+                                                    &nbsp;
+                                                    <form [formGroup]="studySchFormGroup" style="display: flex;">
+                
+                                                        <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="5px">
+                                                            <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                
+                                                                
+                                                                <mat-form-field appearance="outline" style="width:30%;">
+                                                                    <mat-label>Visit Name</mat-label>
+                                                                    <input name="VisitName" formControlName="VisitName"
+                                                                        placeholder="Visit Name" matInput required>
+                                                                    <!-- <mat-error
+                                                                        *ngIf="personalFormGroup.get('CommitteeName').invalid && personalFormGroup.get('CommitteeName').touched">
+                                                                        Committee is required Enter only
+                                                                        Alphabets</mat-error> -->
+                                                                </mat-form-field>
+                
+                
+                
+                                                                <mat-form-field appearance="outline" style="width:20%;">
+                                                                    <mat-label>VisitDscription</mat-label>
+                                                                    <input name="VisitDscription" formControlName="VisitDscription"
+                                                                        placeholder="VisitDscription" matInput>
+                                                                    <!-- <mat-error class="error"
+                                                                        *ngIf="personalFormGroup.get('Location').invalid && personalFormGroup.get('Location').touched">
+                                                                        Middle Name is required
+                                                                        Enter
+                                                                        only Alphabets</mat-error> -->
+                                                                </mat-form-field>
+                
+
+                                                                
+                                                                <mat-form-field appearance="outline" style="width:20%;">
+                                                                    <mat-label>Amount</mat-label>
+                                                                    <input name="Amount" formControlName="Amount"
+                                                                        placeholder="Amount" matInput>
+                                                                    <!-- <mat-error class="error"
+                                                                        *ngIf="personalFormGroup.get('Location').invalid && personalFormGroup.get('Location').touched">
+                                                                        Middle Name is required
+                                                                        Enter
+                                                                        only Alphabets</mat-error> -->
+                                                                </mat-form-field>
+                
+                                                                <diV style="margin-top:21px;">
+                                                                    <span style="margin-right: 40px;color: black;font-weight: bold;">
+                                                                        <app-common-date [screenFrom]="screenFromString"
+                                                                            (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
+                                                                    </span>
+                                                                </diV>&nbsp;&nbsp;
+                                                            </div>
+                
+                                                        </div>
+                
+                
+                                                    </form>
+                                                </mat-card>
+                
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                   
+                                    <div fxLayout="row" style="width: 100%;">
+                
+                
+                                        <div fxFlex="100" fxFlex.gt-sm="70" fxLayout="row" fxLayout.gt-xs="column"
+                                            style="width:90%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
+                                            <ng-template mat-tab-label style="color: black; font-size: 17px bold; height: 100px; ">
+                                                <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
+                                                Member List
+                                            </ng-template>
+                                            <div>
+                                                
+                                                <div class="col-md-12">
+                                                    <!-- ================= Charges List Table ======================= -->
+                                                    <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
+                                                        style="height: 300px !important;" class="table1">
+                
+                                                        <ng-container matColumnDef="VisitName">
+                                                            <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                                style="margin-right: 5px;">VisitName</mat-header-cell>
+                                                            <mat-cell *matCellDef="let contact">
+                                                                {{contact.VisitName}}
+                                                            </mat-cell>
+                                                        </ng-container>
+                
+                                                        <ng-container matColumnDef="VisitDescription">
+                                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                                                Visit Description
+                                                            </mat-header-cell>
+                                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                                {{contact.VisitDescription}}
+                                                            </mat-cell>
+                                                        </ng-container>
+                
+                                                        <ng-container matColumnDef="Amount">
+                                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                                                Visit Amount
+                                                            </mat-header-cell>
+                                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                                {{contact.Amount}}
+                                                            </mat-cell>
+                                                        </ng-container>
+                
+                                                        <ng-container matColumnDef="action" stickyEnd>
+                                                            <mat-header-cell *matHeaderCellDef style="color: white;"> Action
+                                                            </mat-header-cell>
+                                                            <mat-cell *matCellDef="let row">
+                                                                <!-- <button mat-icon-button (click)="onEdit(row)">
+                                                                            <mat-icon title="Edit Menu">launch</mat-icon>
+                                                                        </button> -->
+                                                                <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
+                                                                    <mat-icon>delete_outline</mat-icon>
+                                                                </button>
+                                                                <!-- <button mat-icon-button (click)="onDeactive(row.RegId)" color="warn"><mat-icon>delete_outline</mat-icon></button>       -->
+                                                            </mat-cell>
+                                                        </ng-container>
+                
+                
+                
+                                                        <ng-container matColumnDef="loading">
+                                                            <mat-footer-cell *matFooterCellDef colspan="6">
+                                                                loading data...
+                                                            </mat-footer-cell>
+                                                        </ng-container>
+                
+                                                        <ng-container matColumnDef="noData">
+                                                            <mat-footer-cell *matFooterCellDef colspan="6">
+                                                                <!-- <mat-spinner  class="spinner" [diameter]="35"
+                                                            [color]="blue"></mat-spinner> -->
+                                                                <span>No Data Found</span>
+                                                            </mat-footer-cell>
+                                                        </ng-container>
+                
+                                                        <mat-header-row class="accent"
+                                                            *matHeaderRowDef="displayedColumns; sticky: true">
+                                                        </mat-header-row>
+                                                        <mat-row *matRowDef="let contact; columns: displayedColumns;"
+                                                            [ngClass]="{'row-yellow': contact.ServiceName == 'CBC'}"
+                                                            [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+                                                        <mat-footer-row *matFooterRowDef="['loading']"
+                                                            [ngClass]="{'hide':dataSource!=null}">
+                                                        </mat-footer-row>
+                                                        <mat-footer-row *matFooterRowDef="['noData']"
+                                                            [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
+                                                        </mat-footer-row>
+                                                    </mat-table>
+                                                    <!-- ================= Charges List Footer Table ======================= -->
+                                                    <div>
+                
+                                                    </div>
+                                                </div>
+                                            </div>
+                
+                                        </div>
+                
+                
+                                    </div>
+                
+                
+                                    <div fxFlex="100" fxFlex.gt-sm="98" class="content py-16 pl-10 p-12" fxLayout="row"
+                                        fxLayout.gt-xs="column" fusePerfectScrollbar
+                                        style=" width:98%; float: right;  border-radius:4px; background-color: white;
+                                border:rgba(0,0,0,0.12) 1px solid; float: right;  padding: 1em; height: 515px !important; margin-top: 10px;">
+                
+                                        <div fxLayout="row">
+                
+                                            <mat-form-field appearance="outline" style="width:0%;">
+                                                <mat-label>Amount</mat-label>
+                                                <input name="Amount" formControlName="Amount" placeholder="Amount" matInput>
+                                                <!-- <mat-error class="error"
+                                                    *ngIf="personalFormGroup.get('Amount').invalid && pers3onalFormGroup.get('Amount').touched">
+                                                    Middle Name is required
+                                                    Enter
+                                                    only Alphabets</mat-error> -->
+                                            </mat-form-field>
+                
+                                            <button class="next-btn" color="accent" (click)="onSubmit()"
+                                                style="border-radius: 16px;float: right;">
+                                                <span style="display: flex;justify-content: center;">
+                                                    
+                                                    <span style="margin-left: 6px;">Save</span>
+                                                </span>
+                                            </button>
+                
+                                            <button class="footer-btn" (click)="onClose()">Cancel</button>
+                
+                                        </div>
+                
+                
+                                    </div>
+                                </div>
+                
+                            </form>
+                        </div>
+                    </div>
+                </mat-tab>
+
+            </mat-card>
+        </mat-tab-group>
+
+
+
     </div>
 
 </div>

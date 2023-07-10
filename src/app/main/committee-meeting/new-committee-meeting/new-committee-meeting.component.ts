@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
   animations: fuseAnimations
 })
 export class NewCommitteeMeetingComponent implements OnInit {
-
+  screenFromString = 'admission-form';
 
   constructor(  public _CommitteMeetingService: CommitteMeetingService,
     
@@ -65,6 +65,10 @@ export class NewCommitteeMeetingComponent implements OnInit {
 
   createPesonalForm() {
     return this.formBuilder.group({
+      CommitteeId:'',
+      MemberId:'',
+      MemberName:'',
+      CommitteeMeetingName:'',
       CommitteeName: '',
       Location: '',
       Amount:''
@@ -88,38 +92,36 @@ export class NewCommitteeMeetingComponent implements OnInit {
     // filter
     this.filteredMember.next(
         this.MembercmbList.filter(
-            (bank) => bank.FirstName.toLowerCase().indexOf(search) > -1
+            (bank) => bank.MemberName.toLowerCase().indexOf(search) > -1
         )
     );
 }
 getMemberNameCombobox() {
-  var m={
-    FirstName:'%',                  
-    LastName :'%'
+  // var m={
+  //   FirstName:'%',                  
+  //   LastName :'%'
     
-  };
+  // };
 
-  this._CommitteMeetingService.getMemberMasterList().subscribe((data) => {
+  this._CommitteMeetingService.getCommitteeMemberMasterList().subscribe((data) => {
       this.MembercmbList = data;
       console.log(data);
       this.filteredMember.next(this.MembercmbList.slice());
    
   });
 }
+OnSave(){}
 
 
-
-onSaveEntry() {
+onSaveEntry(e) {
   debugger;
  
-  // if (this.SrvcName && (parseInt(this.b_price) != 0) && this.b_qty) {
-  // this.isLoading = 'save';
   this.dataSource.data = [];
   this.chargeslist.push(
     {
      
-      MemberId: this.MemberId,
-      MemberName: this.MemberName,
+      MemberId: e.MemberId,
+      MemberName: e.MemberName
      
     });
   this.isLoading = '';
@@ -134,26 +136,40 @@ onSubmit() {
 
   this.isLoading = 'submit';
 
-  var m_data = {
-    "insertMemberDetail": {
-      "MemberId":0,// this.personalFormGroup.get('MemberId').value.CaseId || 0,
-      "FirstName": this.personalFormGroup.get('FirstName').value || '',
-      "MiddleName": this.personalFormGroup.get('MiddleName').value || '',
-      "LastName": this.personalFormGroup.get('LastName').value || 0,
-      "Member_Address": this.personalFormGroup.get('Member_Address').value || '',
-      "CityId": this.personalFormGroup.get('CityId').value.CityId || 0,
-      "PinCode": this.personalFormGroup.get('PinCode').value || '',
-      "MobileNo": this.personalFormGroup.get('MobileNo').value || 0,
-      "EmailId": this.personalFormGroup.get('EmailId').value || '',
-      "StudyAmount": this.personalFormGroup.get('StudyAmount').value || '',
+ 
+  let insertCommitteeMeeting = {};
 
-      // "AgreementFileName": this.personalFormGroup.get('AgreementFileName').value || '',
-      "createdBy": this.accountService.currentUserValue.user.id
+  insertCommitteeMeeting['committeeMeetingId'] = 0;
+  insertCommitteeMeeting['committeeMeetingDate'] = this.dateTimeObj.date;
+    insertCommitteeMeeting['committeeMeetingTime'] =this.dateTimeObj.time;
+    insertCommitteeMeeting['commiteeMeetingName'] = this.personalFormGroup.get('CommitteeMeetingName').value || '';
+    insertCommitteeMeeting['committeeMeetingLocation'] =  this.personalFormGroup.get('Location').value || '';
+    insertCommitteeMeeting['committeeMeetingAmount'] =  this.personalFormGroup.get('Amount').value || '';
+  
 
-    }
-  }
-  console.log(m_data);
-  this._CommitteMeetingService.CommitteeDetailInsert(m_data).subscribe(response => {
+  let insertCommitteeMeetingMemberDetarry = [];
+  this.dataSource.data.forEach((element) => {
+    let insertCommitteeMeetingMemberDet = {};
+    insertCommitteeMeetingMemberDet['committeeMeetingId'] = 0;
+   
+    insertCommitteeMeetingMemberDet['memberId'] = element.MemberId;
+     insertCommitteeMeetingMemberDet['studyId'] =0,// element.studyId;
+    insertCommitteeMeetingMemberDet['memberAmount'] = this.personalFormGroup.get('Amount').value || '';
+    insertCommitteeMeetingMemberDet['memberMeetingStatus'] = '',//element.MemberId;
+    insertCommitteeMeetingMemberDet['createdBy'] = this.accountService.currentUserValue.user.id;
+    insertCommitteeMeetingMemberDetarry.push(insertCommitteeMeetingMemberDet);
+  });
+
+  let submitData = {
+
+    "insertCommitteeMeeting": insertCommitteeMeeting,
+    "insertCommitteeMeetingMemberDet": insertCommitteeMeetingMemberDetarry
+
+  };
+
+
+  console.log(submitData);
+  this._CommitteMeetingService.CommitteeDetailInsert(submitData).subscribe(response => {
     if (response) {
       Swal.fire('New Committee Save !', ' New Committee Save Successfully !', 'success').then((result) => {
         if (result.isConfirmed) {

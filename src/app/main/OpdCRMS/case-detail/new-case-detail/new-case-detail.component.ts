@@ -14,6 +14,7 @@ import { UploadDocumentComponent } from '../../appointment/upload-document/uploa
 import { FileUploadComponent } from '../../appointment/file-upload/file-upload.component';
 import { ImageUploadComponent } from '../../appointment/image-upload/image-upload.component';
 import Swal from 'sweetalert2';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-new-case-detail',
@@ -25,8 +26,9 @@ import Swal from 'sweetalert2';
 export class NewCaseDetailComponent implements OnInit {
 
   
-
+  chargeslist: any = [];
   personalFormGroup: FormGroup;
+  studySchFormGroup:FormGroup;
   currentDate=new Date();
   submitted = false;
   now = Date.now();
@@ -66,6 +68,15 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
   private _onDestroy = new Subject<void>();
   // private _onDestroy1 = new Subject<void>();
 
+  displayedColumns = [
+  
+    'VisitName',
+    'VisitDescription',
+    'Amount',
+    'action'
+  ];
+
+  dataSource = new MatTableDataSource<VisitDetail>();
 
 
 
@@ -87,23 +98,11 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
    
   console.log(this.data)
    this.personalFormGroup = this.createPesonalForm();
-   
+   this.studySchFormGroup =this.createstudySchForm();
+
       if(this.data){
         this.registerObj = this.data.registerObj;
 
-        // this.CaseId=this.data.CaseId;
-        // this.CaseTitle=this.data.CaseTitle;
-        // this.CaseDescription=this.data.CaseDescription;
-        // this.TotalSubjects=this.data.TotalSubjects;
-        // this.TotalVisits=this.data.TotalVisits;
-        // this.VisitFrequency=this.data.VisitFrequency;
-        // this.CaseStartDate=this.data.CaseStartDate;
-        // this.CaseEndDate=this.data.CaseEndDate;
-        // this.CaseStatus=this.data.CaseStatus;
-        // this.CompanyName=this.data.CompanyName;
-        // this.CaseRepresentative=this.data.CaseRepresentative;
-        // this.HospitalRepresentative=this.data.HospitalRepresentative;
-        // this.AgreementFileName=this.data.AgreementFileName;
       
       }
       this.getCompanyList();
@@ -152,7 +151,15 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
   }
 
 
+  createstudySchForm() {
+  return this.formBuilder.group({
+      VisitId: '',
+      VisitName: '',
+      VisitDscription: '',
+      Amount: '',
 
+    });
+  }
   // company filter code  
   private filterCompany() {
 
@@ -230,11 +237,26 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
     });
   }
 
-  addEmptyRow() {
-
+  onSaveEntry() {
+    debugger;
    
-   }
- 
+    // if (this.SrvcName && (parseInt(this.b_price) != 0) && this.b_qty) {
+    // this.isLoading = 'save';
+    this.dataSource.data = [];
+    this.chargeslist.push(
+      {
+       
+        // MemberId: this.Vi,
+        // MemberName: this.MemberName,
+       
+      });
+    this.isLoading = '';
+    console.log(this.chargeslist);
+    this.dataSource.data = this.chargeslist;
+    console.log(this.dataSource.data);
+    
+  }
+  
   
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
@@ -377,4 +399,27 @@ export class CaseDetail {
   }
 }
 
+}
+
+
+
+export class VisitDetail {
+  VisitName:any;
+  VisitDescription:any;
+  Amount:any;
+ 
+  /**
+   * Constructor
+   *
+   * @param VisitDetail
+   */
+
+  constructor(VisitDetail) {
+    {
+      this.VisitName = VisitDetail.VisitName || '';
+      this.VisitDescription = VisitDetail.VisitDescription || '';
+      this.Amount = VisitDetail.Amount || '';
+    
+    }
+  }
 }

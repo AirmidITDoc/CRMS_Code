@@ -13,15 +13,15 @@
             </span>
 
             <button mat-raised-button (click)="newMember()" fxLayoutAlign="center center"
-                style="margin-left:1000px;">Add Member 
+                style="margin-left:980px;">Add Member 
                 
             </button>
             <button mat-raised-button (click)="newCommitteeMember()" fxLayoutAlign="center center"
-            style="margin-left:20px;">CommitteeMembers
+            style="margin-left:10px;">CommitteeMembers
             <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
         </button>
         <button mat-raised-button (click)="newcommitteemeeting()" fxLayoutAlign="center center"
-        style="margin-left:20px;">Committee Meeting
+        style="margin-left:10px;">Committee Meeting
         <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
     </button>
         </div>
@@ -106,7 +106,7 @@
                                             fxShow.gt-md>CommitteeMeetingDate
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.CommitteeMeetingDate }}
+                                            {{contact.CommitteeMeetingDate | 'shortDate'}}
                                         </mat-cell>
                                     </ng-container>
 
