@@ -218,8 +218,8 @@
 
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Department</mat-label>
-        <mat-select formControlName="Departmentid" placeholder="Bank" #singleSelect required
-          (selectionChange)="SaveEnter($event.value)">
+        <mat-select formControlName="Departmentid" placeholder="Bank" #singleSelect required>
+          <!-- (selectionChange)="SaveEnter($event.value)"> -->
           <mat-option>
             <ngx-mat-select-search [formControl]="departmentFilterCtrl" [placeholderLabel]="'Search'"
               [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
@@ -230,7 +230,10 @@
         </mat-select>
       </mat-form-field>
 
- 
+      <button mat-raised-button color="primary" type="submit" (click)="SaveEnter($event.value)"
+      >Add Selected Values</button>
+    <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+
     </div>
     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
    

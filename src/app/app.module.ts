@@ -36,6 +36,7 @@ import { NewCaseDetailComponent } from './main/OpdCRMS/case-detail/new-case-deta
 import { EditCasedetailComponent } from './main/OpdCRMS/case-detail/edit-casedetail/edit-casedetail.component';
 import { ViewCasedetailComponent } from './main/OpdCRMS/case-detail/view-casedetail/view-casedetail.component';
 import Swal from 'sweetalert2';
+import { CommitteeMeetingComponent } from './main/committee-meeting/committee-meeting.component';
 
 
 const appRoutes: Routes = [
@@ -112,8 +113,7 @@ export const PICK_FORMATS = {
 
 @NgModule({
     declarations: [
-        AppComponent
-                          
+        AppComponent                        
         
     ],
     imports: [

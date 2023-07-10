@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BrowsePaymentReceiptComponent } from './browse-payment-receipt/browse-payment-receipt.component';
-import { BillSettlementComponent } from './bill-settlement/bill-settlement.component';
-
 
 
 const appRoutes: Routes = [
@@ -11,12 +8,15 @@ const appRoutes: Routes = [
     path: "appointment",
     loadChildren: () => import("./appointment/appointment.module").then((m) => m.AppointmentModule),
   },
-  
+  {
+    path: "appoinmentwithbill",
+    loadChildren: () => import("../committee-meeting/committe-meeting.module").then((m) => m.CommitteMeetingModule),
+  },
   {
     path: "bill",
     loadChildren: () => import("./appointment/appointment.module").then((m) => m.AppointmentModule),
+    // loadChildren: () => import("../committee-meeting/committe-meeting.module").then((m) => m.CommitteMeetingModule),
   },
-   
   {
     path: "registration",
     loadChildren: () => import("./case-detail/casedetail.module").then((m) => m.CasedetailModule),

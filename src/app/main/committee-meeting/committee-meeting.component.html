@@ -1,0 +1,198 @@
+<div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <mat-toolbar class="accent" style="height:50px; justify-content: space-between;width: 100%;background-color:rgb(18, 87, 134) !important;">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm (click)="toggleSidebar('app-main')"
+                style="color: white;">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
+                style="color: white;" style="color: aliceblue;">account_box
+            </mat-icon>
+            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" style="color: aliceblue;">
+                Committee Meeting
+            </span>
+
+            <button mat-raised-button (click)="newMember()" fxLayoutAlign="center center"
+                style="margin-left:1000px;">Add Member 
+                
+            </button>
+            <button mat-raised-button (click)="newCommitteeMember()" fxLayoutAlign="center center"
+            style="margin-left:20px;">CommitteeMembers
+            <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
+        </button>
+        <button mat-raised-button (click)="newcommitteemeeting()" fxLayoutAlign="center center"
+        style="margin-left:20px;">Committee Meeting
+        <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
+    </button>
+        </div>
+
+
+
+
+    </mat-toolbar>
+    <!-- / HEADER -->
+    <!-- SELECTED BAR -->
+    <app-main class="accent-600" *ngIf="hasSelectedContacts" [@slideInTop]></app-main>
+    <!-- / SELECTED BAR -->
+    <!-- CONTENT -->
+    <div class="content">
+        <!-- SIDEBAR -->
+        <fuse-sidebar name="app-main" position="left" lockedOpen="gt-sm" style="width:30%; border-radius:4px;
+        margin-left:12px; background-color: white;height:100%;">
+            <div>
+                <!-- SIDEBAR HEADER -->
+                <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center" style="margin-top: 3%;background-color: rgb(18, 87, 134) !important;">
+                    <span class="h5" style="font-size: 17px;color: aliceblue;">Search Facility</span>
+                    <!-- / USER -->
+                </div>
+                <!-- / SIDEBAR HEADER -->
+                <!-- SIDEBAR CONTENT -->
+                <div>
+                    <div class="nav material2">
+                        <form [formGroup]="_CasedetailService.myFilterform" style="padding: 6px 6px 5px 5px;"
+                            fusePerfectScrollbar>
+                            <div fxLayout="column" fxLayoutAlign="start none">
+                                
+                              
+                                <div style="margin-top: 10px;">
+                                    <button mat-raised-button (click)="onClear()" class="clearbutton"
+                                        matTooltip="close">
+                                        <mat-icon class="cleariconbutton">close</mat-icon>
+                                    </button>&nbsp;
+                                    <button mat-raised-button class="searchButton" (click)="getCommitteeList()"
+                                        matTooltip="search">
+                                        <mat-icon class="searchiconbutton">search</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </fuse-sidebar>
+        <!-- / SIDEBAR -->
+        <!-- CENTER -->
+        <!-- CENTER -->
+
+        <div class="center p-12 pb-56" fxFlexAlign="start center">
+
+            <div class="content-card" style="border-radius:4px; ">
+
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="30px">
+                    <div fxFlex.gt-sm="100%" fxFlex>
+
+                        <div fxlayout="row">
+                            <div style="width: 100%;">
+                                <div matColumnDef="loading" [ngClass]="{'hide': !(sIsLoading == 'loading-data')}"
+                                    class="backgroundBlur">
+                                    <div class="spinner-border text-danger"></div>
+                                </div>
+                                <!-- sppinner -->
+                                <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
+                                    class="table1">
+
+                                    <ng-container matColumnDef="CommitteeMeetingId">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>CommitteeMeetingId
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm style="margin-top: 1px;">
+                                            {{contact.CommitteeMeetingId}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="CommitteeMeetingDate">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>CommitteeMeetingDate
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.CommitteeMeetingDate }}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="CommiteeMeetingName">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>CommiteeMeetingName
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.CommiteeMeetingName}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="CommitteeMeetingLocation">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>CommitteeMeetingLocation
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.CommitteeMeetingLocation}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="CommitteeMeetingAmount">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>MeetingAmount</mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
+                                            style="margin-top: 1px;">
+                                            {{contact.CommitteeMeetingAmount}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="CreatedBy">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>CreatedBy</mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
+                                            style="margin-top: 1px;">
+                                            {{contact.CreatedBy}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                
+                                    <ng-container matColumnDef="action" stickyEnd>
+                                        <mat-header-cell *matHeaderCellDef style="color: white;"> Action
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let row">
+                                            <button mat-icon-button (click)="onEdit(row)"><mat-icon
+                                                    title="Edit Menu">launch</mat-icon></button>
+
+                                        </mat-cell>
+                                    </ng-container>
+
+
+                                    <ng-container matColumnDef="loading">
+                                        <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
+                                        </mat-header-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="noData">
+                                        <mat-footer-cell *matFooterCellDef colspan="6">
+                                            no data found...
+                                        </mat-footer-cell>
+                                    </ng-container>
+
+                                    <mat-header-row class="accent" *matHeaderRowDef="displayedColumns; sticky: true">
+                                    </mat-header-row>
+                                    <mat-row *matRowDef="let contact; columns: displayedColumns;" class="contact"
+                                        [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+                                    <mat-footer-row *matFooterRowDef="['loading']"
+                                        [ngClass]="{'hide': !(sIsLoading == 'loading-data')}">
+                                    </mat-footer-row>
+                                    <mat-footer-row *matFooterRowDef="['noData']"
+                                        [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
+                                </mat-table>
+                                <mat-paginator [pageSizeOptions]="[20, 25, 50, 100]" [pageSize]="20"
+                                    showFirstLastButtons>
+                                </mat-paginator>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- CENTER -->
+    </div>
+    <!-- / USER -->
+    <!-- / CENTER -->
+    <!-- / CONTENT-->
+</div>
+
+//
