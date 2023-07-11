@@ -29,7 +29,7 @@ export class CommitteeMasterMemberComponent implements OnInit {
     public _matDialog: MatDialog,
     public dialogRef: MatDialogRef<CommitteeMasterMemberComponent>) { }
   displayedColumns = [
-    'MemberId',
+    // 'MemberId',
     'MemberName',
     'action'
   ];

@@ -2,6 +2,8 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { PatientTypeMasterComponent } from './patient-type-master/patient-type-master.component';
 import { AreaMasterComponent } from './area-master/area-master.component';
+import { SponserInformationComponent } from './sponser-information/sponser-information.component';
+import { InstitutionInformationComponent } from './institution-information/institution-information.component';
 
 const appRoutes: Routes = [
     {
@@ -74,6 +76,20 @@ const appRoutes: Routes = [
         loadChildren: () =>
             import("./area-master/area-master.module").then(
                 (m) => m.AreaMasterModule
+            ),
+    },
+    {
+        path: "SponserInformation",
+        loadChildren: () =>
+            import("./sponser-information/sponserinformation.module").then(
+                (m) => m.SponserinformationModule
+            ),
+    },
+    {
+        path: "InstitutionInformation",
+        loadChildren: () =>
+            import("./institution-information/institution-information.module").then(
+                (m) => m.InstitutionInformationModule
             ),
     },
 ];

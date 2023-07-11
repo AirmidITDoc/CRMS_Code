@@ -109,8 +109,7 @@
 
                                                     <div matTooltip="Select Member name to enable this button!!"
                                                         [matTooltipPosition]="'above'">
-                                                        <button mat-raised-button id="btnAdd" (click)="onSaveEntry($event.value)"
-                                                            style="background-color: blue; color: white; width: 70px; margin-left: 20px;">
+                                                        <button mat-raised-button id="btnAdd" (click)="onSaveEntry($event.value)">
                                                             <mat-icon> add </mat-icon> &nbsp;Add
                                                         </button>
                                                     </div>
@@ -123,13 +122,8 @@
                         </div>
                     </div>
 
-
-
                             <div fxLayout="column">
-
-
-                                <div fxFlex="100" fxFlex.gt-sm="100" fxLayout="row" fxLayout.gt-xs="column"
-                                    style="width:50%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
+                                <div fxFlex="100" fxFlex.gt-sm="100" fxLayout="row" fxLayout.gt-xs="column">
                                     <ng-template mat-tab-label
                                         style="color: black; font-size: 17px bold; height: 100px; ">
                                         <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
@@ -144,13 +138,13 @@
                                                     style="height: 300px !important;width: 80% !important"
                                                     class="table1">
 
-                                                    <ng-container matColumnDef="MemberId">
+                                                    <!-- <ng-container matColumnDef="MemberId">
                                                         <mat-header-cell *matHeaderCellDef mat-sort-header
                                                             style="margin-right: 5px;">MemberId</mat-header-cell>
                                                         <mat-cell *matCellDef="let contact">
                                                             {{contact.MemberId}}
                                                         </mat-cell>
-                                                    </ng-container>
+                                                    </ng-container> -->
 
                                                     <ng-container matColumnDef="MemberName">
                                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>

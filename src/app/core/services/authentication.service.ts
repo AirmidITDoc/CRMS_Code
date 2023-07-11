@@ -35,8 +35,7 @@ export class AuthenticationService {
     }
 
     login(userName: string, password: string) {
-        debugger;
-        console.log(userName,password);
+        // console.log(userName,password);
         return (
             this.http
                 .post<any>(`login/token`, {
@@ -77,8 +76,6 @@ export class AuthenticationService {
 
 
     getNavigationData(){
-
-        debugger
     //    if(this._fuseNavigationService.getNavigation("main1")){
     //        console.log("already exist")
     //        return;
@@ -87,7 +84,6 @@ export class AuthenticationService {
             // .post(`Generic/GetByProc?procName=SS_Rtrv_MenuInfo_Login_2`, {UserId:this.authService.currentUserValue.user.id})
             .post(`Generic/GetByProc?procName=SS_Rtrv_MenuInfo_Login_2`, {})
             .subscribe((data: any[]) => {
-console.log(data);
                 var fn: FuseNavigation[] = [
                     {
                         id: "applications",
@@ -169,7 +165,7 @@ console.log(data);
                 }catch{
 
                 }
-                console.log(this.navigation)
+                // console.log(this.navigation)
                 // Register the navigation to the service
                 
                 this._fuseNavigationService.register("main1", this.navigation);

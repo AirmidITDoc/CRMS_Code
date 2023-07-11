@@ -177,7 +177,7 @@ console.log(xx);
     const dialogRef = this._matDialog.open(NewCaseDetailComponent,
       {
         maxWidth: "75vw",
-        height: '560px',
+        height: '600px',
         width: '100%',
         
       });
