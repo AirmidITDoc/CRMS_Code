@@ -14,13 +14,7 @@
                     <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
                         style="width: 80%;font-size: 16px;">
                         New Committee Meeting</span>
-
-                    <!-- || ( {{selectedAdvanceObj.RegNo}} ) {{selectedAdvanceObj.PatientName}} (
-                        {{selectedAdvanceObj.AgeYear}}) Yrs | {{selectedAdvanceObj.Doctorname}} | Visit Id
-                        {{selectedAdvanceObj.VisitId}} | Visit Date {{selectedAdvanceObj.VistDateTime}} </span> -->
-
                     <div fxLayout="row" fxLayoutAlign="start center" style="float: right;">
-
                         <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
                             close
                         </span>
@@ -30,54 +24,35 @@
 
             <mat-card-content style="width: 100%;margin-right: 5px;">
 
-
                 <div fxLayout="column">
 
                     <div class="content-card"
-                        style="width:100%;  margin-top: 2px; float: right;background-color: white; margin-right: 10px;margin-left: 10px;">
+                        style="width:100%;  margin-top: 2px; float: right;background-color: white;">
                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="column" fxLayoutGap="3px">
-                            <div fxlayout="row" style=" padding: 3px 3px 3px 1px; margin-right: 5px;">
-                                <!-- ================================ LABEL HEADER  -->
-
-                                <mat-card fxFlex.gt-sm="100%" fxFlex
-                                    style="padding: 0 5px; height: fit-content; background-color: white;">
-                                    &nbsp;
+                            <div fxlayout="row">
+                                <mat-card fxFlex.gt-sm="100%" fxFlex>
                                     <form [formGroup]="personalFormGroup" style="display: flex;">
-
                                         <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="5px">
                                             <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
 
-                                                <!-- [formControl]="name" -->
                                                 <mat-form-field appearance="outline" style="width: 40%;">
                                                     <mat-label>Committee Meeting Name</mat-label>
                                                     <input name="CommitteeMeetingName"
                                                         formControlName="CommitteeMeetingName"
                                                         placeholder="Committee Meeting Name" matInput required>
-                                                    <!-- <mat-error
-                                                        *ngIf="personalFormGroup.get('CommitteeName').invalid && personalFormGroup.get('CommitteeName').touched">
-                                                        Committee is required Enter only
-                                                        Alphabets</mat-error> -->
                                                 </mat-form-field>
-
-
 
                                                 <mat-form-field appearance="outline" style="width: 40%;">
                                                     <mat-label>Location</mat-label>
                                                     <input name="Location" formControlName="Location"
                                                         placeholder="Location" matInput>
-                                                    <!-- <mat-error class="error"
-                                                        *ngIf="personalFormGroup.get('Location').invalid && personalFormGroup.get('Location').touched">
-                                                        Middle Name is required
-                                                        Enter
-                                                        only Alphabets</mat-error> -->
                                                 </mat-form-field>
 
                                                 <diV style="margin-top:21px;">
                                                     <span style="margin-right: 40px;color: black;font-weight: bold;">
-                                                        <app-common-date [screenFrom]="screenFromString"
-                                                            (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
+                                                        <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
                                                     </span>
-                                                </diV>&nbsp;&nbsp;
+                                                </diV>
                                             </div>
 
                                         </div>
@@ -93,43 +68,29 @@
                     <div fxLayout="column">
 
                         <div class="content-card"
-                            style="width:100%;  margin-top: 2px; float: right;background-color: white; margin-right: 10px;margin-left: 10px;">
+                            style="width:100%;  margin-top: 2px; float: right;background-color: white;">
                             <div fxFlexFill fxLayout="column" fxLayout.gt-xs="column" fxLayoutGap="3px">
-                                <div fxlayout="row" style=" padding: 3px 3px 3px 1px; margin-right: 5px;">
-                                    <!-- ================================ LABEL HEADER  -->
-
+                                <div fxlayout="row">
                                     <mat-card fxFlex.gt-sm="100%" fxFlex
-                                        style="padding: 0 5px; height: fit-content; background-color: white;">
-                                        &nbsp;
+                                        style="height: fit-content; background-color: white;">
                                         <form [formGroup]="personalFormGroup" style="display: flex;">
-
-                                            <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between"
-                                                fxLayoutGap="5px">
-
-                                                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
-                                                    fxLayoutGap="4px">
-
+                                            <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="5px">
+                                                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
                                                     <mat-form-field appearance="outline" style="width: 40%;">
                                                         <mat-label>Member</mat-label>
-                                                        <mat-select formControlName="MemberId" placeholder="Bank"
-                                                            #singleSelect required
-                                                            (selectionChange)="onSaveEntry($event.value)">
+                                                        <mat-select formControlName="CommitteeId" placeholder="Bank"
+                                                            #singleSelect required>
                                                             <mat-option>
-                                                                <ngx-mat-select-search [formControl]="memberFilterCtrl"
-                                                                    [placeholderLabel]="'Search'"
-                                                                    [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
                                                             </mat-option>
-                                                            <mat-option *ngFor="let element of filteredMember | async"
-                                                                [value]="element">
-                                                                {{element.MemberName}}
+                                                            <mat-option *ngFor="let element of MembercmbList" [value]="element">
+                                                                {{element.CommiteeName}}
                                                             </mat-option>
                                                         </mat-select>
                                                     </mat-form-field>
 
                                                     <div matTooltip="Select Member name to enable this button!!"
                                                         [matTooltipPosition]="'above'">
-                                                        <button mat-raised-button id="btnAdd" (click)="onSaveEntry($event.value)"
-                                                            style="background-color: blue; color: white; width: 70px; margin-left: 20px;">
+                                                        <button mat-raised-button id="btnAdd" (click)="onAdd()">
                                                             <mat-icon> add </mat-icon> &nbsp;Add
                                                         </button>
                                                     </div>
@@ -145,18 +106,11 @@
 
                 
                     <div fxLayout="row" style="width: 100%;">
-
-
-                        <div fxFlex="100" fxFlex.gt-sm="70" fxLayout="row" fxLayout.gt-xs="column"
-                            style="width:80%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
-                            <ng-template mat-tab-label style="color: black; font-size: 17px bold; height: 100px; ">
-                                <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
-                                Member List
-                            </ng-template>
+                        <div fxFlex="100" fxLayout="row" fxLayout.gt-xs="column">
                             <div>
                                 <div class="col-md-12">
                                     <!-- ================= Charges List Table ======================= -->
-                                    <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
+                                    <mat-table #table matSort [dataSource]="dscommitteeMemberList" [@animateStagger]="{value:'50'}"
                                         style="height: 300px !important;" class="table1">
 
                                         <ng-container matColumnDef="MemberId">
@@ -176,18 +130,32 @@
                                             </mat-cell>
                                         </ng-container>
 
+                                        <ng-container matColumnDef="StudyAmount">                                        
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                                StudyAmount
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                {{contact.StudyAmount}}
+                                            </mat-cell>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="MeetingStatus">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                                MeetingStatus
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                {{contact.MeetingStatus}}
+                                            </mat-cell>
+                                        </ng-container>                                                                                                                                                                                     
+
 
                                         <ng-container matColumnDef="action" stickyEnd>
                                             <mat-header-cell *matHeaderCellDef style="color: white;"> Action
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let row">
-                                                <!-- <button mat-icon-button (click)="onEdit(row)">
-                                                            <mat-icon title="Edit Menu">launch</mat-icon>
-                                                        </button> -->
                                                 <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
                                                     <mat-icon>delete_outline</mat-icon>
                                                 </button>
-                                                <!-- <button mat-icon-button (click)="onDeactive(row.RegId)" color="warn"><mat-icon>delete_outline</mat-icon></button>       -->
                                             </mat-cell>
                                         </ng-container>
 
@@ -214,10 +182,10 @@
                                             [ngClass]="{'row-yellow': contact.ServiceName == 'CBC'}"
                                             [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
                                         <mat-footer-row *matFooterRowDef="['loading']"
-                                            [ngClass]="{'hide':dataSource!=null}">
+                                            [ngClass]="{'hide':dscommitteeMemberList!=null}">
                                         </mat-footer-row>
                                         <mat-footer-row *matFooterRowDef="['noData']"
-                                            [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
+                                            [ngClass]="{'hide':!(dscommitteeMemberList!=null && dscommitteeMemberList.data.length==0)}">
                                         </mat-footer-row>
                                     </mat-table>
                                     <!-- ================= Charges List Footer Table ======================= -->
@@ -226,47 +194,14 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
-
                     </div>
-
-
-                    <div fxFlex="100" fxFlex.gt-sm="98" class="content py-16 pl-10 p-12" fxLayout="row"
-                        fxLayout.gt-xs="column" fusePerfectScrollbar
-                        style=" width:98%; float: right;  border-radius:4px; background-color: white;
-                border:rgba(0,0,0,0.12) 1px solid; float: right;  padding: 1em; height: 515px !important; margin-top: 10px;">
-
+                    <div fxFlex="100" fxFlex.gt-sm="98" fxLayout="row" fxLayout.gt-xs="column" fusePerfectScrollbar>
                         <div fxLayout="row">
-
-                            <mat-form-field appearance="outline" style="width:0%;">
-                                <mat-label>Amount</mat-label>
-                                <input name="Amount" formControlName="Amount" placeholder="Amount" matInput>
-                                <!-- <mat-error class="error"
-                                    *ngIf="personalFormGroup.get('Amount').invalid && pers3onalFormGroup.get('Amount').touched">
-                                    Middle Name is required
-                                    Enter
-                                    only Alphabets</mat-error> -->
-                            </mat-form-field>
-
-                            <button class="next-btn" color="accent" (click)="onSubmit()"
-                                style="border-radius: 16px;float: right;">
-                                <span style="display: flex;justify-content: center;">
-
-                                    <span style="margin-left: 6px;">Save</span>
-                                </span>
-                            </button>
-
+                            <button class="next-btn" color="accent" (click)="onSubmit()"> Save</button>
                             <button class="footer-btn" (click)="onClose()">Cancel</button>
-
                         </div>
-
-
                     </div>
                 </div>
             </mat-card-content>
-            <!-- Final bill calculation -->
-
-
         </div>

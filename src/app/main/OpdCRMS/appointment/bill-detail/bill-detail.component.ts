@@ -743,13 +743,13 @@ debugger;
   //   // let Cal_DiscAmount_OPBillObj = {};
   //   // Cal_DiscAmount_OPBillObj['BillNo'] = 0;
 
-  //   let Billdetsarr = [];
-  //   this.dataSource.data.forEach((element) => {
-  //     let BillDetailsInsertObj = {};
-  //     BillDetailsInsertObj['BillNo'] = 0;
-  //     BillDetailsInsertObj['ChargesId'] = element.ChargesId;
-  //     Billdetsarr.push(BillDetailsInsertObj);
-  //   });
+    // let Billdetsarr = [];
+    // this.dataSource.data.forEach((element) => {
+    //   let BillDetailsInsertObj = {};
+    //   BillDetailsInsertObj['BillNo'] = 0;
+    //   BillDetailsInsertObj['ChargesId'] = element.ChargesId;
+    //   Billdetsarr.push(BillDetailsInsertObj);
+    // });
 
 
   //   let PatientHeaderObj = {};

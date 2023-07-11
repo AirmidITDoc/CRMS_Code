@@ -54,40 +54,33 @@
   }
   
   app-committee-meeting {
-  
     .table1{
         height:590px !important;
     }
   .mat-header-row {
     width: 100%;
-    max-width: 1850px;
-    min-width: 1850px;  
+    max-width: 1250px;
+    min-width: 1250px;  
     min-height: 20px;     
   }
   
   .mat-row {
     width: 100%;
-    max-width: 1850px;
-    min-width: 1850px;      
+    max-width: 1250px;
+    min-width: 1250px;      
     min-height: 20px;            
   }
-  
-  .mat-column-checkbox {
-    width:60px;
-    max-width: 60px;
-    min-width: 60px;
-  }
- 
+
   .mat-column-CommitteeMeetingId {
-    width: 150px; 
-    max-width:150px;
-    min-width: 150px;
+    width: 100px; 
+    max-width:100px;
+    min-width: 100px;
     text-align: center;
   }
   .mat-column-CommiteeMeetingName {
-    width: 350px;
-    max-width: 350px;
-    min-width: 350px;
+    width: 300px;
+    max-width: 300px;
+    min-width: 300px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
@@ -99,15 +92,15 @@
      justify-content:left; 
   }
   .mat-column-CommitteeMeetingDate {
-    width:150px;
-    max-width:150px;
-    min-width:150px;
+    width:100px;
+    max-width:100px;
+    min-width:100px;
   }
 
   .mat-column-CommitteeMeetingLocation {
-    width: 350px;
-    max-width: 350px;
-    min-width: 350px;
+    width: 300px;
+    max-width: 300px;
+    min-width: 300px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
@@ -126,9 +119,9 @@
     min-width: 100px;
   }
   .mat-column-CommitteeMeetingAmount {
-    width:110px;
-    max-width:110px;
-    min-width:110px;
+    width:100px;
+    max-width:100px;
+    min-width:100px;
   }
   
   

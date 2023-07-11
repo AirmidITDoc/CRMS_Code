@@ -14,16 +14,15 @@
                 Committee Meeting
             </span>
 
-            <button mat-raised-button (click)="newMember()" fxLayoutAlign="center center" style="margin-left:980px;">Add
+            <button mat-raised-button (click)="newMember()" fxLayoutAlign="center center" style="margin-left:10%;">Add
                 Member
-
             </button>
             <button mat-raised-button (click)="newCommitteeMember()" fxLayoutAlign="center center"
-                style="margin-left:10px;">CommitteeMembers
+                style="margin-left:12%;">CommitteeMembers
                 <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
             </button>
             <button mat-raised-button (click)="newcommitteemeeting()" fxLayoutAlign="center center"
-                style="margin-left:10px;">Committee Meeting
+                style="margin-left:14%;">Committee Meeting
                 <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
             </button>
         </div>
@@ -92,7 +91,7 @@
 
                                     <ng-container matColumnDef="CommitteeMeetingId">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header
-                                            fxShow.gt-sm>CommitteeMeetingId
+                                            fxShow.gt-sm>Code
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm style="margin-top: 1px;">
                                             {{contact.CommitteeMeetingId}}
@@ -101,7 +100,7 @@
 
                                     <ng-container matColumnDef="CommitteeMeetingDate">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>CommitteeMeetingDate
+                                            fxShow.gt-md>Meeting Date
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.CommitteeMeetingDate}}
@@ -110,7 +109,7 @@
 
                                     <ng-container matColumnDef="CommiteeMeetingName">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>CommiteeMeetingName
+                                            fxShow.gt-md>Meeting Name
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.CommiteeMeetingName}}
@@ -119,7 +118,7 @@
 
                                     <ng-container matColumnDef="CommitteeMeetingLocation">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>CommitteeMeetingLocation
+                                            fxShow.gt-md>Location
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.CommitteeMeetingLocation}}
@@ -128,7 +127,7 @@
 
                                     <ng-container matColumnDef="CommitteeMeetingAmount">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>MeetingAmount</mat-header-cell>
+                                            fxShow.gt-md>Amount</mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
                                             style="margin-top: 1px;">
                                             {{contact.CommitteeMeetingAmount}}

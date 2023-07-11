@@ -51,20 +51,14 @@ export class CommitteeMasterMemberComponent implements OnInit {
   DeptSource = new MatTableDataSource<MemberDetail>();
 
   ngOnInit(): void {
-
     this.personalFormGroup = this.createPesonalForm();
-    
     this.getMemberNameCombobox();
 
-    
     this.memberFilterCtrl.valueChanges
     .pipe(takeUntil(this._onDestroy))
     .subscribe(() => {
-        
     });
   }
-
-
   
   createPesonalForm() {
     return this.formBuilder.group({
@@ -72,10 +66,8 @@ export class CommitteeMasterMemberComponent implements OnInit {
       CommitteeName: '',
       MemberId: '',
       Amount:''
-
     });
   }
-
  
   private MemberDepartment() {
     // debugger;
@@ -101,39 +93,59 @@ getMemberNameCombobox() {
   var m={
     FirstName:'%',                  
     LastName :'%'
-    
   };
-
   this._CommitteMeetingService.getMemberMasterList(m).subscribe((data) => {
       this.MembercmbList = data;
-      console.log(data);
       this.filteredMember.next(this.MembercmbList.slice());
-   
   });
 }
 
 
 onSubmit() {
 
-  this.isLoading = 'submit';
+  // {
+  //   "insertCommitteeMaster": {
+  //     "committeeId": 0,
+  //     "commiteeName": "string",
+  //     "createdBy": 0
+  //   },
+  //   "insertCommitteeMemberDetails": [
+  //     {
+  //       "committeeId": 0,
+  //       "memberId": 0,
+  //       "createdBy": 0
+  //     }
+  //   ]
+  // }
 
-  var m_data = {
-    "insertCommitteeMaster": {
-      "committeeId": 0,//this.personalFormGroup.get('CommitteeId').value.CommitteeId || 0,
-      "commiteeName": this.personalFormGroup.get('commiteeName').value.MemberId || 0,
-      "createdBy": this.accountService.currentUserValue.user.id
-     
-    }
-  }
-  console.log(m_data);
-  this._CommitteMeetingService.CommitteeMemberDetailInsert(m_data).subscribe(response => {
+
+  this.isLoading = 'submit';
+   let committeeInsertObj = {};
+   committeeInsertObj['committeeId']= 0,//this.personalFormGroup.get('CommitteeId').value.CommitteeId || 0,
+   committeeInsertObj['commiteeName']= this.personalFormGroup.get('CommitteeName').value || 0,
+   committeeInsertObj['createdBy']= this.accountService.currentUserValue.user.id
+  
+  let Billdetsarr = [];
+  this.dataSource.data.forEach((element) => {
+    let BillDetailsInsertObj = {};
+    BillDetailsInsertObj['committeeId'] = 0;
+    BillDetailsInsertObj['memberId'] = element.MemberId;
+    BillDetailsInsertObj['createdBy'] =  this.accountService.currentUserValue.user.id;
+    Billdetsarr.push(BillDetailsInsertObj);
+  });
+
+  let submitData = {
+    "insertCommitteeMaster": committeeInsertObj,
+    "insertCommitteeMemberDetails": Billdetsarr
+  };
+
+  console.log(submitData);
+  this._CommitteMeetingService.CommitteeMemberDetailInsert(submitData).subscribe(response => {
     if (response) {
       Swal.fire('New CommitteeMember Save !', ' CommitteeMember Save Successfully !', 'success').then((result) => {
         if (result.isConfirmed) {
           this._matDialog.closeAll();
-
         }
-
       });
     } else {
       Swal.fire('Error !', 'CommitteeMember not saved', 'error');
@@ -145,22 +157,16 @@ onSubmit() {
 
 
 onSaveEntry(element) {
-  debugger;
- console.log(element);
-
   this.dataSource.data = [];
   this.chargeslist.push(
     {
-     
       MemberId: element.MemberId,
       MemberName: element.FirstName
-     
     });
   this.isLoading = '';
-  console.log(this.chargeslist);
+  // console.log(this.chargeslist);
   this.dataSource.data = this.chargeslist;
-  console.log(this.dataSource.data);
-  
+  // console.log(this.dataSource.data);
 }
 
 
@@ -175,9 +181,10 @@ OnSave(){
   
 }
 
-onClose(){}
+onClose(){
+  this.dialogRef.close();
 }
-
+}
 
 
 

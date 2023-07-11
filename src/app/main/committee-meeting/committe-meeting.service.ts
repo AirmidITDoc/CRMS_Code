@@ -67,8 +67,13 @@ public getMemberMasterList(employee){
     return this._httpClient.post("Generic/GetByProc?procName=RetrieveCityMasterForCombo", {})
   }
 
-  public getCommitteeMemberMasterList(){
-    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CommitteeMemberList", {})
+  public getCommitteeMeetingList(){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CommitteeListCombo", {})
+  }
+  
+  
+  public getCommitteeMemberList(Params){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CommitteeMemberList", Params)
   }
   
   public getDepartmentCombobox() {
