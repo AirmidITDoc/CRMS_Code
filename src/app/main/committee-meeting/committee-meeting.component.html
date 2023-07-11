@@ -1,5 +1,6 @@
 <div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
-    <mat-toolbar class="accent" style="height:50px; justify-content: space-between;width: 100%;background-color:rgb(18, 87, 134) !important;">
+    <mat-toolbar class="accent"
+        style="height:50px; justify-content: space-between;width: 100%;background-color:rgb(18, 87, 134) !important;">
         <div fxLayout="row" fxLayoutAlign="start center">
             <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm (click)="toggleSidebar('app-main')"
                 style="color: white;">
@@ -8,26 +9,24 @@
             <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
                 style="color: white;" style="color: aliceblue;">account_box
             </mat-icon>
-            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" style="color: aliceblue;">
+            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
+                style="color: aliceblue;">
                 Committee Meeting
             </span>
 
-            <button mat-raised-button (click)="newMember()" fxLayoutAlign="center center"
-                style="margin-left:980px;">Add Member 
-                
+            <button mat-raised-button (click)="newMember()" fxLayoutAlign="center center" style="margin-left:980px;">Add
+                Member
+
             </button>
             <button mat-raised-button (click)="newCommitteeMember()" fxLayoutAlign="center center"
-            style="margin-left:10px;">CommitteeMembers
-            <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
-        </button>
-        <button mat-raised-button (click)="newcommitteemeeting()" fxLayoutAlign="center center"
-        style="margin-left:10px;">Committee Meeting
-        <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
-    </button>
+                style="margin-left:10px;">CommitteeMembers
+                <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
+            </button>
+            <button mat-raised-button (click)="newcommitteemeeting()" fxLayoutAlign="center center"
+                style="margin-left:10px;">Committee Meeting
+                <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
+            </button>
         </div>
-
-
-
 
     </mat-toolbar>
     <!-- / HEADER -->
@@ -41,7 +40,8 @@
         margin-left:12px; background-color: white;height:100%;">
             <div>
                 <!-- SIDEBAR HEADER -->
-                <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center" style="margin-top: 3%;background-color: rgb(18, 87, 134) !important;">
+                <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
+                    style="margin-top: 3%;background-color: rgb(18, 87, 134) !important;">
                     <span class="h5" style="font-size: 17px;color: aliceblue;">Search Facility</span>
                     <!-- / USER -->
                 </div>
@@ -52,8 +52,8 @@
                         <form [formGroup]="_CasedetailService.myFilterform" style="padding: 6px 6px 5px 5px;"
                             fusePerfectScrollbar>
                             <div fxLayout="column" fxLayoutAlign="start none">
-                                
-                              
+
+
                                 <div style="margin-top: 10px;">
                                     <button mat-raised-button (click)="onClear()" class="clearbutton"
                                         matTooltip="close">
@@ -76,10 +76,7 @@
         <!-- CENTER -->
 
         <div class="center p-12 pb-56" fxFlexAlign="start center">
-
             <div class="content-card" style="border-radius:4px; ">
-
-
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="30px">
                     <div fxFlex.gt-sm="100%" fxFlex>
 
@@ -90,11 +87,12 @@
                                     <div class="spinner-border text-danger"></div>
                                 </div>
                                 <!-- sppinner -->
-                                <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
-                                    class="table1">
+                                <mat-table #table matSort [dataSource]="dscommitteeMeetingList"
+                                    [@animateStagger]="{value:'50'}" class="table1">
 
                                     <ng-container matColumnDef="CommitteeMeetingId">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>CommitteeMeetingId
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header
+                                            fxShow.gt-sm>CommitteeMeetingId
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm style="margin-top: 1px;">
                                             {{contact.CommitteeMeetingId}}
@@ -106,7 +104,7 @@
                                             fxShow.gt-md>CommitteeMeetingDate
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.CommitteeMeetingDate | 'shortDate'}}
+                                            {{contact.CommitteeMeetingDate}}
                                         </mat-cell>
                                     </ng-container>
 
@@ -146,7 +144,7 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                
+
                                     <ng-container matColumnDef="action" stickyEnd>
                                         <mat-header-cell *matHeaderCellDef style="color: white;"> Action
                                         </mat-header-cell>
@@ -177,7 +175,7 @@
                                         [ngClass]="{'hide': !(sIsLoading == 'loading-data')}">
                                     </mat-footer-row>
                                     <mat-footer-row *matFooterRowDef="['noData']"
-                                        [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
+                                        [ngClass]="{'hide':!(dscommitteeMeetingList!=null && dscommitteeMeetingList.data.length==0)}"></mat-footer-row>
                                 </mat-table>
                                 <mat-paginator [pageSizeOptions]="[20, 25, 50, 100]" [pageSize]="20"
                                     showFirstLastButtons>

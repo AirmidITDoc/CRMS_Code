@@ -19,9 +19,6 @@ import { fuseAnimations } from '@fuse/animations';
   animations: fuseAnimations
 })
 export class AddMemberComponent implements OnInit {
-
-
-
   personalFormGroup: FormGroup;
   currentDate = new Date();
   submitted = false;
@@ -40,12 +37,8 @@ export class AddMemberComponent implements OnInit {
   public cityFilterCtrl: FormControl = new FormControl();
   public filteredCity: ReplaySubject<any> = new ReplaySubject<any>(1);
 
-
   private _onDestroy = new Subject<void>();
   // private _onDestroy1 = new Subject<void>();
-
-
-
 
   constructor(public _CommitteMeetingService: CommitteMeetingService,
     private formBuilder: FormBuilder,
@@ -61,23 +54,17 @@ export class AddMemberComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-    console.log(this.data)
     this.personalFormGroup = this.createPesonalForm();
-
     if (this.data) {
       this.registerObj = this.data.registerObj;
     }
 
     this.getcityList();
-
     this.cityFilterCtrl.valueChanges
     .pipe(takeUntil(this._onDestroy))
     .subscribe(() => {
       this.filterCity();
     });
-
- 
   }
 
 

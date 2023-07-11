@@ -301,7 +301,6 @@ export class NewAppointmentComponent implements OnInit {
         Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
       ]],
       MiddleName: ['', [
-
         Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
       ]],
       LastName: ['', [
@@ -336,7 +335,7 @@ export class NewAppointmentComponent implements OnInit {
       CountryId: '',
       CaseId:'',
       RationCardNo: '',
-    IsMember: ''
+      IsMember: ''
 
     });
     

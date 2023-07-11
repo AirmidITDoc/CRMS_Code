@@ -27,29 +27,20 @@
 
         <div>
           <form [formGroup]="personalFormGroup">
-
             <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-
-
               <mat-form-field appearance="outline"
                 style="width:200px;font-weight:bold;float: left;padding-top: 10px;padding-right: 10px;padding-left: 10px;">
                 <mat-label>Case ID</mat-label>
                 <mat-select formControlName="CaseId" name="CaseId" style="color: blue;" required>
                   <mat-option></mat-option>
                   <mat-option *ngFor="let m of CaseIdList" [value]="m">
-                    CaseId {{m.CaseId}} || {{m.CaseTitle}}
+                    {{m.CaseId}} || {{m.CaseTitle}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-
-
-
             </div>
-
             <div style="padding: 7px;">
               <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-
-
                 <mat-form-field appearance="outline" fxFlex>
                   <mat-label>Prefix</mat-label>
                   <mat-select formControlName="PrefixID" placeholder="Bank" #singleSelect
@@ -62,21 +53,20 @@
                       {{element.PrefixName}}
                     </mat-option>
                   </mat-select>
-                  <mat-error
+                  <!-- <mat-error
                     *ngIf="personalFormGroup.get('PrefixID').invalid && personalFormGroup.get('PrefixID').touched">
-                    Prefix is required</mat-error>
+                    Prefix is required</mat-error> -->
                 </mat-form-field>
 
-                <!-- [formControl]="name" -->
                 <mat-form-field appearance="outline" fxFlex>
                   <mat-label>First Name</mat-label>
                   <input name="FirstName" formControlName="FirstName" placeholder="First Name" matInput required
                     [(ngModel)]="registerObj.FirstName" onkeypress=" (event.charCode > 64 && 
                         event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
-                  <mat-error
+                  <!-- <mat-error
                     *ngIf="personalFormGroup.get('FirstName').invalid && personalFormGroup.get('FirstName').touched">
                     First Name is required Enter only
-                    Alphabets</mat-error>
+                    Alphabets</mat-error> -->
                 </mat-form-field>
 
 
@@ -110,7 +100,7 @@
               <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
                 <mat-form-field appearance="outline" fxFlex>
                   <mat-label>Birth date</mat-label>
-                  <input name="DateOfBirth" matInput [matDatepicker]="picker" formControllName="DateOfBirth"
+                  <input name="DateOfBirth" matInput [matDatepicker]="picker" formControlName="DateOfBirth"
                     (dateChange)="onChangeDateofBirth($event.value)" [value]="registerObj.DateofBirth"
                     [readonly]="true">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

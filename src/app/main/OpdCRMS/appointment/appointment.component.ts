@@ -104,20 +104,18 @@ export class AppointmentComponent implements OnInit {
       "F_Name": this._AppointmentSreviceService.myFilterform.get("FirstName").value.trim() + '%' || '%',
       "L_Name": this._AppointmentSreviceService.myFilterform.get("LastName").value.trim() + '%' || '%',
       "Reg_No": this._AppointmentSreviceService.myFilterform.get("RegNo").value || 0,
-      "Doctor_Id": this._AppointmentSreviceService.myFilterform.get("DoctorId").value || 0,
       "From_Dt": this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
       "To_Dt": this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-
     }
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._AppointmentSreviceService.getAppointmentList(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as VisitMaster[];
-        console.log(this.dataSource.data);
+        // console.log(this.dataSource.data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.sIsLoading = '';
-        console.log(this.dataSource.data)
+        // console.log(this.dataSource.data)
       },
         error => {
           this.sIsLoading = '';

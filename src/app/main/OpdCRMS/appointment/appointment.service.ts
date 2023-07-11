@@ -30,9 +30,9 @@ export class AppointmentService {
       LastName:['', [
         Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
       ]],
-      DoctorId:'',
-      DoctorName:'',
-      IsMark: 2,
+      // DoctorId:'',
+      // DoctorName:'',
+      // IsMark: 2,
       start: [(new Date()).toISOString()],
       end: [(new Date()).toISOString()],
 
@@ -168,8 +168,7 @@ export class AppointmentService {
 
   // display Appointment list
   public getAppointmentList(employee) {
-    // return this._httpClient.post("Generic/GetByProc?procName=ps_Rtrv_VisitDetailsList", employee)
-    return this._httpClient.post("Generic/GetByProc?procName=RetrieveT_VisitDetailsList", employee)
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_VisitDetailsList", employee)
   }
   // Doctor Master Combobox List
   public getAdmittedDoctorCombo() {

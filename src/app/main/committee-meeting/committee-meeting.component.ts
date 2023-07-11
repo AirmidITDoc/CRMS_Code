@@ -49,11 +49,9 @@ export class CommitteeMeetingComponent implements OnInit {
     'CommitteeMeetingLocation',
     'CommitteeMeetingAmount',
     'CreatedBy',
-    
     'action'
-
   ];
-  dataSource = new MatTableDataSource<CommmitteeDetail>();
+  dscommitteeMeetingList = new MatTableDataSource<CommmitteeDetail>();
   menuActions: Array<string> = [];
   //datePipe: any;
 
@@ -70,27 +68,18 @@ export class CommitteeMeetingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-
     this.getCommitteeList();
-    
-
   }
-
-  
 
   getCommitteeList() {
     this.sIsLoading = 'loading-data';
-   
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._CasedetailService.getCommitteeList().subscribe(Visit => {
-        this.dataSource.data = Visit as CommmitteeDetail[];
-        console.log(this.dataSource.data);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
+        this.dscommitteeMeetingList.data = Visit as CommmitteeDetail[];
+        this.dscommitteeMeetingList.sort = this.sort;
+        this.dscommitteeMeetingList.paginator = this.paginator;
         this.sIsLoading = '';
-        console.log(this.dataSource.data)
       },
         error => {
           this.sIsLoading = '';
@@ -157,13 +146,11 @@ export class CommitteeMeetingComponent implements OnInit {
 
 
 newMember() {
-
     const dialogRef = this._matDialog.open(AddMemberComponent,
       {
         maxWidth: "75vw",
-        height: '400px',
+        height: '300px',
         width: '100%',
-        
       });
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed - Insert Action', result);
