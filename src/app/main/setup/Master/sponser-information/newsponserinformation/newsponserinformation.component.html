@@ -1,0 +1,139 @@
+<div fxlayout="row" fxFlex.gt-sm="100%" fxFlex class="page-layout simple right-sidebar">
+    <div class="center" fusePerfectScrollbar style="overflow: auto;">
+        <mat-toolbar matDialogTitle class="mat-accent m-0">
+            <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
+                style="background-color:rgb(18, 87, 134) !important;">
+                <h3>New Sponser Information</h3>
+                <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+        <div style="padding:10px; height: 100%;" fxLayoutGap="2px">
+            <div class="dialog-content-wrapper" style="align-items: flex-end;margin-right:10px;">
+                <div style="padding: 7px;">
+                    <form [formGroup]="personalFormGroup">
+                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>First Name</mat-label>
+                                <input name="SponserName" formControlName="SponserName" placeholder="Sponser Name"
+                                    matInput required type="text">
+                                <mat-error
+                                    *ngIf="personalFormGroup.get('SponserName').invalid && personalFormGroup.get('SponserName').touched">
+                                    Enter Sponser Name </mat-error>
+                            </mat-form-field>
+
+
+                        </div>
+
+                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>Member Address</mat-label>
+                                <input name="Address" formControlName="Address" placeholder="Address" matInput>
+                                <mat-error
+                                    *ngIf="personalFormGroup.get('Address').invalid && personalFormGroup.get('Address').touched">Please
+                                    enter Address </mat-error>
+                            </mat-form-field>
+
+
+                        </div>
+
+                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>ContactNo</mat-label>
+                                <input name="ContactNo" formControlName="ContactNo" placeholder="ContactNo" matInput
+                                    type="text">
+                                <mat-error class="error"
+                                    *ngIf="personalFormGroup.get('ContactNo').invalid && personalFormGroup.get('ContactNo').touched">
+                                    Middle Name is required
+                                    Enter
+                                    only Alphabets</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>PinCode</mat-label>
+                                <input name="PinCode" formControlName="PinCode" placeholder="PinCode" matInput
+                                    type="number">
+                                <mat-error class="error"
+                                    *ngIf="personalFormGroup.get('PinCode').invalid && personalFormGroup.get('PinCode').touched">
+                                    Middle Name is required
+                                    Enter
+                                    only Alphabets</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>State</mat-label>
+                                <input name="State" formControlName="State" placeholder="State" matInput
+                                    appCharmaxLength="6" value="">
+                            </mat-form-field>
+
+
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>StateCode</mat-label>
+                                <input name="StateCode" formControlName="StateCode" placeholder="StateCode" matInput
+                                    required minlength="10" maxlength="10" type="number">
+                                <mat-error class="error"
+                                    *ngIf="personalFormGroup.get('StateCode').invalid && personalFormGroup.get('StateCode').touched">10
+                                    digits Mobile number is
+                                    required</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>GSTIN </mat-label>
+                                <input name="GSTIN" formControlName="GSTIN" placeholder="GSTIN" matInput>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>SAC </mat-label>
+                                <input name="SAC" formControlName="SAC" placeholder="SAC" matInput>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>PAN</mat-label>
+                                <input name="PAN" formControlName="PAN" placeholder="PAN" matInput required
+                                    required="required" type="number">
+                            </mat-form-field>
+
+
+                        </div>
+
+                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>PlaceOfSupply</mat-label>
+                                <input name="PlaceOfSupply" formControlName="PlaceOfSupply" placeholder="PlaceOfSupply"
+                                    matInput>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>Email Id </mat-label>
+                                <input name="EmailId" formControlName="EmailId" placeholder="EmailId" matInput>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div style="float: right;">
+
+                            <button class="next-btn" color="accent" (click)="onSubmit()" style="border-radius: 16px;">
+                                <span style="display: flex;justify-content: center;">
+                                    <!-- <mat-spinner *ngIf="isLoading=='submit'" [color]="white" [diameter]="20"></mat-spinner> -->
+                                    <span style="margin-left: 6px;">Save</span>
+                                </span>
+                            </button>
+
+                            <button class="footer-btn" (click)="onClose()">Cancel</button>
+                            &nbsp;
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

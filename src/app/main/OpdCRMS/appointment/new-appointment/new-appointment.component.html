@@ -3,13 +3,11 @@
 
     <div class="form-section">
 
-      <div class="header-container" fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
-        style="background-color:rgb(18, 87, 134) !important;">
+      <div class="header-container" fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between" style="background-color:rgb(18, 87, 134) !important;" >
         <span style="font-size: 22px; font-weight: 500; color: #fff;">New Appointment</span>
-        <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
-        </app-common-date>
-        <span class="material-icons" style="cursor: pointer;float: right; color: #fff;float: right;"
-          (click)="onClose()">
+        <!-- <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
+        </app-common-date> -->
+        <span class="material-icons" style="cursor: pointer;float: right; color: #fff;float: right;" (click)="onClose()">
           close
         </span>
 
@@ -27,20 +25,25 @@
 
         <div>
           <form [formGroup]="personalFormGroup">
-            <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-              <mat-form-field appearance="outline"
-                style="width:200px;font-weight:bold;float: left;padding-top: 10px;padding-right: 10px;padding-left: 10px;">
+            
+              <div  fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+             
+
+              <mat-form-field appearance="outline" style="width:200px;font-weight:bold;float: left;padding-top: 10px;padding-right: 10px;padding-left: 10px;">
                 <mat-label>Case ID</mat-label>
                 <mat-select formControlName="CaseId" name="CaseId" style="color: blue;" required>
-                  <mat-option></mat-option>
-                  <mat-option *ngFor="let m of CaseIdList" [value]="m">
-                    {{m.CaseId}} || {{m.CaseTitle}}
-                  </mat-option>
+                    <mat-option></mat-option>
+                    <mat-option *ngFor="let m of CaseIdList" [value]="m">
+                       {{m.StudyId}} || {{m.ProtocolNo}}
+                    </mat-option>
                 </mat-select>
-              </mat-form-field>
-            </div>
+            </mat-form-field>
+          </div>
+           
             <div style="padding: 7px;">
               <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+              
+
                 <mat-form-field appearance="outline" fxFlex>
                   <mat-label>Prefix</mat-label>
                   <mat-select formControlName="PrefixID" placeholder="Bank" #singleSelect
@@ -53,20 +56,21 @@
                       {{element.PrefixName}}
                     </mat-option>
                   </mat-select>
-                  <!-- <mat-error
+                  <mat-error
                     *ngIf="personalFormGroup.get('PrefixID').invalid && personalFormGroup.get('PrefixID').touched">
-                    Prefix is required</mat-error> -->
+                    Prefix is required</mat-error>
                 </mat-form-field>
 
+                <!-- [formControl]="name" -->
                 <mat-form-field appearance="outline" fxFlex>
                   <mat-label>First Name</mat-label>
                   <input name="FirstName" formControlName="FirstName" placeholder="First Name" matInput required
                     [(ngModel)]="registerObj.FirstName" onkeypress=" (event.charCode > 64 && 
                         event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
-                  <!-- <mat-error
+                  <mat-error
                     *ngIf="personalFormGroup.get('FirstName').invalid && personalFormGroup.get('FirstName').touched">
                     First Name is required Enter only
-                    Alphabets</mat-error> -->
+                    Alphabets</mat-error>
                 </mat-form-field>
 
 
@@ -100,7 +104,7 @@
               <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
                 <mat-form-field appearance="outline" fxFlex>
                   <mat-label>Birth date</mat-label>
-                  <input name="DateOfBirth" matInput [matDatepicker]="picker" formControlName="DateOfBirth"
+                  <input name="DateOfBirth" matInput [matDatepicker]="picker" formControllName="DateOfBirth"
                     (dateChange)="onChangeDateofBirth($event.value)" [value]="registerObj.DateofBirth"
                     [readonly]="true">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -443,7 +447,25 @@
                   </mat-select>
 
                 </mat-form-field>
+                <!-- <button mat-raised-button (click)="DocSelectdelete()"> <mat-icon
+                      style="width:2px;">close</mat-icon></button> -->
 
+
+                <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
+                  <mat-label>Purpose</mat-label>
+                  <mat-select formControlName="PurposeId" placeholder="Bank" #singleSelect>
+                    <mat-option>
+                      <ngx-mat-select-search [formControl]="purposeFilterCtrl" [placeholderLabel]="'Search'"
+                        [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let element of filteredPurpose | async" [value]="element">
+                      {{element.PurposeName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <!-- <label for="name">Name: </label>
+                      <input id="name" type="text" [formControl]="name"> -->
 
                 <br>
 
@@ -451,11 +473,17 @@
 
             </div>
 
+            <!-- <span class="label"> Value: </span>
+                  <span >{{ name.value}}</span> -->
+
+
+
+
             <div style="float: right;">
               <!-- <button class="next-btn"  *ngIf="isLoading=='submit'" [color]="white" [diameter]="20"  (click)="onSubmit()" [disabled]="personalFormGroup.invalid" style="border-radius: 16px;" >Save
                           </button> -->
 
-              <button class="next-btn" color="accent" (click)="submitAppointForm()"
+              <button class="next-btn" color="accent" (click)="nextClicked(VisitFormGroup)"
                 [disabled]="personalFormGroup.invalid || VisitFormGroup.invalid" style="border-radius: 16px;">
                 <span style="display: flex;justify-content: center;">
                   <!-- <mat-spinner *ngIf="isLoading=='submit'" [color]="white" [diameter]="20"></mat-spinner> -->
@@ -468,6 +496,18 @@
             </div>
 
 
+            <!-- <div class="back-div">
+                        <button class="back-btn" (click)="backClicked()">
+                          Back
+                        </button>
+                      </div>
+                      <button class="next-btn" (click)="nextClicked(VisitFormGroup)" [disabled]="isLoading=='submit'">
+                        <span style="display: flex;justify-content: center;">
+                          <mat-spinner *ngIf="isLoading=='submit'" [color]="white" [diameter]="20"></mat-spinner>
+                          <span style="margin-left: 5px;" >Save</span>
+                        </span>
+                      </button>
+                    </div> -->
           </form>
 
         </div>

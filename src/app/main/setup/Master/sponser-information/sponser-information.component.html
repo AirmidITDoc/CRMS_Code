@@ -1,1 +1,174 @@
-<p>sponser-information works!</p>
+<div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <!-- HEADER -->
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+        fxLayoutAlign.gt-xs="space-between center">
+
+        <!-- APP TITLE -->
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="color: aliceblue;">
+                <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">account_box
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Sponser Information List
+                </span>
+                <button mat-raised-button (click)="onAdd()" fxLayoutAlign="center center" style="margin-left: 80%;">
+                    <mat-icon color="Primary" title=" Appointment Form ">how_to_reg</mat-icon>
+                </button>
+            </div>
+        </div>
+        <!-- / APP TITLE -->
+        <!-- SEARCH -->
+        <!-- / SEARCH -->
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- SIDEBAR -->
+        <!-- / SIDEBAR -->
+
+        <!-- CENTER -->
+        <div class="center p-24 pb-56" fusePerfectScrollbar>
+            <!-- CONTENT -->
+            <div class="content-card">
+
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
+                    <div fxFlex.gt-sm="99%" fxFlex>
+                        <div style="width: 100%;">
+                            <mat-table #table matSort [dataSource]="DSSponserInformationList"
+                                [@animateStagger]="{value:'50'}" style="overflow:auto">
+
+                                <ng-container matColumnDef="SponserId">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Code
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> {{element.SponserId}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="SponserName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Sponser Name </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.SponserName}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="Address">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Address
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> {{element.Address}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="ContactNo">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> ContactNo </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.ContactNo}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="PinCode">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>PinCode</mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.PinCode}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="State">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>State
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> {{element.State}}
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="StateCode">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> StateCode </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.StateCode}} </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="GSTIN">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> GSTIN </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.GSTIN}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="SAC">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>SAC </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.SAC}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="PAN">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>PAN </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.PAN}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="PlaceOfSupply">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>PlaceOfSupply </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.PlaceOfSupply}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="EmailId">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>EmailId </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.EmailId}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="IsActive">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm> IsActive
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                        <mat-icon *ngIf="!element.IsActive"
+                                            class="active-icon green-600 s-16">check_circle</mat-icon>
+                                        <mat-icon *ngIf="element.IsActive"
+                                            class="active-icon red-500 s-16">close</mat-icon>
+                                    </mat-cell>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="action" stickyEnd>
+                                    <mat-header-cell *matHeaderCellDef class="table-actions" style="color: aliceblue;">
+                                        Action </mat-header-cell>
+                                    <mat-cell *matCellDef="let element">
+                                        <button mat-icon-button (click)="onEdit(row)"><mat-icon
+                                                title="Edit Menu">launch</mat-icon></button>
+                                        <!-- <button mat-icon-button (click)="onDeactive(row.ServiceId)"
+                                            color="warn"><mat-icon>delete_outline</mat-icon></button>-->
+
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="loading">
+                                    <mat-footer-cell *matFooterCellDef colspan="6">
+                                        loading data...
+                                    </mat-footer-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="noData">
+                                    <mat-footer-cell *matFooterCellDef colspan="6">
+                                        no data found...
+                                    </mat-footer-cell>
+                                </ng-container>
+
+                                <mat-header-row class="accent"
+                                    *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                                <mat-row *matRowDef="let element; columns: displayedColumns;" class="element"
+                                    [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+
+                            </mat-table>
+
+
+                            <mat-card *ngIf="isLoading"
+                                style="display: flex; justify-content: center; align-items: center; background: white;">
+                                <mat-progress-spinner color="primary" mode="indeterminate">
+                                </mat-progress-spinner>
+                            </mat-card>
+                        </div>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"
+                            showFirstLastButtons></mat-paginator>
+                    </div>
+                </div>
+            </div>
+            <!-- / CONTENT -->
+        </div>
+        <!-- / CENTER -->
+    </div>
+    <!-- / CONTENT-->
+</div>

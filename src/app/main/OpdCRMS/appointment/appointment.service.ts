@@ -327,7 +327,11 @@ public CaseDetailInsert(employee){
   }
 
   public getCaseIDCombo(){
-    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CaseCombo", {});
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_StudyInformationCombo", {});
+  }
+
+  public getStudyListCombo(){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_StudyInformationCombo", {});
   }
 
   public getCaseDetailPrint(employee){
