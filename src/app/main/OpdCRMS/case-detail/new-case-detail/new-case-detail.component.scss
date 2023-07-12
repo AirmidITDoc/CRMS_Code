@@ -32,7 +32,106 @@ app-new-case-detail{
     //     color: white;
     //     cursor: pointer;
     // }
+
+    .table2{
+        .mat-header-row {
+            // width: 100%;
+            max-width: 800px;
+            min-width: 800px;
+            min-height: 30px;
+        }
+
+        .mat-row {
+            // width: 100%;
+            max-width: 800px;
+            min-width: 800px;
+            min-height: 30px;
+        }
+
+        
+        .mat-column-DocumentName {
+            width: 300px;
+            max-width: 300px;
+            min-width: 300px;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            overflow: hidden !important;
+        }
+
+
+        
+        .mat-column-DocumentPath {
+            width: 400px;
+            max-width: 400px;
+            min-width: 400px;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            overflow: hidden !important;
+        }
+    }
     
+    .table1{
+
+        .mat-header-row {
+            // width: 100%;
+            max-width: 900px;
+            min-width: 900px;
+            min-height: 30px;
+        }
+
+        .mat-row {
+            // width: 100%;
+            max-width: 900px;
+            min-width: 900px;
+            min-height: 30px;
+        }
+
+        .mat-column-VisitName {
+            width: 300px;
+            max-width: 300px;
+            min-width: 300px;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            overflow: hidden !important;
+        }
+
+        .mat-column-Amount {
+            width: 100px;
+            max-width: 110px;
+            min-width: 10px;
+            text-align: right;
+        }
+
+        .mat-column-VisitDescription {
+            width: 400px;
+            max-width: 400px;
+            min-width: 400px;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            overflow: hidden !important;
+        }
+
+
+    }
+
+        .mat-column-action {
+            // color: white !important;
+            width: 70px;
+            max-width: 70px;
+            min-width: 70px;
+            text-align: right;
+            justify-content: right;
+
+        }
+   
     
     .footer-navigation-container {
         text-align: right;
@@ -89,7 +188,7 @@ app-new-case-detail{
     
     .main-content {
         display: flex;
-        height: 600px;
+        height: 700px;
     }
     
     .profile-section {

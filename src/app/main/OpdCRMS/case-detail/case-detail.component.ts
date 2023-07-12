@@ -131,28 +131,28 @@ export class CaseDetailComponent implements OnInit {
 
     console.log(" This is for Update Case Detail pop : " + contact);
     let xx = {
-    
-      CaseId:contact.CaseId,
-      CaseTitle:contact.CaseTitle,
-      CaseDescription: contact.CaseDescription,
+      StudyId:contact.StudyId,
+      ProtocolNo:contact.ProtocolNo,
+      ProtocolTitle:contact.ProtocolTitle,
+      StudyProduct: contact.StudyProduct,
       TotalSubjects:contact.TotalSubjects,
       TotalVisits:contact.TotalVisits,
       VisitFrequency:contact.VisitFrequency,
-      CaseStartDate: contact.CaseStartDate,
-      CaseEndDate:contact.CaseEndDate,
-      CaseStatus: contact.CaseStatus,
-      CompanyName:contact.CompanyName,
-      CaseRepresentative: contact.CaseRepresentative,
+      StudyStartDate: contact.StudyStartDate,
+      StudyEndDate:contact.StudyEndDate,
+      Sponser: contact.Sponser,
+      Investigator:contact.Investigator,
+      Institution: contact.Institution,
       HospitalRepresentative: contact.HospitalRepresentative,
       AgreementFileName: contact.AgreementFileName,
-
+      "operation":"UPDATE"
     };
     // this.advanceDataStored.storage = new CaseDetail(xx);
     // this._CasedetailService.populateFormpersonal(xx);
   
 console.log(xx);
-    // this._ActRoute.navigate(['/opd/registration']);
-    const dialogRef = this._matDialog.open(EditCasedetailComponent,
+    
+    const dialogRef = this._matDialog.open(NewCaseDetailComponent,
       {
         maxWidth: "75vw",
         height: '580px',
@@ -173,7 +173,7 @@ console.log(xx);
     const dialogRef = this._matDialog.open(NewCaseDetailComponent,
       {
         maxWidth: "75vw",
-        height: '600px',
+        height: '700px',
         width: '100%',
         
       });

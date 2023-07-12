@@ -30,9 +30,12 @@ export class AppointmentService {
       LastName:['', [
         Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
       ]],
+      StudyId:'',
+      // DoctorName:'',
+      // IsMark: 2,
       start: [(new Date()).toISOString()],
       end: [(new Date()).toISOString()],
-      StudyId:0
+      
     });
   }
 

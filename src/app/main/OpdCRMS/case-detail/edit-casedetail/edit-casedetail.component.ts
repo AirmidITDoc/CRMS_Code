@@ -232,49 +232,50 @@ export class EditCasedetailComponent implements OnInit {
 
 
 
-  onSubmit() {
-    debugger
-    this.isLoading = 'submit';
+  // onSubmit() {
+  //   debugger
+  //   this.isLoading = 'submit';
 
-    var m_data = {
-      "updateCaseDetail": {
-        "CaseId": this.registerObj.CaseId,
-        "CaseTitle": this.personalFormGroup.get('CaseTitle').value || '',
-        "CaseDescription": this.personalFormGroup.get('CaseDescription').value || '',
-        "TotalSubjects": this.personalFormGroup.get('TotalSubjects').value || 0,
-        "TotalVisits": this.personalFormGroup.get('TotalVisits').value || '',
-        "VisitFrequency": this.personalFormGroup.get('VisitFrequency').value.ConstantId || 0,
-        "CaseStartDate": this.datePipe.transform(this.personalFormGroup.get('CaseStartDate').value, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
-        "CaseEndDate": this.datePipe.transform(this.personalFormGroup.get('CaseEndDate').value, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
-        "CaseStatus": 1,// this.personalFormGroup.get('CaseStatus').value || '',
-        "CompanyName": this.personalFormGroup.get('CompanyId').value.companyId || 0,
-        "CaseRepresentative": this.personalFormGroup.get('CaseRepresentative').value || '',
-        "HospitalRepresentative": this.personalFormGroup.get('HospitalRepresentative').value || '',
-        "AgreementFileName": this.personalFormGroup.get('AgreementFileName').value || '',
-        "createdBy": this.accountService.currentUserValue.user.id,
-        "IsActive": 1,
-        "UpdatedBy": this.accountService.currentUserValue.user.id
+  //   var m_data = {
+  //     "updateStudyInformation": {
+  //       "studyId": 0,
+  //       "operation":"UPDATE",
+  //       "protocolNo": this.registerObj.CaseId,
+  //         "protocolTitle": this.personalFormGroup.get('protocolTitle').value || '',
+  //         "studyProduct": this.personalFormGroup.get('studyProduct').value || '',
+  //         "TotalSubjects": this.personalFormGroup.get('TotalSubjects').value || 0,
+  //         "TotalVisits": this.personalFormGroup.get('TotalVisits').value || '',
+  //         "VisitFrequency": this.personalFormGroup.get('VisitFrequency').value.ConstantId || 0,
+  //         "sponser": this.personalFormGroup.get('CompanyId').value.CompanyId || 0,
+  //         "investigator": this.personalFormGroup.get('investigator').value || '',
+  //         "institution": this.personalFormGroup.get('institution').value || '',
+  //         "studyStartDate": this.registerObj.studyStartDate,//this.datePipe.transform(this.personalFormGroup.get('CaseStartDate').value, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
+  //         "studyEndDate":this.registerObj.studyEndDate,// this.datePipe.transform(this.personalFormGroup.get('CaseEndDate').value, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
+  //          "AgreementFileName": this.personalFormGroup.get('AgreementFileName').value || '',
+         
+  //         // "IsActive": 1,
+  //       "UpdatedBy": this.accountService.currentUserValue.user.id
 
-      }
-    }
-    console.log(m_data);
-    this._registerService.CaseDetailUpdate(m_data).subscribe(response => {
+  //     }
+  //   }
+  //   console.log(m_data);
+  //   this._registerService.CaseDetailUpdate(m_data).subscribe(response => {
 
-      if (response) {
-        Swal.fire('Edit CaseDetail Save !', 'Edit CaseDetail save Successfully !', 'success').then((result) => {
-          if (result.isConfirmed) {
-            this._matDialog.closeAll();
+  //     if (response) {
+  //       Swal.fire('Edit CaseDetail Save !', 'Edit CaseDetail save Successfully !', 'success').then((result) => {
+  //         if (result.isConfirmed) {
+  //           this._matDialog.closeAll();
 
-          }
+  //         }
 
-        });
-      } else {
-        Swal.fire('Error !', 'CaseDetail not saved', 'error');
-      }
-    });
+  //       });
+  //     } else {
+  //       Swal.fire('Error !', 'CaseDetail not saved', 'error');
+  //     }
+  //   });
 
 
-  }
+  // }
 
   onClose() {
     this.dialogRef.close();

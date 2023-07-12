@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { RegInsert, VisitMaster } from '../appointment.component';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
@@ -8,7 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AppointmentService } from '../appointment.service';
 import { AuthenticationService } from 'app/core/services/authentication.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
@@ -185,13 +185,21 @@ export class NewAppointmentComponent implements OnInit {
     public dialogRef: MatDialogRef<NewAppointmentComponent>,
     public datePipe: DatePipe,
     private formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     // private advanceDataStored: AdvanceDataStored,
     private router: Router
   ) {
     // dialogRef.disableClose = true;
   }
 
+  
   ngOnInit(): void {
+
+    if(this.data){
+      this.registerObj = this.data.registerObj;
+      console.log(this.registerObj);
+            
+    }
 
     this.personalFormGroup = this.createPesonalForm();
     this.personalFormGroup.markAllAsTouched();
@@ -334,9 +342,12 @@ export class NewAppointmentComponent implements OnInit {
       CityId: '',
       StateId: '',
       CountryId: '',
-
+      StudyId:'',
       RationCardNo: '',
-    IsMember: ''
+    IsMember: '',
+    CaseId:['', [
+      Validators.required]]
+
 
     });
     
@@ -949,7 +960,7 @@ export class NewAppointmentComponent implements OnInit {
       "F_Name": this._opappointmentService.myFilterform.get("FirstName").value.trim() + '%' || '%',
       "L_Name": this._opappointmentService.myFilterform.get("LastName").value.trim() + '%'|| '%',
       "Reg_No": this._opappointmentService.myFilterform.get("RegNo").value || 0,
-      "Doctor_Id": this._opappointmentService.myFilterform.get("DoctorId").value || 0,
+      "Doctor_Id":0,// this._opappointmentService.myFilterform.get("DoctorId").value.DoctorId || 0,
       "From_Dt" :this.datePipe.transform(this._opappointmentService.myFilterform.get("start").value,"yyyy-MM-dd 00:00:00.000") || '01/01/1900', 
       "To_Dt" :  this.datePipe.transform(this._opappointmentService.myFilterform.get("end").value,"yyyy-MM-dd 00:00:00.000") || '01/01/1900',  
       "IsMark": this._opappointmentService.myFilterform.get("IsMark").value || 0,
@@ -988,14 +999,14 @@ export class NewAppointmentComponent implements OnInit {
 
 
   submitAppointForm() {
-
-    if (this.searchFormGroup.get('regRadio').value == "registration") {
+debugger;
+    if (this.registerObj.Opration != "UPDATE") {
 
       this.isLoading = 'submit';
       let submissionObj = {};
       let registrationSave = {};
       let visitSave = {};
-      let tokenNumberWithDoctorWiseInsert = {};
+      
       
       registrationSave['regId'] = 0;
       registrationSave['regDate'] = '2023-06-22T09:52:54.616Z';//this.dateTimeObj.date //this.registerObj.RegDate;
@@ -1029,12 +1040,12 @@ export class NewAppointmentComponent implements OnInit {
      registrationSave['IsMember'] =1;// this.personalFormGroup.get('IsMember').value || '';
    
       submissionObj['registrationSave'] = registrationSave;
-
+debugger;
       visitSave['VisitId'] = 0;
       visitSave['RegID'] = 0;
       visitSave['VisitDate'] = '2023-06-22T09:52:54.616Z';
       visitSave['VisitTime'] = '2023-06-22T09:52:54.616Z';
-      visitSave['CaseID'] = this.VisitFormGroup.get('CaseId').value.CaseId ? this.VisitFormGroup.get('CaseId').value.CaseId : 0;
+      visitSave['StudyId'] = this.personalFormGroup.get('CaseId').value.StudyId ? this.personalFormGroup.get('CaseId').value.StudyId : 0;
       visitSave['UnitId'] = this.VisitFormGroup.get('HospitalId').value.HospitalId ? this.VisitFormGroup.get('HospitalId').value.HospitalId : 0;
       visitSave['PatientTypeId'] = this.VisitFormGroup.get('PatientTypeID').value.PatientTypeId || 0;//.PatientTypeID;//? this.VisitFormGroup.get('PatientTypeID').value.PatientTypeID : 0;
       visitSave['ConsultantDocId'] = this.VisitFormGroup.get('DoctorID').value.DoctorId || 0;//? this.VisitFormGroup.get('DoctorId').value.DoctorId : 0;
@@ -1053,7 +1064,7 @@ export class NewAppointmentComponent implements OnInit {
    
       visitSave['PatientOldNew'] = this.Patientnewold;
       visitSave['FirstFollowupVisit'] = 0,// this.VisitFormGroup.get('RelativeAddress').value ? this.VisitFormGroup.get('RelativeAddress').value : '';
-      visitSave['appPurposeId'] = this.VisitFormGroup.get('PurposeId').value.PurposeId;// ? this.VisitFormGroup.get('RelativeAddress').value : '';
+      visitSave['appPurposeId'] = 0,//this.VisitFormGroup.get('PurposeId').value.PurposeId;// ? this.VisitFormGroup.get('RelativeAddress').value : '';
       visitSave['FollowupDate'] = "2023-06-22T09:52:54.616Z";
       visitSave['IsMark'] = 0,// this.VisitFormGroup.get('RelatvieMobileNo').value ? this.personalFormGroup.get('MobileNo').value : '';
  
@@ -1064,8 +1075,7 @@ export class NewAppointmentComponent implements OnInit {
 
       submissionObj['visitSave'] = visitSave;
 
-      tokenNumberWithDoctorWiseInsert['patVisitID'] = 0;
-      // submissionObj['tokenNumberWithDoctorWiseSave'] = tokenNumberWithDoctorWiseInsert;
+    
       console.log(submissionObj);
       this._opappointmentService.appointregInsert(submissionObj).subscribe(response => {
         console.log(response);
@@ -1095,6 +1105,7 @@ export class NewAppointmentComponent implements OnInit {
       let tokenNumberWithDoctorWiseUpdate = {};
 
       registrationUpdate['regId'] = this.registerObj.RegId;
+      registrationUpdate['opration'] = "UPDATE";
       registrationUpdate['prefixId'] = this.personalFormGroup.get('PrefixID').value.PrefixID;
       registrationUpdate['firstName'] = this.registerObj.FirstName;
       registrationUpdate['middleName'] = this.registerObj.MiddleName;
@@ -1123,7 +1134,7 @@ export class NewAppointmentComponent implements OnInit {
       visitUpdate['RegID'] = this.registerObj.RegId;
       visitUpdate['VisitDate'] = '2023-06-22T09:52:54.616Z',// this.dateTimeObj.date;
       visitUpdate['VisitTime'] = '2023-06-22T09:52:54.616Z',//this.dateTimeObj.time;
-
+      visitUpdate['StudyId'] = this.personalFormGroup.get('CaseId').value.StudyId ? this.personalFormGroup.get('CaseId').value.StudyId : 0;
       visitUpdate['UnitId'] = this.VisitFormGroup.get('HospitalId').value.HospitalId ? this.VisitFormGroup.get('HospitalId').value.HospitalId : 0; // this.VisitFormGroup.get('UnitId').value.UnitId ? this.VisitFormGroup.get('UnitId').value.UnitId: 0;
       visitUpdate['PatientTypeId'] = this.VisitFormGroup.get('PatientTypeID').value.PatientTypeId;//.PatientTypeID;//? this.VisitFormGroup.get('PatientTypeID').value.PatientTypeID : 0;
       visitUpdate['ConsultantDocId'] = this.VisitFormGroup.get('DoctorID').value.DoctorId;//? this.VisitFormGroup.get('DoctorId').value.DoctorId : 0;

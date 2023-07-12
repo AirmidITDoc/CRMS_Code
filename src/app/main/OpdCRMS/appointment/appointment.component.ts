@@ -108,7 +108,7 @@ export class AppointmentComponent implements OnInit {
       "Reg_No": this._AppointmentSreviceService.myFilterform.get("RegNo").value || 0,
       "From_Dt": this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
       "To_Dt": this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "StudyId": this._AppointmentSreviceService.myFilterform.get("StudyId").value.StudyId || 0,
+      "StudyId":this._AppointmentSreviceService.myFilterform.get("StudyId").value  || 1,
     }
     console.log(D_data);
     setTimeout(() => {
@@ -201,10 +201,11 @@ export class AppointmentComponent implements OnInit {
         "PinNo": contact.PinNo,
         "RegDate": contact.RegDate,
         "RegNoWithPrefix": contact.RegNoWithPrefix,
-        "RegTime": contact.RegTime
+        "RegTime": contact.RegTime,
+        "Opration":"UPDATE"
       }
       this._AppointmentSreviceService.populateFormpersonal(m_data);
-      const dialogRef = this._matDialog.open(EditAppointmentComponent,
+      const dialogRef = this._matDialog.open(NewAppointmentComponent,
         {
           maxWidth: "85vw",
           height: '500px',
@@ -706,6 +707,7 @@ export class VisitMaster {
   DoctorId: any;
   AgeYear: any;
   VistDateTime: any;
+ 
   /**
    * Constructor
    *
@@ -784,6 +786,7 @@ export class RegInsert {
   IsMember: any;
   VisitDate: any;
   VisitTime: any;
+  Opration:any;
   /**
    * Constructor
    *
@@ -829,6 +832,7 @@ export class RegInsert {
       this.IsMember = RegInsert.IsMember || 0;
       this.VisitDate = RegInsert.VisitDate || this.currentDate;
       this.VisitTime = RegInsert.VisitTime || this.currentDate;
+      this.Opration = RegInsert.Opration || 0;
     }
   }
 }
