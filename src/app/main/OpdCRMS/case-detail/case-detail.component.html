@@ -105,28 +105,37 @@
                                 <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
                                     class="table1">
 
-                                    <!-- <ng-container matColumnDef="CaseId">
+                                    <!-- <ng-container matColumnDef="StudyId">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header
-                                            fxShow.gt-sm>Case Id</mat-header-cell>
+                                            fxShow.gt-sm>StudyId</mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                            {{contact.CaseId}}
+                                            {{contact.StudyId}}
                                         </mat-cell>
                                     </ng-container> -->
 
-                                    <ng-container matColumnDef="CaseTitle">
+                                    <ng-container matColumnDef="ProtocolNo">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Protocol Number
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm style="margin-top: 1px;">
-                                            {{contact.CaseTitle}}
+                                            {{contact.ProtocolNo}}
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="CaseDescription">
+                                    <ng-container matColumnDef="ProtocolTitle">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
                                             fxShow.gt-md>Protocol Title
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.CaseDescription }}
+                                            {{contact.ProtocolTitle }}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="StudyProduct">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>Study Product
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.StudyProduct }}
                                         </mat-cell>
                                     </ng-container>
 
@@ -157,60 +166,51 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="CaseStartDate">
+                                    <ng-container matColumnDef="Sponser">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Study Start Date</mat-header-cell>
+                                            fxShow.gt-md>Sponser</mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
                                             style="margin-top: 1px;">
-                                            {{contact.CaseStartDate | date:'shortDate'}}
+                                            {{contact.Sponser}}
                                         </mat-cell>
                                     </ng-container>
 
-                                    <!-- <ng-container matColumnDef="CaseStatus">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Case Status
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.CaseStatus}}
-                                        </mat-cell>
-                                    </ng-container> -->
-
-                                    <ng-container matColumnDef="CompanyName">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Sponsor Name
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
-                                            style="margin-top: 1px;">
-                                            {{contact.CompanyName}}
-                                        </mat-cell>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="CaseRepresentative">
+                                    <ng-container matColumnDef="Investigator">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
                                             fxShow.gt-md>Investigator
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.CaseRepresentative}}
+                                            {{contact.Investigator}}
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="HospitalRepresentative">
+                                    <ng-container matColumnDef="Institution">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md> Institution
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
+                                            style="margin-top: 1px;">
+                                            {{contact.Institution}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="StudyStartDate">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
                                             fxShow.gt-md>Institution / Site
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
                                             style="margin-top: 1px;">
-                                            {{contact.HospitalRepresentative}}
+                                            {{contact.StudyStartDate}}
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="AgreementFileName">
+                                    <ng-container matColumnDef="StudyEndDate">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Agreement FileName
+                                            fxShow.gt-md>StudyEndDate
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
                                             style="margin-top: 1px;">
-                                            {{contact.AgreementFileName}}
+                                            {{contact.StudyEndDate}}
                                         </mat-cell>
                                     </ng-container>
 

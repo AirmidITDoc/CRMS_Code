@@ -62,8 +62,8 @@ export class CasedetailService {
     return this._httpClient.post("Generic/GetByProc?procName=Retrieve_CompanyDetailsForCombo", {})
   }
 
-  public getAllCaseList(employee){
-    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CasedetailId",employee);
+  public getStudyInformationList(Params){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_StudyInformationList",Params);
   }
 
 }

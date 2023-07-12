@@ -42,20 +42,19 @@ export class CaseDetailComponent implements OnInit {
   @Input() dataArray: any;
 
   displayedColumns = [
-    // 'CaseId',
-    'CaseTitle',
-    'CaseDescription',
+    // 'StudyId',
+    'ProtocolNo',
+    'ProtocolTitle',
+    'StudyProduct',
     'TotalSubjects',
     'TotalVisits',
     'VisitFrequency',
-    'CaseStartDate',
-    // 'CaseStatus',
-    'CompanyName',
-    'CaseRepresentative',
-    'HospitalRepresentative',
-    'AgreementFileName',
+    'Sponser',
+    'Investigator',
+    'Institution',
+    'StudyStartDate',
+    'StudyEndDate',
     'action',
-
   ];
   dataSource = new MatTableDataSource<CaseDetail>();
   menuActions: Array<string> = [];
@@ -92,15 +91,12 @@ export class CaseDetailComponent implements OnInit {
 
   getCaseList() {
     this.sIsLoading = 'loading-data';
-    var D_data = {
-      "CaseId": 0,//this._CasedetailService.myFilterform.get("CaseId").value || 0,
-      "From_Dt":'01/01/1900',// this.datePipe.transform(this._CasedetailService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "To_Dt": '01/01/1900',//this.datePipe.transform(this._CasedetailService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      
+    var Params = {
+      "StudyId": 0,//this._CasedetailService.myFilterform.get("CaseId").value || 0,
     }
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
-      this._CasedetailService.getAllCaseList(D_data).subscribe(Visit => {
+      this._CasedetailService.getStudyInformationList(Params).subscribe(Visit => {
         this.dataSource.data = Visit as CaseDetail[];
         console.log(this.dataSource.data);
         this.dataSource.sort = this.sort;
