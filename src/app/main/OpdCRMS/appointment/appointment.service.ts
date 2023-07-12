@@ -30,7 +30,7 @@ export class AppointmentService {
       LastName:['', [
         Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
       ]],
-      // DoctorId:'',
+      StudyId:'',
       // DoctorName:'',
       // IsMark: 2,
       start: [(new Date()).toISOString()],

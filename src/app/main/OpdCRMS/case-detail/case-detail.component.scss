@@ -77,16 +77,18 @@
     max-width: 60px;
     min-width: 60px;
   }
-  .mat-column-CaseId {
-    width: 90px; 
-    max-width:90px;
-    min-width: 90px;
+
+  
+  .mat-column-ProtocolNo {
+    width: 200px; 
+    max-width:200px;
+    min-width: 200px;
     text-align: center;
   }
-  .mat-column-CaseDescription {
-    width: 250px;
-    max-width: 250px;
-    min-width: 250px;
+  .mat-column-ProtocolTitle {
+    width: 350px;
+    max-width: 350px;
+    min-width: 350px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
@@ -97,7 +99,7 @@
      margin-right: 7px;
      justify-content:left; 
   }
-  .mat-column-CaseTitle {
+  .mat-column-StudyProduct {
     width:200px;
     max-width:200px;
     min-width:200px;
@@ -133,8 +135,10 @@
      margin-top: 7px;
      margin-right: 7px;
      justify-content:left; 
+     
   }
-  .mat-column-CompanyName {
+ 
+  .mat-column-Sponser {
     width: 200px;
     max-width: 200px;
     min-width: 200px;
@@ -150,18 +154,18 @@
      justify-content:left; 
   }
   
-  .mat-column-CaseStartDate {
+  .mat-column-StudyStartDate {
     width: 110px;
     max-width: 110px;
     min-width: 110px;
   }
-  .mat-column-CaseStatus {
+  .mat-column-StudyEndDate {
     width: 100px;
     max-width: 100px;
     min-width: 100px;
   }
 
-  .mat-column-CaseRepresentative {
+  .mat-column-Investigator {
     width: 200px;
     max-width: 200px;
     min-width: 200px;
@@ -176,7 +180,7 @@
      justify-content:left; 
   }
 
-  .mat-column-HospitalRepresentative {
+  .mat-column-Institution {
     width: 200px;
     max-width: 200px;
     min-width: 200px;
@@ -191,35 +195,7 @@
      justify-content:left; 
   }
 
-  .mat-column-AgreementFileName {
-    width: 200px;
-    max-width: 200px;
-    min-width: 200px;
-    text-align: left;
-    white-space: nowrap; 
-    overflow: hidden;
-    text-overflow: ellipsis; 
-     overflow: hidden !important;
-     display: inline-block;
-     margin-top: 7px;
-     margin-right: 7px;
-     justify-content:left; 
-  }
-
-  .mat-column-HospitalName {
-    width: 200px;
-    max-width: 200px;
-    min-width: 200px;
-    text-align: left;
-    white-space: nowrap; 
-    overflow: hidden;
-    text-overflow: ellipsis; 
-     overflow: hidden !important;
-     display: inline-block;
-     margin-top: 7px;
-     margin-right: 7px;
-     justify-content:left; 
-  }
+  
   .mat-icon-button {
     padding: 0;
     min-width: 0;

@@ -174,13 +174,13 @@ export class NewCommitteeMeetingComponent implements OnInit {
     console.log(submitData);
     this._CommitteMeetingService.CommitteeDetailInsert(submitData).subscribe(response => {
       if (response) {
-        Swal.fire('New Committee Save !', ' New Committee Save Successfully !', 'success').then((result) => {
+        Swal.fire('New Committee Meeting Save !', ' New Committee Meeting Save Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {
             this._matDialog.closeAll();
           }
         });
       } else {
-        Swal.fire('Error !', 'Committee not saved', 'error');
+        Swal.fire('Error !', 'Committee Meeting not saved', 'error');
       }
     });
 

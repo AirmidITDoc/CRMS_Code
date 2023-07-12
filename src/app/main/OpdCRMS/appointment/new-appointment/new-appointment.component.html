@@ -450,7 +450,7 @@
                 <!-- <button mat-raised-button (click)="DocSelectdelete()"> <mat-icon
                       style="width:2px;">close</mat-icon></button> -->
 
-
+<!-- 
                 <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
                   <mat-label>Purpose</mat-label>
                   <mat-select formControlName="PurposeId" placeholder="Bank" #singleSelect>
@@ -462,7 +462,7 @@
                       {{element.PurposeName}}
                     </mat-option>
                   </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <!-- <label for="name">Name: </label>
                       <input id="name" type="text" [formControl]="name"> -->
@@ -482,9 +482,9 @@
             <div style="float: right;">
               <!-- <button class="next-btn"  *ngIf="isLoading=='submit'" [color]="white" [diameter]="20"  (click)="onSubmit()" [disabled]="personalFormGroup.invalid" style="border-radius: 16px;" >Save
                           </button> -->
-
-              <button class="next-btn" color="accent" (click)="nextClicked(VisitFormGroup)"
-                [disabled]="personalFormGroup.invalid || VisitFormGroup.invalid" style="border-radius: 16px;">
+                          <!-- [disabled]="personalFormGroup.invalid || VisitFormGroup.invalid" -->
+              <button class="next-btn" color="accent" (click)="submitAppointForm()"
+               style="border-radius: 16px;">
                 <span style="display: flex;justify-content: center;">
                   <!-- <mat-spinner *ngIf="isLoading=='submit'" [color]="white" [diameter]="20"></mat-spinner> -->
                   <span style="margin-left: 6px;">Save</span>

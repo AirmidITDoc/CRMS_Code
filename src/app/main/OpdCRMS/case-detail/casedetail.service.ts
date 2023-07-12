@@ -36,12 +36,12 @@ export class CasedetailService {
     });
   }
 
-  public CaseDetailInsert(employee){
-    return this._httpClient.post("OutPatient/CaseDetailSave", employee);
+  public StudyInfoInsert(employee){
+    return this._httpClient.post("CRMSTran/Save_StudyInformation", employee);
   }
 
-  public CaseDetailUpdate(employee){
-    return this._httpClient.post("OutPatient/CaseDetailUpdate", employee);
+  public StudyInfoUpdate(employee){
+    return this._httpClient.post("CRMSTran/Update_StudyInformation", employee);
   }
 
 
@@ -53,10 +53,13 @@ export class CasedetailService {
     // this.personalFormGroup.patchValue(employee);
   }
 
-  public getVisitFrequencyCList(D_data){
+  public getDocumentList(D_data){
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_Constants", D_data);
   }
 
+  public getVisitFrequencyCList(D_data){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_Constants", D_data);
+  }
    //company Combobox List
    public getCompanyCombo() {
     return this._httpClient.post("Generic/GetByProc?procName=Retrieve_CompanyDetailsForCombo", {})
@@ -66,4 +69,19 @@ export class CasedetailService {
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_StudyInformationList",Params);
   }
 
+  public StudySchduleInsert(employee){
+    return this._httpClient.post("CRMSTran/Save_InsertStudySchedule", employee)
+  }
+
+  public StudySchduleUpdate(employee){
+    return this._httpClient.post("CRMSTran/Update_UpdateStudySchedule", employee)
+  }
+
+  public DocumentInsert(employee){
+    return this._httpClient.post("CRMSTran/Save_StudyUploadDocument", employee)
+  }
+
+  public DocumentUpdate(employee){
+    return this._httpClient.post("CRMSTran/Update_StudyUploadDocument", employee)
+  }
 }

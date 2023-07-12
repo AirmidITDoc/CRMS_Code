@@ -1,5 +1,5 @@
 <div fxlayout="row" fxFlex.gt-sm="100%" fxFlex class="page-layout simple right-sidebar"
-    style="height: 530px !important;">
+    style="height: 700px !important;">
     <div class="center" fusePerfectScrollbar style="overflow: auto;">
 
 
@@ -36,27 +36,27 @@
 
                                     <mat-form-field appearance="outline" style="width: 25%;font-weight: bolder;">
                                         <mat-label>Protocol Number</mat-label>
-                                        <input name="CaseTitle" formControlName="CaseTitle"
-                                            placeholder="Protocol Number" matInput [ngModel]="registerObj.CaseTitle"
-                                            (ngModelChange)="registerObj.CaseTitle = $event" required>
+                                        <input name="ProtocolNo" formControlName="ProtocolNo"
+                                            placeholder="Protocol Number" matInput [ngModel]="registerObj.ProtocolNo"
+                                            (ngModelChange)="registerObj.ProtocolNo = $event" required>
                                     </mat-form-field>
-
-
-                                    <mat-form-field appearance="outline" style="width: 25%;font-weight: bolder;">
+                                </div>
+                                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                                    <mat-form-field appearance="outline" style="width:65%;font-weight: bolder;">
                                         <mat-label>Study Product</mat-label>
-                                        <input name="CaseTitle" formControlName="CaseTitle" placeholder="Study Product"
-                                            matInput [ngModel]="registerObj.CaseTitle"
-                                            (ngModelChange)="registerObj.CaseTitle = $event" required>
+                                        <input name="ProtocolTitle" formControlName="ProtocolTitle" placeholder="ProtocolTitle"
+                                            matInput [ngModel]="registerObj.ProtocolTitle"
+                                            (ngModelChange)="registerObj.ProtocolTitle = $event" required>
                                     </mat-form-field>
                                 </div>
                                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Protocol Description</mat-label>
-                                        <textarea name="CaseDescription" formControlName="CaseDescription"
-                                            placeholder="CaseDescription" matInput
-                                            [(ngModel)]="registerObj.CaseDescription" required>
+                                        <textarea name="StudyProduct" formControlName="StudyProduct"
+                                            placeholder="StudyProduct" matInput
+                                            [(ngModel)]="registerObj.StudyProduct" required>
 
-                        </textarea>
+                                     </textarea>
 
                                     </mat-form-field>
 
@@ -67,8 +67,8 @@
 
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Study Start Date</mat-label>
-                                        <input name="CaseStartDate" matInput [matDatepicker]="picker"
-                                            formControllName="CaseStartDate" [value]="registerObj.CaseStartDate">
+                                        <input name="StudyStartDate" matInput [matDatepicker]="picker"
+                                            formControllName="StudyStartDate" [value]="registerObj.StudyStartDate">
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
 
@@ -76,8 +76,8 @@
 
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Study End Date</mat-label>
-                                        <input name="CaseEndDate" matInput [matDatepicker]="picker1"
-                                            formControllName="CaseEndDate" [value]="registerObj.CaseEndDate">
+                                        <input name="StudyEndDate" matInput [matDatepicker]="picker1"
+                                            formControllName="StudyEndDate" [value]="registerObj.StudyEndDate">
                                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                         <mat-datepicker #picker1></mat-datepicker>
 
@@ -115,35 +115,33 @@
 
                                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
                                     <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
-                                        <mat-label>Sponsor </mat-label>
-                                        <mat-select formControlName="CompanyId" placeholder="Bank" #singleSelect
-                                            required>
+                                        <mat-label>Sponser </mat-label>
+                                        <mat-select formControlName="CompanyId" placeholder="Bank" #singleSelect>
                                             <mat-option>
                                                 <ngx-mat-select-search [formControl]="companyFilterCtrl"
                                                     [placeholderLabel]="'Search'"
                                                     [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
                                             </mat-option>
-                                            <mat-option *ngFor="let element of filteredCompany | async"
-                                                [value]="element">
+                                            <mat-option *ngFor="let element of filteredCompany | async" [value]="element">
                                                 {{element.CompanyName}}
                                             </mat-option>
                                         </mat-select>
-
+            
                                     </mat-form-field>
 
 
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Investigator</mat-label>
-                                        <input name="CaseRepresentative" formControlName="CaseRepresentative"
+                                        <input name="Investigator" formControlName="Investigator"
                                             placeholder="Investigator" matInput
-                                            [(ngModel)]="registerObj.CaseRepresentative" required>
+                                            [(ngModel)]="registerObj.Investigator" required>
                                     </mat-form-field>
 
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Institution / Site </mat-label>
-                                        <input name="HospitalRepresentative" formControlName="HospitalRepresentative"
+                                        <input name="Institution" formControlName="Institution"
                                             placeholder="Institution Name" matInput required
-                                            [(ngModel)]="registerObj.HospitalRepresentative">
+                                            [(ngModel)]="registerObj.Institution">
                                     </mat-form-field>
                                 </div>
 
@@ -197,9 +195,208 @@
                     <ng-template mat-tab-label
                         style="color: black; font-size: 17px bold; height: 100px;font-weight: bolder; ">
                         <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
-                        Img Upload Doc
+                        Image Upload
                     </ng-template>
+                    <div style="padding:10px; height: 100%;" fxLayoutGap="2px">
+                        <div class="dialog-content-wrapper" style="align-items: flex-end;margin-right:10px;">
 
+                            <form [formGroup]="personalFormGroup">
+
+                                <ng-template matStepLabel>Img Upload</ng-template>
+
+                                <div fxLayout="column">
+
+                                    <div class="content-card"
+                                        style="width:100%;  margin-top: 2px; float: right;background-color: white; margin-right: 10px;margin-left: 10px;">
+                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="column" fxLayoutGap="3px">
+                                            <div fxlayout="row" style=" padding: 3px 3px 3px 1px; margin-right: 5px;">
+                                                <!-- ================================ LABEL HEADER  -->
+
+                                                <mat-card fxFlex.gt-sm="100%" fxFlex
+                                                    style="padding: 0 5px; height: fit-content; background-color: white;">
+                                                    &nbsp;
+                                                    <form [formGroup]="documentFormGroup" style="display: flex;">
+
+                                                      
+                                                        <div fxLayout="row">
+                                                          
+                                                            <button class="next-btn" color="accent" style="border-radius: 16px;"
+                                                                (click)="UploadDoc()">Select</button>
+                                                           
+                                                        </div>
+                                                    
+
+                                                        <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between"
+                                                            fxLayoutGap="5px">
+                                                            
+                                                            
+                                                            <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
+                                                                fxLayoutGap="4px">
+
+
+                                                                <mat-form-field appearance="outline" style="width:30%;">
+                                                                    <mat-label>Document Name</mat-label>
+                                                                    <input name="DocumentName" formControlName="DocumentName"
+                                                                        placeholder="Document Name" matInput
+                                                                        [(ngModel)]="DocumentName" required>
+                                                                    <!-- <mat-error
+                                                                        *ngIf="personalFormGroup.get('CommitteeName').invalid && personalFormGroup.get('CommitteeName').touched">
+                                                                        Committee is required Enter only
+                                                                        Alphabets</mat-error> -->
+                                                                </mat-form-field>
+
+
+
+                                                                <mat-form-field appearance="outline" style="width:40%;">
+                                                                    <mat-label>DocumentPath</mat-label>
+                                                                    <input name="DocumentPath"
+                                                                        formControlName="DocumentPath"
+                                                                        placeholder="DocumentPath"
+                                                                        [(ngModel)]="DocumentPath" matInput>
+                                                                    <!-- <mat-error class="error"
+                                                                        *ngIf="personalFormGroup.get('Location').invalid && personalFormGroup.get('Location').touched">
+                                                                        Middle Name is required
+                                                                        Enter
+                                                                        only Alphabets</mat-error> -->
+                                                                </mat-form-field>
+
+                                                                <div matTooltip="Select Document name to enable this button!!"
+                                                                [matTooltipPosition]="'above'" style="margin-left: 20px;">
+                                                                <button mat-raised-button id="btnAdd"
+                                                                    (click)="onAddDocumentDetail()">
+                                                                    <mat-icon> add </mat-icon> &nbsp;Add
+                                                                </button>
+                                                            </div>
+
+<!--                                                            
+                                                                <diV style="margin-top:21px;margin-left: 30px;">
+                                                                    <span
+                                                                        style="margin-right: 40px;color: black;font-weight: bold;">
+                                                                        <app-common-date [screenFrom]="screenFromString"
+                                                                            (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
+                                                                    </span>
+                                                                </diV>&nbsp;&nbsp; -->
+
+                                                                
+
+                                                            </div>
+
+                                                        </div>
+
+
+                                                    </form>
+                                                </mat-card>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div fxLayout="row" style="width: 100%;">
+
+
+                                        <div fxFlex="100" fxFlex.gt-sm="70" fxLayout="row" fxLayout.gt-xs="column"
+                                            style="width:90%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
+                                            <ng-template mat-tab-label
+                                                style="color: black; font-size: 17px bold; height: 80px; ">
+                                                <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
+                                                Document List
+                                            </ng-template>
+                                            <div>
+
+                                                <div class="col-md-12">
+                                                    <!-- ================= Charges List Table ======================= -->
+                                                    <mat-table #table matSort [dataSource]="dataSource2"
+                                                        [@animateStagger]="{value:'50'}"
+                                                        style="height: 270px !important;" class="table2">
+
+                                                        <ng-container matColumnDef="DocumentName">
+                                                            <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                                style="margin-right: 5px;">DocumentName</mat-header-cell>
+                                                            <mat-cell *matCellDef="let contact">
+                                                                {{contact.DocumentName}}
+                                                            </mat-cell>
+                                                        </ng-container>
+
+                                                        <ng-container matColumnDef="DocumentPath">
+                                                            <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                                fxShow.gt-sm>
+                                                                Visit DocumentPath
+                                                            </mat-header-cell>
+                                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                                {{contact.DocumentPath}}
+                                                            </mat-cell>
+                                                        </ng-container>
+
+                                                     
+                                                        <ng-container matColumnDef="action" stickyEnd>
+                                                            <mat-header-cell *matHeaderCellDef style="color: white;">
+                                                                Action
+                                                            </mat-header-cell>
+                                                            <mat-cell *matCellDef="let row">
+                                                                <!-- <button mat-icon-button (click)="onEdit(row)">
+                                                                            <mat-icon title="Edit Menu">launch</mat-icon>
+                                                                        </button> -->
+                                                                <button mat-icon-button (click)="deleteTableRow(row)"
+                                                                    color="warn">
+                                                                    <mat-icon>delete_outline</mat-icon>
+                                                                </button>
+                                                                <!-- <button mat-icon-button (click)="onDeactive(row.RegId)" color="warn"><mat-icon>delete_outline</mat-icon></button>       -->
+                                                            </mat-cell>
+                                                        </ng-container>
+
+
+
+                                                        <ng-container matColumnDef="loading">
+                                                            <mat-footer-cell *matFooterCellDef colspan="6">
+                                                                loading data...
+                                                            </mat-footer-cell>
+                                                        </ng-container>
+
+                                                        <ng-container matColumnDef="noData">
+                                                            <mat-footer-cell *matFooterCellDef colspan="6">
+                                                                <!-- <mat-spinner  class="spinner" [diameter]="35"
+                                                            [color]="blue"></mat-spinner> -->
+                                                                <span>No Data Found</span>
+                                                            </mat-footer-cell>
+                                                        </ng-container>
+
+                                                        <mat-header-row class="accent"
+                                                            *matHeaderRowDef="displayedColumns1; sticky: true">
+                                                        </mat-header-row>
+                                                        <mat-row *matRowDef="let contact; columns: displayedColumns1;"
+                                                            [ngClass]="{'row-yellow': contact.ServiceName == 'CBC'}"
+                                                            [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+                                                        <mat-footer-row *matFooterRowDef="['loading']"
+                                                            [ngClass]="{'hide':dataSource2!=null}">
+                                                        </mat-footer-row>
+                                                        <mat-footer-row *matFooterRowDef="['noData']"
+                                                            [ngClass]="{'hide':!(dataSource2!=null && dataSource2.data.length==0)}">
+                                                        </mat-footer-row>
+                                                    </mat-table>
+                                                    <!-- ================= Charges List Footer Table ======================= -->
+                                                    <div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div fxFlex="100" fxFlex.gt-sm="98" class="content py-16 pl-10 p-12" fxLayout="row"
+                                        fxLayout.gt-xs="column">
+                                        <div fxLayout="row" style="float: right;">
+                                          
+                                            <button class="next-btn" color="accent" style="border-radius: 16px;"
+                                                (click)="onDocumentSave()">Save</button>
+                                            <button class="footer-btn" id="btncancel"
+                                                (click)="onClose()">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
                 </mat-tab>
 
 
@@ -223,87 +420,105 @@
                                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="column" fxLayoutGap="3px">
                                             <div fxlayout="row" style=" padding: 3px 3px 3px 1px; margin-right: 5px;">
                                                 <!-- ================================ LABEL HEADER  -->
-                
+
                                                 <mat-card fxFlex.gt-sm="100%" fxFlex
                                                     style="padding: 0 5px; height: fit-content; background-color: white;">
                                                     &nbsp;
                                                     <form [formGroup]="studySchFormGroup" style="display: flex;">
-                
-                                                        <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="5px">
-                                                            <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-                
-                                                                
+
+                                                        <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between"
+                                                            fxLayoutGap="5px">
+                                                            <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
+                                                                fxLayoutGap="4px">
+
+
                                                                 <mat-form-field appearance="outline" style="width:30%;">
                                                                     <mat-label>Visit Name</mat-label>
                                                                     <input name="VisitName" formControlName="VisitName"
-                                                                        placeholder="Visit Name" matInput required>
+                                                                        placeholder="Visit Name" matInput
+                                                                        [(ngModel)]="VisitName" required>
                                                                     <!-- <mat-error
                                                                         *ngIf="personalFormGroup.get('CommitteeName').invalid && personalFormGroup.get('CommitteeName').touched">
                                                                         Committee is required Enter only
                                                                         Alphabets</mat-error> -->
                                                                 </mat-form-field>
-                
-                
-                
+
+
+
                                                                 <mat-form-field appearance="outline" style="width:20%;">
-                                                                    <mat-label>VisitDscription</mat-label>
-                                                                    <input name="VisitDscription" formControlName="VisitDscription"
-                                                                        placeholder="VisitDscription" matInput>
+                                                                    <mat-label>VisitDescription</mat-label>
+                                                                    <input name="VisitDescription"
+                                                                        formControlName="VisitDescription"
+                                                                        placeholder="VisitDescription"
+                                                                        [(ngModel)]="VisitDescription" matInput>
                                                                     <!-- <mat-error class="error"
                                                                         *ngIf="personalFormGroup.get('Location').invalid && personalFormGroup.get('Location').touched">
                                                                         Middle Name is required
                                                                         Enter
                                                                         only Alphabets</mat-error> -->
                                                                 </mat-form-field>
-                
 
-                                                                
+
+
                                                                 <mat-form-field appearance="outline" style="width:20%;">
                                                                     <mat-label>Amount</mat-label>
                                                                     <input name="Amount" formControlName="Amount"
-                                                                        placeholder="Amount" matInput>
+                                                                        placeholder="Amount" matInput
+                                                                        [(ngModel)]="Amount">
                                                                     <!-- <mat-error class="error"
                                                                         *ngIf="personalFormGroup.get('Location').invalid && personalFormGroup.get('Location').touched">
                                                                         Middle Name is required
                                                                         Enter
                                                                         only Alphabets</mat-error> -->
                                                                 </mat-form-field>
-                
+
                                                                 <diV style="margin-top:21px;">
-                                                                    <span style="margin-right: 40px;color: black;font-weight: bold;">
+                                                                    <span
+                                                                        style="margin-right: 40px;color: black;font-weight: bold;">
                                                                         <app-common-date [screenFrom]="screenFromString"
                                                                             (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
                                                                     </span>
                                                                 </diV>&nbsp;&nbsp;
+
+                                                                <div matTooltip="Select Member name to enable this button!!"
+                                                                    [matTooltipPosition]="'above'">
+                                                                    <button mat-raised-button id="btnAdd"
+                                                                        (click)="onAddVisitDetail()">
+                                                                        <mat-icon> add </mat-icon> &nbsp;Add
+                                                                    </button>
+                                                                </div>
+
                                                             </div>
-                
+
                                                         </div>
-                
-                
+
+
                                                     </form>
                                                 </mat-card>
-                
+
                                             </div>
                                         </div>
                                     </div>
-                
-                                   
+
+
                                     <div fxLayout="row" style="width: 100%;">
-                
-                
+
+
                                         <div fxFlex="100" fxFlex.gt-sm="70" fxLayout="row" fxLayout.gt-xs="column"
                                             style="width:90%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
-                                            <ng-template mat-tab-label style="color: black; font-size: 17px bold; height: 80px; ">
+                                            <ng-template mat-tab-label
+                                                style="color: black; font-size: 17px bold; height: 80px; ">
                                                 <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
                                                 Member List
                                             </ng-template>
                                             <div>
-                                                
+
                                                 <div class="col-md-12">
                                                     <!-- ================= Charges List Table ======================= -->
-                                                    <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
-                                                        style="height: 300px !important;" class="table1">
-                
+                                                    <mat-table #table matSort [dataSource]="dataSource1"
+                                                        [@animateStagger]="{value:'50'}"
+                                                        style="height: 270px !important;" class="table1">
+
                                                         <ng-container matColumnDef="VisitName">
                                                             <mat-header-cell *matHeaderCellDef mat-sort-header
                                                                 style="margin-right: 5px;">VisitName</mat-header-cell>
@@ -311,47 +526,51 @@
                                                                 {{contact.VisitName}}
                                                             </mat-cell>
                                                         </ng-container>
-                
+
                                                         <ng-container matColumnDef="VisitDescription">
-                                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                                            <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                                fxShow.gt-sm>
                                                                 Visit Description
                                                             </mat-header-cell>
                                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                                                 {{contact.VisitDescription}}
                                                             </mat-cell>
                                                         </ng-container>
-                
+
                                                         <ng-container matColumnDef="Amount">
-                                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                                                                Visit Amount
+                                                            <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                                fxShow.gt-sm>
+                                                                Amount
                                                             </mat-header-cell>
                                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                                                 {{contact.Amount}}
                                                             </mat-cell>
                                                         </ng-container>
-                
+
                                                         <ng-container matColumnDef="action" stickyEnd>
-                                                            <mat-header-cell *matHeaderCellDef style="color: white;"> Action
+                                                            <mat-header-cell *matHeaderCellDef style="color: white;">
+                                                                Action
                                                             </mat-header-cell>
                                                             <mat-cell *matCellDef="let row">
                                                                 <!-- <button mat-icon-button (click)="onEdit(row)">
                                                                             <mat-icon title="Edit Menu">launch</mat-icon>
                                                                         </button> -->
-                                                                <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
+                                                                <button mat-icon-button (click)="deleteTableRow(row)"
+                                                                    color="warn">
                                                                     <mat-icon>delete_outline</mat-icon>
                                                                 </button>
                                                                 <!-- <button mat-icon-button (click)="onDeactive(row.RegId)" color="warn"><mat-icon>delete_outline</mat-icon></button>       -->
                                                             </mat-cell>
                                                         </ng-container>
-                
-                
-                
+
+
+
                                                         <ng-container matColumnDef="loading">
                                                             <mat-footer-cell *matFooterCellDef colspan="6">
                                                                 loading data...
                                                             </mat-footer-cell>
                                                         </ng-container>
-                
+
                                                         <ng-container matColumnDef="noData">
                                                             <mat-footer-cell *matFooterCellDef colspan="6">
                                                                 <!-- <mat-spinner  class="spinner" [diameter]="35"
@@ -359,7 +578,7 @@
                                                                 <span>No Data Found</span>
                                                             </mat-footer-cell>
                                                         </ng-container>
-                
+
                                                         <mat-header-row class="accent"
                                                             *matHeaderRowDef="displayedColumns; sticky: true">
                                                         </mat-header-row>
@@ -380,26 +599,20 @@
                                             </div>
                                         </div>
                                     </div>
-                
+
                                     <div fxFlex="100" fxFlex.gt-sm="98" class="content py-16 pl-10 p-12" fxLayout="row"
-                                        fxLayout.gt-xs="column" fusePerfectScrollbar>
+                                        fxLayout.gt-xs="column" >
                                         <div fxLayout="row">
-                                            <!-- <mat-form-field appearance="outline" style="width:0%;">
-                                                <mat-label>Amount</mat-label>
-                                                <input name="Amount" formControlName="Amount" placeholder="Amount" matInput>
-                                                <mat-error class="error"
-                                                    *ngIf="personalFormGroup.get('Amount').invalid && pers3onalFormGroup.get('Amount').touched">
-                                                    Middle Name is required
-                                                    Enter
-                                                    only Alphabets</mat-error>
-                                            </mat-form-field> -->
-                
-                                            <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()">Save</button>
-                                            <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
+                                        
+
+                                            <button class="next-btn" color="accent" style="border-radius: 16px;"
+                                                (click)="onStudySave()">Save</button>
+                                            <button class="footer-btn" id="btncancel"
+                                                (click)="onClose()">Cancel</button>
                                         </div>
                                     </div>
                                 </div>
-                
+
                             </form>
                         </div>
                     </div>

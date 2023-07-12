@@ -15,6 +15,7 @@ import { FileUploadComponent } from '../../appointment/file-upload/file-upload.c
 import { ImageUploadComponent } from '../../appointment/image-upload/image-upload.component';
 import Swal from 'sweetalert2';
 import { MatTableDataSource } from '@angular/material/table';
+import { DcoumentUploadComponent } from '../../dcoument-upload/dcoument-upload.component';
 
 @Component({
   selector: 'app-new-case-detail',
@@ -29,6 +30,7 @@ export class NewCaseDetailComponent implements OnInit {
   chargeslist: any = [];
   personalFormGroup: FormGroup;
   studySchFormGroup:FormGroup;
+  documentFormGroup:FormGroup;
   currentDate=new Date();
   submitted = false;
   now = Date.now();
@@ -51,7 +53,15 @@ HospitalRepresentative: string;
 AgreementFileName: String;
 registerObj = new CaseDetail({});
 VisitFrequencyList: any = [];
+VisitName:any;
+VisitDescription:any;
+Amount:any;
 
+DocumentName:any;
+DocumentPath:any;
+// Amount:any;
+
+VisitList:any=[]
 CompanyList:any=[];
 DocumentList:any=[];
 
@@ -76,8 +86,19 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
     'action'
   ];
 
-  dataSource = new MatTableDataSource<VisitDetail>();
+  
 
+  displayedColumns1 = [
+  
+    'DocumentName',
+    'DocumentPath',
+    // 'Amount',
+    'action'
+  ];
+
+  dataSource = new MatTableDataSource<VisitDetail>();
+  dataSource1 = new MatTableDataSource<VisitDetail>();
+  dataSource2 = new MatTableDataSource<DocumentDetail>();
 
 
   constructor(public _registerService: CasedetailService,
@@ -99,10 +120,12 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
   console.log(this.data)
    this.personalFormGroup = this.createPesonalForm();
    this.studySchFormGroup =this.createstudySchForm();
+    this.documentFormGroup=this.createdocumentForm();
+
 
       if(this.data){
         this.registerObj = this.data.registerObj;
-
+console.log(this.registerObj);
       
       }
       this.getCompanyList();
@@ -129,24 +152,22 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
   }
   createPesonalForm() {
     return this.formBuilder.group({
-      CaseId: '',
-      CaseTitle: '',
-      CaseDescription: '',
+      ProtocolNo: '',
+      ProtocolTitle: '',
+      StudyProduct: '',
       TotalSubjects: '',
       TotalVisits: ['', [
         Validators.required,
         Validators.maxLength(1),
         Validators.pattern("^[0-9]*$")]],
         VisitFrequency:'',
-        CaseStartDate:[{ value: this.registerObj.CaseStartDate }],
-        CaseEndDate:[{ value: this.registerObj.CaseEndDate }],
-        CaseStatus: '',
-        CompanyName: '',
-        CompanyId:' ',
-        CaseRepresentative: '',
-        HospitalRepresentative: '',
-        AgreementFileName: ''
-      
+        StudyStartDate:[{ value: this.registerObj.StudyStartDate }],
+        StudyEndDate:[{ value: this.registerObj.StudyEndDate }],
+        Sponser: '',
+        Investigator: '',
+        Institution:' ',
+        AgreementFileName: '',
+        CompanyId:''
     });
   }
 
@@ -155,11 +176,24 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
   return this.formBuilder.group({
       VisitId: '',
       VisitName: '',
-      VisitDscription: '',
+      VisitDescription: '',
       Amount: '',
 
     });
   }
+
+  
+  createdocumentForm() {
+    return this.formBuilder.group({
+      StudyId: '',
+      DocumentTypeId: '',
+      DocumentName: '',
+      DocumentPath: '',
+  
+      });
+    }
+
+
   // company filter code  
   private filterCompany() {
 
@@ -208,6 +242,7 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
   getCompanyList() {
     this._registerService.getCompanyCombo().subscribe(data => {
       this.CompanyList = data;
+      console.log(data);
       this.filteredCompany.next(this.CompanyList.slice());
     });
   }
@@ -230,7 +265,7 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
       ConstanyType:"CaseDocuments"
     };
        
-    this._registerService.getVisitFrequencyCList(mdata).subscribe(data => {
+    this._registerService.getDocumentList(mdata).subscribe(data => {
       this.DocumentList = data;
       console.log( this.VisitFrequencyList );
       this.filteredDocument.next(this.DocumentList.slice());
@@ -266,16 +301,16 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
 
   UploadDoc(){
  
-    const dialogRef = this._matDialog.open(FileUploadComponent,
-      {
-        maxWidth: "25vw",
-        height: '25vw',
-        width: '100%',
+    // const dialogRef = this._matDialog.open(DcoumentUploadComponent,
+    //   {
+    //     maxWidth: "25vw",
+    //     height: '25vw',
+    //     width: '100%',
        
-      });
-    dialogRef.afterClosed().subscribe(result => {
+    //   });
+    // dialogRef.afterClosed().subscribe(result => {
       
-    });
+    // });
   }
  
   UploadImgage(){
@@ -293,30 +328,32 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
   onSubmit() {
 
         this.isLoading = 'submit';
+
+        if(this.registerObj.operation !="UPDATE"){
     
       var m_data = {
-        "insertCaseDetail": {
-          "CaseId": this.personalFormGroup.get('CaseId').value.CaseId || 0,
-          "CaseTitle": this.personalFormGroup.get('CaseTitle').value || '',
-          "CaseDescription": this.personalFormGroup.get('CaseDescription').value || '',
+        "insertStudyInformation": {
+          "studyId":0,
+          "protocolNo": this.personalFormGroup.get('ProtocolNo').value || '',
+          "protocolTitle": this.personalFormGroup.get('ProtocolTitle').value || '',
+          "studyProduct": this.personalFormGroup.get('StudyProduct').value || '',
           "TotalSubjects": this.personalFormGroup.get('TotalSubjects').value || 0,
           "TotalVisits": this.personalFormGroup.get('TotalVisits').value || '',
           "VisitFrequency": this.personalFormGroup.get('VisitFrequency').value.ConstantId || 0,
-          "CaseStartDate": this.registerObj.CaseStartDate,//this.datePipe.transform(this.personalFormGroup.get('CaseStartDate').value, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
-          "CaseEndDate":this.registerObj.CaseEndDate,// this.datePipe.transform(this.personalFormGroup.get('CaseEndDate').value, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
-          "CaseStatus":1,// this.personalFormGroup.get('CaseStatus').value || '',
-          "CompanyName": this.personalFormGroup.get('CompanyId').value.CompanyId || 0,
-          "CaseRepresentative": this.personalFormGroup.get('CaseRepresentative').value || '',
-          "HospitalRepresentative": this.personalFormGroup.get('HospitalRepresentative').value || '',
-          "AgreementFileName": this.personalFormGroup.get('AgreementFileName').value || '',
+          "sponser": this.personalFormGroup.get('CompanyId').value.CompanyId || 0,
+          "investigator": this.personalFormGroup.get('Investigator').value || '',
+          "institution": this.personalFormGroup.get('Institution').value || 0,
+          "studyStartDate": this.registerObj.StudyStartDate,//this.datePipe.transform(this.personalFormGroup.get('CaseStartDate').value, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
+          "studyEndDate":this.registerObj.StudyEndDate,// this.datePipe.transform(this.personalFormGroup.get('CaseEndDate').value, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
+          "AgreementFileName": this.personalFormGroup.get('AgreementFileName').value.ConstantId || 0,
           "createdBy": this.accountService.currentUserValue.user.id
           
         }
       }
       console.log(m_data);
-      this._registerService.CaseDetailInsert(m_data).subscribe(response => {
+      this._registerService.StudyInfoInsert(m_data).subscribe(response => {
         if (response) {
-          Swal.fire('New CaseDetail Save !', ' CaseDetail Save Successfully !', 'success').then((result) => {
+          Swal.fire('New StudyDetail Save !', ' StudyDetail Save Successfully !', 'success').then((result) => {
             if (result.isConfirmed) {
               this._matDialog.closeAll();
   
@@ -324,11 +361,181 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
   
           });
         } else {
-          Swal.fire('Error !', 'CaseDetail not saved', 'error');
+          Swal.fire('Error !', 'StudyDetail not saved', 'error');
         }
       });
+    }else{
+
+      var m_data1 = {
+        "updateStudyInformation": {
+          "studyId":this.registerObj.StudyId,
+          "operation":"UPDATE",
+            "protocolNo":  this.personalFormGroup.get('ProtocolNo').value || '',
+            "protocolTitle": this.personalFormGroup.get('ProtocolTitle').value || '',
+            "studyProduct": this.personalFormGroup.get('StudyProduct').value || '',
+            "TotalSubjects": this.personalFormGroup.get('TotalSubjects').value || 0,
+            "TotalVisits": this.personalFormGroup.get('TotalVisits').value || '',
+            "VisitFrequency": this.personalFormGroup.get('VisitFrequency').value.ConstantId || 0,
+            "sponser": this.personalFormGroup.get('CompanyId').value.CompanyId || 0,
+            "investigator": this.personalFormGroup.get('Investigator').value || '',
+            "institution": this.personalFormGroup.get('Institution').value || '',
+            "studyStartDate": this.registerObj.StudyStartDate,//this.datePipe.transform(this.personalFormGroup.get('CaseStartDate').value, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
+            "studyEndDate":this.registerObj.StudyEndDate,// this.datePipe.transform(this.personalFormGroup.get('CaseEndDate').value, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
+             "AgreementFileName": this.personalFormGroup.get('AgreementFileName').value.ConstantId || 0,
+           
+            // "IsActive": 1,
+             "UpdatedBy": this.accountService.currentUserValue.user.id
+  
+        }
+      }
+      console.log(m_data1);
+      this._registerService.StudyInfoUpdate(m_data1).subscribe(response => {
+  
+        if (response) {
+          Swal.fire('Edit StudyDetail Save !', 'Edit StudyDetail save Successfully !', 'success').then((result) => {
+            if (result.isConfirmed) {
+              this._matDialog.closeAll();
+  
+            }
+  
+          });
+        } else {
+          Swal.fire('Error !', 'StudyDetail not saved', 'error');
+        }
+      });
+    }
     
    
+  }
+  onAddVisitDetail(){
+    this.VisitList.data = [];
+    this.chargeslist.push(
+      {
+        VisitName:this.VisitName,
+        VisitDescription: this.VisitDescription,
+         Amount: this.Amount
+      });
+    this.isLoading = '';
+    console.log(this.chargeslist);
+    this.dataSource1.data = this.chargeslist;
+    console.log(this.VisitList.data);
+
+  }
+
+  onAddDocumentDetail(){
+    this.DocumentList.data = [];
+    this.chargeslist.push(
+      {
+        DocumentName:this.DocumentName,
+        DocumentPath: this.DocumentPath
+         
+      });
+    this.isLoading = '';
+    console.log(this.chargeslist);
+    this.dataSource2.data = this.chargeslist;
+    console.log(this.DocumentList.data);
+  }
+
+  onStudySave(){
+
+    debugger;
+    let insertStudySchedulearr = [];
+    this.dataSource1.data.forEach((element) => {
+      let insertStudySchedule = {};
+      insertStudySchedule['studyVisitId'] = 0;
+      insertStudySchedule['studyId'] = 1;
+
+      insertStudySchedule['visitName'] = element.VisitName;
+      insertStudySchedule['visitDescription'] = element.VisitDescription;
+      insertStudySchedule['visitAmount'] = element.Amount;
+      insertStudySchedule['createdBy'] =  this.accountService.currentUserValue.user.id;
+      insertStudySchedulearr.push(insertStudySchedule);
+    });
+  
+    let submitData = {
+            "insertStudySchedule": insertStudySchedulearr
+    };
+  
+    console.log(submitData);
+    this._registerService.StudySchduleInsert(submitData).subscribe(response => {
+      if (response) {
+        Swal.fire('New StudySchedule Save !', ' StudySchedule Save Successfully !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+          }
+        });
+      } else {
+        Swal.fire('Error !', 'StudySchedule not saved', 'error');
+      }
+    });
+  
+  }
+
+  onStudyUpdate(){
+    let updateStudySchedulearr = [];
+    this.dataSource1.data.forEach((element) => {
+      let updateStudySchedule = {};
+      updateStudySchedule['studyVisitId'] = 0;
+      updateStudySchedule['studyId'] = 0;
+
+      updateStudySchedule['visitName'] = element.VisitName;
+      updateStudySchedule['visitDescription'] = element.VisitDescription;
+      updateStudySchedule['visitAmount'] = element.Amount;
+      updateStudySchedule['createdBy'] =  this.accountService.currentUserValue.user.id;
+      updateStudySchedulearr.push(updateStudySchedule);
+    });
+  
+    let submitData = {
+            "updateStudySchedule": updateStudySchedulearr
+    };
+  
+    console.log(submitData);
+    this._registerService.StudySchduleInsert(submitData).subscribe(response => {
+      if (response) {
+        Swal.fire('StudySchedule Update !', ' StudySchedule Update Successfully !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+          }
+        });
+      } else {
+        Swal.fire('Error !', 'StudySchedule not saved', 'error');
+      }
+    });
+  
+  }
+
+
+  onDocumentSave(){
+    let insertDocumentarr = [];
+    
+    this.dataSource2.data.forEach((element) => {
+      let insertDocument = {};
+      insertDocument['studyDocId'] = 0;
+      insertDocument['studyId'] = 0;
+
+      insertDocument['DocumentTypeId'] = element.DocumentTypeId;
+      insertDocument['DocumentName'] = element.DocumentName;
+      insertDocument['DocumentPath'] = element.DocumentPath;
+      insertDocument['createdBy'] =  this.accountService.currentUserValue.user.id;
+      insertDocumentarr.push(insertDocument);
+    });
+  
+    let submitData = {
+            "insertStudyUploadDocument": insertDocumentarr
+    };
+  
+    console.log(submitData);
+    this._registerService.DocumentInsert(submitData).subscribe(response => {
+      if (response) {
+        Swal.fire('New Document Save !', ' Document Save Successfully !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+          }
+        });
+      } else {
+        Swal.fire('Error !', 'Document not saved', 'error');
+      }
+    });
   }
 
   onClose() {
@@ -344,22 +551,33 @@ public filteredDocument: ReplaySubject<any> = new ReplaySubject<any>(1);
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 15000);
   }
+
+  
+  deleteTableRow(element) {
+  {  let index = this.chargeslist.indexOf(element);
+  if (index >= 0) {
+    this.chargeslist.splice(index, 1);
+    this.dataSource.data = [];
+    this.dataSource.data = this.chargeslist;
+  }
+  Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
+}
 }
 
-
+}
 
 export class CaseDetail {
-  CaseId: any;
-  CaseTitle: any;
-  CaseDescription: any;
+  ProtocolNo: any;
+  ProtocolTitle: any;
+  StudyProduct: any;
   TotalSubjects: any;
   TotalVisits: number;
   VisitFrequency: string;
-  CaseStartDate: Date;
-  CaseEndDate: Date;
-  CaseStatus: string;
-  CompanyName: string;
-  CaseRepresentative: string;
+  StudyStartDate: Date;
+  StudyEndDate: Date;
+  Sponser: string;
+  Investigator: string;
+  Institution: string;
   HospitalRepresentative: string;
   AgreementFileName: String;
   currentDate = new Date();
@@ -369,6 +587,8 @@ export class CaseDetail {
   AgeYear:any;
   TotalBillAmt:any;
  BillNo:any;
+ StudyId:any;
+ operation:any;
   /**
    * Constructor
    *
@@ -377,17 +597,17 @@ export class CaseDetail {
 
   constructor(CaseDetail) {
     {
-      this.CaseId = CaseDetail.CaseId || '';
-      this.CaseTitle = CaseDetail.CaseTitle || '';
-      this.CaseDescription = CaseDetail.CaseDescription || '';
+      this.ProtocolNo = CaseDetail.ProtocolNo || '';
+      this.ProtocolTitle = CaseDetail.ProtocolTitle || '';
+      this.StudyProduct = CaseDetail.StudyProduct || '';
       this.TotalSubjects = CaseDetail.TotalSubjects || 0;
       this.TotalVisits = CaseDetail.TotalVisits || '';
       this.VisitFrequency = CaseDetail.VisitFrequency || '';
-      this.CaseStartDate = CaseDetail.CaseStartDate ||  this.currentDate;
-      this.CaseEndDate = CaseDetail.CaseEndDate || this.currentDate;
-      this.CaseStatus = CaseDetail.CaseStatus || '';
-      this.CompanyName = CaseDetail.CompanyName || '';
-      this.CaseRepresentative = CaseDetail.CaseRepresentative || '';
+      this.StudyStartDate = CaseDetail.StudyStartDate ||  this.currentDate;
+      this.StudyEndDate = CaseDetail.StudyEndDate || this.currentDate;
+      this.Sponser = CaseDetail.Sponser || '';
+      this.Investigator = CaseDetail.Investigator || '';
+      this.Institution = CaseDetail.Institution || '';
       this.AgreementFileName = CaseDetail.AgreementFileName || '';
 
       this.PatientName = CaseDetail.PatientName || '';
@@ -396,6 +616,8 @@ export class CaseDetail {
       this.AgeYear = CaseDetail.AgeYear || '';
       this.TotalBillAmt = CaseDetail.TotalBillAmt || '';
       this.BillNo=CaseDetail.BillNo || 0;
+      this.StudyId=CaseDetail.StudyId || 0;
+      this.operation=CaseDetail.operation || 0;
   }
 }
 
@@ -419,6 +641,35 @@ export class VisitDetail {
       this.VisitName = VisitDetail.VisitName || '';
       this.VisitDescription = VisitDetail.VisitDescription || '';
       this.Amount = VisitDetail.Amount || '';
+    
+    }
+  }
+}
+
+
+
+
+export class DocumentDetail {
+  StudyDocId:any;
+  StudyId:any;
+  DocumentTypeId:any;
+  DocumentName:any;
+  DocumentPath:any;
+  /**
+   * Constructor
+   *
+   * @param DocumentDetail
+   */
+
+  constructor(DocumentDetail) {
+    {
+      this.StudyDocId = DocumentDetail.StudyDocId || 0;
+      this.StudyId = DocumentDetail.StudyId || 0;
+      this.DocumentTypeId = DocumentDetail.DocumentTypeId || '';
+
+      this.DocumentName = DocumentDetail.DocumentName || '';
+      this.DocumentPath = DocumentDetail.DocumentPath || '';
+      // this.Amount = VisitDetail.Amount || '';
     
     }
   }
