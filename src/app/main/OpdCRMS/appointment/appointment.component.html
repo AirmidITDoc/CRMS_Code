@@ -9,7 +9,7 @@
                 style="color: white;">account_box
             </mat-icon>
             <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" style="color: aliceblue;">
-                Appointment
+                Patient Screenings
             </span>
 
             <button mat-raised-button (click)="newappointmentSchdule()" fxLayoutAlign="center center"
@@ -47,11 +47,11 @@
                                 <br />
 
                                 <mat-form-field appearance="outline" fxFlex>
-                                    <mat-label>Case ID</mat-label>
+                                    <mat-label>ProtocolNo</mat-label>
                                     <mat-select formControlName="StudyId" name="StudyId" style="color: blue;" required>
                                         <mat-option></mat-option>
                                         <mat-option *ngFor="let m of CaseIdList" [value]="m">
-                                           {{m.StudyId}} || {{m.ProtocolNo}}
+                                            {{m.ProtocolNo}}  : ( {{m.StudyId}} )
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
