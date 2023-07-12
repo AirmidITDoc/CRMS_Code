@@ -45,6 +45,18 @@
                             fusePerfectScrollbar>
                             <div fxLayout="column" fxLayoutAlign="start none">
                                 <br />
+
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>Case ID</mat-label>
+                                    <mat-select formControlName="StudyId" name="StudyId" style="color: blue;" required>
+                                        <mat-option></mat-option>
+                                        <mat-option *ngFor="let m of CaseIdList" [value]="m">
+                                           {{m.StudyId}} || {{m.ProtocolNo}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+
                                 <mat-form-field appearance="outline" style="margin-left: 2%;">
                                     <mat-label>Enter a date range</mat-label>
                                     <mat-date-range-input [rangePicker]="picker">
@@ -115,6 +127,27 @@
                                 <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
                                     class="table1">
                                 
+                                    <ng-container matColumnDef="ProtocolNo">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>ProtocolNo</mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                            {{contact.ProtocolNo}}
+                                        </mat-cell>
+                                    </ng-container>
+                                    
+                                    <ng-container matColumnDef="VisitTitle">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>VisitTitle</mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                            {{contact.VisitTitle}}
+                                        </mat-cell>
+                                    </ng-container>
+                                    
+                                    <ng-container matColumnDef="SubjectName">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>SubjectName</mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                            {{contact.SubjectName}}
+                                        </mat-cell>
+                                    </ng-container>
+
                                     <ng-container matColumnDef="RegNoWithPrefix">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Reg
                                             No</mat-header-cell>
@@ -132,7 +165,7 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="DVisitDate">
+                                    <!-- <ng-container matColumnDef="DVisitDate">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Date
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
@@ -146,7 +179,7 @@
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.VisitTime}}
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
                                     <ng-container matColumnDef="OPDNo">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>OPDNo

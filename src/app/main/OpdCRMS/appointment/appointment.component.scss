@@ -60,31 +60,45 @@
     }
   .mat-header-row {
     width: 100%;
-    max-width: 1300px;
-    min-width: 1300px;  
+    max-width: 1800px;
+    min-width: 1800px;  
     min-height: 20px;     
     background-color: rgb(13, 67, 102) !important;
   }
   
   .mat-row {
     width: 100%;
-    max-width: 1300px;
-    min-width: 1300px;      
+    max-width: 1800px;
+    min-width: 1800px;      
     min-height: 20px;            
   }
   
-  .mat-column-MPbillNo {
-    width:90px;
-    max-width: 90px;
-    min-width: 90px;
+  .mat-column-ProtocolNo {
+    width:200px;
+    max-width: 200px;
+    min-width: 200px;
     text-align: left;
   }
-  .mat-column-RegNoWithPrefix {
-    width: 110px; 
-    max-width:110px;
-    min-width: 110px;
+  .mat-column-VisitTitle {
+    width: 150px; 
+    max-width:150px;
+    min-width: 150px;
     text-align: center;
   }
+  .mat-column-SubjectName {
+    width: 150px; 
+    max-width:150px;
+    min-width: 150px;
+    text-align: center;
+  }
+
+  .mat-column-RegNoWithPrefix {
+    width: 100px; 
+    max-width:100px;
+    min-width: 100px;
+    text-align: center;
+  }
+
   .mat-column-PatientName {
     width: 250px;
     max-width: 250px;

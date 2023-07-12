@@ -39,6 +39,7 @@ export class AppointmentComponent implements OnInit {
   printTemplate: any;
   // reportPrintObjList: CasepaperVisitDetails[] = [];
   subscriptionArr: Subscription[] = [];
+  CaseIdList:any = [];
 
   VisitID: any;
   @ViewChild(MatSort) sort: MatSort;
@@ -46,12 +47,13 @@ export class AppointmentComponent implements OnInit {
   @Input() dataArray: any;
 
   displayedColumns = [
-    // 'PatientOldNew',
-    // 'MPbillNo',
+    'ProtocolNo',
+    'VisitTitle',
+    'SubjectName',
     'RegNoWithPrefix',
     'PatientName',
-    'DVisitDate',
-    'VisitTime',
+    // 'DVisitDate',
+    // 'VisitTime',
     'OPDNo',
     'Doctorname',
     'RefDocName',
@@ -90,7 +92,7 @@ export class AppointmentComponent implements OnInit {
       this.menuActions.push('New Bill');
     }
 
-
+    this.CaseListCombo();
     // this.getVisitList();
     // this.dataSource.data.refresh();
 
@@ -101,21 +103,21 @@ export class AppointmentComponent implements OnInit {
   getVisitList() {
     this.sIsLoading = 'loading-data';
     var D_data = {
-      "F_Name": this._AppointmentSreviceService.myFilterform.get("FirstName").value.trim() + '%' || '%',
-      "L_Name": this._AppointmentSreviceService.myFilterform.get("LastName").value.trim() + '%' || '%',
+      "F_Name": this._AppointmentSreviceService.myFilterform.get("FirstName").value|| '%',
+      "L_Name": this._AppointmentSreviceService.myFilterform.get("LastName").value || '%',
       "Reg_No": this._AppointmentSreviceService.myFilterform.get("RegNo").value || 0,
       "From_Dt": this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
       "To_Dt": this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
+      "StudyId": this._AppointmentSreviceService.myFilterform.get("StudyId").value.StudyId || 0,
     }
+    console.log(D_data);
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._AppointmentSreviceService.getAppointmentList(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as VisitMaster[];
-        // console.log(this.dataSource.data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.sIsLoading = '';
-        // console.log(this.dataSource.data)
       },
         error => {
           this.sIsLoading = '';
@@ -123,6 +125,11 @@ export class AppointmentComponent implements OnInit {
     }, 1000);
 
   }
+
+  CaseListCombo(){
+    this._AppointmentSreviceService.getCaseIDCombo().subscribe(data => { this.CaseIdList = data; })
+    }
+
 
   // toggle sidebar
   toggleSidebar(name): void {
