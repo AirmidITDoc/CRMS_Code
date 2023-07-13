@@ -203,7 +203,7 @@
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
                                             style="margin-top: 1px;">
-                                            {{contact.StudyStartDate}}
+                                            {{contact.StudyStartDate | date:'shortDate'}}
                                         </mat-cell>
                                     </ng-container>
 
@@ -213,19 +213,30 @@
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
                                             style="margin-top: 1px;">
-                                            {{contact.StudyEndDate}}
+                                            {{contact.StudyEndDate | date:'shortDate'}}
                                         </mat-cell>
                                     </ng-container>
 
 
 
-                                    <ng-container matColumnDef="action" stickyEnd>
-                                        <mat-header-cell *matHeaderCellDef style="color: white;"> Action
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let row">
-                                            <button mat-icon-button (click)="onEdit(row)"><mat-icon
-                                                    title="Edit Menu">launch</mat-icon></button>
-
+                                    <ng-container matColumnDef="buttons" stickyEnd>
+                                        <mat-header-cell *matHeaderCellDef
+                                            class="table-actions">Action</mat-header-cell>
+                                        <mat-cell *matCellDef="let contact">
+                                            <div fxFlex="row" fxLayoutAlign="center center">
+                                                <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
+                                                    (click)="$event.stopPropagation();">
+                                                    <mat-icon class="secondary-text">more_vert</mat-icon>
+                                                </button>
+                                                <mat-menu #moreMenu="matMenu">
+                                                    <ng-container *ngFor="let m of menuActions, let n of menuActions">
+                                                        <button mat-menu-item aria-label="remove"
+                                                            (click)="getRecord(contact,m)">
+                                                            <span>{{m}}</span>
+                                                        </button>
+                                                    </ng-container>
+                                                </mat-menu>
+                                            </div>
                                         </mat-cell>
                                     </ng-container>
 

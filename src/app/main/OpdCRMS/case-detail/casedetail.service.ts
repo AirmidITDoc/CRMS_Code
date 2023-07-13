@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CasedetailService {
   
+  personalFormGroup: FormGroup;
   myFilterform: FormGroup;
   mySaveForm: FormGroup;
   now = Date.now();
@@ -16,6 +17,7 @@ export class CasedetailService {
   ) {
     this.myFilterform = this.filterForm();
     // this.mySaveForm = this.saveForm();
+    this.personalFormGroup = this.createPesonalForm();
   }
 
   filterForm(): FormGroup {
@@ -36,6 +38,29 @@ export class CasedetailService {
     });
   }
 
+  createPesonalForm() {
+    return this._formBuilder.group({
+      ProtocolNo: '',
+      ProtocolTitle: '',
+      StudyProduct: '',
+      TotalSubjects: '',
+      TotalVisits: ['', [
+        Validators.required,
+        Validators.maxLength(1),
+        Validators.pattern("^[0-9]*$")]],
+        VisitFrequency:'',
+        StudyStartDate:[(new Date()).toISOString()],
+        StudyEndDate:[(new Date()).toISOString()],
+        Sponser: '',
+        Investigator: '',
+        Institution:' ',
+        AgreementFileName: '',
+        CompanyId:'',
+        StudyId:''
+    });
+  }
+
+
   public StudyInfoInsert(employee){
     return this._httpClient.post("CRMSTran/Save_StudyInformation", employee);
   }
@@ -50,7 +75,7 @@ export class CasedetailService {
   }
 
   populateFormpersonal(employee) {
-    // this.personalFormGroup.patchValue(employee);
+    this.personalFormGroup.patchValue(employee);
   }
 
   public getDocumentList(D_data){
@@ -83,5 +108,9 @@ export class CasedetailService {
 
   public DocumentUpdate(employee){
     return this._httpClient.post("CRMSTran/Update_StudyUploadDocument", employee)
+  }
+  
+  public getInstitutionCombo(){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_InstitutionInformationCombo",{});
   }
 }

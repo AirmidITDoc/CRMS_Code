@@ -6,7 +6,8 @@
         <mat-toolbar matDialogTitle class="mat-accent m-0">
             <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
                 style="background-color:rgb(18, 87, 134) !important;">
-                <h3>Create Study </h3>
+                <h3>{{_CasedetailService.personalFormGroup.controls.StudyId.value?"Modify Study Master" :"New
+                    Study Master"}}</h3>
                 <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
                     <mat-icon>close</mat-icon>
                 </button>
@@ -25,27 +26,33 @@
                     <div style="padding:10px; height: 100%;" fxLayoutGap="2px">
                         <div class="dialog-content-wrapper" style="align-items: flex-end;margin-right:10px;">
 
-                            <form [formGroup]="personalFormGroup">
-                                <!-- <div style="float: right;">
-                        <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
-                        </app-common-date>
-                    </div> -->
+                            <form [formGroup]="_CasedetailService.personalFormGroup">
+                                <input type="hidden" name="StudyId" formControlName="StudyId">
+
                                 <ng-template matStepLabel>Personal</ng-template>
+
+                                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" *ngIf="Study">
+
+                                    <mat-form-field appearance="outline" style="width: 25%;font-weight: bolder;">
+                                        <mat-label>Study Id</mat-label>
+                                        <input name="StudyId" formControlName="StudyId" placeholder="StudyId" matInput
+                                            value="StudyId">
+                                    </mat-form-field>
+                                </div>
+
 
                                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
 
                                     <mat-form-field appearance="outline" style="width: 25%;font-weight: bolder;">
                                         <mat-label>Protocol Number</mat-label>
                                         <input name="ProtocolNo" formControlName="ProtocolNo"
-                                            placeholder="Protocol Number" matInput [ngModel]="registerObj.ProtocolNo"
-                                            (ngModelChange)="registerObj.ProtocolNo = $event" required>
+                                            placeholder="Protocol Number" matInput required>
                                     </mat-form-field>
-                                </div>
-                                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+
                                     <mat-form-field appearance="outline" style="width:65%;font-weight: bolder;">
                                         <mat-label>Study Product</mat-label>
-                                        <input name="ProtocolTitle" formControlName="ProtocolTitle" placeholder="ProtocolTitle"
-                                            matInput [ngModel]="registerObj.ProtocolTitle"
+                                        <input name="ProtocolTitle" formControlName="ProtocolTitle"
+                                            placeholder="ProtocolTitle" matInput
                                             (ngModelChange)="registerObj.ProtocolTitle = $event" required>
                                     </mat-form-field>
                                 </div>
@@ -53,8 +60,7 @@
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Protocol Description</mat-label>
                                         <textarea name="StudyProduct" formControlName="StudyProduct"
-                                            placeholder="StudyProduct" matInput
-                                            [(ngModel)]="registerObj.StudyProduct" required>
+                                            placeholder="StudyProduct" matInput required>
 
                                      </textarea>
 
@@ -90,16 +96,13 @@
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Total Subjects</mat-label>
                                         <input name="TotalSubjects" formControlName="TotalSubjects"
-                                            placeholder="TotalSubjects" matInput [ngModel]="registerObj.TotalSubjects"
-                                            (ngModelChange)="registerObj.TotalSubjects = $event" type="number" required>
+                                            placeholder="TotalSubjects" matInput type="number" required>
                                     </mat-form-field>
 
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Total Visits</mat-label>
                                         <input name="TotalVisits" formControlName="TotalVisits"
-                                            placeholder="TotalVisits" matInput min="0"
-                                            [ngModel]="registerObj.TotalVisits"
-                                            (ngModelChange)="registerObj.TotalVisits = $event" type="number" required>
+                                            placeholder="TotalVisits" matInput min="0" type="number" required>
                                     </mat-form-field>
 
                                     <mat-form-field appearance="outline" fxFlex>
@@ -122,27 +125,45 @@
                                                     [placeholderLabel]="'Search'"
                                                     [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
                                             </mat-option>
-                                            <mat-option *ngFor="let element of filteredCompany | async" [value]="element">
+                                            <mat-option *ngFor="let element of filteredCompany | async"
+                                                [value]="element">
                                                 {{element.CompanyName}}
                                             </mat-option>
                                         </mat-select>
-            
+
                                     </mat-form-field>
 
 
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Investigator</mat-label>
                                         <input name="Investigator" formControlName="Investigator"
-                                            placeholder="Investigator" matInput
-                                            [(ngModel)]="registerObj.Investigator" required>
+                                            placeholder="Investigator" matInput required>
                                     </mat-form-field>
 
-                                    <mat-form-field appearance="outline" fxFlex>
+                                    <!-- <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Institution / Site </mat-label>
                                         <input name="Institution" formControlName="Institution"
                                             placeholder="Institution Name" matInput required
                                             [(ngModel)]="registerObj.Institution">
+                                    </mat-form-field> -->
+
+
+                                    <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
+                                        <mat-label>Institution Name /Site </mat-label>
+                                        <mat-select formControlName="Institution" placeholder="Bank" #singleSelect>
+                                            <mat-option>
+                                                <ngx-mat-select-search [formControl]="institutionFilterCtrl"
+                                                    [placeholderLabel]="'Search'"
+                                                    [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let element of filteredInstitution | async"
+                                                [value]="element">
+                                                {{element.InstitutionId}} | {{element.InstitutionName}}
+                                            </mat-option>
+                                        </mat-select>
+
                                     </mat-form-field>
+
                                 </div>
 
 
@@ -180,7 +201,8 @@
 
                                     <div style="float: right;margin-top: 20px;">
                                         <button class="next-btn" color="accent" style="border-radius: 16px;"
-                                            (click)="onSubmit()" [disabled]="personalFormGroup.invalid">Save</button>
+                                            (click)="onSubmit()"
+                                            [disabled]="_CasedetailService.personalFormGroup.invalid">Save</button>
                                         <!-- <button class="next-btn" id="btncancel" (click)="UploadDoc()">Uplaod
                                             File</button> -->
                                         <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
@@ -200,7 +222,7 @@
                     <div style="padding:10px; height: 100%;" fxLayoutGap="2px">
                         <div class="dialog-content-wrapper" style="align-items: flex-end;margin-right:10px;">
 
-                            <form [formGroup]="personalFormGroup">
+                            <form [formGroup]="documentFormGroup">
 
                                 <ng-template matStepLabel>Img Upload</ng-template>
 
@@ -217,26 +239,28 @@
                                                     &nbsp;
                                                     <form [formGroup]="documentFormGroup" style="display: flex;">
 
-                                                      
+
                                                         <div fxLayout="row">
-                                                          
-                                                            <button class="next-btn" color="accent" style="border-radius: 16px;"
+
+                                                            <button class="next-btn" color="accent"
+                                                                style="border-radius: 16px;"
                                                                 (click)="UploadDoc()">Select</button>
-                                                           
+
                                                         </div>
-                                                    
+
 
                                                         <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between"
                                                             fxLayoutGap="5px">
-                                                            
-                                                            
+
+
                                                             <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
                                                                 fxLayoutGap="4px">
 
 
                                                                 <mat-form-field appearance="outline" style="width:30%;">
                                                                     <mat-label>Document Name</mat-label>
-                                                                    <input name="DocumentName" formControlName="DocumentName"
+                                                                    <input name="DocumentName"
+                                                                        formControlName="DocumentName"
                                                                         placeholder="Document Name" matInput
                                                                         [(ngModel)]="DocumentName" required>
                                                                     <!-- <mat-error
@@ -261,14 +285,15 @@
                                                                 </mat-form-field>
 
                                                                 <div matTooltip="Select Document name to enable this button!!"
-                                                                [matTooltipPosition]="'above'" style="margin-left: 20px;">
-                                                                <button mat-raised-button id="btnAdd"
-                                                                    (click)="onAddDocumentDetail()">
-                                                                    <mat-icon> add </mat-icon> &nbsp;Add
-                                                                </button>
-                                                            </div>
+                                                                    [matTooltipPosition]="'above'"
+                                                                    style="margin-left: 20px;">
+                                                                    <button mat-raised-button id="btnAdd"
+                                                                        (click)="onAddDocumentDetail()">
+                                                                        <mat-icon> add </mat-icon> &nbsp;Add
+                                                                    </button>
+                                                                </div>
 
-<!--                                                            
+                                                                <!--                                                            
                                                                 <diV style="margin-top:21px;margin-left: 30px;">
                                                                     <span
                                                                         style="margin-right: 40px;color: black;font-weight: bold;">
@@ -277,7 +302,7 @@
                                                                     </span>
                                                                 </diV>&nbsp;&nbsp; -->
 
-                                                                
+
 
                                                             </div>
 
@@ -328,7 +353,7 @@
                                                             </mat-cell>
                                                         </ng-container>
 
-                                                     
+
                                                         <ng-container matColumnDef="action" stickyEnd>
                                                             <mat-header-cell *matHeaderCellDef style="color: white;">
                                                                 Action
@@ -385,7 +410,7 @@
                                     <div fxFlex="100" fxFlex.gt-sm="98" class="content py-16 pl-10 p-12" fxLayout="row"
                                         fxLayout.gt-xs="column">
                                         <div fxLayout="row" style="float: right;">
-                                          
+
                                             <button class="next-btn" color="accent" style="border-radius: 16px;"
                                                 (click)="onDocumentSave()">Save</button>
                                             <button class="footer-btn" id="btncancel"
@@ -409,7 +434,7 @@
                     <div style="padding:10px; height: 100%;" fxLayoutGap="2px">
                         <div class="dialog-content-wrapper" style="align-items: flex-end;margin-right:10px;">
 
-                            <form [formGroup]="personalFormGroup">
+                            <form [formGroup]="studySchFormGroup">
 
                                 <ng-template matStepLabel>Study Schdule </ng-template>
 
@@ -472,13 +497,6 @@
                                                                         only Alphabets</mat-error> -->
                                                                 </mat-form-field>
 
-                                                                <diV style="margin-top:21px;">
-                                                                    <span
-                                                                        style="margin-right: 40px;color: black;font-weight: bold;">
-                                                                        <app-common-date [screenFrom]="screenFromString"
-                                                                            (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
-                                                                    </span>
-                                                                </diV>&nbsp;&nbsp;
 
                                                                 <div matTooltip="Select Member name to enable this button!!"
                                                                     [matTooltipPosition]="'above'">
@@ -589,11 +607,13 @@
                                                             [ngClass]="{'hide':dataSource!=null}">
                                                         </mat-footer-row>
                                                         <mat-footer-row *matFooterRowDef="['noData']"
-                                                            [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
+                                                            [ngClass]="{'hide':!(dataSource1!=null && dataSource1.data.length==0)}">
                                                         </mat-footer-row>
                                                     </mat-table>
                                                     <!-- ================= Charges List Footer Table ======================= -->
-                                                    <div>
+                                                    <div class="net-amt">
+                                                        <span class="net-amt-label" style="margin-left: 600px;color: rgb(7, 63, 91);">Net Amount:</span>&nbsp;<span
+                                                            class="net-amt-value">{{getNetAmtSum(dataSource1.data)}}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -601,9 +621,9 @@
                                     </div>
 
                                     <div fxFlex="100" fxFlex.gt-sm="98" class="content py-16 pl-10 p-12" fxLayout="row"
-                                        fxLayout.gt-xs="column" >
+                                        fxLayout.gt-xs="column">
                                         <div fxLayout="row">
-                                        
+
 
                                             <button class="next-btn" color="accent" style="border-radius: 16px;"
                                                 (click)="onStudySave()">Save</button>

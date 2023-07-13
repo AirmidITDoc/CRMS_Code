@@ -54,8 +54,10 @@ export class CaseDetailComponent implements OnInit {
     'Institution',
     'StudyStartDate',
     'StudyEndDate',
-    'action',
+    'buttons',
   ];
+
+
   dataSource = new MatTableDataSource<CaseDetail>();
   menuActions: Array<string> = [];
   //datePipe: any;
@@ -76,9 +78,9 @@ export class CaseDetailComponent implements OnInit {
 
     if (this._ActRoute.url == '/opd/registration') {
       // this.menuActions.push('One');
-      // this.menuActions.push('New Case Detail');
-      this.menuActions.push('Update Case Detail');
-      this.menuActions.push('View Case Detail');
+      this.menuActions.push('Edit Study Detail');
+      this.menuActions.push('Edit Study Schdule');
+      this.menuActions.push('Upload Document');
         }
 
 
@@ -126,12 +128,14 @@ export class CaseDetailComponent implements OnInit {
   }
 
  
-  onEdit(contact){
-    console.log(contact)
+  
+  getRecord(contact, m): void {
+    debugger;
+    console.log(contact);
 
-    console.log(" This is for Update Case Detail pop : " + contact);
-    let xx = {
-      StudyId:contact.StudyId,
+    if (m == "Edit Study Detail") {
+      var m_data = {
+        StudyId:contact.StudyId,
       ProtocolNo:contact.ProtocolNo,
       ProtocolTitle:contact.ProtocolTitle,
       StudyProduct: contact.StudyProduct,
@@ -146,25 +150,35 @@ export class CaseDetailComponent implements OnInit {
       HospitalRepresentative: contact.HospitalRepresentative,
       AgreementFileName: contact.AgreementFileName,
       "operation":"UPDATE"
-    };
-    // this.advanceDataStored.storage = new CaseDetail(xx);
-    // this._CasedetailService.populateFormpersonal(xx);
-  
-console.log(xx);
-    
-    const dialogRef = this._matDialog.open(NewCaseDetailComponent,
-      {
-        maxWidth: "75vw",
-        height: '580px',
-        width: '100%',
-        data : {
-          registerObj : xx,
-        }
+      }
+      this._CasedetailService.populateFormpersonal(m_data);
+
+      const dialogRef = this._matDialog.open(NewCaseDetailComponent,
+        {
+          maxWidth: "85vw",
+          height: '580px',
+          width: '100%',
+          data: {
+            registerObj: m_data,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+        this.getCaseList();
       });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed - Insert Action', result);
-       this.getCaseList();
-    });
+
+      error => {
+        this.sIsLoading = '';
+
+      }
+    }
+ 
+    error => {
+      this.sIsLoading = '';
+
+    }
+    // /   this._ActRoute.navigate(['opd/appointment/op_bill'], {queryParams:{id:this.selectedID}})
+
   }
 
 
@@ -173,7 +187,7 @@ console.log(xx);
     const dialogRef = this._matDialog.open(NewCaseDetailComponent,
       {
         maxWidth: "75vw",
-        height: '700px',
+        height: '580px',
         width: '100%',
         
       });
