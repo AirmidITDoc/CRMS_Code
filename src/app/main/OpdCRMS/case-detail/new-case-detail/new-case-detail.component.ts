@@ -442,7 +442,7 @@ console.log(this.registerObj);
     let insertStudySchedulearr = [];
     this.dataSource1.data.forEach((element) => {
       let insertStudySchedule = {};
-      insertStudySchedule['studyVisitId'] = 0;
+      // insertStudySchedule['studyVisitId'] = 0;
       insertStudySchedule['studyId'] = 1;
 
       insertStudySchedule['visitName'] = element.VisitName;
@@ -458,9 +458,13 @@ console.log(this.registerObj);
   
     console.log(submitData);
     this._registerService.StudySchduleInsert(submitData).subscribe(response => {
+      console.log(response)
       if (response) {
         Swal.fire('New StudySchedule Save !', ' StudySchedule Save Successfully !', 'success').then((result) => {
-          if (result.isConfirmed) {
+        
+          console.log(result)
+          if (result) {
+          
             this._matDialog.closeAll();
           }
         });

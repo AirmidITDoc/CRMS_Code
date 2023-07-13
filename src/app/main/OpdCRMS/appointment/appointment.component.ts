@@ -163,7 +163,7 @@ export class AppointmentComponent implements OnInit {
     this.VisitID = contact.VisitId;
     let AgeDay, AgeMonth, AgeYear, Age
     if (contact.Age != null || contact.AgeDay != null || contact.AgeMonth != null || contact.AgeYear != null) {
-      Age = contact.Age.trim();
+    
       AgeDay = contact.AgeDay.trim();
       AgeMonth = contact.AgeMonth.trim();
       AgeYear = contact.AgeYear.trim();
