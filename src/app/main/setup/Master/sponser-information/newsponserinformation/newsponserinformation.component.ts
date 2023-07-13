@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./newsponserinformation.component.scss']
 })
 export class NewsponserinformationComponent implements OnInit {
-  personalFormGroup: FormGroup;
+
   isLoading: any;
 
   constructor( private formBuilder: FormBuilder,
@@ -21,50 +21,35 @@ export class NewsponserinformationComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.personalFormGroup = this.createPesonalForm();
+   
   }
 
-  createPesonalForm() {
-    return this.formBuilder.group({
-      SponserId: '',
-      SponserName: '',
-      Address: '',
-      ContactNo: '',
-      PinCode: '',
-      State: '',
-      StateCode: ' ',
-      GSTIN: '',
-      SAC:'',
-      PAN:'',
-      PlaceOfSupply:'',
-      EmailId: '',
-      CreatedBy:0,
-      UpdatedBy:0
-    });
-  }
+ 
 
   closeDialog() {
     // console.log("closed")
     // this.dialogRef.close();
-    this.personalFormGroup.reset();
+    this._sponserService.personalFormGroup.reset();
   }
 
   onSubmit() {
     this.isLoading = 'submit';
+
+    if(!this._sponserService.personalFormGroup.get('SponserId').value){
     var m_data = {
       "insertSponserInformation": {
-        "sponserId":0,// this.personalFormGroup.get('MemberId').value.CaseId || 0,
-        "SponserName": this.personalFormGroup.get('SponserName').value || '',
-        "Address": this.personalFormGroup.get('Address').value || '',
-        "ContactNo": this.personalFormGroup.get('ContactNo').value || 0,
-        "PinCode": this.personalFormGroup.get('PinCode').value || '',
-        "State": this.personalFormGroup.get('State').value.CityId || 0,
-        "StateCode": this.personalFormGroup.get('StateCode').value || '',
-        "GSTIN": this.personalFormGroup.get('GSTIN').value || 0,
-        "SAC": this.personalFormGroup.get('SAC').value || '',
-        "PAN": this.personalFormGroup.get('PAN').value || '',
-        "PlaceOfSupply": this.personalFormGroup.get('PlaceOfSupply').value || '',
-        "EmailId": this.personalFormGroup.get('EmailId').value || '',
+        "sponserId":0,
+        "SponserName": this._sponserService.personalFormGroup.get('SponserName').value || '',
+        "Address": this._sponserService.personalFormGroup.get('Address').value || '',
+        "ContactNo": this._sponserService.personalFormGroup.get('ContactNo').value || 0,
+        "PinCode": this._sponserService.personalFormGroup.get('PinCode').value || '',
+        "State": this._sponserService.personalFormGroup.get('State').value || '',
+        "StateCode": this._sponserService.personalFormGroup.get('StateCode').value || '',
+        "GSTIN": this._sponserService.personalFormGroup.get('GSTIN').value || 0,
+        "SAC": this._sponserService.personalFormGroup.get('SAC').value || '',
+        "PAN": this._sponserService.personalFormGroup.get('PAN').value || '',
+        "PlaceOfSupply": this._sponserService.personalFormGroup.get('PlaceOfSupply').value || '',
+        "EmailId": this._sponserService.personalFormGroup.get('EmailId').value || '',
         "createdBy": this.accountService.currentUserValue.user.id
       }
     }
@@ -80,7 +65,39 @@ export class NewsponserinformationComponent implements OnInit {
         Swal.fire('Error !', 'MemberDetail not saved', 'error');
       }
     });
-
+  }
+  else{
+    var m_data1 = {
+      "updateSponserInformation": {
+        "operation": "UPDATE",
+        "sponserId":this._sponserService.personalFormGroup.get('SponserId').value.sponserId || 0,
+        "SponserName": this._sponserService.personalFormGroup.get('SponserName').value || '',
+        "Address": this._sponserService.personalFormGroup.get('Address').value || '',
+        "ContactNo": this._sponserService.personalFormGroup.get('ContactNo').value || 0,
+        "PinCode": this._sponserService.personalFormGroup.get('PinCode').value || '',
+        "State": this._sponserService.personalFormGroup.get('State').value || '',
+        "StateCode": this._sponserService.personalFormGroup.get('StateCode').value || '',
+        "GSTIN": this._sponserService.personalFormGroup.get('GSTIN').value || 0,
+        "SAC": this._sponserService.personalFormGroup.get('SAC').value || '',
+        "PAN": this._sponserService.personalFormGroup.get('PAN').value || '',
+        "PlaceOfSupply": this._sponserService.personalFormGroup.get('PlaceOfSupply').value || '',
+        "EmailId": this._sponserService.personalFormGroup.get('EmailId').value || '',
+        "updatedBy": this.accountService.currentUserValue.user.id
+      }
+    }
+    console.log(m_data1);
+    this._sponserService.UpdateSponserInformation(m_data1).subscribe(response => {
+      if (response) {
+        Swal.fire('Update Sponser Information Save !', ' Sponser Information Updated Successfully !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+          }
+        });
+      } else {
+        Swal.fire('Error !', 'MemberDetail not Updated', 'error');
+      }
+    });
+  }
 
   }
 

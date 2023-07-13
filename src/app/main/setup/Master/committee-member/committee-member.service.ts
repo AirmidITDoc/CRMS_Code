@@ -5,10 +5,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Injectable({
   providedIn: 'root'
 })
-export class CommitteMeetingService {
+export class CommitteeMemberService {
+
+
   personalFormGroup: FormGroup;
   myFilterform: FormGroup;
-  mySaveForm: FormGroup;
+  // mySaveForm: FormGroup;
   now = Date.now();
   sIsLoading: string = '';
   constructor(public _httpClient: HttpClient,
@@ -36,27 +38,18 @@ export class CommitteMeetingService {
     });
   }
 
-
+  
   createPesonalForm() {
     return this._formBuilder.group({
-      CommitteeId: '',
-      MemberId: '',
-      MemberName: '',
-      CommitteeMeetingName: '',
+      CommitteeId:'',
       CommitteeName: '',
-      Location: '',
-      Amount: '',
-      CommitteeMeetingId:''
+      MemberId: '',
+      Amount:''
     });
   }
+ 
+  
 
-  public MemberDetailInsert(employee){
-    return this._httpClient.post("Master/Save_InsertMemberMaster", employee);
-  }
-
-  public MemberDetailUpdate(employee){
-    return this._httpClient.post("Master/Update_UpdateMemberMaster", employee);
-  }
 public getCommitteeList(){
   return this._httpClient.post("Generic/GetByProc?procName=Rtrv_T_CommitteeMeeting_List", {})
 }
@@ -76,14 +69,14 @@ public getMemberMasterList(employee){
     // this.personalFormGroup.patchValue(employee);
   }
   
-  //  city list
-  public getCityList() {
-    return this._httpClient.post("Generic/GetByProc?procName=RetrieveCityMasterForCombo", {})
+  //  CommitteeMemberList list
+  public getCommitteeMemberDetailList(employee) {
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_M_CommitteeMasterList ", employee)
   }
 
-  public getCommitteeMeetingList(){
-    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CommitteeListCombo", {})
-  }
+  // public getCommitteeMeetingList(){
+  //   return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CommitteeListCombo", {})
+  // }
   
   
   public getCommitteeMemberList(Params){
@@ -99,5 +92,4 @@ public getMemberMasterList(employee){
 populateForm(param) {
   this.personalFormGroup.patchValue(param);
 }
-
 }

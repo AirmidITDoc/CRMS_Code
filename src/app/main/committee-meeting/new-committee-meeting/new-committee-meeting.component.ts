@@ -10,6 +10,11 @@ import { fuseAnimations } from '@fuse/animations';
 import Swal from 'sweetalert2';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
+interface Result {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-new-committee-meeting',
   templateUrl: './new-committee-meeting.component.html',
@@ -22,6 +27,12 @@ export class NewCommitteeMeetingComponent implements OnInit {
   lngCommitteeId: any;
   sIsLoading: string = '';
 
+  results: Result[] = [
+    { value: 'ONLINE', viewValue: 'ONLINE' },
+    { value: 'OFFLINE', viewValue: 'OFFLINE' },
+  ];
+
+
   constructor(public _CommitteMeetingService: CommitteMeetingService,
 
     private formBuilder: FormBuilder,
@@ -30,7 +41,7 @@ export class NewCommitteeMeetingComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<NewCommitteeMeetingComponent>) { }
 
-  personalFormGroup: FormGroup;
+    StudyAmount:any;
   registerObj = new MemberDetail({});
 
   displayedColumns = [
@@ -40,7 +51,8 @@ export class NewCommitteeMeetingComponent implements OnInit {
     'MeetingStatus',
     'action'
   ];
-  dscommitteeMemberList = new MatTableDataSource<CommitteeMeetingMemberList>();
+
+  dataSource = new MatTableDataSource<CommitteeMeetingMemberList>();
 
   chargeslist: any = [];
   isLoading: any;
@@ -55,53 +67,43 @@ export class NewCommitteeMeetingComponent implements OnInit {
   private _onDestroy = new Subject<void>();
 
   ngOnInit(): void {
-    this.personalFormGroup = this.createPesonalForm();
+   
     this.getCommitteListCombobox();
   }
 
-  createPesonalForm() {
-    return this.formBuilder.group({
-      CommitteeId: '',
-      MemberId: '',
-      MemberName: '',
-      CommitteeMeetingName: '',
-      CommitteeName: '',
-      Location: '',
-      Amount: ''
-
-    });
-  }
-
-  //   private MemberDepartment() {
-  //     // debugger;
-  //     if (!this.MembercmbList) {
-  //         return;
-  //     }
-  //     // get the search keyword
-  //     let search = this.memberFilterCtrl.value;
-  //     if (!search) {
-  //         this.filteredMember.next(this.MembercmbList.slice());
-  //         return;
-  //     } else {
-  //         search = search.toLowerCase();
-  //     }
-  //     // filter
-  //     this.filteredMember.next(
-  //         this.MembercmbList.filter(
-  //             (bank) => bank.MemberName.toLowerCase().indexOf(search) > -1
-  //         )
-  //     );sssss
-  // }
+  
+ 
   getCommitteListCombobox() {
     this._CommitteMeetingService.getCommitteeMeetingList().subscribe((data) => {
       this.MembercmbList = data;
     });
   }
-  OnSave() { }
+
+  getNetAmtSum(element) {
+
+    let netAmt;
+    netAmt = element.reduce((sum, { StudyAmount }) => sum += +(StudyAmount || 0), 0);
+    this.StudyAmount = netAmt;
+    // this.netPaybleAmt = netAmt;
+   
+    return netAmt
+  }
+
+  deleteTableRow(element) {
+    debugger;
+    
+    let index = this.chargeslist.indexOf(element);
+    if (index >= 0) {
+      this.chargeslist.splice(index, 1);
+      this.dataSource.data = [];
+      this.dataSource.data = this.chargeslist;
+    }
+    Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
+  }
 
 
   onAdd() {
-    this.lngCommitteeId = this.personalFormGroup.get("CommitteeId").value.CommitteeId;
+    this.lngCommitteeId = this._CommitteMeetingService.personalFormGroup.get("CommitteeId").value.CommitteeId;
     console.log(this.lngCommitteeId);
     this.getCommitteeMemberList(this.lngCommitteeId)
   }
@@ -114,8 +116,11 @@ export class NewCommitteeMeetingComponent implements OnInit {
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._CommitteMeetingService.getCommitteeMemberList(m).subscribe(Visit => {
-        this.dscommitteeMemberList.data = Visit as CommitteeMeetingMemberList[];
-        // this.dscommitteeMemberList.sort = this.sort;
+        this.dataSource.data = Visit as CommitteeMeetingMemberList[];
+
+        this.chargeslist = Visit as CommitteeMeetingMemberList[];
+
+        this.dataSource.data = this.chargeslist;
         // this.dscommitteeMemberList.paginator = this.paginator;
         this.sIsLoading = '';
       },
@@ -127,7 +132,7 @@ export class NewCommitteeMeetingComponent implements OnInit {
   }
 
   onSaveEntry(e) {
-    this.dscommitteeMemberList.data = [];
+    this.dataSource.data = [];
     this.chargeslist.push(
       {
         MemberId: e.MemberId,
@@ -135,8 +140,9 @@ export class NewCommitteeMeetingComponent implements OnInit {
       });
     this.isLoading = '';
     console.log(this.chargeslist);
-    this.dscommitteeMemberList.data = this.chargeslist;
-    console.log(this.dscommitteeMemberList.data);
+    
+    this.dataSource.data = this.chargeslist;
+    console.log(this.dataSource.data);
 
   }
 
@@ -144,19 +150,19 @@ export class NewCommitteeMeetingComponent implements OnInit {
   onSubmit() {
 
     this.isLoading = 'submit';
-
+if(! this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').value){
 
     let insertCommitteeMeeting = {};
 
     insertCommitteeMeeting['committeeMeetingId'] = 0;
     insertCommitteeMeeting['committeeMeetingDate'] = this.dateTimeObj.date;
     insertCommitteeMeeting['committeeMeetingTime'] = this.dateTimeObj.time;
-    insertCommitteeMeeting['commiteeMeetingName'] = this.personalFormGroup.get('CommitteeMeetingName').value || '';
-    insertCommitteeMeeting['committeeMeetingLocation'] = this.personalFormGroup.get('Location').value || '';
-    insertCommitteeMeeting['committeeMeetingAmount'] = this.personalFormGroup.get('Amount').value || 0;
+    insertCommitteeMeeting['commiteeMeetingName'] = this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingName').value || '';
+    insertCommitteeMeeting['committeeMeetingLocation'] = this._CommitteMeetingService.personalFormGroup.get('Location').value || '';
+    insertCommitteeMeeting['committeeMeetingAmount'] = this._CommitteMeetingService.personalFormGroup.get('Amount').value || 0;
 
     let insertCommitteeMeetingMemberDetarry = [];
-    this.dscommitteeMemberList.data.forEach((element) => {
+    this.dataSource.data.forEach((element) => {
       let insertCommitteeMeetingMemberDet = {};
       insertCommitteeMeetingMemberDet['committeeMeetingId'] = 0;
       insertCommitteeMeetingMemberDet['memberId'] = element.MemberId;
@@ -183,7 +189,45 @@ export class NewCommitteeMeetingComponent implements OnInit {
         Swal.fire('Error !', 'Committee Meeting not saved', 'error');
       }
     });
+  }else{
+    let updateCommitteeMeeting = {};
 
+    updateCommitteeMeeting['committeeMeetingId'] =this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').value || 0;
+    updateCommitteeMeeting['committeeMeetingDate'] = this.dateTimeObj.date;
+    updateCommitteeMeeting['committeeMeetingTime'] = this.dateTimeObj.time;
+    updateCommitteeMeeting['commiteeMeetingName'] = this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingName').value || '';
+    updateCommitteeMeeting['committeeMeetingLocation'] = this._CommitteMeetingService.personalFormGroup.get('Location').value || '';
+    updateCommitteeMeeting['committeeMeetingAmount'] = this._CommitteMeetingService.personalFormGroup.get('Amount').value || 0;
+
+    let insertCommitteeMeetingMemberDetarry = [];
+    this.dataSource.data.forEach((element) => {
+      let insertCommitteeMeetingMemberDet = {};
+      insertCommitteeMeetingMemberDet['committeeMeetingId'] = 0;
+      insertCommitteeMeetingMemberDet['memberId'] = element.MemberId;
+      insertCommitteeMeetingMemberDet['studyId'] = 0,// element.studyId;
+      insertCommitteeMeetingMemberDet['memberAmount'] = element.StudyAmount || 0;
+      insertCommitteeMeetingMemberDet['memberMeetingStatus'] = element.MeetingStatus;
+      insertCommitteeMeetingMemberDet['createdBy'] = this.accountService.currentUserValue.user.id;
+      insertCommitteeMeetingMemberDetarry.push(insertCommitteeMeetingMemberDet);
+    });
+
+    let submitData = {
+      "insertCommitteeMeeting": updateCommitteeMeeting,
+      "insertCommitteeMeetingMemberDet": insertCommitteeMeetingMemberDetarry
+    };
+    console.log(submitData);
+    this._CommitteMeetingService.CommitteeDetailInsert(submitData).subscribe(response => {
+      if (response) {
+        Swal.fire('Updated Committee Meeting  !', ' Updated Committee Meeting  Successfully !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+          }
+        });
+      } else {
+        Swal.fire('Error !', 'Committee Meeting not Updated', 'error');
+      }
+    });
+  }
 
   }
 

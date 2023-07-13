@@ -54,7 +54,7 @@ export class InstitutionInformationComponent implements OnInit {
   onAdd(){
     const dialogRef = this._matDialog.open(NewInstitutionInformationComponent, {
       maxWidth: "80vw",
-      maxHeight: "95vh",
+      maxHeight: "55vh",
       width: "100%",
       height: "100%",
   });
@@ -80,6 +80,54 @@ export class InstitutionInformationComponent implements OnInit {
       (error) => (this.isLoading = false)
     );
   }
+
+
+
+  
+  onEdit(row) {
+    console.log(row);
+    var m_data = {
+      InstitutionId:row.InstitutionId,
+      InstitutionName:row.InstitutionName,
+      Address:row.Address,
+      ContactNo:row.ContactNo,
+      PinCode:row.PinCode,
+      State:row.State,
+      StateCode: row.StateCode,
+      GSTIN: row.GSTIN,
+      SAC: row.SAC,
+      PAN: row.PAN,
+      PlaceOfSupply:row.PlaceOfSupply,
+      EmailId: row.EmailId,
+      IsActive: row.IsActive,
+      CreatedBy:row.CreatedBy,
+      CreatedOn: row.CreatedOn,
+      UpdatedBy: row.UpdatedBy,
+      UpdatedOn:row.UpdatedOn,
+    };
+
+    console.log(m_data);
+    this._InstitutionService.populateForm(m_data);
+
+    const dialogRef = this._matDialog.open(
+      NewInstitutionInformationComponent,
+
+      {
+        maxWidth: "70vw",
+        maxHeight: "55vh",
+        width: "100%",
+        height: "100%",
+        // data : {
+        //   registerObj : m_data,
+        // }
+      }
+    );
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log("The dialog was closed - Insert Action", result);
+      this.getServiceMasterList();
+    });
+  }
 }
 
 export class InstitutionInformation {
@@ -100,36 +148,31 @@ export class InstitutionInformation {
   CreatedOn: Date;
   UpdatedBy: number;
   UpdatedOn: Date;
-  // IsDocEditable: boolean;
-  // AddedBy: number;
-  // UpdatedBy: number;
-  // AddedByName: string;
-  // currentDate = new Date();
-  // EffectiveDate:any;
+  
   /**
    * Constructor
    *
-   * @param SponserInformation
+   * @param InstitutionInformation
    */
-  constructor(SponserInformation) {
+  constructor(InstitutionInformation) {
       {
-          this.InstitutionId = SponserInformation.InstitutionId || 0;
-          this.InstitutionName = SponserInformation.InstitutionName || "";
-          this.Address = SponserInformation.Address || "";
-          this.ContactNo = SponserInformation.ContactNo || 0;
-          this.PinCode = SponserInformation.PinCode || "";
-          this.State = SponserInformation.State || "";
-          this.StateCode = SponserInformation.StateCode || 0;
-          this.GSTIN = SponserInformation.GSTIN || "";
-          this.SAC = SponserInformation.SAC || 0;
-          this.PAN = SponserInformation.PAN || 0;
-          this.PlaceOfSupply = SponserInformation.PlaceOfSupply || "false";
-          this.EmailId = SponserInformation.EmailId || "";
-          this.IsActive = SponserInformation.IsActive || 0;
-          this.CreatedBy = SponserInformation.CreatedBy || 0;
-          this.CreatedOn = SponserInformation.CreatedOn || "";
-          this.UpdatedBy = SponserInformation.UpdatedBy || 0;
-          this.UpdatedOn = SponserInformation.UpdatedOn || "";
+          this.InstitutionId = InstitutionInformation.InstitutionId || 0;
+          this.InstitutionName = InstitutionInformation.InstitutionName || "";
+          this.Address = InstitutionInformation.Address || "";
+          this.ContactNo = InstitutionInformation.ContactNo || 0;
+          this.PinCode = InstitutionInformation.PinCode || "";
+          this.State = InstitutionInformation.State || "";
+          this.StateCode = InstitutionInformation.StateCode || 0;
+          this.GSTIN = InstitutionInformation.GSTIN || "";
+          this.SAC = InstitutionInformation.SAC || 0;
+          this.PAN = InstitutionInformation.PAN || 0;
+          this.PlaceOfSupply = InstitutionInformation.PlaceOfSupply || "false";
+          this.EmailId = InstitutionInformation.EmailId || "";
+          this.IsActive = InstitutionInformation.IsActive || 0;
+          this.CreatedBy = InstitutionInformation.CreatedBy || 0;
+          this.CreatedOn = InstitutionInformation.CreatedOn || "";
+          this.UpdatedBy = InstitutionInformation.UpdatedBy || 0;
+          this.UpdatedOn = InstitutionInformation.UpdatedOn || "";
       }
   }
 }

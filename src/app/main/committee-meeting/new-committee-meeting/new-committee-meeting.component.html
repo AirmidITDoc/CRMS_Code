@@ -7,13 +7,11 @@
                 style="width:100% ; height:37px;color: white;">
 
                 <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
-                    <button mat-icon-button class="sidebar-toggle mr-12">
+                    <!-- <button mat-icon-button class="sidebar-toggle mr-12">
                         <mat-icon>menu</mat-icon>
-                    </button>
-
-                    <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
-                        style="width: 80%;font-size: 16px;">
-                        New Committee Meeting</span>
+                    </button> -->
+                    <h3>{{_CommitteMeetingService.personalFormGroup.controls.CommitteeMeetingId.value?"Modify Committee Master":"New
+                        Committee Master"}}</h3>
                     <div fxLayout="row" fxLayoutAlign="start center" style="float: right;">
                         <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
                             close
@@ -31,7 +29,11 @@
                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="column" fxLayoutGap="3px">
                             <div fxlayout="row">
                                 <mat-card fxFlex.gt-sm="100%" fxFlex>
-                                    <form [formGroup]="personalFormGroup" style="display: flex;">
+                                    <form [formGroup]="_CommitteMeetingService.personalFormGroup" style="display: flex;">
+
+                                        <input type="hidden" name="CommitteeMeetingId" formControlName="CommitteeMeetingId">
+
+
                                         <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="5px">
                                             <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
 
@@ -73,7 +75,7 @@
                                 <div fxlayout="row">
                                     <mat-card fxFlex.gt-sm="100%" fxFlex
                                         style="height: fit-content; background-color: white;">
-                                        <form [formGroup]="personalFormGroup" style="display: flex;">
+                                        <form [formGroup]="_CommitteMeetingService.personalFormGroup" style="display: flex;">
                                             <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="5px">
                                                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
                                                     <mat-form-field appearance="outline" style="width: 40%;">
@@ -110,7 +112,7 @@
                             <div>
                                 <div class="col-md-12">
                                     <!-- ================= Charges List Table ======================= -->
-                                    <mat-table #table matSort [dataSource]="dscommitteeMemberList" [@animateStagger]="{value:'50'}"
+                                    <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
                                         style="height: 300px !important;" class="table1">
 
                                         <ng-container matColumnDef="MemberId">
@@ -139,21 +141,37 @@
                                             </mat-cell>
                                         </ng-container>
 
-                                        <ng-container matColumnDef="MeetingStatus">
+                                        <!-- <ng-container matColumnDef="MeetingStatus">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
                                                 MeetingStatus
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                                 {{contact.MeetingStatus}}
                                             </mat-cell>
-                                        </ng-container>                                                                                                                                                                                     
+                                        </ng-container>           
+                                         -->
+                                        
+                                         <ng-container matColumnDef="MeetingStatus">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                                MeetingStatus
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                <mat-select>
+                                                    <mat-option *ngFor="let Result of results" [value]="Result.value">
+                                                      {{ Result.viewValue }}
+                                                    </mat-option>
+                                                  </mat-select>
+                                            </mat-cell>
+                                        </ng-container>           
+                                        
+                                       
 
 
                                         <ng-container matColumnDef="action" stickyEnd>
                                             <mat-header-cell *matHeaderCellDef style="color: white;"> Action
                                             </mat-header-cell>
-                                            <mat-cell *matCellDef="let row">
-                                                <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
+                                            <mat-cell *matCellDef="let contact">
+                                                <button mat-icon-button (click)="deleteTableRow(contact)" color="warn">
                                                     <mat-icon>delete_outline</mat-icon>
                                                 </button>
                                             </mat-cell>
@@ -182,15 +200,16 @@
                                             [ngClass]="{'row-yellow': contact.ServiceName == 'CBC'}"
                                             [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
                                         <mat-footer-row *matFooterRowDef="['loading']"
-                                            [ngClass]="{'hide':dscommitteeMemberList!=null}">
+                                            [ngClass]="{'hide':dataSource!=null}">
                                         </mat-footer-row>
                                         <mat-footer-row *matFooterRowDef="['noData']"
-                                            [ngClass]="{'hide':!(dscommitteeMemberList!=null && dscommitteeMemberList.data.length==0)}">
+                                            [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
                                         </mat-footer-row>
                                     </mat-table>
                                     <!-- ================= Charges List Footer Table ======================= -->
-                                    <div>
-
+                                    <div class="net-amt" style="margin-left:350px;">
+                                        <span class="net-amt-label" style="color: rgb(7, 124, 214);">Net Amount:</span>&nbsp;<span
+                                            class="net-amt-value">{{getNetAmtSum(dataSource.data)}}</span>
                                     </div>
                                 </div>
                             </div>

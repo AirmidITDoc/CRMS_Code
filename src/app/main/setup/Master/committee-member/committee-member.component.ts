@@ -3,32 +3,27 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { CaseDetail } from '../OpdCRMS/case-detail/edit-casedetail/edit-casedetail.component';
+import { CommitteeMemberService } from './committee-member.service';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { CommitteMeetingService } from './committe-meeting.service';
-import { DatePipe } from '@angular/common';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
-import { AddMemberComponent } from './add-member/add-member.component';
-import { CommitteeMasterMemberComponent } from './committee-master-member/committee-master-member.component';
-import { NewCommitteeMeetingComponent } from './new-committee-meeting/new-committee-meeting.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DatePipe } from '@angular/common';
+import { MemberDetail, NewCommitteeMemberComponent } from './new-committee-member/new-committee-member.component';
 import { fuseAnimations } from '@fuse/animations';
 
 @Component({
-  selector: 'app-committee-meeting',
-  templateUrl: './committee-meeting.component.html',
-  styleUrls: ['./committee-meeting.component.scss'],
+  selector: 'app-committee-member',
+  templateUrl: './committee-member.component.html',
+  styleUrls: ['./committee-member.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations
 })
-export class CommitteeMeetingComponent implements OnInit {
+export class CommitteeMemberComponent implements OnInit {
 
-  
+    
   msg: any;
   sIsLoading: string = '';
   isLoading = true;
-  isRateLimitReached = false;
-  hasSelectedContacts: boolean;
   currentDate=new Date();
   subscriptions: Subscription[] = [];
   
@@ -41,25 +36,22 @@ export class CommitteeMeetingComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() dataArray: any;
   screenFromString = 'admission-form';
-
+  
   displayedColumns = [
-    'CommitteeMeetingId',
-    'CommitteeMeetingDate',
-    'CommiteeMeetingName',
-    'CommitteeMeetingLocation',
-    'CommitteeMeetingAmount',
+    'CommitteeId',
+    'CommiteeName',
+    'IsActive',
     'CreatedBy',
     'action'
   ];
-  dscommitteeMeetingList = new MatTableDataSource<CommmitteeDetail>();
+   dataSource = new MatTableDataSource<MemberDetail>();
   menuActions: Array<string> = [];
   //datePipe: any;
 
   constructor(
-    public _CasedetailService: CommitteMeetingService,
+    public _CasedetailService: CommitteeMemberService,
     private _ActRoute: Router,
     private _fuseSidebarService: FuseSidebarService,
-    // private advanceDataStored: AdvanceDataStored,
     public _matDialog: MatDialog,
     public datePipe: DatePipe,
     // private advanceDataStored: AdvanceDataStored
@@ -72,13 +64,18 @@ export class CommitteeMeetingComponent implements OnInit {
   }
 
   getCommitteeList() {
-    this.sIsLoading = 'loading-data';
+    
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
-      this._CasedetailService.getCommitteeList().subscribe(Visit => {
-        this.dscommitteeMeetingList.data = Visit as CommmitteeDetail[];
-        this.dscommitteeMeetingList.sort = this.sort;
-        this.dscommitteeMeetingList.paginator = this.paginator;
+
+      var m = {
+        CommiteeName:'%'
+      };
+
+      this._CasedetailService.getCommitteeMemberDetailList(m).subscribe(Visit => {
+        this. dataSource.data = Visit as MemberDetail[];
+        this. dataSource.sort = this.sort;
+        this. dataSource.paginator = this.paginator;
         this.sIsLoading = '';
       },
         error => {
@@ -94,30 +91,30 @@ export class CommitteeMeetingComponent implements OnInit {
   }
 
   onClear() {
-    this._CasedetailService.myFilterform.reset(
-      {
-        start: [],
-        end: []
-      }
-    );
+    // this._CasedetailService.myFilterform.reset(
+    //   {
+    //     start: [],
+    //     end: []
+    //   }
+    // );
   }
 
 
-newMember() {
-    const dialogRef = this._matDialog.open(AddMemberComponent,
-      {
-        maxWidth: "75vw",
-        height: '300px',
-        width: '100%',
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed - Insert Action', result);
-      // this.getCommitteeList();
-    });
-  }
+// newMember() {
+//     const dialogRef = this._matDialog.open(AddMemberComponent,
+//       {
+//         maxWidth: "75vw",
+//         height: '300px',
+//         width: '100%',
+//       });
+//     dialogRef.afterClosed().subscribe(result => {
+//       // console.log('The dialog was closed - Insert Action', result);
+//       // this.getCommitteeList();
+//     });
+//   }
 
   newCommitteeMember() {
-    const dialogRef = this._matDialog.open(CommitteeMasterMemberComponent,
+    const dialogRef = this._matDialog.open(NewCommitteeMemberComponent,
       {
         maxWidth: "80vw",
         height: '660px',
@@ -131,19 +128,19 @@ newMember() {
   }
 
 
-  newcommitteemeeting() {
-    const dialogRef = this._matDialog.open(NewCommitteeMeetingComponent,
-      {
-        maxWidth: "80vw",
-        height: '660px',
-        width: '100%',
+  // newcommitteemeeting() {
+  //   const dialogRef = this._matDialog.open(NewCommitteeMeetingComponent,
+  //     {
+  //       maxWidth: "80vw",
+  //       height: '660px',
+  //       width: '100%',
         
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed - Insert Action', result);
-      this.getCommitteeList();
-    });
-  }
+  //     });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     // console.log('The dialog was closed - Insert Action', result);
+  //     this.getCommitteeList();
+  //   });
+  // }
 
 
 
@@ -242,18 +239,18 @@ newMember() {
   onEdit(row) {
     console.log(row);
     var m_data = {
-      CommitteeMeetingId: row.CommitteeMeetingId,
-      CommitteeMeetingDate: row.CommitteeMeetingDate,
-      CommiteeMeetingName: row.CommiteeMeetingName,
-      CommitteeMeetingLocation: row.CommitteeMeetingLocation,
-      CreatedBy: row.CreatedBy,
+      // CommitteeId: row.CommitteeId,
+      // CommiteeName: row.CommiteeName,
+      // CommiteeMeetingName: row.CommiteeMeetingName,
+      // CommitteeMeetingLocation: row.CommitteeMeetingLocation,
+      // CreatedBy: row.CreatedBy,
     
     };
 
     console.log(m_data);
     this._CasedetailService.populateForm(m_data);
 
-     const dialogRef = this._matDialog.open(NewCommitteeMeetingComponent,
+     const dialogRef = this._matDialog.open(NewCommitteeMemberComponent,
         {
         maxWidth: "70vw",
         maxHeight: "55vh",
@@ -272,28 +269,3 @@ newMember() {
   }
 }
 
-
-export class CommmitteeDetail {
-  CommitteeMeetingId:any;
-  CommitteeMeetingDate:any;
-  CommiteeMeetingName:any;
-  CreatedBy: any;
-  CommitteeMeetingLocation: any;
- 
-  /**
-   * Constructor
-   *
-   * @param CommmitteeDetail
-   */
-
-  constructor(CommmitteeDetail) {
-    {
-      this.CommitteeMeetingId = CommmitteeDetail.CommitteeMeetingId || '';
-      this.CommitteeMeetingDate = CommmitteeDetail.CommitteeMeetingDate || '';
-      this.CommiteeMeetingName = CommmitteeDetail.CommiteeMeetingName || '';
-      this.CommitteeMeetingLocation = CommmitteeDetail.CommitteeMeetingLocation || '';
-      this.CreatedBy = CommmitteeDetail.CreatedBy || 0;
-  
-    }
-  }
-}

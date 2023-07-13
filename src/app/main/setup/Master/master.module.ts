@@ -4,6 +4,10 @@ import { PatientTypeMasterComponent } from './patient-type-master/patient-type-m
 import { AreaMasterComponent } from './area-master/area-master.component';
 import { SponserInformationComponent } from './sponser-information/sponser-information.component';
 import { InstitutionInformationComponent } from './institution-information/institution-information.component';
+import { MemberMasterComponent } from './member-master/member-master.component';
+import { NewMemberMasterComponent } from './member-master/new-member-master/new-member-master.component';
+import { CommitteeMemberComponent } from './committee-member/committee-member.component';
+import { NewCommitteeMemberComponent } from './committee-member/new-committee-member/new-committee-member.component';
 
 const appRoutes: Routes = [
     {
@@ -92,10 +96,27 @@ const appRoutes: Routes = [
                 (m) => m.InstitutionInformationModule
             ),
     },
+    {
+        path: "MemberMaster",
+        loadChildren: () =>
+            import("./member-master/member-master.module").then(
+                (m) => m.MemberMasterModule
+            ),
+            
+    },
+    {
+        path: "CommitteeMember",
+        loadChildren: () =>
+            import("./committee-member/committee-member.module").then(
+                (m) => m.CommitteeMemberModule
+            ),
+    },
+   
+   
 ];
 
 @NgModule({
-    declarations: [],
+    declarations: [CommitteeMemberComponent, NewCommitteeMemberComponent],
     imports: [RouterModule.forChild(appRoutes)],
 })
 export class MasterModule { }

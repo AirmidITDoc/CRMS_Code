@@ -11,10 +11,11 @@
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     Sponser Information List
                 </span>
-                <button mat-raised-button (click)="onAdd()" fxLayoutAlign="center center" style="margin-left: 80%;">
-                    <mat-icon color="Primary" title=" Appointment Form ">how_to_reg</mat-icon>
-                </button>
+
             </div>
+            <button mat-raised-button (click)="onAdd()" fxLayoutAlign="center center" style="margin-left: 1300px;">
+                <mat-icon color="Primary" title=" Appointment Form ">how_to_reg</mat-icon>
+            </button>
         </div>
         <!-- / APP TITLE -->
         <!-- SEARCH -->
@@ -127,7 +128,7 @@
                                     <mat-header-cell *matHeaderCellDef class="table-actions" style="color: aliceblue;">
                                         Action </mat-header-cell>
                                     <mat-cell *matCellDef="let element">
-                                        <button mat-icon-button (click)="onEdit(row)"><mat-icon
+                                        <button mat-icon-button (click)="onEdit(element)"><mat-icon
                                                 title="Edit Menu">launch</mat-icon></button>
                                         <!-- <button mat-icon-button (click)="onDeactive(row.ServiceId)"
                                             color="warn"><mat-icon>delete_outline</mat-icon></button>-->

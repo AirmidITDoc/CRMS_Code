@@ -1,33 +1,33 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CommitteeMemberService } from '../committee-member.service';
+import { AuthenticationService } from 'app/core/services/authentication.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { CommitteMeetingService } from '../committe-meeting.service';
-import { AuthenticationService } from 'app/core/services/authentication.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { fuseAnimations } from '@fuse/animations';
 import Swal from 'sweetalert2';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
-  selector: 'app-committee-master-member',
-  templateUrl: './committee-master-member.component.html',
-  styleUrls: ['./committee-master-member.component.scss'],
+  selector: 'app-new-committee-member',
+  templateUrl: './new-committee-member.component.html',
+  styleUrls: ['./new-committee-member.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations
 })
-export class CommitteeMasterMemberComponent implements OnInit {
+export class NewCommitteeMemberComponent implements OnInit {
 
   registerObj = new MemberDetail({});
   personalFormGroup: FormGroup;
   screenFromString = 'admission-form';
   
-  constructor(  public _CommitteMeetingService: CommitteMeetingService,
+  constructor(  public _CommitteMeetingService: CommitteeMemberService,
     private accountService: AuthenticationService,
     // public notification: NotificationServiceService,
     private formBuilder: FormBuilder,
     public _matDialog: MatDialog,
-    public dialogRef: MatDialogRef<CommitteeMasterMemberComponent>) { }
+    public dialogRef: MatDialogRef<NewCommitteeMemberComponent>) { }
   displayedColumns = [
     // 'MemberId',
     'MemberName',
@@ -51,7 +51,7 @@ export class CommitteeMasterMemberComponent implements OnInit {
   DeptSource = new MatTableDataSource<MemberDetail>();
 
   ngOnInit(): void {
-    this.personalFormGroup = this.createPesonalForm();
+    
     this.getMemberNameCombobox();
 
     this.memberFilterCtrl.valueChanges
@@ -59,16 +59,7 @@ export class CommitteeMasterMemberComponent implements OnInit {
     .subscribe(() => {
     });
   }
-  
-  createPesonalForm() {
-    return this.formBuilder.group({
-      CommitteeId:'',
-      CommitteeName: '',
-      MemberId: '',
-      Amount:''
-    });
-  }
- 
+
   private MemberDepartment() {
     // debugger;
     if (!this.MembercmbList) {
@@ -103,26 +94,11 @@ getMemberNameCombobox() {
 
 onSubmit() {
 
-  // {
-  //   "insertCommitteeMaster": {
-  //     "committeeId": 0,
-  //     "commiteeName": "string",
-  //     "createdBy": 0
-  //   },
-  //   "insertCommitteeMemberDetails": [
-  //     {
-  //       "committeeId": 0,
-  //       "memberId": 0,
-  //       "createdBy": 0
-  //     }
-  //   ]
-  // }
-
-
+ if(!this._CommitteMeetingService.personalFormGroup.get('CommitteeId').value){
   this.isLoading = 'submit';
    let committeeInsertObj = {};
    committeeInsertObj['committeeId']= 0,//this.personalFormGroup.get('CommitteeId').value.CommitteeId || 0,
-   committeeInsertObj['commiteeName']= this.personalFormGroup.get('CommitteeName').value || 0,
+   committeeInsertObj['commiteeName']= this._CommitteMeetingService.personalFormGroup.get('CommitteeName').value || 0,
    committeeInsertObj['createdBy']= this.accountService.currentUserValue.user.id
   
   let Billdetsarr = [];
@@ -151,7 +127,42 @@ onSubmit() {
       Swal.fire('Error !', 'CommitteeMember not saved', 'error');
     }
   });
+ }else{
 
+
+  this.isLoading = 'submit';
+  let committeeInsertObj = {};
+  committeeInsertObj['committeeId']= this._CommitteMeetingService.personalFormGroup.get('CommitteeId').value || 0,
+  committeeInsertObj['commiteeName']= this._CommitteMeetingService.personalFormGroup.get('CommitteeName').value || 0,
+  committeeInsertObj['createdBy']= this.accountService.currentUserValue.user.id
+ 
+ let Billdetsarr = [];
+ this.dataSource.data.forEach((element) => {
+   let BillDetailsInsertObj = {};
+   BillDetailsInsertObj['committeeId'] = 0;
+   BillDetailsInsertObj['memberId'] = element.MemberId;
+   BillDetailsInsertObj['createdBy'] =  this.accountService.currentUserValue.user.id;
+   Billdetsarr.push(BillDetailsInsertObj);
+ });
+
+ let submitData = {
+   "insertCommitteeMaster": committeeInsertObj,
+   "insertCommitteeMemberDetails": Billdetsarr
+ };
+
+ console.log(submitData);
+ this._CommitteMeetingService.CommitteeMemberDetailInsert(submitData).subscribe(response => {
+   if (response) {
+     Swal.fire('Update CommitteeMember Save !', ' CommitteeMember Update Successfully !', 'success').then((result) => {
+       if (result.isConfirmed) {
+         this._matDialog.closeAll();
+       }
+     });
+   } else {
+     Swal.fire('Error !', 'CommitteeMember not Updated', 'error');
+   }
+ });
+ }
 
 }
 
@@ -213,6 +224,10 @@ export class MemberDetail {
   MobileNo: any;
   EmailId: any;
   StudyAmount: any;
+
+  CommitteeId:any;
+  CommiteeName:any;
+  IsActive:any;
   /**
    * Constructor
    *
@@ -232,6 +247,11 @@ export class MemberDetail {
       this.MobileNo = MemberDetail.MobileNo || '';
       this.EmailId = MemberDetail.EmailId || '';
       this.StudyAmount = MemberDetail.StudyAmount || '';
+
+
+      this.CommitteeId = MemberDetail.CommitteeId || 0;
+      this.CommiteeName = MemberDetail.CommiteeName || '';
+      this.IsActive = MemberDetail.IsActive || '';
    
     }
   }

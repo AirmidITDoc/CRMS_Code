@@ -55,7 +55,7 @@ DSSponserInformationList = new MatTableDataSource<SponserInformation>();
   onAdd(){
     const dialogRef = this._matDialog.open(NewsponserinformationComponent, {
       maxWidth: "80vw",
-      maxHeight: "95vh",
+      maxHeight: "65vh",
       width: "100%",
       height: "100%",
   });
@@ -80,6 +80,52 @@ DSSponserInformationList = new MatTableDataSource<SponserInformation>();
         },
         (error) => (this.isLoading = false)
     );
+}
+
+
+onEdit(row) {
+  console.log(row);
+  var m_data = {
+    SponserId:row.SponserId,
+    SponserName:row.SponserName,
+    Address:row.Address,
+    ContactNo:row.ContactNo,
+    PinCode:row.PinCode,
+    State:row.State,
+    StateCode: row.StateCode,
+    GSTIN: row.GSTIN,
+    SAC: row.SAC,
+    PAN: row.PAN,
+    PlaceOfSupply:row.PlaceOfSupply,
+    EmailId: row.EmailId,
+    IsActive: row.IsActive,
+    CreatedBy:row.CreatedBy,
+    CreatedOn: row.CreatedOn,
+    UpdatedBy: row.UpdatedBy,
+    UpdatedOn:row.UpdatedOn,
+  };
+
+  console.log(m_data);
+  this._sponserService.populateForm(m_data);
+
+  const dialogRef = this._matDialog.open(
+    NewsponserinformationComponent,
+
+    {
+      maxWidth: "70vw",
+      maxHeight: "55vh",
+      width: "100%",
+      height: "100%",
+      // data : {
+      //   registerObj : m_data,
+      // }
+    }
+  );
+
+  dialogRef.afterClosed().subscribe((result) => {
+    console.log("The dialog was closed - Insert Action", result);
+    this.getServiceMasterList();
+  });
 }
 
 }
