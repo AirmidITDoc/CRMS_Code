@@ -19,13 +19,7 @@
 
           </span>
 
-          <div fxLayout="row" fxLayoutAlign="start center" style="float: right; margin-right: 5px;  ">
-            <diV style="margin-top:21px;">
-              <span style="margin-right: 40px;color: black;font-weight: bold;">
-                <app-common-date [screenFrom]="screenFromString"
-                  (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
-              </span>
-            </diV>&nbsp;&nbsp;
+          <div fxLayout="row" fxLayoutAlign="start center" style="margin-left:280px;">
             <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
               close
             </span>
@@ -39,12 +33,7 @@
         <div>
           <mat-card>
 
-
-
             <form [formGroup]="VisitFormGroup">
-
-
-
               <div class="redio-container">
                 <mat-radio-group aria-label="Select an option" formControlName="regRadio" name="regRadio"
                   (change)="onChangeReg($event)">
@@ -55,40 +44,18 @@
               </div>
 
 
-              <div style="padding: 7px;">
+              <div>
 
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px"  style="padding:10px;">
 
-                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+            
+                  <diV style="margin-top:21px;">
+                    <span style="margin-right: 40px;color: black;font-weight: bold;">
+                      <app-common-date [screenFrom]="screenFromString"
+                        (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
+                    </span>
+                  </diV>&nbsp;&nbsp;
 
-                  <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Visit Date</mat-label>
-                    <input name="VisitDate" matInput [matDatepicker]="picker" formControllName="VisitDate"
-                      [value]="registerObj.VisitDate">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-
-                  </mat-form-field>
-<!-- 
-                  <div fxLayout="row">
-                   
-                      <mat-form-field>
-                        <input matInput [ngxTimepicker]="endTime" [format]="24"  placeholder="{{placeholderTime}}" formControlName="endTime" />
-                      </mat-form-field>
-                      <ngx-material-timepicker #endTime (timeSet)="timeChange($event)" [minutesGap]="10"></ngx-material-timepicker>
-                    </div>
-                    <div>
-                      <mat-form-field>
-                        <input id="pickerId" matInput [matDatepicker]="datepicker" placeholder="{{placeholderDate}}" [formControl]="dateForm"
-                               [min]="config.minDate" [max]="config.maxDate" (dateChange)="dateChange($event)">
-                        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-                        <mat-datepicker #datepicker [disabled]="disabled" startView="{{config.startView}}"></mat-datepicker>
-                      </mat-form-field>
-                    
-                  </div> -->
-
-                  <mat-form-field appearance="outline" fxFlex>
-                    <input matInput type="datetime-local" placeholder="start date" formControllName="VisitTime">
-                  </mat-form-field>
 
                   <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
                     <mat-label>Department</mat-label>
@@ -116,72 +83,18 @@
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
-
-
                 </div>
               </div>
               <div class="footer-navigation" style="text-align: right;">
-                <div class="next-div">
-                  <button class="next-btn" (click)="VisitUpdate()" style="border-radius: 16px;"   [disabled]="IsUpdatevisit">
+                <div *ngIf="IsNewvisit">
+                  <button class="next-btn" (click)="VisitUpdate()" style="border-radius: 16px;"
+                    [disabled]="IsUpdatevisit">
                     Update
                   </button>
+
+                  <button class="footer-btn" (click)="onClose()">Cancel</button>
                 </div>
-              </div>
-            </form>
-          </mat-card>
-
-          <mat-card>
-            <form [formGroup]="VisitFormGroup">
-
-              <!-- <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
-                style=" height: 35px;background-color: rgb(18, 87, 134)">
-                <span style="font-size:18px; font-weight: 500; color:white;padding:5px;">Visit Details </span>
-  
-              </div> -->
-
-              <div style="padding: 7px;">
-
-                <!--   
-                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-  
-                  <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
-                    <mat-label>Department</mat-label>
-                    <mat-select formControlName="Departmentid" placeholder="Bank" #singleSelect required
-                      (selectionChange)="OnChangeDoctorList($event.value)">
-                      <mat-option>
-                        <ngx-mat-select-search [formControl]="departmentFilterCtrl" [placeholderLabel]="'Search'"
-                          [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
-                      </mat-option>
-                      <mat-option *ngFor="let element of filteredDepartment | async" [value]="element">
-                        {{element.departmentName}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-  
-                  <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
-                    <mat-label>Doctor Name</mat-label>
-                    <mat-select formControlName="DoctorID" placeholder="Bank" #singleSelect>
-                      <mat-option>
-                        <ngx-mat-select-search [formControl]="doctorFilterCtrl" [placeholderLabel]="'Search'"
-                          [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
-                      </mat-option>
-                      <mat-option *ngFor="let element of filteredDoctor | async" [value]="element">
-                        {{element.Doctorname}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-  
-                
-  
-                  <br>
-  
-                </div> -->
-
-              </div>
-
-
-              <div class="footer-navigation" style="text-align: left;">
-                <div class="next-div">
+                    <div *ngIf="IsUpdatevisit">
                   <button class="next-btn" (click)="VisitAdd()"
                     style="border-radius: 16px;width: max-content !important;margin-right: 10px;margin-top: 50px;"
                     [disabled]="IsNewvisit">
@@ -190,17 +103,15 @@
 
                   <button class="footer-btn" (click)="onClose()">Cancel</button>
                 </div>
+                 
+
+                
               </div>
-
-
             </form>
           </mat-card>
         </div>
 
-
-
       </div>
-
 
     </div>
   </div>

@@ -49,7 +49,7 @@
 
                                         <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="5px">
 
-                                            <mat-form-field appearance="outline" style="width: 30%;">
+                                            <mat-form-field appearance="outline" style="width:400px;">
                                                 <input type="text" name="SrvcName" formControlName="SrvcName"
                                                     placeholder="Service Name" matInput [matAutocomplete]="auto"
                                                     (input)="getServiceListCombobox()" required
@@ -74,7 +74,7 @@
                                             </mat-form-field>
 
 
-                                            <mat-form-field appearance="outline" style="width: 7%;" #Price>
+                                            <mat-form-field appearance="outline" style="width:200px;" #Price>
                                                 <mat-label>Price</mat-label>
                                                 <input matInput [(ngModel)]="b_price" name="bPrice"
                                                     (keyup)="calculateTotalAmt()" formControlName="price" required
@@ -84,7 +84,7 @@
                                                     Price is required</mat-error>
                                             </mat-form-field>
 
-                                            <mat-form-field appearance="outline" style="width: 7%;">
+                                            <mat-form-field appearance="outline" style="width:200px;">
                                                 <mat-label>Qty</mat-label>
                                                 <input matInput [(ngModel)]="b_qty" name="bQty"
                                                     (keyup)="calculateTotalAmt()" formControlName="qty" required
@@ -94,7 +94,7 @@
                                                     Qty is required</mat-error>
                                             </mat-form-field>
 
-                                            <mat-form-field appearance="outline" style="width: 10%;">
+                                            <mat-form-field appearance="outline" style="width:200px;">
                                                 <mat-label>TotalAmt</mat-label>
                                                 <input matInput [(ngModel)]="b_totalAmount" name="bTotalAmt" readonly
                                                     formControlName="totalAmount" required>
@@ -105,10 +105,10 @@
 
                                             <div *ngIf="isDoctor" style="margin-right: 10px; width:200px;">
                                                 <!-- [disabled]="isDoctor" -->
-                                                <mat-form-field appearance="outline" fxFlex id="DoctorID" >
+                                                <mat-form-field appearance="outline" fxFlex id="DoctorID">
                                                     <mat-label>Doctor Name</mat-label>
-                                                    <mat-select formControlName="DoctorID" placeholder="Bank" 
-                                                        #singleSelect required >
+                                                    <mat-select formControlName="DoctorID" placeholder="Bank"
+                                                        #singleSelect required>
                                                         <mat-option>
                                                             <ngx-mat-select-search [formControl]="doctorFilterCtrl"
                                                                 [placeholderLabel]="'Search'"
@@ -127,7 +127,7 @@
                                                     </mat-select>
                                                 </mat-form-field>
                                             </div>
-
+                                            <!-- 
                                             <mat-form-field appearance="outline" style="width: 7%;">
                                                 <mat-label>Disc %</mat-label>
                                                 <input matInput [(ngModel)]="formDiscPersc" name="formDiscPer"
@@ -155,13 +155,13 @@
                                                 <mat-error
                                                     *ngIf="registeredForm.get('netAmount').invalid && registeredForm.get('netAmount').touched">
                                                     NetAmount is required</mat-error>
-                                            </mat-form-field>
+                                            </mat-form-field> -->
 
                                             <div matTooltip="Select doctor name to enable this button!!"
                                                 [matTooltipDisabled]="!registeredForm.invalid"
                                                 [matTooltipPosition]="'above'">
                                                 <button mat-raised-button fxLayoutAlign="center center" id="btnAdd"
-                                                    (click)="onSaveEntry()" 
+                                                    (click)="onSaveEntry()"
                                                     style="background-color: blue; color: white; width: 70px; ">
                                                     <mat-icon> add </mat-icon> &nbsp;Add
                                                 </button>
@@ -176,45 +176,11 @@
                     </div>
                     <div fxLayout="row" style="width: 100%;">
 
-                        <div fxFlex="100" fxFlex.gt-sm="20" fxLayout="row" fxLayout.gt-xs="column"
-                            style="width:15%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
-
-                             <mat-form-field appearance="outline"
-                                style="width:200px;font-weight:bold;float: left;padding-top: 10px;padding-right: 10px;padding-left: 10px;">
-                                <mat-label>Visit Date Time</mat-label>
-                                <mat-select formControlName="VisitDate" name="VisitDate" style="color: blue;" required > 
-                                    <mat-option></mat-option>
-                                    <mat-option *ngFor="let m of VisitDateList" [value]="m">
-                                        {{m.VisitDate}}
-                                    </mat-option>
-                                </mat-select>
-                              
-                            </mat-form-field> 
-
-                            <mat-tree [dataSource]="dataSource11" [treeControl]="treeControl">
-                                <!-- This is the tree node template for leaf nodes -->
-                                <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-                                  <!-- use a disabled button to provide padding for tree leaf -->
-                                  <button mat-icon-button disabled></button>
-                                  {{node.name}}
-                                </mat-tree-node>
-                                <!-- This is the tree node template for expandable nodes -->
-                                <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
-                                  <button mat-icon-button matTreeNodeToggle
-                                          [attr.aria-label]="'toggle ' + node.name">
-                                    <mat-icon class="mat-icon-rtl-mirror">
-                                      {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                                    </mat-icon>
-                                  </button>
-                                  {{node.name}}
-                                </mat-tree-node>
-                              </mat-tree>
-
-                        </div>
 
 
-                        <div fxFlex="100" fxFlex.gt-sm="70" fxLayout="row" fxLayout.gt-xs="column"
-                            style="width:90%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
+
+                        <div fxFlex="100" fxFlex.gt-sm="80" fxLayout="row" fxLayout.gt-xs="column"
+                            style="width:98%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
                             <mat-tab-group style="background-color: white;">
 
                                 <mat-tab>
@@ -562,7 +528,7 @@
                                 </form>
 
                             </div>
-                            <div fxLayout="row">
+                            <div fxLayout="row" style="margin-left:100px;margin-top: 20px;">
 
                                 <button class="next-btn" (click)="onSaveOPBill()" style="border-radius: 16px;"
                                     [disabled]="click">Save</button>

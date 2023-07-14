@@ -47,7 +47,7 @@
                                                     (selectionChange)="getCaseList()">
                                                     <mat-option></mat-option>
                                                     <mat-option *ngFor="let m of caseList" [value]="m">
-                                                        {{m.CaseId}} ||   {{m.CaseTitle}}
+                                                        {{m.StudyId}} ||   {{m.ProtocolNo}}
                                                     </mat-option>
                                                 </mat-select>
                                             </mat-form-field>
@@ -78,7 +78,7 @@
                                     <!-- ================= Charges List Table ======================= -->
 
                                     <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
-                                        class="table1">
+                                        class="table1" style="overflow: auto;">
 
                                         <ng-container matColumnDef="checkbox" sticky>
                                             <mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -198,11 +198,11 @@
                                     </mat-table>
                                     <!-- ================= Charges List Footer Table ======================= -->
                                     <div>
-                                        <mat-paginator [pageSizeOptions]="[15,30, 45]" [pageSize]="15"
+                                        <mat-paginator [pageSizeOptions]="[10,20,30]" [pageSize]="10"
                                             showFirstLastButtons>
                                         </mat-paginator>
-                                        <div class="net-amt" style="margin-left: 900px;">
-                                            <span class="net-amt-label" style="font-size: large;font-family: sans-serif;">Net Amount:</span>&nbsp;<span
+                                        <div class="net-amt" style="margin-left: 900px;" hidden="true">
+                                            <span class="net-amt-label" style="font-size: large;font-family: sans-serif;"></span>&nbsp;<span
                                                 class="net-amt-value">{{getNetAmtSum(dataSource.data)}}</span>
                                         </div>
                                     </div>
@@ -232,7 +232,7 @@
                                             <mat-form-field appearance="outline" fxFlex>
                                                 <mat-label>TaxableAmount</mat-label>
                                                 <input matInput [(ngModel)]="TaxableAmount" name="TaxableAmount"
-                                                    formControlName="TaxableAmount" required>
+                                                    formControlName="TaxableAmount" required style="font-weight: bold;">
                                                 <!-- <mat-error
                                                     *ngIf="registeredForm.get('totalAmount').invalid && registeredForm.get('totalAmount').touched">
                                                     TotalAmount is required</mat-error> -->
@@ -240,7 +240,7 @@
 
 
 
-                                            <mat-form-field appearance="outline" fxFlex>
+                                            <mat-form-field appearance="outline" style="width: 100px;">
                                                 <mat-label>CGST</mat-label>
                                                 <input matInput [(ngModel)]="CGST" name="CGST" formControlName="CGST"
                                                     type="number" (keyup)="calculateCGST()">
@@ -250,7 +250,18 @@
                                                     required</mat-error> -->
                                             </mat-form-field>
 
-                                            <mat-form-field appearance="outline" fxFlex>
+                                            
+                                            <mat-form-field appearance="outline"  style="width: 100px;">
+                                                <mat-label>CGST Amount</mat-label>
+                                                <input matInput [(ngModel)]="CGSTAmount" name="CGSTAmount" formControlName="CGSTAmount"
+                                                    type="number" readonly>
+                                                <!-- <mat-error
+                                                    *ngIf="registeredForm.get('discAmount').invalid && registeredForm.get('discAmount').touched">
+                                                    Discount Amount Schod me Less than Tptal Amount TotalAmount is
+                                                    required</mat-error> -->
+                                            </mat-form-field>
+
+                                            <mat-form-field appearance="outline"  style="width: 100px;">
                                                 <mat-label>SGST</mat-label>
                                                 <input matInput [(ngModel)]="SGST" name="SGST" formControlName="SGST"
                                                     required  (keyup)="calculateSGST()" >
@@ -259,7 +270,18 @@
                                                     NetAmount is required</mat-error> -->
                                             </mat-form-field>
 
-                                            <mat-form-field appearance="outline" fxFlex>
+                                            
+                                            <mat-form-field appearance="outline"  style="width: 100px;">
+                                                <mat-label>SGST Amount</mat-label>
+                                                <input matInput [(ngModel)]="SGSTAmount" name="SGSTAmount" formControlName="SGSTAmount"
+                                                    type="number" readonly>
+                                                <!-- <mat-error
+                                                    *ngIf="registeredForm.get('discAmount').invalid && registeredForm.get('discAmount').touched">
+                                                    Discount Amount Schod me Less than Tptal Amount TotalAmount is
+                                                    required</mat-error> -->
+                                            </mat-form-field>
+
+                                            <mat-form-field appearance="outline"  style="width:100px;">
                                                 <mat-label>IGST</mat-label>
                                                 <input matInput [(ngModel)]="IGST" name="IGST" formControlName="IGST"
                                                     required  (keyup)="calculateIGST()" >
@@ -268,12 +290,21 @@
                                                     NetAmount is required</mat-error> -->
                                             </mat-form-field>
 
+                                            <mat-form-field appearance="outline"  style="width: 100px;">
+                                                <mat-label>IGST Amount</mat-label>
+                                                <input matInput [(ngModel)]="IGSTAmount" name="IGSTAmount" formControlName="IGSTAmount"
+                                                    type="number" readonly>
+                                                <!-- <mat-error
+                                                    *ngIf="registeredForm.get('discAmount').invalid && registeredForm.get('discAmount').touched">
+                                                    Discount Amount Schod me Less than Tptal Amount TotalAmount is
+                                                    required</mat-error> -->
+                                            </mat-form-field>
 
 
                                             <mat-form-field appearance="outline" fxFlex>
                                                 <mat-label>TotalAmount</mat-label>
-                                                <input matInput [(ngModel)]="TotalAmount" name="TotalAmount"
-                                                   formControlName="TotalAmount"
+                                                <input matInput [(ngModel)]="FinalTotalAmount" name="TotalAmount"
+                                                   formControlName="TotalAmount" style="font-weight: bold;"
                                                     required>
                                                 <!-- <mat-error
                                                     *ngIf="registeredForm.get('price').invalid && registeredForm.get('price').touched">
@@ -295,8 +326,7 @@
                 <div style="float: right;">
                     <button class="next-btn" color="accent" (click)="onSaveOPBill()">
                         <span style="display: flex;justify-content: center;">
-                            <!-- <mat-spinner *ngIf="isLoading=='submit'" [color]="white" [diameter]="20"></mat-spinner> -->
-                            <span>Save</span>
+                                  <span>Save</span>
                         </span>
                     </button>
 

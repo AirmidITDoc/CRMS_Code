@@ -14,6 +14,8 @@ app-bill-detail {
         width: 100%;
         background: transparent;
         box-shadow: none;
+        border-color: #b4babe;
+        border-style: groove;
 
         .mat-column-checkbox {
             flex: 0 1 64px;
@@ -58,60 +60,6 @@ app-bill-detail {
 
 app-bill-detail{
 
-    // .tables-contianer {
-    //     padding: 0 15px;
-    // }
-    
-   
-    
-//     .mat-header-row {
-//         width: 100%;
-//         max-width: 460px;
-//         min-width: 460px;  
-//         min-height: 25px;     
-//     }
-//    .mat-row {
-//         width: 100%;
-//         max-width: 460px;
-//         min-width: 460px;         
-//     }
-//     .mat-column-checkbox {
-//         width:60px;
-//         max-width: 60px;
-//         min-width: 60px;
-//     }
- 
-//     .mat-column-ServiceName {
-//         width: 150px;
-//         max-width: 150px;
-//         min-width: 150px;
-//         justify-content:left;
-//     }
-   
-//     .mat-column-Qty {
-//         width:40px;
-//         max-width:40px;
-//         min-width:40px;
-//         justify-content:center;
-//     }
-    
-    // .mat-column-ChargeDoctorName {
-    //     width: 180px;
-    //     max-width: 180px;
-    //     min-width: 180px;
-    // }
-    
-
-//     .mat-column-buttons {
-//         width: 60px;
-//         max-width: 60px;
-//         min-width: 60px;
-//     }
-    
-    
-    // .data-table .mat-form-field {
-    //     width: 54px !important;
-    // }
     
     .mat-data-table.mat-form-field-appearance-legacy .mat-form-field-infix{
         padding: 0.4375em 0px 0.4375em 5px !important;
@@ -680,14 +628,14 @@ padding-bottom: 2px;
 
 .mat-header-row {
     width: 100%;
-    max-width:1170px;
-    min-width:1170px; 
+    max-width:1400px;
+    min-width:1400px; 
     min-height: 30px;     
 }
 .mat-row {
     width: 100%;
-    max-width:1170px;
-    min-width:1170px; 
+    max-width:1400px;
+    min-width:1400px; 
     min-height: 30px;            
 }
 // PatientData
@@ -739,15 +687,15 @@ padding-bottom: 2px;
 }
 
 .mat-column-DiscPer {
-    width:60px;
-    max-width:60px;
-    min-width:60px;
+    width:70px;
+    max-width:70px;
+    min-width:70px;
     text-align:center;
 }
 .mat-column-DiscAmt {
-    width:60px;
-    max-width:60px;
-    min-width:60px;
+    width:70px;
+    max-width:70px;
+    min-width:70px;
     text-align:center;
 }
 .mat-column-NetAmount {

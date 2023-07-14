@@ -116,7 +116,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-    declarations: [CommitteeMemberComponent, NewCommitteeMemberComponent],
+    declarations: [],
     imports: [RouterModule.forChild(appRoutes)],
 })
 export class MasterModule { }

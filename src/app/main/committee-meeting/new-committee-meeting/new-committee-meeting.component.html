@@ -3,22 +3,20 @@
     <div class="container" style="width: 100%;">
         <div style="width: 100%;">
             <!-- <div fxFlex> -->
-            <div fxLayout="row" fxLayoutAlign="start center" class="accent"
-                style="width:100% ; height:37px;color: white;">
 
-                <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
-                    <!-- <button mat-icon-button class="sidebar-toggle mr-12">
-                        <mat-icon>menu</mat-icon>
-                    </button> -->
-                    <h3>{{_CommitteMeetingService.personalFormGroup.controls.CommitteeMeetingId.value?"Modify Committee Master":"New
+
+            <mat-toolbar matDialogTitle class="mat-accent m-0">
+                <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
+                    style="background-color: rgb(13, 67, 102) !important;">
+                    <h3>{{_CommitteMeetingService.personalFormGroup.controls.CommitteeMeetingId.value?"Modify Committee
+                        Master":"New
                         Committee Master"}}</h3>
-                    <div fxLayout="row" fxLayoutAlign="start center" style="float: right;">
-                        <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
-                            close
-                        </span>
-                    </div>
-                </div>
-            </div>
+                    <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog"
+                        style="float: right;">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-toolbar-row>
+            </mat-toolbar>
 
             <mat-card-content style="width: 100%;margin-right: 5px;">
 
@@ -29,9 +27,11 @@
                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="column" fxLayoutGap="3px">
                             <div fxlayout="row">
                                 <mat-card fxFlex.gt-sm="100%" fxFlex>
-                                    <form [formGroup]="_CommitteMeetingService.personalFormGroup" style="display: flex;">
+                                    <form [formGroup]="_CommitteMeetingService.personalFormGroup"
+                                        style="display: flex;">
 
-                                        <input type="hidden" name="CommitteeMeetingId" formControlName="CommitteeMeetingId">
+                                        <input type="hidden" name="CommitteeMeetingId"
+                                            formControlName="CommitteeMeetingId">
 
 
                                         <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="5px">
@@ -52,7 +52,8 @@
 
                                                 <diV style="margin-top:21px;">
                                                     <span style="margin-right: 40px;color: black;font-weight: bold;">
-                                                        <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
+                                                        <app-common-date [screenFrom]="screenFromString"
+                                                            (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
                                                     </span>
                                                 </diV>
                                             </div>
@@ -75,16 +76,20 @@
                                 <div fxlayout="row">
                                     <mat-card fxFlex.gt-sm="100%" fxFlex
                                         style="height: fit-content; background-color: white;">
-                                        <form [formGroup]="_CommitteMeetingService.personalFormGroup" style="display: flex;">
-                                            <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="5px">
-                                                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                                        <form [formGroup]="_CommitteMeetingService.personalFormGroup"
+                                            style="display: flex;">
+                                            <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between"
+                                                fxLayoutGap="5px">
+                                                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
+                                                    fxLayoutGap="4px">
                                                     <mat-form-field appearance="outline" style="width: 40%;">
                                                         <mat-label>Member</mat-label>
                                                         <mat-select formControlName="CommitteeId" placeholder="Bank"
                                                             #singleSelect required>
                                                             <mat-option>
                                                             </mat-option>
-                                                            <mat-option *ngFor="let element of MembercmbList" [value]="element">
+                                                            <mat-option *ngFor="let element of MembercmbList"
+                                                                [value]="element">
                                                                 {{element.CommiteeName}}
                                                             </mat-option>
                                                         </mat-select>
@@ -106,7 +111,7 @@
                     </div>
 
 
-                
+
                     <div fxLayout="row" style="width: 100%;">
                         <div fxFlex="100" fxLayout="row" fxLayout.gt-xs="column">
                             <div>
@@ -132,7 +137,7 @@
                                             </mat-cell>
                                         </ng-container>
 
-                                        <ng-container matColumnDef="StudyAmount">                                        
+                                        <ng-container matColumnDef="StudyAmount">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
                                                 StudyAmount
                                             </mat-header-cell>
@@ -150,21 +155,21 @@
                                             </mat-cell>
                                         </ng-container>           
                                          -->
-                                        
-                                         <ng-container matColumnDef="MeetingStatus">
+
+                                        <ng-container matColumnDef="MeetingStatus">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
                                                 MeetingStatus
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                                 <mat-select>
                                                     <mat-option *ngFor="let Result of results" [value]="Result.value">
-                                                      {{ Result.viewValue }}
+                                                        {{ Result.viewValue }}
                                                     </mat-option>
-                                                  </mat-select>
+                                                </mat-select>
                                             </mat-cell>
-                                        </ng-container>           
-                                        
-                                       
+                                        </ng-container>
+
+
 
 
                                         <ng-container matColumnDef="action" stickyEnd>
@@ -208,7 +213,8 @@
                                     </mat-table>
                                     <!-- ================= Charges List Footer Table ======================= -->
                                     <div class="net-amt" style="margin-left:350px;">
-                                        <span class="net-amt-label" style="color: rgb(7, 124, 214);">Net Amount:</span>&nbsp;<span
+                                        <span class="net-amt-label" style="color: rgb(7, 124, 214);">Net
+                                            Amount:</span>&nbsp;<span
                                             class="net-amt-value">{{getNetAmtSum(dataSource.data)}}</span>
                                     </div>
                                 </div>
@@ -224,3 +230,5 @@
                 </div>
             </mat-card-content>
         </div>
+    </div>
+</div>

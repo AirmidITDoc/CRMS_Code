@@ -14,7 +14,7 @@
                     <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
                         style="width: 80%;font-size: 16px;">
                         Add Committee Member</span>
-                    <div fxLayout="row" fxLayoutAlign="start end" style="float: right; margin-right: 5px;  ">
+                    <div fxLayout="row" fxLayoutAlign="start end" style="margin-left: 400px;">
                         <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
                             close
                         </span>
@@ -27,19 +27,19 @@
                     <div class="content-card"
                         style="width:100%;  margin-top: 2px; float: right;background-color: white;">
                         <mat-card fxFlex.gt-sm="100%" fxFlex>
-                            <form [formGroup]="personalFormGroup" style="display: flex;" #f="ngForm" #aForm>
+                            <form [formGroup]="_CommitteMeetingService.personalFormGroup" style="display: flex;" #f="ngForm" #aForm>
                                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
                                     <mat-form-field appearance="outline" style="width: 40%;">
                                         <mat-label>Committee Name</mat-label>
                                         <input name="CommitteeName" formControlName="CommitteeName"
                                             placeholder="Committee Name" matInput required type="text">
                                         <mat-error
-                                            *ngIf="personalFormGroup.get('CommitteeName').invalid && personalFormGroup.get('CommitteeName').touched">
+                                            *ngIf="_CommitteMeetingService.personalFormGroup.get('CommitteeName').invalid && _CommitteMeetingService.personalFormGroup.get('CommitteeName').touched">
                                             CommitteeName is required Enter only
                                             Alphabets</mat-error>
                                     </mat-form-field>
 
-                                    <diV style="margin-top:21px;">
+                                    <diV style="margin-top:21px;margin-left: 400px;">
                                         <span style="margin-right: 40px;color: black;font-weight: bold;">
                                             <app-common-date [screenFrom]="screenFromString"
                                                 (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
@@ -149,9 +149,10 @@
                 </div>
             </mat-card-content>
         </div>
+        <div style="margin-left:550px;">
+            <button class="next-btn" color="accent" (click)="onSubmit()" style="border-radius: 16px;"> Save</button>
+            <button class="footer-btn" (click)="onClose()">Cancel</button>
+        </div>
     </div>
-    <div style="float: right;">
-        <button class="next-btn" color="accent" (click)="onSubmit()" style="border-radius: 16px;"> Save</button>
-        <button class="footer-btn" (click)="onClose()">Cancel</button>
-    </div>
+   
 </div>

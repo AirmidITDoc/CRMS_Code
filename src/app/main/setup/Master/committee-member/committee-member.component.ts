@@ -28,7 +28,7 @@ export class CommitteeMemberComponent implements OnInit {
   subscriptions: Subscription[] = [];
   
   printTemplate: any;
-  
+  hasSelectedContacts: boolean;
   subscriptionArr: Subscription[] = [];
 
   VisitID:any;
@@ -53,7 +53,7 @@ export class CommitteeMemberComponent implements OnInit {
     private _ActRoute: Router,
     private _fuseSidebarService: FuseSidebarService,
     public _matDialog: MatDialog,
-    public datePipe: DatePipe,
+    // public datePipe: DatePipe,
     // private advanceDataStored: AdvanceDataStored
   ) {
     // this.getCommitteeList();
@@ -116,8 +116,8 @@ export class CommitteeMemberComponent implements OnInit {
   newCommitteeMember() {
     const dialogRef = this._matDialog.open(NewCommitteeMemberComponent,
       {
-        maxWidth: "80vw",
-        height: '660px',
+        maxWidth: "50vw",
+        height: '600px',
         width: '100%',
         
       });
@@ -252,8 +252,8 @@ export class CommitteeMemberComponent implements OnInit {
 
      const dialogRef = this._matDialog.open(NewCommitteeMemberComponent,
         {
-        maxWidth: "70vw",
-        maxHeight: "55vh",
+        maxWidth: "60vw",
+        maxHeight: "660px",
         width: "100%",
         height: "100%",
         // data : {

@@ -202,10 +202,11 @@ export class AppointmentComponent implements OnInit {
         "RegDate": contact.RegDate,
         "RegNoWithPrefix": contact.RegNoWithPrefix,
         "RegTime": contact.RegTime,
+        "DoctorId":contact.DoctorId,
         "Opration":"UPDATE"
       }
       this._AppointmentSreviceService.populateFormpersonal(m_data);
-      const dialogRef = this._matDialog.open(NewAppointmentComponent,
+      const dialogRef = this._matDialog.open(EditAppointmentComponent,
         {
           maxWidth: "85vw",
           height: '500px',
@@ -251,8 +252,8 @@ export class AppointmentComponent implements OnInit {
         this.advanceDataStored.storage = new SearchInforObj(xx);
         const dialogRef = this._matDialog.open(BillDetailComponent,
           {
-            maxWidth: "99%",
-            height: '700px',
+            maxWidth: "95%",
+            height: '650px',
             width: '100%',
             data: {
               registerObj: xx,
@@ -290,8 +291,8 @@ export class AppointmentComponent implements OnInit {
       this.advanceDataStored.storage = new SearchInforObj(xx);
       const dialogRef = this._matDialog.open(InvoiceBillMappingComponent,
         {
-          maxWidth: "99%",
-          height: '700px',
+          maxWidth: "65%",
+          height: '760px',
           width: '100%',
           data: {
             registerObj: xx,
@@ -432,8 +433,8 @@ export class AppointmentComponent implements OnInit {
       this._AppointmentSreviceService.populateFormpersonal(m_data1);
       const dialogRef = this._matDialog.open(NewVistDateComponent,
         {
-          maxWidth: "85vw",
-          height: '400px',
+          maxWidth: "75vw",
+          height: '290px',
           width: '100%',
           data: {
             registerObj: m_data1,

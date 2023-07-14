@@ -299,7 +299,7 @@ export class CaseDetailComponent implements OnInit {
     const dialogRef = this._matDialog.open(NewCaseDetailComponent,
       {
         maxWidth: "75vw",
-        height: '580px',
+        height: '550px',
         width: '100%',
         
       });

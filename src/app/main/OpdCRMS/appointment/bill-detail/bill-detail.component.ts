@@ -106,7 +106,7 @@ export class BillDetailComponent implements OnInit {
   billingServiceList = [];
   showAutocomplete = false;
 
-  isDoctor: boolean = true;
+  isDoctor: boolean = false;
   Consession: boolean = true;
   VisitDateList: any = [];
   ConcessionReasonList: any = [];
@@ -499,10 +499,10 @@ debugger;
     if (obj.IsDocEditable) {
 
       
-      this.isDoctor = false;
+      this.isDoctor = true;
     } else {
      
-      this.isDoctor = true;
+      this.isDoctor = false;
 
       // this.DoctorId.close();
 
@@ -1056,10 +1056,10 @@ debugger;
         ChargesAddedName: this.accountService.currentUserValue.user.id || 1,
       });
     this.isLoading = '';
-    console.log(this.chargeslist);
+    
     this.dataSource.data = this.chargeslist;
-    console.log(this.dataSource.data);
-    this.changeDetectorRefs.detectChanges();
+    
+    // this.changeDetectorRefs.detectChanges();
 
     // }
     this.onClearServiceAddList();
@@ -1096,7 +1096,7 @@ debugger;
     this.registeredForm.get('price').reset();
     this.registeredForm.get('qty').reset('1');
     this.registeredForm.get('totalAmount').reset();
-    this.registeredForm.get('DoctorId').reset();
+    // this.registeredForm.get('DoctorId').reset();
     this.registeredForm.get('discPer').reset();
     this.registeredForm.get('discAmount').reset();
     this.registeredForm.get('netAmount').reset();

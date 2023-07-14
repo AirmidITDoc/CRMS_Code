@@ -123,22 +123,24 @@ app-invoice-bill-mapping {
 app-invoice-bill-mapping{
 
     .table1 {
-        height: 350px !important;
+        height: 400px !important;
+        border-color: #808080;
+        border-style: groove;
     }
 
     .mat-header-row {
         background-color: rgb(13, 67, 102) !important;
-        max-width: 100%;
-        min-width: 800px;
+        max-width: 1100px;
+        min-width: 1100px;
         min-height: 20px;
-        width: 100%;
+        width: 800px;
 
     }
 
     .mat-row {
-        max-width: 100%;
+        max-width: 1100px;
         min-height: 25px;
-        min-width: 800px;
+        min-width: 1100px;
         display: flex;
     }
     .mat-column-checkbox {
@@ -149,26 +151,26 @@ app-invoice-bill-mapping{
         justify-content: left;
     }
     .mat-column-BillNo {
-        width: 80px;
-        max-width: 80px;
-        min-width: 80px;
+        width: 150px;
+        max-width: 150px;
+        min-width: 150px;
         text-align: right;
         justify-content: left;
     }
 
     .mat-column-RegNo {
-        width: 80px;
-        max-width: 80px;
-        min-width: 80px;
+        width: 150px;
+        max-width: 150px;
+        min-width: 150px;
         text-align: right;
         justify-content: left;
     }
 
     .mat-column-PatientName {
 
-        width: 300px;
-        max-width: 300px;
-        min-width: 300px;
+        width: 500px;
+        max-width: 500px;
+        min-width: 500px;
         text-align: left;
         white-space: nowrap;
         overflow: hidden;
@@ -181,9 +183,9 @@ app-invoice-bill-mapping{
     }
 
     .mat-column-TotalAmt {
-        width: 110px;
-        max-width: 110px;
-        min-width: 110px;
+        width: 150px;
+        max-width: 150px;
+        min-width: 150px;
         text-align: right;
         //justify-content:right;
         justify-content: right;

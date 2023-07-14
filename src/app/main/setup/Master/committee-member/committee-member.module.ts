@@ -27,6 +27,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CommitteeMemberComponent } from './committee-member.component';
 import { NewCommitteeMemberComponent } from './new-committee-member/new-committee-member.component';
+import { MatCardModule } from '@angular/material/card';
 
 
 const routes: Routes = [
@@ -64,6 +65,7 @@ const routes: Routes = [
     MatStepperModule,
     MatAutocompleteModule,
     SharedModule,
+    MatCardModule,
     NgxMatSelectSearchModule,
   ],
   entryComponents: [CommitteeMemberComponent],
