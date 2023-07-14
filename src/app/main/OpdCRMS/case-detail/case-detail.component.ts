@@ -13,6 +13,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { fuseAnimations } from '@fuse/animations';
 import { EditCasedetailComponent } from './edit-casedetail/edit-casedetail.component';
 import { CaseIdDetailComponent } from 'app/main/dashboard/case-id-detail/case-id-detail.component';
+import { StudyDetailComponent } from './study-detail/study-detail.component';
+import { StudySchduleComponent } from './study-schdule/study-schdule.component';
+import { UploadDocumentComponent } from '../appointment/upload-document/upload-document.component';
 
 @Component({
   selector: 'app-case-detail',
@@ -77,9 +80,9 @@ export class CaseDetailComponent implements OnInit {
   ngOnInit(): void {
 
     if (this._ActRoute.url == '/opd/registration') {
-      // this.menuActions.push('One');
-      this.menuActions.push('Edit Study Detail');
-      this.menuActions.push('Edit Study Schdule');
+      this.menuActions.push('Update All Study Detail');
+      this.menuActions.push('Update Study Detail');
+      this.menuActions.push('Update Study Schdule');
       this.menuActions.push('Upload Document');
         }
 
@@ -133,7 +136,7 @@ export class CaseDetailComponent implements OnInit {
     debugger;
     console.log(contact);
 
-    if (m == "Edit Study Detail") {
+    if (m == "Update All Study Detail") {
       var m_data = {
         StudyId:contact.StudyId,
       ProtocolNo:contact.ProtocolNo,
@@ -156,7 +159,121 @@ export class CaseDetailComponent implements OnInit {
       const dialogRef = this._matDialog.open(NewCaseDetailComponent,
         {
           maxWidth: "85vw",
-          height: '580px',
+          height: '590px',
+          width: '100%',
+          data: {
+            registerObj: m_data,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+        this.getCaseList();
+      });
+
+      error => {
+        this.sIsLoading = '';
+
+      }
+    }else if (m == "Update Study Detail") {
+      var m_data = {
+        StudyId:contact.StudyId,
+      ProtocolNo:contact.ProtocolNo,
+      ProtocolTitle:contact.ProtocolTitle,
+      StudyProduct: contact.StudyProduct,
+      TotalSubjects:contact.TotalSubjects,
+      TotalVisits:contact.TotalVisits,
+      VisitFrequency:contact.VisitFrequency,
+      StudyStartDate: contact.StudyStartDate,
+      StudyEndDate:contact.StudyEndDate,
+      Sponser: contact.Sponser,
+      Investigator:contact.Investigator,
+      Institution: contact.Institution,
+      HospitalRepresentative: contact.HospitalRepresentative,
+      AgreementFileName: contact.AgreementFileName,
+      "operation":"UPDATE"
+      }
+      this._CasedetailService.populateFormpersonal(m_data);
+
+      const dialogRef = this._matDialog.open(StudyDetailComponent,
+        {
+          maxWidth: "85vw",
+          height: '510px',
+          width: '100%',
+          data: {
+            registerObj: m_data,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+        this.getCaseList();
+      });
+
+      error => {
+        this.sIsLoading = '';
+
+      }
+    }else if (m == "Update Study Schdule") {
+      var m_data = {
+        StudyId:contact.StudyId,
+      ProtocolNo:contact.ProtocolNo,
+      ProtocolTitle:contact.ProtocolTitle,
+      StudyProduct: contact.StudyProduct,
+      TotalSubjects:contact.TotalSubjects,
+      TotalVisits:contact.TotalVisits,
+      VisitFrequency:contact.VisitFrequency,
+      StudyStartDate: contact.StudyStartDate,
+      StudyEndDate:contact.StudyEndDate,
+      Sponser: contact.Sponser,
+      Investigator:contact.Investigator,
+      Institution: contact.Institution,
+      HospitalRepresentative: contact.HospitalRepresentative,
+      AgreementFileName: contact.AgreementFileName,
+      "operation":"UPDATE"
+      }
+      this._CasedetailService.populateFormpersonal(m_data);
+
+      const dialogRef = this._matDialog.open(StudySchduleComponent,
+        {
+          maxWidth: "85vw",
+          height: '560px',
+          width: '100%',
+          data: {
+            registerObj: m_data,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+        this.getCaseList();
+      });
+
+      error => {
+        this.sIsLoading = '';
+
+      }
+    }else if (m == "Upload Document") {
+      var m_data = {
+        StudyId:contact.StudyId,
+      ProtocolNo:contact.ProtocolNo,
+      ProtocolTitle:contact.ProtocolTitle,
+      StudyProduct: contact.StudyProduct,
+      TotalSubjects:contact.TotalSubjects,
+      TotalVisits:contact.TotalVisits,
+      VisitFrequency:contact.VisitFrequency,
+      StudyStartDate: contact.StudyStartDate,
+      StudyEndDate:contact.StudyEndDate,
+      Sponser: contact.Sponser,
+      Investigator:contact.Investigator,
+      Institution: contact.Institution,
+      HospitalRepresentative: contact.HospitalRepresentative,
+      AgreementFileName: contact.AgreementFileName,
+      "operation":"UPDATE"
+      }
+      this._CasedetailService.populateFormpersonal(m_data);
+
+      const dialogRef = this._matDialog.open(UploadDocumentComponent,
+        {
+          maxWidth: "85vw",
+          height: '540px',
           width: '100%',
           data: {
             registerObj: m_data,
@@ -173,12 +290,7 @@ export class CaseDetailComponent implements OnInit {
       }
     }
  
-    error => {
-      this.sIsLoading = '';
-
-    }
-    // /   this._ActRoute.navigate(['opd/appointment/op_bill'], {queryParams:{id:this.selectedID}})
-
+   
   }
 
 

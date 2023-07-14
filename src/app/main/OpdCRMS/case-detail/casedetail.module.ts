@@ -37,6 +37,8 @@ import { NewCaseDetailComponent } from './new-case-detail/new-case-detail.compon
 import { CaseDetailComponent } from './case-detail.component';
 import { CasedetailService } from './casedetail.service';
 import { EditCasedetailComponent } from './edit-casedetail/edit-casedetail.component';
+import { StudySchduleComponent } from './study-schdule/study-schdule.component';
+import { StudyDetailComponent } from './study-detail/study-detail.component';
 
 // import { SharedModule } from 'app/main/shared/shared.module';
 
@@ -50,7 +52,9 @@ const routes: Routes = [
     declarations: [
         CaseDetailComponent,
         NewCaseDetailComponent,
-        EditCasedetailComponent
+        EditCasedetailComponent,
+        StudySchduleComponent,
+        StudyDetailComponent
       
     ],
     imports: [

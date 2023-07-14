@@ -1,32 +1,26 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
+import Swal from 'sweetalert2';
 import { CasedetailService } from '../casedetail.service';
 import { AuthenticationService } from 'app/core/services/authentication.service';
-import { CaseDetailComponent } from '../case-detail.component';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { fuseAnimations } from '@fuse/animations';
 import { takeUntil } from 'rxjs/operators';
-import { UploadDocumentComponent } from '../../appointment/upload-document/upload-document.component';
-import { FileUploadComponent } from '../../appointment/file-upload/file-upload.component';
-import { ImageUploadComponent } from '../../appointment/image-upload/image-upload.component';
-import Swal from 'sweetalert2';
-import { MatTableDataSource } from '@angular/material/table';
-
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
-  selector: 'app-new-case-detail',
-  templateUrl: './new-case-detail.component.html',
-  styleUrls: ['./new-case-detail.component.scss'],
+  selector: 'app-study-detail',
+  templateUrl: './study-detail.component.html',
+  styleUrls: ['./study-detail.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations
 })
-export class NewCaseDetailComponent implements OnInit {
+export class StudyDetailComponent implements OnInit {
 
-
+  
   chargeslist: any = [];
 
   studySchFormGroup: FormGroup;
@@ -38,27 +32,14 @@ export class NewCaseDetailComponent implements OnInit {
   CaseIdList: any = [];
   snackmessage: any;
   screenFromString = 'admission-form';
-  CaseId: any;
-  CaseTitle: any;
-  CaseDescription: any;
-  TotalSubjects: number;
-  TotalVisits: number;
-  VisitFrequency: string;
-  CaseStartDate: Date;
-  CaseEndDate: Date;
-  CaseStatus: string;
-  CompanyName: string;
-  CaseRepresentative: string;
-  HospitalRepresentative: string;
-  AgreementFileName: String;
+  
   registerObj = new CaseDetail({});
   VisitFrequencyList: any = [];
   VisitName: any;
   VisitDescription: any;
   Amount: any;
 
-  DocumentName: any;
-  DocumentPath: any;
+ 
   StudyAmount: any;
   StudyId: any;
   VisitList: any = []
@@ -83,35 +64,13 @@ export class NewCaseDetailComponent implements OnInit {
   private _onDestroy = new Subject<void>();
   // private _onDestroy1 = new Subject<void>();
 
-  displayedColumns = [
-
-    'VisitName',
-    'VisitDescription',
-    'Amount',
-    'action'
-  ];
-
-
-
-  displayedColumns1 = [
-
-    'DocumentName',
-    'DocumentPath',
-    // 'Amount',
-    'action'
-  ];
-
-  dataSource = new MatTableDataSource<VisitDetail>();
-  dataSource1 = new MatTableDataSource<VisitDetail>();
-  dataSource2 = new MatTableDataSource<DocumentDetail>();
-
 
   constructor(public _CasedetailService: CasedetailService,
     private formBuilder: FormBuilder,
     private accountService: AuthenticationService,
     public _matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<NewCaseDetailComponent>,
+    public dialogRef: MatDialogRef<StudyDetailComponent>,
     private _snackBar: MatSnackBar,
     public datePipe: DatePipe,
     private router: Router,
@@ -311,31 +270,12 @@ export class NewCaseDetailComponent implements OnInit {
       this.DocumentList = data;
       // console.log(this.VisitFrequencyList);
       this.filteredDocument.next(this.DocumentList.slice());
-      this._CasedetailService.personalFormGroup
-      .get("Document")
-      .setValue(this.DocumentList[0]);
+      // this._CasedetailService.personalFormGroup
+      // .get("Document")
+      // .setValue(this.DocumentList[0]);
     });
   }
 
-  onSaveEntry() {
-    debugger;
-
-    // if (this.SrvcName && (parseInt(this.b_price) != 0) && this.b_qty) {
-    // this.isLoading = 'save';
-    this.dataSource.data = [];
-    this.chargeslist.push(
-      {
-
-        // MemberId: this.Vi,
-        // MemberName: this.MemberName,
-
-      });
-    this.isLoading = '';
-    console.log(this.chargeslist);
-    this.dataSource.data = this.chargeslist;
-    console.log(this.dataSource.data);
-
-  }
 
 
   dateTimeObj: any;
@@ -344,32 +284,6 @@ export class NewCaseDetailComponent implements OnInit {
     this.dateTimeObj = dateTimeObj;
   }
 
-  UploadDoc() {
-
-    // const dialogRef = this._matDialog.open(DcoumentUploadComponent,
-    //   {
-    //     maxWidth: "25vw",
-    //     height: '25vw',
-    //     width: '100%',
-
-    //   });
-    // dialogRef.afterClosed().subscribe(result => {
-
-    // });
-  }
-
-  UploadImgage() {
-    const dialogRef = this._matDialog.open(ImageUploadComponent,
-      {
-        maxWidth: "45vw",
-        height: '45vw',
-        width: '100%',
-
-      });
-    dialogRef.afterClosed().subscribe(result => {
-
-    });
-  }
   onSubmit() {
 
     this.isLoading = 'submit';
@@ -423,7 +337,7 @@ export class NewCaseDetailComponent implements OnInit {
           "VisitFrequency": this._CasedetailService.personalFormGroup.get('VisitFrequency').value.ConstantId || 0,
           "sponser": this._CasedetailService.personalFormGroup.get('CompanyId').value.CompanyId || 0,
           "investigator": this._CasedetailService.personalFormGroup.get('Investigator').value || '',
-          "institution": this._CasedetailService.personalFormGroup.get('Institution').value || '',
+          "institution": this._CasedetailService.personalFormGroup.get('Institution').value.InstitutionId || 0,
           "studyStartDate": this.datePipe.transform(this.registerObj.StudyStartDate, "MM-dd-yyyy"),
           "studyEndDate": this.datePipe.transform(this.registerObj.StudyEndDate, "MM-dd-yyyy"),
           "AgreementFileName": this._CasedetailService.personalFormGroup.get('AgreementFileName').value.ConstantId || 0,
@@ -450,140 +364,7 @@ export class NewCaseDetailComponent implements OnInit {
 
 
   }
-  onAddVisitDetail() {
-    this.VisitList.data = [];
-    this.chargeslist.push(
-      {
-        VisitName: this.VisitName,
-        VisitDescription: this.VisitDescription,
-        Amount: this.Amount
-      });
-    this.isLoading = '';
-    console.log(this.chargeslist);
-    this.dataSource1.data = this.chargeslist;
-    console.log(this.VisitList.data);
-
-  }
-
-  onAddDocumentDetail() {
-    this.DocumentList.data = [];
-    this.chargeslist.push(
-      {
-        DocumentName: this.DocumentName,
-        DocumentPath: this.DocumentPath
-
-      });
-    this.isLoading = '';
-    console.log(this.chargeslist);
-    this.dataSource2.data = this.chargeslist;
-    console.log(this.DocumentList.data);
-  }
-
-  onStudySave() {
-
-    debugger;
-    let insertStudySchedulearr = [];
-    this.dataSource1.data.forEach((element) => {
-      let insertStudySchedule = {};
-      // insertStudySchedule['studyVisitId'] = 0;
-      insertStudySchedule['studyId'] = this.registerObj.StudyId;
-
-      insertStudySchedule['visitName'] = element.VisitName;
-      insertStudySchedule['visitDescription'] = element.VisitDescription;
-      insertStudySchedule['visitAmount'] = element.Amount;
-      insertStudySchedule['createdBy'] = this.accountService.currentUserValue.user.id;
-      insertStudySchedulearr.push(insertStudySchedule);
-    });
-
-    let submitData = {
-      "insertStudySchedule": insertStudySchedulearr
-    };
-
-    console.log(submitData);
-    this._CasedetailService.StudySchduleInsert(submitData).subscribe(response => {
-      console.log(response)
-      if (response) {
-        Swal.fire('New StudySchedule Save !', ' StudySchedule Save Successfully !', 'success').then((result) => {
-
-          console.log(result)
-          if (result) {
-
-            this._matDialog.closeAll();
-          }
-        });
-      } else {
-        Swal.fire('Error !', 'StudySchedule not saved', 'error');
-      }
-    });
-
-  }
-
-  onStudyUpdate() {
-    let updateStudySchedulearr = [];
-    this.dataSource1.data.forEach((element) => {
-      let updateStudySchedule = {};
-      updateStudySchedule['studyVisitId'] = 0;
-      updateStudySchedule['studyId'] = this.registerObj.StudyId
-
-      updateStudySchedule['visitName'] = element.VisitName;
-      updateStudySchedule['visitDescription'] = element.VisitDescription;
-      updateStudySchedule['visitAmount'] = element.Amount;
-      updateStudySchedule['createdBy'] = this.accountService.currentUserValue.user.id;
-      updateStudySchedulearr.push(updateStudySchedule);
-    });
-
-    let submitData = {
-      "updateStudySchedule": updateStudySchedulearr
-    };
-
-    console.log(submitData);
-    this._CasedetailService.StudySchduleInsert(submitData).subscribe(response => {
-      if (response) {
-        Swal.fire('StudySchedule Update !', ' StudySchedule Update Successfully !', 'success').then((result) => {
-          if (result.isConfirmed) {
-            this._matDialog.closeAll();
-          }
-        });
-      } else {
-        Swal.fire('Error !', 'StudySchedule not saved', 'error');
-      }
-    });
-
-  }
-
-
-  onDocumentSave() {
-    let insertDocumentarr = [];
-
-    this.dataSource2.data.forEach((element) => {
-      let insertDocument = {};
-      insertDocument['studyDocId'] = 0;
-      insertDocument['studyId'] = this.registerObj.StudyId
-
-      insertDocument['DocumentTypeId'] = element.DocumentTypeId;
-      insertDocument['DocumentName'] = element.DocumentName;
-      insertDocument['DocumentPath'] = element.DocumentPath;
-      insertDocument['createdBy'] = this.accountService.currentUserValue.user.id;
-      insertDocumentarr.push(insertDocument);
-    });
-
-    let submitData = {
-      "insertStudyUploadDocument": insertDocumentarr
-    };
-
-    console.log(submitData);
-    this._CasedetailService.DocumentInsert(submitData).subscribe(response => {
-      if (response) {
-        Swal.fire('New Document Save !', ' Document Save Successfully !', 'success').then((result) => {
-          if (result.isConfirmed) {
-            this._matDialog.closeAll();
-          }
-        });
-      } else {
-        Swal.fire('Error !', 'Document not saved', 'error');
-      }
-    });
-  }
+   
 
   onClose() {
     this.dialogRef.close();
@@ -600,17 +381,6 @@ export class NewCaseDetailComponent implements OnInit {
   }
 
 
-  deleteTableRow(element) {
-    {
-      let index = this.chargeslist.indexOf(element);
-      if (index >= 0) {
-        this.chargeslist.splice(index, 1);
-        this.dataSource.data = [];
-        this.dataSource.data = this.chargeslist;
-      }
-      Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
-    }
-  }
 
 }
 
@@ -695,30 +465,3 @@ export class VisitDetail {
 }
 
 
-
-
-export class DocumentDetail {
-  StudyDocId: any;
-  StudyId: any;
-  DocumentTypeId: any;
-  DocumentName: any;
-  DocumentPath: any;
-  /**
-   * Constructor
-   *
-   * @param DocumentDetail
-   */
-
-  constructor(DocumentDetail) {
-    {
-      this.StudyDocId = DocumentDetail.StudyDocId || 0;
-      this.StudyId = DocumentDetail.StudyId || 0;
-      this.DocumentTypeId = DocumentDetail.DocumentTypeId || '';
-
-      this.DocumentName = DocumentDetail.DocumentName || '';
-      this.DocumentPath = DocumentDetail.DocumentPath || '';
-      // this.Amount = VisitDetail.Amount || '';
-
-    }
-  }
-}

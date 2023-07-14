@@ -10,6 +10,9 @@ export class CasedetailService {
   personalFormGroup: FormGroup;
   myFilterform: FormGroup;
   mySaveForm: FormGroup;
+  studySchFormGroup: FormGroup;
+
+
   now = Date.now();
   sIsLoading: string = '';
   constructor(public _httpClient: HttpClient,
@@ -17,6 +20,7 @@ export class CasedetailService {
   ) {
     this.myFilterform = this.filterForm();
     // this.mySaveForm = this.saveForm();
+    this.studySchFormGroup = this.createstudySchForm();
     this.personalFormGroup = this.createPesonalForm();
   }
 
@@ -57,6 +61,28 @@ export class CasedetailService {
         AgreementFileName: '',
         CompanyId:'',
         StudyId:''
+    });
+  }
+
+  
+  createstudySchForm() {
+    return this._formBuilder.group({
+      VisitId: '',
+      VisitName: '',
+      VisitDescription: '',
+      Amount: '',
+      TotalAmount:' '
+    });
+  }
+
+
+  createdocumentForm() {
+    return this._formBuilder.group({
+      StudyId: '',
+      DocumentTypeId: '',
+      DocumentName: '',
+      DocumentPath: '',
+
     });
   }
 
