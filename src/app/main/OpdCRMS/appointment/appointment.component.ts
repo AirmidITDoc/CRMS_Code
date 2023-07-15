@@ -171,7 +171,7 @@ export class AppointmentComponent implements OnInit {
 
     if (m == "Update Registration") {
       var m_data = {
-        "RegNo": contact.RegNo,
+        // "RegNo": contact.RegNo,
         "RegId": contact.RegId,
         "PrefixID": contact.PrefixId,
         "PrefixName": contact.PrefixName,
@@ -227,12 +227,7 @@ export class AppointmentComponent implements OnInit {
     }
     else if (m == "Bill") {
       console.log(contact);
-      var D_data = {
-        "RegId": contact.RegId,
-      }
-      this._AppointmentSreviceService.getregisterListByRegId(D_data).subscribe(reg => {
-        // this.dataArray = reg;
-        // console.log(this.dataArray);
+    
         let xx = {
           RegNo: contact.RegId,
           RegId: contact.RegId,
@@ -252,8 +247,8 @@ export class AppointmentComponent implements OnInit {
         this.advanceDataStored.storage = new SearchInforObj(xx);
         const dialogRef = this._matDialog.open(BillDetailComponent,
           {
-            maxWidth: "95%",
-            height: '650px',
+            maxWidth: "98%",
+            height: '600px',
             width: '100%',
             data: {
               registerObj: xx,
@@ -263,10 +258,10 @@ export class AppointmentComponent implements OnInit {
           console.log('The dialog was closed - Insert Action', result);
           this.getVisitList();
         });
-      },
+     
         error => {
           this.sIsLoading = '';
-        });
+        }
     }
     else if (m == "Invoice Bill") {
       console.log(contact);

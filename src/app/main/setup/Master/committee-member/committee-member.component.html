@@ -11,7 +11,7 @@
             </mat-icon>
             <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
                 style="color: aliceblue;">
-                Committee Member Detail List
+                Committee Member Information List
             </span>
 
             <!-- <button mat-raised-button (click)="newMember()" style="margin-left:10%;width:180px;">Add
@@ -52,13 +52,19 @@
                             fusePerfectScrollbar>
                             <div fxLayout="column" fxLayoutAlign="start none">
 
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>CommitteeId</mat-label>
+                                    <input name="CommitteeId" formControlName="CommitteeId" matInput (keyup)="getCommitteeMemberList()">
+                                    <!-- <span class="error" *ngIf="f.CommitteeId.invalid && f.CommitteeId.touched">CommitteeId is
+                                        required Enter</span> -->
+                                </mat-form-field>
 
                                 <div style="margin-top: 10px;">
                                     <button mat-raised-button (click)="onClear()" class="clearbutton"
                                         matTooltip="close">
                                         <mat-icon class="cleariconbutton">close</mat-icon>
                                     </button>&nbsp;
-                                    <button mat-raised-button class="searchButton" (click)="getCommitteeList()"
+                                    <button mat-raised-button class="searchButton" (click)="getCommitteeMemberList()"
                                         matTooltip="search">
                                         <mat-icon class="searchiconbutton">search</mat-icon>
                                     </button>
@@ -89,11 +95,9 @@
                                 <mat-table #table matSort [dataSource]="dataSource"
                                     [@animateStagger]="{value:'50'}" class="table1">
 
-                             
-
                                     <ng-container matColumnDef="CommitteeId">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header
-                                            fxShow.gt-sm>Code
+                                            fxShow.gt-sm>CommitteeId
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm style="margin-top: 1px;">
                                             {{contact.CommitteeId}}
@@ -109,25 +113,79 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="CreatedBy">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>CreatedBy
+                                    <ng-container matColumnDef="MemberId">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header
+                                            fxShow.gt-sm>MemberId
                                         </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.CreatedBy}}
+                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm style="margin-top: 1px;">
+                                            {{contact.MemberId}}
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="IsActive">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>IsActive
+                                  
+                                    <ng-container matColumnDef="MemberName">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header
+                                            fxShow.gt-sm>MemberName
                                         </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.IsActive}}
+                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm style="margin-top: 1px;">
+                                            {{contact.MemberName}}
                                         </mat-cell>
                                     </ng-container>
 
+                                    <ng-container matColumnDef="Member_Address">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>Member_Address
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.Member_Address}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="CityId">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header
+                                            fxShow.gt-sm>CityId
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm style="margin-top: 1px;">
+                                            {{contact.CityId}}
+                                        </mat-cell>
+                                    </ng-container>
                                 
+
+                                    <ng-container matColumnDef="MobileNo">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>MobileNo
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.MobileNo}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="EmailId">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>EmailId
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.EmailId}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="StudyAmount">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>StudyAmount
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.StudyAmount}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="MeetingStatus">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>MeetingStatus
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.MeetingStatus}}
+                                        </mat-cell>
+                                    </ng-container>
 
                                     <ng-container matColumnDef="action" stickyEnd>
                                         <mat-header-cell *matHeaderCellDef style="color: white;"> Action

@@ -46,8 +46,8 @@ export class InvoiceBillMappingComponent implements OnInit {
   CGSTAmount: any;
   SGSTAmount: any;
   IGSTAmount: any;
-  TotalAmount=0;
-  FinalTotalAmount=0;
+  TotalAmount = 0;
+  FinalTotalAmount = 0;
   caseList: any = [];
   StudyId: any;
   interimArray: any = [];
@@ -55,10 +55,10 @@ export class InvoiceBillMappingComponent implements OnInit {
   registerObj: InvoiceBillMap;
   subscriptionArr: Subscription[] = [];
   printTemplate: any;
-  FianlamtSGST:any =0;
-  FianlamtCGST:any =0;
-  FianlamtIGST:any =0;
-  Fianlamt:any =0;
+  FianlamtSGST: any = 0;
+  FianlamtCGST: any = 0;
+  FianlamtIGST: any = 0;
+  Fianlamt: any = 0;
 
   // reportPrintObjList: BrowseOPDBill[] = [];
   chargeslist: any = [];
@@ -248,7 +248,7 @@ export class InvoiceBillMappingComponent implements OnInit {
     netAmt = element.reduce((sum, { TotalBillAmt }) => sum += +(TotalBillAmt || 0), 0);
     this.TaxableAmount = netAmt;
 
-        return netAmt
+    return netAmt
   }
 
 
@@ -261,18 +261,18 @@ export class InvoiceBillMappingComponent implements OnInit {
 
   }
 
-  tableElementChecked(event,element) {
-debugger;
+  tableElementChecked(event, element) {
+    debugger;
     if (event.checked) {
       this.interimArray.push(element);
       this.dataSource1.data = this.interimArray;
 
 
-     let netAmt = this.Fianlamt + this.dataSource1.data[0].TotalBillAmt;
+      let netAmt = this.Fianlamt + this.dataSource1.data[0].TotalBillAmt;
       this.TaxableAmount = netAmt;
       this.Fianlamt = netAmt;
       // let total = Math.round(parseInt(this.TaxableAmount) * parseInt(this.CGST)).toString();
-       
+
 
     } else if (this.interimArray.length > 0) {
       let index = this.interimArray.indexOf(element);
@@ -540,146 +540,178 @@ debugger;
   calculateCGST() {
     debugger;
 
-    if (this.CGST == null || this.CGST == 0 ) {
-      this.registeredForm.get('CGSTAmount').setValue(0);
-      this.registeredForm.get('TotalAmount').setValue(this.TaxableAmount);
-    }
-    else{
-    this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
 
-    if (this.TaxableAmount && this.CGST) {
-      this.CGSTAmount  = (Math.round((parseInt(this.TaxableAmount) * parseInt(this.CGST)) /100));
-      this.FinalTotalAmount = this.TaxableAmount +  parseInt(this.CGSTAmount);
+    if (this.CGST == null || this.CGST == 0) {
+      this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
+      this.registeredForm.get('CGSTAmount').setValue(0);
+   
+
+      if (this.SGST != 0 || this.SGST != null) {
         
+        let amt = this.TaxableAmount + this.SGSTAmount
+       
+        if (this.SGST != 0 || this.SGST != null) {
+          this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
+          let amt = this.FinalTotalAmount + this.SGSTAmount
+       
+       
+        if (this.IGST != 0 || this.IGST != null) {
+          
+          let amt = this.FinalTotalAmount + this.IGSTAmount
+          this.FinalTotalAmount = amt;
+        }
+
+        this.FinalTotalAmount = amt;
+
+      }
+
+
+        this.FinalTotalAmount = amt;
+      }
+
+      this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
     }
+
+
+
+
+
+    else {
+      this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
+
+      if (this.TaxableAmount && this.CGST) {
+        this.CGSTAmount = (Math.round((parseInt(this.TaxableAmount) * parseInt(this.CGST)) / 100));
+        this.FinalTotalAmount = this.TaxableAmount + parseInt(this.CGSTAmount);
+
+      }
+    }
+
   }
 
+
+  calculateSGST() {
+
+    if (this.SGST == null || this.SGST == 0) {
+      this.registeredForm.get('SGSTAmount').setValue(0);
+
+      this.registeredForm.get('TotalAmount').setValue(this.TaxableAmount);
     }
+    else {
 
-
-    calculateSGST(){
-
-      if (this.SGST == null || this.SGST == 0 ) {
-        this.registeredForm.get('SGSTAmount').setValue(0);
-
-         this.registeredForm.get('TotalAmount').setValue(this.TaxableAmount);
-      }
-      else{
-      
       this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
 
       if (this.TaxableAmount && this.SGST) {
-        
-       this.SGSTAmount =  (Math.round((parseInt(this.TaxableAmount) * parseInt(this.SGST)) /100));
 
-       this.FinalTotalAmount = this.FinalTotalAmount +  parseInt(this.SGSTAmount);
+        this.SGSTAmount = (Math.round((parseInt(this.TaxableAmount) * parseInt(this.SGST)) / 100));
+
+        this.FinalTotalAmount = this.FinalTotalAmount + parseInt(this.SGSTAmount);
 
       }
     }
+  }
+
+
+
+  calculateIGST() {
+
+    if (this.IGST == null || this.IGST == 0) {
+      this.registeredForm.get('IGSTAmount').setValue(0);
+      this.registeredForm.get('TotalAmount').setValue(this.TaxableAmount);
     }
-
-
-
-    calculateIGST(){
-
-      if (this.IGST == null || this.IGST == 0 ) {
-        this.registeredForm.get('IGSTAmount').setValue(0);
-        this.registeredForm.get('TotalAmount').setValue(this.TaxableAmount);
-      }
-      else{
+    else {
 
       this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
 
       if (this.TaxableAmount && this.IGST) {
-        
-        this.IGSTAmount = (Math.round((parseInt(this.TaxableAmount) * parseInt(this.IGST)) /100));
 
-        this.FinalTotalAmount = this.FinalTotalAmount +  parseInt(this.IGSTAmount);
-       
-      }
-    }
-    }
+        this.IGSTAmount = (Math.round((parseInt(this.TaxableAmount) * parseInt(this.IGST)) / 100));
 
-    onKeydown(event) {
-      if (event.key === "Enter") {
-        // console.log(event);
+        this.FinalTotalAmount = this.FinalTotalAmount + parseInt(this.IGSTAmount);
 
       }
     }
+  }
 
+  onKeydown(event) {
+    if (event.key === "Enter") {
+      // console.log(event);
 
-    deleteTableRow(element) {
-
-      // debugger;
-      let index = this.chargeslist.indexOf(element);
-      if (index >= 0) {
-        this.chargeslist.splice(index, 1);
-        this.dataSource.data = [];
-        this.dataSource.data = this.chargeslist;
-      }
-      Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
     }
+  }
 
-    showAllFilter(event) {
-      console.log(event.value);
-      this.isFilteredDateDisabled = event.value;
+
+  deleteTableRow(element) {
+
+    // debugger;
+    let index = this.chargeslist.indexOf(element);
+    if (index >= 0) {
+      this.chargeslist.splice(index, 1);
+      this.dataSource.data = [];
+      this.dataSource.data = this.chargeslist;
     }
+    Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
+  }
 
-    backNavigate() {
-      // this._location.back();
-    }
+  showAllFilter(event) {
+    console.log(event.value);
+    this.isFilteredDateDisabled = event.value;
+  }
+
+  backNavigate() {
+    // this._location.back();
+  }
 
 
 
 
 
-    convertToWord(e) {
+  convertToWord(e) {
 
-      // return converter.toWords(e);
-    }
+    // return converter.toWords(e);
+  }
 
-    transform1(value: string) {
-      var datePipe = new DatePipe("en-US");
-      value = datePipe.transform(value, 'dd/MM/yyyy hh:mm a');
-      return value;
-    }
+  transform1(value: string) {
+    var datePipe = new DatePipe("en-US");
+    value = datePipe.transform(value, 'dd/MM/yyyy hh:mm a');
+    return value;
+  }
 
-    transform2(value: string) {
-      var datePipe = new DatePipe("en-US");
-      value = datePipe.transform((new Date), 'dd/MM/yyyy h:mm a');
-      return value;
-    }
+  transform2(value: string) {
+    var datePipe = new DatePipe("en-US");
+    value = datePipe.transform((new Date), 'dd/MM/yyyy h:mm a');
+    return value;
+  }
 
-    transformBilld(value: string) {
-      // var datePipe = new DatePipe("en-US");
-      // value = datePipe.transform(this.reportPrintObj.BillDate, 'dd/MM/yyyy');
-      // return value;
-    }
-    // PRINT 
-    print() {
-      // HospitalName, HospitalAddress, AdvanceNo, PatientName
-      let popupWin, printContents;
-      // printContents =this.printTemplate; // document.getElementById('print-section').innerHTML;
+  transformBilld(value: string) {
+    // var datePipe = new DatePipe("en-US");
+    // value = datePipe.transform(this.reportPrintObj.BillDate, 'dd/MM/yyyy');
+    // return value;
+  }
+  // PRINT 
+  print() {
+    // HospitalName, HospitalAddress, AdvanceNo, PatientName
+    let popupWin, printContents;
+    // printContents =this.printTemplate; // document.getElementById('print-section').innerHTML;
 
-      popupWin = window.open('', '_blank', 'top=0,left=0,height=800px !important,width=auto,width=2200px !important');
-      // popupWin.document.open();
-      popupWin.document.write(` <html>
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=800px !important,width=auto,width=2200px !important');
+    // popupWin.document.open();
+    popupWin.document.write(` <html>
     <head><style type="text/css">`);
-      popupWin.document.write(`
+    popupWin.document.write(`
       </style>
           <title></title>
       </head>
     `);
-      popupWin.document.write(`<body onload="window.print();window.close()">${this.printTemplate}</body>
+    popupWin.document.write(`<body onload="window.print();window.close()">${this.printTemplate}</body>
     </html>`);
-      popupWin.document.close();
-    }
-
-    onClose() {
-      this.dialogRef.close();
-    }
-
+    popupWin.document.close();
   }
+
+  onClose() {
+    this.dialogRef.close();
+  }
+
+}
 
 
 export class Bill {

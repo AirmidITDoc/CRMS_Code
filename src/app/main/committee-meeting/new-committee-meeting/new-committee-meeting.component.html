@@ -115,10 +115,10 @@
                     <div fxLayout="row" style="width: 100%;">
                         <div fxFlex="100" fxLayout="row" fxLayout.gt-xs="column">
                             <div>
-                                <div class="col-md-12">
+                                <div class="col-md-12" fusePerfectScrollbar>
                                     <!-- ================= Charges List Table ======================= -->
                                     <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
-                                        style="height: 300px !important;" class="table1">
+                                        style="height: 300px !important;overflow: auto;" class="table1" >
 
                                         <ng-container matColumnDef="MemberId">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header

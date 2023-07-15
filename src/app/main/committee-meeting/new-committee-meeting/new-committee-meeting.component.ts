@@ -69,6 +69,28 @@ export class NewCommitteeMeetingComponent implements OnInit {
   ngOnInit(): void {
    
     this.getCommitteListCombobox();
+if(this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').value){
+    let m ={
+      'CommitteeId': 1
+    }
+   
+    setTimeout(() => {
+      this.sIsLoading = 'loading-data';
+      this._CommitteMeetingService.getCommitteeMemberList(m).subscribe(Visit => {
+        this.dataSource.data = Visit as CommitteeMeetingMemberList[];
+
+        this.chargeslist = Visit as CommitteeMeetingMemberList[];
+
+        this.dataSource.data = this.chargeslist;
+        // this.dscommitteeMemberList.paginator = this.paginator;
+        this.sIsLoading = '';
+      },
+        error => {
+          this.sIsLoading = '';
+        });
+    }, 1000);
+
+  }
   }
 
   
@@ -112,7 +134,7 @@ export class NewCommitteeMeetingComponent implements OnInit {
     let m ={
       'CommitteeId': Params
     }
-    this.sIsLoading = 'loading-data';
+   
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._CommitteMeetingService.getCommitteeMemberList(m).subscribe(Visit => {

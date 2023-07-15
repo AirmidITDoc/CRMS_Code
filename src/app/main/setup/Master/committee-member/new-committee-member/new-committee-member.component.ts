@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CommitteeMemberService } from '../committee-member.service';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +8,7 @@ import { ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { fuseAnimations } from '@fuse/animations';
+import { CommitteeMemberDetail } from '../committee-member.component';
 
 @Component({
   selector: 'app-new-committee-member',
@@ -18,14 +19,16 @@ import { fuseAnimations } from '@fuse/animations';
 })
 export class NewCommitteeMemberComponent implements OnInit {
 
-  registerObj = new MemberDetail({});
+  registerObj = new CommitteeMemberDetail({});
   personalFormGroup: FormGroup;
   screenFromString = 'admission-form';
-  
-  constructor(  public _CommitteMeetingService: CommitteeMemberService,
+  paginator: any;
+  sort: any;
+
+  constructor(public _CommitteeMemberService: CommitteeMemberService,
     private accountService: AuthenticationService,
-    // public notification: NotificationServiceService,
     private formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public _matDialog: MatDialog,
     public dialogRef: MatDialogRef<NewCommitteeMemberComponent>) { }
   displayedColumns = [
@@ -34,225 +37,201 @@ export class NewCommitteeMemberComponent implements OnInit {
     'action'
   ];
 
-  dataSource = new MatTableDataSource<MemberDetail>();
+  dataSource = new MatTableDataSource<CommitteeMemberDetail>();
   chargeslist: any = [];
-  isLoading:any;
-  MemberId:any;
-  MemberName:any;
+  isLoading: any;
+  MemberId: any;
+  MemberName: any;
   MembercmbList: any = [];
-
+  CommiteeName: any;
 
   public memberFilterCtrl: FormControl = new FormControl();
   public filteredMember: ReplaySubject<any> = new ReplaySubject<any>(1);
 
   private _onDestroy = new Subject<void>();
-  
 
-  DeptSource = new MatTableDataSource<MemberDetail>();
+
+  DeptSource = new MatTableDataSource<CommitteeMemberDetail>();
 
   ngOnInit(): void {
-    
+    debugger;
+
+    if (this.data) {
+      console.log(this.data);
+      this.CommiteeName = this.data.registerObj.CommiteeName;
+      var m = {
+        CommitteeId:this.data.registerObj.CommitteeId
+      };
+
+      this._CommitteeMemberService.getCommitteeMemberMeetingList(m).subscribe(Visit => {
+        this.dataSource.data = Visit as CommitteeMemberDetail[];
+        this.dataSource.sort = this.sort;
+        console.log(this.dataSource.data);
+        this.dataSource.paginator = this.paginator;
+        this.isLoading = '';
+      },
+        error => {
+          this.isLoading = '';
+        });
+    }
+
     this.getMemberNameCombobox();
 
     this.memberFilterCtrl.valueChanges
-    .pipe(takeUntil(this._onDestroy))
-    .subscribe(() => {
-    });
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+      });
   }
 
   private MemberDepartment() {
     // debugger;
     if (!this.MembercmbList) {
-        return;
+      return;
     }
     // get the search keyword
     let search = this.memberFilterCtrl.value;
     if (!search) {
-        this.filteredMember.next(this.MembercmbList.slice());
-        return;
+      this.filteredMember.next(this.MembercmbList.slice());
+      return;
     } else {
-        search = search.toLowerCase();
+      search = search.toLowerCase();
     }
     // filter
     this.filteredMember.next(
-        this.MembercmbList.filter(
-            (bank) => bank.FirstName.toLowerCase().indexOf(search) > -1
-        )
+      this.MembercmbList.filter(
+        (bank) => bank.FirstName.toLowerCase().indexOf(search) > -1
+      )
     );
-}
-getMemberNameCombobox() {
-  var m={
-    FirstName:'%',                  
-    LastName :'%'
-  };
-  this._CommitteMeetingService.getMemberMasterList(m).subscribe((data) => {
+  }
+  getMemberNameCombobox() {
+    var m = {
+      FirstName: '%',
+      LastName: '%'
+    };
+    this._CommitteeMemberService.getMemberMasterList(m).subscribe((data) => {
       this.MembercmbList = data;
       this.filteredMember.next(this.MembercmbList.slice());
-  });
-}
+    });
+  }
 
 
-onSubmit() {
+  onSubmit() {
 
- if(!this._CommitteMeetingService.personalFormGroup.get('CommitteeId').value){
-  this.isLoading = 'submit';
-   let committeeInsertObj = {};
-   committeeInsertObj['committeeId']= 0,//this.personalFormGroup.get('CommitteeId').value.CommitteeId || 0,
-   committeeInsertObj['commiteeName']= this._CommitteMeetingService.personalFormGroup.get('CommitteeName').value || 0,
-   committeeInsertObj['createdBy']= this.accountService.currentUserValue.user.id
-  
-  let Billdetsarr = [];
-  this.dataSource.data.forEach((element) => {
-    let BillDetailsInsertObj = {};
-    BillDetailsInsertObj['committeeId'] = 0;
-    BillDetailsInsertObj['memberId'] = element.MemberId;
-    BillDetailsInsertObj['createdBy'] =  this.accountService.currentUserValue.user.id;
-    Billdetsarr.push(BillDetailsInsertObj);
-  });
+    if (!this._CommitteeMemberService.personalFormGroup.get('CommitteeId').value) {
+      this.isLoading = 'submit';
+      let committeeInsertObj = {};
+      committeeInsertObj['committeeId'] = 0,//this.personalFormGroup.get('CommitteeId').value.CommitteeId || 0,
+        committeeInsertObj['commiteeName'] = this._CommitteeMemberService.personalFormGroup.get('CommitteeName').value || 0,
+        committeeInsertObj['createdBy'] = this.accountService.currentUserValue.user.id
 
-  let submitData = {
-    "insertCommitteeMaster": committeeInsertObj,
-    "insertCommitteeMemberDetails": Billdetsarr
-  };
+      let MemberDetailarr = [];
+      this.dataSource.data.forEach((element) => {
+        let MemberDetailObj = {};
+        MemberDetailObj['committeeId'] = 0;
+        MemberDetailObj['memberId'] = element.MemberId;
+        MemberDetailObj['createdBy'] = this.accountService.currentUserValue.user.id;
+        MemberDetailarr.push(MemberDetailObj);
+      });
 
-  console.log(submitData);
-  this._CommitteMeetingService.CommitteeMemberDetailInsert(submitData).subscribe(response => {
-    if (response) {
-      Swal.fire('New CommitteeMember Save !', ' CommitteeMember Save Successfully !', 'success').then((result) => {
-        if (result.isConfirmed) {
-          this._matDialog.closeAll();
+      let submitData = {
+        "insertCommitteeMaster": committeeInsertObj,
+        "insertCommitteeMemberDetails": MemberDetailarr
+      };
+
+      console.log(submitData);
+      this._CommitteeMemberService.CommitteeMemberDetailInsert(submitData).subscribe(response => {
+        if (response) {
+          Swal.fire('New CommitteeMember Save !', ' CommitteeMember Save Successfully !', 'success').then((result) => {
+            if (result.isConfirmed) {
+              this._matDialog.closeAll();
+            }
+          });
+        } else {
+          Swal.fire('Error !', 'CommitteeMember not saved', 'error');
         }
       });
     } else {
-      Swal.fire('Error !', 'CommitteeMember not saved', 'error');
+
+
+      this.isLoading = 'submit';
+      let committeeInsertObj = {};
+      committeeInsertObj['committeeId'] = this._CommitteeMemberService.personalFormGroup.get('CommitteeId').value || 0,
+        committeeInsertObj['commiteeName'] = this._CommitteeMemberService.personalFormGroup.get('CommitteeName').value || 0,
+        committeeInsertObj['createdBy'] = this.accountService.currentUserValue.user.id
+
+      let MemberDetailarr = [];
+      this.dataSource.data.forEach((element) => {
+        let MemberDetailObj = {};
+        MemberDetailObj['committeeId'] = 0;
+        MemberDetailObj['memberId'] = element.MemberId;
+        MemberDetailObj['createdBy'] = this.accountService.currentUserValue.user.id;
+        MemberDetailarr.push(MemberDetailObj);
+      });
+
+      let submitData = {
+        "insertCommitteeMaster": committeeInsertObj,
+        "insertCommitteeMemberDetails": MemberDetailarr
+      };
+
+      console.log(submitData);
+      this._CommitteeMemberService.CommitteeMemberDetailInsert(submitData).subscribe(response => {
+        if (response) {
+          Swal.fire('Update CommitteeMember Save !', ' CommitteeMember Update Successfully !', 'success').then((result) => {
+            if (result.isConfirmed) {
+              this._matDialog.closeAll();
+            }
+          });
+        } else {
+          Swal.fire('Error !', 'CommitteeMember not Updated', 'error');
+        }
+      });
     }
-  });
- }else{
+
+  }
 
 
-  this.isLoading = 'submit';
-  let committeeInsertObj = {};
-  committeeInsertObj['committeeId']= this._CommitteMeetingService.personalFormGroup.get('CommitteeId').value || 0,
-  committeeInsertObj['commiteeName']= this._CommitteMeetingService.personalFormGroup.get('CommitteeName').value || 0,
-  committeeInsertObj['createdBy']= this.accountService.currentUserValue.user.id
- 
- let Billdetsarr = [];
- this.dataSource.data.forEach((element) => {
-   let BillDetailsInsertObj = {};
-   BillDetailsInsertObj['committeeId'] = 0;
-   BillDetailsInsertObj['memberId'] = element.MemberId;
-   BillDetailsInsertObj['createdBy'] =  this.accountService.currentUserValue.user.id;
-   Billdetsarr.push(BillDetailsInsertObj);
- });
+  deleteTableRow(element) {
+    debugger;
 
- let submitData = {
-   "insertCommitteeMaster": committeeInsertObj,
-   "insertCommitteeMemberDetails": Billdetsarr
- };
-
- console.log(submitData);
- this._CommitteMeetingService.CommitteeMemberDetailInsert(submitData).subscribe(response => {
-   if (response) {
-     Swal.fire('Update CommitteeMember Save !', ' CommitteeMember Update Successfully !', 'success').then((result) => {
-       if (result.isConfirmed) {
-         this._matDialog.closeAll();
-       }
-     });
-   } else {
-     Swal.fire('Error !', 'CommitteeMember not Updated', 'error');
-   }
- });
- }
-
-}
+    let index = this.chargeslist.indexOf(element);
+    if (index >= 0) {
+      this.chargeslist.splice(index, 1);
+      this.dataSource.data = [];
+      this.dataSource.data = this.chargeslist;
+    }
+    Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
+  }
 
 
-deleteTableRow(element) {
-  debugger;
-  
-  let index = this.chargeslist.indexOf(element);
-  if (index >= 0) {
-    this.chargeslist.splice(index, 1);
+  onSaveEntry(element) {
     this.dataSource.data = [];
+    this.chargeslist.push(
+      {
+        MemberId: element.MemberId,
+        MemberName: element.FirstName
+      });
+    this.isLoading = '';
+    // console.log(this.chargeslist);
     this.dataSource.data = this.chargeslist;
+    // console.log(this.dataSource.data);
   }
-  Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
-}
-
-
-onSaveEntry(element) {
-  this.dataSource.data = [];
-  this.chargeslist.push(
-    {
-      MemberId: element.MemberId,
-      MemberName: element.FirstName
-    });
-  this.isLoading = '';
-  // console.log(this.chargeslist);
-  this.dataSource.data = this.chargeslist;
-  // console.log(this.dataSource.data);
-}
 
 
 
-dateTimeObj: any;
-getDateTime(dateTimeObj) {
-  // console.log('dateTimeObj==', dateTimeObj);
-  this.dateTimeObj = dateTimeObj;
-}
+  dateTimeObj: any;
+  getDateTime(dateTimeObj) {
+    // console.log('dateTimeObj==', dateTimeObj);
+    this.dateTimeObj = dateTimeObj;
+  }
 
-OnSave(){
-  
-}
+  OnSave() {
 
-onClose(){
-  this.dialogRef.close();
-}
-}
+  }
 
-
-
-export class MemberDetail {
-  MemberId:any;
-  MemberName:any;
-  FirstName:any;
-  MiddleName: any;
-  LastName: any;
-  Member_Address: any;
-  CityId: any;
-  PinCode: any;
-  MobileNo: any;
-  EmailId: any;
-  StudyAmount: any;
-
-  CommitteeId:any;
-  CommiteeName:any;
-  IsActive:any;
-  /**
-   * Constructor
-   *
-   * @param MemberDetail
-   */
-
-  constructor(MemberDetail) {
-    {
-      this.MemberId = MemberDetail.MemberId || '';
-      this.MemberName = MemberDetail.MemberName || '';
-      this.FirstName = MemberDetail.FirstName || '';
-      this.MiddleName = MemberDetail.MiddleName || '';
-      this.LastName = MemberDetail.LastName || 0;
-      this.Member_Address = MemberDetail.Member_Address || '';
-      this.CityId = MemberDetail.CityId || '';
-      this.PinCode = MemberDetail.PinCode || '';
-      this.MobileNo = MemberDetail.MobileNo || '';
-      this.EmailId = MemberDetail.EmailId || '';
-      this.StudyAmount = MemberDetail.StudyAmount || '';
-
-
-      this.CommitteeId = MemberDetail.CommitteeId || 0;
-      this.CommiteeName = MemberDetail.CommiteeName || '';
-      this.IsActive = MemberDetail.IsActive || '';
-   
-    }
+  onClose() {
+    this.dialogRef.close();
   }
 }
+
+
+

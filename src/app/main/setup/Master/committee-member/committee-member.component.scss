@@ -59,17 +59,18 @@
     }
   .mat-header-row {
     width: 100%;
-    max-width: 1250px;
-    min-width: 1250px;  
+    max-width: 1750px;
+    min-width: 1750px;  
     min-height: 20px;     
   }
   
   .mat-row {
     width: 100%;
-    max-width: 1250px;
-    min-width: 1250px;      
+    max-width: 1750px;
+    min-width: 1750px;      
     min-height: 20px;            
   }
+ 
  
   .mat-column-CommitteeId {
     width: 120px; 
@@ -78,6 +79,35 @@
     text-align: center;
   }
   .mat-column-CommiteeName {
+    width: 200px;
+    max-width: 200px;
+    min-width: 200px;
+    text-align: left;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+     overflow: hidden !important;
+     display: inline-block;
+     margin-top: 7px;
+     margin-right: 7px;
+     justify-content:left; 
+  }
+  .mat-column-MemberName {
+    width: 300px;
+    max-width: 300px;
+    min-width: 300px;
+    text-align: left;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+     overflow: hidden !important;
+     display: inline-block;
+     margin-top: 7px;
+     margin-right: 7px;
+     justify-content:left; 
+  }
+
+  .mat-column-Member_Address {
     width: 300px;
     max-width: 300px;
     min-width: 300px;
@@ -92,16 +122,55 @@
      justify-content:left; 
   }
  
+  
+  .mat-column-CityId {
+    width: 90px;
+    max-width:90px;
+    min-width:90px;
+    text-align: center;
+  }
+  .mat-column-MemberId {
+    width: 90px;
+    max-width:90px;
+    min-width:90px;
+    text-align: center;
+  }
+
+  
+  
+  .mat-column-MobileNo {
+    width: 90px;
+    max-width:90px;
+    min-width:90px;
+    text-align: center;
+  }
+
+  
+  .mat-column-EmailId {
+    width: 250px;
+    max-width:250px;
+    min-width:250px;
+    text-align: center;
+  }
+
+  
+  .mat-column-StudyAmount {
+    width: 110px;
+    max-width:10px;
+    min-width:110px;
+    text-align: center;
+  }
+  
 
   .mat-column-action {
     width:100px;
     max-width: 100px;
     min-width: 100px;
   }
-  .mat-column-IsActive {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
+  .mat-column-MeetingStatus {
+    width:150px;
+    max-width:150px;
+    min-width:150px;
   }
   
 

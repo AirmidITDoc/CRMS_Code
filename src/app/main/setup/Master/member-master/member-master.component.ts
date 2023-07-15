@@ -17,7 +17,9 @@ import { fuseAnimations } from '@fuse/animations';
 export class MemberMasterComponent implements OnInit {
 
   isLoading = true;
-
+  sIsLoading: string = '';
+  hasSelectedContacts: boolean;
+  
   displayedColumns: string[] = [
     "MemberId",
     "FirstName",
@@ -42,7 +44,20 @@ export class MemberMasterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getMemberMasterList();
+    var Params = {
+      "F_Name": '%',
+      "L_Name": '%',
+    };
+    this._MemberMasterService.getMemberList(Params).subscribe(
+      (Menu) => {
+        this.MemberList.data = Menu as MemberDetail[];
+        console.log(this.MemberList.data);
+        this.isLoading = false;
+        this.MemberList.sort = this.sort;
+        this.MemberList.paginator = this.paginator;
+      },
+      (error) => (this.isLoading = false)
+    );
   }
 
   onAdd() {
@@ -61,10 +76,20 @@ export class MemberMasterComponent implements OnInit {
   }
 
 
+  onClear() {
+    this._MemberMasterService.myFilterform.reset(
+      {
+        // start: [],
+        // end: []
+      }
+    );
+  }
+
+
   getMemberMasterList() {
     var Params = {
-      "F_Name": '%',
-      "L_Name": '%'
+      "F_Name": this._MemberMasterService.myFilterform.get("FirstName").value + '%' || '%',
+      "L_Name":  this._MemberMasterService.myFilterform.get("LastName").value + '%' || '%',
     };
     this._MemberMasterService.getMemberList(Params).subscribe(
       (Menu) => {

@@ -171,7 +171,7 @@ debugger
     var m_data1 = {
       "updateMemberMaster": {
         "operation": "UPDATE",
-        "MemberId":this.registerObj.MemberId || 0,
+        "MemberId":  this._MemberMasterService.personalFormGroup.get('MemberId').value || 0,
         "FirstName": this._MemberMasterService.personalFormGroup.get('FirstName').value || '',
         "MiddleName": this._MemberMasterService.personalFormGroup.get('MiddleName').value || '',
         "LastName": this._MemberMasterService.personalFormGroup.get('LastName').value || 0,

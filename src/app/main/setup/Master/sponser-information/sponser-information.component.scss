@@ -1,78 +1,122 @@
 app-sponser-information {
     .mat-header-row {
-        width: 1500px;
-        max-width: 1500px;
-        min-width: 1500px;
+        width: 1900px;
+        max-width: 1900px;
+        min-width: 1900px;
         font-weight: bold;
     }
+
     .mat-row {
-        width: 1500px;
-        max-width: 1500px;
-        min-width: 1500px;
+        width: 1900px;
+        max-width: 1900px;
+        min-width: 1900px;
     }
 
-    .mat-column-ServiceId {
+
+    .mat-column-SponserId {
         width: 70px;
         max-width: 70px;
         min-width: 70px;
     }
 
-    .mat-column-ServiceName {
-        width: 450px;
-        max-width: 450px;
-        min-width: 420px;
+    .mat-column-SponserName {
+        width:300px;
+        max-width: 300px;
+        min-width: 300px;
+        text-align: left;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+         overflow: hidden !important;
+         display: inline-block;
+         margin-top: 7px;
+         margin-right: 7px;
+         justify-content:left;
     }
-    .mat-column-GroupName {
+
+    .mat-column-Address {
+        width: 290px;
+        max-width: 290px;
+        min-width: 290px;
+        text-align: left;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+         overflow: hidden !important;
+         display: inline-block;
+         margin-top: 7px;
+         margin-right: 7px;
+         justify-content:left;
+    }
+
+    .mat-column-ContactNo {
         width: 90px;
         max-width: 90px;
         min-width: 90px;
     }
-    .mat-column-IsEditable {
-        width: 70px;
-        max-width: 70px;
-        min-width: 70px;
-    }
-    .mat-column-CreditedtoDoctor {
+
+    .mat-column-PinCode {
         width: 110px;
         max-width: 110px;
         min-width: 110px;
     }
-    .mat-column-PrintOrder {
+
+    .mat-column-State {
         width: 70px;
         max-width: 70px;
         min-width: 70px;
     }
-    .mat-column-SubGroupName {
+
+ 
+
+    .mat-column-StateCode {
         width: 100px;
         max-width: 100px;
         min-width: 100px;
     }
 
-    .mat-column-ServiceShortDesc {
-        width: 2%;
-        max-width: 200px;
-        min-width: 200px;
+    .mat-column-GSTIN {
+        width: 150px;
+        max-width: 150px;
+        min-width: 150px;
     }
 
-    .mat-column-EmgAmt {
-        width: 70px;
-        max-width: 70px;
-        min-width: 70px;
+    .mat-column-SAC {
+        width: 150px;
+        max-width: 150px;
+        min-width: 150px;
     }
 
-    .mat-column-EmgPer {
-        width: 70px;
-        max-width: 70px;
-        min-width: 70px;
+    .mat-column-PAN {
+        width: 150px;
+        max-width: 150px;
+        min-width: 150px;
     }
 
-    .mat-column-AddedByName {
-        width: 90px;
-        max-width: 90px;
-        min-width: 90px;
+    .mat-column-PlaceOfSupply {
+        width: 190px;
+        max-width: 190px;
+        min-width: 190px;
+        text-align: left;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+         overflow: hidden !important;
+         display: inline-block;
+         margin-top: 7px;
+         margin-right: 7px;
+         justify-content:left;
     }
 
-    .mat-column-IsDeleted {
+    .mat-column-EmailId {
+        width: 170px;
+        max-width: 170px;
+        min-width: 170px;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .mat-colum-IsActive {
         width: 70px;
         max-width: 70px;
         min-width: 70px;
@@ -88,6 +132,7 @@ app-sponser-information {
         text-align: right;
         justify-content: right;
     }
+
     .mat-icon-button {
         padding: 0;
         min-width: 0;

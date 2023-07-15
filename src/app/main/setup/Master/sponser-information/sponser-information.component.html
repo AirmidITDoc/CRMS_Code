@@ -1,46 +1,115 @@
 <div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
-    <!-- HEADER -->
-    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
-        fxLayoutAlign.gt-xs="space-between center">
-
-        <!-- APP TITLE -->
+    <mat-toolbar class="accent"
+        style="height:50px; justify-content: space-between;width: 100%;background-color:rgb(18, 87, 134) !important;">
         <div fxLayout="row" fxLayoutAlign="start center">
-            <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="color: aliceblue;">
-                <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">account_box
-                </mat-icon>
-                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    Sponser Information List
-                </span>
-
-            </div>
-            <button mat-raised-button (click)="onAdd()" fxLayoutAlign="center center" style="margin-left: 1300px;">
-                <mat-icon color="Primary" title=" Appointment Form ">how_to_reg</mat-icon>
+            <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm (click)="toggleSidebar('app-main')"
+                style="color: white;">
+                <mat-icon>menu</mat-icon>
             </button>
+            <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
+                style="color: white;" style="color: aliceblue;">account_box
+            </mat-icon>
+            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
+                style="color: aliceblue;">
+                Sponser Information List
+            </span>
+
+            <!-- <button mat-raised-button (click)="newMember()" style="margin-left:10%;width:180px;">Add
+                Member
+            </button> -->
+            <button mat-raised-button (click)="onAdd()" 
+                style="margin-left:1100px;width:200px;">Sponser
+                <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
+            </button>
+            <!-- <button mat-raised-button (click)="newcommitteemeeting()" 
+                style="margin-left:10px;width:200px;">Committee Meeting
+                <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
+            </button> -->
         </div>
-        <!-- / APP TITLE -->
-        <!-- SEARCH -->
-        <!-- / SEARCH -->
 
-    </div>
+    </mat-toolbar>
     <!-- / HEADER -->
-
+    <!-- SELECTED BAR -->
+    <app-main class="accent-600" *ngIf="hasSelectedContacts" [@slideInTop]></app-main>
+    <!-- / SELECTED BAR -->
     <!-- CONTENT -->
     <div class="content">
-
         <!-- SIDEBAR -->
+        <fuse-sidebar name="app-main" position="left" lockedOpen="gt-sm" style="width:30%; border-radius:4px;
+        margin-left:12px; background-color: white;height:100%;">
+            <div>
+                <!-- SIDEBAR HEADER -->
+                <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
+                    style="margin-top: 3%;background-color: rgb(18, 87, 134) !important;">
+                    <span class="h5" style="font-size: 17px;color: aliceblue;">Search Facility</span>
+                    <!-- / USER -->
+                </div>
+                <!-- / SIDEBAR HEADER -->
+                <!-- SIDEBAR CONTENT -->
+                <div>
+                    <div class="nav material2">
+                        <form [formGroup]="_sponserService.myFilterform" style="padding: 6px 6px 5px 5px;"
+                            fusePerfectScrollbar>
+                            <div fxLayout="column" fxLayoutAlign="start none">
+
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>SponserId</mat-label>
+                                    <input name="SponserId" formControlName="SponserId" matInput (keyup)="getServiceMasterList()">
+                                    <!-- <span class="error" *ngIf="f.SponserId.invalid && f.SponserId.touched">SponserId is
+                                        required Enter</span> -->
+                                </mat-form-field>
+                                
+                                
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>SponserName</mat-label>
+                                    <input name="SponserName" formControlName="SponserName" matInput (keyup)="getServiceMasterList()">
+                                    <!-- <span class="error" *ngIf="f.SponserName.invalid && f.SponserName.touched">SponserName is
+                                        required Enter</span> -->
+                                </mat-form-field>
+
+                                
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>ContactNo</mat-label>
+                                    <input name="ContactNo" formControlName="ContactNo" matInput (keyup)="getServiceMasterList()">
+                                    <!-- <span class="error" *ngIf="f.ContactNo.invalid && f.ContactNo.touched">ContactNo is
+                                        required Enter</span> -->
+                                </mat-form-field>
+
+                                <div style="margin-top: 10px;">
+                                    <button mat-raised-button (click)="onClear()" class="clearbutton"
+                                        matTooltip="close">
+                                        <mat-icon class="cleariconbutton">close</mat-icon>
+                                    </button>&nbsp;
+                                    <button mat-raised-button class="searchButton" (click)="getCommitteeMemberList()"
+                                        matTooltip="search">
+                                        <mat-icon class="searchiconbutton">search</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </fuse-sidebar>
         <!-- / SIDEBAR -->
-
         <!-- CENTER -->
-        <div class="center p-24 pb-56" fusePerfectScrollbar>
-            <!-- CONTENT -->
-            <div class="content-card">
+        <!-- CENTER -->
 
+        <div class="center p-12 pb-56" fxFlexAlign="start center">
+            <div class="content-card" style="border-radius:4px; ">
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="30px">
+                    <div fxFlex.gt-sm="100%" fxFlex>
 
-                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
-                    <div fxFlex.gt-sm="99%" fxFlex>
-                        <div style="width: 100%;">
-                            <mat-table #table matSort [dataSource]="DSSponserInformationList"
-                                [@animateStagger]="{value:'50'}" style="overflow:auto">
+                        <div fxlayout="row">
+                            <div style="width: 100%;">
+                                <div matColumnDef="loading" [ngClass]="{'hide': !(sIsLoading == 'loading-data')}"
+                                    class="backgroundBlur">
+                                    <div class="spinner-border text-danger"></div>
+                                </div>
+                                <!-- sppinner -->
+                                <mat-table #table matSort [dataSource]="DSSponserInformationList"
+                                [@animateStagger]="{value:'50'}" style="overflow:auto;height: 600px !important;">
 
                                 <ng-container matColumnDef="SponserId">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Code
@@ -154,22 +223,20 @@
                                     [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
 
                             </mat-table>
-
-
-                            <mat-card *ngIf="isLoading"
-                                style="display: flex; justify-content: center; align-items: center; background: white;">
-                                <mat-progress-spinner color="primary" mode="indeterminate">
-                                </mat-progress-spinner>
-                            </mat-card>
+                                <mat-paginator [pageSizeOptions]="[20, 25, 50, 100]" [pageSize]="20"
+                                    showFirstLastButtons>
+                                </mat-paginator>
+                            </div>
                         </div>
-                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"
-                            showFirstLastButtons></mat-paginator>
                     </div>
                 </div>
             </div>
-            <!-- / CONTENT -->
         </div>
-        <!-- / CENTER -->
+        <!-- CENTER -->
     </div>
+    <!-- / USER -->
+    <!-- / CENTER -->
     <!-- / CONTENT-->
 </div>
+
+//

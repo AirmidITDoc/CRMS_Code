@@ -18,6 +18,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class SponserInformationComponent implements OnInit {
   isLoading = true;
 
+  sIsLoading: string = '';
+
   displayedColumns: string[] = [
     "SponserId", 
     "SponserName",  
@@ -32,10 +34,6 @@ export class SponserInformationComponent implements OnInit {
     "PlaceOfSupply", 
     "EmailId", 
     "IsActive", 
-    // "CreatedBy", 
-    // "CreatedOn", 
-    // "UpdatedBy", 
-    // "UpdatedOn", 
     "action",
 ];
 @ViewChild(MatSort) sort: MatSort;
@@ -66,6 +64,8 @@ DSSponserInformationList = new MatTableDataSource<SponserInformation>();
   onClose(){
     
   }
+
+  
   getServiceMasterList() {
     var Params={
             "SponserName":'%',       

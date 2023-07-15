@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
-import { MemberDetail, NewCommitteeMemberComponent } from './new-committee-member/new-committee-member.component';
+import {  NewCommitteeMemberComponent } from './new-committee-member/new-committee-member.component';
 import { fuseAnimations } from '@fuse/animations';
 
 @Component({
@@ -40,11 +40,19 @@ export class CommitteeMemberComponent implements OnInit {
   displayedColumns = [
     'CommitteeId',
     'CommiteeName',
-    'IsActive',
-    'CreatedBy',
+    'MemberId',
+    'MemberName',
+    'Member_Address',
+    'CityId',
+    'MobileNo',
+    'EmailId',
+    'StudyAmount',
+    'MeetingStatus',
+    // 'IsActive',
+    // 'CreatedBy',
     'action'
   ];
-   dataSource = new MatTableDataSource<MemberDetail>();
+   dataSource = new MatTableDataSource<CommitteeMemberDetail>();
   menuActions: Array<string> = [];
   //datePipe: any;
 
@@ -60,20 +68,20 @@ export class CommitteeMemberComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCommitteeList();
+    this.getCommitteeMemberList();
   }
 
-  getCommitteeList() {
+  getCommitteeMemberList() {
     
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
 
       var m = {
-        CommiteeName:'%'
+        CommitteeId: this._CasedetailService.myFilterform.get('CommitteeId').value || 1
       };
 
-      this._CasedetailService.getCommitteeMemberDetailList(m).subscribe(Visit => {
-        this. dataSource.data = Visit as MemberDetail[];
+      this._CasedetailService.getCommitteeMemberMeetingList(m).subscribe(Visit => {
+        this. dataSource.data = Visit as CommitteeMemberDetail[];
         this. dataSource.sort = this.sort;
         this. dataSource.paginator = this.paginator;
         this.sIsLoading = '';
@@ -117,13 +125,13 @@ export class CommitteeMemberComponent implements OnInit {
     const dialogRef = this._matDialog.open(NewCommitteeMemberComponent,
       {
         maxWidth: "50vw",
-        height: '600px',
+        height: '720px',
         width: '100%',
         
       });
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed - Insert Action', result);
-      this.getCommitteeList();
+      this.getCommitteeMemberList();
     });
   }
 
@@ -237,35 +245,73 @@ export class CommitteeMemberComponent implements OnInit {
 
    
   onEdit(row) {
-    console.log(row);
+   
     var m_data = {
-      // CommitteeId: row.CommitteeId,
-      // CommiteeName: row.CommiteeName,
-      // CommiteeMeetingName: row.CommiteeMeetingName,
-      // CommitteeMeetingLocation: row.CommitteeMeetingLocation,
-      // CreatedBy: row.CreatedBy,
-    
+      CommitteeId: row.CommitteeId,
+      CommiteeName: row.CommiteeName
+         
     };
-
     console.log(m_data);
+  
     this._CasedetailService.populateForm(m_data);
 
      const dialogRef = this._matDialog.open(NewCommitteeMemberComponent,
         {
-        maxWidth: "60vw",
-        maxHeight: "660px",
-        width: "100%",
-        height: "100%",
-        // data : {
-        //   registerObj : m_data,
-        // }
+          maxWidth: "50vw",
+          height: '600px',
+          width: '100%',
+           data : {
+          registerObj : m_data,
+        }
       }
     );
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log("The dialog was closed - Insert Action", result);
-      this.getCommitteeList();
+      this.getCommitteeMemberList();
     });
   }
 }
 
+
+export class CommitteeMemberDetail {
+  CommitteeId:any;
+  CommiteeName:any;
+  
+  StudyId:any;
+  MemberId:any;
+  MemberName:any;
+  Member_Address: any;
+  CityId: any;
+  PinCode: any;
+  MobileNo: any;
+  EmailId: any;
+  StudyAmount: any;
+  MemberMeetingStatus:any;
+  /**
+   * Constructor
+   *
+   * @param CommitteeMemberDetail
+   */
+
+  constructor(CommitteeMemberDetail) {
+    {
+
+      this.CommitteeId = CommitteeMemberDetail.CommitteeId || 0;
+      this.CommiteeName = CommitteeMemberDetail.CommiteeName || '';
+   
+      this.StudyId = CommitteeMemberDetail.StudyId || 0;
+      this.MemberId = CommitteeMemberDetail.MemberId || '';
+      this.MemberName = CommitteeMemberDetail.MemberName || '';
+      this.Member_Address = CommitteeMemberDetail.Member_Address || '';
+      this.CityId = CommitteeMemberDetail.CityId || '';
+      this.PinCode = CommitteeMemberDetail.PinCode || '';
+      this.MobileNo = CommitteeMemberDetail.MobileNo || '';
+      this.EmailId = CommitteeMemberDetail.EmailId || '';
+      this.StudyAmount = CommitteeMemberDetail.StudyAmount || '';
+      this.MemberMeetingStatus = CommitteeMemberDetail.MemberMeetingStatus || '';
+      // this.LastName = MemberDetail.LastName || 0;
+    }
+  }
+
+}

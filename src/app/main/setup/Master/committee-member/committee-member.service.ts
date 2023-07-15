@@ -22,18 +22,10 @@ export class CommitteeMemberService {
 
   filterForm(): FormGroup {
     return this._formBuilder.group({
-      RegNo:'',
-      CaseId:['', [
-        Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
-      ]],
-      CaseName:['', [
-        Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
-      ]],
-      // DoctorId:'',
-      // DoctorName:'',
-      // IsMark: 2,
-      start: [(new Date()).toISOString()],
-      end: [(new Date()).toISOString()],
+      CommitteeId:'',
+     
+      // start: [(new Date()).toISOString()],
+      // end: [(new Date()).toISOString()],
 
     });
   }
@@ -69,14 +61,14 @@ public getMemberMasterList(employee){
     // this.personalFormGroup.patchValue(employee);
   }
   
-  //  CommitteeMemberList list
+  //  CommitteeMemberList list ---------------sir gave
   public getCommitteeMemberDetailList(employee) {
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_M_CommitteeMasterList ", employee)
   }
 
-  // public getCommitteeMeetingList(){
-  //   return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CommitteeListCombo", {})
-  // }
+  public getCommitteeMemberMeetingList(employee){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CommitteeMemberList",employee)
+  }
   
   
   public getCommitteeMemberList(Params){

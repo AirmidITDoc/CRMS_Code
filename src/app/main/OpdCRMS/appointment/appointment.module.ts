@@ -48,7 +48,6 @@ import { ViewFinancialSummarybudgetComponent } from './invoice-bill-mapping/view
 import { BrowseInvoiceListComponent } from './browse-invoice-list/browse-invoice-list.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
-// import { SharedModule } from 'app/main/shared/shared.module';
 
 const routes: Routes = [
     {
@@ -63,14 +62,13 @@ const routes: Routes = [
         EditAppointmentComponent,
         BillDetailComponent,
         PaymentDetailComponent,
-        // EditVisitDateComponent,
-        NewVistDateComponent,
+         NewVistDateComponent,
         InvoiceBillMappingComponent,
         UploadDocumentComponent,
         ViewFinancialSummarybudgetComponent,
         FileUploadComponent,
         ImageUploadComponent,
-          
+              
       
     ],
     imports: [

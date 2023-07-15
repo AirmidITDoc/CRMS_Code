@@ -1054,7 +1054,6 @@ debugger;
       visitSave['TariffId'] = this.VisitFormGroup.get('TariffId').value.TariffId ? this.VisitFormGroup.get('TariffId').value.TariffId : 0;
       visitSave['CompanyId'] = this.VisitFormGroup.get('CompanyId').value.CompanyId ? this.VisitFormGroup.get('CompanyId').value.CompanyId : 0;
       visitSave['createdBy'] = this.accountService.currentUserValue.user.id;
-      visitSave['updatedBy'] = 0,//this.VisitFormGroup.get('RelationshipId').value.RelationshipId ? this.VisitFormGroup.get('RelationshipId').value.RelationshipId : 0;
       visitSave['IsCancelled'] = 0;
       visitSave['IsCancelledBy'] = 0;
       visitSave['IsCancelledDate'] = '2023-06-22T09:52:54.616Z';

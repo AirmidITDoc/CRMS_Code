@@ -83,8 +83,8 @@ export class BillDetailComponent implements OnInit {
     'Price',
     'Qty',
     'TotalAmt',
-    'DiscPer',
-    'DiscAmt',
+    // 'DiscPer',
+    // 'DiscAmt',
     'NetAmount',
     'ChargeDoctorName',
     'ClassName',
@@ -179,24 +179,6 @@ export class BillDetailComponent implements OnInit {
 
   resBillId: Post;
 
-  Vist1: any = '2/05/2023';
-  Vist2: any = '3/05/2023';
-  Vist3: any = '4/05/2023';
-
-  private _transformer = (node: FoodNode, level: number) => {
-    return {
-      expandable: !!node.children && node.children.length > 0,
-      name: node.name,
-      level: level,
-    };
-  }
-  treeControl = new FlatTreeControl<ExampleFlatNode>(
-    node => node.level, node => node.expandable);
-  treeFlattener = new MatTreeFlattener(
-    this._transformer, node => node.level, node => node.expandable, node => node.children);
-  dataSource11 = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-
-
 
   constructor(
     private _fuseSidebarService: FuseSidebarService,
@@ -230,18 +212,6 @@ export class BillDetailComponent implements OnInit {
     }
 
 
-    this.VisitListCombo();
-    debugger;
-    const TREE_DATA: FoodNode[] = [
-      {
-        name: 'Visit Date Schdule',
-        children: [{ name: this.Vist1 }, { name: this.Vist2 }, { name: this.Vist3 },]
-      },
-
-    ];
-
-
-    this.dataSource11.data = TREE_DATA;
 
     this.getServiceListCombobox();
     this.getAdmittedDoctorCombo();
@@ -257,83 +227,9 @@ export class BillDetailComponent implements OnInit {
       });
 
 
-    console.log(this.Vist1);
-
-    // const TREE_DATA: FoodNode[] = [
-    //   {
-    //     name: 'Visit Date Schdule',
-    //     children: [{ name: this.Vist1 }, { name: this.Vist2 }, { name: this.Vist3 },]
-    //   },
-
-    // ];
-
-    //   this.dataSource11.data = TREE_DATA;
   }
 
-  // openChanged(event) {
-  //   // this.isOpen = event;
-  //   this.isLoading = event;
-  //   if (event) {
-  //     // this.savedValue = this.departmentFilterCtrl.value;
-  //     // this.options = [];
-  //     // this.departmentFilterCtrl.reset();
-  //     this._opappointmentService.getVisitDateCombo(17);
-  //   }
-  // }
-
-
-  VisitListCombo() {
-    debugger;
-    var m = {
-      "RegId": 17,//this.selectedAdvanceObj.RegId
-    }
-    this._opappointmentService.getVisitDateCombo(m).subscribe(data => {
-
-      setTimeout(() => {
-        this.VisitDateList = data;
-        console.log(this.VisitDateList)
-      }, 1000);
-
-
-      this.Vist1 = this.VisitDateList[0].VisitDate;
-      this.Vist2 = data[1].VisitDate;
-      this.Vist3 = data[2].VisitDate;
-      console.log(this.Vist1)
-    })
-
-
-
-
-  }
-
-  //  TREE_DATA: FoodNode[] = [
-  //     {
-  //       name: 'Visit Date Schdule',
-
-  //       children: [{ name: 'this.Vist1' }, { name: 'this.Vist2' }, { name: 'this.Vist3' },]
-  //     },
-
-  //   ];
-  //   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
-
-  //   private _transformer = (node: FoodNode, level: number) => {
-  //     return {
-  //       expandable: !!node.children && node.children.length > 0,
-  //       name: node.name,
-  //       level: level,
-  //     };
-  //     this.dataSource11.data = this.TREE_DATA;
-  //   }
-  //   treeControl = new FlatTreeControl<ExampleFlatNode>(
-  //     node => node.level, node => node.expandable);
-  //   treeFlattener = new MatTreeFlattener(
-  //     this._transformer, node => node.level, node => node.expandable, node => node.children);
-
-  //   dataSource11 = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-
-
-
-
+ 
 
   focusNextPrice() {
     this.renderer.selectRootElement('#Price').focus();
@@ -425,6 +321,8 @@ export class BillDetailComponent implements OnInit {
   }
 
   onOptionSelected(selectedItem) {
+
+    console.log(selectedItem);
     this.b_price = selectedItem.Price
     this.b_totalAmount = selectedItem.Price  //* parseInt(this.b_qty)
     this.b_disAmount = '0';
@@ -435,6 +333,7 @@ export class BillDetailComponent implements OnInit {
     this.b_isRad = selectedItem.IsRadiology
     this.serviceId = selectedItem.ServiceId;
     this.serviceName = selectedItem.ServiceName;
+    this.DoctorId=selectedItem.DoctorId;
     this.calculateTotalAmt();
   }
 
@@ -481,7 +380,7 @@ export class BillDetailComponent implements OnInit {
   }
 
   getSelectedObj(obj) {
-    // debugger;
+    debugger;
     console.log(obj);
     console.log('obj==', obj);
     this.SrvcName = obj.ServiceName;
@@ -491,22 +390,17 @@ export class BillDetailComponent implements OnInit {
     this.serviceId = obj.ServiceId;
     this.b_isPath = obj.IsPathology;
     this.b_isRad = obj.IsRadiology;
-    // this.registerObj = new AdmissionPersonlModel({});
-    // this.registerObj = obj;
-    // this.setDropdownObjs();
+ 
 debugger;
 
     if (obj.IsDocEditable) {
 
-      
       this.isDoctor = true;
     } else {
      
       this.isDoctor = false;
 
-      // this.DoctorId.close();
-
-    }
+        }
   }
 
   getTotalAmount(element) {
@@ -555,8 +449,7 @@ debugger;
     this.netPaybleAmt = netAmt;
     // this.TotalnetPaybleAmt = netAmt;
     this.b_TotalChargesAmount = netAmt;
-    // console.log(this.b_TotalChargesAmount);
-    // this.TotalnetPaybleAmt= this.netPaybleAmt.toString();
+   
 
     return netAmt
   }
@@ -581,71 +474,6 @@ debugger;
     }
   }
 
-  getInterimData() {
-    // console.log('this.interimArray==', this.interimArray);
-    // this._matDialog.open(InterimComponentComponent,
-    //   { data: this.interimArray });
-  }
-  // //Addcharges
-  // onInsertAddCharges() {
-  //   this.isLoading = 'save';
-  //   let InsertAdddetArr = [];
-
-  //   if (this.SrvcName && (Math.round(parseInt(this.b_price)) != 0) && this.b_qty) {
-  //     // console.log(this.dataSource.data.length);
-  //     this.dataSource.data.forEach((element) => {
-  //       let InsertAddChargesObj = {};
-  //       InsertAddChargesObj['ChargeID'] = 0,
-  //         InsertAddChargesObj['ChargesDate'] = this.datePipe.transform(this.currentDate, "MM-dd-yyyy"),
-  //         InsertAddChargesObj['opD_IPD_Type'] = 0,
-  //         InsertAddChargesObj['opD_IPD_Id'] = this.selectedAdvanceObj.AdmissionID,
-  //         InsertAddChargesObj['serviceId'] = element.ServiceId,
-  //         InsertAddChargesObj['price'] = element.Price,
-  //         InsertAddChargesObj['qty'] = element.Qty,
-  //         InsertAddChargesObj['totalAmt'] = element.TotalAmt,
-  //         InsertAddChargesObj['concessionPercentage'] = element.DiscPer || 0,
-  //         InsertAddChargesObj['concessionAmount'] = element.DiscAmt || 0,
-  //         InsertAddChargesObj['netAmount'] = element.NetAmount,
-  //         InsertAddChargesObj['doctorId'] = element.DoctorId,// this.registeredForm.get('DoctorID').value.DoctorID;
-  //         InsertAddChargesObj['docPercentage'] = 0,// this.registeredForm.get('DoctorId').value;
-  //         InsertAddChargesObj['docAmt'] = 0,
-  //         InsertAddChargesObj['hospitalAmt'] = element.NetAmount,
-  //         InsertAddChargesObj['isGenerated'] = 0,
-  //         InsertAddChargesObj['addedBy'] = this.accountService.currentUserValue.user.id,
-  //         InsertAddChargesObj['isCancelled'] = 0,
-  //         InsertAddChargesObj['isCancelledBy'] = 0,
-  //         InsertAddChargesObj['isCancelledDate'] = "01/01/1900",
-  //         InsertAddChargesObj['isPathology'] = element.IsPathology,
-  //         InsertAddChargesObj['isRadiology'] = element.IsRadiology,
-  //         InsertAddChargesObj['isPackage'] = 0,
-  //         InsertAddChargesObj['packageMainChargeID'] = 0,
-  //         InsertAddChargesObj['isSelfOrCompanyService'] = false,
-  //         InsertAddChargesObj['packageId'] = 0,
-  //         InsertAddChargesObj['chargeTime'] = this.dateTimeObj.time;
-  //       InsertAddChargesObj['classId'] = this.selectedAdvanceObj.ClassId,// this.registeredForm.get('ClassId').value;
-
-  //         InsertAdddetArr.push(InsertAddChargesObj);
-  //       // console.log(InsertAdddetArr.length);
-  //     })
-  //     let submitData = {
-  //       "opdAddChargesInsert": InsertAdddetArr
-  //     }
-  //     this._opappointmentService.InsertOPAddCharges(submitData).subscribe(data => {
-  //       this.msg = data;
-  //       if (data) {
-  //         Swal.fire('Charges !', 'Record Saved Successfully !', 'success').then((result) => {
-  //           if (result.isConfirmed) {
-  //             this.getChargesList();
-  //           }
-  //         });
-  //       } else {
-  //         Swal.fire('Error !', 'OP Addcharges data not saved', 'error');
-  //       }
-  //     });
-  //     this.isLoading = '';
-  //   }
-  //   // console.log(InsertAdddetArr.length);
-  // }
 
   getChargesList1() {
     this.chargeslist = [];
@@ -892,13 +720,13 @@ debugger;
       this.netPaybleAmt1 = this.TotalnetPaybleAmt;
     }
 
-
+debugger;
 
     let Billdetsarr = [];
     this.dataSource.data.forEach((element) => {
       let BillDetailsInsertObj = {};
       BillDetailsInsertObj['BillNo'] = 0;
-      BillDetailsInsertObj['ChargesId'] = element.ChargesId;
+      BillDetailsInsertObj['ChargesId'] = element.ServiceId;
       Billdetsarr.push(BillDetailsInsertObj);
     });
 
@@ -906,9 +734,9 @@ debugger;
     let PatientHeaderObj = {};
 
     PatientHeaderObj['Date'] = this.dateTimeObj.date;
-    PatientHeaderObj['VisitId'] = this.selectedAdvanceObj.VisitId;
+    PatientHeaderObj['VisitId'] = this.selectedAdvanceObj.RegId;
     PatientHeaderObj['PatientName'] = this.selectedAdvanceObj.PatientName;
-    PatientHeaderObj['OPD_IPD_Id'] = this.selectedAdvanceObj.AdmissionID;
+    PatientHeaderObj['OPD_IPD_Id'] = this.selectedAdvanceObj.OPD_IPD_ID;
     PatientHeaderObj['NetPayAmount'] = this.FinalAmt; //this.netPaybleAmt1; //this.registeredForm.get('FinalAmt').value;//this.TotalnetPaybleAmt,//this.FinalAmt || 0,//
 
 
@@ -923,7 +751,7 @@ debugger;
     let InterimOrFinal = 0;
 
     InsertBillUpdateBillNoObj['BillNo'] = 0;
-    InsertBillUpdateBillNoObj['OPD_IPD_ID'] = this.selectedAdvanceObj.AdmissionID;
+    InsertBillUpdateBillNoObj['OPD_IPD_ID'] = this.selectedAdvanceObj.RegId;
     InsertBillUpdateBillNoObj['TotalAmt'] = this.totalAmtOfNetAmt;
     InsertBillUpdateBillNoObj['ConcessionAmt'] = this.concessionAmtOfNetAmt;
     InsertBillUpdateBillNoObj['NetPayableAmt'] = this.FinalAmt; //this.netPaybleAmt1;
@@ -956,10 +784,10 @@ debugger;
 
     this.dataSource.data.forEach((element) => {
       let chargesDetailInsert = {};
-      chargesDetailInsert['ChargeID'] = 0,
+    
         chargesDetailInsert['ChargesDate'] = this.datePipe.transform(this.currentDate, "MM-dd-yyyy"),
         chargesDetailInsert['opD_IPD_Type'] = 0,
-        chargesDetailInsert['opD_IPD_Id'] = this.selectedAdvanceObj.AdmissionID,
+        chargesDetailInsert['opD_IPD_Id'] = this.selectedAdvanceObj.RegId,
         chargesDetailInsert['serviceId'] = element.ServiceId,
         chargesDetailInsert['price'] = element.Price,
         chargesDetailInsert['qty'] = element.Qty,
@@ -986,7 +814,7 @@ debugger;
         chargesDetailInsert['classId'] = this.selectedAdvanceObj.ClassId,// this.registeredForm.get('ClassId').value;
 
         chargesDetailInsert['BillNo'] = 0;
-      chargesDetailInsert['ChargeID'] = 0;
+        chargesDetailInsert['ChargeID'] = element.ServiceId;
 
       InsertAdddetArr.push(chargesDetailInsert);
       // console.log(InsertAdddetArr.length);
@@ -1025,7 +853,7 @@ debugger;
     debugger;
     if (this.registeredForm.get("DoctorID").value) {
       this.DoctornewId = this.registeredForm.get("DoctorID").value.DoctorID;
-      // this.ChargesDoctorname = this.registeredForm.get("DoctorID").value.DoctorName.toString()
+      this.ChargesDoctorname = this.registeredForm.get("DoctorID").value.DoctorName;
     } else {
       this.DoctornewId = 0;
       this.ChargesDoctorname = '';
@@ -1065,7 +893,7 @@ debugger;
     this.onClearServiceAddList();
     this.getTotalNetAmount();
 
-    this.isDoctor=true;
+    this.isDoctor=false;
   }
 
 

@@ -119,8 +119,8 @@ newMember() {
   newCommitteeMember() {
     const dialogRef = this._matDialog.open(CommitteeMasterMemberComponent,
       {
-        maxWidth: "80vw",
-        height: '660px',
+        maxWidth: "50vw",
+        height: '600px',
         width: '100%',
         
       });
@@ -244,8 +244,8 @@ newMember() {
     var m_data = {
       CommitteeMeetingId: row.CommitteeMeetingId,
       CommitteeMeetingDate: row.CommitteeMeetingDate,
-      CommiteeMeetingName: row.CommiteeMeetingName,
-      CommitteeMeetingLocation: row.CommitteeMeetingLocation,
+      CommitteeMeetingName: row.CommiteeMeetingName,
+      Location: row.CommitteeMeetingLocation,
       CreatedBy: row.CreatedBy,
     
     };
@@ -256,7 +256,7 @@ newMember() {
      const dialogRef = this._matDialog.open(NewCommitteeMeetingComponent,
         {
         maxWidth: "70vw",
-        maxHeight: "55vh",
+        maxHeight: "80vh",
         width: "100%",
         height: "100%",
         // data : {

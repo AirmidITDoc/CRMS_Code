@@ -20,16 +20,8 @@ export class CommitteMeetingService {
 
   filterForm(): FormGroup {
     return this._formBuilder.group({
-      RegNo:'',
-      CaseId:['', [
-        Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
-      ]],
-      CaseName:['', [
-        Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
-      ]],
-      // DoctorId:'',
-      // DoctorName:'',
-      // IsMark: 2,
+      CommitteeMeetingId:'',
+     
       start: [(new Date()).toISOString()],
       end: [(new Date()).toISOString()],
 

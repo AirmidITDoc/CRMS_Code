@@ -16,6 +16,7 @@ import { NewInstitutionInformationComponent } from './new-institution-informatio
 })
 export class InstitutionInformationComponent implements OnInit {
   isLoading = true;
+  sIsLoading: string = '';
 
   displayedColumns: string[] = [
     "InstitutionId", 
@@ -31,10 +32,7 @@ export class InstitutionInformationComponent implements OnInit {
     "PlaceOfSupply", 
     "EmailId", 
     "IsActive", 
-    // "CreatedBy", 
-    // "CreatedOn", 
-    // "UpdatedBy", 
-    // "UpdatedOn", 
+   
     "action",
   ];
   @ViewChild(MatSort) sort: MatSort;
@@ -159,14 +157,14 @@ export class InstitutionInformation {
           this.InstitutionId = InstitutionInformation.InstitutionId || 0;
           this.InstitutionName = InstitutionInformation.InstitutionName || "";
           this.Address = InstitutionInformation.Address || "";
-          this.ContactNo = InstitutionInformation.ContactNo || 0;
+          this.ContactNo = InstitutionInformation.ContactNo || '';
           this.PinCode = InstitutionInformation.PinCode || "";
           this.State = InstitutionInformation.State || "";
-          this.StateCode = InstitutionInformation.StateCode || 0;
+          this.StateCode = InstitutionInformation.StateCode || '';
           this.GSTIN = InstitutionInformation.GSTIN || "";
           this.SAC = InstitutionInformation.SAC || 0;
           this.PAN = InstitutionInformation.PAN || 0;
-          this.PlaceOfSupply = InstitutionInformation.PlaceOfSupply || "false";
+          this.PlaceOfSupply = InstitutionInformation.PlaceOfSupply || "";
           this.EmailId = InstitutionInformation.EmailId || "";
           this.IsActive = InstitutionInformation.IsActive || 0;
           this.CreatedBy = InstitutionInformation.CreatedBy || 0;

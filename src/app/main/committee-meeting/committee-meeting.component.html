@@ -51,7 +51,12 @@
                         <form [formGroup]="_CasedetailService.myFilterform" style="padding: 6px 6px 5px 5px;"
                             fusePerfectScrollbar>
                             <div fxLayout="column" fxLayoutAlign="start none">
-
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>CommitteeMeetingId</mat-label>
+                                    <input name="CommitteeMeetingId" formControlName="CommitteeMeetingId" matInput (keyup)="getCommitteeList()">
+                                    <!-- <span class="error" *ngIf="f.CommitteeId.invalid && f.CommitteeId.touched">CommitteeId is
+                                        required Enter</span> -->
+                                </mat-form-field>
 
                                 <div style="margin-top: 10px;">
                                     <button mat-raised-button (click)="onClear()" class="clearbutton"

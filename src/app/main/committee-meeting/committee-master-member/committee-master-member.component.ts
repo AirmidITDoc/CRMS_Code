@@ -125,18 +125,18 @@ onSubmit() {
    committeeInsertObj['commiteeName']= this.personalFormGroup.get('CommitteeName').value || 0,
    committeeInsertObj['createdBy']= this.accountService.currentUserValue.user.id
   
-  let Billdetsarr = [];
+  let MemberDetailarr = [];
   this.dataSource.data.forEach((element) => {
-    let BillDetailsInsertObj = {};
-    BillDetailsInsertObj['committeeId'] = 0;
-    BillDetailsInsertObj['memberId'] = element.MemberId;
-    BillDetailsInsertObj['createdBy'] =  this.accountService.currentUserValue.user.id;
-    Billdetsarr.push(BillDetailsInsertObj);
+    let MemberDetailObj = {};
+    MemberDetailObj['committeeId'] = 0;
+    MemberDetailObj['memberId'] = element.MemberId;
+    MemberDetailObj['createdBy'] =  this.accountService.currentUserValue.user.id;
+    MemberDetailarr.push(MemberDetailObj);
   });
 
   let submitData = {
     "insertCommitteeMaster": committeeInsertObj,
-    "insertCommitteeMemberDetails": Billdetsarr
+    "insertCommitteeMemberDetails": MemberDetailarr
   };
 
   console.log(submitData);

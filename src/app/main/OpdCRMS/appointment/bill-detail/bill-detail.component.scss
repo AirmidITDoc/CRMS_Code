@@ -10,7 +10,7 @@ app-bill-detail {
     width: 100%;
     
     .mat-table {
-        height: 460px !important;
+        height: 500px !important;
         width: 100%;
         background: transparent;
         box-shadow: none;
@@ -132,13 +132,7 @@ app-bill-detail{
         width: 100%;
     }
     
-    .mat-drawer {
-        width: 275px;
-    }
-    
-    // .mat-form-field {
-    //     width: 99%;
-    // }
+ 
     
     .header-row {
         display: flex;
@@ -628,14 +622,14 @@ padding-bottom: 2px;
 
 .mat-header-row {
     width: 100%;
-    max-width:1400px;
-    min-width:1400px; 
+    max-width:1070px;
+    min-width:1070px; 
     min-height: 30px;     
 }
 .mat-row {
     width: 100%;
-    max-width:1400px;
-    min-width:1400px; 
+    max-width:1070px;
+    min-width:1070px; 
     min-height: 30px;            
 }
 // PatientData
@@ -673,9 +667,9 @@ padding-bottom: 2px;
 }
 
 .mat-column-Qty {
-    width:60px;
-    max-width:60px;
-    min-width:60px;
+    width:50px;
+    max-width:50px;
+    min-width:50px;
     text-align:center;
 }
 
@@ -710,9 +704,9 @@ padding-bottom: 2px;
     text-align:center;
 }
 .mat-column-ChargeDoctorName {
-    width:140px;
-    max-width:140px;
-    min-width:140px;
+    width:160px;
+    max-width:160px;
+    min-width:160px;
     // justify-content:center;
     text-align:center;
     white-space: nowrap; 
@@ -818,7 +812,9 @@ button:disabled {
     color: white;
    
 }
-
+.mat-drawer {
+    width: 300px;
+}
 
 
 }

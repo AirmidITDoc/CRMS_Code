@@ -7,10 +7,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class InstitutionInformationService {
   personalFormGroup: FormGroup;
+  myFilterform: FormGroup;
+
+
   constructor(
     private _httpClient: HttpClient,
     private _formBuilder: FormBuilder
   ) {
+    this.personalFormGroup = this.createPesonalForm();
+
     this.personalFormGroup = this.createPesonalForm();
   }
 
@@ -25,7 +30,7 @@ export class InstitutionInformationService {
       ContactNo: '',
       PinCode: '',
       State: '',
-      StateCode: ' ',
+      StateCode: '',
       GSTIN: '',
       SAC:'',
       PAN:'',
@@ -35,6 +40,20 @@ export class InstitutionInformationService {
       UpdatedBy:0
     });
   }
+
+  
+  filterForm(): FormGroup {
+    return this._formBuilder.group({
+      InstitutionId:'',
+      InstitutionName:'',
+      StateCode:''
+
+    });
+  }
+
+
+
+
   public getInstitutionInformationList(Params) {
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_InstitutionInformationList", Params);
   }

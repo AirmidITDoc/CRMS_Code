@@ -3,38 +3,32 @@
     <div class="container" style="width: 100%;">
         <div style="width: 100%;">
             <!-- <div fxFlex> -->
-            <div fxLayout="row" fxLayoutAlign="start center" class="accent"
-                style="width:100% ; height:37px;color: white;">
-
-                <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
-                    <button mat-icon-button class="sidebar-toggle mr-12">
-                        <mat-icon>menu</mat-icon>
-                    </button>
-
-                    <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
-                        style="width: 80%;font-size: 16px;">
-                        Add Committee Member</span>
-                    <div fxLayout="row" fxLayoutAlign="start end" style="margin-left: 400px;">
-                        <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
-                            close
-                        </span>
-                    </div>
-                </div>
-            </div>
+                <mat-toolbar matDialogTitle class="mat-accent m-0">
+                    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
+                        style="background-color:rgb(18, 87, 134) !important;">
+                        <h3>{{_CommitteeMemberService.personalFormGroup.controls.CommitteeId.value?"Modify Committee Member":"New
+                            Committee Member"}}</h3>
+                        <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog" style="float: right;">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-toolbar-row>
+                </mat-toolbar>
 
             <mat-card-content style="width: 100%;margin-right: 5px;">
                 <div fxLayout="column">
                     <div class="content-card"
                         style="width:100%;  margin-top: 2px; float: right;background-color: white;">
                         <mat-card fxFlex.gt-sm="100%" fxFlex>
-                            <form [formGroup]="_CommitteMeetingService.personalFormGroup" style="display: flex;" #f="ngForm" #aForm>
+                            <form [formGroup]="_CommitteeMemberService.personalFormGroup" style="display: flex;" #f="ngForm" #aForm>
                                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                                    <input type="hidden" name="CommitteeId" formControlName="CommitteeId">
+                                    
                                     <mat-form-field appearance="outline" style="width: 40%;">
                                         <mat-label>Committee Name</mat-label>
                                         <input name="CommitteeName" formControlName="CommitteeName"
-                                            placeholder="Committee Name" matInput required type="text">
+                                            placeholder="Committee Name" matInput required  [(ngModel)]="CommiteeName">
                                         <mat-error
-                                            *ngIf="_CommitteMeetingService.personalFormGroup.get('CommitteeName').invalid && _CommitteMeetingService.personalFormGroup.get('CommitteeName').touched">
+                                            *ngIf="_CommitteeMemberService.personalFormGroup.get('CommitteeName').invalid && _CommitteeMemberService.personalFormGroup.get('CommitteeName').touched">
                                             CommitteeName is required Enter only
                                             Alphabets</mat-error>
                                     </mat-form-field>
@@ -55,7 +49,7 @@
                             style="width:100%;  margin-top: 2px; float: right;background-color: white;">
                             <div fxFlexFill fxLayout="column" fxLayout.gt-xs="column" fxLayoutGap="3px">
                                 <div fxlayout="row" >
-                                    <form [formGroup]="_CommitteMeetingService.personalFormGroup" style="display: flex;">
+                                    <form [formGroup]="_CommitteeMemberService.personalFormGroup" style="display: flex;">
 
                                         <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="5px">
 
@@ -89,10 +83,10 @@
                         <div fxFlex="100" fxFlex.gt-sm="100" fxLayout="row" fxLayout.gt-xs="column">
                             <div>
                                 <div class="col-md-12">
-                                    <div>
+                                    <div  style="height: 450px !important;  overflow: auto !important;">
                                         <mat-table #table matSort [dataSource]="dataSource"
                                             [@animateStagger]="{value:'50'}"
-                                            style="height: 300px !important;width: 80% !important" class="table1">
+                                            style="height: 400px !important;overflow: auto;" class="table1">
 
                                             <ng-container matColumnDef="MemberName">
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
@@ -140,7 +134,10 @@
                                                 [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
                                             </mat-footer-row>
                                         </mat-table>
-
+                                        <div class="net-amt">
+                                            <span class="net-amt-label" style="margin-left:150px;color: rgb(91, 153, 214);">Total Member</span>&nbsp;<span
+                                                class="net-amt-value" style="color: rgb(9, 50, 85);">{{dataSource.data.length}}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

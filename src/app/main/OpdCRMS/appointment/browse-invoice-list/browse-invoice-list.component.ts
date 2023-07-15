@@ -36,7 +36,7 @@ export class BrowseInvoiceListComponent implements OnInit {
   interimArray: any = [];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  // @ViewChild(MatPaginator) PathTestpaginator: MatPaginator;
+ 
 
   selectedAdvanceObj: InvoiceBilll;
   numberInWords!: string;
@@ -48,7 +48,7 @@ export class BrowseInvoiceListComponent implements OnInit {
   isLoading = true;
 
   displayedColumns = [
-    // 'checkbox',
+ 
     'InvoiceId',
     'BillNo',
     'InvoiceNumber',
