@@ -6,6 +6,7 @@ import { SponserService } from './sponser.service';
 import { fuseAnimations } from '@fuse/animations';
 import { NewsponserinformationComponent } from './newsponserinformation/newsponserinformation.component';
 import { MatDialog } from '@angular/material/dialog';
+import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 @Component({
   selector: 'app-sponser-information',
@@ -17,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class SponserInformationComponent implements OnInit {
   isLoading = true;
-
+  hasSelectedContacts: boolean;
   sIsLoading: string = '';
 
   displayedColumns: string[] = [
@@ -43,6 +44,7 @@ DSSponserInformationList = new MatTableDataSource<SponserInformation>();
 
   constructor(
     public _sponserService: SponserService,
+    private _fuseSidebarService: FuseSidebarService,
     public _matDialog: MatDialog
   ) { }
 
@@ -65,7 +67,10 @@ DSSponserInformationList = new MatTableDataSource<SponserInformation>();
     
   }
 
-  
+  toggleSidebar(name): void {
+    this._fuseSidebarService.getSidebar(name).toggleOpen();
+  }
+
   getServiceMasterList() {
     var Params={
             "SponserName":'%',       
@@ -127,6 +132,8 @@ onEdit(row) {
     this.getServiceMasterList();
   });
 }
+
+onClear(){}
 
 }
 

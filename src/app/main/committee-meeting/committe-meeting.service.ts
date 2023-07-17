@@ -92,4 +92,12 @@ populateForm(param) {
   this.personalFormGroup.patchValue(param);
 }
 
+getCommitteeMeetPrint(Params){
+
+  return this._httpClient.post("Generic/GetByProc?procName=rptCommitteeMeetingPrint", Params)
+}
+
+public getTemplate(query) {
+  return this._httpClient.post("Generic/GetBySelectQuery?query="+query, {})
+} 
 }

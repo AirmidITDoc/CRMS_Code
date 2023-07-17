@@ -392,32 +392,32 @@ export class InvoiceBillMappingComponent implements OnInit {
       "BillNo": 1,// el,
     }
 
-    // let printContents; 
-    // this.subscriptionArr.push(
-    //   this._opappointmentService.getFinancialSummarybudgetPrint(D_data).subscribe(res => {
+    let printContents; 
+    this.subscriptionArr.push(
+      this._opappointmentService.getFinancialSummarybudgetPrint(D_data).subscribe(res => {
 
-    //     this.reportPrintObjList = res as BrowseOPDBill[];
-    //     console.log(this.reportPrintObjList);
-    //     this.reportPrintObj = res[0] as BrowseOPDBill;
+        this.reportPrintObjList = res as BrowseOPDBill[];
+        console.log(this.reportPrintObjList);
+        this.reportPrintObj = res[0] as BrowseOPDBill;
 
-    //     this.getTemplate();
+        this.getTemplate();
 
-    //   })
-    // );
+      })
+    );
 
-    const dialogRef = this._matDialog.open(ViewFinancialSummarybudgetComponent,
-      {
-        maxWidth: "75vw",
-        height: '1560px',
-        width: '100%',
-        // data : {
-        //   registerObj : xx,
-        // }
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed - Insert Action', result);
-      //  this.getCaseList();
-    });
+    // const dialogRef = this._matDialog.open(ViewFinancialSummarybudgetComponent,
+    //   {
+    //     maxWidth: "75vw",
+    //     height: '1560px',
+    //     width: '100%',
+    //     // data : {
+    //     //   registerObj : xx,
+    //     // }
+    //   });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed - Insert Action', result);
+    //   //  this.getCaseList();
+    // });
 
 
   }

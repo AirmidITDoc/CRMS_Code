@@ -82,6 +82,8 @@ if(this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').valu
         this.chargeslist = Visit as CommitteeMeetingMemberList[];
 
         this.dataSource.data = this.chargeslist;
+
+        this.dataSource.data['MeetingStatus']="Offline";
         // this.dscommitteeMemberList.paginator = this.paginator;
         this.sIsLoading = '';
       },
@@ -264,6 +266,9 @@ if(! this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').va
     this.dateTimeObj = dateTimeObj;
   }
 
+
+  
+  
 }
 
 export class CommitteeMeetingMemberList {

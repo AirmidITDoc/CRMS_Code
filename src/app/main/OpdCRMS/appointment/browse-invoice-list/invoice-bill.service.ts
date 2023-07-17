@@ -35,4 +35,12 @@ export class InvoiceBillService {
     return this._httpClient.post("Generic/GetByProc?procName=Retrieve_BrowseInvoiceBill", param) 
   }  
 
+  public getInvoiceBillPrint(BillNo) {
+    return this._httpClient.post("Generic/GetByProc?procName=Retrieve_BrowseInvoiceBill", BillNo)
+  }
+
+  public getTemplate(query) {
+    return this._httpClient.post("Generic/GetBySelectQuery?query="+query, {})
+  } 
+
 }

@@ -20,7 +20,7 @@ import { fuseAnimations } from '@fuse/animations';
 })
 export class BrowseInvoiceListComponent implements OnInit {
 
-  
+
   @Output() showClicked = new EventEmitter();
   click: boolean = false;
   MouseEvent = true;
@@ -36,7 +36,7 @@ export class BrowseInvoiceListComponent implements OnInit {
   interimArray: any = [];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
- 
+
 
   selectedAdvanceObj: InvoiceBilll;
   numberInWords!: string;
@@ -48,7 +48,7 @@ export class BrowseInvoiceListComponent implements OnInit {
   isLoading = true;
 
   displayedColumns = [
- 
+
     'InvoiceId',
     'BillNo',
     'InvoiceNumber',
@@ -85,7 +85,7 @@ export class BrowseInvoiceListComponent implements OnInit {
 
   ngOnInit(): void {
 
-     if (this._ActRoute.url == '/opd/payment') {
+    if (this._ActRoute.url == '/opd/payment') {
       this.menuActions.push('Approval');
     }
 
@@ -96,7 +96,7 @@ export class BrowseInvoiceListComponent implements OnInit {
       // "From_Dt": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("start").value, "MM-dd-yyyy"),
       // "To_Dt": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "MM-dd-yyyy"),
       // "Reg_No": 0,
-      "InvoiceId":11,
+      "InvoiceId": 11,
     }
     console.log(D_data);
 
@@ -142,7 +142,7 @@ export class BrowseInvoiceListComponent implements OnInit {
 
   }
 
-   
+
   tableElementChecked(event, element) {
     if (event.checked) {
       this.interimArray.push(element);
@@ -390,26 +390,97 @@ export class BrowseInvoiceListComponent implements OnInit {
 
 
   getPrint(el) {
-    // debugger;
-    // var D_data = {
-    //   "BillNo": el.BillNo,
-    //   // "BillNo":111,
-    // }
+    debugger;
+    var D_data = {
+      "InvoiceId": 9,// el.InvoiceId,
+
+    }
     // el.bgColor = 'red';
-    // //console.log(el);
-    // let printContents; //`<div style="padding:20px;height:550px"><div><div style="display:flex"><img src="http://localhost:4200/assets/images/logos/Airmid_NewLogo.jpeg" width="90"><div><div style="font-weight:700;font-size:16px">YASHODHARA SUPER SPECIALITY HOSPITAL PVT. LTD.</div><div style="color:#464343">6158, Siddheshwar peth, near zilla parishad, solapur-3 phone no.: (0217) 2323001 / 02</div><div style="color:#464343">www.yashodharahospital.org</div></div></div><div style="border:1px solid grey;border-radius:16px;text-align:center;padding:8px;margin-top:5px"><span style="font-weight:700">IP ADVANCE RECEIPT</span></div></div><hr style="border-color:#a0a0a0"><div><div style="display:flex;justify-content:space-between"><div style="display:flex"><div style="width:100px;font-weight:700">Advance No</div><div style="width:10px;font-weight:700">:</div><div>6817</div></div><div style="display:flex"><div style="width:60px;font-weight:700">Reg. No</div><div style="width:10px;font-weight:700">:</div><div>117399</div></div><div style="display:flex"><div style="width:60px;font-weight:700">Date</div><div style="width:10px;font-weight:700">:</div><div>26/06/2019&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:15:49PM</div></div></div><div style="display:flex;margin:8px 0"><div style="display:flex;width:477px"><div style="width:100px;font-weight:700">Patient Name</div><div style="width:10px;font-weight:700">:</div><div>Mrs. Suglabai Dhulappa Waghmare</div></div><div style="display:flex"><div style="width:60px;font-weight:700">IPD No</div><div style="width:10px;font-weight:700">:</div><div>IP/53757/2019</div></div></div><div style="display:flex;margin:8px 0"><div style="display:flex"><div style="width:100px;font-weight:700">DOA</div><div style="width:10px;font-weight:700">:</div><div>30/10/2019</div></div></div><div style="display:flex"><div style="display:flex"><div style="width:100px;font-weight:700">Patient Type</div><div style="width:10px;font-weight:700">:</div><div>Self</div></div></div></div><hr style="border-color:#a0a0a0"><div><div style="display:flex"><div style="display:flex"><div style="width:150px;font-weight:700">Advacne Amount</div><div style="width:10px;font-weight:700">:</div><div>4,000.00</div></div></div><div style="display:flex;margin:8px 0"><div style="display:flex"><div style="width:150px;font-weight:700">Amount in Words</div><div style="width:10px;font-weight:700">:</div><div>FOUR THOUSANDS RUPPEE ONLY</div></div></div><div style="display:flex"><div style="display:flex"><div style="width:150px;font-weight:700">Reason of Advance</div><div style="width:10px;font-weight:700">:</div><div></div></div></div></div><div style="position:relative;top:100px;text-align:right"><div style="font-weight:700;font-size:16px">YASHODHARA SUPER SPECIALITY HOSPITAL PVT. LTD.</div><div style="font-weight:700;font-size:16px">Cashier</div><div>Paresh Manlor</div></div></div>`;
-    // this.subscriptionArr.push(
-    //   this._InvoiceBilllsService.getBillPrint(D_data).subscribe(res => {
+    //console.log(el);
+    let printContents; //`<div style="padding:20px;height:550px"><div><div style="display:flex"><img src="http://localhost:4200/assets/images/logos/Airmid_NewLogo.jpeg" width="90"><div><div style="font-weight:700;font-size:16px">YASHODHARA SUPER SPECIALITY HOSPITAL PVT. LTD.</div><div style="color:#464343">6158, Siddheshwar peth, near zilla parishad, solapur-3 phone no.: (0217) 2323001 / 02</div><div style="color:#464343">www.yashodharahospital.org</div></div></div><div style="border:1px solid grey;border-radius:16px;text-align:center;padding:8px;margin-top:5px"><span style="font-weight:700">IP ADVANCE RECEIPT</span></div></div><hr style="border-color:#a0a0a0"><div><div style="display:flex;justify-content:space-between"><div style="display:flex"><div style="width:100px;font-weight:700">Advance No</div><div style="width:10px;font-weight:700">:</div><div>6817</div></div><div style="display:flex"><div style="width:60px;font-weight:700">Reg. No</div><div style="width:10px;font-weight:700">:</div><div>117399</div></div><div style="display:flex"><div style="width:60px;font-weight:700">Date</div><div style="width:10px;font-weight:700">:</div><div>26/06/2019&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:15:49PM</div></div></div><div style="display:flex;margin:8px 0"><div style="display:flex;width:477px"><div style="width:100px;font-weight:700">Patient Name</div><div style="width:10px;font-weight:700">:</div><div>Mrs. Suglabai Dhulappa Waghmare</div></div><div style="display:flex"><div style="width:60px;font-weight:700">IPD No</div><div style="width:10px;font-weight:700">:</div><div>IP/53757/2019</div></div></div><div style="display:flex;margin:8px 0"><div style="display:flex"><div style="width:100px;font-weight:700">DOA</div><div style="width:10px;font-weight:700">:</div><div>30/10/2019</div></div></div><div style="display:flex"><div style="display:flex"><div style="width:100px;font-weight:700">Patient Type</div><div style="width:10px;font-weight:700">:</div><div>Self</div></div></div></div><hr style="border-color:#a0a0a0"><div><div style="display:flex"><div style="display:flex"><div style="width:150px;font-weight:700">Advacne Amount</div><div style="width:10px;font-weight:700">:</div><div>4,000.00</div></div></div><div style="display:flex;margin:8px 0"><div style="display:flex"><div style="width:150px;font-weight:700">Amount in Words</div><div style="width:10px;font-weight:700">:</div><div>FOUR THOUSANDS RUPPEE ONLY</div></div></div><div style="display:flex"><div style="display:flex"><div style="width:150px;font-weight:700">Reason of Advance</div><div style="width:10px;font-weight:700">:</div><div></div></div></div></div><div style="position:relative;top:100px;text-align:right"><div style="font-weight:700;font-size:16px">YASHODHARA SUPER SPECIALITY HOSPITAL PVT. LTD.</div><div style="font-weight:700;font-size:16px">Cashier</div><div>Paresh Manlor</div></div></div>`;
+    this.subscriptionArr.push(
+      this._InvoiceBilllsService.getInvoiceBillPrint(D_data).subscribe(res => {
 
-    //     this.reportPrintObjList = res as InvoiceBilll[];
-    //     console.log(this.reportPrintObjList);
-    //     this.reportPrintObj = res[0] as InvoiceBilll;
+        this.reportPrintObjList = res as InvoiceBilll[];
+        console.log(this.reportPrintObjList);
+        this.reportPrintObj = res[0] as InvoiceBilll;
 
-    //     this.getTemplate();
+        this.getTemplate();
 
 
-    //   })
-    // );
+      })
+    );
+  }
+
+
+  getTemplate() {
+    let query = 'select TempId,TempDesign,TempKeys as TempKeys from Tg_Htl_Tmp where TempId=16';
+    this._InvoiceBilllsService.getTemplate(query).subscribe((resData: any) => {
+
+      this.printTemplate = resData[0].TempDesign;
+      let keysArray = ['InvoiceId', 'BillNo', 'InvoiceNumber', 'CaseId', 'InvoiceDate', 'InvoiceTime', 'TaxableAmount', 'CGST', 'SGST', 'IGST', 'ApprovalStatus', 'TotalAmount', 'ApprovedBy', 'ApprovedDate', 'InvoiceStatus']; // resData[0].TempKeys;
+      debugger;
+      for (let i = 0; i < keysArray.length; i++) {
+        let reString = "{{" + keysArray[i] + "}}";
+        let re = new RegExp(reString, "g");
+        this.printTemplate = this.printTemplate.replace(re, this.reportPrintObj[keysArray[i]]);
+      }
+      var strrowslist = "";
+      for (let i = 1; i <= this.reportPrintObjList.length; i++) {
+        console.log(this.reportPrintObjList);
+        var objreportPrint = this.reportPrintObjList[i - 1];
+
+
+        var strabc = `<hr style="border-color:white" >
+        <div style="display:flex;margin:8px 0">
+        <div style="display:flex;width:60px;margin-left:20px;">
+            <div>`+ i + `</div> <!-- <div>BLOOD UREA</div> -->
+        </div>
+        <div style="display:flex;width:80px;text-align:left;">
+            <div>`+ objreportPrint.CaseId + `</div> <!-- <div>BLOOD UREA</div> -->
+        </div>
+        <div style="display:flex;width:80px;text-align:left;">
+        <div>`+ objreportPrint.BillNo + `</div> <!-- <div>BLOOD UREA</div> -->
+    </div>
+        <div style="display:flex;width:80px;text-align:left;">
+        <div>`+ objreportPrint.CGST + `</div> <!-- <div>BLOOD UREA</div> -->
+        </div>
+        <div style="display:flex;width:80px;text-align:left;">
+            <div>`+ objreportPrint.SGST + `</div> <!-- <div>450</div> -->
+        </div>
+        <div style="display:flex;width:80px;text-align:left;">
+            <div>`+ objreportPrint.IGST + `</div> <!-- <div>1</div> -->
+        </div>
+        <div style="display:flex;width:110px;text-align:center;">
+            <div>`+ objreportPrint.ApprovalStatus + `</div> <!-- <div>450</div> -->
+        </div>
+        <div style="display:flex;width:110px;text-align:center;">
+        <div>`+ '₹' + objreportPrint.TotalAmount.toFixed(2) + `</div> <!-- <div>450</div> -->
+    </div>
+    <div style="display:flex;width:110px;text-align:center;">
+    <div>`+ objreportPrint.ApprovedBy + `</div> <!-- <div>450</div> -->
+    </div>
+    <div style="display:flex;width:110px;text-align:center;">
+    <div>`+ objreportPrint.ApprovedDate + `</div> <!-- <div>450</div> -->
+    </div>
+    <div style="display:flex;width:110px;text-align:center;">
+    <div>`+ objreportPrint.InvoiceStatus + `</div> <!-- <div>450</div> -->
+    </div>
+        </div>`;
+        strrowslist += strabc;
+      }
+      var objPrintWordInfo = this.reportPrintObjList[0];
+
+
+      this.printTemplate = this.printTemplate.replace('StrTotalPaidAmountInWords', this.convertToWord(objPrintWordInfo.TotalAmount));
+      this.printTemplate = this.printTemplate.replace('StrPrintDate', this.transform2(this.currentDate.toString()));
+      this.printTemplate = this.printTemplate.replace('SetMultipleRowsDesign', strrowslist);
+
+      this.printTemplate = this.printTemplate.replace(/{{.*}}/g, '');
+      setTimeout(() => {
+        this.print();
+      }, 1000);
+    });
   }
 
   // PRINT 
@@ -472,7 +543,7 @@ export class BrowseInvoiceListComponent implements OnInit {
       ServiceName: contact.ServiceName,
       Price: contact.Price,
       Qty: contact.Qty,
-
+      ApprovedDate: contact.ApprovedDate
 
 
     };
@@ -489,68 +560,68 @@ export class BrowseInvoiceListComponent implements OnInit {
 
 
   getRecord(contact, m): void {
-  //   debugger;
-  //   console.log(contact);
+    //   debugger;
+    //   console.log(contact);
 
-  //   // this.VisitID = contact.VisitId;
-  //   let AgeDay, AgeMonth, AgeYear, Age
-  //   if (contact.Age != null || contact.AgeDay != null || contact.AgeMonth != null || contact.AgeYear != null) {
-  //     Age = contact.Age.trim();
-  //     AgeDay = contact.AgeDay.trim();
-  //     AgeMonth = contact.AgeMonth.trim();
-  //     AgeYear = contact.AgeYear.trim();
-  //   }
+    //   // this.VisitID = contact.VisitId;
+    //   let AgeDay, AgeMonth, AgeYear, Age
+    //   if (contact.Age != null || contact.AgeDay != null || contact.AgeMonth != null || contact.AgeYear != null) {
+    //     Age = contact.Age.trim();
+    //     AgeDay = contact.AgeDay.trim();
+    //     AgeMonth = contact.AgeMonth.trim();
+    //     AgeYear = contact.AgeYear.trim();
+    //   }
 
-  //   if (m == "Approval") {
-  //     console.log(contact);
-  //    let xx = {
-  //         RegNo: contact.RegId,
-  //         RegId: contact.RegId,
-  //         AdmissionID: contact.VisitId,
-  //         PatientName: contact.PatientName,
-  //         Doctorname: contact.Doctorname,
-  //         AdmDateTime: contact.AdmDateTime,
-  //         AgeYear: contact.AgeYear,
-  //         ClassId: contact.ClassId,
-  //         ClassName: contact.ClassName,
-  //         TariffName: contact.TariffName,
-  //         TariffId: contact.TariffId,
-  //         VisitId: contact.VisitId,
-  //         VisitDate: contact.VisitDate,
-  //         BillNo:contact.BillNo
-  //       };
+    //   if (m == "Approval") {
+    //     console.log(contact);
+    //    let xx = {
+    //         RegNo: contact.RegId,
+    //         RegId: contact.RegId,
+    //         AdmissionID: contact.VisitId,
+    //         PatientName: contact.PatientName,
+    //         Doctorname: contact.Doctorname,
+    //         AdmDateTime: contact.AdmDateTime,
+    //         AgeYear: contact.AgeYear,
+    //         ClassId: contact.ClassId,
+    //         ClassName: contact.ClassName,
+    //         TariffName: contact.TariffName,
+    //         TariffId: contact.TariffId,
+    //         VisitId: contact.VisitId,
+    //         VisitDate: contact.VisitDate,
+    //         BillNo:contact.BillNo
+    //       };
 
-  //       let PatientHeaderObj = {};
+    //       let PatientHeaderObj = {};
 
-  //       PatientHeaderObj['Date'] = contact.VisitDate
-  //       PatientHeaderObj['PatientName'] =contact.PatientName,
-  //       PatientHeaderObj['OPD_IPD_Id'] =contact.RegId,
-  //       PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt
-  //       PatientHeaderObj['BillNo'] = contact.BillNo
-  //       //  PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt
-  //       // this._AppointmentSreviceService.populateFormpersonal(xx);
-  //       this.advanceDataStored.storage = new SearchInforObj(xx);
-  //       const dialogRef = this._matDialog.open(BillApproveComponent,
-  //         {
-  //           maxWidth: "90%",
-  //           height: '600px',
-  //           width: '100%',
-  //           data: {
-  //             advanceObj: PatientHeaderObj,
-  //             FromName: "OP-Bill"
-  //           }
-  //         });
-  //       dialogRef.afterClosed().subscribe(result => {
-  //         console.log('The dialog was closed - Insert Action', result);
-  //         // this.getVisitList();
-  //       });
-  //     }
-       
-    }
- 
-    // /   this._ActRoute.navigate(['opd/appointment/op_bill'], {queryParams:{id:this.selectedID}})
+    //       PatientHeaderObj['Date'] = contact.VisitDate
+    //       PatientHeaderObj['PatientName'] =contact.PatientName,
+    //       PatientHeaderObj['OPD_IPD_Id'] =contact.RegId,
+    //       PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt
+    //       PatientHeaderObj['BillNo'] = contact.BillNo
+    //       //  PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt
+    //       // this._AppointmentSreviceService.populateFormpersonal(xx);
+    //       this.advanceDataStored.storage = new SearchInforObj(xx);
+    //       const dialogRef = this._matDialog.open(BillApproveComponent,
+    //         {
+    //           maxWidth: "90%",
+    //           height: '600px',
+    //           width: '100%',
+    //           data: {
+    //             advanceObj: PatientHeaderObj,
+    //             FromName: "OP-Bill"
+    //           }
+    //         });
+    //       dialogRef.afterClosed().subscribe(result => {
+    //         console.log('The dialog was closed - Insert Action', result);
+    //         // this.getVisitList();
+    //       });
+    //     }
 
   }
+
+  // /   this._ActRoute.navigate(['opd/appointment/op_bill'], {queryParams:{id:this.selectedID}})
+
+}
 
 
 
@@ -570,19 +641,21 @@ export class ReportPrintObj {
 
 
 export class InvoiceBilll {
-  InvoiceId:any;
-  BillNo:any;
-  InvoiceNumber:any;
-  CaseId:any;
-  InvoiceDate:any;
-  InvoiceTime:any;
-  TaxableAmount:any;
-  CGST:any;
-  SGST:any;
-  IGST:any;
-  ApprovalStatus:any;
-  TotalAmount:any;
-  ApprovedBy:any;
+  InvoiceId: any;
+  BillNo: any;
+  InvoiceNumber: any;
+  CaseId: any;
+  InvoiceDate: any;
+  InvoiceTime: any;
+  TaxableAmount: any;
+  CGST: any;
+  SGST: any;
+  IGST: any;
+  ApprovalStatus: any;
+  TotalAmount: any;
+  ApprovedBy: any;
+  ApprovedDate: any;
+  InvoiceStatus: any;
   /**
    * Constructor
    *
@@ -603,7 +676,9 @@ export class InvoiceBilll {
       this.ApprovalStatus = InvoiceBilll.ApprovalStatus || '';
       this.TotalAmount = InvoiceBilll.TotalAmount || '';
       this.ApprovedBy = InvoiceBilll.ApprovedBy || '';
-     
+      this.ApprovedDate = InvoiceBilll.ApprovedDate || '';
+      this.InvoiceStatus = InvoiceBilll.InvoiceStatus || '';
+
     }
   }
 

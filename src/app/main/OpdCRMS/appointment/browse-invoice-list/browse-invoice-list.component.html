@@ -15,7 +15,7 @@
                 Browse Invoice Bill
             </span>
         </div>
-            </mat-toolbar>
+    </mat-toolbar>
     <!-- / HEADER -->
 
     <!-- SELECTED BAR -->
@@ -167,8 +167,9 @@
                                     </ng-container>
 
                                     <ng-container matColumnDef="InvoiceDate">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>InvoiceDate
-                                            
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>InvoiceDate
+
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.InvoiceDate | date:'shortDate'}}
@@ -184,7 +185,8 @@
                                     </ng-container> -->
 
                                     <ng-container matColumnDef="TaxableAmount">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>TaxableAmount
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>TaxableAmount
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.TaxableAmount | currency:"INR":"symbol"}}
@@ -253,7 +255,7 @@
                                             {{contact.ApprovedBy}}
                                         </mat-cell>
                                     </ng-container>
-                                
+
 
                                     <ng-container matColumnDef="action" stickyEnd>
                                         <mat-header-cell *matHeaderCellDef style="color: white;">Action
@@ -300,8 +302,7 @@
                                     </mat-footer-row>
                                 </mat-table>
 
-                                <mat-paginator [pageSizeOptions]="[15,30, 45]" [pageSize]="15"
-                                    showFirstLastButtons>
+                                <mat-paginator [pageSizeOptions]="[15,30, 45]" [pageSize]="15" showFirstLastButtons>
                                 </mat-paginator>
                             </div>
                         </div>

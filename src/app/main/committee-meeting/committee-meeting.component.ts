@@ -31,11 +31,11 @@ export class CommitteeMeetingComponent implements OnInit {
   hasSelectedContacts: boolean;
   currentDate=new Date();
   subscriptions: Subscription[] = [];
-  
+  reportPrintObj:CommmitteeDetail;
   printTemplate: any;
-  
+  reportPrintObjList: CommmitteeDetail[] = [];
   subscriptionArr: Subscription[] = [];
-
+  
   VisitID:any;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -270,16 +270,130 @@ newMember() {
       this.getCommitteeList();
     });
   }
+
+
+ getPrint() {
+    debugger;
+    var D_data = {
+      "CommitteeMeetingId": 1,//this.selectedAdvanceObj.AdmissionID || 0,
+     
+    }
+    // el.bgColor = 'red';
+    console.log(D_data);
+    let printContents;
+    this.subscriptionArr.push(
+      this._CasedetailService.getCommitteeMeetPrint(D_data).subscribe(res => {
+        console.log(res);
+        this.reportPrintObjList = res as CommmitteeDetail[];
+        console.log(this.reportPrintObjList);
+        this.reportPrintObj = res[0] as CommmitteeDetail;
+
+        this.getTemplate();
+
+        console.log(D_data);
+      })
+    );
+  }
+
+
+  
+  getTemplate() {
+    let query = 'select TempId,TempDesign,TempKeys as TempKeys from Tg_Htl_Tmp where TempId=33';
+    this._CasedetailService.getTemplate(query).subscribe((resData: any) => {
+
+      this.printTemplate = resData[0].TempDesign;
+      let keysArray = ['CommitteeMeetingId', 'CommitteeMeetingDate', 'CommitteeMeetingTime', 'CommiteeMeetingName', 'CommitteeMeetingLocation', 'CommitteeMeetingAmount', 'MemberName', 'MemberAmount']; // resData[0].TempKeys;
+      debugger;
+      for (let i = 0; i < keysArray.length; i++) {
+        let reString = "{{" + keysArray[i] + "}}";
+        let re = new RegExp(reString, "g");
+        this.printTemplate = this.printTemplate.replace(re, this.reportPrintObj[keysArray[i]]);
+      }
+      var strrowslist = "";
+      for (let i = 1; i <= this.reportPrintObjList.length; i++) {
+        console.log(this.reportPrintObjList);
+        var objreportPrint = this.reportPrintObjList[i - 1];
+
+      
+
+        var strabc = `<hr style="border-color:white" >
+        <div style="display:flex;margin:8px 0">
+        <div style="display:flex;width:60px;margin-left:20px;">
+            <div>`+ i + `</div> <!-- <div>BLOOD UREA</div> -->
+        </div>
+        <div style="display:flex;width:600px;margin-left:10px;text-align:left;">
+            <div>`+ objreportPrint.MemberName + `</div> <!-- <div>BLOOD UREA</div> -->
+        </div>
+        <div style="display:flex;width:300px;margin-left:10px;text-align:left;">
+        <div>`+ objreportPrint.MemberAmount + `</div> <!-- <div>BLOOD UREA</div> -->
+        </div>
+       
+        </div>`;
+        strrowslist += strabc;
+      }
+      var objPrintWordInfo = this.reportPrintObjList[0];
+     
+
+      // this.printTemplate = this.printTemplate.replace('StrTotalPaidAmountInWords', this.convertToWord(objPrintWordInfo.PaidAmount));
+      this.printTemplate = this.printTemplate.replace('StrPrintDate', this.transform2(this.currentDate.toString()));
+      this.printTemplate = this.printTemplate.replace('SetMultipleRowsDesign', strrowslist);
+     
+      
+      this.printTemplate = this.printTemplate.replace(/{{.*}}/g, '');
+      setTimeout(() => {
+        this.print();
+      }, 1000);
+    });
+  }
+
+  transform1(value: string) {
+    var datePipe = new DatePipe("en-US");
+    value = datePipe.transform(value, 'dd/MM/yyyy hh:mm a');
+    return value;
+  }
+
+  transform2(value: string) {
+    var datePipe = new DatePipe("en-US");
+    value = datePipe.transform((new Date), 'dd/MM/yyyy h:mm a');
+    return value;
+  }
+
+
+
+
+  // PRINT 
+  print() {
+
+    let popupWin, printContents;
+
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=800px !important,width=auto,width=2200px !important');
+    // popupWin.document.open();
+    popupWin.document.write(` <html>
+    <head><style type="text/css">`);
+    popupWin.document.write(`
+      </style>
+          <title></title>
+      </head>
+    `);
+    popupWin.document.write(`<body onload="window.print();window.close()">${this.printTemplate}</body>
+    </html>`);
+    popupWin.document.close();
+  }
+
+
 }
 
 
 export class CommmitteeDetail {
   CommitteeMeetingId:any;
   CommitteeMeetingDate:any;
+  CommitteeMeetingTime:any;
   CommiteeMeetingName:any;
   CreatedBy: any;
   CommitteeMeetingLocation: any;
- 
+  MemberName:any;
+  MemberAmount:any;
+
   /**
    * Constructor
    *
@@ -290,8 +404,11 @@ export class CommmitteeDetail {
     {
       this.CommitteeMeetingId = CommmitteeDetail.CommitteeMeetingId || '';
       this.CommitteeMeetingDate = CommmitteeDetail.CommitteeMeetingDate || '';
+      this.CommitteeMeetingTime = CommmitteeDetail.CommitteeMeetingTime || '';
       this.CommiteeMeetingName = CommmitteeDetail.CommiteeMeetingName || '';
       this.CommitteeMeetingLocation = CommmitteeDetail.CommitteeMeetingLocation || '';
+      this.MemberName = CommmitteeDetail.MemberName || '';
+      this.MemberAmount = CommmitteeDetail.MemberAmount || '';
       this.CreatedBy = CommmitteeDetail.CreatedBy || 0;
   
     }

@@ -18,7 +18,7 @@ import Swal from 'sweetalert2';
 })
 export class EditAppointmentComponent implements OnInit {
 
-  personalFormGroup: FormGroup;
+
 
   submitted = false;
   now = Date.now();
@@ -112,7 +112,7 @@ export class EditAppointmentComponent implements OnInit {
 
     this.IsSaveupdate = "true";
     console.log(this.data)
-    this.personalFormGroup = this.createPesonalForm();
+  
     this.searchFormGroup = this.createSearchForm();
     // this.getHospitalList();
     this.getPrefixList();
@@ -177,62 +177,9 @@ export class EditAppointmentComponent implements OnInit {
   closeDialog() {
     console.log("closed")
     //  this.dialogRef.close();
-    // this.personalFormGroup.reset();
+    // this._registerService.personalFormGroup.reset();
   }
-  createPesonalForm() {
-    return this.formBuilder.group({
-      RegId: '',
-      RegNo: '',
-      PrefixId: '',
-      PrefixID: '',
-      FirstName: ['', [
-        Validators.required,
-        Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
-      ]],
-      MiddleName: ['', [
-
-        Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
-      ]],
-      LastName: ['', [
-        Validators.required,
-        Validators.pattern("^[A-Za-z]*[a-zA-z]*$"),
-      ]],
-      GenderId: '',
-      Address: '',
-      DateOfBirth: [{ value: this.registerObj.DateofBirth }],
-      AgeYear: ['', [
-        Validators.required,
-        Validators.maxLength(3),
-        Validators.pattern("^[0-9]*$")]],
-      AgeMonth: ['', [
-        Validators.pattern("^[0-9]*$")]],
-      AgeDay: ['', [
-        Validators.pattern("^[0-9]*$")]],
-      PhoneNo: ['', [Validators.minLength(10),
-      Validators.maxLength(15),
-      Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")
-      ]],
-      MobileNo: ['', [Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(10),
-      Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")
-      ]],
-      AadharCardNo: ['', [
-        // Validators.required,
-        Validators.pattern("^[0-9]*$"),
-        Validators.minLength(12),
-        Validators.maxLength(12),
-      ]],
-      PanCardNo: '',
-      MaritalStatusId: '',
-      ReligionId: '',
-      AreaId: '',
-      CityId: '',
-      StateId: '',
-      CountryId: '',
-      IsCharity: '',
-    });
-  }
+  
 
 
 
@@ -362,9 +309,9 @@ export class EditAppointmentComponent implements OnInit {
       this.filteredPrefix.next(this.PrefixList.slice());
       if (this.data) {
         const ddValue = this.PrefixList.find(c => c.PrefixID == this.data.registerObj.PrefixID);
-        this.personalFormGroup.get('PrefixID').setValue(ddValue);
+        this._registerService.personalFormGroup.get('PrefixID').setValue(ddValue);
       }
-      this.onChangeGenderList(this.personalFormGroup.get('PrefixID').value);
+      this.onChangeGenderList(this._registerService.personalFormGroup.get('PrefixID').value);
     });
   }
 
@@ -388,7 +335,7 @@ export class EditAppointmentComponent implements OnInit {
 
       if (this.data) {
         const ddValue = this.AreaList.find(c => c.AreaId == this.data.registerObj.AreaId);
-        this.personalFormGroup.get('AreaId').setValue(ddValue);
+        this._registerService.personalFormGroup.get('AreaId').setValue(ddValue);
       }
     });
   }
@@ -400,7 +347,7 @@ export class EditAppointmentComponent implements OnInit {
       this.filteredMaritalstatus.next(this.MaritalStatusList.slice());
       if (this.data) {
         const ddValue = this.MaritalStatusList.find(c => c.MaritalStatusId == this.data.registerObj.MaritalStatusId);
-        this.personalFormGroup.get('MaritalStatusId').setValue(ddValue);
+        this._registerService.personalFormGroup.get('MaritalStatusId').setValue(ddValue);
       }
     });
   }
@@ -412,7 +359,7 @@ export class EditAppointmentComponent implements OnInit {
       this.filteredReligion.next(this.ReligionList.slice());
       if (this.data) {
         const ddValue = this.ReligionList.find(c => c.ReligionId == this.data.registerObj.ReligionId);
-        this.personalFormGroup.get('ReligionId').setValue(ddValue);
+        this._registerService.personalFormGroup.get('ReligionId').setValue(ddValue);
       }
     });
   }
@@ -423,7 +370,7 @@ export class EditAppointmentComponent implements OnInit {
     this._registerService.getGenderMasterCombo().subscribe(data => {
       this.GenderList = data;
       const ddValue = this.GenderList.find(c => c.GenderId == this.data.registerObj.GenderId);
-      this.personalFormGroup.get('GenderId').setValue(ddValue);
+      this._registerService.personalFormGroup.get('GenderId').setValue(ddValue);
     })
   }
 
@@ -433,7 +380,7 @@ export class EditAppointmentComponent implements OnInit {
       this.filteredCity.next(this.cityList.slice());
       if (this.data) {
         const ddValue = this.cityList.find(c => c.CityId == this.data.registerObj.CityId);
-        this.personalFormGroup.get('CityId').setValue(ddValue);
+        this._registerService.personalFormGroup.get('CityId').setValue(ddValue);
         this.onChangeCityList(this.data.registerObj.CityId)
       }
     });
@@ -454,7 +401,7 @@ export class EditAppointmentComponent implements OnInit {
         this.stateList = data;
         this.selectedState = this.stateList[0].StateName;
         this.selectedStateID = this.stateList[0].StateId;
-        this.personalFormGroup.get('StateId').setValue(this.stateList[0]);
+        this._registerService.personalFormGroup.get('StateId').setValue(this.stateList[0]);
         this.onChangeCountryList(this.selectedStateID);
       });
     } else {
@@ -469,8 +416,8 @@ export class EditAppointmentComponent implements OnInit {
       this._registerService.getCountryList(StateId).subscribe(data => {
         this.countryList = data;
         this.selectedCountry = this.countryList[0].CountryName;
-        this.personalFormGroup.get('CountryId').setValue(this.countryList[0]);
-        this.personalFormGroup.updateValueAndValidity();
+        this._registerService.personalFormGroup.get('CountryId').setValue(this.countryList[0]);
+        this._registerService.personalFormGroup.updateValueAndValidity();
       });
     }
   }
@@ -480,7 +427,7 @@ export class EditAppointmentComponent implements OnInit {
     if (prefixObj) {
       this._registerService.getGenderCombo(prefixObj.PrefixID).subscribe(data => {
         this.GenderList = data;
-        this.personalFormGroup.get('GenderId').setValue(this.GenderList[0]);
+        this._registerService.personalFormGroup.get('GenderId').setValue(this.GenderList[0]);
 
         this.selectedGenderID = this.GenderList[0].GenderId;
       });
@@ -534,29 +481,29 @@ export class EditAppointmentComponent implements OnInit {
     debugger;
 
     const toSelect = this.PrefixList.find(c => c.PrefixID == this.registerObj.PrefixID);
-    this.personalFormGroup.get('PrefixID').setValue(toSelect);
+    this._registerService.personalFormGroup.get('PrefixID').setValue(toSelect);
 
     const toSelectMarital = this.MaritalStatusList.find(c => c.MaritalStatusId == this.registerObj.MaritalStatusId);
-    this.personalFormGroup.get('MaritalStatusId').setValue(toSelectMarital);
+    this._registerService.personalFormGroup.get('MaritalStatusId').setValue(toSelectMarital);
 
     const toSelectReligion = this.ReligionList.find(c => c.ReligionId == this.registerObj.ReligionId);
-    this.personalFormGroup.get('ReligionId').setValue(toSelectReligion);
+    this._registerService.personalFormGroup.get('ReligionId').setValue(toSelectReligion);
 
     const toSelectArea = this.AreaList.find(c => c.AreaId == this.registerObj.AreaId);
-    this.personalFormGroup.get('AreaId').setValue(toSelectArea);
+    this._registerService.personalFormGroup.get('AreaId').setValue(toSelectArea);
 
     const toSelectCity = this.cityList.find(c => c.CityId == this.registerObj.CityId);
-    this.personalFormGroup.get('CityId').setValue(toSelectCity);
+    this._registerService.personalFormGroup.get('CityId').setValue(toSelectCity);
 
     // const toSelectMat = this.cityList.find(c => c.CityId == this.registerObj.CityId);
-    // this.personalFormGroup.get('CityId').setValue(toSelectCity);
+    // this._registerService.personalFormGroup.get('CityId').setValue(toSelectCity);
 
 
-    this.onChangeGenderList(this.personalFormGroup.get('PrefixID').value);
+    this.onChangeGenderList(this._registerService.personalFormGroup.get('PrefixID').value);
 
     this.onChangeCityList(this.registerObj.CityId);
 
-    this.personalFormGroup.updateValueAndValidity();
+    this._registerService.personalFormGroup.updateValueAndValidity();
     // this.dialogRef.close();
 
   }
@@ -586,26 +533,26 @@ export class EditAppointmentComponent implements OnInit {
 
       registrationUpdate['regId'] = this.registerObj.RegId;
       registrationUpdate['opration'] = "UPDATE";
-      registrationUpdate['prefixId'] = this.personalFormGroup.get('PrefixID').value.PrefixID || 0;
+      registrationUpdate['prefixId'] = this._registerService.personalFormGroup.get('PrefixID').value.PrefixID || 0;
       registrationUpdate['firstName'] = this.registerObj.FirstName ||'';
       registrationUpdate['middleName'] = this.registerObj.MiddleName || '';
       registrationUpdate['lastName'] = this.registerObj.LastName || '';
       registrationUpdate['address'] = this.registerObj.Address || '';
-      registrationUpdate['City'] = this.personalFormGroup.get('CityId').value.CityName || '';
+      registrationUpdate['City'] = this._registerService.personalFormGroup.get('CityId').value.CityName || '';
       registrationUpdate['pinNo'] = '';
-      registrationUpdate['dateOfBirth'] =  this.datePipe.transform(this.registerObj.DateofBirth,"MM-dd-yyyy"); //this.personalFormGroup.get('DateofBirth').value.DateofBirth;
+      registrationUpdate['dateOfBirth'] =  this.datePipe.transform(this.registerObj.DateofBirth,"MM-dd-yyyy"); //this._registerService.personalFormGroup.get('DateofBirth').value.DateofBirth;
       registrationUpdate['age'] = this.registerObj.AgeYear || 0;//this.registerObj.Age;
-      registrationUpdate['genderID'] = this.personalFormGroup.get('GenderId').value.GenderId || 0;
-      registrationUpdate['phoneNo'] = this.personalFormGroup.get('PhoneNo').value || 0;
+      registrationUpdate['genderID'] = this._registerService.personalFormGroup.get('GenderId').value.GenderId || 0;
+      registrationUpdate['phoneNo'] = this._registerService.personalFormGroup.get('PhoneNo').value || 0;
       registrationUpdate['mobileNo'] = this.registerObj.MobileNo || '';
       registrationUpdate['updatedBy'] = this.accountService.currentUserValue.user.id;
       registrationUpdate['ageYear'] = this.registerObj.AgeYear || '';
       registrationUpdate['ageMonth'] = this.registerObj.AgeMonth || '';
       registrationUpdate['ageDay'] = this.registerObj.AgeDay || '';
-      registrationUpdate['countryId'] = this.personalFormGroup.get('CountryId').value.CountryId || '';
-      registrationUpdate['stateId'] = this.personalFormGroup.get('StateId').value.StateId || '';
-      registrationUpdate['cityId'] = this.personalFormGroup.get('CityId').value.CityId || '';
-      registrationUpdate['maritalStatusId'] = this.personalFormGroup.get('MaritalStatusId').value ? this.personalFormGroup.get('MaritalStatusId').value.MaritalStatusId : 0;
+      registrationUpdate['countryId'] = this._registerService.personalFormGroup.get('CountryId').value.CountryId || '';
+      registrationUpdate['stateId'] = this._registerService.personalFormGroup.get('StateId').value.StateId || '';
+      registrationUpdate['cityId'] = this._registerService.personalFormGroup.get('CityId').value.CityId || '';
+      registrationUpdate['maritalStatusId'] = this._registerService.personalFormGroup.get('MaritalStatusId').value ? this._registerService.personalFormGroup.get('MaritalStatusId').value.MaritalStatusId : 0;
       registrationUpdate['isCharity'] = false;
     
       submissionObj['registrationUpdate'] = registrationUpdate;
@@ -614,7 +561,7 @@ export class EditAppointmentComponent implements OnInit {
       // visitUpdate['RegID'] = this.registerObj.RegId;
       // visitUpdate['VisitDate'] = '2023-06-22T09:52:54.616Z',// this.dateTimeObj.date;
       // visitUpdate['VisitTime'] = '2023-06-22T09:52:54.616Z',//this.dateTimeObj.time;
-      // visitUpdate['StudyId'] = this.personalFormGroup.get('CaseId').value.StudyId ? this.personalFormGroup.get('CaseId').value.StudyId : 0;
+      // visitUpdate['StudyId'] = this._registerService.personalFormGroup.get('CaseId').value.StudyId ? this._registerService.personalFormGroup.get('CaseId').value.StudyId : 0;
       // visitUpdate['UnitId'] = this.VisitFormGroup.get('HospitalId').value.HospitalId ? this.VisitFormGroup.get('HospitalId').value.HospitalId : 0; // this.VisitFormGroup.get('UnitId').value.UnitId ? this.VisitFormGroup.get('UnitId').value.UnitId: 0;
       // visitUpdate['PatientTypeId'] = this.VisitFormGroup.get('PatientTypeID').value.PatientTypeId;//.PatientTypeID;//? this.VisitFormGroup.get('PatientTypeID').value.PatientTypeID : 0;
       // visitUpdate['ConsultantDocId'] = this.VisitFormGroup.get('DoctorID').value.DoctorId;//? this.VisitFormGroup.get('DoctorId').value.DoctorId : 0;
@@ -636,7 +583,7 @@ export class EditAppointmentComponent implements OnInit {
       // visitUpdate['PatientOldNew'] = this.Patientnewold;
       // visitUpdate['FirstFollowupVisit'] = 0,// this.VisitFormGroup.get('RelativeAddress').value ? this.VisitFormGroup.get('RelativeAddress').value : '';
       // visitUpdate['appPurposeId'] = this.VisitFormGroup.get('PurposeId').value.PurposeId;// ? this.VisitFormGroup.get('RelativeAddress').value : '';
-      // visitUpdate['FollowupDate'] = this.dateTimeObj.date;// this.personalFormGroup.get('PhoneNo').value ? this.personalFormGroup.get('PhoneNo').value : '';
+      // visitUpdate['FollowupDate'] = this.dateTimeObj.date;// this._registerService.personalFormGroup.get('PhoneNo').value ? this._registerService.personalFormGroup.get('PhoneNo').value : '';
    
       // submissionObj['visitUpdate'] = visitUpdate;
 
@@ -683,7 +630,7 @@ export class EditAppointmentComponent implements OnInit {
       // this.registerObj.AgeMonth = Math.abs(todayDate.getMonth() - dob.getMonth());
       // this.registerObj.AgeDay = Math.abs(todayDate.getDate() - dob.getDate());
       this.registerObj.DateofBirth = DateOfBirth;
-      this.personalFormGroup.get('DateOfBirth').setValue(DateOfBirth);
+      this._registerService.personalFormGroup.get('DateOfBirth').setValue(DateOfBirth);
     }
 
   }

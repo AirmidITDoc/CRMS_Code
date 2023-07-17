@@ -17,7 +17,9 @@ import { NewInstitutionInformationComponent } from './new-institution-informatio
 export class InstitutionInformationComponent implements OnInit {
   isLoading = true;
   sIsLoading: string = '';
+  hasSelectedContacts: boolean;
 
+  
   displayedColumns: string[] = [
     "InstitutionId", 
     "InstitutionName",  
@@ -126,6 +128,8 @@ export class InstitutionInformationComponent implements OnInit {
       this.getServiceMasterList();
     });
   }
+
+  onClear(){}
 }
 
 export class InstitutionInformation {

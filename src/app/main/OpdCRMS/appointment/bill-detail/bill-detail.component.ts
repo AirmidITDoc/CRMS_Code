@@ -1141,30 +1141,6 @@ debugger;
         else
           docname = '';
 
-        //   var strabc = `<hr style="border-color:white" >
-        //   <div style="display:flex;margin:8px 0">
-        //   <div style="display:flex;width:60px;margin-left:20px;">
-        //       <div>`+ i + `</div> <!-- <div>BLOOD UREA</div> -->
-        //   </div>
-        //   <div style="display:flex;width:370px;margin-left:10px;text-align:left;">
-        //       <div>`+ objreportPrint.ServiceName + `</div> <!-- <div>BLOOD UREA</div> -->
-        //   </div>
-        //   // <div style="display:flex;width:370px;margin-left:30px;text-align:left;">
-        //   // <div>`+ docname + `</div> <!-- <div>BLOOD UREA</div> -->
-        //   // </div>
-        //   <div style="display:flex;width:90px;margin-left:40px;text-align:right;">
-        //       <div>`+ '₹' + objreportPrint.Price.toFixed(2) + `</div> <!-- <div>450</div> -->
-        //   </div>
-        //   <div style="display:flex;width:60px;margin-left:40px;text-align:right;">
-        //       <div>`+ objreportPrint.Qty + `</div> <!-- <div>1</div> -->
-        //   </div>
-        //   <div style="display:flex;width:140px;margin-left:40px;text-align:left;">
-        //       <div>`+ '₹' + objreportPrint.NetAmount.toFixed(2) + `</div> <!-- <div>450</div> -->
-        //   </div>
-        //   </div>`;
-        //   strrowslist += strabc;
-        // }
-
         var strabc = `<hr style="border-color:white" >
         <div style="display:flex;margin:8px 0">
         <div style="display:flex;width:60px;margin-left:20px;">

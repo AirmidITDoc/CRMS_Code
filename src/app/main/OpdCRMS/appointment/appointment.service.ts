@@ -8,6 +8,8 @@ import { Observable, Subject } from 'rxjs';
 })
 export class AppointmentService {
 
+  personalFormGroup: FormGroup;
+
   public afterMethodFileSelect: Subject<any> = new Subject();
   
   myFilterform: FormGroup;
@@ -18,7 +20,7 @@ export class AppointmentService {
     private _formBuilder: FormBuilder
   ) {
     this.myFilterform = this.filterForm();
-    // this.mySaveForm = this.saveForm();
+    this.personalFormGroup = this.createPesonalForm();
   }
 
   filterForm(): FormGroup {
@@ -39,108 +41,62 @@ export class AppointmentService {
     });
   }
 
-  //---Regi starrt-------
-  // saveForm(): FormGroup {
-  //   return this._formBuilder.group({
 
-  //     RegId: '',
-  //     RegDate: '',
-  //     RegTime: '',
-  //     PrefixId: '',
-  //     PrefixID: '',
-  //     FirstName: ['', [
-  //       Validators.required,
-  //       Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
-  //     ]],
-  //     MiddleName: ['', [
-  //       Validators.required,
-  //       Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
-  //     ]],
-  //     LastName: ['', [
-  //       Validators.required,
-  //       Validators.pattern("^[A-Za-z]*[a-zA-z]*$"),
-  //     ]],
-  //     Address: '',
-  //     City: '',
-  //     PinNo: ['', [Validators.minLength(6), Validators.maxLength(6)]],
-  //     DateofBirth:  [(new Date()).toISOString()],
-  //     Age: '',
-  //     GenderId: '',
-  //     GenderName: '',
-  //     PhoneNo: ['', [
-       
-  //       Validators.pattern("^[- +()]*[0-9][- +()0-9]*$"),
-  //       Validators.minLength(10),
-  //       Validators.maxLength(10),
-  //     ]],
-  //     MobileNo: ['', [
-  //       Validators.required,
-  //       Validators.pattern("^[0-9]*$"),
-  //       Validators.minLength(10),
-  //       Validators.maxLength(10),
-  //     ]],
-  //     AddedBy: '',
-  //     RegNo: '',
-  //     AgeYear: ['', Validators.pattern("[0-9]+")],
-  //     AgeMonth: ['', Validators.pattern("[0-9]+")],
-  //     AgeDay: ['', Validators.pattern("[0-9]+")],
-  //     CountryId: '',
-  //     StateId: '',
-  //     CityId: '',
-  //     CityName: '',
-  //     MaritalStatusId: '',
-  //     IsCharity: '',
-  //     ReligionId: '',
-  //     AreaId: '',
-  //     VillageId: '',
-  //     TalukaId: '',
-  //     PatientWeight: '',
-  //     AreaName: '',
-  //     AadharCardNo: ['', [
-  //       Validators.required,
-  //       Validators.pattern("^[0-9]*$"),
-  //       Validators.minLength(12),
-  //       Validators.maxLength(12),
-  //     ]],
-  //     PanCardNo: '',
-  //     VisitId: '',
-  //     RegID: '',
-  //     VisitDate: [(new Date()).toISOString()],
-  //     VisitTime: [(new Date()).toISOString()],
-  //     UnitId: '',
-  //     PatientTypeID: '',
-  //     PatientType: '',
-  //     ConsultantDocId: '',
-  //     RefDocId: '',
-  //     DoctorId: '',
-  //     DoctorName: '',
-  //     OPDNo: '',
-  //     TariffId: '',
-  //     CompanyId: '',
-  //     CompanyName: '',
-  //     //AddedBy :'',
-  //     IsCancelledBy: '',
-  //     IsCancelled: '',
-  //     IsCancelledDate: '',
-  //     ClassId: '',
-  //     ClassName: '',
-  //     DepartmentId: '',
-  //     DepartmentName: '',
-  //     PatientOldNew: '',
-  //     FirstFollowupVisit: '',
-  //     AppPurposeId: '',
-  //     FollowupDate: '',
-  //     IsMark: '',
-  //     IsXray: '',
-  //     HospitalID: '',
-  
-  //     ServiceID: '',
-  //     TotalAmt: '',
-  //     ConcessionAmt: '',
-  //     NetPayableAmt: '',
 
-  //   });
-  // }
+  createPesonalForm() {
+    return this._formBuilder.group({
+      RegId: '',
+      RegNo: '',
+      PrefixId: '',
+      PrefixID: '',
+      FirstName: ['', [
+        Validators.required,
+        Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
+      ]],
+      MiddleName: ['', [
+
+        Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
+      ]],
+      LastName: ['', [
+        Validators.required,
+        Validators.pattern("^[A-Za-z]*[a-zA-z]*$"),
+      ]],
+      GenderId: '',
+      Address: '',
+      DateOfBirth:  [(new Date()).toISOString()],
+      AgeYear: ['', [
+        Validators.required,
+        Validators.maxLength(3),
+        Validators.pattern("^[0-9]*$")]],
+      AgeMonth: ['', [
+        Validators.pattern("^[0-9]*$")]],
+      AgeDay: ['', [
+        Validators.pattern("^[0-9]*$")]],
+      PhoneNo: ['', [Validators.minLength(10),
+      Validators.maxLength(15),
+      Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")
+      ]],
+      MobileNo: ['', [Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(10),
+      Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")
+      ]],
+      AadharCardNo: ['', [
+        // Validators.required,
+        Validators.pattern("^[0-9]*$"),
+        Validators.minLength(12),
+        Validators.maxLength(12),
+      ]],
+      PanCardNo: '',
+      MaritalStatusId: '',
+      ReligionId: '',
+      AreaId: '',
+      CityId: '',
+      StateId: '',
+      CountryId: '',
+      IsCharity: '',
+    });
+  }
 
   initializeFormGroup() {
     // this.saveForm();
@@ -407,7 +363,7 @@ public getCaseIDList (D_data){
 }
 
 public getFinancialSummarybudgetPrint(employee){
-  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_VisitDateTime", employee)
+  return this._httpClient.post("Generic/GetByProc?procName=rptBillPrint", employee)
 }
 
 }

@@ -21,7 +21,7 @@
         <br>
 
 
-        <form [formGroup]="personalFormGroup">
+        <form [formGroup]="_registerService.personalFormGroup">
 
           <ng-template matStepLabel>Personal</ng-template>
 
@@ -47,7 +47,7 @@
                   {{element.PrefixName}}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="personalFormGroup.get('PrefixID').invalid && personalFormGroup.get('PrefixID').touched">
+              <mat-error *ngIf="_registerService.personalFormGroup.get('PrefixID').invalid && _registerService.personalFormGroup.get('PrefixID').touched">
                 Prefix is required</mat-error>
             </mat-form-field>
 
@@ -57,7 +57,7 @@
                 [(ngModel)]="registerObj.FirstName" onkeypress=" (event.charCode > 64 && 
           event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
               <mat-error
-                *ngIf="personalFormGroup.get('FirstName').invalid && personalFormGroup.get('FirstName').touched">
+                *ngIf="_registerService.personalFormGroup.get('FirstName').invalid && _registerService.personalFormGroup.get('FirstName').touched">
                 First Name is required Enter only
                 Alphabets</mat-error>
             </mat-form-field>
@@ -65,11 +65,11 @@
             <mat-form-field appearance="outline" fxFlex>
               <mat-label>Middle Name</mat-label>
               <input name="MiddleName" formControlName="MiddleName" placeholder="Middle Name"
-                [ngClass]="{ 'is-invalid': submitted && personalFormGroup.get('MiddleName').errors }" matInput
+                [ngClass]="{ 'is-invalid': submitted && _registerService.personalFormGroup.get('MiddleName').errors }" matInput
                 [(ngModel)]="registerObj.MiddleName" onkeypress=" (event.charCode > 64 && 
           event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
               <mat-error class="error"
-                *ngIf="personalFormGroup.get('MiddleName').invalid && personalFormGroup.get('MiddleName').touched">
+                *ngIf="_registerService.personalFormGroup.get('MiddleName').invalid && _registerService.personalFormGroup.get('MiddleName').touched">
                 Middle Name is required
                 Enter
                 only Alphabets</mat-error>
@@ -78,11 +78,11 @@
             <mat-form-field appearance="outline" fxFlex>
               <mat-label>Last Name</mat-label>
               <input name="LastName" formControlName="LastName" placeholder="Last Name"
-                [ngClass]="{ 'is-invalid': submitted && personalFormGroup.get('LastName').errors }" matInput required
+                [ngClass]="{ 'is-invalid': submitted && _registerService.personalFormGroup.get('LastName').errors }" matInput required
                 [(ngModel)]="registerObj.LastName" onkeypress=" (event.charCode > 64 && 
           event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
               <mat-error class="error"
-                *ngIf="personalFormGroup.get('LastName').invalid && personalFormGroup.get('LastName').touched">Last
+                *ngIf="_registerService.personalFormGroup.get('LastName').invalid && _registerService.personalFormGroup.get('LastName').touched">Last
                 Name is required Enter
                 only
                 Alphabets</mat-error>
@@ -105,7 +105,7 @@
               <mat-label>Age (D)</mat-label>
               <input name="AgeDay" formControlName="AgeDay" placeholder="Age (D)" matInput
                 [ngModel]="registerObj.AgeDay" type="number" maxlength=2>
-              <!-- <mat-error *ngIf="personalFormGroup.get('AgeDay').invalid && personalFormGroup.get('AgeDay').touched">
+              <!-- <mat-error *ngIf="_registerService.personalFormGroup.get('AgeDay').invalid && _registerService.personalFormGroup.get('AgeDay').touched">
           Please enter Age Day </mat-error> -->
             </mat-form-field>
 
@@ -114,7 +114,7 @@
               <input name="AgeMonth" formControlName="AgeMonth" placeholder="Age (M)" matInput
                 [ngModel]="registerObj.AgeMonth" type="number">
               <!-- <mat-error
-          *ngIf="personalFormGroup.get('AgeMonth').invalid && personalFormGroup.get('AgeMonth').touched">
+          *ngIf="_registerService.personalFormGroup.get('AgeMonth').invalid && _registerService.personalFormGroup.get('AgeMonth').touched">
           Please enter Age Month </mat-error> -->
             </mat-form-field>
 
@@ -123,7 +123,7 @@
               <input name="AgeYear" formControlName="AgeYear" placeholder="Age (Y)" matInput [ngModel]="registerObj.Age"
                 (ngModelChange)="registerObj.AgeYear = $event" type="number">
               <mat-error
-                *ngIf="personalFormGroup.get('AgeYear').invalid && personalFormGroup.get('AgeYear').touched">Please
+                *ngIf="_registerService.personalFormGroup.get('AgeYear').invalid && _registerService.personalFormGroup.get('AgeYear').touched">Please
                 enter Age Year </mat-error>
             </mat-form-field>
           </div>
@@ -134,9 +134,9 @@
               <input name="AadharCardNo" formControlName="AadharCardNo" placeholder="Aadhar Card No."
                 [ngModel]="registerObj.AadharCardNo" (ngModelChange)="registerObj.AadharCardNo = $event" matInput
                 type="number">
-              <!-- [ngClass]="{ 'is-invalid': submitted && personalFormGroup.get('AadharCardNo').errors }" -->
+              <!-- [ngClass]="{ 'is-invalid': submitted && _registerService.personalFormGroup.get('AadharCardNo').errors }" -->
               <mat-error class="error"
-                *ngIf="personalFormGroup.get('AadharCardNo').invalid && personalFormGroup.get('AadharCardNo').touched">
+                *ngIf="_registerService.personalFormGroup.get('AadharCardNo').invalid && _registerService.personalFormGroup.get('AadharCardNo').touched">
                 12 digits
                 AadharCardNo is
                 required</mat-error>
@@ -147,9 +147,9 @@
         <input name="AadharCardNo" formControlName="AadharCardNo" placeholder="Aadhar Card No."
           [ngModel]="registerObj.AadharCardNo | trim" (ngModelChange)="registerObj.AadharCardNo = $event"
           matInput type="number">
-        <!-- [ngClass]="{ 'is-invalid': submitted && personalFormGroup.get('AadharCardNo').errors }" 
+        <!-- [ngClass]="{ 'is-invalid': submitted && _registerService.personalFormGroup.get('AadharCardNo').errors }" 
         <mat-error class="error"
-          *ngIf="personalFormGroup.get('AadharCardNo').invalid && personalFormGroup.get('AadharCardNo').touched">
+          *ngIf="_registerService.personalFormGroup.get('AadharCardNo').invalid && _registerService.personalFormGroup.get('AadharCardNo').touched">
           12 digits
           AadharCardNo is
           required</mat-error>
@@ -163,8 +163,8 @@
                   {{m.GenderName}}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="personalFormGroup.get('GenderId').invalid && personalFormGroup.get('GenderId').touched">
-                <span *ngIf="personalFormGroup.get('GenderId').hasError('required')">
+              <mat-error *ngIf="_registerService.personalFormGroup.get('GenderId').invalid && _registerService.personalFormGroup.get('GenderId').touched">
+                <span *ngIf="_registerService.personalFormGroup.get('GenderId').hasError('required')">
                   Gender is required</span>
               </mat-error>
             </mat-form-field>
@@ -203,7 +203,7 @@
               <input name="Address" formControlName="Address" placeholder="Address" matInput
                 [(ngModel)]="registerObj.Address">
               <mat-error
-                *ngIf="personalFormGroup.get('Address').invalid && personalFormGroup.get('Address').touched">Please
+                *ngIf="_registerService.personalFormGroup.get('Address').invalid && _registerService.personalFormGroup.get('Address').touched">Please
                 enter Address </mat-error>
             </mat-form-field>
 
@@ -235,7 +235,7 @@
                   {{element.CityName}}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="personalFormGroup.get('CityId').invalid && personalFormGroup.get('CityId').touched">
+              <mat-error *ngIf="_registerService.personalFormGroup.get('CityId').invalid && _registerService.personalFormGroup.get('CityId').touched">
                 City Name is required</mat-error>
             </mat-form-field>
 
@@ -271,7 +271,7 @@
               <input name="PhoneNo" formControlName="PhoneNo" placeholder="Phone Number" matInput
                 [(ngModel)]="registerObj.PhoneNo" type="number">
               <mat-error class="error"
-                *ngIf="personalFormGroup.get('PhoneNo').invalid && personalFormGroup.get('PhoneNo').touched">10 Degits
+                *ngIf="_registerService.personalFormGroup.get('PhoneNo').invalid && _registerService.personalFormGroup.get('PhoneNo').touched">10 Degits
                 number is required
               </mat-error>
             </mat-form-field>
@@ -281,7 +281,7 @@
               <input name="MobileNo" formControlName="MobileNo" placeholder="Mobile Number" matInput required
                 [(ngModel)]="registerObj.MobileNo" type="number">
               <mat-error class="error"
-                *ngIf="personalFormGroup.get('MobileNo').invalid && personalFormGroup.get('MobileNo').touched">10
+                *ngIf="_registerService.personalFormGroup.get('MobileNo').invalid && _registerService.personalFormGroup.get('MobileNo').touched">10
                 digits Mobile number is
                 required</mat-error>
             </mat-form-field>

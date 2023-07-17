@@ -118,7 +118,7 @@
                                 <div class="col-md-12" fusePerfectScrollbar>
                                     <!-- ================= Charges List Table ======================= -->
                                     <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
-                                        style="height: 300px !important;overflow: auto;" class="table1" >
+                                        style="height: 300px !important;overflow: auto;" class="table1">
 
                                         <ng-container matColumnDef="MemberId">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header
@@ -221,8 +221,8 @@
                             </div>
                         </div>
                     </div>
-                    <div fxFlex="100" fxFlex.gt-sm="98" fxLayout="row" fxLayout.gt-xs="column" fusePerfectScrollbar>
-                        <div fxLayout="row">
+                    <div fxFlex="100" fxFlex.gt-sm="98" fxLayout="row" fxLayout.gt-xs="column">
+                        <div fxLayout="row" style="margin-left: 1100px;">
                             <button class="next-btn" color="accent" (click)="onSubmit()"> Save</button>
                             <button class="footer-btn" (click)="onClose()">Cancel</button>
                         </div>
@@ -232,3 +232,6 @@
         </div>
     </div>
 </div>
+
+
+//
