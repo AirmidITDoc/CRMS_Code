@@ -60,6 +60,8 @@ export class StudySchduleComponent implements OnInit {
   ];
 
   dataSource1 = new MatTableDataSource<VisitDetail>();
+  paginator: any;
+  sort: any;
 
   constructor(public _CasedetailService: CasedetailService,
     private formBuilder: FormBuilder,
@@ -79,16 +81,31 @@ export class StudySchduleComponent implements OnInit {
     console.log(this.data)
 
       
-
-
     if (this.data) {
       this.registerObj = this.data.registerObj;
       // this.StudyId=this.data.registerObj.StudyId;
       console.log(this.registerObj.StudyId);
       this.Study = true;
+   
     }
-
+var m={
+  StudyId: 3//this.registerObj.StudyId
+  };
+      
+  this._CasedetailService.getStudyschdulebyStuIdList(m).subscribe(Visit => {
+    this.dataSource1.data = Visit as VisitDetail[];
+    console.log(this.dataSource1.data)
+    this.dataSource1.sort = this.sort;
+    this.dataSource1.paginator = this.paginator;
+    // this.sIsLoading = '';
+  },
+    error => {
+      // this.sIsLoading = '';
+    });
+  
   }
+
+
 
   closeDialog() {
     console.log("closed")
@@ -146,65 +163,72 @@ debugger;
     this.isLoading = '';
     console.log(this.chargeslist);
     this.dataSource1.data = this.chargeslist;
-    console.log(this.VisitList.data);
+    
+    this._CasedetailService.studySchFormGroup.get('VisitName').reset('')
+
+    this._CasedetailService.studySchFormGroup.get('VisitDescription').reset('')
+
+    this._CasedetailService.studySchFormGroup.get('Amount').reset(0)
 
   }
-  onStudySave() {
+  // onStudySave() {
 
-    debugger;
-    let insertStudySchedulearr = [];
-    this.dataSource1.data.forEach((element) => {
-      let insertStudySchedule = {};
-      // insertStudySchedule['studyVisitId'] = 0;
-      insertStudySchedule['studyId'] = this.registerObj.StudyId;
+  //   debugger;
+  //   let insertStudySchedulearr = [];
+  //   this.dataSource1.data.forEach((element) => {
+  //     let insertStudySchedule = {};
+  //     // insertStudySchedule['studyVisitId'] = 0;
+  //     insertStudySchedule['studyId'] = this.registerObj.StudyId;
 
-      insertStudySchedule['visitName'] = element.VisitName;
-      insertStudySchedule['visitDescription'] = element.VisitDescription;
-      insertStudySchedule['visitAmount'] = element.Amount;
-      insertStudySchedule['createdBy'] = this.accountService.currentUserValue.user.id;
-      insertStudySchedulearr.push(insertStudySchedule);
-    });
+  //     insertStudySchedule['visitName'] = element.VisitName;
+  //     insertStudySchedule['visitDescription'] = element.VisitDescription;
+  //     insertStudySchedule['visitAmount'] = element.Amount;
+  //     insertStudySchedule['createdBy'] = this.accountService.currentUserValue.user.id;
+  //     insertStudySchedulearr.push(insertStudySchedule);
+  //   });
 
-    let submitData = {
-      "insertStudySchedule": insertStudySchedulearr
-    };
+  //   let submitData = {
+  //     "insertStudySchedule": insertStudySchedulearr
+  //   };
 
-    console.log(submitData);
-    this._CasedetailService.StudySchduleInsert(submitData).subscribe(response => {
-      console.log(response)
-      if (response) {
-        Swal.fire('New StudySchedule Save !', ' StudySchedule Save Successfully !', 'success').then((result) => {
+  //   console.log(submitData);
+  //   this._CasedetailService.StudySchduleUpdate(submitData).subscribe(response => {
+  //     console.log(response)
+  //     if (response) {
+  //       Swal.fire('Edit StudySchedule  !', ' StudySchedule Update Successfully !', 'success').then((result) => {
 
-          console.log(result)
-          if (result) {
+  //         console.log(result)
+  //         if (result) {
 
-            this._matDialog.closeAll();
-          }
-        });
-      } else {
-        Swal.fire('Error !', 'StudySchedule not saved', 'error');
-      }
-    });
+  //           this._matDialog.closeAll();
+  //         }
+  //       });
+  //     } else {
+  //       Swal.fire('Error !', 'StudySchedule not saved', 'error');
+  //     }
+  //   });
 
-  }
+  // }
 
   onStudyUpdate() {
     let updateStudySchedulearr = [];
     this.dataSource1.data.forEach((element) => {
       let updateStudySchedule = {};
       updateStudySchedule['Opration'] = 'UPDATE';
-      updateStudySchedule['studyVisitId'] = 0;
+      updateStudySchedule['studyVisitId'] = element.StudyVisitId;
       updateStudySchedule['studyId'] = this.registerObj.StudyId
-
       updateStudySchedule['visitName'] = element.VisitName;
       updateStudySchedule['visitDescription'] = element.VisitDescription;
       updateStudySchedule['visitAmount'] = element.Amount;
       updateStudySchedule['UpdatedBy'] = this.accountService.currentUserValue.user.id;
       updateStudySchedulearr.push(updateStudySchedule);
     });
-
+    let deleteStudySchedule = {};
+    deleteStudySchedule['studyId'] = this.registerObj.StudyId
+  
     let submitData = {
-      "updateStudySchedule": updateStudySchedulearr
+      "updateStudySchedule": updateStudySchedulearr,
+      "deleteStudySchedule":deleteStudySchedule
     };
 
     console.log(submitData);
@@ -232,7 +256,8 @@ export class VisitDetail {
   VisitName: any;
   VisitDescription: any;
   Amount: any;
-
+  StudyVisitId:any;
+  StudyId:any;
   /**
    * Constructor
    *
@@ -244,6 +269,9 @@ export class VisitDetail {
       this.VisitName = VisitDetail.VisitName || '';
       this.VisitDescription = VisitDetail.VisitDescription || '';
       this.Amount = VisitDetail.Amount || '';
+      this.StudyVisitId = VisitDetail.StudyVisitId || 0;
+      this.StudyId = VisitDetail.StudyId || 0;
+
 
     }
   }
