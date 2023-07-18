@@ -95,7 +95,7 @@ export class StudyDetailComponent implements OnInit {
 
     this.getCompanyList();
     this.getInstitutionList();
-    this.VisitFrequencyComboList();
+    
     this.DocumentComboList();
 
     this.companyFilterCtrl.valueChanges
@@ -236,20 +236,7 @@ export class StudyDetailComponent implements OnInit {
     });
   }
 
-  VisitFrequencyComboList() {
-    var mdata = {
-      ConstanyType: "VisitFrequency"
-    };
 
-    this._CasedetailService.getVisitFrequencyCList(mdata).subscribe(data => {
-      this.VisitFrequencyList = data;
-      console.log(this.VisitFrequencyList);
-      // this.filteredCity.next(this.VisitFrequencyList.slice());
-      this._CasedetailService.personalFormGroup
-        .get("VisitFrequency")
-        .setValue(this.VisitFrequencyList[0]);
-    });
-  }
 
   getNetAmtSum(element) {
 
@@ -288,43 +275,43 @@ export class StudyDetailComponent implements OnInit {
 
     this.isLoading = 'submit';
 
-    if (!this._CasedetailService.personalFormGroup.get('StudyId').value) {
+    // if (!this._CasedetailService.personalFormGroup.get('StudyId').value) {
 
-      var m_data = {
-        "insertStudyInformation": {
-          "studyId": 0,
-          "protocolNo": this._CasedetailService.personalFormGroup.get('ProtocolNo').value || '',
-          "protocolTitle": this._CasedetailService.personalFormGroup.get('ProtocolTitle').value || '',
-          "studyProduct": this._CasedetailService.personalFormGroup.get('StudyProduct').value || '',
-          "TotalSubjects": this._CasedetailService.personalFormGroup.get('TotalSubjects').value || 0,
-          "TotalVisits": this._CasedetailService.personalFormGroup.get('TotalVisits').value || '',
-          "VisitFrequency": this._CasedetailService.personalFormGroup.get('VisitFrequency').value.ConstantId || 0,
-          "sponser": this._CasedetailService.personalFormGroup.get('CompanyId').value.CompanyId || 0,
-          "investigator": this._CasedetailService.personalFormGroup.get('Investigator').value || '',
-          "institution": this._CasedetailService.personalFormGroup.get('Institution').value.InstitutionId || 0,
-          "studyStartDate": this.datePipe.transform(this.registerObj.StudyStartDate, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
-          "studyEndDate": this.datePipe.transform(this.registerObj.StudyEndDate, "MM-dd-yyyy"),
-          "AgreementFileName": this._CasedetailService.personalFormGroup.get('AgreementFileName').value.ConstantId || 0,
-          "createdBy": this.accountService.currentUserValue.user.id
+    //   var m_data = {
+    //     "insertStudyInformation": {
+    //       "studyId": 0,
+    //       "protocolNo": this._CasedetailService.personalFormGroup.get('ProtocolNo').value || '',
+    //       "protocolTitle": this._CasedetailService.personalFormGroup.get('ProtocolTitle').value || '',
+    //       "studyProduct": this._CasedetailService.personalFormGroup.get('StudyProduct').value || '',
+    //       "TotalSubjects": this._CasedetailService.personalFormGroup.get('TotalSubjects').value || 0,
+    //       "TotalVisits": this._CasedetailService.personalFormGroup.get('TotalVisits').value || '',
+    //       "VisitFrequency": this._CasedetailService.personalFormGroup.get('VisitFrequency').value || 0,
+    //       "sponser": this._CasedetailService.personalFormGroup.get('CompanyId').value.CompanyId || 0,
+    //       "investigator": this._CasedetailService.personalFormGroup.get('Investigator').value || '',
+    //       "institution": this._CasedetailService.personalFormGroup.get('Institution').value.InstitutionId || 0,
+    //       "studyStartDate": this.datePipe.transform(this.registerObj.StudyStartDate, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
+    //       "studyEndDate": this.datePipe.transform(this.registerObj.StudyEndDate, "MM-dd-yyyy"),
+    //       "AgreementFileName": this._CasedetailService.personalFormGroup.get('AgreementFileName').value.ConstantId || 0,
+    //       "createdBy": this.accountService.currentUserValue.user.id
 
-        }
-      }
-      console.log(m_data);
-      this._CasedetailService.StudyInfoInsert(m_data).subscribe(response => {
-        if (response) {
-          Swal.fire('New StudyDetail Save !', ' StudyDetail Save Successfully !', 'success').then((result) => {
-            if (result.isConfirmed) {
-              this._matDialog.closeAll();
+    //     }
+    //   }
+    //   console.log(m_data);
+    //   this._CasedetailService.StudyInfoInsert(m_data).subscribe(response => {
+    //     if (response) {
+    //       Swal.fire('New StudyDetail Save !', ' StudyDetail Save Successfully !', 'success').then((result) => {
+    //         if (result.isConfirmed) {
+    //           this._matDialog.closeAll();
 
-            }
+    //         }
 
-          });
-        } else {
-          Swal.fire('Error !', 'StudyDetail not saved', 'error');
-        }
-      });
-    } else {
-
+    //       });
+    //     } else {
+    //       Swal.fire('Error !', 'StudyDetail not saved', 'error');
+    //     }
+    //   });
+    // } else {
+debugger;
       var m_data1 = {
         "updateStudyInformation": {
           "operation": "UPDATE",
@@ -347,9 +334,9 @@ export class StudyDetailComponent implements OnInit {
       }
       console.log(m_data1);
       this._CasedetailService.StudyInfoUpdate(m_data1).subscribe(response => {
-
+        console.log(response);
         if (response) {
-          Swal.fire('Edit StudyDetail Save !', 'Edit StudyDetail save Successfully !', 'success').then((result) => {
+          Swal.fire('Edit StudyDetail Save !', 'Edit StudyDetail Successfully !', 'success').then((result) => {
             if (result.isConfirmed) {
               this._matDialog.closeAll();
 
@@ -360,7 +347,7 @@ export class StudyDetailComponent implements OnInit {
           Swal.fire('Error !', 'StudyDetail not saved', 'error');
         }
       });
-    }
+    // }
 
 
   }

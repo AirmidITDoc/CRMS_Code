@@ -195,12 +195,12 @@ export class NewVistDateComponent implements OnInit {
     this._opappointmentService.getCaseIDCombo().subscribe(data => { this.CaseIdList = data; })
     }
 
-  getPatientTypeList() {
-    this._opappointmentService.getPatientTypeCombo().subscribe(data => {
-      this.PatientTypeList = data;
-      this.VisitFormGroup.get('PatientTypeID').setValue(this.PatientTypeList[0]);
-    })
-  }
+  // getPatientTypeList() {
+  //   this._opappointmentService.getPatientTypeCombo().subscribe(data => {
+  //     this.PatientTypeList = data;
+  //     this.VisitFormGroup.get('PatientTypeID').setValue(this.PatientTypeList[0]);
+  //   })
+  // }
 
  
   getDepartmentList() {

@@ -126,7 +126,7 @@ export class MaritalstatusMasterComponent implements OnInit {
                         updatedBy: 1,
                     },
                 };
-
+              
                 this._maritalService
                     .updateMaritalStatusMaster(m_dataUpdate)
                     .subscribe((data) => {

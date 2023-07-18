@@ -17,6 +17,8 @@ import { AdvanceDataStored } from '../advance';
 import { NewVistDateComponent } from './new-vist-date/new-vist-date.component';
 import { PaymentDetailComponent } from './payment-detail/payment-detail.component';
 import { InvoiceBillMappingComponent } from './invoice-bill-mapping/invoice-bill-mapping.component';
+import { MatDrawer } from '@angular/material/sidenav';
+import { PatientScreenBillDetailComponent } from './patient-screen-bill-detail/patient-screen-bill-detail.component';
 
 
 @Component({
@@ -44,6 +46,8 @@ export class AppointmentComponent implements OnInit {
   VisitID: any;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('drawer') public drawer: MatDrawer;
+  
   @Input() dataArray: any;
 
   displayedColumns = [
@@ -63,6 +67,9 @@ export class AppointmentComponent implements OnInit {
 
   ];
   dataSource = new MatTableDataSource<VisitMaster>();
+
+ 
+
   menuActions: Array<string> = [];
   //datePipe: any;
 
@@ -83,7 +90,6 @@ export class AppointmentComponent implements OnInit {
     if (this._ActRoute.url == '/opd/appointment') {
 
       this.menuActions.push('Update Registration');
-      // this.menuActions.push('Update Visit Date');
       this.menuActions.push('Add New Visit Date');
       this.menuActions.push('Bill');
 
@@ -93,6 +99,7 @@ export class AppointmentComponent implements OnInit {
     }
 
     this.CaseListCombo();
+    this.drawer.toggle();
     // this.getVisitList();
     // this.dataSource.data.refresh();
 
@@ -108,13 +115,14 @@ export class AppointmentComponent implements OnInit {
       "Reg_No": this._AppointmentSreviceService.myFilterform.get("RegNo").value || 0,
       "From_Dt": this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
       "To_Dt": this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "StudyId":this._AppointmentSreviceService.myFilterform.get("StudyId").value  || 1,
+      "StudyId":this._AppointmentSreviceService.myFilterform.get("StudyId").value.StudyId  || 0,
     }
     console.log(D_data);
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._AppointmentSreviceService.getAppointmentList(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as VisitMaster[];
+        console.log( this.dataSource.data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.sIsLoading = '';
@@ -125,6 +133,29 @@ export class AppointmentComponent implements OnInit {
     }, 1000);
 
   }
+
+
+
+  
+  getPatScrBillList(element) {
+    console.log(element);
+    const dialogRef = this._matDialog.open(PatientScreenBillDetailComponent,
+      {
+        maxWidth: "65vw",
+        height: '600px',
+        width: '100%',
+        data : {
+          element : element,
+          StudyId:this._AppointmentSreviceService.myFilterform.get("StudyId").value.StudyId ,
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed - Insert Action', result);
+      
+    });
+  }
+
+
 
   CaseListCombo(){
     this._AppointmentSreviceService.getCaseIDCombo().subscribe(data => { this.CaseIdList = data; })
@@ -155,6 +186,12 @@ export class AppointmentComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     // this.isLoading = false;
   }
+
+  onClick(){
+
+
+  }
+
 
   getRecord(contact, m): void {
     debugger;
@@ -668,6 +705,7 @@ export class AppointmentComponent implements OnInit {
 
 export class VisitMaster {
   VisitId: Number;
+  VisitTitle:any;
   PrefixId: number;
   RegNoWithPrefix: number;
   PatientName: string;
@@ -703,7 +741,9 @@ export class VisitMaster {
   DoctorId: any;
   AgeYear: any;
   VistDateTime: any;
- 
+  SubjectName:any;
+  RegId:any;
+  BilId:any;
   /**
    * Constructor
    *
@@ -738,8 +778,13 @@ export class VisitMaster {
       this.DoctorId = VisitMaster.DoctorId || 0;
       this.AgeYear = VisitMaster.AgeYear || '';
       this.VistDateTime = VisitMaster.VistDateTime || '';
+      this.SubjectName = VisitMaster.SubjectName || '';
+      this.RegId = VisitMaster.RegId || 0;
+      this.VisitTitle = VisitMaster.VisitTitle || '';
+      this.BilId = VisitMaster.BilId || '';
     }
-  }
+    }
+  
 }
 
 export class RegInsert {

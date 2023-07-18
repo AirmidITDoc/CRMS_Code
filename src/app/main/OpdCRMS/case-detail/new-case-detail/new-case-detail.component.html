@@ -1,5 +1,5 @@
 <div fxlayout="row" fxFlex.gt-sm="100%" fxFlex class="page-layout simple right-sidebar"
-    style="height:510px !important;">
+    style="height:580px !important;">
     <div class="center" fusePerfectScrollbar style="overflow: auto;">
 
 
@@ -106,14 +106,12 @@
                                     </mat-form-field>
 
                                     <mat-form-field appearance="outline" fxFlex>
-                                        <mat-label>Visit Frequency</mat-label>
-                                        <mat-select formControlName="VisitFrequency" name="VisitFrequency" required>
-                                            <mat-option></mat-option>
-                                            <mat-option *ngFor="let m of VisitFrequencyList" [value]="m">
-                                                {{m.Name}}
-                                            </mat-option>
-                                        </mat-select>
+                                        <mat-label>VisitFrequency</mat-label>
+                                        <input name="VisitFrequency" formControlName="VisitFrequency"
+                                            placeholder="VisitFrequency" matInput min="0" type="number" required>
                                     </mat-form-field>
+
+                                
                                 </div>
 
                                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
@@ -431,7 +429,7 @@
                         <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
                         Study Schdule
                     </ng-template>
-                    <div style="padding:10px; height: 100%;" fxLayoutGap="2px">
+                    <div style="padding:10px; height: 100%;width:90%;" fxLayoutGap="2px">
                         <div class="dialog-content-wrapper" style="align-items: flex-end;margin-right:10px;">
 
                             <form [formGroup]="studySchFormGroup">
@@ -450,6 +448,8 @@
                                                     style="padding: 0 5px; height: fit-content; background-color: white;">
                                                     &nbsp;
                                                     <form [formGroup]="studySchFormGroup" style="display: flex;">
+
+                                                        <input type="hidden" name="StudyId" formControlName="StudyId">
 
                                                         <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between"
                                                             fxLayoutGap="5px">
@@ -475,7 +475,7 @@
                                                                     <input name="VisitDescription"
                                                                         formControlName="VisitDescription"
                                                                         placeholder="VisitDescription"
-                                                                        [(ngModel)]="VisitDescription" matInput>
+                                                                        [(ngModel)]="VisitDescription" matInput required>
                                                                     <!-- <mat-error class="error"
                                                                         *ngIf="personalFormGroup.get('Location').invalid && personalFormGroup.get('Location').touched">
                                                                         Middle Name is required
@@ -487,7 +487,7 @@
 
                                                                 <mat-form-field appearance="outline" style="width:20%;">
                                                                     <mat-label>Amount</mat-label>
-                                                                    <input name="Amount" formControlName="Amount"
+                                                                    <input name="Amount" formControlName="Amount" required
                                                                         placeholder="Amount" matInput
                                                                         [(ngModel)]="Amount">
                                                                     <!-- <mat-error class="error"
@@ -501,7 +501,7 @@
                                                                 <div matTooltip="Select Member name to enable this button!!"
                                                                     [matTooltipPosition]="'above'">
                                                                     <button mat-raised-button id="btnAdd"
-                                                                        (click)="onAddVisitDetail()">
+                                                                        (click)="onAddVisitDetail()" [disabled]="studySchFormGroup.invalid">
                                                                         <mat-icon> add </mat-icon> &nbsp;Add
                                                                     </button>
                                                                 </div>
@@ -522,8 +522,8 @@
                                     <div fxLayout="row" style="width: 100%;">
 
 
-                                        <div fxFlex="100" fxFlex.gt-sm="70" fxLayout="row" fxLayout.gt-xs="column"
-                                            style="width:90%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
+                                        <div fxFlex="100" fxFlex.gt-sm="95" fxLayout="row" fxLayout.gt-xs="column"
+                                            style="width:95%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
                                             <ng-template mat-tab-label
                                                 style="color: black; font-size: 17px bold; height: 80px; ">
                                                 <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
@@ -535,7 +535,7 @@
                                                     <!-- ================= Charges List Table ======================= -->
                                                     <mat-table #table matSort [dataSource]="dataSource1"
                                                         [@animateStagger]="{value:'50'}"
-                                                        style="height: 270px !important;" class="table1">
+                                                        style="height: 200px !important;width: 1000px !important;overflow: auto;" class="table1">
 
                                                         <ng-container matColumnDef="VisitName">
                                                             <mat-header-cell *matHeaderCellDef mat-sort-header
@@ -622,11 +622,11 @@
 
                                     <div fxFlex="100" fxFlex.gt-sm="98" class="content py-16 pl-10 p-12" fxLayout="row"
                                         fxLayout.gt-xs="column">
-                                        <div fxLayout="row">
+                                        <div fxLayout="row" style="margin-left:70px;">
 
 
                                             <button class="next-btn" color="accent" style="border-radius: 16px;"
-                                                (click)="onStudySave()">Save</button>
+                                                (click)="onStudySave()" >Save</button>
                                             <button class="footer-btn" id="btncancel"
                                                 (click)="onClose()">Cancel</button>
                                         </div>

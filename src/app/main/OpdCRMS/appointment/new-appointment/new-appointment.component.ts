@@ -1009,8 +1009,8 @@ debugger;
       
       
       registrationSave['regId'] = 0;
-      registrationSave['regDate'] = '2023-06-22T09:52:54.616Z';//this.dateTimeObj.date //this.registerObj.RegDate;
-      registrationSave['regTime'] = '2023-06-22T09:52:54.616Z';//this.dateTimeObj.time;
+      registrationSave['regDate'] = this.dateTimeObj.date //this.registerObj.RegDate;
+      registrationSave['regTime'] = this.dateTimeObj.time;
       registrationSave['prefixId'] = this.personalFormGroup.get('PrefixID').value.PrefixID;
       registrationSave['firstName'] = this.registerObj.FirstName;
       registrationSave['middleName'] = this.registerObj.MiddleName;
@@ -1043,8 +1043,8 @@ debugger;
 debugger;
       visitSave['VisitId'] = 0;
       visitSave['RegID'] = 0;
-      visitSave['VisitDate'] = '2023-06-22T09:52:54.616Z';
-      visitSave['VisitTime'] = '2023-06-22T09:52:54.616Z';
+      visitSave['VisitDate'] = this.dateTimeObj.date;
+      visitSave['VisitTime'] = this.dateTimeObj.time;
       visitSave['StudyId'] = this.personalFormGroup.get('CaseId').value.StudyId ? this.personalFormGroup.get('CaseId').value.StudyId : 0;
       visitSave['UnitId'] = this.VisitFormGroup.get('HospitalId').value.HospitalId ? this.VisitFormGroup.get('HospitalId').value.HospitalId : 0;
       visitSave['PatientTypeId'] = this.VisitFormGroup.get('PatientTypeID').value.PatientTypeId || 0;//.PatientTypeID;//? this.VisitFormGroup.get('PatientTypeID').value.PatientTypeID : 0;

@@ -188,7 +188,7 @@ debugger
     console.log(m_data1);
     this._MemberMasterService.MemberDetailUpdate(m_data1).subscribe(response => {
       if (response) {
-        Swal.fire('New MemberDetail Save !', ' MemberDetail Save Successfully !', 'success').then((result) => {
+        Swal.fire('Edit MemberDetail  !', ' MemberDetail Edit Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {
             this._matDialog.closeAll();
 
@@ -196,7 +196,7 @@ debugger
 
         });
       } else {
-        Swal.fire('Error !', 'MemberDetail not saved', 'error');
+        Swal.fire('Error !', 'MemberDetail not Updated', 'error');
       }
     });
 

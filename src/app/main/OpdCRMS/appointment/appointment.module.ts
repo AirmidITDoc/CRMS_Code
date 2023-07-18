@@ -48,6 +48,7 @@ import { ViewFinancialSummarybudgetComponent } from './invoice-bill-mapping/view
 import { BrowseInvoiceListComponent } from './browse-invoice-list/browse-invoice-list.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { PatientScreenBillDetailComponent } from './patient-screen-bill-detail/patient-screen-bill-detail.component';
 
 const routes: Routes = [
     {
@@ -68,6 +69,7 @@ const routes: Routes = [
         ViewFinancialSummarybudgetComponent,
         FileUploadComponent,
         ImageUploadComponent,
+        PatientScreenBillDetailComponent,
               
       
     ],

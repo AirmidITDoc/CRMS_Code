@@ -136,8 +136,7 @@ export class NewCaseDetailComponent implements OnInit {
 
     this.getCompanyList();
     this.getInstitutionList();
-    this.VisitFrequencyComboList();
-    this.DocumentComboList();
+        this.DocumentComboList();
 
     this.companyFilterCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
@@ -277,20 +276,6 @@ export class NewCaseDetailComponent implements OnInit {
     });
   }
 
-  VisitFrequencyComboList() {
-    var mdata = {
-      ConstanyType: "VisitFrequency"
-    };
-
-    this._CasedetailService.getVisitFrequencyCList(mdata).subscribe(data => {
-      this.VisitFrequencyList = data;
-      console.log(this.VisitFrequencyList);
-      // this.filteredCity.next(this.VisitFrequencyList.slice());
-      this._CasedetailService.personalFormGroup
-        .get("VisitFrequency")
-        .setValue(this.VisitFrequencyList[0]);
-    });
-  }
 
   getNetAmtSum(element) {
 
@@ -384,7 +369,7 @@ export class NewCaseDetailComponent implements OnInit {
           "studyProduct": this._CasedetailService.personalFormGroup.get('StudyProduct').value || '',
           "TotalSubjects": this._CasedetailService.personalFormGroup.get('TotalSubjects').value || 0,
           "TotalVisits": this._CasedetailService.personalFormGroup.get('TotalVisits').value || '',
-          "VisitFrequency": this._CasedetailService.personalFormGroup.get('VisitFrequency').value.ConstantId || 0,
+          "VisitFrequency": this._CasedetailService.personalFormGroup.get('VisitFrequency').value || 0,
           "sponser": this._CasedetailService.personalFormGroup.get('CompanyId').value.CompanyId || 0,
           "investigator": this._CasedetailService.personalFormGroup.get('Investigator').value || '',
           "institution": this._CasedetailService.personalFormGroup.get('Institution').value.InstitutionId || 0,
@@ -410,7 +395,7 @@ export class NewCaseDetailComponent implements OnInit {
         }
       });
     } else {
-
+debugger;
       var m_data1 = {
         "updateStudyInformation": {
           "operation": "UPDATE",
@@ -420,10 +405,10 @@ export class NewCaseDetailComponent implements OnInit {
           "studyProduct": this._CasedetailService.personalFormGroup.get('StudyProduct').value || '',
           "TotalSubjects": this._CasedetailService.personalFormGroup.get('TotalSubjects').value || 0,
           "TotalVisits": this._CasedetailService.personalFormGroup.get('TotalVisits').value || '',
-          "VisitFrequency": this._CasedetailService.personalFormGroup.get('VisitFrequency').value.ConstantId || 0,
+          "VisitFrequency": this._CasedetailService.personalFormGroup.get('VisitFrequency').value || 0,
           "sponser": this._CasedetailService.personalFormGroup.get('CompanyId').value.CompanyId || 0,
           "investigator": this._CasedetailService.personalFormGroup.get('Investigator').value || '',
-          "institution": this._CasedetailService.personalFormGroup.get('Institution').value || '',
+          "institution": this._CasedetailService.personalFormGroup.get('Institution').value.InstitutionId || 0,
           "studyStartDate": this.datePipe.transform(this.registerObj.StudyStartDate, "MM-dd-yyyy"),
           "studyEndDate": this.datePipe.transform(this.registerObj.StudyEndDate, "MM-dd-yyyy"),
           "AgreementFileName": this._CasedetailService.personalFormGroup.get('AgreementFileName').value.ConstantId || 0,
@@ -462,6 +447,13 @@ export class NewCaseDetailComponent implements OnInit {
     console.log(this.chargeslist);
     this.dataSource1.data = this.chargeslist;
     console.log(this.VisitList.data);
+
+    this.studySchFormGroup.get('VisitName').reset('')
+
+    this.studySchFormGroup.get('VisitDescription').reset('')
+
+    this.studySchFormGroup.get('Amount').reset(0)
+
 
   }
 
@@ -532,8 +524,13 @@ export class NewCaseDetailComponent implements OnInit {
       updateStudySchedulearr.push(updateStudySchedule);
     });
 
+    let deleteStudySchedule = {};
+    deleteStudySchedule['studyId'] = this.registerObj.StudyId
+  
+
     let submitData = {
-      "updateStudySchedule": updateStudySchedulearr
+      "updateStudySchedule": updateStudySchedulearr,
+      "deleteStudySchedule":deleteStudySchedule
     };
 
     console.log(submitData);
@@ -550,8 +547,7 @@ export class NewCaseDetailComponent implements OnInit {
     });
 
   }
-
-
+ 
   onDocumentSave() {
     let insertDocumentarr = [];
 

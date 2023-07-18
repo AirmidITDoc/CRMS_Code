@@ -52,6 +52,17 @@
   .active-icon {
     border-radius: 50%;
   }
+
+  .mat-drawer {
+    width: 300px;
+}
+
+.mat-drawer-content {
+  position: relative;
+  z-index: 1;
+  display: block;
+ // height: 100vh;
+}
   
   app-appointment {
   

@@ -366,4 +366,10 @@ public getFinancialSummarybudgetPrint(employee){
   return this._httpClient.post("Generic/GetByProc?procName=rptBillPrint", employee)
 }
 
+public getPatientScreeningBillingList(employee){
+  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_PatientScreeningBillingList", employee)
+}
+public getBillGeneration(employee){
+  return this._httpClient.post("Generic/GetByProc?procName=AutoBillGeneration", employee)
+}
 }
