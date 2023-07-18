@@ -139,4 +139,8 @@ export class CasedetailService {
   public getInstitutionCombo(){
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_InstitutionInformationCombo",{});
   }
+
+  public getStudyschdulebyStuIdList(employee){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_SchduleDetailBySchId",employee);
+  }
 }
