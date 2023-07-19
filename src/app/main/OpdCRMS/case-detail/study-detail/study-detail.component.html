@@ -1,5 +1,5 @@
 <div fxlayout="row" fxFlex.gt-sm="100%" fxFlex class="page-layout simple right-sidebar"
-    style="height:500px !important;">
+    style="height:580px !important;">
     <div class="center" fusePerfectScrollbar style="overflow: auto;">
 
 
@@ -13,8 +13,8 @@
             </mat-toolbar-row>
         </mat-toolbar>
 
-        <div style="padding:10px; height: 100%;padding-top: 10px;" fxLayoutGap="2px" >
-            <div class="dialog-content-wrapper" style="align-items: flex-end;margin-right:10px;">
+        <div style="padding:20px; height: 100%;padding-top: 10px;" fxLayoutGap="2px" >
+            <div class="dialog-content-wrapper" style="align-items: flex-end;margin-right:10px;margin-top: 20px;">
 
                 <form [formGroup]="_CasedetailService.personalFormGroup">
                     <input type="hidden" name="StudyId" formControlName="StudyId">
@@ -158,9 +158,9 @@
 
         </div> -->
 
-                    <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;">
+                    <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;margin-top:120px !important;">
 
-                        <div style="float: right;margin-top: 20px;">
+                        <div style="float: right;">
                             <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()"
                                 [disabled]="_CasedetailService.personalFormGroup.invalid">Save</button>
                             <!-- <button class="next-btn" id="btncancel" (click)="UploadDoc()">Uplaod

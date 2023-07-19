@@ -106,8 +106,8 @@ export class CommitteeMeetingComponent implements OnInit {
 newMember() {
     const dialogRef = this._matDialog.open(AddMemberComponent,
       {
-        maxWidth: "75vw",
-        height: '300px',
+        maxWidth: "80vw",
+        height: '440px',
         width: '100%',
       });
     dialogRef.afterClosed().subscribe(result => {
@@ -119,8 +119,8 @@ newMember() {
   newCommitteeMember() {
     const dialogRef = this._matDialog.open(CommitteeMasterMemberComponent,
       {
-        maxWidth: "50vw",
-        height: '600px',
+        maxWidth: "80vw",
+        height: '640px',
         width: '100%',
         
       });
@@ -135,7 +135,7 @@ newMember() {
     const dialogRef = this._matDialog.open(NewCommitteeMeetingComponent,
       {
         maxWidth: "80vw",
-        height: '660px',
+        height: '640px',
         width: '100%',
         
       });
@@ -255,10 +255,9 @@ newMember() {
 
      const dialogRef = this._matDialog.open(NewCommitteeMeetingComponent,
         {
-        maxWidth: "70vw",
-        maxHeight: "80vh",
-        width: "100%",
-        height: "100%",
+          maxWidth: "80vw",
+        height: '640px',
+        width: '100%',
         // data : {
         //   registerObj : m_data,
         // }

@@ -26,7 +26,7 @@ export class StudySchduleComponent implements OnInit {
   chargeslist: any = [];
 
   studySchFormGroup: FormGroup;
-  documentFormGroup: FormGroup;
+
   currentDate = new Date();
   submitted = false;
   now = Date.now();
@@ -46,9 +46,7 @@ export class StudySchduleComponent implements OnInit {
   StudyAmount: any;
   StudyId: any;
   VisitList: any = []
-  Institutionist: any = []
-  CompanyList: any = [];
-  DocumentList: any = [];
+
   Study: boolean = false;
 
   displayedColumns = [
@@ -89,7 +87,7 @@ export class StudySchduleComponent implements OnInit {
    
     }
 var m={
-  StudyId: 3//this.registerObj.StudyId
+  StudyId: this.registerObj.StudyId
   };
       
   this._CasedetailService.getStudyschdulebyStuIdList(m).subscribe(Visit => {
@@ -214,7 +212,7 @@ debugger;
     let updateStudySchedulearr = [];
     this.dataSource1.data.forEach((element) => {
       let updateStudySchedule = {};
-      updateStudySchedule['Opration'] = 'UPDATE';
+      updateStudySchedule['Operation'] = 'UPDATE';
       updateStudySchedule['studyVisitId'] = element.StudyVisitId;
       updateStudySchedule['studyId'] = this.registerObj.StudyId
       updateStudySchedule['visitName'] = element.VisitName;
@@ -227,8 +225,9 @@ debugger;
     deleteStudySchedule['studyId'] = this.registerObj.StudyId
   
     let submitData = {
-      "updateStudySchedule": updateStudySchedulearr,
-      "deleteStudySchedule":deleteStudySchedule
+      "deleteStudySchedule":deleteStudySchedule,
+      "updateStudySchedule": updateStudySchedulearr
+     
     };
 
     console.log(submitData);

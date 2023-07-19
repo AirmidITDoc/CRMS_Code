@@ -96,28 +96,13 @@ getMemberNameCombobox() {
   };
   this._CommitteMeetingService.getMemberMasterList(m).subscribe((data) => {
       this.MembercmbList = data;
+      console.log(data);
       this.filteredMember.next(this.MembercmbList.slice());
   });
 }
 
 
 onSubmit() {
-
-  // {
-  //   "insertCommitteeMaster": {
-  //     "committeeId": 0,
-  //     "commiteeName": "string",
-  //     "createdBy": 0
-  //   },
-  //   "insertCommitteeMemberDetails": [
-  //     {
-  //       "committeeId": 0,
-  //       "memberId": 0,
-  //       "createdBy": 0
-  //     }
-  //   ]
-  // }
-
 
   this.isLoading = 'submit';
    let committeeInsertObj = {};
@@ -174,7 +159,7 @@ onSaveEntry(element) {
   this.chargeslist.push(
     {
       MemberId: element.MemberId,
-      MemberName: element.FirstName
+      MemberName: element.MemberName
     });
   this.isLoading = '';
   // console.log(this.chargeslist);

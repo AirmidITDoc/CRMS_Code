@@ -48,7 +48,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
     'VisitTime',
     'ProtocolNo',
     'SubjectName',
-    'BillId',
+    'PbillNo',
     'BillAmount',
    'action',
 

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ReplaySubject, Subject } from 'rxjs';
+import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { CasedetailService } from '../casedetail.service';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import { CaseDetailComponent } from '../case-detail.component';
@@ -15,6 +15,7 @@ import { FileUploadComponent } from '../../appointment/file-upload/file-upload.c
 import { ImageUploadComponent } from '../../appointment/image-upload/image-upload.component';
 import Swal from 'sweetalert2';
 import { MatTableDataSource } from '@angular/material/table';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -56,7 +57,7 @@ export class NewCaseDetailComponent implements OnInit {
   VisitName: any;
   VisitDescription: any;
   Amount: any;
-
+  DocumentTypeId:any;
   DocumentName: any;
   DocumentPath: any;
   StudyAmount: any;
@@ -66,6 +67,13 @@ export class NewCaseDetailComponent implements OnInit {
   CompanyList: any = [];
   DocumentList: any = [];
   Study: boolean = false;
+  TotalAmount:any;
+  
+  requiredFileType:string;
+
+  fileName = '';
+  uploadProgress:number;
+  uploadSub: Subscription;
 
   //company filter
   public companyFilterCtrl: FormControl = new FormControl();
@@ -94,7 +102,7 @@ export class NewCaseDetailComponent implements OnInit {
 
 
   displayedColumns1 = [
-
+    'DocumentTypeId',
     'DocumentName',
     'DocumentPath',
     // 'Amount',
@@ -115,6 +123,7 @@ export class NewCaseDetailComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public datePipe: DatePipe,
     private router: Router,
+    private http: HttpClient
     // private toastr: ToastrService
   ) { }
 
@@ -172,7 +181,7 @@ export class NewCaseDetailComponent implements OnInit {
       VisitName: '',
       VisitDescription: '',
       Amount: '',
-
+      TotalAmount:''
     });
   }
 
@@ -282,7 +291,7 @@ export class NewCaseDetailComponent implements OnInit {
     let netAmt;
     netAmt = element.reduce((sum, { Amount }) => sum += +(Amount || 0), 0);
     this.StudyAmount = netAmt;
-   
+   this.TotalAmount=netAmt;
     return netAmt
   }
 
@@ -297,7 +306,7 @@ export class NewCaseDetailComponent implements OnInit {
       // console.log(this.VisitFrequencyList);
       this.filteredDocument.next(this.DocumentList.slice());
       this._CasedetailService.personalFormGroup
-      .get("Document")
+      .get("DocumentTypeId")
       .setValue(this.DocumentList[0]);
     });
   }
@@ -329,32 +338,48 @@ export class NewCaseDetailComponent implements OnInit {
     this.dateTimeObj = dateTimeObj;
   }
 
-  UploadDoc() {
 
-    // const dialogRef = this._matDialog.open(DcoumentUploadComponent,
-    //   {
-    //     maxWidth: "25vw",
-    //     height: '25vw',
-    //     width: '100%',
+  onFileSelected(event) {
 
-    //   });
-    // dialogRef.afterClosed().subscribe(result => {
+    const file:File = event.target.files[0];
 
-    // });
-  }
+    if (file) {
+console.log(file)
+        this.fileName = file.name;
+    
+        const formData = new FormData();
 
-  UploadImgage() {
-    const dialogRef = this._matDialog.open(ImageUploadComponent,
-      {
-        maxWidth: "45vw",
-        height: '45vw',
-        width: '100%',
+        formData.append("thumbnail", file);
 
-      });
-    dialogRef.afterClosed().subscribe(result => {
+        const upload$ = this.http.post("/api/thumbnail-upload", formData);
 
-    });
-  }
+        upload$.subscribe();
+    }
+}
+localUrl: any[];
+// showPreviewImage(event: any) {
+//   debugger;
+//   if (event.target.files && event.target.files[0]) {
+//       var reader = new FileReader();
+//       reader.onload = (event: any) => {
+//           this.localUrl = event.target.result;
+//       }
+//       reader.readAsDataURL(event.target.files[0]);
+//   }
+// }
+
+
+ 
+cancelUpload() {
+  this.uploadSub.unsubscribe();
+  this.reset();
+}
+
+reset() {
+  this.uploadProgress = null;
+  this.uploadSub = null;
+}
+
   onSubmit() {
 
     this.isLoading = 'submit';
@@ -458,17 +483,19 @@ debugger;
   }
 
   onAddDocumentDetail() {
+    debugger;
     this.DocumentList.data = [];
     this.chargeslist.push(
       {
-        DocumentName: this.DocumentName,
-        DocumentPath: this.DocumentPath
-
+        DocumentTypeId: this.documentFormGroup.get('DocumentTypeId').value.ConstantId || 0,
+        DocumentName: this.DocumentName || '',
+        DocumentPath:  this.fileName || '',// this.DocumentPath || ''
+       
       });
     this.isLoading = '';
     console.log(this.chargeslist);
     this.dataSource2.data = this.chargeslist;
-    console.log(this.DocumentList.data);
+    
   }
 
   onStudySave() {
@@ -555,7 +582,6 @@ debugger;
       let insertDocument = {};
       insertDocument['studyDocId'] = 0;
       insertDocument['studyId'] = this.registerObj.StudyId
-
       insertDocument['DocumentTypeId'] = element.DocumentTypeId;
       insertDocument['DocumentName'] = element.DocumentName;
       insertDocument['DocumentPath'] = element.DocumentPath;
@@ -603,6 +629,18 @@ debugger;
         this.chargeslist.splice(index, 1);
         this.dataSource.data = [];
         this.dataSource.data = this.chargeslist;
+      }
+      Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
+    }
+  }
+
+  deleteTableRow1(element) {
+    {
+      let index = this.chargeslist.indexOf(element);
+      if (index >= 0) {
+        this.chargeslist.splice(index, 1);
+        this.dataSource2.data = [];
+        this.dataSource2.data = this.chargeslist;
       }
       Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
     }
@@ -718,3 +756,7 @@ export class DocumentDetail {
     }
   }
 }
+
+
+
+// https://blog.angular-university.io/angular-file-upload/

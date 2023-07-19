@@ -11,7 +11,7 @@ export class CasedetailService {
   myFilterform: FormGroup;
   mySaveForm: FormGroup;
   studySchFormGroup: FormGroup;
-
+  studyServicesFormGroup: FormGroup;
 
   now = Date.now();
   sIsLoading: string = '';
@@ -22,6 +22,7 @@ export class CasedetailService {
     // this.mySaveForm = this.saveForm();
     this.studySchFormGroup = this.createstudySchForm();
     this.personalFormGroup = this.createPesonalForm();
+    this.studyServicesFormGroup = this.createStudyservicesForm();
   }
 
   filterForm(): FormGroup {
@@ -74,7 +75,15 @@ export class CasedetailService {
       TotalAmount:' '
     });
   }
-
+  createStudyservicesForm(){
+    return this._formBuilder.group({
+      VisitId: '',
+      VisitName: '',
+      ServiceName: '',
+      Price: '',
+      TotalAmount:' '
+    });
+  }
 
   createdocumentForm() {
     return this._formBuilder.group({
@@ -142,5 +151,13 @@ export class CasedetailService {
 
   public getStudyschdulebyStuIdList(employee){
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_SchduleDetailBySchId",employee);
+  }
+
+  public getVistNameList(employee){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_SchduleDetailBySchId",employee);
+  }
+
+  public getServviceNameList(){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_ServiceMasterList",{});
   }
 }

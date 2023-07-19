@@ -63,7 +63,7 @@ app-committee-master-member{
 .mat-header-row {
     // width: 100%;
     max-width:1100px;
-    min-width:100px; 
+    min-width:1100px; 
     min-height: 30px;     
 }
 .mat-row {
@@ -89,9 +89,9 @@ app-committee-master-member{
 }
 
 .mat-column-MemberName {
-    width:750px;
-    max-width:750px;
-    min-width:750px;
+    width:950px;
+    max-width:950px;
+    min-width:950px;
     text-align:left;
     white-space: nowrap; 
     overflow: hidden;

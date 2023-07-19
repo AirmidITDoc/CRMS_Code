@@ -540,7 +540,7 @@ export class EditAppointmentComponent implements OnInit {
       registrationUpdate['address'] = this.registerObj.Address || '';
       registrationUpdate['City'] = this._registerService.personalFormGroup.get('CityId').value.CityName || '';
       registrationUpdate['pinNo'] = '';
-      registrationUpdate['dateOfBirth'] =  this.datePipe.transform(this.registerObj.DateofBirth,"MM-dd-yyyy"); //this._registerService.personalFormGroup.get('DateofBirth').value.DateofBirth;
+      registrationUpdate['dateOfBirth'] =  this._registerService.personalFormGroup.get('DateofBirth').value || '01/01/1900';
       registrationUpdate['age'] = this.registerObj.AgeYear || 0;//this.registerObj.Age;
       registrationUpdate['genderID'] = this._registerService.personalFormGroup.get('GenderId').value.GenderId || 0;
       registrationUpdate['phoneNo'] = this._registerService.personalFormGroup.get('PhoneNo').value || 0;

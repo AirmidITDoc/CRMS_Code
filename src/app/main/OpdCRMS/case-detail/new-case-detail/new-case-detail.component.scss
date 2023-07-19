@@ -22,37 +22,42 @@ app-new-case-detail{
         -webkit-overflow-scrolling: touch;
     }
     
-    // .next-btn {
-    //     width: 100px;
-    //     font-size: 14px;
-    //     padding: 1px;
-    //     border-radius: 2px;
-    //     background-color: #054a53;
-    //     // border: 1px solid #f76bd8;
-    //     color: white;
-    //     cursor: pointer;
-    // }
+  
+.file-input {
+    display: none;
+  }
 
     .table2{
+        // width: 100% !important;
         .mat-header-row {
-            // width: 100%;
-            max-width: 800px;
-            min-width: 800px;
+            width: 100%;
+            max-width: 1200px;
+            min-width: 1200px;
             min-height: 30px;
         }
 
         .mat-row {
-            // width: 100%;
-            max-width: 800px;
-            min-width: 800px;
+            width: 100%;
+            max-width: 1200px;
+            min-width: 1200px;
             min-height: 30px;
         }
 
+        .mat-column-DocumentTypeId {
+            width: 200px;
+            max-width: 200px;
+            min-width: 200px;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            overflow: hidden !important;
+        }
         
         .mat-column-DocumentName {
-            width: 300px;
-            max-width: 300px;
-            min-width: 300px;
+            width: 400px;
+            max-width: 400px;
+            min-width: 400px;
             text-align: left;
             white-space: nowrap;
             overflow: hidden;
@@ -63,9 +68,9 @@ app-new-case-detail{
 
         
         .mat-column-DocumentPath {
-            width: 400px;
-            max-width: 400px;
-            min-width: 400px;
+            width: 500px;
+            max-width: 500px;
+            min-width: 500px;
             text-align: left;
             white-space: nowrap;
             overflow: hidden;
@@ -78,22 +83,22 @@ app-new-case-detail{
 
         .mat-header-row {
             width: 100%;
-            max-width: 1000px;
-            min-width: 1000px;
+            max-width: 1200px;
+            min-width: 1200px;
             min-height: 30px;
         }
 
         .mat-row {
             width: 100%;
-            max-width: 1000px;
-            min-width: 1000px;
+            max-width: 1200px;
+            min-width: 1200px;
             min-height: 30px;
         }
 
         .mat-column-VisitName {
-            width: 300px;
-            max-width: 300px;
-            min-width: 300px;
+            width: 400px;
+            max-width: 400px;
+            min-width: 400px;
             text-align: left;
             white-space: nowrap;
             overflow: hidden;
@@ -102,9 +107,9 @@ app-new-case-detail{
         }
 
         .mat-column-Amount {
-            width: 100px;
+            width: 110px;
             max-width: 110px;
-            min-width: 10px;
+            min-width: 110px;
             text-align: right;
         }
 

@@ -38,7 +38,8 @@ export class CommitteMeetingService {
       CommitteeName: '',
       Location: '',
       Amount: '',
-      CommitteeMeetingId:''
+      CommitteeMeetingId:'',
+      NetAmount:''
     });
   }
 
@@ -53,7 +54,11 @@ public getCommitteeList(){
   return this._httpClient.post("Generic/GetByProc?procName=Rtrv_T_CommitteeMeeting_List", {})
 }
 
-public CommitteeDetailInsert(employee){
+public CommitteeMeettingDetailInsert(employee){
+  return this._httpClient.post("CRMSTran/Save_InsertCommitteeMaster", employee);
+}
+
+public CommitteeMeettingDetailUpdate(employee){
   return this._httpClient.post("CRMSTran/Save_InsertCommitteeMaster", employee);
 }
 

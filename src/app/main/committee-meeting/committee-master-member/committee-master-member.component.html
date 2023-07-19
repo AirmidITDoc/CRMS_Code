@@ -14,7 +14,7 @@
                     <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
                         style="width: 100%;font-size: 16px;">
                         Add Committee Member</span>
-                    <div fxLayout="row" fxLayoutAlign="start end" style="margin-left:480px;">
+                    <div fxLayout="row" fxLayoutAlign="start end" style="margin-left:440px;">
                         <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
                             close
                         </span>
@@ -22,140 +22,158 @@
                 </div>
             </div>
 
-            <mat-card-content style="width: 100%;margin-right: 5px;">
-                <div fxLayout="column">
-                    <div class="content-card"
-                        style="width:100%;  margin-top: 2px; float: right;background-color: white;">
-                        <mat-card fxFlex.gt-sm="100%" fxFlex>
-                            <form [formGroup]="personalFormGroup" style="display: flex;" #f="ngForm" #aForm>
-                                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-                                    <mat-form-field appearance="outline" style="width: 40%;">
-                                        <mat-label>Committee Name</mat-label>
-                                        <input name="CommitteeName" formControlName="CommitteeName"
-                                            placeholder="Committee Name" matInput required type="text">
-                                        <mat-error
-                                            *ngIf="personalFormGroup.get('CommitteeName').invalid && personalFormGroup.get('CommitteeName').touched">
-                                            CommitteeName is required Enter only
-                                            Alphabets</mat-error>
-                                    </mat-form-field>
+            <div class="content-card" style="width:100%;  margin-top: 2px; float: right;background-color: white;">
+                <mat-card fxFlex.gt-sm="100%" fxFlex>
+                    <form [formGroup]="personalFormGroup" style="display: flex;" #f="ngForm" #aForm>
+                        <mat-card-content style="width: 100%;margin-right: 5px;">
+                            <div fxLayout="column">
+                                <div class="content-card"
+                                    style="width:100%;  margin-top: 2px; float: right;background-color: white;">
 
-                                    <diV style="margin-top:21px;">
+                                    <!-- <form [formGroup]="personalFormGroup" style="display: flex;" #f="ngForm" #aForm> -->
+                                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                                        <mat-form-field appearance="outline" style="width: 40%;">
+                                            <mat-label>Committee Name</mat-label>
+                                            <input name="CommitteeName" formControlName="CommitteeName"
+                                                placeholder="Committee Name" matInput required type="text">
+                                            <mat-error
+                                                *ngIf="personalFormGroup.get('CommitteeName').invalid && personalFormGroup.get('CommitteeName').touched">
+                                                CommitteeName is required Enter only
+                                                Alphabets</mat-error>
+                                        </mat-form-field>
+
+                                        <!-- <diV style="margin-top:21px;">
                                         <span style="margin-right: 40px;color: black;font-weight: bold;">
                                             <app-common-date [screenFrom]="screenFromString"
                                                 (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
                                         </span>
-                                    </diV>&nbsp;&nbsp;
+                                    </diV>&nbsp;&nbsp; -->
+                                    </div>
+                                    <!-- </form> -->
+
                                 </div>
-                            </form>
-                        </mat-card>
-                    </div>
-                    <div fxLayout="column">
+                                <div fxLayout="column">
 
-                        <div class="content-card"
-                            style="width:100%;  margin-top: 2px; float: right;background-color: white;">
-                            <div fxFlexFill fxLayout="column" fxLayout.gt-xs="column" fxLayoutGap="3px">
-                                <div fxlayout="row" >
-                                    <form [formGroup]="personalFormGroup" style="display: flex;">
+                                    <div class="content-card"
+                                        style="width:100%;  margin-top: 2px; float: right;background-color: white;">
+                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="column" fxLayoutGap="3px">
+                                            <div fxlayout="row">
+                                                <form [formGroup]="personalFormGroup" style="display: flex;">
 
-                                        <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="5px">
+                                                    <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between"
+                                                        fxLayoutGap="5px">
 
-                                            <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
+                                                            fxLayoutGap="4px">
 
-                                                <mat-form-field appearance="outline" style="width: 40%;" flex>
-                                                    <mat-label>Member</mat-label>
-                                                    <mat-select formControlName="MemberId" placeholder="Bank"
-                                                        #singleSelect required
-                                                        (selectionChange)="onSaveEntry($event.value)">
-                                                        <mat-option>
-                                                            <ngx-mat-select-search [formControl]="memberFilterCtrl"
-                                                                [placeholderLabel]="'Search'"
-                                                                [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
-                                                        </mat-option>
-                                                        <mat-option *ngFor="let element of filteredMember | async"
-                                                            [value]="element">
-                                                            {{element.FirstName}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
+                                                            <mat-form-field appearance="outline" style="width: 40%;"
+                                                                flex>
+                                                                <mat-label>Member</mat-label>
+                                                                <mat-select formControlName="MemberId"
+                                                                    placeholder="Bank" #singleSelect required
+                                                                    (selectionChange)="onSaveEntry($event.value)">
+                                                                    <mat-option>
+                                                                        <ngx-mat-select-search
+                                                                            [formControl]="memberFilterCtrl"
+                                                                            [placeholderLabel]="'Search'"
+                                                                            [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
+                                                                    </mat-option>
+                                                                    <mat-option
+                                                                        *ngFor="let element of filteredMember | async"
+                                                                        [value]="element">
+                                                                        {{element.MemberName}}
+                                                                    </mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div fxLayout="column">
-                        <div fxFlex="100" fxFlex.gt-sm="100" fxLayout="row" fxLayout.gt-xs="column">
-                            <div>
-                                <div class="col-md-12">
-                                    <div  style="height: 250px !important;  overflow: auto !important;">
-
-                                        <mat-table #table matSort [dataSource]="dataSource"
-                                            [@animateStagger]="{value:'50'}"
-                                            style="height: 300px !important;overflow: auto;" class="table1">
-
-                                            <ng-container matColumnDef="MemberName">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                                                    Member Name
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                    {{contact.MemberName}}
-                                                </mat-cell>
-                                            </ng-container>
-
-                                            <ng-container matColumnDef="action" stickyEnd>
-                                                <mat-header-cell *matHeaderCellDef style="color: white;"> Action
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let row">
-                                                    <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
-                                                        <mat-icon>delete_outline</mat-icon>
-                                                    </button>
-                                                </mat-cell>
-                                            </ng-container>
-
-                                            <ng-container matColumnDef="loading">
-                                                <mat-footer-cell *matFooterCellDef colspan="6">
-                                                    loading data...
-                                                </mat-footer-cell>
-                                            </ng-container>
-
-                                            <ng-container matColumnDef="noData">
-                                                <mat-footer-cell *matFooterCellDef colspan="6">
-                                                    <!-- <mat-spinner  class="spinner" [diameter]="35"
-                                            [color]="blue"></mat-spinner> -->
-                                                    <span>No Data Found</span>
-                                                </mat-footer-cell>
-                                            </ng-container>
-
-                                            <mat-header-row class="accent"
-                                                *matHeaderRowDef="displayedColumns; sticky: true">
-                                            </mat-header-row>
-                                            <mat-row *matRowDef="let contact; columns: displayedColumns;"
-                                                [ngClass]="{'row-yellow': contact.ServiceName == 'CBC'}"
-                                                [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
-                                            <mat-footer-row *matFooterRowDef="['loading']"
-                                                [ngClass]="{'hide':dataSource!=null}">
-                                            </mat-footer-row>
-                                            <mat-footer-row *matFooterRowDef="['noData']"
-                                                [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
-                                            </mat-footer-row>
-                                        </mat-table>
-                                        <div class="net-amt">
-                                            <span class="net-amt-label" style="margin-left: 500px;">Total Member :</span>&nbsp;<span
-                                                class="net-amt-value" style="color: aliceblue;">{{dataSource.data}}</span>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div fxLayout="column">
+                                    <div class="content-card"
+                                        style="width:100%;  margin-top: 2px; float: right;background-color: white;">
+                                        <div fxlayout="row">
+                                         
+                                            <mat-table #table matSort [dataSource]="dataSource"
+                                                [@animateStagger]="{value:'50'}"
+                                                style="height: 350px !important;overflow: auto;" class="table1">
+
+                                                <ng-container matColumnDef="MemberName">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                                        Member Name
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                        {{contact.MemberName}}
+                                                    </mat-cell>
+                                                </ng-container>
+
+                                                <ng-container matColumnDef="action" stickyEnd>
+                                                    <mat-header-cell *matHeaderCellDef style="color: white;"> Action
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">
+                                                        <button mat-icon-button (click)="deleteTableRow(row)"
+                                                            color="warn">
+                                                            <mat-icon>delete_outline</mat-icon>
+                                                        </button>
+                                                    </mat-cell>
+                                                </ng-container>
+
+                                                <ng-container matColumnDef="loading">
+                                                    <mat-footer-cell *matFooterCellDef colspan="6">
+                                                        loading data...
+                                                    </mat-footer-cell>
+                                                </ng-container>
+
+                                                <ng-container matColumnDef="noData">
+                                                    <mat-footer-cell *matFooterCellDef colspan="6">
+                                                        <!-- <mat-spinner  class="spinner" [diameter]="35"
+                                            [color]="blue"></mat-spinner> -->
+                                                        <span>No Data Found</span>
+                                                    </mat-footer-cell>
+                                                </ng-container>
+
+                                                <mat-header-row class="accent"
+                                                    *matHeaderRowDef="displayedColumns; sticky: true">
+                                                </mat-header-row>
+                                                <mat-row *matRowDef="let contact; columns: displayedColumns;"
+                                                    [ngClass]="{'row-yellow': contact.ServiceName == 'CBC'}"
+                                                    [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+                                                <mat-footer-row *matFooterRowDef="['loading']"
+                                                    [ngClass]="{'hide':dataSource!=null}">
+                                                </mat-footer-row>
+                                                <mat-footer-row *matFooterRowDef="['noData']"
+                                                    [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
+                                                </mat-footer-row>
+                                            </mat-table>
+                                            <div class="net-amt">
+                                                <span class="net-amt-label" style="margin-left: 500px;">Total Member
+                                                    :</span>&nbsp;<span class="net-amt-value"
+                                                    style="color: aliceblue;">{{dataSource.data}}</span>
+                                            </div>
+                                            <!-- </div> -->
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+
+                                </div>
+
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </mat-card-content>
+
+                        </mat-card-content>
+                    </form>
+
+                </mat-card>
+            </div>
         </div>
     </div>
-    <div style="float: right;margin-top: 20px;">
-        <button class="next-btn" color="accent" (click)="onSubmit()" style="border-radius: 16px;"> Save</button>
-        <button class="footer-btn" (click)="onClose()">Cancel</button>
+    <div class="content-card" style="width:100%;float: right;background-color: white;">
+        <div style="margin-left: 1000px;">
+            <button class="next-btn" color="accent" (click)="onSubmit()" style="border-radius: 16px;"> Save</button>
+            <button class="footer-btn" (click)="onClose()">Cancel</button>
+        </div>
     </div>
 </div>

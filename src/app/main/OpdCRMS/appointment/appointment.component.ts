@@ -744,6 +744,7 @@ export class VisitMaster {
   SubjectName:any;
   RegId:any;
   BilId:any;
+  PBillNo:any;
   /**
    * Constructor
    *
@@ -782,6 +783,7 @@ export class VisitMaster {
       this.RegId = VisitMaster.RegId || 0;
       this.VisitTitle = VisitMaster.VisitTitle || '';
       this.BilId = VisitMaster.BilId || '';
+      this.PBillNo=VisitMaster.PBillNo|| '';
     }
     }
   

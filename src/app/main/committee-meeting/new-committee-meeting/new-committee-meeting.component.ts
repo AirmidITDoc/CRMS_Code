@@ -26,7 +26,8 @@ export class NewCommitteeMeetingComponent implements OnInit {
   screenFromString = 'admission-form';
   lngCommitteeId: any;
   sIsLoading: string = '';
-
+  NetAmount:any;
+  
   results: Result[] = [
     { value: 'ONLINE', viewValue: 'ONLINE' },
     { value: 'OFFLINE', viewValue: 'OFFLINE' },
@@ -108,7 +109,7 @@ if(this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').valu
     let netAmt;
     netAmt = element.reduce((sum, { StudyAmount }) => sum += +(StudyAmount || 0), 0);
     this.StudyAmount = netAmt;
-    // this.netPaybleAmt = netAmt;
+    this.NetAmount = netAmt;
    
     return netAmt
   }
@@ -183,7 +184,7 @@ if(! this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').va
     insertCommitteeMeeting['committeeMeetingTime'] = this.dateTimeObj.time;
     insertCommitteeMeeting['commiteeMeetingName'] = this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingName').value || '';
     insertCommitteeMeeting['committeeMeetingLocation'] = this._CommitteMeetingService.personalFormGroup.get('Location').value || '';
-    insertCommitteeMeeting['committeeMeetingAmount'] = this._CommitteMeetingService.personalFormGroup.get('Amount').value || 0;
+    insertCommitteeMeeting['committeeMeetingAmount'] = this._CommitteMeetingService.personalFormGroup.get('NetAmount').value || 0;
 
     let insertCommitteeMeetingMemberDetarry = [];
     this.dataSource.data.forEach((element) => {
@@ -202,7 +203,7 @@ if(! this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').va
       "insertCommitteeMeetingMemberDet": insertCommitteeMeetingMemberDetarry
     };
     console.log(submitData);
-    this._CommitteMeetingService.CommitteeDetailInsert(submitData).subscribe(response => {
+    this._CommitteMeetingService.CommitteeMeettingDetailInsert(submitData).subscribe(response => {
       if (response) {
         Swal.fire('New Committee Meeting Save !', ' New Committee Meeting Save Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {
@@ -221,7 +222,7 @@ if(! this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').va
     updateCommitteeMeeting['committeeMeetingTime'] = this.dateTimeObj.time;
     updateCommitteeMeeting['commiteeMeetingName'] = this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingName').value || '';
     updateCommitteeMeeting['committeeMeetingLocation'] = this._CommitteMeetingService.personalFormGroup.get('Location').value || '';
-    updateCommitteeMeeting['committeeMeetingAmount'] = this._CommitteMeetingService.personalFormGroup.get('Amount').value || 0;
+    updateCommitteeMeeting['committeeMeetingAmount'] = this._CommitteMeetingService.personalFormGroup.get('NetAmount').value || 0;
 
     let insertCommitteeMeetingMemberDetarry = [];
     this.dataSource.data.forEach((element) => {
@@ -240,7 +241,7 @@ if(! this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').va
       "insertCommitteeMeetingMemberDet": insertCommitteeMeetingMemberDetarry
     };
     console.log(submitData);
-    this._CommitteMeetingService.CommitteeDetailInsert(submitData).subscribe(response => {
+    this._CommitteMeetingService.CommitteeMeettingDetailUpdate(submitData).subscribe(response => {
       if (response) {
         Swal.fire('Updated Committee Meeting  !', ' Updated Committee Meeting  Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {

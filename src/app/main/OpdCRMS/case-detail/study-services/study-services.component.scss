@@ -1,4 +1,4 @@
-app-study-schdule{
+app-study-services{
 
     .p-sm-24 {
         padding: 15px !important;
@@ -47,8 +47,7 @@ app-study-schdule{
 
     .table1{
 
-        // border-color: #99a7af;
-        // border-style: groove;
+    
         .mat-header-row {
             // width: 100%;
             max-width: 1230px;
@@ -74,14 +73,14 @@ app-study-schdule{
             overflow: hidden !important;
         }
 
-        .mat-column-Amount {
+        .mat-column-Price {
             width: 150px;
             max-width: 150px;
             min-width: 150px;
             text-align: right;
         }
 
-        .mat-column-VisitDescription {
+        .mat-column-ServiceName {
             width: 500px;
             max-width: 500px;
             min-width: 500px;
