@@ -145,6 +145,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
     } else {
       var m = {
         "VisitId": contact.VisitId,
+        "StudyId": contact.StudyId,
         "StudyVisitId": contact.StudyVisitId
       };
       console.log(m);
@@ -157,7 +158,6 @@ export class PatientScreenBillDetailComponent implements OnInit {
         });
     }
     this.getBillList();
-
   }
 
 
