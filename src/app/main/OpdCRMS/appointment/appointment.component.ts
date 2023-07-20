@@ -99,7 +99,7 @@ export class AppointmentComponent implements OnInit {
     }
 
     this.CaseListCombo();
-    this.drawer.toggle();
+    // this.drawer.toggle();
     // this.getVisitList();
     // this.dataSource.data.refresh();
 
@@ -142,7 +142,7 @@ export class AppointmentComponent implements OnInit {
     const dialogRef = this._matDialog.open(PatientScreenBillDetailComponent,
       {
         maxWidth: "65vw",
-        height: '600px',
+        height: '700px',
         width: '100%',
         data : {
           element : element,
@@ -198,12 +198,13 @@ export class AppointmentComponent implements OnInit {
     console.log(contact);
 
     this.VisitID = contact.VisitId;
-    let AgeDay, AgeMonth, AgeYear, Age
+    let AgeDay,AgeMonth,AgeYear,Age
     if (contact.Age != null || contact.AgeDay != null || contact.AgeMonth != null || contact.AgeYear != null) {
     
       AgeDay = contact.AgeDay.trim();
       AgeMonth = contact.AgeMonth.trim();
       AgeYear = contact.AgeYear.trim();
+      // Age=contact.Age.trim();
     }
 
     if (m == "Update Registration") {
@@ -743,7 +744,7 @@ export class VisitMaster {
   VistDateTime: any;
   SubjectName:any;
   RegId:any;
-  BilId:any;
+  BillId:any;
   PBillNo:any;
   /**
    * Constructor
@@ -782,7 +783,7 @@ export class VisitMaster {
       this.SubjectName = VisitMaster.SubjectName || '';
       this.RegId = VisitMaster.RegId || 0;
       this.VisitTitle = VisitMaster.VisitTitle || '';
-      this.BilId = VisitMaster.BilId || '';
+      this.BillId = VisitMaster.BillId || '';
       this.PBillNo=VisitMaster.PBillNo|| '';
     }
     }

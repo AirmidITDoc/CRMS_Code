@@ -214,7 +214,7 @@ export class Servicedetail {
     TariffId: number;
     ClassId: number;
     ClassName:any;
-    ClassRate: number;
+    ClassRate: any;
     EffectiveDate: Date;
     currentDate = new Date();
     constructor(Servicedetail) {

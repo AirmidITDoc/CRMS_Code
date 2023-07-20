@@ -10,6 +10,7 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-patient-screen-bill-detail',
@@ -25,20 +26,20 @@ export class PatientScreenBillDetailComponent implements OnInit {
   isLoading = true;
   isRateLimitReached = false;
   hasSelectedContacts: boolean;
-  currentDate=new Date();
+  currentDate = new Date();
   subscriptions: Subscription[] = [];
   screenFromString = 'admission-form';
   printTemplate: any;
-  
+
   subscriptionArr: Subscription[] = [];
-  StudyId:0;
+  StudyId: 0;
   totalAmtOfNetAmt: any;
-  VisitID:any;
+  VisitID: any;
   selectedAdvanceObj: VisitMaster;
   reportPrintObjList: BrowseOPDBill[] = [];
   reportPrintObj: BrowseOPDBill;
-  Billbutton=false;
-  
+  Billbutton = false;
+
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() dataArray: any;
@@ -48,9 +49,9 @@ export class PatientScreenBillDetailComponent implements OnInit {
     'VisitTime',
     'ProtocolNo',
     'SubjectName',
-    'PbillNo',
     'BillAmount',
-   'action',
+    'BillId',
+    'action',
 
   ];
 
@@ -76,42 +77,43 @@ export class PatientScreenBillDetailComponent implements OnInit {
   ngOnInit(): void {
 
 
-    if(this.data)
-    {
+    if (this.data) {
       console.log(this.data);
-      this.StudyId=this.data.element.Title;
+      this.StudyId = this.data.element.Title;
 
       this.selectedAdvanceObj = this.data.element;
       console.log(this.selectedAdvanceObj)
+
+
     }
-   
+
     this.getBillList();
     // this.dataSource.data.refresh();
 
   }
 
-  
+
 
   getBillList() {
     this.sIsLoading = 'loading-data';
     var D_data = {
-      "StudyId":this.data.StudyId,  
-      "RegId" :this.data.element.RegId    
+      "StudyId": this.data.StudyId,
+      "RegId": this.data.element.RegId
     };
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._AppointmentService.getPatientScreeningBillingList(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as VisitMaster[];
-        console.log(this.dataSource.data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.sIsLoading = '';
-        
+
       },
         error => {
           this.sIsLoading = '';
         });
     }, 1000);
+
 
   }
 
@@ -135,29 +137,32 @@ export class PatientScreenBillDetailComponent implements OnInit {
     // );
   }
 
- 
-  getGeneratebill(contact){
-    console.log(contact)
-    var m={
-     "VisitId":contact.VisitId,
-     "StudyVisitId":contact.StudyVisitId
-    };
-    console.log(m);
-    this._AppointmentService.getBillGeneration(m).subscribe(data => {
-    //  this._matDialog.closeAll();
-      this.sIsLoading = '';
-      console.log(data)
-    },
-      error => {
+
+  getGeneratebill(contact) {
+    debugger
+    let BillId = contact.BillId
+    if (BillId != 0) {
+      Swal.fire("Bill Already Generated")
+    } else {
+      var m = {
+        "VisitId": contact.VisitId,
+        "StudyVisitId": contact.StudyVisitId
+      };
+      console.log(m);
+      this._AppointmentService.getBillGeneration(m).subscribe(data => {
         this.sIsLoading = '';
-      });
-   
-      this.getBillList();
-      this.Billbutton=true;
+        console.log(data)
+      },
+        error => {
+          this.sIsLoading = '';
+        });
+    }
+    this.getBillList();
+
   }
 
 
-  
+
 
 
   onExport(exprtType) {
@@ -259,7 +264,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
     this._AppointmentService.getTemplate(query).subscribe((resData: any) => {
 
       this.printTemplate = resData[0].TempDesign;
-      let keysArray = ['HospitalName', 'HospitalAddress', 'Phone','EmailId', 'PhoneNo', 'RegNo', 'BillNo', 'AgeYear', 'AgeDay', 'AgeMonth', 'PBillNo', 'PatientName', 'BillDate', 'VisitDate', 'ConsultantDocName', 'DepartmentName', 'ServiceName', 'ChargesDoctorName', 'Price', 'Qty', 'ChargesTotalAmount', 'TotalBillAmount', 'NetPayableAmt', 'NetAmount', 'ConcessionAmt', 'PaidAmount', 'BalanceAmt', 'AddedByName','Address','MobileNo']; // resData[0].TempKeys;
+      let keysArray = ['HospitalName', 'HospitalAddress', 'Phone', 'EmailId', 'PhoneNo', 'RegNo', 'BillNo', 'AgeYear', 'AgeDay', 'AgeMonth', 'PBillNo', 'PatientName', 'BillDate', 'VisitDate', 'ConsultantDocName', 'DepartmentName', 'ServiceName', 'ChargesDoctorName', 'Price', 'Qty', 'ChargesTotalAmount', 'TotalBillAmount', 'NetPayableAmt', 'NetAmount', 'ConcessionAmt', 'PaidAmount', 'BalanceAmt', 'AddedByName', 'Address', 'MobileNo']; // resData[0].TempKeys;
 
       for (let i = 0; i < keysArray.length; i++) {
         let reString = "{{" + keysArray[i] + "}}";
@@ -278,7 +283,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
         else
           docname = '';
 
-          // <hr style="border-color:white" >
+        // <hr style="border-color:white" >
         var strabc = ` <div style="display:flex;margin:8px 0">
         <div style="display:flex;width:60px;margin-left:20px;">
             <div>`+ i + `</div> <!-- <div>BLOOD UREA</div> -->
@@ -360,5 +365,5 @@ export class PatientScreenBillDetailComponent implements OnInit {
   onClose() {
     this._matDialog.closeAll();
   }
-   
+
 }

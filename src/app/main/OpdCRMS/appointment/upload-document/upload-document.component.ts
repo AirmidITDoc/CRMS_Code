@@ -51,6 +51,7 @@ export class UploadDocumentComponent implements OnInit {
         if (file) {
             this.fileName = file.name;
             // this.FilePath=file.path;
+            // console.log
             const formData = new FormData();
             formData.append("thumbnail", file);
 

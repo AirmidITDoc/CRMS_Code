@@ -21,8 +21,8 @@ import { fuseAnimations } from '@fuse/animations';
 })
 export class StudySchduleComponent implements OnInit {
 
- 
-  
+
+
   chargeslist: any = [];
 
   studySchFormGroup: FormGroup;
@@ -34,15 +34,15 @@ export class StudySchduleComponent implements OnInit {
   CaseIdList: any = [];
   snackmessage: any;
   screenFromString = 'admission-form';
-  
+
   registerObj = new CaseDetail({});
   VisitFrequencyList: any = [];
   VisitName: any;
   VisitDescription: any;
   Amount: any;
   TotalAmount1: any;
-  TotalAmount=0;
- 
+  TotalAmount = 0;
+
   StudyAmount: any;
   StudyId: any;
   VisitList: any = []
@@ -78,29 +78,29 @@ export class StudySchduleComponent implements OnInit {
 
     console.log(this.data)
 
-      
-    if (this.data) {
+
+  if (this.data) {
       this.registerObj = this.data.registerObj;
       // this.StudyId=this.data.registerObj.StudyId;
       console.log(this.registerObj.StudyId);
       this.Study = true;
-   
-    }
-var m={
-  StudyId: this.registerObj.StudyId
-  };
-      
-  this._CasedetailService.getStudyschdulebyStuIdList(m).subscribe(Visit => {
-    this.dataSource1.data = Visit as VisitDetail[];
-    console.log(this.dataSource1.data)
-    this.dataSource1.sort = this.sort;
-    this.dataSource1.paginator = this.paginator;
-    // this.sIsLoading = '';
-  },
-    error => {
+debugger;
+    
+    var m = {
+      StudyId: this.registerObj.StudyId
+    };
+
+    this._CasedetailService.getStudyschdulebyStuIdList(m).subscribe(Visit => {
+      this.dataSource1.data = Visit as VisitDetail[];
+      console.log(this.dataSource1.data)
+      this.dataSource1.sort = this.sort;
+      this.dataSource1.paginator = this.paginator;
       // this.sIsLoading = '';
-    });
-  
+    },
+      error => {
+        // this.sIsLoading = '';
+      });
+    }
   }
 
 
@@ -115,11 +115,11 @@ var m={
 
 
   getNetAmtSum(element) {
-debugger;
+    debugger;
     let netAmt;
     netAmt = element.reduce((sum, { Amount }) => sum += +(Amount || 0), 0);
-     this.TotalAmount = netAmt;
-      // this._CasedetailService.studySchFormGroup.get('TotalAmount').setValue(this.TotalAmount);
+    this.TotalAmount = netAmt;
+    // this._CasedetailService.studySchFormGroup.get('TotalAmount').setValue(this.TotalAmount);
     return netAmt
   }
 
@@ -131,7 +131,7 @@ debugger;
     console.log('dateTimeObj ==', dateTimeObj);
     this.dateTimeObj = dateTimeObj;
   }
- 
+
 
   onClose() {
     this.dialogRef.close();
@@ -161,7 +161,7 @@ debugger;
     this.isLoading = '';
     console.log(this.chargeslist);
     this.dataSource1.data = this.chargeslist;
-    
+
     this._CasedetailService.studySchFormGroup.get('VisitName').reset('')
 
     this._CasedetailService.studySchFormGroup.get('VisitDescription').reset('')
@@ -223,11 +223,11 @@ debugger;
     });
     let deleteStudySchedule = {};
     deleteStudySchedule['studyId'] = this.registerObj.StudyId
-  
+
     let submitData = {
-      "deleteStudySchedule":deleteStudySchedule,
+      "deleteStudySchedule": deleteStudySchedule,
       "updateStudySchedule": updateStudySchedulearr
-     
+
     };
 
     console.log(submitData);
@@ -255,8 +255,8 @@ export class VisitDetail {
   VisitName: any;
   VisitDescription: any;
   Amount: any;
-  StudyVisitId:any;
-  StudyId:any;
+  StudyVisitId: any;
+  StudyId: any;
   /**
    * Constructor
    *

@@ -26,8 +26,8 @@ export class NewCommitteeMeetingComponent implements OnInit {
   screenFromString = 'admission-form';
   lngCommitteeId: any;
   sIsLoading: string = '';
-  NetAmount:any;
-  
+  NetAmount: any;
+
   results: Result[] = [
     { value: 'ONLINE', viewValue: 'ONLINE' },
     { value: 'OFFLINE', viewValue: 'OFFLINE' },
@@ -42,7 +42,7 @@ export class NewCommitteeMeetingComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<NewCommitteeMeetingComponent>) { }
 
-    StudyAmount:any;
+  StudyAmount: any;
   registerObj = new MemberDetail({});
 
   displayedColumns = [
@@ -68,36 +68,33 @@ export class NewCommitteeMeetingComponent implements OnInit {
   private _onDestroy = new Subject<void>();
 
   ngOnInit(): void {
-   
+
     this.getCommitteListCombobox();
-if(this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').value){
-    let m ={
-      'CommitteeId': 1
-    }
-   
-    setTimeout(() => {
-      this.sIsLoading = 'loading-data';
-      this._CommitteMeetingService.getCommitteeMemberList(m).subscribe(Visit => {
-        this.dataSource.data = Visit as CommitteeMeetingMemberList[];
+    if (this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').value) {
+      let m = {
+        'CommitteeId': 1
+      }
 
-        this.chargeslist = Visit as CommitteeMeetingMemberList[];
+      setTimeout(() => {
+        this.sIsLoading = 'loading-data';
+        this._CommitteMeetingService.getCommitteeMemberList(m).subscribe(Visit => {
+          this.dataSource.data = Visit as CommitteeMeetingMemberList[];
 
-        this.dataSource.data = this.chargeslist;
-
-        this.dataSource.data['MeetingStatus']="Offline";
-        // this.dscommitteeMemberList.paginator = this.paginator;
-        this.sIsLoading = '';
-      },
-        error => {
+          this.chargeslist = Visit as CommitteeMeetingMemberList[];
+          this.dataSource.data = this.chargeslist;
+          this.dataSource.data['MeetingStatus'] = "Offline";
           this.sIsLoading = '';
-        });
-    }, 1000);
+        },
+          error => {
+            this.sIsLoading = '';
+          });
+      }, 1000);
 
-  }
+    }
   }
 
-  
- 
+
+
   getCommitteListCombobox() {
     this._CommitteMeetingService.getCommitteeMeetingList().subscribe((data) => {
       this.MembercmbList = data;
@@ -110,13 +107,13 @@ if(this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').valu
     netAmt = element.reduce((sum, { StudyAmount }) => sum += +(StudyAmount || 0), 0);
     this.StudyAmount = netAmt;
     this.NetAmount = netAmt;
-   
+
     return netAmt
   }
 
   deleteTableRow(element) {
     debugger;
-    
+
     let index = this.chargeslist.indexOf(element);
     if (index >= 0) {
       this.chargeslist.splice(index, 1);
@@ -134,10 +131,10 @@ if(this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').valu
   }
 
   getCommitteeMemberList(Params) {
-    let m ={
+    let m = {
       'CommitteeId': Params
     }
-   
+
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._CommitteMeetingService.getCommitteeMemberList(m).subscribe(Visit => {
@@ -165,7 +162,7 @@ if(this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').valu
       });
     this.isLoading = '';
     console.log(this.chargeslist);
-    
+
     this.dataSource.data = this.chargeslist;
     console.log(this.dataSource.data);
 
@@ -175,84 +172,84 @@ if(this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').valu
   onSubmit() {
 
     this.isLoading = 'submit';
-if(! this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').value){
+    if (!this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').value) {
 
-    let insertCommitteeMeeting = {};
+      let insertCommitteeMeeting = {};
 
-    insertCommitteeMeeting['committeeMeetingId'] = 0;
-    insertCommitteeMeeting['committeeMeetingDate'] = this.dateTimeObj.date;
-    insertCommitteeMeeting['committeeMeetingTime'] = this.dateTimeObj.time;
-    insertCommitteeMeeting['commiteeMeetingName'] = this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingName').value || '';
-    insertCommitteeMeeting['committeeMeetingLocation'] = this._CommitteMeetingService.personalFormGroup.get('Location').value || '';
-    insertCommitteeMeeting['committeeMeetingAmount'] = this._CommitteMeetingService.personalFormGroup.get('NetAmount').value || 0;
+      insertCommitteeMeeting['committeeMeetingId'] = 0;
+      insertCommitteeMeeting['committeeMeetingDate'] = this.dateTimeObj.date;
+      insertCommitteeMeeting['committeeMeetingTime'] = this.dateTimeObj.time;
+      insertCommitteeMeeting['commiteeMeetingName'] = this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingName').value || '';
+      insertCommitteeMeeting['committeeMeetingLocation'] = this._CommitteMeetingService.personalFormGroup.get('Location').value || '';
+      insertCommitteeMeeting['committeeMeetingAmount'] = this._CommitteMeetingService.personalFormGroup.get('NetAmount').value || 0;
 
-    let insertCommitteeMeetingMemberDetarry = [];
-    this.dataSource.data.forEach((element) => {
-      let insertCommitteeMeetingMemberDet = {};
-      insertCommitteeMeetingMemberDet['committeeMeetingId'] = 0;
-      insertCommitteeMeetingMemberDet['memberId'] = element.MemberId;
-      insertCommitteeMeetingMemberDet['studyId'] = 0,// element.studyId;
-      insertCommitteeMeetingMemberDet['memberAmount'] = element.StudyAmount || 0;
-      insertCommitteeMeetingMemberDet['memberMeetingStatus'] = element.MeetingStatus;
-      insertCommitteeMeetingMemberDet['createdBy'] = this.accountService.currentUserValue.user.id;
-      insertCommitteeMeetingMemberDetarry.push(insertCommitteeMeetingMemberDet);
-    });
+      let insertCommitteeMeetingMemberDetarry = [];
+      this.dataSource.data.forEach((element) => {
+        let insertCommitteeMeetingMemberDet = {};
+        insertCommitteeMeetingMemberDet['committeeMeetingId'] = 0;
+        insertCommitteeMeetingMemberDet['memberId'] = element.MemberId;
+        insertCommitteeMeetingMemberDet['studyId'] = 0,// element.studyId;
+          insertCommitteeMeetingMemberDet['memberAmount'] = element.StudyAmount || 0;
+        insertCommitteeMeetingMemberDet['memberMeetingStatus'] = element.MeetingStatus;
+        insertCommitteeMeetingMemberDet['createdBy'] = this.accountService.currentUserValue.user.id;
+        insertCommitteeMeetingMemberDetarry.push(insertCommitteeMeetingMemberDet);
+      });
 
-    let submitData = {
-      "insertCommitteeMeeting": insertCommitteeMeeting,
-      "insertCommitteeMeetingMemberDet": insertCommitteeMeetingMemberDetarry
-    };
-    console.log(submitData);
-    this._CommitteMeetingService.CommitteeMeettingDetailInsert(submitData).subscribe(response => {
-      if (response) {
-        Swal.fire('New Committee Meeting Save !', ' New Committee Meeting Save Successfully !', 'success').then((result) => {
-          if (result.isConfirmed) {
-            this._matDialog.closeAll();
-          }
-        });
-      } else {
-        Swal.fire('Error !', 'Committee Meeting not saved', 'error');
-      }
-    });
-  }else{
-    let updateCommitteeMeeting = {};
+      let submitData = {
+        "insertCommitteeMeeting": insertCommitteeMeeting,
+        "insertCommitteeMeetingMemberDet": insertCommitteeMeetingMemberDetarry
+      };
+      console.log(submitData);
+      this._CommitteMeetingService.CommitteeMeettingDetailInsert(submitData).subscribe(response => {
+        if (response) {
+          Swal.fire('New Committee Meeting Save !', ' New Committee Meeting Save Successfully !', 'success').then((result) => {
+            if (result.isConfirmed) {
+              this._matDialog.closeAll();
+            }
+          });
+        } else {
+          Swal.fire('Error !', 'Committee Meeting not saved', 'error');
+        }
+      });
+    } else {
+      let updateCommitteeMeeting = {};
 
-    updateCommitteeMeeting['committeeMeetingId'] =this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').value || 0;
-    updateCommitteeMeeting['committeeMeetingDate'] = this.dateTimeObj.date;
-    updateCommitteeMeeting['committeeMeetingTime'] = this.dateTimeObj.time;
-    updateCommitteeMeeting['commiteeMeetingName'] = this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingName').value || '';
-    updateCommitteeMeeting['committeeMeetingLocation'] = this._CommitteMeetingService.personalFormGroup.get('Location').value || '';
-    updateCommitteeMeeting['committeeMeetingAmount'] = this._CommitteMeetingService.personalFormGroup.get('NetAmount').value || 0;
+      updateCommitteeMeeting['committeeMeetingId'] = this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').value || 0;
+      updateCommitteeMeeting['committeeMeetingDate'] = this.dateTimeObj.date;
+      updateCommitteeMeeting['committeeMeetingTime'] = this.dateTimeObj.time;
+      updateCommitteeMeeting['commiteeMeetingName'] = this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingName').value || '';
+      updateCommitteeMeeting['committeeMeetingLocation'] = this._CommitteMeetingService.personalFormGroup.get('Location').value || '';
+      updateCommitteeMeeting['committeeMeetingAmount'] = this._CommitteMeetingService.personalFormGroup.get('NetAmount').value || 0;
 
-    let insertCommitteeMeetingMemberDetarry = [];
-    this.dataSource.data.forEach((element) => {
-      let insertCommitteeMeetingMemberDet = {};
-      insertCommitteeMeetingMemberDet['committeeMeetingId'] = 0;
-      insertCommitteeMeetingMemberDet['memberId'] = element.MemberId;
-      insertCommitteeMeetingMemberDet['studyId'] = 0,// element.studyId;
-      insertCommitteeMeetingMemberDet['memberAmount'] = element.StudyAmount || 0;
-      insertCommitteeMeetingMemberDet['memberMeetingStatus'] = element.MeetingStatus;
-      insertCommitteeMeetingMemberDet['createdBy'] = this.accountService.currentUserValue.user.id;
-      insertCommitteeMeetingMemberDetarry.push(insertCommitteeMeetingMemberDet);
-    });
+      let insertCommitteeMeetingMemberDetarry = [];
+      this.dataSource.data.forEach((element) => {
+        let insertCommitteeMeetingMemberDet = {};
+        insertCommitteeMeetingMemberDet['committeeMeetingId'] = 0;
+        insertCommitteeMeetingMemberDet['memberId'] = element.MemberId;
+        insertCommitteeMeetingMemberDet['studyId'] = 0,// element.studyId;
+          insertCommitteeMeetingMemberDet['memberAmount'] = element.StudyAmount || 0;
+        insertCommitteeMeetingMemberDet['memberMeetingStatus'] = element.MeetingStatus;
+        insertCommitteeMeetingMemberDet['createdBy'] = this.accountService.currentUserValue.user.id;
+        insertCommitteeMeetingMemberDetarry.push(insertCommitteeMeetingMemberDet);
+      });
 
-    let submitData = {
-      "insertCommitteeMeeting": updateCommitteeMeeting,
-      "insertCommitteeMeetingMemberDet": insertCommitteeMeetingMemberDetarry
-    };
-    console.log(submitData);
-    this._CommitteMeetingService.CommitteeMeettingDetailUpdate(submitData).subscribe(response => {
-      if (response) {
-        Swal.fire('Updated Committee Meeting  !', ' Updated Committee Meeting  Successfully !', 'success').then((result) => {
-          if (result.isConfirmed) {
-            this._matDialog.closeAll();
-          }
-        });
-      } else {
-        Swal.fire('Error !', 'Committee Meeting not Updated', 'error');
-      }
-    });
-  }
+      let submitData = {
+        "insertCommitteeMeeting": updateCommitteeMeeting,
+        "insertCommitteeMeetingMemberDet": insertCommitteeMeetingMemberDetarry
+      };
+      console.log(submitData);
+      this._CommitteMeetingService.CommitteeMeettingDetailUpdate(submitData).subscribe(response => {
+        if (response) {
+          Swal.fire('Updated Committee Meeting  !', ' Updated Committee Meeting  Successfully !', 'success').then((result) => {
+            if (result.isConfirmed) {
+              this._matDialog.closeAll();
+            }
+          });
+        } else {
+          Swal.fire('Error !', 'Committee Meeting not Updated', 'error');
+        }
+      });
+    }
 
   }
 
@@ -268,8 +265,8 @@ if(! this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').va
   }
 
 
-  
-  
+
+
 }
 
 export class CommitteeMeetingMemberList {

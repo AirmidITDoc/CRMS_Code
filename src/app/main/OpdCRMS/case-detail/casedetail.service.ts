@@ -100,10 +100,11 @@ export class CasedetailService {
     return this._httpClient.post("CRMSTran/Save_StudyInformation", employee);
   }
 
-  public StudyInfoUpdate(employee){
-    return this._httpClient.post("CRMSTran/Update_StudyInformation", employee);
+ 
+  public StudyInfoUpdate(employee)
+  {    
+    return this._httpClient.post("CRMSTran/Update_StudyInformation",employee);
   }
-
 
   public getCaseDetailPrint(employee){
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CasedetailId",employee);
@@ -159,5 +160,11 @@ export class CasedetailService {
 
   public getServviceNameList(){
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_ServiceMasterList",{});
+  }
+  public StudyServiceInsert(employee){
+    return this._httpClient.post("CRMSTran/Save_InsertStudyService", employee)
+  }
+  public StudyServiceUpdate(employee){
+    return this._httpClient.post("CRMSTran/Update_UpdateStudyService", employee)
   }
 }

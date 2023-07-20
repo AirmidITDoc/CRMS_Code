@@ -154,7 +154,7 @@
 
                             
                            
-
+<!-- 
                             <ng-container matColumnDef="ClassRate">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
                                     fxShow.gt-md>
@@ -166,7 +166,23 @@
                                     </mat-form-field>
                                 </mat-cell>
 
+                            </ng-container> -->
+
+
+                            
+                            <ng-container matColumnDef="ClassRate">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                    fxShow.gt-md>
+                                    ClassRate
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                    <mat-form-field appearance="legacy">
+                                        <input matInput [(ngModel)]="contact.ClassRate">
+                                    </mat-form-field>
+                                </mat-cell>
+
                             </ng-container>
+
 
 
 <!-- 

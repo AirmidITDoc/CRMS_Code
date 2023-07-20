@@ -37,9 +37,9 @@ export class ServiceMasterFormComponent implements OnInit {
   IsEmergency: boolean = true;
   interimArray: any = [];
   msg: any;
-  ClassRate :any;
+  ClassRate: any;
 
- 
+
   dataSource = new MatTableDataSource<Servicedetail>();
   dataSource1 = new MatTableDataSource<Servicedetail>();
 
@@ -266,6 +266,7 @@ export class ServiceMasterFormComponent implements OnInit {
 
 
   getClassListforNew() {
+    debugger
     this._serviceMasterService.getServiceClassMasterList().subscribe(Menu => {
       this.dataSource.data = Menu as Servicedetail[];
       console.log(Menu)
@@ -310,10 +311,10 @@ export class ServiceMasterFormComponent implements OnInit {
   }
 
 
-  getClassRate(element){
+  getClassRate(element) {
     debugger;
-    this.ClassRate=element.ClassRate;
-    console.log(this.ClassRate)
+    this.ClassRate = element.ClassRate;
+
     this.ClassRate = this._serviceMasterService.myform.get("ClassRate").value;
     console.log(this.ClassRate)
   }
@@ -348,22 +349,22 @@ export class ServiceMasterFormComponent implements OnInit {
 
 
 
-   
+
       let serviceDetailInsertarray = [];
       let serviceDetailInsert = {};
 
-     
-        this.dataSource.data.forEach((element) => {
-          debugger;
-          console.log(element);
-          let serviceDetailInsert = {};
+
+      this.dataSource.data.forEach((element) => {
+        debugger;
+        console.log(element);
+        let serviceDetailInsert = {};
         serviceDetailInsert['ServiceId'] = 0;
         serviceDetailInsert['TariffId'] = this._serviceMasterService.myform.get("TariffId").value.TariffId || 0;
-        serviceDetailInsert['ClassId'] = element.ClassId|| 0;
+        serviceDetailInsert['ClassId'] = element.ClassId || 0;
         serviceDetailInsert['ClassRate'] = 122;//element.ClassRate || 0;
         serviceDetailInsert['EffectiveDate'] = this._serviceMasterService.myform.get("EffectiveDate").value.value || "01/01/1900";
 
-          serviceDetailInsertarray.push(serviceDetailInsert);
+        serviceDetailInsertarray.push(serviceDetailInsert);
         // console.log(InsertAdddetArr.length);
       })
 
@@ -407,7 +408,7 @@ export class ServiceMasterFormComponent implements OnInit {
 
       let serviceDetailInsert = [];
       let serviceDetailInsert1 = {};
-      
+
       this.dataSource.data.forEach((element) => {
 
         serviceDetailInsert1['ServiceId'] = 0;

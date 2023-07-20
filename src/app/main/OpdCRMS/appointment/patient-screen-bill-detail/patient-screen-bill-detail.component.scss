@@ -54,7 +54,16 @@
   }
   
   app-patient-screen-bill-detail{
-  
+
+    .c1{
+      background-color: #42A948;
+      color: blueviolet;
+    }
+    .c2{
+      background-color: #18a3be;
+      color: rgb(226, 43, 52);
+    }
+
     .table1{
         height:400px !important;
     }
@@ -72,7 +81,7 @@
     min-height: 20px;            
   }
   
-  .mat-column-PbillNo {
+  .mat-column-BillId {
     width:90px;
     max-width: 90px;
     min-width: 90px;

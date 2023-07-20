@@ -303,7 +303,7 @@ export class EditAppointmentComponent implements OnInit {
 
 
   getPrefixList() {
-
+debugger
     this._registerService.getPrefixCombo().subscribe(data => {
       this.PrefixList = data;
       this.filteredPrefix.next(this.PrefixList.slice());
@@ -533,6 +533,9 @@ export class EditAppointmentComponent implements OnInit {
 
       registrationUpdate['regId'] = this.registerObj.RegId;
       registrationUpdate['opration'] = "UPDATE";
+     
+      registrationUpdate['RegDate'] ="2023-07-20T10:58:20.071Z";
+      registrationUpdate['RegTime'] ="2023-07-20T10:58:20.071Z";
       registrationUpdate['prefixId'] = this._registerService.personalFormGroup.get('PrefixID').value.PrefixID || 0;
       registrationUpdate['firstName'] = this.registerObj.FirstName ||'';
       registrationUpdate['middleName'] = this.registerObj.MiddleName || '';
@@ -540,7 +543,7 @@ export class EditAppointmentComponent implements OnInit {
       registrationUpdate['address'] = this.registerObj.Address || '';
       registrationUpdate['City'] = this._registerService.personalFormGroup.get('CityId').value.CityName || '';
       registrationUpdate['pinNo'] = '';
-      registrationUpdate['dateOfBirth'] =  this._registerService.personalFormGroup.get('DateofBirth').value || '01/01/1900';
+      registrationUpdate['dateOfBirth'] ="2023-07-20T10:58:20.071Z";// this.datePipe.transform(this.registerObj.DateofBirth,"MM-dd-yyyy");
       registrationUpdate['age'] = this.registerObj.AgeYear || 0;//this.registerObj.Age;
       registrationUpdate['genderID'] = this._registerService.personalFormGroup.get('GenderId').value.GenderId || 0;
       registrationUpdate['phoneNo'] = this._registerService.personalFormGroup.get('PhoneNo').value || 0;
@@ -553,7 +556,13 @@ export class EditAppointmentComponent implements OnInit {
       registrationUpdate['stateId'] = this._registerService.personalFormGroup.get('StateId').value.StateId || '';
       registrationUpdate['cityId'] = this._registerService.personalFormGroup.get('CityId').value.CityId || '';
       registrationUpdate['maritalStatusId'] = this._registerService.personalFormGroup.get('MaritalStatusId').value ? this._registerService.personalFormGroup.get('MaritalStatusId').value.MaritalStatusId : 0;
-      registrationUpdate['isCharity'] = false;
+    
+      registrationUpdate['ReligionId'] = this._registerService.personalFormGroup.get('ReligionId').value ? this._registerService.personalFormGroup.get('ReligionId').value.ReligionId : 0;
+      registrationUpdate['AreaId'] = this._registerService.personalFormGroup.get('AreaId').value ? this._registerService.personalFormGroup.get('AreaId').value.AreaId : 0;
+      registrationUpdate['IsSeniorCitizen'] = 0;//this._registerService.personalFormGroup.get('IsSeniorCitizen ').value;
+      registrationUpdate['RationCardNo'] ='';// this._registerService.personalFormGroup.get('MaritalStatusId').value ? this._registerService.personalFormGroup.get('MaritalStatusId').value.MaritalStatusId : 0;
+      
+      registrationUpdate['IsMember'] = false;
     
       submissionObj['registrationUpdate'] = registrationUpdate;
       // // visit detail

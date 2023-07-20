@@ -51,7 +51,7 @@
                                                             </mat-option>
                                                             <mat-option *ngFor="let element of filteredVisitname | async"
                                                                 [value]="element">
-                                                                {{element.VisitId}} | {{element.VisitnName}}
+                                                               {{element.VisitName}}
                                                             </mat-option>
                                                         </mat-select>
                 
@@ -213,7 +213,7 @@
                         </div>
 
                     
-                        <div fxLayout="row" style="margin-left:1000px;">
+                        <div fxLayout="row" style="margin-left:1100px;margin-top:50px;">
 
                             <!-- <mat-form-field appearance="outline" style="width:40%;margin-right: 20px;">
                                 <mat-label>Total Amount</mat-label>
@@ -227,7 +227,7 @@
                                     only Alphabets</mat-error> -->
                             <!-- </mat-form-field> --> 
                             <!-- [disabled]="_CasedetailService.studySchFormGroup.invalid"  -->
-                            <button class="next-btn" (click)="onStudySave()" style="border-radius: 16px;"
+                            <button class="next-btn" (click)="onStudyServiceSave()" style="border-radius: 16px;"
                            >Save</button>
 
                             <button class="footer-btn" (click)="onClose()"

@@ -120,7 +120,7 @@
 
             <mat-form-field appearance="outline" fxFlex>
               <mat-label>Age (Y)</mat-label>
-              <input name="AgeYear" formControlName="AgeYear" placeholder="Age (Y)" matInput [ngModel]="registerObj.Age"
+              <input name="AgeYear" formControlName="AgeYear" placeholder="Age (Y)" matInput [ngModel]="registerObj.AgeYear"
                 (ngModelChange)="registerObj.AgeYear = $event" type="number">
               <mat-error
                 *ngIf="_registerService.personalFormGroup.get('AgeYear').invalid && _registerService.personalFormGroup.get('AgeYear').touched">Please

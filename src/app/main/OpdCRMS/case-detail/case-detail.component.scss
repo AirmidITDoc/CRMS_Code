@@ -80,15 +80,15 @@
 
   
   .mat-column-ProtocolNo {
-    width: 200px; 
-    max-width:200px;
-    min-width: 200px;
+    width: 150px; 
+    max-width:150px;
+    min-width: 150px;
     text-align: center;
   }
   .mat-column-ProtocolTitle {
-    width: 350px;
-    max-width: 350px;
-    min-width: 350px;
+    width: 250px;
+    max-width: 250px;
+    min-width: 250px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
@@ -100,9 +100,18 @@
      justify-content:left; 
   }
   .mat-column-StudyProduct {
-    width:200px;
-    max-width:200px;
-    min-width:200px;
+    width:250px;
+    max-width:250px;
+    min-width:250px;
+    text-align: left;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+     overflow: hidden !important;
+     display: inline-block;
+     margin-top: 7px;
+     margin-right: 7px;
+     justify-content:left; 
   }
   .mat-column-action {
     width:100px;

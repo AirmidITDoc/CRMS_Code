@@ -331,23 +331,24 @@ debugger;
           "UpdatedBy": this.accountService.currentUserValue.user.id
 
         }
-      }
+      };
       console.log(m_data1);
       this._CasedetailService.StudyInfoUpdate(m_data1).subscribe(response => {
         console.log(response);
         if (response) {
-          Swal.fire('Edit StudyDetail Save !', 'Edit StudyDetail Successfully !', 'success').then((result) => {
+          Swal.fire('Congratulations !', 'StudyInfo Updated Successfully !', 'success').then((result) => {
             if (result.isConfirmed) {
+              let m = response;
+             
               this._matDialog.closeAll();
 
             }
-
           });
         } else {
-          Swal.fire('Error !', 'StudyDetail not saved', 'error');
+          Swal.fire('Error !', 'StudyInfo not saved', 'error');
         }
+        this.isLoading = '';
       });
-    // }
 
 
   }

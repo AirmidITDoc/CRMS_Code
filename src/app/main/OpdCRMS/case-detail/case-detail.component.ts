@@ -272,19 +272,19 @@ export class CaseDetailComponent implements OnInit {
       }
       this._CasedetailService.populateFormpersonal(m_data);
 
-      const dialogRef = this._matDialog.open(UploadDocumentComponent,
-        {
-          maxWidth: "85vw",
-          height: '540px',
-          width: '100%',
-          data: {
-            registerObj: m_data,
-          }
-        });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed - Insert Action', result);
-        this.getCaseList();
-      });
+      // const dialogRef = this._matDialog.open(UploadDocumentComponent,
+      //   {
+      //     maxWidth: "85vw",
+      //     height: '540px',
+      //     width: '100%',
+      //     data: {
+      //       registerObj: m_data,
+      //     }
+      //   });
+      // dialogRef.afterClosed().subscribe(result => {
+      //   console.log('The dialog was closed - Insert Action', result);
+      //   this.getCaseList();
+      // });
 
       error => {
         this.sIsLoading = '';
