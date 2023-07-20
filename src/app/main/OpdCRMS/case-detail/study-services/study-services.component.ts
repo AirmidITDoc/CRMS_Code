@@ -321,7 +321,7 @@ debugger;
       let updateStudyService = {};
       updateStudyService['Opration'] = 'UPDATE';
       updateStudyService['StudyVisitId'] = element.StudyVisitId;
-      updateStudyService['StudyId'] = this.registerObj.StudyId;
+      updateStudyService['StudyId'] =  this.registerObj.StudyId;
       updateStudyService['ServiceId'] = element.ServiceId;
       updateStudyService['Amount'] = element.Amount;
       updateStudyService['isActive'] = 1,//element.Amount;

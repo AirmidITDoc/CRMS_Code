@@ -49,15 +49,14 @@ export class PatientScreenBillDetailComponent implements OnInit {
     'VisitTime',
     'ProtocolNo',
     'SubjectName',
+    'PBillNo',
     'BillAmount',
     'BillId',
     'action',
-
   ];
 
 
   dataSource = new MatTableDataSource<VisitMaster>();
-
   // dataSource = new MatTableDataSource<CaseDetail>();
   menuActions: Array<string> = [];
   //datePipe: any;
