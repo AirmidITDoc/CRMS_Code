@@ -258,9 +258,9 @@ newMember() {
           maxWidth: "80vw",
         height: '640px',
         width: '100%',
-        // data : {
-        //   registerObj : m_data,
-        // }
+        data : {
+          registerObj : m_data,
+        }
       }
     );
 

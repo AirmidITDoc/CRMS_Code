@@ -167,4 +167,8 @@ export class CasedetailService {
   public StudyServiceUpdate(employee){
     return this._httpClient.post("CRMSTran/Update_UpdateStudyService", employee)
   }
+
+  public getStudyservicebyStuIdList(employee){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_StudyServicebyStudyId",employee);
+  }
 }

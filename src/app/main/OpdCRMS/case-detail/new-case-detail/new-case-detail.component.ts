@@ -305,9 +305,7 @@ export class NewCaseDetailComponent implements OnInit {
       this.DocumentList = data;
       // console.log(this.VisitFrequencyList);
       this.filteredDocument.next(this.DocumentList.slice());
-      this._CasedetailService.personalFormGroup
-      .get("DocumentTypeId")
-      .setValue(this.DocumentList[0]);
+      // this._CasedetailService.personalFormGroup.get("DocumentTypeId").setValue(this.DocumentList[0]);
     });
   }
 
@@ -406,9 +404,13 @@ reset() {
         }
       }
       console.log(m_data);
+      debugger
       this._CasedetailService.StudyInfoInsert(m_data).subscribe(response => {
         if (response) {
+          this.StudyId=response;
+          console.log(response)
           Swal.fire('New StudyDetail Save !', ' StudyDetail Save Successfully !', 'success').then((result) => {
+            console.log(result);
             if (result.isConfirmed) {
               this._matDialog.closeAll();
 
@@ -498,15 +500,14 @@ debugger;
     
   }
 
-  onStudySave() {
+  onStudyschduleSave() {
 
-    debugger;
+   
     let insertStudySchedulearr = [];
     this.dataSource1.data.forEach((element) => {
       let insertStudySchedule = {};
       // insertStudySchedule['studyVisitId'] = 0;
-      insertStudySchedule['studyId'] = this.registerObj.StudyId;
-
+      insertStudySchedule['studyId'] = this.StudyId;
       insertStudySchedule['visitName'] = element.VisitName;
       insertStudySchedule['visitDescription'] = element.VisitDescription;
       insertStudySchedule['visitAmount'] = element.Amount;
@@ -517,7 +518,7 @@ debugger;
     let submitData = {
       "insertStudySchedule": insertStudySchedulearr
     };
-
+    debugger;
     console.log(submitData);
     this._CasedetailService.StudySchduleInsert(submitData).subscribe(response => {
       console.log(response)

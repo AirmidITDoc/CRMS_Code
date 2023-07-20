@@ -321,7 +321,7 @@ debugger;
           "studyProduct": this._CasedetailService.personalFormGroup.get('StudyProduct').value || '',
           "TotalSubjects": this._CasedetailService.personalFormGroup.get('TotalSubjects').value || 0,
           "TotalVisits": this._CasedetailService.personalFormGroup.get('TotalVisits').value || '',
-          "VisitFrequency": this._CasedetailService.personalFormGroup.get('VisitFrequency').value.ConstantId || 0,
+          "VisitFrequency": this._CasedetailService.personalFormGroup.get('VisitFrequency').value || 0,
           "sponser": this._CasedetailService.personalFormGroup.get('CompanyId').value.CompanyId || 0,
           "investigator": this._CasedetailService.personalFormGroup.get('Investigator').value || '',
           "institution": this._CasedetailService.personalFormGroup.get('Institution').value.InstitutionId || 0,

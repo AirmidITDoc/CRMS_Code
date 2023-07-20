@@ -24,7 +24,7 @@ export class StudySchduleComponent implements OnInit {
 
 
   chargeslist: any = [];
-
+  chargeslist1: any = [];
   studySchFormGroup: FormGroup;
 
   currentDate = new Date();
@@ -84,7 +84,7 @@ export class StudySchduleComponent implements OnInit {
       // this.StudyId=this.data.registerObj.StudyId;
       console.log(this.registerObj.StudyId);
       this.Study = true;
-debugger;
+
     
     var m = {
       StudyId: this.registerObj.StudyId
@@ -92,8 +92,9 @@ debugger;
 
     this._CasedetailService.getStudyschdulebyStuIdList(m).subscribe(Visit => {
       this.dataSource1.data = Visit as VisitDetail[];
-      console.log(this.dataSource1.data)
+      // console.log(this.dataSource1.data)
       this.dataSource1.sort = this.sort;
+      this.chargeslist1= this.dataSource1.data;
       this.dataSource1.paginator = this.paginator;
       // this.sIsLoading = '';
     },
@@ -152,6 +153,7 @@ debugger;
   onAddVisitDetail() {
     debugger;
     this.VisitList.data = [];
+    this.chargeslist=this.chargeslist1;
     this.chargeslist.push(
       {
         VisitName: this.VisitName,
@@ -160,6 +162,7 @@ debugger;
       });
     this.isLoading = '';
     console.log(this.chargeslist);
+
     this.dataSource1.data = this.chargeslist;
 
     this._CasedetailService.studySchFormGroup.get('VisitName').reset('')

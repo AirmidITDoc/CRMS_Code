@@ -25,6 +25,7 @@ export class StudyServicesComponent implements OnInit {
  
   
   chargeslist: any = [];
+  chargeslist1: any = [];
 
   currentDate = new Date();
   submitted = false;
@@ -67,7 +68,7 @@ export class StudyServicesComponent implements OnInit {
 
     'VisitName',
     'ServiceName',
-    'Price',
+    'Amount',
     'action'
   ];
 
@@ -93,29 +94,30 @@ export class StudyServicesComponent implements OnInit {
     console.log(this.data)
 
       
-//     if (this.data) {
-//       this.registerObj = this.data.registerObj;
-//       // this.StudyId=this.data.registerObj.StudyId;
-//       // console.log(this.registerObj.StudyId);
-//       this.Study = true;
-   
+
+    if (this.data) {
+      this.registerObj = this.data.registerObj;
+      // this.StudyId=this.data.registerObj.StudyId;
+      console.log(this.registerObj.StudyId);
+      this.Study = true;
+
     
-// var m={
-//   StudyId: this.registerObj.StudyId
-//   };
-      
-//   this._CasedetailService.getStudyschdulebyStuIdList(m).subscribe(Visit => {
-//     this.dataSource1.data = Visit as StudyServicesDetail[];
-//     console.log(this.dataSource1.data)
-//     this.dataSource1.sort = this.sort;
-//     this.dataSource1.paginator = this.paginator;
-//     // this.sIsLoading = '';
-//   },
-//     error => {
-//       // this.sIsLoading = '';
-//     });
-  
-//   }
+    var m = {
+      StudyId:1// this.registerObj.StudyId
+    };
+
+    this._CasedetailService.getStudyservicebyStuIdList(m).subscribe(Visit => {
+      this.dataSource1.data = Visit as StudyServicesDetail[];
+      console.log(this.dataSource1.data)
+      this.dataSource1.sort = this.sort;
+      this.chargeslist1= this.dataSource1.data;
+      this.dataSource1.paginator = this.paginator;
+      // this.sIsLoading = '';
+    },
+      error => {
+        // this.sIsLoading = '';
+      });
+    }
     this.getVisitNameCombobox();
 
     this.getServiceNameCombobox();
@@ -132,6 +134,9 @@ export class StudyServicesComponent implements OnInit {
     .subscribe(() => {
       this.filterService();
     });
+
+
+
     
   }
 
@@ -251,13 +256,14 @@ debugger;
 
     debugger;
     this.VisitList.data = [];
+    this.chargeslist=this.chargeslist1;
     this.chargeslist.push(
       {
         StudyVisitId:this._CasedetailService.studyServicesFormGroup.get('VisitName').value.StudyVisitId,
         VisitName: this._CasedetailService.studyServicesFormGroup.get('VisitName').value.VisitName,
         ServiceId:this._CasedetailService.studyServicesFormGroup.get('ServiceName').value.ServiceId,
         ServiceName: this._CasedetailService.studyServicesFormGroup.get('ServiceName').value.ServiceName,
-        Price: this.Price
+        Amount: this.Price
       });
     this.isLoading = '';
     console.log(this.chargeslist);

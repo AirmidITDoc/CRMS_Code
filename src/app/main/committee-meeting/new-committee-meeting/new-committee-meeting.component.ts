@@ -56,6 +56,8 @@ export class NewCommitteeMeetingComponent implements OnInit {
   dataSource = new MatTableDataSource<CommitteeMeetingMemberList>();
 
   chargeslist: any = [];
+  chargeslist1: any = [];
+
   isLoading: any;
   MemberId: any;
   MemberName: any;
@@ -70,18 +72,18 @@ export class NewCommitteeMeetingComponent implements OnInit {
   ngOnInit(): void {
 
     this.getCommitteListCombobox();
-    if (this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').value) {
+    debugger;
+    if (this.data) {
       let m = {
-        'CommitteeId': 1
-      }
-
+        'CommitteeId':this.data.registerObj.CommitteeId
+      };
       setTimeout(() => {
         this.sIsLoading = 'loading-data';
         this._CommitteMeetingService.getCommitteeMemberList(m).subscribe(Visit => {
           this.dataSource.data = Visit as CommitteeMeetingMemberList[];
 
-          this.chargeslist = Visit as CommitteeMeetingMemberList[];
-          this.dataSource.data = this.chargeslist;
+          this.chargeslist1 = Visit as CommitteeMeetingMemberList[];
+          this.dataSource.data = this.chargeslist1;
           this.dataSource.data['MeetingStatus'] = "Offline";
           this.sIsLoading = '';
         },
@@ -154,7 +156,9 @@ export class NewCommitteeMeetingComponent implements OnInit {
   }
 
   onSaveEntry(e) {
+    debugger;
     this.dataSource.data = [];
+    this.chargeslist=this.chargeslist1;
     this.chargeslist.push(
       {
         MemberId: e.MemberId,
@@ -284,7 +288,7 @@ export class CommitteeMeetingMemberList {
       this.MemberId = CommitteeMeetingMemberList.MemberId || '';
       this.MemberName = CommitteeMeetingMemberList.MemberName || '';
       this.StudyAmount = CommitteeMeetingMemberList.StudyAmount || '';
-      this.MeetingStatus = CommitteeMeetingMemberList.MeetingStatus || '';
+      this.MeetingStatus = CommitteeMeetingMemberList.MeetingStatus || 'Offline';
     }
   }
 }
