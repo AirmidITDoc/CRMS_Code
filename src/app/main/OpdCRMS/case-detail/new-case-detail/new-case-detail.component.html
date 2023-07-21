@@ -681,21 +681,22 @@
                                             only Alphabets</mat-error> -->
                                     </mat-form-field>
 
-                                    <div fxFlex="100" fxFlex.gt-sm="98" class="content py-16 pl-10 p-12" fxLayout="row"
-                                        fxLayout.gt-xs="column">
-                                        <div fxLayout="row" style="margin-left:1100px;">
-
-                                            <button class="next-btn" color="accent" style="border-radius: 16px;"
-                                                (click)="onStudyschduleSave()">Save</button>
-                                            <button class="footer-btn" id="btncancel"
-                                                (click)="onClose()">Cancel</button>
-                                        </div>
-                                    </div>
                                 </div>
 
                             </form>
                         </div>
                     </div>
+                    
+                    <div fxFlex="100" fxFlex.gt-sm="98" class="content py-16 pl-10 p-12" fxLayout="row"
+                    fxLayout.gt-xs="column" style="margin-top: 50px;">
+                    <div fxLayout="row" style="margin-left:1100px;">
+
+                        <button class="next-btn" color="accent" style="border-radius: 16px;"
+                            (click)="onStudyschduleSave()">Save</button>
+                        <button class="footer-btn" id="btncancel"
+                            (click)="onClose()">Cancel</button>
+                    </div>
+                </div>
                 </mat-tab>
 
             </mat-card>

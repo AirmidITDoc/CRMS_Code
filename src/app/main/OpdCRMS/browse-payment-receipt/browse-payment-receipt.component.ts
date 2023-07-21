@@ -232,14 +232,7 @@ onExport(exprtType){
 
 
   getRecord(el,i) {
-    // console.log(el,i);
-    // this._matDialog.open(SmsEmailTemplateComponent, {
-    //   data: i,
-    //   width: '40%',
-    //   height: "fit-content",
-    //   autoFocus: false
-    // });
-
+   
   }
   convertToWord(e){
     // this.numberInWords= converter.toWords(this.mynumber);
@@ -259,7 +252,7 @@ debugger;
 
     // console.log(this.printTemplate)
     // console.log(this.data);
-    let  keysArray = ['HospitalName','HospitalAddress','Phone','EmailId','ReceiptNo','BillDate','RegId','GenderName','BillNo','PatientName','Age','AgeDay','AgeMonth','ConsultantDr','ReferDr','PaidAmount','CashPayAmount','CardPayAmount','ChequePayAmount','NEFTPayAmount','PayTMAmount','Remark','UserName','CardNo','CardBankName']; // resData[0].TempKeys;
+    let  keysArray = ['HospitalName','HospitalAddress','Phone','EmailId','ReceiptNo','BillDate','RegId','GenderName','BillNo','PatientName','Age','AgeDay','AgeMonth','PaymentDate','ConsultantDr','ReferDr','PaidAmount','CashPayAmount','CardPayAmount','ChequePayAmount','NEFTPayAmount','PayTMAmount','Remark','UserName','CardNo','CardBankName']; // resData[0].TempKeys;
    
 
 //   @Pipe({
@@ -278,7 +271,7 @@ debugger;
         this.printTemplate = this.printTemplate.replace(re, this.reportPrintObj[keysArray[i]]);
       }
 
-   
+      this.printTemplate = this.printTemplate.replace('StrPaymentDate', this.transform2(this.reportPrintObj.PaymentDate.toString()));
       this.printTemplate = this.printTemplate.replace('StrPrintDate', this.transform2(this.currentDate.toString()));
       this.printTemplate = this.printTemplate.replace('StrRefundAmountInWords', this.convertToWord(this.reportPrintObj.PaidAmount));
       this.printTemplate = this.printTemplate.replace(/{{.*}}/g, '');

@@ -100,7 +100,7 @@ export class PaymentDetailComponent implements OnInit {
     this.advanceData = data;
     console.log(this.advanceData);
 
-
+debugger;
    
     if (this.advanceData.FromName == "OP-Bill") {
       this.netPayAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
@@ -111,9 +111,9 @@ export class PaymentDetailComponent implements OnInit {
     }
    
     else {
-      this.netPayAmt =11,// parseInt(this.advanceData.advanceObj.NetPayAmount);
-      this.cashAmt = 22,//parseInt(this.advanceData.advanceObj.NetPayAmount);
-      this.paidAmt =33,// parseInt(this.advanceData.advanceObj.NetPayAmount);
+      this.netPayAmt =parseInt(this.advanceData.advanceObj.NetPayAmount);
+      this.cashAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
+      this.paidAmt =parseInt(this.advanceData.advanceObj.NetPayAmount);
       this.getBalanceAmt();
     }
   }

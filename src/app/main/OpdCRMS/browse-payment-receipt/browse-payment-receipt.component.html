@@ -1,6 +1,7 @@
 <div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
     <!-- HEADER -->
-    <mat-toolbar class="accent" style="height:50px; justify-content: space-between;width: 100%;background-color:rgb(18, 87, 134) !important;">
+    <mat-toolbar class="accent"
+        style="height:50px; justify-content: space-between;width: 100%;background-color:rgb(18, 87, 134) !important;">
         <div fxLayout="row" fxLayoutAlign="start center">
             <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm (click)="toggleSidebar('app-main')"
                 style="color: white;">
@@ -9,7 +10,8 @@
             <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
                 style="color: white;">account_box
             </mat-icon>
-            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" style="color: aliceblue;">
+            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
+                style="color: aliceblue;">
                 Browse OPD Payment Receipt
             </span>
             <button mat-icon-button (click)="getPrint($event)" matTooltip="print" style="margin-left: 1100px;">
@@ -51,7 +53,8 @@
                     <div class="card">
 
                         <!-- SIDEBAR HEADER -->
-                        <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center" style="margin-top: 3%;background-color: rgb(13, 67, 102) !important;">
+                        <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
+                            style="margin-top: 3%;background-color: rgb(13, 67, 102) !important;">
                             <!-- USER -->
                             <!-- <img [src]="user.avatar" class="avatar mr-16" [alt]="user.name" /> -->
                             <span class="h5" style="color: aliceblue;font-size: 17px;">Search Facility</span>

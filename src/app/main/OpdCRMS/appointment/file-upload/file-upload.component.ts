@@ -9,96 +9,38 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./file-upload.component.scss']
 })
 export class FileUploadComponent implements OnInit {
-  ngOnInit(): void {}
- 
-  constructor(private _service: FileUploadService,
-    private http: HttpClient) { }
-
-  // upload(event: any) {
-  //     let files = event.target.files;
-  //     let fData: FormData = new FormData;
-
-  //     for (var i = 0; i < files.length; i++) {
-  //         fData.append("file[]", files[i]);
-  //     }
-  //     var _data = {
-  //         filename: 'Sample File',
-  //         id: '0001'
-  //     }
-
-  //     fData.append("data", JSON.stringify(_data));
-
-  //     this._service.uploadFile(fData).subscribe(
-  //         response => this.handleResponse(response),
-  //         error => this.handleError(error)
-  //     )
-  // }
-  // handleResponse(response: any) {
-  //     console.log(response);
-  // }
-  // handleError(error: string) {
-  //     console.log(error);
-  // }
-
-
-  // new
-
-
   
-//  file: File = null;
  
-//  onFilechange(event: any) {
-//    console.log(event.target.files[0])
-//    this.file = event.target.files[0]
-//  }
- 
-//  upload() {
-//    if (this.file) {
-//      this._service.uploadfile(this.file).subscribe(resp => {
-//        alert("Uploaded")
-//      })
-//    } else {
-//      alert("Please select a file first")
-//    }
-//  }
-
-
-//sec
-
-myFiles:string [] = [];
-   
-myForm = new FormGroup({
- name: new FormControl('', [Validators.required, Validators.minLength(3)]),
- file: new FormControl('', [Validators.required])
-});
+    // Variable to store shortLink from api response
+    shortLink: string = "";
+    loading: boolean = false; // Flag variable
+    file: File = null; // Variable to store file
   
-    
-get f(){
- return this.myForm.controls;
-}
-   
-onFileChange(event) {
- 
-     for (var i = 0; i < event.target.files.length; i++) { 
-         this.myFiles.push(event.target.files[i]);
-     }
-}
-    
-submit(){
- const formData = new FormData();
-
- for (var i = 0; i < this.myFiles.length; i++) { 
-   formData.append("file[]", this.myFiles[i]);
- }
-
- this.http.post('http://localhost:8001/upload.php', formData)
-   .subscribe(res => {
-     console.log(res);
-     alert('Uploaded Successfully.');
-   })
-}
-
-onClose(){
+    // Inject service 
+    constructor(private fileUploadService: FileUploadService) { }
   
-}
+    ngOnInit(): void {
+    }
+  
+    // On file Select
+    onChange(event) {
+        this.file = event.target.files[0];
+    }
+  
+    // OnClick of button Upload
+    onUpload() {
+        this.loading = !this.loading;
+        console.log(this.file);
+        this.fileUploadService.upload(this.file).subscribe(
+            (event: any) => {
+                if (typeof (event) === 'object') {
+  
+                    // Short link via api response
+                    this.shortLink = event.link;
+  
+                    this.loading = false; // Flag variable 
+                }
+            }
+        );
+    }
 }

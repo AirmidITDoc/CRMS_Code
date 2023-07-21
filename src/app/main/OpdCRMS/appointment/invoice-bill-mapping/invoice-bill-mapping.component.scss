@@ -124,21 +124,21 @@ app-invoice-bill-mapping{
 
     .table1 {
         height: 400px !important;
-        border-color: #808080;
-        border-style: groove;
+        // border-color: #808080;
+        // border-style: groove;
     }
 
     .mat-header-row {
         background-color: rgb(13, 67, 102) !important;
-        max-width: 1100px;
-        min-width: 1100px;
+        max-width: 1050px;
+        min-width:  1050px;
         min-height: 20px;
-        width: 800px;
+        width: 1100px;
 
     }
 
     .mat-row {
-        max-width: 1100px;
+        max-width: 1050px;
         min-height: 25px;
         min-width: 1100px;
         display: flex;
@@ -151,9 +151,9 @@ app-invoice-bill-mapping{
         justify-content: left;
     }
     .mat-column-BillNo {
-        width: 150px;
-        max-width: 150px;
-        min-width: 150px;
+        width: 200px;
+        max-width: 200px;
+        min-width: 200px;
         text-align: right;
         justify-content: left;
     }

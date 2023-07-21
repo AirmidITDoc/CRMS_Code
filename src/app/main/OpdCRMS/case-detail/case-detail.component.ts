@@ -16,7 +16,8 @@ import { CaseIdDetailComponent } from 'app/main/dashboard/case-id-detail/case-id
 import { StudyDetailComponent } from './study-detail/study-detail.component';
 import { StudySchduleComponent } from './study-schdule/study-schdule.component';
 import { UploadDocumentComponent } from '../appointment/upload-document/upload-document.component';
-import { StudyServicesComponent } from './study-services/study-services.component';
+import { StudyServicesComponent } from './study-sevices/study-services/study-services.component';
+import { FileUploadComponent } from '../appointment/file-upload/file-upload.component';
 
 @Component({
   selector: 'app-case-detail',
@@ -272,10 +273,10 @@ export class CaseDetailComponent implements OnInit {
       }
       this._CasedetailService.populateFormpersonal(m_data);
 
-      // const dialogRef = this._matDialog.open(UploadDocumentComponent,
+      // const dialogRef = this._matDialog.open(FileUploadComponent,
       //   {
-      //     maxWidth: "85vw",
-      //     height: '540px',
+      //     maxWidth: "25vw",
+      //     height: '240px',
       //     width: '100%',
       //     data: {
       //       registerObj: m_data,
@@ -291,6 +292,7 @@ export class CaseDetailComponent implements OnInit {
 
       }
     }else if (m == "Study Services") {
+      console.log(contact)
       var m_data = {
         StudyId:contact.StudyId,
       ProtocolNo:contact.ProtocolNo,
@@ -339,8 +341,8 @@ export class CaseDetailComponent implements OnInit {
     const dialogRef = this._matDialog.open(NewCaseDetailComponent,
       {
         maxWidth: "85vw",
-          height: '590px',
-          width: '100%',
+        height: '590px',
+        width: '100%',
         
       });
     dialogRef.afterClosed().subscribe(result => {

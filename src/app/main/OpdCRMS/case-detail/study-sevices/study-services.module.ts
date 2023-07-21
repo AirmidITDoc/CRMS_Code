@@ -32,34 +32,20 @@ import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { SharedModule } from 'app/main/shared/shared.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatNestedTreeNode, MatTree, MatTreeModule } from '@angular/material/tree';
-import { NewCaseDetailComponent } from './new-case-detail/new-case-detail.component';
-import { CaseDetailComponent } from './case-detail.component';
-import { CasedetailService } from './casedetail.service';
-import { EditCasedetailComponent } from './edit-casedetail/edit-casedetail.component';
-import { StudySchduleComponent } from './study-schdule/study-schdule.component';
-import { StudyDetailComponent } from './study-detail/study-detail.component';
-// import { StudyServicesComponent } from './study-sevices/study-services/study-services.component';
-// import { StudySevicesComponent } from './study-sevices/study-sevices.component';
-
-// import { SharedModule } from 'app/main/shared/shared.module';
+import { StudyServicesService } from './study-services.service';
+import { StudySevicesComponent } from './study-sevices.component';
+import { StudyServicesComponent } from './study-services/study-services.component';
 
 const routes: Routes = [
     {
         path: '**',
-        component: CaseDetailComponent,
+        component: StudySevicesComponent,
     },
 ];
 @NgModule({
     declarations: [
-        CaseDetailComponent,
-        NewCaseDetailComponent,
-        EditCasedetailComponent,
-        StudySchduleComponent,
-        StudyDetailComponent,
-                // StudyServicesComponent,
-                // StudySevicesComponent
-      
+      StudySevicesComponent,
+      StudyServicesComponent        
     ],
     imports: [
         RouterModule.forChild(routes),
@@ -105,15 +91,14 @@ const routes: Routes = [
         MatTooltipModule,
         MatExpansionModule,
         MatListModule,
-        // TreeViewComponent,
-        MatTreeModule,
+       
     ],
     providers: [
-        CasedetailService,
+      StudyServicesService,
         DatePipe
     ],
     entryComponents: [
-        CaseDetailComponent
+      StudySevicesComponent
     ]
 })
-export class CasedetailModule { }
+export class StudyServicesModule { }

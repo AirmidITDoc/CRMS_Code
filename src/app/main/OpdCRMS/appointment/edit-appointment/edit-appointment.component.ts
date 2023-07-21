@@ -114,17 +114,17 @@ export class EditAppointmentComponent implements OnInit {
     console.log(this.data)
   
     this.searchFormGroup = this.createSearchForm();
-    // this.getHospitalList();
+    
     this.getPrefixList();
     this.getMaritalStatusList();
     this.getReligionList();
-    // this.getPatientTypeList();
+    
     this.getAreaList();
-    // this.getCityList();
+    
     this.getcityList();
     this.getDoctor1List();
     this.getDoctor2List();
-    // this.addEmptyRow();
+    
 
     this.bankFilterCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
@@ -168,7 +168,7 @@ export class EditAppointmentComponent implements OnInit {
       // this.AgeYear = this.data.PatObj.AgeYear;
       this.Prefix = this.data.registerObj.PrefixID;
      
-      this.setDropdownObjs1();
+      // this.setDropdownObjs1();
     }
 
 
@@ -477,36 +477,36 @@ debugger
   }
 
 
-  setDropdownObjs1() {
-    debugger;
+  // setDropdownObjs1() {
+  //   debugger;
 
-    const toSelect = this.PrefixList.find(c => c.PrefixID == this.registerObj.PrefixID);
-    this._registerService.personalFormGroup.get('PrefixID').setValue(toSelect);
+  //   const toSelect = this.PrefixList.find(c => c.PrefixID == this.registerObj.PrefixID);
+  //   this._registerService.personalFormGroup.get('PrefixID').setValue(toSelect);
 
-    const toSelectMarital = this.MaritalStatusList.find(c => c.MaritalStatusId == this.registerObj.MaritalStatusId);
-    this._registerService.personalFormGroup.get('MaritalStatusId').setValue(toSelectMarital);
+  //   const toSelectMarital = this.MaritalStatusList.find(c => c.MaritalStatusId == this.registerObj.MaritalStatusId);
+  //   this._registerService.personalFormGroup.get('MaritalStatusId').setValue(toSelectMarital);
 
-    const toSelectReligion = this.ReligionList.find(c => c.ReligionId == this.registerObj.ReligionId);
-    this._registerService.personalFormGroup.get('ReligionId').setValue(toSelectReligion);
+  //   const toSelectReligion = this.ReligionList.find(c => c.ReligionId == this.registerObj.ReligionId);
+  //   this._registerService.personalFormGroup.get('ReligionId').setValue(toSelectReligion);
 
-    const toSelectArea = this.AreaList.find(c => c.AreaId == this.registerObj.AreaId);
-    this._registerService.personalFormGroup.get('AreaId').setValue(toSelectArea);
+  //   const toSelectArea = this.AreaList.find(c => c.AreaId == this.registerObj.AreaId);
+  //   this._registerService.personalFormGroup.get('AreaId').setValue(toSelectArea);
 
-    const toSelectCity = this.cityList.find(c => c.CityId == this.registerObj.CityId);
-    this._registerService.personalFormGroup.get('CityId').setValue(toSelectCity);
+  //   const toSelectCity = this.cityList.find(c => c.CityId == this.registerObj.CityId);
+  //   this._registerService.personalFormGroup.get('CityId').setValue(toSelectCity);
 
-    // const toSelectMat = this.cityList.find(c => c.CityId == this.registerObj.CityId);
-    // this._registerService.personalFormGroup.get('CityId').setValue(toSelectCity);
+  //   // const toSelectMat = this.cityList.find(c => c.CityId == this.registerObj.CityId);
+  //   // this._registerService.personalFormGroup.get('CityId').setValue(toSelectCity);
 
 
-    this.onChangeGenderList(this._registerService.personalFormGroup.get('PrefixID').value);
+  //   this.onChangeGenderList(this._registerService.personalFormGroup.get('PrefixID').value);
 
-    this.onChangeCityList(this.registerObj.CityId);
+  //   this.onChangeCityList(this.registerObj.CityId);
 
-    this._registerService.personalFormGroup.updateValueAndValidity();
-    // this.dialogRef.close();
+  //   this._registerService.personalFormGroup.updateValueAndValidity();
+  //   // this.dialogRef.close();
 
-  }
+  // }
 
 
   OnChangeDoctorList(departmentObj) {
@@ -602,7 +602,7 @@ debugger
 
       console.log(submissionObj);
       this._registerService.appointregupdate(submissionObj).subscribe(response => {
-        console.log(response);
+        // console.log(response);
         if (response) {
           Swal.fire('Congratulations !', 'Registered Appoinment Updated Successfully  !', 'success').then((result) => {
             if (result.isConfirmed) {

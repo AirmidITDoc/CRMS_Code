@@ -263,7 +263,7 @@ export class BillDetailComponent implements OnInit {
       this.doctorNameCmbList.filter(bank => bank.DoctorName.toLowerCase().indexOf(search) > -1)
     );
   }
-
+z
   // Create registered form group
   createForm() {
     this.registeredForm = this.formBuilder.group({
@@ -706,6 +706,7 @@ debugger;
   //     }
   //   });
   // }
+
 
   onSaveOPBill() {
     this.click = true;

@@ -111,10 +111,7 @@ export class NewVistDateComponent implements OnInit {
     
     // this.personalFormGroup.markAllAsTouched();
     this.VisitFormGroup = this.createVisitdetailForm();
-    // this.VisitFormGroup.markAllAsTouched();
-    // this.searchFormGroup = this.createSearchForm();
-    // this.searchFormGroup.markAllAsTouched();
-
+   
     this.getDepartmentList();
     this.getDoctor2List();
 
@@ -150,14 +147,14 @@ export class NewVistDateComponent implements OnInit {
 
     
     const toSelect = this.DepartmentList.find(c => c.Departmentid == this.registerObj.DepartmentId);
-    this.personalFormGroup.get('Departmentid').setValue(toSelect);
+    this.VisitFormGroup.get('Departmentid').setValue(toSelect);
 
     const ss = this.DoctorList.find(c => c.DoctorId == this.registerObj.DoctorId);
-    this.personalFormGroup.get('DoctorID').setValue(ss);
+    this.VisitFormGroup.get('DoctorID').setValue(ss);
 
     
 
-    this.personalFormGroup.updateValueAndValidity();
+    this.VisitFormGroup.updateValueAndValidity();
     // this.dialogRef.close();
 
   }
@@ -283,6 +280,14 @@ export class NewVistDateComponent implements OnInit {
         console.log(this.DoctorList);
         this.filteredDoctor.next(this.DoctorList.slice());
       })
+
+debugger;
+      if (this.data) {
+        const ddValue = this.DoctorList.find(c => c.DoctorId == this.data.registerObj.DoctorId);
+        this._opappointmentService.personalFormGroup.get('DoctorID').setValue(ddValue);
+      }
+   
+    
   }
 
 

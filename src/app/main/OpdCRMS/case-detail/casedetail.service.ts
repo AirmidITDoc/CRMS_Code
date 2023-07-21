@@ -22,7 +22,7 @@ export class CasedetailService {
     // this.mySaveForm = this.saveForm();
     this.studySchFormGroup = this.createstudySchForm();
     this.personalFormGroup = this.createPesonalForm();
-    this.studyServicesFormGroup = this.createStudyservicesForm();
+    // this.studyServicesFormGroup = this.createStudyservicesForm();
   }
 
   filterForm(): FormGroup {
@@ -75,15 +75,15 @@ export class CasedetailService {
       TotalAmount:' '
     });
   }
-  createStudyservicesForm(){
-    return this._formBuilder.group({
-      VisitId: '',
-      VisitName: '',
-      ServiceName: '',
-      Price: '',
-      TotalAmount:' '
-    });
-  }
+  // createStudyservicesForm(){
+  //   return this._formBuilder.group({
+  //     VisitId: '',
+  //     VisitName: '',
+  //     ServiceName: '',
+  //     Price: '',
+  //     TotalAmount:' '
+  //   });
+  // }
 
   createdocumentForm() {
     return this._formBuilder.group({
@@ -93,7 +93,7 @@ export class CasedetailService {
       DocumentPath: '',
 
     });
-  }
+  }z
 
 
   public StudyInfoInsert(employee){

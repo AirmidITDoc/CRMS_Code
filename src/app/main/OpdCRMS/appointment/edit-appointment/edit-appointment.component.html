@@ -296,7 +296,7 @@
                 IsCharity</mat-slide-toggle>
 
 
-              <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()">Update</button>
+              <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()"    [disabled]="_registerService.personalFormGroup.invalid">Update</button>
 
               <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
 

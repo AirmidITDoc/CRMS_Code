@@ -46,6 +46,12 @@ const appRoutes: Routes = [
   loadChildren: () =>import("./bill-settlement/bill-settlement.module").then((m) => m.BillSettlementModule),
 },
 
+
+// {
+//   path: "brows-opd-refund",
+//   loadChildren: () => import("../OpdCRMS/case-detail/study-sevices/study-services.module").then((m) => m.StudyServicesModule),
+// },
+
 ];
 @NgModule({
   declarations: [],

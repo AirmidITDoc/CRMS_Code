@@ -162,9 +162,9 @@ app-bill-settlement{
 }
 .mat-column-PatientName {
    
-    width: 300px;
-    max-width:300px;
-    min-width:300px;
+    width: 280px;
+    max-width:280px;
+    min-width:280px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
@@ -189,9 +189,9 @@ app-bill-settlement{
 }
 
 .mat-column-chkBalanceAmt {
-    width: 90px;
-    max-width: 90px;
-    min-width: 90px;
+    width: 110px;
+    max-width: 110px;
+    min-width: 110px;
     text-align: right;
     //justify-content:right;
      justify-content:center;
@@ -246,9 +246,9 @@ app-bill-settlement{
     // justify-content:flex-start;
 }
 .mat-column-action{
-    width: 200px;
-    max-width: 200px;
-    min-width: 200px;
+    width: 170px;
+    max-width: 170px;
+    min-width: 170px;
    // color: white;
     text-align: center;
      justify-content:center;

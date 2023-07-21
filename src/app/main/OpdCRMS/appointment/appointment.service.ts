@@ -50,7 +50,7 @@ export class AppointmentService {
       PrefixId: '',
       PrefixID: '',
       FirstName: ['', [
-        Validators.required,
+        // Validators.required,
         Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
       ]],
       MiddleName: ['', [
@@ -58,14 +58,14 @@ export class AppointmentService {
         Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
       ]],
       LastName: ['', [
-        Validators.required,
+        // Validators.required,
         Validators.pattern("^[A-Za-z]*[a-zA-z]*$"),
       ]],
       GenderId: '',
       Address: '',
       DateOfBirth:  [(new Date()).toISOString()],
       AgeYear: ['', [
-        Validators.required,
+        // Validators.required,
         Validators.maxLength(3),
         Validators.pattern("^[0-9]*$")]],
       AgeMonth: ['', [

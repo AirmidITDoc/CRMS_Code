@@ -336,7 +336,7 @@ debugger;
       this._CasedetailService.StudyInfoUpdate(m_data1).subscribe(response => {
         console.log(response);
         if (response) {
-          Swal.fire('Congratulations !', 'StudyInfo Updated Successfully !', 'success').then((result) => {
+          Swal.fire('Congratulations !', 'Study Detail Updated Successfully !', 'success').then((result) => {
             if (result.isConfirmed) {
               let m = response;
              
@@ -345,7 +345,7 @@ debugger;
             }
           });
         } else {
-          Swal.fire('Error !', 'StudyInfo not saved', 'error');
+          Swal.fire('Error !', 'Study Detail not saved', 'error');
         }
         this.isLoading = '';
       });

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReplaySubject, Subject } from 'rxjs';
-import { CasedetailService } from '../casedetail.service';
+import { CasedetailService } from '../../casedetail.service';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { fuseAnimations } from '@fuse/animations';
 import { takeUntil } from 'rxjs/operators';
+import { StudyServicesService } from '../study-services.service';
 
 @Component({
   selector: 'app-study-services',
@@ -76,7 +77,7 @@ export class StudyServicesComponent implements OnInit {
   paginator: any;
   sort: any;
 
-  constructor(public _CasedetailService: CasedetailService,
+  constructor(public _StudyServicesService: StudyServicesService,
     private formBuilder: FormBuilder,
     private accountService: AuthenticationService,
     public _matDialog: MatDialog,
@@ -106,7 +107,7 @@ export class StudyServicesComponent implements OnInit {
       StudyId:1// this.registerObj.StudyId
     };
 
-    this._CasedetailService.getStudyservicebyStuIdList(m).subscribe(Visit => {
+    this._StudyServicesService.getStudyservicebyStuIdList(m).subscribe(Visit => {
       this.dataSource1.data = Visit as StudyServicesDetail[];
       console.log(this.dataSource1.data)
       this.dataSource1.sort = this.sort;
@@ -191,7 +192,7 @@ export class StudyServicesComponent implements OnInit {
   closeDialog() {
     console.log("closed")
     //  this.dialogRef.close();
-    // this._CasedetailService.personalFormGroup.reset();
+    // this._StudyServicesService.personalFormGroup.reset();
   }
 
 
@@ -200,7 +201,7 @@ export class StudyServicesComponent implements OnInit {
       StudyId:1             
     
     };
-    this._CasedetailService.getVistNameList(m).subscribe((data) => {
+    this._StudyServicesService.getVistNameList(m).subscribe((data) => {
         this.VisitList = data;
         console.log(data);
         this.filteredVisitname.next(this.VisitList.slice());
@@ -210,7 +211,7 @@ export class StudyServicesComponent implements OnInit {
 
   getServiceNameCombobox() {
   
-    this._CasedetailService.getServviceNameList().subscribe((data) => {
+    this._StudyServicesService.getServviceNameList().subscribe((data) => {
         this.ServiceList = data;
         console.log(data);
         this.filteredServicename.next(this.ServiceList.slice());
@@ -222,7 +223,7 @@ debugger;
     let netAmt;
     netAmt = element.reduce((sum, { Amount }) => sum += +(Amount || 0), 0);
      this.TotalAmount = netAmt;
-      // this._CasedetailService.studySchFormGroup.get('TotalAmount').setValue(this.TotalAmount);
+      // this._StudyServicesService.studySchFormGroup.get('TotalAmount').setValue(this.TotalAmount);
     return netAmt
   }
 
@@ -259,23 +260,24 @@ debugger;
     this.chargeslist=this.chargeslist1;
     this.chargeslist.push(
       {
-        StudyVisitId:this._CasedetailService.studyServicesFormGroup.get('VisitName').value.StudyVisitId,
-        VisitName: this._CasedetailService.studyServicesFormGroup.get('VisitName').value.VisitName,
-        ServiceId:this._CasedetailService.studyServicesFormGroup.get('ServiceName').value.ServiceId,
-        ServiceName: this._CasedetailService.studyServicesFormGroup.get('ServiceName').value.ServiceName,
+        StudyVisitId:this._StudyServicesService.studyServicesFormGroup.get('VisitName').value.StudyVisitId,
+        VisitName: this._StudyServicesService.studyServicesFormGroup.get('VisitName').value.VisitName,
+        ServiceId:this._StudyServicesService.studyServicesFormGroup.get('ServiceName').value.ServiceId,
+        ServiceName: this._StudyServicesService.studyServicesFormGroup.get('ServiceName').value.ServiceName,
         Amount: this.Price
       });
     this.isLoading = '';
     console.log(this.chargeslist);
     this.dataSource1.data = this.chargeslist;
     
-    this._CasedetailService.studyServicesFormGroup.get('VisitName').reset('')
+    this._StudyServicesService.studyServicesFormGroup.get('VisitName').reset('')
 
-    this._CasedetailService.studyServicesFormGroup.get('ServiceName').reset('')
+    this._StudyServicesService.studyServicesFormGroup.get('ServiceName').reset('')
 
-    this._CasedetailService.studyServicesFormGroup.get('Price').reset(0)
+    this._StudyServicesService.studyServicesFormGroup.get('Price').reset(0)
 
   }
+
   onStudyServiceSave(){
  
     debugger;
@@ -297,7 +299,7 @@ debugger;
     };
 
     console.log(submitData);
-    this._CasedetailService.StudyServiceInsert(submitData).subscribe(response => {
+    this._StudyServicesService.StudyServiceInsert(submitData).subscribe(response => {
       console.log(response)
       if (response) {
         Swal.fire('New StudyService  !', ' StudyService Save Successfully !', 'success').then((result) => {
@@ -319,27 +321,29 @@ debugger;
     let updateStudyservicearr = [];
     this.dataSource1.data.forEach((element) => {
       let updateStudyService = {};
-      updateStudyService['Opration'] = 'UPDATE';
-      updateStudyService['StudyVisitId'] = element.StudyVisitId;
-      updateStudyService['StudyId'] =  this.registerObj.StudyId;
+      updateStudyService['Operation'] = 'UPDATE';
+      
+      updateStudyService['StudyServicesId'] =0;// this.data.registerObj.StudyServicesId;
+      updateStudyService['StudyVisitId'] = 0;//element.StudyVisitId;
+      updateStudyService['StudyId'] = this.registerObj.StudyId;
       updateStudyService['ServiceId'] = element.ServiceId;
       updateStudyService['Amount'] = element.Amount;
       updateStudyService['isActive'] = 1,//element.Amount;
       updateStudyService['UpdatedBy'] = this.accountService.currentUserValue.user.id;
       updateStudyservicearr.push(updateStudyService);
     });
-    let deleteStudySchedule = {};
-    deleteStudySchedule['studyId'] = this.registerObj.StudyId
+    let deleteStudyService = {};
+    deleteStudyService['studyId'] = this.registerObj.StudyId
   
     let submitData = {
-      "updateStudyservice": updateStudyservicearr
-      // "deleteStudySchedule":deleteStudySchedule
+      "deleteStudyService":deleteStudyService,
+      "updateStudyservice": updateStudyservicearr     
     };
 
     console.log(submitData);
-    this._CasedetailService.StudyServiceUpdate(submitData).subscribe(response => {
+    this._StudyServicesService.StudyServiceUpdate(submitData).subscribe(response => {
       if (response) {
-        Swal.fire('StudyService Update !', ' StudyService Update Successfully !', 'success').then((result) => {
+        Swal.fire('StudyService Save !', ' StudyService Save Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {
             this._matDialog.closeAll();
           }
@@ -365,6 +369,10 @@ export class StudyServicesDetail {
   Amount: any;
   StudyVisitId:any;
   StudyId:any;
+ ProtocolNo:any;
+ ProtocolTitle:any;
+ StudyProduct:any;
+
   /**
    * Constructor
    *
@@ -380,6 +388,9 @@ export class StudyServicesDetail {
       this.StudyVisitId = StudyServicesDetail.StudyVisitId || 0;
       this.StudyId = StudyServicesDetail.StudyId || 0;
 
+      this.ProtocolNo = StudyServicesDetail.ProtocolNo || '';
+      this.ProtocolTitle = StudyServicesDetail.ProtocolTitle || 0;
+      this.StudyProduct = StudyServicesDetail.StudyProduct || '';
 
     }
   }
