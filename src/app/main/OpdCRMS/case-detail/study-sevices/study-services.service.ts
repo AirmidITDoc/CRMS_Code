@@ -58,7 +58,7 @@ export class StudyServicesService {
 
 
   public getVistNameList(employee){
-    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_SchduleDetailBySchId",employee);
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_StudyScheduleList",employee);
   }
 
   public getServviceNameList(){

@@ -92,24 +92,21 @@ export class StudyServicesComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.data)
-
-      
+         
 
     if (this.data) {
       this.registerObj = this.data.registerObj;
-      // this.StudyId=this.data.registerObj.StudyId;
-      console.log(this.registerObj.StudyId);
+           
       this.Study = true;
 
     
     var m = {
-      StudyId:1// this.registerObj.StudyId
+      StudyId: this.registerObj.StudyId
     };
 
     this._StudyServicesService.getStudyservicebyStuIdList(m).subscribe(Visit => {
       this.dataSource1.data = Visit as StudyServicesDetail[];
-      console.log(this.dataSource1.data)
+      
       this.dataSource1.sort = this.sort;
       this.chargeslist1= this.dataSource1.data;
       this.dataSource1.paginator = this.paginator;
@@ -198,12 +195,12 @@ export class StudyServicesComponent implements OnInit {
 
   getVisitNameCombobox() {
     var m={
-      StudyId:1             
+      StudyId:this.registerObj.StudyId            
     
     };
     this._StudyServicesService.getVistNameList(m).subscribe((data) => {
         this.VisitList = data;
-        console.log(data);
+        
         this.filteredVisitname.next(this.VisitList.slice());
     });
   }
@@ -213,7 +210,7 @@ export class StudyServicesComponent implements OnInit {
   
     this._StudyServicesService.getServviceNameList().subscribe((data) => {
         this.ServiceList = data;
-        console.log(data);
+        
         this.filteredServicename.next(this.ServiceList.slice());
     });
   }
@@ -244,8 +241,8 @@ debugger;
 
   myFunction(s) {
     this.snackmessage = s;
-    console.log(s);
-    console.log(this.snackmessage);
+    // console.log(s);
+    // console.log(this.snackmessage);
     var x = document.getElementById("snackbar");
     x.className = "show";
     setTimeout(function () { x.className = x.className.replace("show", ""); }, 15000);
@@ -322,9 +319,8 @@ debugger;
     this.dataSource1.data.forEach((element) => {
       let updateStudyService = {};
       updateStudyService['Operation'] = 'UPDATE';
-      
       updateStudyService['StudyServicesId'] =0;// this.data.registerObj.StudyServicesId;
-      updateStudyService['StudyVisitId'] = 0;//element.StudyVisitId;
+      updateStudyService['StudyVisitId'] = element.StudyVisitId;
       updateStudyService['StudyId'] = this.registerObj.StudyId;
       updateStudyService['ServiceId'] = element.ServiceId;
       updateStudyService['Amount'] = element.Amount;

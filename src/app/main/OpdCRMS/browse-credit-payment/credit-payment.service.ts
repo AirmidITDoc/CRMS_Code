@@ -34,7 +34,7 @@ export class CreditPaymentService {
   }
 
   public getBrowseBillsList(param) {
-    return this._httpClient.post("Generic/GetByProc?procName=Retrieve_BrowseOPDBill", param) 
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_BrowseOPBillList", param) 
   }  
   public getBillPrint(BillNo) {
     return this._httpClient.post("Generic/GetByProc?procName=rptBillPrint", BillNo)

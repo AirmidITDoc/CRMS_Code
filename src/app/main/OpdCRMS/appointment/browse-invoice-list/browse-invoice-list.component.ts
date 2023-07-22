@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { AdvanceDataStored } from '../../advance';
 import { fuseAnimations } from '@fuse/animations';
+import { InvoiceBillMappingComponent } from '../invoice-bill-mapping/invoice-bill-mapping.component';
 
 @Component({
   selector: 'app-browse-invoice-list',
@@ -194,6 +195,23 @@ export class BrowseInvoiceListComponent implements OnInit {
     }, 1000);
 
     this.onClear();
+  }
+
+
+  InvoiceGenerate(){
+    const dialogRef = this._matDialog.open(InvoiceBillMappingComponent,
+      {
+        maxWidth: "75%",
+        height: '800px',
+        width: '100%',
+        data: {
+          registerObj: this.dataSource
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed - Insert Action', result);
+      // this.getVisitList();
+    });
   }
 
 

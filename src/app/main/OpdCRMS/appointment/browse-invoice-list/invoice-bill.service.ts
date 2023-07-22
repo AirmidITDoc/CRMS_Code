@@ -32,7 +32,7 @@ export class InvoiceBillService {
   }
 
   public getBrowseInvoiceBillsList(param) {
-    return this._httpClient.post("Generic/GetByProc?procName=Retrieve_BrowseInvoiceBill", param) 
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_InvoiceList", param) 
   }  
 
   public getInvoiceBillPrint(BillNo) {
