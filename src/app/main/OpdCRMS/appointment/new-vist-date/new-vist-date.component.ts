@@ -44,9 +44,10 @@ export class NewVistDateComponent implements OnInit {
   VisitFormGroup: FormGroup;
   searchFormGroup: FormGroup;
   registration: any;
-  IsNewvisit: boolean = false;
-  IsUpdatevisit: boolean = true;
+  changeText='Save';
+  Onsave=1;
 
+  public btn = document.getElementById('changeText');
  
   dataArray = {};
  
@@ -325,53 +326,17 @@ debugger;
     this.personalFormGroup.updateValueAndValidity();
   }
 
-  VisitUpdate(){
-
-    this.isLoading = 'submit';
-    let submissionObj = {};
-      let visitMasterUpdate = {};
-         
-   
-      visitMasterUpdate['VisitId'] = this.registerObj.VisitId;
-    
-      visitMasterUpdate['VisitDate'] = this.dateTimeObj.date;
-      visitMasterUpdate['VisitTime'] = this.dateTimeObj.time;
-      visitMasterUpdate['ConsultantDocId'] = this.VisitFormGroup.get('DoctorID').value.DoctorId || 0;//? this.VisitFormGroup.get('DoctorId').value.DoctorId : 0;
-   
-      visitMasterUpdate['createdBy'] = this.accountService.currentUserValue.user.id;
-   
-    submissionObj['visitMasterUpdate'] = visitMasterUpdate;
-
-    
-    // submissionObj['tokenNumberWithDoctorWiseSave'] = tokenNumberWithDoctorWiseInsert;
-    console.log(submissionObj);
-    this._opappointmentService.VisitUpdate(submissionObj).subscribe(response => {
-      console.log(response);
-      if (response) {
-        Swal.fire('Congratulations !', 'New Visit Update Successfully !', 'success').then((result) => {
-          if (result.isConfirmed) {
-            this._matDialog.closeAll();
-                      
-          }
-         
-        });
-      } else {
-        Swal.fire('Error !', 'Visit not Updated', 'error');
-      }
-      this.isLoading = '';
-      
-    });
-  }
-
+ 
 
   VisitAdd() {
-  
-
+debugger
+    if(this.Onsave==1){
+    
       this.isLoading = 'submit';
       let submissionObj = {};
         let visitMasterAdd = {};
            
-        // https://stackoverflow.com/questions/48649987/angular-material-datetime-picker-component?
+        
       visitMasterAdd['VisitId'] = 0;
       visitMasterAdd['RegID'] = this.registerObj.RegNo;
       visitMasterAdd['VisitDate'] = this.dateTimeObj.date;
@@ -381,33 +346,24 @@ debugger;
       visitMasterAdd['PatientTypeId'] = this.registerObj.PatientTypeId;
       visitMasterAdd['ConsultantDocId'] = this.VisitFormGroup.get('DoctorID').value.DoctorId || 0;
       visitMasterAdd['RefDocId'] = this.registerObj.RefDocId;
-
       visitMasterAdd['TariffId'] = this.registerObj.TariffId;
       visitMasterAdd['CompanyId'] = 0;
       visitMasterAdd['createdBy'] = this.accountService.currentUserValue.user.id;
       visitMasterAdd['updatedBy'] = this.accountService.currentUserValue.user.id;
-      visitMasterAdd['IsCancelled'] = 0;
-      visitMasterAdd['IsCancelledBy'] = 0;
-      visitMasterAdd['IsCancelledDate'] = '2023-06-22T09:52:54.616Z';
-
       visitMasterAdd['ClassId'] = 1;
       visitMasterAdd['DepartmentId'] = this.VisitFormGroup.get('DoctorID').value.DepartmentId || 0;
-   
-      visitMasterAdd['PatientOldNew'] = this.Patientnewold;
+       visitMasterAdd['PatientOldNew'] = this.Patientnewold;
       visitMasterAdd['FirstFollowupVisit'] = 0,
       visitMasterAdd['appPurposeId'] =1;
       visitMasterAdd['FollowupDate'] = "2023-06-22T09:52:54.616Z";
       visitMasterAdd['IsMark'] = 0,
- 
-    visitMasterAdd['Comments'] = "";
+     visitMasterAdd['Comments'] = "";
     visitMasterAdd['Intime'] = '2023-06-22T09:52:54.616Z';
     visitMasterAdd['outTime'] = '2023-06-22T09:52:54.616Z';
 
 
       submissionObj['visitMasterAdd'] = visitMasterAdd;
 
-      
-      // submissionObj['tokenNumberWithDoctorWiseSave'] = tokenNumberWithDoctorWiseInsert;
       console.log(submissionObj);
       this._opappointmentService.VisitInsert(submissionObj).subscribe(response => {
         console.log(response);
@@ -425,6 +381,41 @@ debugger;
         this.isLoading = '';
         
       });
+    }
+    else{
+      this.isLoading = 'submit';
+      let submissionObj = {};
+        let visitMasterUpdate = {};
+           
+     
+        visitMasterUpdate['VisitId'] = this.registerObj.VisitId;
+        visitMasterUpdate['VisitDate'] = this.dateTimeObj.date;
+        visitMasterUpdate['VisitTime'] = this.dateTimeObj.time;
+        visitMasterUpdate['ConsultantDocId'] = this.VisitFormGroup.get('DoctorID').value.DoctorId || 0;
+        visitMasterUpdate['createdBy'] = this.accountService.currentUserValue.user.id;
+     
+      submissionObj['visitMasterUpdate'] = visitMasterUpdate;
+  
+      
+      // submissionObj['tokenNumberWithDoctorWiseSave'] = tokenNumberWithDoctorWiseInsert;
+      console.log(submissionObj);
+      this._opappointmentService.VisitUpdate(submissionObj).subscribe(response => {
+        console.log(response);
+        if (response) {
+          Swal.fire('Congratulations !', 'New Visit Update Successfully !', 'success').then((result) => {
+            if (result.isConfirmed) {
+              this._matDialog.closeAll();
+                        
+            }
+           
+          });
+        } else {
+          Swal.fire('Error !', 'Visit not Updated', 'error');
+        }
+        this.isLoading = '';
+        
+      });
+    }
    
   }
 
@@ -441,19 +432,11 @@ debugger;
 
     debugger;
     
-    if (event.value == 'NewVisit') {
-   
-      this.IsNewvisit = false;
-      this.IsUpdatevisit = true;
-   
-    } else {
-
-      this.IsNewvisit = true;
-      this.IsUpdatevisit = false;
-   
-    }
+    if (event.value != 'NewVisit') {
+     this.changeText ='Update'
+       this.Onsave=0
+    } 
   }
-
 
 
   onClose() {

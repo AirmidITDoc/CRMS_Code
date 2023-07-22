@@ -51,17 +51,17 @@ export class BrowseInvoiceListComponent implements OnInit {
   displayedColumns = [
 
     'InvoiceId',
-    'BillNo',
     'InvoiceNumber',
     'CaseId',
+    'ProtocolNo',
+    'ProtocolTitle',
     'InvoiceDate',
-    // 'InvoiceTime',
     'TaxableAmount',
     'CGST',
     'SGST',
     'IGST',
-    'ApprovalStatus',
     'TotalAmount',
+    'ApprovalStatus',
     'ApprovedBy',
     'action'
   ];
@@ -94,10 +94,10 @@ export class BrowseInvoiceListComponent implements OnInit {
     var D_data = {
       // "F_Name": "%",
       // "L_Name": "%",
-      // "From_Dt": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("start").value, "MM-dd-yyyy"),
-      // "To_Dt": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "MM-dd-yyyy"),
-      // "Reg_No": 0,
-      "InvoiceId": 11,
+      "StudyId": this._InvoiceBilllsService.myFilterform.get("StudyId").value || 0,
+      "FromDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
+      "ToDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900'
+          
     }
     console.log(D_data);
 
@@ -170,12 +170,10 @@ export class BrowseInvoiceListComponent implements OnInit {
     this.sIsLoading = 'loading-data';
 
     var D_data = {
-      // "F_Name": (this._InvoiceBilllsService.myFilterform.get("FirstName").value).trim() + '%' || "%",
-      // "L_Name": (this._InvoiceBilllsService.myFilterform.get("LastName").value).trim() + '%' || "%",
-      // "From_Dt": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("start").value, "MM-dd-yyyy"),
-      // "To_Dt": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "MM-dd-yyyy"),
-      // "Reg_No": this._InvoiceBilllsService.myFilterform.get("RegNo").value || 0,
-      "InvoiceId": this._InvoiceBilllsService.myFilterform.get("InvoiceId").value || 0,
+      "StudyId": this._InvoiceBilllsService.myFilterform.get("StudyId").value || 0,
+      "FromDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
+      "ToDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900'
+         
     }
     // console.log(D_data);
 
@@ -586,6 +584,8 @@ export class InvoiceBilll {
   BillNo: any;
   InvoiceNumber: any;
   CaseId: any;
+  ProtocolNo:any;
+  ProtocolTitle:any;
   InvoiceDate: any;
   InvoiceTime: any;
   TaxableAmount: any;
@@ -608,6 +608,9 @@ export class InvoiceBilll {
       this.BillNo = InvoiceBilll.BillNo || '';
       this.InvoiceNumber = InvoiceBilll.InvoiceNumber || '';
       this.CaseId = InvoiceBilll.CaseId || '';
+      this.ProtocolNo = InvoiceBilll.ProtocolNo || '';
+      this.ProtocolTitle = InvoiceBilll.ProtocolTitle || '';
+    
       this.InvoiceDate = InvoiceBilll.InvoiceDate || '';
       this.InvoiceTime = InvoiceBilll.InvoiceTime || '';
       this.TaxableAmount = InvoiceBilll.TaxableAmount || '';

@@ -46,9 +46,9 @@
 
               <div>
 
-                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px"  style="padding:10px;">
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" style="padding:10px;">
 
-            
+
                   <diV style="margin-top:21px;">
                     <span style="margin-right: 40px;color: black;font-weight: bold;">
                       <app-common-date [screenFrom]="screenFromString"
@@ -86,26 +86,14 @@
                 </div>
               </div>
               <div class="footer-navigation" style="text-align: right;">
-                <div *ngIf="IsNewvisit">
-                  <button class="next-btn" (click)="VisitUpdate()" style="border-radius: 16px;"
-                    [disabled]="IsUpdatevisit">
-                    Update
+                <div>
+                  <button class="next-btn" (click)="VisitAdd()" style="border-radius: 16px;">
+                   {{changeText}}
                   </button>
 
                   <button class="footer-btn" (click)="onClose()">Cancel</button>
                 </div>
-                    <div *ngIf="IsUpdatevisit">
-                  <button class="next-btn" (click)="VisitAdd()"
-                    style="border-radius: 16px;width: max-content !important;margin-right: 10px;margin-top: 50px;"
-                    [disabled]="IsNewvisit">
-                    Add New Visit
-                  </button>
-
-                  <button class="footer-btn" (click)="onClose()">Cancel</button>
-                </div>
-                 
-
-                
+            
               </div>
             </form>
           </mat-card>

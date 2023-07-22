@@ -26,7 +26,8 @@ export class StudySchduleComponent implements OnInit {
   chargeslist: any = [];
   chargeslist1: any = [];
   studySchFormGroup: FormGroup;
-
+  ProtocolNo="";
+  ProtocolTitle="";
   currentDate = new Date();
   submitted = false;
   now = Date.now();
@@ -44,7 +45,7 @@ export class StudySchduleComponent implements OnInit {
   TotalAmount = 0;
 
   StudyAmount: any;
-  StudyId: any;
+  StudyId ="";
   VisitList: any = []
 
   Study: boolean = false;
@@ -105,6 +106,18 @@ export class StudySchduleComponent implements OnInit {
   }
 
 
+  deleteTableRow(element) {
+    debugger;
+    
+    let index = this.chargeslist.indexOf(element);
+    if (index >= 0) {
+      this.chargeslist.splice(index, 1);
+      this.dataSource1.data = [];
+      this.dataSource1.data = this.chargeslist;
+    }
+    Swal.fire('Success !', 'List Row Deleted Successfully', 'success');
+  }
+  
 
   closeDialog() {
     console.log("closed")

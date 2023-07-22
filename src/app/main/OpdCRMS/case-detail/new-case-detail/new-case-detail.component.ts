@@ -130,10 +130,10 @@ export class NewCaseDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.data)
+  this._CasedetailService.personalFormGroup.reset();
 
-    this.studySchFormGroup = this.createstudySchForm();
-    this.documentFormGroup = this.createdocumentForm();
+    // this.studySchFormGroup = this.createstudySchForm();
+    // this.documentFormGroup = this.createdocumentForm();
 
 
     if (this.data) {
@@ -398,7 +398,7 @@ reset() {
           "institution": this._CasedetailService.personalFormGroup.get('Institution').value.InstitutionId || 0,
           "studyStartDate": this.datePipe.transform(this.registerObj.StudyStartDate, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
           "studyEndDate": this.datePipe.transform(this.registerObj.StudyEndDate, "MM-dd-yyyy"),
-          "AgreementFileName": this._CasedetailService.personalFormGroup.get('AgreementFileName').value.ConstantId || 0,
+          "AgreementFileName": 1,//this._CasedetailService.personalFormGroup.get('AgreementFileName').value.ConstantId || 0,
           "createdBy": this.accountService.currentUserValue.user.id
 
         }

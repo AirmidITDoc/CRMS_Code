@@ -85,8 +85,8 @@ export class CaseDetailComponent implements OnInit {
       this.menuActions.push('Update All Study Detail');
       this.menuActions.push('Update Study Detail');
       this.menuActions.push('Update Study Schdule');
-      this.menuActions.push('Upload Document');
       this.menuActions.push('Study Services');
+      this.menuActions.push('Upload Document');
         }
 
 

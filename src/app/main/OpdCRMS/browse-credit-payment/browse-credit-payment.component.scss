@@ -157,10 +157,10 @@ app-browse-credit-payment {
     }
 
     .mat-column-BillNo {
-        width: 100px;
-        max-width: 100px;
-        min-width: 100px;
-        text-align: right;
+        width: 80px;
+        max-width: 80px;
+        min-width: 80px;
+        text-align: left;
         justify-content: left;
     }
 
@@ -200,19 +200,26 @@ app-browse-credit-payment {
 
     }
 
-    .mat-column-chkBalanceAmt {
-        width: 90px;
-        max-width: 90px;
-        min-width: 90px;
-        text-align: center;
-        //justify-content:right;
-        justify-content: center;
+   
 
+   
+    .mat-column-PatientName {
 
-
+        width: 300px;
+        max-width: 300px;
+        min-width: 300px;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow: hidden !important;
+        // display: inline-block;
+        // margin-top: 7px;
+        margin-right: 10px;
+        justify-content: left;
     }
 
-    .mat-column-NEFTPayAmount {
+    .mat-column-ProtocolNo {
         width: 110px;
         max-width: 110px;
         min-width: 110px;
@@ -220,18 +227,34 @@ app-browse-credit-payment {
         text-align: center;
     }
 
-    .mat-column-PayTMAmount {
-        width: 110px;
-        max-width: 110px;
-        min-width: 110px;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .mat-column-ConcessionAmt {
+    .mat-column-ProtocolNo {
         width: 150px;
         max-width: 150px;
         min-width: 150px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .mat-column-SubjectName {
+
+        width: 200px;
+        max-width: 200px;
+        min-width: 200px;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow: hidden !important;
+        // display: inline-block;
+        // margin-top: 7px;
+        margin-right: 10px;
+        justify-content: left;
+    }
+
+    .mat-column-DiscAmount {
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
         text-align: center;
         justify-content: center;
     }

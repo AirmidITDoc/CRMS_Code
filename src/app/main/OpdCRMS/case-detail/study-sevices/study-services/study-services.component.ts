@@ -46,6 +46,8 @@ export class StudyServicesComponent implements OnInit {
  
   StudyAmount: any;
   StudyId: any;
+  ProtocolNo="";
+  ProtocolTitle="";
   VisitList: any = []
   ServiceList:any =[];
  
@@ -313,6 +315,21 @@ debugger;
     });
 
   }
+
+  
+deleteTableRow(element) {
+  debugger;
+  
+  let index = this.chargeslist.indexOf(element);
+  if (index >= 0) {
+    this.chargeslist.splice(index, 1);
+    this.dataSource1.data = [];
+    this.dataSource1.data = this.chargeslist;
+  }
+  Swal.fire('Success !', 'List Row Deleted Successfully', 'success');
+}
+
+
 
   onStudyUpdate() {
     let updateStudyservicearr = [];

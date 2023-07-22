@@ -26,7 +26,7 @@ export class InvoiceBillService {
      ]],
       start: [(new Date()).toISOString()],
       end: [(new Date()).toISOString()],
-      InvoiceId: '', 
+      StudyId: '', 
      
     });
   }

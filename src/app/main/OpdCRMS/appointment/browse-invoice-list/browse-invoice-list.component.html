@@ -65,8 +65,8 @@
                                     </mat-form-field>
 
                                     <mat-form-field appearance="outline" fxFlex>
-                                        <mat-label>InvoiceId</mat-label>
-                                        <input name="InvoiceId" formControlName="InvoiceId" matInput>
+                                        <mat-label>StudyId</mat-label>
+                                        <input name="StudyId" formControlName="StudyId" matInput keyup="onShow($event)">
                                     </mat-form-field>
 
                                     <!-- <mat-form-field appearance="outline" fxFlex>
@@ -136,7 +136,7 @@
                                             </mat-checkbox>
                                         </mat-cell>
                                     </ng-container> -->
-
+                                   
 
 
                                     <ng-container matColumnDef="InvoiceId">
@@ -170,6 +170,23 @@
                                         </mat-cell>
                                     </ng-container>
 
+
+                                    <ng-container matColumnDef="ProtocolNo">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>ProtocolNo
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.ProtocolNo}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="ProtocolTitle">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>ProtocolTitle
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.ProtocolTitle}}
+                                        </mat-cell>
+                                    </ng-container>
+
                                     <ng-container matColumnDef="InvoiceDate">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
                                             fxShow.gt-md>InvoiceDate
@@ -180,13 +197,16 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <!-- <ng-container matColumnDef="InvoiceTime">
+                                    <ng-container matColumnDef="InvoiceTime">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>InvoiceTime
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.InvoiceTime}}
                                         </mat-cell>
-                                    </ng-container> -->
+                                    </ng-container>
+
+
+
 
                                     <ng-container matColumnDef="TaxableAmount">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
@@ -233,14 +253,7 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="ApprovalStatus">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
-                                            ApprovalStatus
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.ApprovalStatus}}
-                                        </mat-cell>
-                                    </ng-container>
+                                  
 
                                     <ng-container matColumnDef="TotalAmount">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
@@ -248,6 +261,15 @@
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.TotalAmount}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="ApprovalStatus">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
+                                            ApprovalStatus
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.ApprovalStatus}}
                                         </mat-cell>
                                     </ng-container>
 

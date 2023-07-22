@@ -56,14 +56,17 @@ export class BrowseCreditPaymentComponent implements OnInit {
     // 'checkbox',
     'BillDate',
     'BillNo',
+    'StudyId',
+    'ProtocolNo',
+    'SubjectName',
     'RegNo',
     'PatientName',
     'TotalAmt',
-    'ConcessionAmt',
+    'DiscAmount',
     'NetPayableAmt',
-    'PaidAmount',
-    'BalanceAmt',
-    'chkBalanceAmt',
+    // 'PaidAmount',
+    // 'BalanceAmt',
+    // 'chkBalanceAmt',
     'action'
   ];
 
@@ -93,10 +96,11 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
     debugger;
     var D_data = {
+      "StudyId":this._BrowseOPDBillsService.myFilterform.get("StudyId").value || 1,
       "F_Name": "%",
       "L_Name": "%",
-      "From_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("start").value, "MM-dd-yyyy"),
-      "To_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("end").value, "MM-dd-yyyy"),
+      "From_Dt": '2023-07-17 00:00:00.000',//this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
+      "To_Dt": '2023-07-17 00:00:00.000',// this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
       "Reg_No": 0,
       "PBillNo": '%',
     }
@@ -171,10 +175,11 @@ export class BrowseCreditPaymentComponent implements OnInit {
     this.sIsLoading = 'loading-data';
 
     var D_data = {
+      "StudyId":this._BrowseOPDBillsService.myFilterform.get("StudyId").value || 0,
       "F_Name": (this._BrowseOPDBillsService.myFilterform.get("FirstName").value).trim() + '%' || "%",
       "L_Name": (this._BrowseOPDBillsService.myFilterform.get("LastName").value).trim() + '%' || "%",
-      "From_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("start").value, "MM-dd-yyyy"),
-      "To_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("end").value, "MM-dd-yyyy"),
+      "From_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
+      "To_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
       "Reg_No": this._BrowseOPDBillsService.myFilterform.get("RegNo").value || 0,
       "PBillNo": this._BrowseOPDBillsService.myFilterform.get("PBillNo").value || '%',
     }
@@ -490,22 +495,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
   }
 
   InvoiceGenerate(){
-    // let xx = {
-    //   RegNo: contact.RegId,
-    //   RegId: contact.RegId,
-    //   AdmissionID: contact.VisitId,
-    //   PatientName: contact.PatientName,
-    //   Doctorname: contact.Doctorname,
-    //   AdmDateTime: contact.AdmDateTime,
-    //   AgeYear: contact.AgeYear,
-    //   ClassId: contact.ClassId,
-    //   ClassName: contact.ClassName,
-    //   TariffName: contact.TariffName,
-    //   TariffId: contact.TariffId,
-    //   VisitId: contact.VisitId,
-    //   VisitDate: contact.VisitDate,
-    //   BillNo:contact.BillNo
-    // };
+ 
 
     const dialogRef = this._matDialog.open(InvoiceBillMappingComponent,
       {
@@ -595,8 +585,11 @@ export class BrowseOPDBill {
 Department:any;
 Address:any;
 MobileNo:any;
-  //PayTMAmount:number;
-  //NEFTPayAmount:number;
+StudyId:number;
+ProtocolNo:any;
+SubjectName:any;
+
+ 
   /**
    * Constructor
    *
@@ -643,6 +636,10 @@ MobileNo:any;
       this.Address = BrowseOPDBill.Address || '';
       this.Department = BrowseOPDBill.Department || '';
       this.MobileNo=BrowseOPDBill.MobileNo || '';
+
+      this.StudyId = BrowseOPDBill.StudyId || 0;
+      this.ProtocolNo = BrowseOPDBill.ProtocolNo || '';
+      this.SubjectName=BrowseOPDBill.SubjectName || '';
     }
   }
 

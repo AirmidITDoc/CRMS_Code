@@ -150,7 +150,7 @@ deleteTableRow(element) {
     this.dataSource.data = [];
     this.dataSource.data = this.chargeslist;
   }
-  Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
+  Swal.fire('Success !', 'List Row Deleted Successfully', 'success');
 }
 
 

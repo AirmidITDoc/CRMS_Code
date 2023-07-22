@@ -337,12 +337,7 @@ export class AppointmentComponent implements OnInit {
       });
     } else if (m == "New Bill") {
       console.log(contact);
-      var D_data = {
-        "RegId": contact.RegId,
-      }
-      this._AppointmentSreviceService.getregisterListByRegId(D_data).subscribe(reg => {
-        // this.dataArray = reg;
-        // console.log(this.dataArray);
+    
         let xx = {
           RegNo: contact.RegId,
           RegId: contact.RegId,
@@ -373,19 +368,11 @@ export class AppointmentComponent implements OnInit {
           console.log('The dialog was closed - Insert Action', result);
           this.getVisitList();
         });
-      },
-        error => {
-          this.sIsLoading = '';
-        });
+    
     }
     else if (m == "Payment") {
       console.log(contact);
-      var D_data = {
-        "RegId": contact.RegId,
-      }
-      this._AppointmentSreviceService.getregisterListByRegId(D_data).subscribe(reg => {
-        // this.dataArray = reg;
-        // console.log(this.dataArray);
+      
         let xx = {
           RegNo: contact.RegId,
           RegId: contact.RegId,
@@ -425,10 +412,7 @@ export class AppointmentComponent implements OnInit {
           console.log('The dialog was closed - Insert Action', result);
           this.getVisitList();
         });
-      },
-        error => {
-          this.sIsLoading = '';
-        });
+     
     }
     else if (m == "Add New Visit Date") {
       console.log(contact);
@@ -440,7 +424,6 @@ export class AppointmentComponent implements OnInit {
         "VisitDate": contact.VisitDate,
         "DVisitDate": contact.DVisitDate,
         "VisitTime": contact.VisitTime,
-
         "PatientTypeId": contact.PatientTypeId,
         "PatientType": contact.PatientType,
         "VistDateTime": contact.VistDateTime,
@@ -452,7 +435,6 @@ export class AppointmentComponent implements OnInit {
         "CompanyName": "",
         "ClassId": 1,
         "ClassName": "OPD",
-
         "DoctorId": contact.DoctorId,
         "Doctorname": contact.Doctorname,
         "RefDocId": contact.DoctorId,
@@ -463,7 +445,7 @@ export class AppointmentComponent implements OnInit {
 
 
       }
-      this._AppointmentSreviceService.populateFormpersonal(m_data1);
+      
       const dialogRef = this._matDialog.open(NewVistDateComponent,
         {
           maxWidth: "75vw",
@@ -482,7 +464,7 @@ export class AppointmentComponent implements OnInit {
       this.sIsLoading = '';
 
     }
-    // /   this._ActRoute.navigate(['opd/appointment/op_bill'], {queryParams:{id:this.selectedID}})
+    
 
   }
 
@@ -753,8 +735,8 @@ export class VisitMaster {
    */
   constructor(VisitMaster) {
     {
-      this.VisitId = VisitMaster.VisitId || '';
-      this.PrefixId = VisitMaster.PrefixId || '',
+      this.VisitId = VisitMaster.VisitId || 0;
+      this.PrefixId = VisitMaster.PrefixId || 0,
         this.RegNoWithPrefix = VisitMaster.RegNoWithPrefix || '';
       this.PatientName = VisitMaster.PatientName || '';
       this.VisitDate = VisitMaster.VisitDate || this.currentDate;

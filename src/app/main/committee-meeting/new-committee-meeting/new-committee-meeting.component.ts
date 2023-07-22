@@ -27,9 +27,10 @@ export class NewCommitteeMeetingComponent implements OnInit {
   lngCommitteeId: any;
   sIsLoading: string = '';
   NetAmount: any;
+  Meetstatus ='false'
 
   results: Result[] = [
-    { value: 'ONLINE', viewValue: 'ONLINE' },
+    { value: 'ONLINE', viewValue: 'ONLINE'},
     { value: 'OFFLINE', viewValue: 'OFFLINE' },
   ];
 
@@ -95,7 +96,10 @@ export class NewCommitteeMeetingComponent implements OnInit {
     }
   }
 
-
+  ChnageMeetstatus(){
+    debugger
+    this.Meetstatus = 'true'
+  }
 
   getCommitteListCombobox() {
     this._CommitteMeetingService.getCommitteeMeetingList().subscribe((data) => {
@@ -122,7 +126,7 @@ export class NewCommitteeMeetingComponent implements OnInit {
       this.dataSource.data = [];
       this.dataSource.data = this.chargeslist;
     }
-    Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
+    Swal.fire('Success !', 'List Row Deleted Successfully', 'success');
   }
 
 

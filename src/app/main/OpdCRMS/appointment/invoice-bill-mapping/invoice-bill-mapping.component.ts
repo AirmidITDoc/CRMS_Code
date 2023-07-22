@@ -73,7 +73,7 @@ export class InvoiceBillMappingComponent implements OnInit {
     // 'MobileNo',
     // 'AgeYear',
     'TotalBillAmt',
-    // 'action',
+    'action',
 
   ];
 
@@ -136,10 +136,6 @@ export class InvoiceBillMappingComponent implements OnInit {
     if (this.advanceDataStored.storage) {
       this.selectedAdvanceObj = this.advanceDataStored.storage;
       console.log(this.selectedAdvanceObj)
-    }
-
-    if (this.data) {
-
     }
 
     this.getCaseList();
@@ -261,34 +257,29 @@ export class InvoiceBillMappingComponent implements OnInit {
 
   }
 
-  tableElementChecked(event, element) {
-    debugger;
-    if (event.checked) {
-      this.interimArray.push(element);
-      this.dataSource1.data = this.interimArray;
+  // tableElementChecked(event, element) {
+  //   debugger;
+  //   if (event.checked) {
+  //     this.interimArray.push(element);
+  //     this.dataSource1.data = this.interimArray;
 
 
-      let netAmt = this.Fianlamt + this.dataSource1.data[0].TotalBillAmt;
-      this.TaxableAmount = netAmt;
-      this.Fianlamt = netAmt;
-      // let total = Math.round(parseInt(this.TaxableAmount) * parseInt(this.CGST)).toString();
+  //     let netAmt = this.Fianlamt + this.dataSource1.data[0].TotalBillAmt;
+  //     this.TaxableAmount = netAmt;
+  //     this.Fianlamt = netAmt;
+  //     // let total = Math.round(parseInt(this.TaxableAmount) * parseInt(this.CGST)).toString();
 
 
-    } else if (this.interimArray.length > 0) {
-      let index = this.interimArray.indexOf(element);
-      if (index !== -1) {
-        this.interimArray.splice(index, 1);
-      }
-    }
+  //   } else if (this.interimArray.length > 0) {
+  //     let index = this.interimArray.indexOf(element);
+  //     if (index !== -1) {
+  //       this.interimArray.splice(index, 1);
+  //     }
+  //   }
 
-    console.log(this.dataSource1.data);
-  }
+  //   console.log(this.dataSource1.data);
+  // }
 
-  getInterimData() {
-    // console.log('this.interimArray==', this.interimArray);
-    // this._matDialog.open(InterimComponentComponent,
-    //   { data: this.interimArray });
-  }
 
   getCasecombo() {
 
@@ -311,11 +302,11 @@ export class InvoiceBillMappingComponent implements OnInit {
       this.sIsLoading = 'loading-data';
       this._opappointmentService.getCaseIDList(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as CaseDetail[];
-        console.log(this.dataSource.data);
+        this.chargeslist= this.dataSource.data
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.sIsLoading = '';
-        console.log(this.dataSource.data)
+        
       },
         error => {
           this.sIsLoading = '';
@@ -356,7 +347,7 @@ export class InvoiceBillMappingComponent implements OnInit {
       InvoiceBillDetail['CreatedBy'] = this.accountService.currentUserValue.user.id;
 
       insertInvoiceBillDetailarray.push(InvoiceBillDetail);
-      // console.log(InsertAdddetArr.length);
+      
     })
 
 
@@ -397,27 +388,13 @@ export class InvoiceBillMappingComponent implements OnInit {
       this._opappointmentService.getFinancialSummarybudgetPrint(D_data).subscribe(res => {
 
         this.reportPrintObjList = res as BrowseOPDBill[];
-        console.log(this.reportPrintObjList);
+        // console.log(this.reportPrintObjList);
         this.reportPrintObj = res[0] as BrowseOPDBill;
 
         this.getTemplate();
 
       })
     );
-
-    // const dialogRef = this._matDialog.open(ViewFinancialSummarybudgetComponent,
-    //   {
-    //     maxWidth: "75vw",
-    //     height: '1560px',
-    //     width: '100%',
-    //     // data : {
-    //     //   registerObj : xx,
-    //     // }
-    //   });
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed - Insert Action', result);
-    //   //  this.getCaseList();
-    // });
 
 
   }
@@ -435,7 +412,7 @@ export class InvoiceBillMappingComponent implements OnInit {
       }
       var strrowslist = "";
       for (let i = 1; i <= this.reportPrintObjList.length; i++) {
-        console.log(this.reportPrintObjList);
+        // console.log(this.reportPrintObjList);
         var objreportPrint = this.reportPrintObjList[i - 1];
 
         let docname;
@@ -634,9 +611,7 @@ export class InvoiceBillMappingComponent implements OnInit {
 
   onKeydown(event) {
     if (event.key === "Enter") {
-      // console.log(event);
-
-    }
+      }
   }
 
 
@@ -653,7 +628,7 @@ export class InvoiceBillMappingComponent implements OnInit {
   }
 
   showAllFilter(event) {
-    console.log(event.value);
+    // console.log(event.value);
     this.isFilteredDateDisabled = event.value;
   }
 
