@@ -46,26 +46,24 @@ app-study-services{
     }
 
     .table1{
-
-    
         .mat-header-row {
             // width: 100%;
-            max-width: 1230px;
-            min-width: 1230px;
+            max-width: 1000px;
+            min-width: 1000px;
             min-height: 30px;
         }
 
         .mat-row {
             // width: 100%;
-            max-width: 1230px;
-            min-width: 1230px;
+            max-width: 1000px;
+            min-width: 1000px;
             min-height: 30px;
         }
 
         .mat-column-VisitName {
-            width: 330px;
-            max-width: 330px;
-            min-width: 330px;
+            width: 200px;
+            max-width: 200px;
+            min-width: 200px;
             text-align: left;
             white-space: nowrap;
             overflow: hidden;
@@ -73,7 +71,7 @@ app-study-services{
             overflow: hidden !important;
         }
 
-        .mat-column-Price {
+        .mat-column-Amount {
             width: 150px;
             max-width: 150px;
             min-width: 150px;
@@ -81,17 +79,15 @@ app-study-services{
         }
 
         .mat-column-ServiceName {
-            width: 500px;
-            max-width: 500px;
-            min-width: 500px;
+            width: 200px;
+            max-width: 200px;
+            min-width: 200px;
             text-align: left;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             overflow: hidden !important;
         }
-
-
     }
 
         .mat-column-action {
