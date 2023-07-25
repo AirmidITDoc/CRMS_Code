@@ -193,6 +193,7 @@ export class NewCommitteeMeetingComponent implements OnInit {
 
       let insertCommitteeMeetingMemberDetarry = [];
       this.dataSource.data.forEach((element) => {
+        console.log(element)
         let insertCommitteeMeetingMemberDet = {};
         insertCommitteeMeetingMemberDet['committeeMeetingId'] = 0;
         insertCommitteeMeetingMemberDet['memberId'] = element.MemberId;
@@ -222,6 +223,8 @@ export class NewCommitteeMeetingComponent implements OnInit {
     } else {
       let updateCommitteeMeeting = {};
 
+    
+
       updateCommitteeMeeting['committeeMeetingId'] = this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').value || 0;
       updateCommitteeMeeting['committeeMeetingDate'] = this.dateTimeObj.date;
       updateCommitteeMeeting['committeeMeetingTime'] = this.dateTimeObj.time;
@@ -231,12 +234,14 @@ export class NewCommitteeMeetingComponent implements OnInit {
 
       let insertCommitteeMeetingMemberDetarry = [];
       this.dataSource.data.forEach((element) => {
+        debugger
+        console.log(element)
         let insertCommitteeMeetingMemberDet = {};
         insertCommitteeMeetingMemberDet['committeeMeetingId'] = 0;
         insertCommitteeMeetingMemberDet['memberId'] = element.MemberId;
         insertCommitteeMeetingMemberDet['studyId'] = 0,// element.studyId;
           insertCommitteeMeetingMemberDet['memberAmount'] = element.StudyAmount || 0;
-        insertCommitteeMeetingMemberDet['memberMeetingStatus'] = element.MeetingStatus;
+        insertCommitteeMeetingMemberDet['memberMeetingStatus'] = element.MeetingStatus.select;
         insertCommitteeMeetingMemberDet['createdBy'] = this.accountService.currentUserValue.user.id;
         insertCommitteeMeetingMemberDetarry.push(insertCommitteeMeetingMemberDet);
       });

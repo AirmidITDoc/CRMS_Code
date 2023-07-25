@@ -55,19 +55,19 @@
   
   app-committee-meeting {
     .table1{
-        height:590px !important;
+        height:720px !important;
     }
   .mat-header-row {
     width: 100%;
-    max-width: 1250px;
-    min-width: 1250px;  
+    max-width: 1550px;
+    min-width: 1550px;  
     min-height: 20px;     
   }
   
   .mat-row {
     width: 100%;
-    max-width: 1250px;
-    min-width: 1250px;      
+    max-width: 1550px;
+    min-width: 1550px;      
     min-height: 20px;            
   }
 
@@ -78,9 +78,9 @@
     text-align: center;
   }
   .mat-column-CommiteeMeetingName {
-    width: 300px;
-    max-width: 300px;
-    min-width: 300px;
+    width: 450px;
+    max-width: 450px;
+    min-width:450px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
@@ -98,9 +98,9 @@
   }
 
   .mat-column-CommitteeMeetingLocation {
-    width: 300px;
-    max-width: 300px;
-    min-width: 300px;
+    width: 500px;
+    max-width: 500px;
+    min-width: 500px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
@@ -119,9 +119,9 @@
     min-width: 100px;
   }
   .mat-column-CommitteeMeetingAmount {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
+    width:150px;
+    max-width:150px;
+    min-width:150px;
   }
   
   

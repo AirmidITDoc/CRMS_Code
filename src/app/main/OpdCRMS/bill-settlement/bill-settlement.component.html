@@ -126,7 +126,7 @@
 
                                 </div>
                                 <mat-table #table matSort class="table1" [dataSource]="dataSource"
-                                    [@animateStagger]="{value:'50'}" style="overflow: auto;width: 100%;height: 600px !important;">
+                                    [@animateStagger]="{value:'50'}" style="overflow: auto;width: 100%;">
 
                                     <ng-container matColumnDef="BillDate">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Bill Date
@@ -231,7 +231,7 @@
                                                 <mat-icon>print</mat-icon>
                                             </button>
                                             <button mat-icon-button class="material-icons"
-                                                (click)="getRecord(contact,'Payment')" matTooltip="email">
+                                                (click)="getRecord(contact,'Payment')" matTooltip="Payment">
                                                 <mat-icon>payment</mat-icon>
                                             </button>
                                             <!-- <button mat-icon-buttmenton class="material-icons"

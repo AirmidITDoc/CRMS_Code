@@ -141,8 +141,8 @@ export class AppointmentComponent implements OnInit {
     console.log(element);
     const dialogRef = this._matDialog.open(PatientScreenBillDetailComponent,
       {
-        maxWidth: '110vw',
-        height: '700px',
+        maxWidth: '180vw',
+        height: '900px',
         width: '100%',
         data : {
           element : element,

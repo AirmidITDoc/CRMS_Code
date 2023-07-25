@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-patient-screen-bill-detail',
@@ -30,7 +31,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
   subscriptions: Subscription[] = [];
   screenFromString = 'admission-form';
   printTemplate: any;
-
+  registeredForm: FormGroup;
   subscriptionArr: Subscription[] = [];
   StudyId: 0;
   totalAmtOfNetAmt: any;
@@ -39,6 +40,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
   reportPrintObjList: BrowseOPDBill[] = [];
   reportPrintObj: BrowseOPDBill;
   Billbutton = false;
+  RegId:any;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -57,7 +59,48 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
   dataSource = new MatTableDataSource<VisitMaster>();
-  // dataSource = new MatTableDataSource<CaseDetail>();
+
+  displayedColumns1 = [
+    'VisitDate',
+    'VisitTime',
+    'ProtocolNo',
+    'SubjectName',
+    'PBillNo',
+    'BillAmount',
+    'BillId',
+    'action',
+  ];
+  dataSource1 = new MatTableDataSource<VisitMaster>();
+
+  displayedColumns2 = [
+    'VisitDate',
+    'VisitTime',
+    'ProtocolNo',
+    'SubjectName',
+    'PBillNo',
+    'BillAmount',
+    'BillId',
+    'action',
+  ];
+  dataSource2 = new MatTableDataSource<VisitMaster>();
+
+
+
+  displayedColumns3 = [
+    'VisitDate',
+    'VisitTime',
+    'ProtocolNo',
+    'SubjectName',
+    'PBillNo',
+    'BillAmount',
+    'BillId',
+    'action',
+  ];
+  dataSource3 = new MatTableDataSource<VisitMaster>();
+
+
+
+
   menuActions: Array<string> = [];
   //datePipe: any;
 
@@ -68,6 +111,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public _matDialog: MatDialog,
     public datePipe: DatePipe,
+    private formBuilder: FormBuilder
     // private advanceDataStored: AdvanceDataStored
   ) {
     this.getBillList();
@@ -85,13 +129,74 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
     }
-
+   
     this.getBillList();
+    this.getVisitdetail();
     // this.dataSource.data.refresh();
 
   }
 
+  
+  getVisitdetail(){
+    this.sIsLoading = 'loading-data';
+    var D_data = {
+        "RegId": this.data.element.RegId
+    };
+    setTimeout(() => {
+      this.sIsLoading = 'loading-data';
+      this._AppointmentService.getVisitdetailsList(D_data).subscribe(Visit => {
+        this.dataSource.data = Visit as VisitMaster[];
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        this.sIsLoading = '';
 
+      },
+        error => {
+          this.sIsLoading = '';
+        });
+    }, 1000);
+  }
+
+  getApiBillList(){
+    this.sIsLoading = 'loading-data';
+    var D_data = {
+        "RegId": this.data.element.RegId
+    };
+    setTimeout(() => {
+      this.sIsLoading = 'loading-data';
+      this._AppointmentService.getVisitdetailsList(D_data).subscribe(Visit => {
+        this.dataSource.data = Visit as VisitMaster[];
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        this.sIsLoading = '';
+
+      },
+        error => {
+          this.sIsLoading = '';
+        });
+    }, 1000);
+  }
+
+
+  getApiBilldetail(){
+    this.sIsLoading = 'loading-data';
+    var D_data = {
+        "RegId": this.data.element.RegId
+    };
+    setTimeout(() => {
+      this.sIsLoading = 'loading-data';
+      this._AppointmentService.getVisitdetailsList(D_data).subscribe(Visit => {
+        this.dataSource.data = Visit as VisitMaster[];
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        this.sIsLoading = '';
+
+      },
+        error => {
+          this.sIsLoading = '';
+        });
+    }, 1000);
+  }
 
   getBillList() {
     this.sIsLoading = 'loading-data';
@@ -163,89 +268,87 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
 
+  getApicode(){
 
-  onExport(exprtType) {
-    // debugger;
-    // let columnList = [];
-    // if (this.dataSource.data.length == 0) {
-    //   // this.toastr.error("No Data Found");
-    //   Swal.fire('Error !', 'No Data Found', 'error');
-    // }
-    // else {
-    //   var excelData = [];
-    //   var a = 1;
-    //   for (var i = 0; i < this.dataSource.data.length; i++) {
-    //     let singleEntry = {
-    //       // "Sr No":a+i,
-    //       "Reg No": this.dataSource.data[i]["RegNoWithPrefix"],
-    //       "PatientOldNew": this.dataSource.data[i]["PatientOldNew"] ? this.dataSource.data[i]["PatientOldNew"] : "N/A",
-    //       "Patient Name": this.dataSource.data[i]["PatientName"] ? this.dataSource.data[i]["PatientName"] : "N/A",
-    //       "VisitDate": this.dataSource.data[i]["DVisitDate"] ? this.dataSource.data[i]["DVisitDate"] : "N/A",
-    //       "Visit Time": this.dataSource.data[i]["VisitTime"] ? this.dataSource.data[i]["VisitTime"] : "N/A",
-    //       "OPDNo": this.dataSource.data[i]["OPDNo"] ? this.dataSource.data[i]["OPDNo"] : "N/A",
-    //       "Doctorname": this.dataSource.data[i]["Doctorname"] ? this.dataSource.data[i]["Doctorname"] : "N/A",
-    //       "RefDocName": this.dataSource.data[i]["RefDocName"] ? this.dataSource.data[i]["RefDocName"] : "N/A",
-    //       "PatientType": this.dataSource.data[i]["PatientType"] ? this.dataSource.data[i]["PatientType"] : "N/A",
+    
+    this.sIsLoading = 'submit';
 
 
-    //     };
-    //     excelData.push(singleEntry);
-    //   }
-    //   var fileName = "OutDoor-Appointment-Patient-List " + new Date() + ".xlsx";
-    //   if (exprtType == "Excel") {
-    //     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(excelData);
-    //     var wscols = [];
-    //     if (excelData.length > 0) {
-    //       var columnsIn = excelData[0];
-    //       for (var key in columnsIn) {
-    //         let headerLength = { wch: (key.length + 1) };
-    //         let columnLength = headerLength;
-    //         try {
-    //           columnLength = { wch: Math.max(...excelData.map(o => o[key].length), 0) + 1 };
-    //         }
-    //         catch {
-    //           columnLength = headerLength;
-    //         }
-    //         if (headerLength["wch"] <= columnLength["wch"]) {
-    //           wscols.push(columnLength)
-    //         }
-    //         else {
-    //           wscols.push(headerLength)
-    //         }
-    //       }
-    //     }
-    //     ws['!cols'] = wscols;
-    //     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    //     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    //     XLSX.writeFile(wb, fileName);
-    //   } else {
-    //     let doc = new jsPDF('p', 'pt', 'a4');
-    //     doc.page = 0;
-    //     var col = [];
-    //     for (var k in excelData[0]) col.push(k);
-    //     console.log(col.length)
-    //     var rows = [];
-    //     excelData.forEach(obj => {
-    //       console.log(obj)
-    //       let arr = [];
-    //       col.forEach(col => {
-    //         arr.push(obj[col]);
-    //       });
-    //       rows.push(arr);
-    //     });
+    let BillDetail = {};
+    BillDetail['emergencyFlag'] = "0",
+      BillDetail['billTotalAmount'] = "";
+    BillDetail['advance'] = "0";
+    BillDetail['billDate'] = "";
+    BillDetail['paymentType'] = "CREDIT";
+    BillDetail['referralName'] = " ";
+    BillDetail['otherReferral'] = "";
+    BillDetail['sampleId'] = "";
+    BillDetail['orderNumber'] = " ";
+    BillDetail['referralIdLH'] = "";
+    BillDetail['organisationName'] = "";
+    BillDetail['billConcession'] = "0",
+      BillDetail['additionalAmount'] = "0",
+      BillDetail['organizationIdLH'] = "440132",
+      BillDetail['comments'] = "CGHS";
 
-    //     doc.autoTable(col, rows, {
-    //       margin: { left: 5, right: 5, top: 5 },
-    //       theme: "grid",
-    //       styles: {
-    //         fontSize: 3
-    //       }
-    //     });
-    //     doc.setFontSize(3);
-    //     // doc.save("Indoor-Patient-List.pdf");
-    //     window.open(URL.createObjectURL(doc.output("blob")))
-    //   }
-    // }
+    let testList = [];
+    this.dataSource1.data.forEach((element) => {
+      let testListInsertObj = {};
+      testListInsertObj['testCode'] = ''// element.ServiceName;
+      testList.push(testListInsertObj);
+    });
+    BillDetail["testList"] = testList;
+
+
+
+    let paymentListarr = [];
+    let paymentList = {};
+    paymentList['paymentType'] = "CREDIT",
+      paymentList['paymentAmount'] = "";
+    paymentList['chequeNo'] = "";
+    paymentList['issueBank'] = "";
+    paymentListarr.push(paymentList);
+
+
+    BillDetail["paymentList"] = paymentListarr;
+
+    let submitData = {
+      "mobile": "",
+      "email": "",
+      "designation": "Mr.",
+      "fullName": "AirmidTest",//this.dataSource.data[0].PatientName,
+      "age": 81,
+      "gender": "Female",
+      "area": "",
+      "city": "",
+      "patientType": "IPD",
+      "labPatientId": "HISPATIENTID",
+      "pincode": " ",
+      "patientId": "",
+      "dob": "",
+      "passportNo": "",
+      "panNumber": "",
+      "aadharNumber": "",
+      "insuranceNo": "",
+      "nationalityethnicity": "",
+      "ethnicity": "",
+      "nationalIdentityNumber": "",
+      "workerCode": "w12",
+      "doctorCode": "",
+      "billDetails": BillDetail
+
+
+    };
+    console.log(submitData);
+    this._AppointmentService.InsertLabDetail(submitData).subscribe(response => {
+      if (response) {
+        Swal.fire('Bill Detail Send Successfully !', 'success').then((result) => {
+        });
+      } else {
+        Swal.fire('Error !', 'Bill Detail  not Send', 'error');
+      }
+      this.sIsLoading = '';
+    });
   }
 
   // field validation 

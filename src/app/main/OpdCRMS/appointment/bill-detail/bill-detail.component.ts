@@ -207,12 +207,6 @@ export class BillDetailComponent implements OnInit {
       console.log(this.selectedAdvanceObj)
     }
 
-    if (this.data) {
-
-    }
-
-
-
     this.getServiceListCombobox();
     this.getAdmittedDoctorCombo();
     // this.getChargesList();
@@ -709,7 +703,7 @@ debugger;
 
 
   onSaveOPBill() {
-    this.click = true;
+    // this.click = true;
     let disamt = this.registeredForm.get('concessionAmt').value;
     debugger;
     if (this.concessionDiscPer > 0 || this.concessionAmtOfNetAmt > 0) {
@@ -776,7 +770,7 @@ debugger;
     InsertBillUpdateBillNoObj['TaxPer'] = 0;
     InsertBillUpdateBillNoObj['TaxAmount'] = 0; //1000;//this.taxAmt;
     // InsertBillUpdateBillNoObj['CompDiscAmt'] = 0; //1000;//this.taxAmt;
-    InsertBillUpdateBillNoObj['CashCounterId'] = 0;
+    InsertBillUpdateBillNoObj['CashCounterId'] = 1;
     InsertBillUpdateBillNoObj['DiscComments'] = 'Remark';// 
     //
 
@@ -1297,7 +1291,7 @@ export class Bill {
       this.TaxPer = InsertBillUpdateBillNoObj.TaxPer || 0;
       this.TaxAmount = InsertBillUpdateBillNoObj.TaxAmount || 0;
       this.DiscComments = InsertBillUpdateBillNoObj.DiscComments || 0;
-      this.CashCounterId = InsertBillUpdateBillNoObj.CashCounterId || 0;
+      this.CashCounterId = InsertBillUpdateBillNoObj.CashCounterId || 1;
     }
   }
 }
@@ -1480,7 +1474,7 @@ export class PaymentInsert {
       this.IsCancelledBy = PaymentInsertObj.IsCancelledBy || 0;
       this.IsCancelledDate = PaymentInsertObj.IsCancelledDate || '';
       this.IsCancelledDate = PaymentInsertObj.IsCancelledDate || '';
-      this.CashCounterId = PaymentInsertObj.CashCounterId || 0;
+      this.CashCounterId = PaymentInsertObj.CashCounterId || 1;
       this.IsSelfORCompany = PaymentInsertObj.IsSelfORCompany || 0;
       this.CompanyId = PaymentInsertObj.CompanyId || 0;
       this.NEFTPayAmount = PaymentInsertObj.NEFTPayAmount || 0;

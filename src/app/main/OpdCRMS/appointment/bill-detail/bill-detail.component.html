@@ -134,14 +134,12 @@
                             <div matTooltip="Select doctor name to enable this button!!"
                                 [matTooltipDisabled]="!registeredForm.invalid" [matTooltipPosition]="'above'">
                                 <button mat-raised-button fxLayoutAlign="center center" id="btnAdd"
-                                    (click)="onSaveEntry()" style="background-color: blue; color: white; width: 70px; "
-                                    [disabled]="registeredForm.invalid">
+                                    (click)="onSaveEntry()" style="background-color: blue; color: white; width: 70px; ">
+                                    <!-- [disabled]="registeredForm.invalid"> -->
                                     <mat-icon> add </mat-icon> &nbsp;Add
                                 </button>
                            
                             </div>
-
-
 
                         </div>
 

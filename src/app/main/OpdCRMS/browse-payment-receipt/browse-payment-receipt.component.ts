@@ -248,22 +248,10 @@ debugger;
     console.log(this.printTemplate = resData[0].TempKeys);
     this.printTemplate = resData[0].TempDesign;
    
-    // this.data = this.sanitizer.bypassSecurityTrustHtml(resData[0].TempDesign);    
-
-    // console.log(this.printTemplate)
-    // console.log(this.data);
     let  keysArray = ['HospitalName','HospitalAddress','Phone','EmailId','ReceiptNo','BillDate','RegId','GenderName','BillNo','PatientName','Age','AgeDay','AgeMonth','PaymentDate','ConsultantDr','ReferDr','PaidAmount','CashPayAmount','CardPayAmount','ChequePayAmount','NEFTPayAmount','PayTMAmount','Remark','UserName','CardNo','CardBankName']; // resData[0].TempKeys;
    
 
-//   @Pipe({
-//   name: 'htmlToPlaintext'
-// })
-//     const temp = document.createElement('div');
-//     temp.innerHTML = this.printTemplate;
-//     this.printTemplate=temp.innerHTML
-//     return temp.textContent || temp.innerText || '';
 
-//     console.log(temp.textContent || temp.innerText || '')
   
    for (let i = 0; i < keysArray.length; i++) {
         let reString = "{{" + keysArray[i] + "}}";

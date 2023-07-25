@@ -143,7 +143,9 @@
                                                 StudyAmount
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.StudyAmount}}
+                                                <mat-form-field appearance="legacy" hidden="StudyAmount">
+                                                    <input matInput [(ngModel)]="contact.StudyAmount">
+                                                </mat-form-field>
                                             </mat-cell>
                                         </ng-container>
 

@@ -59,100 +59,72 @@
             </div>
             <hr size="50">
             <div style="padding: 20px 20px 100px 20px; height: 250px !important;  overflow: auto !important;">
+
                 <div *ngIf="chipsElements[0].state">
-                    <div>
-                        <span>Cash Payment</span>
-                    </div>
-                    <mat-form-field appearance="outline" style="width: 180px;">
-                        <mat-label>Enter Cash</mat-label>
-                        <input type="number" min="1" required matInput formControlName="cashAmountController" [(ngModel)]="cashAmt"
-                            (keyup)="calculatePaidAmt('cashAmountController')" (change)="chkPaidAmt($event,'cashAmountController')">
-                        <mat-error
-                            *ngIf="paymentForm.controls.cashAmountController.touched && paymentForm.controls.cashAmountController.invalid">
-                            <span *ngIf="paymentForm.controls.cashAmountController.errors.required">This field is
-                                mandatory.</span>
-                            <span *ngIf="paymentForm.get('cashAmountController').invalid">This field is
-                                invalid.</span>
-                        </mat-error>
-                        <!-- <mat-error class="error"
-                        *ngIf="paymentForm.get('cashAmountController').invalid && paymentForm.get('cashAmountController').touched">
-                         Amount is   required</mat-error>
-                        <mat-error *ngIf="paymentForm.get('cashAmountController').hasError('invalidRange')">
-                            Entered Amount must not be greater than Net Amount
-                        </mat-error> -->
+                 
 
-                    </mat-form-field>
-                </div>
-
-                <div *ngIf="chipsElements[1].state">
+                    ......
                     <div>
-                        <span>Card Payment</span>
+                        <span>NEFT Payment</span>
                     </div>
                     <div class="cards-div" fxLayout.gt-xs="row" fxLayoutAlign="start">
                         <div style="margin-right: 10px;">
                             <mat-form-field appearance="outline">
                                 <mat-label>Enter Amount</mat-label>
-                                <input matInput formControlName="cardAmountController" [(ngModel)]="cardAmt"type="number" min="0"
-                                    (keyup)="calculatePaidAmt('cardAmountController')">
-                                    <mat-error class="error"
-                                    *ngIf="paymentForm.get('cardAmountController').invalid && paymentForm.get('cardAmountController').touched">
-                                    Entered Amount must not be greater than Net Amount</mat-error>
-                                <!-- <mat-error
-                                    *ngIf="paymentForm.get('cardAmountController').hasError('invalidRange')">
+                                <input matInput formControlName="neftAmountController" [(ngModel)]="neftAmt" type="number" min="0"
+                                    (keyup)="calculatePaidAmt('neftAmountController')">
+                                <mat-error *ngIf="paymentForm.get('neftAmountController').hasError('invalidRange') || paymentForm.get('neftAmountController').invalid">
                                     Entered Amount must not be greater than Net Amount
-                                </mat-error> -->
-
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <div style="margin-right: 10px;">
                             <mat-form-field appearance="outline">
-                                <mat-label>Enter Card No</mat-label>
-                                <input matInput [(ngModel)]="cardNo" formControlName="cardNumberController">
-                                <mat-error class="error" *ngIf="paymentForm.get('cardNumberController').invalid && paymentForm.get('cardNumberController').touched"></mat-error>
-                         </mat-form-field>
+                                <mat-label>Enter NEFT No</mat-label>
+                                <input matInput [(ngModel)]="neftNo" formControlName="neftNumberController">
+                            </mat-form-field>
                         </div>
                         <div style="margin-right: 10px;width:200px;">
-                           
+
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Select Bank Name</mat-label>
-                                <mat-select formControlName="cardBankNameController" placeholder="Bank" #singleSelect [(ngModel)]="bankNameData">
+                                <mat-select formControlName="neftBankNameController" placeholder="Bank" #singleSelect>
                                     <mat-option>
-                                        <ngx-mat-select-search [formControl]="cardbankFilterCtrl"
+                                        <ngx-mat-select-search [formControl]="bankFilterCtrl"
                                             [placeholderLabel]="'Search'" [noEntriesFoundLabel]="'No matching found'">
                                         </ngx-mat-select-search>
                                     </mat-option>
-                                    <mat-option *ngFor="let element of filteredCardbank | async" [value]="element">
+                                    <mat-option *ngFor="let element of filteredBank | async" [value]="element">
                                         {{element.BankName}}
                                     </mat-option>
                                 </mat-select>
                                 <!-- <mat-error class="error"
-                                *ngIf="paymentForm.get('cardbankFilterCtrl').invalid && paymentForm.get('cardbankFilterCtrl').touched">
+                                *ngIf="paymentForm.get('neftBankNameController').invalid && paymentForm.get('neftBankNameController').touched">
                                 Bank Name is required</mat-error> -->
                             </mat-form-field>
 
                         </div>
-                        <div style="margin-right: 10px;">
-                            <!-- <mat-form-field appearance="outline">
+                         <div style="margin-right: 10px;">
+                            <mat-form-field appearance="outline">
                                 <mat-label>Enter Date</mat-label>
-                                <input matInput [matDatepicker]="picker" [(ngModel)]="cardDate"
-                                    placeholder="Choose a DateofBirth" name="cardDateController"
-                                    formControlName="cardDateController">
+                                <input name="NEFTDate" matInput [matDatepicker]="picker" formControlName="neftDateController" [readonly]="true" required>
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field> -->
-
-                            <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Enter date</mat-label>
-                                <input matInput [matDatepicker]="picker" name="cardDateController" formControlName="cardDateController"
-                                 >
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                               
-                              </mat-form-field>
+                            </mat-form-field>
                         </div>
+                        <!-- <div style="margin-right: 10px;">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Enter Date</mat-label>
+                                <input name="NEFTDate" matInput [matDatepicker]="picker"
+                                    formControllName="neftDateController" [readonly]="true" required>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div> -->
                     </div>
                 </div>
-                <div *ngIf="chipsElements[2].state">
+
+                <div *ngIf="chipsElements[1].state">
                     <div>
                         <span>Cheque Payment</span>
                     </div>
@@ -221,67 +193,8 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="chipsElements[3].state">
-                    <div>
-                        <span>NEFT Payment</span>
-                    </div>
-                    <div class="cards-div" fxLayout.gt-xs="row" fxLayoutAlign="start">
-                        <div style="margin-right: 10px;">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Enter Amount</mat-label>
-                                <input matInput formControlName="neftAmountController" [(ngModel)]="neftAmt" type="number" min="0"
-                                    (keyup)="calculatePaidAmt('neftAmountController')">
-                                <mat-error *ngIf="paymentForm.get('neftAmountController').hasError('invalidRange') || paymentForm.get('neftAmountController').invalid">
-                                    Entered Amount must not be greater than Net Amount
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                        <div style="margin-right: 10px;">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Enter NEFT No</mat-label>
-                                <input matInput [(ngModel)]="neftNo" formControlName="neftNumberController">
-                            </mat-form-field>
-                        </div>
-                        <div style="margin-right: 10px;width:200px;">
-
-                            <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Select Bank Name</mat-label>
-                                <mat-select formControlName="neftBankNameController" placeholder="Bank" #singleSelect>
-                                    <mat-option>
-                                        <ngx-mat-select-search [formControl]="bankFilterCtrl"
-                                            [placeholderLabel]="'Search'" [noEntriesFoundLabel]="'No matching found'">
-                                        </ngx-mat-select-search>
-                                    </mat-option>
-                                    <mat-option *ngFor="let element of filteredBank | async" [value]="element">
-                                        {{element.BankName}}
-                                    </mat-option>
-                                </mat-select>
-                                <!-- <mat-error class="error"
-                                *ngIf="paymentForm.get('neftBankNameController').invalid && paymentForm.get('neftBankNameController').touched">
-                                Bank Name is required</mat-error> -->
-                            </mat-form-field>
-
-                        </div>
-                         <div style="margin-right: 10px;">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Enter Date</mat-label>
-                                <input name="NEFTDate" matInput [matDatepicker]="picker" formControlName="neftDateController" [readonly]="true" required>
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-                        <!-- <div style="margin-right: 10px;">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Enter Date</mat-label>
-                                <input name="NEFTDate" matInput [matDatepicker]="picker"
-                                    formControllName="neftDateController" [readonly]="true" required>
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field>
-                        </div> -->
-                    </div>
-                </div>
-                <div *ngIf="chipsElements[4].state">
+                 
+                <div *ngIf="chipsElements[2].state">
                     <div>
                         <span>PayTM Payment</span>
                     </div>
@@ -314,6 +227,101 @@
                         </div>
                     </div>
                 </div>
+                <div *ngIf="chipsElements[4].state">
+                    <div>
+                        <span>Cash Payment</span>
+                    </div>
+                    <mat-form-field appearance="outline" stle="width: 180px;">
+                        <mat-label>Enter Cash</mat-label>
+                        <input type="number" min="1" required matInput formControlName="cashAmountController" [(ngModel)]="cashAmt"
+                            (keyup)="calculatePaidAmt('cashAmountController')" (change)="chkPaidAmt($event,'cashAmountController')">
+                        <mat-error
+                            *ngIf="paymentForm.controls.cashAmountController.touched && paymentForm.controls.cashAmountController.invalid">
+                            <span *ngIf="paymentForm.controls.cashAmountController.errors.required">This field is
+                                mandatory.</span>
+                            <span *ngIf="paymentForm.get('cashAmountController').invalid">This field is
+                                invalid.</span>
+                        </mat-error>
+                        <!-- <mat-error class="error"
+                        *ngIf="paymentForm.get('cashAmountController').invalid && paymentForm.get('cashAmountController').touched">
+                         Amount is   required</mat-error>
+                        <mat-error *ngIf="paymentForm.get('cashAmountController').hasError('invalidRange')">
+                            Entered Amount must not be greater than Net Amount
+                        </mat-error> -->
+
+                    </mat-form-field>
+                </div>
+
+                <div *ngIf="chipsElements[3].state">
+                    <div>
+                        <span>Card Payment</span>
+                    </div>
+                    <div class="cards-div" fxLayout.gt-xs="row" fxLayoutAlign="start">
+                        <div style="margin-right: 10px;">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Enter Amount</mat-label>
+                                <input matInput formControlName="cardAmountController" [(ngModel)]="cardAmt"type="number" min="0"
+                                    (keyup)="calculatePaidAmt('cardAmountController')">
+                                    <mat-error class="error"
+                                    *ngIf="paymentForm.get('cardAmountController').invalid && paymentForm.get('cardAmountController').touched">
+                                    Entered Amount must not be greater than Net Amount</mat-error>
+                                <!-- <mat-error
+                                    *ngIf="paymentForm.get('cardAmountController').hasError('invalidRange')">
+                                    Entered Amount must not be greater than Net Amount
+                                </mat-error> -->
+
+                            </mat-form-field>
+                        </div>
+                        <div style="margin-right: 10px;">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Enter Card No</mat-label>
+                                <input matInput [(ngModel)]="cardNo" formControlName="cardNumberController">
+                                <mat-error class="error" *ngIf="paymentForm.get('cardNumberController').invalid && paymentForm.get('cardNumberController').touched"></mat-error>
+                         </mat-form-field>
+                        </div>
+                        <div style="margin-right: 10px;width:200px;">
+                           
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>Select Bank Name</mat-label>
+                                <mat-select formControlName="cardBankNameController" placeholder="Bank" #singleSelect [(ngModel)]="bankNameData">
+                                    <mat-option>
+                                        <ngx-mat-select-search [formControl]="cardbankFilterCtrl"
+                                            [placeholderLabel]="'Search'" [noEntriesFoundLabel]="'No matching found'">
+                                        </ngx-mat-select-search>
+                                    </mat-option>
+                                    <mat-option *ngFor="let element of filteredCardbank | async" [value]="element">
+                                        {{element.BankName}}
+                                    </mat-option>
+                                </mat-select>
+                                <!-- <mat-error class="error"
+                                *ngIf="paymentForm.get('cardbankFilterCtrl').invalid && paymentForm.get('cardbankFilterCtrl').touched">
+                                Bank Name is required</mat-error> -->
+                            </mat-form-field>
+
+                        </div>
+                        <div style="margin-right: 10px;">
+                            <!-- <mat-form-field appearance="outline">
+                                <mat-label>Enter Date</mat-label>
+                                <input matInput [matDatepicker]="picker" [(ngModel)]="cardDate"
+                                    placeholder="Choose a DateofBirth" name="cardDateController"
+                                    formControlName="cardDateController">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field> -->
+
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>Enter date</mat-label>
+                                <input matInput [matDatepicker]="picker" name="cardDateController" formControlName="cardDateController"
+                                 >
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                               
+                              </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+             
+              
                 <div *ngIf="chipsElements[5].state">
                     <div>
                         <span>Wrf Payment</span>

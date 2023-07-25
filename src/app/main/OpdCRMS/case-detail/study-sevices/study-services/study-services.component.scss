@@ -48,22 +48,22 @@ app-study-services{
     .table1{
         .mat-header-row {
             // width: 100%;
-            max-width: 1000px;
-            min-width: 1000px;
+            max-width: 1250px;
+            min-width: 1250px;
             min-height: 30px;
         }
 
         .mat-row {
             // width: 100%;
-            max-width: 1000px;
-            min-width: 1000px;
+            max-width: 1250px;
+            min-width: 1250px;
             min-height: 30px;
         }
 
         .mat-column-VisitName {
-            width: 200px;
-            max-width: 200px;
-            min-width: 200px;
+            width: 300px;
+            max-width: 300px;
+            min-width: 300px;
             text-align: left;
             white-space: nowrap;
             overflow: hidden;
@@ -72,16 +72,16 @@ app-study-services{
         }
 
         .mat-column-Amount {
-            width: 150px;
-            max-width: 150px;
-            min-width: 150px;
+            width: 160px;
+            max-width: 160px;
+            min-width: 160px;
             text-align: right;
         }
 
         .mat-column-ServiceName {
-            width: 200px;
-            max-width: 200px;
-            min-width: 200px;
+            width: 700px;
+            max-width: 700px;
+            min-width: 700px;
             text-align: left;
             white-space: nowrap;
             overflow: hidden;

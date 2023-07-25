@@ -1,50 +1,56 @@
 <div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <!-- HEADER -->
     <mat-toolbar class="accent"
         style="height:50px; justify-content: space-between;width: 100%;background-color:rgb(18, 87, 134) !important;">
         <div fxLayout="row" fxLayoutAlign="start center">
-            <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm (click)="toggleSidebar('app-main')"
+            <!-- <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm (click)="toggleSidebar('app-main')"
                 style="color: white;">
                 <mat-icon>menu</mat-icon>
             </button>
             <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
-                style="color: white;" style="color: aliceblue;">account_box
-            </mat-icon>
+                style="color: white;">account_box
+            </mat-icon> -->
             <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
                 style="color: aliceblue;">
                 Study Information
             </span>
-
-            <button mat-raised-button (click)="newCaseDetail()" fxLayoutAlign="center center"
-                style="margin-left:1300px;">
-                <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
-            </button>
         </div>
-
-
-
-
+        <button mat-raised-button (click)="newCaseDetail()" fxLayoutAlign="center center"
+        style="margin-left:800px;">New StudyDetail
+        <!-- <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon> -->
+    </button>
     </mat-toolbar>
     <!-- / HEADER -->
+
     <!-- SELECTED BAR -->
     <app-main class="accent-600" *ngIf="hasSelectedContacts" [@slideInTop]></app-main>
     <!-- / SELECTED BAR -->
+
     <!-- CONTENT -->
     <div class="content">
+
         <!-- SIDEBAR -->
-        <fuse-sidebar name="app-main" position="left" lockedOpen="gt-sm" style="width:30%; border-radius:4px;
-        margin-left:12px; background-color: white;height:100%;">
-            <div>
-                <!-- SIDEBAR HEADER -->
-                <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
-                    style="margin-top: 3%;background-color: rgb(18, 87, 134) !important;">
-                    <span class="h5" style="font-size: 17px;color: aliceblue;">Search Facility</span>
-                    <!-- / USER -->
-                </div>
-                <!-- / SIDEBAR HEADER -->
-                <!-- SIDEBAR CONTENT -->
-                <div>
-                    <div class="nav material2">
-                        <form [formGroup]="_CasedetailService.myFilterform" style="padding: 6px 6px 5px 5px;"
+        <fuse-sidebar class="sidebar" name="app-main" position="left" lockedOpen="gt-sm" style="background-color: white;
+        height:100%; margin-top: 10px;">
+
+            <!-- SIDEBAR CONTENT -->
+            <div class="sidebar-content">
+
+                <div class="card">
+
+                    <!-- SIDEBAR HEADER -->
+                    <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
+                        style="margin-top: 3%;background-color: rgb(13, 67, 102) !important;">
+                        <!-- USER -->
+                        <!-- <img [src]="user.avatar" class="avatar mr-16" [alt]="user.name" /> -->
+                        <span class="h5" style="color: aliceblue;font-size: 17px;">Search Facility</span>
+                        <!-- / USER -->
+                    </div>
+                    <!-- / SIDEBAR HEADER -->
+                    <!-- SIDEBAR CONTENT -->
+                    <div class="content py-16 pl-10 p-12" fusePerfectScrollbar>
+                        <div class="nav material2">
+                            <form [formGroup]="_CasedetailService.myFilterform" style="padding: 6px 6px 5px 5px;"
                             fusePerfectScrollbar>
                             <div fxLayout="column" fxLayoutAlign="start none">
                                 <br />
@@ -82,29 +88,30 @@
                             </div>
 
                         </form>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- / SIDEBAR CONTENT -->
+
         </fuse-sidebar>
         <!-- / SIDEBAR -->
+
         <!-- CENTER -->
-        <!-- CENTER -->
+        <div class="center p-12 pb-56">
 
-        <div class="center p-12 pb-56" fxFlexAlign="start center">
-
-            <div class="content-card" style="border-radius:4px; ">
-
-
-                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="30px">
+            <!-- CONTENT -->
+            <div class="content-card" style="border-radius:4px;width: 100%; ">
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
                     <div fxFlex.gt-sm="100%" fxFlex>
 
                         <div fxlayout="row">
-                            <div style="width: 100%;">
+                            <div style="width: 100%; overflow: hidden;">
                                 <div matColumnDef="loading" [ngClass]="{'hide': !(sIsLoading == 'loading-data')}"
                                     class="backgroundBlur">
                                     <div class="spinner-border text-danger"></div>
+
                                 </div>
-                                <!-- sppinner -->
                                 <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
                                     class="table1">
 
@@ -262,20 +269,24 @@
                                     <mat-footer-row *matFooterRowDef="['noData']"
                                         [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
                                 </mat-table>
-                                <mat-paginator [pageSizeOptions]="[20, 25, 50, 100]" [pageSize]="20"
-                                    showFirstLastButtons>
+
+                                <mat-paginator [pageSizeOptions]="[15,30, 45]" [pageSize]="15" showFirstLastButtons>
                                 </mat-paginator>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- / CONTENT -->
+
         </div>
-        <!-- CENTER -->
+        <!-- / CENTER -->
+
     </div>
-    <!-- / USER -->
-    <!-- / CENTER -->
     <!-- / CONTENT-->
+
 </div>
+
+
 
 //

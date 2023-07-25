@@ -519,7 +519,7 @@ export class BillSettlementComponent implements OnInit {
         this.advanceDataStored.storage = new SearchInforObj(xx);
         const dialogRef = this._matDialog.open(PaymentDetailComponent,
           {
-            maxWidth: "90%",
+            maxWidth: "70%",
             height: '600px',
             width: '100%',
             data: {

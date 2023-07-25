@@ -20,11 +20,11 @@ export class PaymentDetailComponent implements OnInit {
 
  
   chipsElements = [
-    { name: 'Cash', state: true },
-    { name: 'Card', state: false },
+    { name: 'NEFT', state: true },
     { name: 'Cheque', state: false },
-    { name: 'NEFT', state: false },
     { name: 'UPI', state: false },
+    { name: 'Cash', state: false },
+    { name: 'Card', state: false },
     { name: 'Wrf Option', state: false }
   ];
 
@@ -104,7 +104,7 @@ debugger;
    
     if (this.advanceData.FromName == "OP-Bill") {
       this.netPayAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
-      this.cashAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
+      this.neftAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
       this.paidAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
       this.billNo = parseInt(this.advanceData.advanceObj.BillId);
 
@@ -112,7 +112,7 @@ debugger;
    
     else {
       this.netPayAmt =parseInt(this.advanceData.advanceObj.NetPayAmount);
-      this.cashAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
+      this.neftAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
       this.paidAmt =parseInt(this.advanceData.advanceObj.NetPayAmount);
       this.getBalanceAmt();
     }

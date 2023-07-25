@@ -98,17 +98,14 @@ export class StudyServicesComponent implements OnInit {
 
     if (this.data) {
       this.registerObj = this.data.registerObj;
-           
-      this.Study = true;
-
-    
+           this.Study = true;
     var m = {
       StudyId: this.registerObj.StudyId
     };
 
     this._StudyServicesService.getStudyservicebyStuIdList(m).subscribe(Visit => {
       this.dataSource1.data = Visit as StudyServicesDetail[];
-      
+      console.log(this.dataSource1.data);
       this.dataSource1.sort = this.sort;
       this.chargeslist1= this.dataSource1.data;
       this.dataSource1.paginator = this.paginator;
