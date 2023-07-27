@@ -76,10 +76,10 @@ export class AuthenticationService {
 
 
     getNavigationData(){
-    //    if(this._fuseNavigationService.getNavigation("main1")){
-    //        console.log("already exist")
-    //        return;
-    //    }
+       if(this._fuseNavigationService.getNavigation("main1")){
+           console.log("already exist")
+           return;
+       }
         return this.http
             // .post(`Generic/GetByProc?procName=SS_Rtrv_MenuInfo_Login_2`, {UserId:this.authService.currentUserValue.user.id})
             .post(`Generic/GetByProc?procName=SS_Rtrv_MenuInfo_Login_2`, {})

@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { NativeDateAdapter, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { formatDate } from '@angular/common';
 
@@ -20,7 +20,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 
 import { fuseConfig } from 'app/fuse-config';
-
+import { NgxSpinnerModule,NgxSpinnerService } from "ngx-spinner";
 import { FakeDbService } from "app/fake-db/fake-db.service";
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
@@ -37,6 +37,9 @@ import { EditCasedetailComponent } from './main/OpdCRMS/case-detail/edit-casedet
 import { ViewCasedetailComponent } from './main/OpdCRMS/case-detail/view-casedetail/view-casedetail.component';
 import Swal from 'sweetalert2';
 import { CommitteeMeetingComponent } from './main/committee-meeting/committee-meeting.component';
+import { InternetConnectionComponent } from './main/shared/componets/internet-connection/internet-connection.component';
+import { AppConfigModule } from './app-config.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 const appRoutes: Routes = [
@@ -113,15 +116,16 @@ export const PICK_FORMATS = {
 
 @NgModule({
     declarations: [
-        AppComponent                        
-        
+        AppComponent               ,         
+        InternetConnectionComponent
     ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        RouterModule.forRoot(appRoutes),
-
+        RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
+        NgxSpinnerModule,
+        AppConfigModule,
         TranslateModule.forRoot(),
 
         // InMemoryWebApiModule.forRoot(FakeDbService, {
@@ -133,6 +137,7 @@ export const PICK_FORMATS = {
         MatMomentDateModule,
         MatDatepickerModule,
         MatNativeDateModule,
+
         // Material
         MatButtonModule,
         MatIconModule,
@@ -145,14 +150,17 @@ export const PICK_FORMATS = {
         FuseThemeOptionsModule,
        
         // App modules
-        LayoutModule
+        LayoutModule,
+        MatDialogModule
 
 
     ],
-    providers: [
+    providers: [NgxSpinnerService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
-        {provide: DateAdapter, useClass: PickDateAdapter},
+            {provide: DateAdapter,
+            useClass: PickDateAdapter,
+            deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]},
         {provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS}
         //APIServices,
         //ServerData
