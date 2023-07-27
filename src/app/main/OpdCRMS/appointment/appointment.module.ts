@@ -49,6 +49,7 @@ import { BrowseInvoiceListComponent } from './browse-invoice-list/browse-invoice
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { PatientScreenBillDetailComponent } from './patient-screen-bill-detail/patient-screen-bill-detail.component';
+import { NewAPIIntergrateComponent } from './patient-screen-bill-detail/new-apiintergrate/new-apiintergrate.component';
 
 const routes: Routes = [
     {
@@ -70,7 +71,7 @@ const routes: Routes = [
         FileUploadComponent,
         ImageUploadComponent,
         PatientScreenBillDetailComponent,
-              
+        NewAPIIntergrateComponent
       
     ],
     imports: [

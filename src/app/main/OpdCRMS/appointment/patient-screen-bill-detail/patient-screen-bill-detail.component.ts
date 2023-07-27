@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NewAPIIntergrateComponent } from './new-apiintergrate/new-apiintergrate.component';
+import { GeturlService } from './new-apiintergrate/geturl.service';
 
 @Component({
   selector: 'app-patient-screen-bill-detail',
@@ -61,42 +63,45 @@ export class PatientScreenBillDetailComponent implements OnInit {
   dataSource = new MatTableDataSource<VisitMaster>();
 
   displayedColumns1 = [
-    'VisitDate',
-    'VisitTime',
-    'ProtocolNo',
-    'SubjectName',
-    'PBillNo',
-    'BillAmount',
-    'BillId',
+    'Date',
+    'VisitId',
+    'MRNo',
+    'FirstName',
+    'MiddleName',
+    'LastName',
+    'Address',
+    'ContactNo',
+    'DateofBirth',
+    'AgeYear',
+    'Gender',
     'action',
   ];
-  dataSource1 = new MatTableDataSource<VisitMaster>();
+  dataSource1 = new MatTableDataSource<ApiMaster>();
 
   displayedColumns2 = [
-    'VisitDate',
-    'VisitTime',
-    'ProtocolNo',
-    'SubjectName',
-    'PBillNo',
-    'BillAmount',
+    'date',
+    'VisitId',
+    'MRNo',
     'BillId',
+    'BillNo',
+    'TotalBillAmount',
     'action',
   ];
-  dataSource2 = new MatTableDataSource<VisitMaster>();
+  dataSource2 = new MatTableDataSource<ApiMaster>();
 
 
 
   displayedColumns3 = [
-    'VisitDate',
-    'VisitTime',
-    'ProtocolNo',
-    'SubjectName',
-    'PBillNo',
-    'BillAmount',
+    
+    'VisitId',
+    'MRNo',
     'BillId',
+    'Servicename',
+    'TotalAmount',
+    
     'action',
   ];
-  dataSource3 = new MatTableDataSource<VisitMaster>();
+  dataSource3 = new MatTableDataSource<ApiMaster>();
 
 
 
@@ -106,6 +111,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
   constructor(
     public _AppointmentService: AppointmentService,
+    public _GeturlService: GeturlService,
     private _ActRoute: Router,
     private _fuseSidebarService: FuseSidebarService,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -121,82 +127,22 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
     if (this.data) {
-      console.log(this.data);
+      // console.log(this.data);
       this.StudyId = this.data.element.Title;
 
       this.selectedAdvanceObj = this.data.element;
-      console.log(this.selectedAdvanceObj)
+      // console.log(this.selectedAdvanceObj)
 
 
     }
    
     this.getBillList();
-    this.getVisitdetail();
-    // this.dataSource.data.refresh();
+    // this.getVisitdetail();
+    
 
   }
 
   
-  getVisitdetail(){
-    this.sIsLoading = 'loading-data';
-    var D_data = {
-        "RegId": this.data.element.RegId
-    };
-    setTimeout(() => {
-      this.sIsLoading = 'loading-data';
-      this._AppointmentService.getVisitdetailsList(D_data).subscribe(Visit => {
-        this.dataSource.data = Visit as VisitMaster[];
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-        this.sIsLoading = '';
-
-      },
-        error => {
-          this.sIsLoading = '';
-        });
-    }, 1000);
-  }
-
-  getApiBillList(){
-    this.sIsLoading = 'loading-data';
-    var D_data = {
-        "RegId": this.data.element.RegId
-    };
-    setTimeout(() => {
-      this.sIsLoading = 'loading-data';
-      this._AppointmentService.getVisitdetailsList(D_data).subscribe(Visit => {
-        this.dataSource.data = Visit as VisitMaster[];
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-        this.sIsLoading = '';
-
-      },
-        error => {
-          this.sIsLoading = '';
-        });
-    }, 1000);
-  }
-
-
-  getApiBilldetail(){
-    this.sIsLoading = 'loading-data';
-    var D_data = {
-        "RegId": this.data.element.RegId
-    };
-    setTimeout(() => {
-      this.sIsLoading = 'loading-data';
-      this._AppointmentService.getVisitdetailsList(D_data).subscribe(Visit => {
-        this.dataSource.data = Visit as VisitMaster[];
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-        this.sIsLoading = '';
-
-      },
-        error => {
-          this.sIsLoading = '';
-        });
-    }, 1000);
-  }
 
   getBillList() {
     this.sIsLoading = 'loading-data';
@@ -218,7 +164,91 @@ export class PatientScreenBillDetailComponent implements OnInit {
         });
     }, 1000);
 
+}
 
+
+
+ 
+getApiVisitList(){
+
+  var D_data = {
+  "RegId": 111023
+
+};
+setTimeout(() => {
+
+this._GeturlService.getVisitData().subscribe(Visit => {
+  this.dataSource1.data = Visit as ApiMaster[];
+  // this.dataSource.sort = this.sort;
+  // this.dataSource.paginator = this.paginator;
+console.log(Visit)
+},
+  error => {
+    
+  });
+}, 1000);
+}
+
+getApiBillList(){
+this.sIsLoading = 'loading-data';
+var D_data = {
+  // "RegId": this.data.element.RegId
+};
+setTimeout(() => {
+this.sIsLoading = 'loading-data';
+this._GeturlService.getBillData().subscribe(Visit => {
+  this.dataSource2.data = Visit as ApiMaster[];
+  this.dataSource2.sort = this.sort;
+  this.dataSource2.paginator = this.paginator;
+  this.sIsLoading = '';
+
+},
+  error => {
+    this.sIsLoading = '';
+  });
+}, 1000);
+}
+
+
+getApiBilldetail(){
+this.sIsLoading = 'loading-data';
+var D_data = {
+  // "RegId": this.data.element.RegId
+};
+setTimeout(() => {
+this.sIsLoading = 'loading-data';
+this._GeturlService.getBillDetData().subscribe(Visit => {
+  this.dataSource3.data = Visit as ApiMaster[];
+  this.dataSource3.sort = this.sort;
+  this.dataSource3.paginator = this.paginator;
+  this.sIsLoading = '';
+
+},
+  error => {
+    this.sIsLoading = '';
+  });
+}, 1000);
+}
+
+  APIPAGE(){
+    const dialogRef = this._matDialog.open(NewAPIIntergrateComponent,
+      {
+        maxWidth: "95vw",
+        height: '800px',
+        width: '100%',
+        // data: {
+        //   registerObj: m_data,
+        // }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed - Insert Action', result);
+      
+    });
+
+    error => {
+      this.sIsLoading = '';
+
+    }
   }
 
   // toggle sidebar
@@ -468,4 +498,57 @@ export class PatientScreenBillDetailComponent implements OnInit {
     this._matDialog.closeAll();
   }
 
+}
+ 
+
+
+
+export class ApiMaster {
+  VisitId: Number;
+  MRNo:any;
+  FirstName:any;
+  MiddleName:any;
+  LastName:any;
+  Address:any;
+  Date: Date;
+  ContactNo:any;
+  DateofBirth: Date;
+  Gender: any;
+  date: Date;
+  BillId: any;
+  BillNo: any;
+  TotalBillAmount: any;
+  Servicename: any;
+  TotalAmount: any;
+  currentDate=new Date();
+  AgeYear:any;
+  /**
+   * Constructor
+   *
+   * @param ApiMaster
+   */
+
+ 
+  constructor(ApiMaster) {
+    {
+      this.Date = ApiMaster.Date ||this.currentDate;
+      this.VisitId = ApiMaster.VisitId || 0,
+      this.MRNo = ApiMaster.MRNo || '';
+      this.FirstName = ApiMaster.FirstName || '';
+      this.MiddleName = ApiMaster.MiddleName || '';
+      this.LastName = ApiMaster.LastName || '';
+      this.Address = ApiMaster.Address || '';
+      this.ContactNo = ApiMaster.ContactNo || '';
+      this.DateofBirth = ApiMaster.DateofBirth || '';
+      this.AgeYear = ApiMaster.AgeYear || '';
+      this.Gender = ApiMaster.Gender || '';
+      this.BillId = ApiMaster.BillId || '';
+      this.BillNo = ApiMaster.BillNo || '';
+      this.TotalBillAmount = ApiMaster.TotalBillAmount || '';
+      this.Servicename = ApiMaster.Servicename || '';
+      this.TotalAmount = ApiMaster.TotalAmount || '';
+     
+    }
+    }
+  
 }

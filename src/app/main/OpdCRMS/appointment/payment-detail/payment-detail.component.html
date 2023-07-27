@@ -381,7 +381,7 @@
                     <div class="save-payment">
                         <!-- <button type="submit" class="next-btn" (click)="saveClicked()" [disabled]="isLoading=='submit' || paymentForm.invalid || !balanceAmt|| checkAmt(netPayAmt,cashAmt,cardAmt,neftAmt,paytmAmt,wrfAmt)" -->
                          
-                        <button type="submit" class="next-btn" (click)="saveClicked()" [disabled]="isLoading=='submit' || paymentForm.invalid || checkAmt(netPayAmt,cashAmt,cardAmt,neftAmt,paytmAmt,wrfAmt)"
+                        <button type="submit" class="next-btn" (click)="saveClicked()" [disabled]="isLoading=='submit' ||  checkAmt(netPayAmt,cashAmt,cardAmt,neftAmt,paytmAmt,wrfAmt)"
                         style="border-radius: 16px;">
                             <span style="display: flex;justify-content: center;">
                                 <mat-spinner *ngIf="isLoading=='submit'" [color]="white" [diameter]="20">
