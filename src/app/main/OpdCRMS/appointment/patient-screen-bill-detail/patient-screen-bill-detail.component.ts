@@ -63,11 +63,11 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
   displayedColumns1 = [
     'Date',
-    'VisitId',
+    // 'VisitId',
     'MRNo',
-    'FirstName',
-    'MiddleName',
-    'LastName',
+    'PatientName',
+    // 'MiddleName',
+    // 'LastName',
     'Address',
     'ContactNo',
     'DateofBirth',
@@ -79,31 +79,18 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
   displayedColumns2 = [
     'date',
-    'VisitId',
-    'MRNo',
-    'BillId',
     'BillNo',
     'TotalBillAmount',
-    'action',
   ];
   dataSource2 = new MatTableDataSource<ApiMaster>();
 
 
 
   displayedColumns3 = [
-    
-    'VisitId',
-    'MRNo',
-    'BillId',
     'Servicename',
     'TotalAmount',
-    
-    'action',
   ];
   dataSource3 = new MatTableDataSource<ApiMaster>();
-
-
-
 
   menuActions: Array<string> = [];
   //datePipe: any;
@@ -169,26 +156,19 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
  
 getApiVisitList(){
-
-  var D_data = {
+var D_data = {
   "mrno": this._AppointmentService.myFilterform.get('MrNo').value || 0
 };
 setTimeout(() => {
-
 this._GeturlService.getVisitData(D_data).subscribe(Visit => {
   this.dataSource1.data = Visit as ApiMaster[];
-  // this.dataSource.sort = this.sort;
-  // this.dataSource.paginator = this.paginator;
-console.log(Visit)
 },
   error => {
-    
   });
 }, 1000);
 }
 
 getApiBillList(contact){
-
 this.sIsLoading = 'loading-data';
 var D_data = {
   "visitid":contact.VisitId
@@ -197,10 +177,7 @@ setTimeout(() => {
 this.sIsLoading = 'loading-data';
 this._GeturlService.getBillData(D_data).subscribe(Visit => {
   this.dataSource2.data = Visit as ApiMaster[];
-  this.dataSource2.sort = this.sort;
-  this.dataSource2.paginator = this.paginator;
   this.sIsLoading = '';
-
 },
   error => {
     this.sIsLoading = '';
@@ -210,7 +187,6 @@ this._GeturlService.getBillData(D_data).subscribe(Visit => {
 
 
 getApiBilldetail(contact){
-  debugger
 this.sIsLoading = 'loading-data';
 var D_data = {
   "billid": contact.BillId
@@ -219,10 +195,7 @@ setTimeout(() => {
 this.sIsLoading = 'loading-data';
 this._GeturlService.getBillDetData(D_data).subscribe(Visit => {
   this.dataSource3.data = Visit as ApiMaster[];
-  this.dataSource3.sort = this.sort;
-  this.dataSource3.paginator = this.paginator;
   this.sIsLoading = '';
-
 },
   error => {
     this.sIsLoading = '';

@@ -168,54 +168,29 @@
                         <div fxFlex="100" fxFlex.gt-sm="50" fxLayout="row" fxLayout.gt-xs="column"
                             style="width:98%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;border-style: groove;">
 
-
                             <div fxLayout="row" fxLayout.gt-xs="column"
                                 style=" width:100%; float: right;  border-radius:4px; background-color: white;
                             border:rgba(0,0,0,0.12) 1px solid; float: right;  padding: 1em; height:fit-content !important; margin-top: 10px;color: blue;">
-
                                 <form class="example-form" [formGroup]="_AppointmentService.myFilterform">
-
                                     <div class="col-md-6">
-
-                                        <mat-form-field appearance="outline"
-                                            style="border-style: groove;color: rgb(179, 174, 174);width: 170px;">
+                                        <mat-form-field appearance="outline">
                                             <mat-label>MrNo</mat-label>
                                             <input name="MrNo" formControlName="MrNo" matInput (keyup)="getApiVisitList()" required>
-                                            <!-- <span class="error" *ngIf="f.MrNo.invalid && f.MrNo.touched">MrNo is
-                                                required Enter only Alphabets</span> -->
                                         </mat-form-field>
 
-
-
-                                        <button mat-raised-button class="searchButton" (click)="getApiVisitList()"
-                                            matTooltip="search" style="width: 40px;margin-right: 650px;">
+                                        <button mat-raised-button class="searchButton" (click)="getApiVisitList()" matTooltip="search" >
                                             <mat-icon class="searchiconbutton">search</mat-icon>
                                         </button>
-
-
-                                        
-                                        <!-- <button mat-raised-button class="searchButton" (click)="getApiVisitList()"
-                                            matTooltip="search" style="width: 40px;margin-left: 30px;">
-                                            <mat-icon class="searchiconbutton">API Data</mat-icon>
-                                        </button> -->
-                                        <!-- <button mat-raised-button (click)="onClear()" class="clearbutton"
-                                            matTooltip="close" style="width: 40px;margin-right: 600px;">
-                                            <mat-icon class="cleariconbutton">close</mat-icon>
-                                        </button> -->
-
-
                                     </div>
                                 </form>
                             </div>
 
 
                             <div fxLayout="row" fxLayout.gt-xs="column"
-                                style=" width:100%; float: right;  border-radius:4px; background-color: white;overflow: auto;
-                                                    border:rgba(0,0,0,0.12) 1px solid; float: right;  padding: 1em; height: 200px !important; margin-top:2px;color: blue;">
-
+                            style=" width:100%; float: right;  border-radius:4px; background-color: white;overflow: auto;
+                            border:rgba(0,0,0,0.12) 1px solid; float: right;  padding: 1em; margin-top: 10px;color: blue;">
                                 <div>
                                     <label style="font-size: large;font-family: serif;">Visit Detail </label>
-
                                     <mat-table #table matSort [dataSource]="dataSource1"
                                         [@animateStagger]="{value:'50'}" class="table2" style="overflow: auto;">
                                         
@@ -227,14 +202,6 @@
                                             </mat-cell>
                                         </ng-container>
 
-                                        <ng-container matColumnDef="VisitId">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>VisitId
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.VisitId}}
-                                            </mat-cell>
-                                        </ng-container>
-
                                         <ng-container matColumnDef="MRNo">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>MRNo
                                             </mat-header-cell>
@@ -243,30 +210,13 @@
                                             </mat-cell>
                                         </ng-container>
 
-                                        <ng-container matColumnDef="FirstName">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>FirstName
+                                        <ng-container matColumnDef="PatientName">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>PatientName
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.FirstName}}
+                                                {{contact.FirstName}}  {{contact.MiddleName}}   {{contact.LastName}}
                                             </mat-cell>
                                         </ng-container>
-
-                                        <ng-container matColumnDef="MiddleName">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>MiddleName
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.MiddleName}}
-                                            </mat-cell>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="LastName">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>LastName
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.LastName}}
-                                            </mat-cell>
-                                        </ng-container>
-
 
                                         <ng-container matColumnDef="Address">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Address
@@ -359,7 +309,7 @@
                             </div>
                             <div fxLayout="row" fxLayout.gt-xs="column"
                                 style=" width:100%; float: right;  border-radius:4px; background-color: white;overflow: auto;
-                                                    border:rgba(0,0,0,0.12) 1px solid; float: right;  padding: 1em; height: 200px !important; margin-top: 10px;color: blue;">
+                                                    border:rgba(0,0,0,0.12) 1px solid; float: right;  padding: 1em;  margin-top: 10px;color: blue;">
 
                                 <div>
 
@@ -375,30 +325,6 @@
                                             </mat-cell>
                                         </ng-container>
 
-                                        <ng-container matColumnDef="VisitId">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>VisitId
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.VisitId}}
-                                            </mat-cell>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="MRNo">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>MRNo
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.MRNo}}
-                                            </mat-cell>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="BillId">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>BillId
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.BillId}}
-                                            </mat-cell>
-                                        </ng-container>
-
                                         <ng-container matColumnDef="BillNo">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>BillNo
                                             </mat-header-cell>
@@ -406,7 +332,6 @@
                                                 {{contact.PBillNo}}
                                             </mat-cell>
                                         </ng-container>
-
 
                                         <ng-container matColumnDef="TotalBillAmount">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header
@@ -416,20 +341,6 @@
                                                 {{contact.TotalBillAmount}}
                                             </mat-cell>
                                         </ng-container>
-                                        <ng-container matColumnDef="action" stickyEnd>
-                                            <mat-header-cell *matHeaderCellDef style="color: white;">Action
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact">
-                                              
-                                                <button mat-icon-button (click)="getPrint(contact)" matTooltip="print">
-                                                    <mat-icon>print</mat-icon>
-                                                </button>
-
-
-                                            </mat-cell>
-                                        </ng-container>
-
-
 
                                         <ng-container matColumnDef="loading">
                                             <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
@@ -454,45 +365,20 @@
                                         <mat-footer-row *matFooterRowDef="['noData']"
                                             [ngClass]="{'hide':!(dataSource2!=null && dataSource2.data.length==0)}"></mat-footer-row>
                                     </mat-table>
-                                    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" [pageSize]="5">
-                                    </mat-paginator>
+                                  
                                 </div>
 
                             </div>
 
                             <div fxLayout="row" fxLayout.gt-xs="column"
                                 style=" width:100%; float: right;  border-radius:4px; background-color: white;overflow: auto;
-                                                    border:rgba(0,0,0,0.12) 1px solid; float: right;  padding: 1em; height: 200px !important; margin-top: 10px;color: blue;">
+                                                    border:rgba(0,0,0,0.12) 1px solid; float: right;  padding: 1em; margin-top: 10px;color: blue;">
 
                                 <div>
 
                                     <label style="font-size: large;font-family: serif;">Bill Detail Information </label>
                                     <mat-table #table matSort [dataSource]="dataSource3"
                                         [@animateStagger]="{value:'50'}" class="table4" style="overflow: auto;">
-
-                                        <ng-container matColumnDef="VisitId">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>VisitId
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.VisitId}}
-                                            </mat-cell>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="MRNo">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>MRNo
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.MRNo}}
-                                            </mat-cell>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="BillId">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>BillId
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.BillId}}
-                                            </mat-cell>
-                                        </ng-container>
 
                                         <ng-container matColumnDef="Servicename">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Servicename
@@ -510,22 +396,6 @@
                                                 {{contact.TotalAmount}}
                                             </mat-cell>
                                         </ng-container>
-
-
-                                        <ng-container matColumnDef="action" stickyEnd>
-                                            <mat-header-cell *matHeaderCellDef style="color: white;">Action
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact">
-                                              
-                                                <button mat-icon-button (click)="getPrint(contact)" matTooltip="print">
-                                                    <mat-icon>print</mat-icon>
-                                                </button>
-
-
-                                            </mat-cell>
-                                        </ng-container>
-
-
 
                                         <ng-container matColumnDef="loading">
                                             <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
@@ -549,8 +419,7 @@
                                         <mat-footer-row *matFooterRowDef="['noData']"
                                             [ngClass]="{'hide':!(dataSource3!=null && dataSource3.data.length==0)}"></mat-footer-row>
                                     </mat-table>
-                                    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" [pageSize]="5">
-                                    </mat-paginator>
+                                  
                                 </div>
 
                             </div>
