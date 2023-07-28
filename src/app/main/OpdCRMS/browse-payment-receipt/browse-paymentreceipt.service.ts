@@ -25,7 +25,7 @@ export class BrowsePaymentreceiptService {
       RegNo: '',
       PBillNo: '',
       ReceiptNo: '',
-      
+      CaseId:''
     });
   }
 
@@ -47,6 +47,8 @@ export class BrowsePaymentreceiptService {
   public getBrowseOpdPaymentReceiptPrint(PaymentId) {
     return this._httpClient.post("Generic/GetByProc?procName=rptOPDPaymentReceiptPrint", PaymentId)
   }    
-
+  public getCaseIDCombo(){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_StudyInformationCombo", {});
+  }
 
 }

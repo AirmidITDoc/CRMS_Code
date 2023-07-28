@@ -310,7 +310,11 @@ export class CaseDetail {
   AgreementFileName: String;
 ContactId:any;
 CompanyId:any;
-StudyId:any;;
+StudyId:any;
+
+ProtocolTitle:any;
+
+
   /**
    * Constructor
    *
@@ -334,6 +338,7 @@ StudyId:any;;
       this.ContactId = CaseDetail.ContactId || '';
       this.CompanyId=CaseDetail.CompanyId ||0;
       this.StudyId=CaseDetail.StudyId ||0;
+      this.ProtocolTitle=CaseDetail.ProtocolTitle ||0;
     }
   }
 }

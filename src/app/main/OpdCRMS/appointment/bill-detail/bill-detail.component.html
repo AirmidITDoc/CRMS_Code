@@ -14,16 +14,17 @@
                     <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
                         style="width: 80%;font-size: 16px;">
                         OPD BILLING || ( {{selectedAdvanceObj.RegNo}} ) {{selectedAdvanceObj.PatientName}} (
-                        {{selectedAdvanceObj.AgeYear}}) Yrs | {{selectedAdvanceObj.Doctorname}} | Visit Id
-                        {{selectedAdvanceObj.VisitId}} | Visit Date {{selectedAdvanceObj.VistDateTime}} </span>
+                        {{selectedAdvanceObj.AgeYear}}) Yrs | {{selectedAdvanceObj.Doctorname}} </span>
+                    <!-- | Visit Id
+                        {{selectedAdvanceObj.VisitId}} | Visit Date {{selectedAdvanceObj.VistDateTime}} </span> -->
 
-                    <div fxLayout="row" fxLayoutAlign="start center" style="float: right; margin-right: 5px;  ">
+                    <div fxLayout="row" fxLayoutAlign="start center" style="float: right;">
                         <diV style="margin-top:21px;">
                             <span style="margin-right: 40px;color: black;font-weight: bold;">
                                 <app-common-date [screenFrom]="screenFromString"
                                     (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
                             </span>
-                        </diV>&nbsp;&nbsp;
+                        </diV>
                         <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
                             close
                         </span>
@@ -31,7 +32,7 @@
                 </div>
             </div>
 
-            <mat-card-content style="width: 100%;margin-right: 5px;">
+            <mat-card-content style="width: 100%;">
 
 
                 <div fxLayout="column">
@@ -57,9 +58,9 @@
                                         <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText"
                                             showPanel="true" (optionsScroll)="onScroll()"
                                             (optionSelected)='getSelectedObj($event.option.value)'
-                                            style="width: 500px;">
+                                            style="width: 600px;">
                                             <mat-option *ngFor="let option of filteredOptions" [value]="option"
-                                                style="width: 500px;">
+                                                style="width: 600px;">
                                                 {{option.ServiceName}} | Price {{option.Price}}
                                             </mat-option>
                                         </mat-autocomplete>
@@ -138,14 +139,14 @@
                                     <!-- [disabled]="registeredForm.invalid"> -->
                                     <mat-icon> add </mat-icon> &nbsp;Add
                                 </button>
-                           
+
                             </div>
 
                         </div>
 
 
                         <div fxFlex="100" fxFlex.gt-sm="65" fxLayout="row" fxLayout.gt-xs="column"
-                            style="width:98%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
+                            style="width:100%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
 
                             <div>
                                 <div class="col-md-12">
@@ -276,7 +277,7 @@
                                                 <!-- <button mat-icon-button (click)="onDeactive(row.RegId)" color="warn"><mat-icon>delete_outline</mat-icon></button>       -->
                                             </mat-cell>
                                         </ng-container>
-                                     
+
                                         <ng-container matColumnDef="loading">
                                             <mat-footer-cell *matFooterCellDef colspan="6">
                                                 loading data...

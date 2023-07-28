@@ -65,6 +65,17 @@
                                 </mat-form-field> -->
 
                                 <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>CaseId</mat-label>
+                                    <mat-select formControlName="CaseId" name="CaseId"
+                                        (selectionChange)="getCaseList()">
+                                        <mat-option></mat-option>
+                                        <mat-option *ngFor="let m of caseList" [value]="m">
+                                            {{m.StudyId}} || {{m.ProtocolNo}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                
+                                <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>Protocol Number</mat-label>
                                     <input name="CaseId" formControlName="CaseId" matInput>
                                 </mat-form-field>

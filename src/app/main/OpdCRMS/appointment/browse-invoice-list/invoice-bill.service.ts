@@ -42,5 +42,10 @@ export class InvoiceBillService {
   public getTemplate(query) {
     return this._httpClient.post("Generic/GetBySelectQuery?query="+query, {})
   } 
-
+  public getCaseIDCombo(){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_StudyInformationCombo", {});
+  }
+  ApprovedInvoice(query){
+    return this._httpClient.post("Generic/GetBySelectQuery?query="+query, {})
+  }
 }

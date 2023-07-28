@@ -892,12 +892,6 @@ debugger;
   }
 
 
-  getSelectedDrug(value) {
-    // console.log('historyContoller==', this.caseFormGroup.get('historyContoller').value);
-    console.log('controll===', value);
-    this.registeredForm.get(`drugController$`).setValue(value);
-    console.log(this.registeredForm.get(`drugController$`).value);
-  }
 
   displayWith(lookup) {
     return lookup ? lookup.ItemName : null;

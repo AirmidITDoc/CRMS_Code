@@ -31,6 +31,8 @@ export class BrowsePaymentReceiptComponent implements OnInit {
   sIsLoading: string = '';
   TempKeys:any;
   data:any;
+  selectedcase:any;
+  caseList:any=[];
 
   @Input() dataArray: any; 
   hasSelectedContacts: boolean;
@@ -42,7 +44,7 @@ export class BrowsePaymentReceiptComponent implements OnInit {
     'PatientName',
     // 'Remark',
     'PaymentDate',
-    'PBillNo',
+    // 'PBillNo',
     'ReceiptNo',
     'PayDate',
     'UserName',
@@ -67,6 +69,7 @@ export class BrowsePaymentReceiptComponent implements OnInit {
     public _matDialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.getCasecombo();
     this.getBrowseOpdPaymentReceiptList();
   }
 
@@ -309,6 +312,15 @@ getPrint(el) {
  }
 
 
+ getCasecombo() {
+
+  this._BrowseOpdPaymentReceiptService.getCaseIDCombo().subscribe(data => {
+    this.caseList = data;
+    this.selectedcase = this.caseList[0].CaseId;
+
+  });
+
+}
 
 
 print() {

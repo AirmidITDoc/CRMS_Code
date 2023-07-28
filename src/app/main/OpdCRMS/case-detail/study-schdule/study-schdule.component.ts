@@ -83,7 +83,7 @@ export class StudySchduleComponent implements OnInit {
   if (this.data) {
       this.registerObj = this.data.registerObj;
       // this.StudyId=this.data.registerObj.StudyId;
-      console.log(this.registerObj.StudyId);
+      console.log(this.registerObj);
       this.Study = true;
 
     

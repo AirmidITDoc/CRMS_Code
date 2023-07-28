@@ -9,7 +9,7 @@
                 <!-- <h3>Add Study Services | Study Id : {{registerObj.StudyId}}</h3> -->
 
                 <h3 style="font-family: serif;">{{_StudyServicesService.studyServicesFormGroup.controls.StudyId.value?"Modify Study Service Master":"New
-                    Study Service Master"}} || StudyId : {{StudyId}} | ProtocolNo : {{ProtocolNo}} | ProtocolTitle : {{ProtocolTitle}}</h3>
+                    Study Service Master"}} | Study Id:{{registerObj.StudyId}} StudyTitle :{{registerObj.ProtocolTitle}}</h3>
                 <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
                     <mat-icon>close</mat-icon>
                 </button>

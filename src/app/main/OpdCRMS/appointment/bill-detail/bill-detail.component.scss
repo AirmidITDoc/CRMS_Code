@@ -612,7 +612,7 @@ mat-cell, mat-header-cell, mat-footer-cell {
     align-items: center;
     overflow: hidden;
     word-wrap: break-word;
-    min-height: 10px;
+    min-height: 20px;
     /* min-height: inherit; */
 }
 
@@ -620,16 +620,17 @@ mat-cell, mat-header-cell, mat-footer-cell {
 padding-bottom: 2px;
 }
 
+.table1{
 .mat-header-row {
     width: 100%;
-    max-width:1070px;
-    min-width:1070px; 
-    min-height: 30px;     
+    max-width:1200px;
+    min-width:1200px; 
+    min-height: 40px;     
 }
 .mat-row {
     width: 100%;
-    max-width:1070px;
-    min-width:1070px; 
+    max-width:1200px;
+    min-width:1200px; 
     min-height: 30px;            
 }
 // PatientData
@@ -649,9 +650,9 @@ padding-bottom: 2px;
 }
 
 .mat-column-ServiceName {
-    width:250px;
-    max-width:250px;
-    min-width:250px;
+    width:300px;
+    max-width:300px;
+    min-width:300px;
     text-align:left;
     white-space: nowrap; 
     overflow: hidden;
@@ -704,9 +705,9 @@ padding-bottom: 2px;
     text-align:center;
 }
 .mat-column-ChargeDoctorName {
-    width:160px;
-    max-width:160px;
-    min-width:160px;
+    width:200px;
+    max-width:200px;
+    min-width:200px;
     // justify-content:center;
     text-align:center;
     white-space: nowrap; 
@@ -820,7 +821,7 @@ button:disabled {
 }
 
 
-
+}
 
 
 

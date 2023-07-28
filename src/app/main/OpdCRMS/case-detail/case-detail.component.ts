@@ -28,7 +28,7 @@ import { FileUploadComponent } from '../appointment/file-upload/file-upload.comp
 })
 export class CaseDetailComponent implements OnInit {
 
-  
+  selectedcase: any;
   msg: any;
   sIsLoading: string = '';
   isLoading = true;
@@ -36,7 +36,7 @@ export class CaseDetailComponent implements OnInit {
   hasSelectedContacts: boolean;
   currentDate=new Date();
   subscriptions: Subscription[] = [];
-  
+  caseList: any = [];
   printTemplate: any;
   
   subscriptionArr: Subscription[] = [];
@@ -91,11 +91,20 @@ export class CaseDetailComponent implements OnInit {
 
 
     this.getCaseList();
-    // this.dataSource.data.refresh();
+    this.getCasecombo();
 
   }
 
-  
+  getCasecombo() {
+
+    this._CasedetailService.getCaseIDCombo().subscribe(data => {
+      this.caseList = data;
+      this.selectedcase = this.caseList[0].CaseId;
+
+    });
+
+  }
+
 
   getCaseList() {
     this.sIsLoading = 'loading-data';

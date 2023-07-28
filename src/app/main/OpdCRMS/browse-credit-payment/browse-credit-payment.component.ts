@@ -41,8 +41,9 @@ export class BrowseCreditPaymentComponent implements OnInit {
   interimArray: any = [];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  // @ViewChild(MatPaginator) PathTestpaginator: MatPaginator;
-
+  
+  caseList:any=[];
+  selectedcase:any;
   selectedAdvanceObj: BrowseOPDBill;
   numberInWords!: string;
   // lang: SUPPORTED_LANGUAGE = 'en';
@@ -55,7 +56,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
   displayedColumns = [
     // 'checkbox',
     'BillDate',
-    'BillNo',
+    // 'BillNo',
     'StudyId',
     'ProtocolNo',
     'SubjectName',
@@ -90,6 +91,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.getCasecombo();
      if (this._ActRoute.url == '/opd/payment') {
       this.menuActions.push('Approval');
     }
@@ -129,6 +131,14 @@ export class BrowseCreditPaymentComponent implements OnInit {
     this._fuseSidebarService.getSidebar(name).toggleOpen();
   }
 
+  getCasecombo() {
+
+    this._BrowseOPDBillsService.getCaseIDCombo().subscribe(data => {
+      this.caseList = data;
+      this.selectedcase = this.caseList[0].CaseId;
+  
+    });
+  }
 
   onShow(event: MouseEvent) {
     // this.click = false;// !this.click;

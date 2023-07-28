@@ -11,6 +11,8 @@ import { DatePipe } from '@angular/common';
 import { AdvanceDataStored } from '../../advance';
 import { fuseAnimations } from '@fuse/animations';
 import { InvoiceBillMappingComponent } from '../invoice-bill-mapping/invoice-bill-mapping.component';
+import Swal from 'sweetalert2';
+import { AuthenticationService } from 'app/core/services/authentication.service';
 
 @Component({
   selector: 'app-browse-invoice-list',
@@ -35,6 +37,9 @@ export class BrowseInvoiceListComponent implements OnInit {
   reportPrintObjList: InvoiceBilll[] = [];
   currentDate = new Date();
   interimArray: any = [];
+  caseList: any = [];
+  selectedcase: any;
+
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -50,8 +55,8 @@ export class BrowseInvoiceListComponent implements OnInit {
 
   displayedColumns = [
 
-    'InvoiceId',
-    'InvoiceNumber',
+    // 'InvoiceId',
+    // 'InvoiceNumber',
     'CaseId',
     'ProtocolNo',
     'ProtocolTitle',
@@ -76,6 +81,7 @@ export class BrowseInvoiceListComponent implements OnInit {
 
   constructor(private _fuseSidebarService: FuseSidebarService,
     public _InvoiceBilllsService: InvoiceBillService,
+    private accountService: AuthenticationService,
     public datePipe: DatePipe,
     private _ActRoute: Router,
     public _matDialog: MatDialog,
@@ -85,17 +91,19 @@ export class BrowseInvoiceListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getCasecombo();
 
     if (this._ActRoute.url == '/opd/payment') {
       this.menuActions.push('Approval');
+
     }
 
     debugger;
     var D_data = {
          
-      "FromDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "ToDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "StudyId": this._InvoiceBilllsService.myFilterform.get("StudyId").value || 0
+      "FromDate":'2023-07-28 00:00:00.000',// this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '2023-07-28 00:00:00.000',
+      "ToDate":'2023-07-28 00:00:00.000',// this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '2023-07-28 00:00:00.000',
+      "StudyId": this._InvoiceBilllsService.myFilterform.get("StudyId").value.StudyId || 1
     }
     console.log(D_data);
 
@@ -117,6 +125,18 @@ export class BrowseInvoiceListComponent implements OnInit {
     this.onClear();
   }
 
+  
+
+
+  getCasecombo() {
+
+    this._InvoiceBilllsService.getCaseIDCombo().subscribe(data => {
+      this.caseList = data;
+      this.selectedcase = this.caseList[0].CaseId;
+
+    });
+
+  }
 
   toggleSidebar(name): void {
     this._fuseSidebarService.getSidebar(name).toggleOpen();
@@ -496,18 +516,38 @@ export class BrowseInvoiceListComponent implements OnInit {
   }
 
 
-  getRecord(contact, m): void {
-    //   debugger;
-    //   console.log(contact);
+  getRecord(contact): void {
+    debugger
+    if (contact.ApprovalStatus == 0) {
+      Swal.fire({
+        title: 'Do you want to Approve the Invoice ',
+        // showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'OK',
 
-    //   // this.VisitID = contact.VisitId;
-    //   let AgeDay, AgeMonth, AgeYear, Age
-    //   if (contact.Age != null || contact.AgeDay != null || contact.AgeMonth != null || contact.AgeYear != null) {
-    //     Age = contact.Age.trim();
-    //     AgeDay = contact.AgeDay.trim();
-    //     AgeMonth = contact.AgeMonth.trim();
-    //     AgeYear = contact.AgeYear.trim();
-    //   }
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+let Appby= this.accountService.currentUserValue.user.id;
+
+var datePipe = new DatePipe("en-US");
+let date = datePipe.transform((new Date), "yyyy-MM-dd");
+
+     
+        if (result.isConfirmed) {
+          let Query = "Update T_InvoiceDetails set ApprovalStatus = 'OK',ApprovedBy= " + Appby + " ,ApprovedDate = " + date + " where InvoiceId=" + contact.InvoiceId + " ";
+          console.log(Query)
+          this._InvoiceBilllsService.ApprovedInvoice(Query).subscribe(data => {
+                console.log(data)
+                Swal.fire("Invoice is Approved Successfully")
+                this.InvoiceBilllsList();
+          });
+        }
+
+      })
+
+    }else{
+      Swal.fire("Invoice is Already Approved Successfully")
+    }
 
     //   if (m == "Approval") {
     //     console.log(contact);

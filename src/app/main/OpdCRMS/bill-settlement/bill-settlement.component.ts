@@ -35,6 +35,7 @@ export class BillSettlementComponent implements OnInit {
   printTemplate: any;
   reportPrintObjList: BrowseOPDBill[] = [];
   currentDate = new Date();
+  selectedcase:any;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -46,12 +47,12 @@ export class BillSettlementComponent implements OnInit {
   value = 123;
   BrowseOPDBillsList: any;
   msg: any;
-
+caseList:any=[];
   isLoading = true;
 
   displayedColumns = [
     'BillDate',
-    'BillNo',
+    // 'BillNo',
     'RegNo',
     'PatientName',
     'TotalAmt',
@@ -82,7 +83,7 @@ export class BillSettlementComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.getCasecombo();
      if (this._ActRoute.url == '/opd/payment') {
       this.menuActions.push('Payment');
     }
@@ -139,7 +140,15 @@ export class BillSettlementComponent implements OnInit {
     this.click = true;
 
   }
+  getCasecombo() {
 
+    this._BrowseOPDBillsService.getCaseIDCombo().subscribe(data => {
+      this.caseList = data;
+      this.selectedcase = this.caseList[0].CaseId;
+
+    });
+
+  }
 
 
   onClear() {

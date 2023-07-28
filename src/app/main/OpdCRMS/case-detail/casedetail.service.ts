@@ -171,4 +171,8 @@ export class CasedetailService {
   public getStudyservicebyStuIdList(employee){
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_StudyServicebyStudyId",employee);
   }
+
+  public getCaseIDCombo(){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_StudyInformationCombo", {});
+  }
 }

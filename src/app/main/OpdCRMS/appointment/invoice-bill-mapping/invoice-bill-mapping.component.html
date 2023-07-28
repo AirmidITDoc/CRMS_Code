@@ -1,4 +1,4 @@
-<div fxFlexFill fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" style="width: 100%; background:#F5F5F5; ">
+<div fxFlexFill fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" style="width: 100%; background:#F5F5F5;padding: 10px; ">
     <!-- <div class="col-md-12" style="padding:10px;" *ngIf="selectedView == 'Dropdown'"> -->
     <div class="container" style="width: 100%;">
         <div style="width: 100%;">
@@ -21,8 +21,8 @@
 
 
             <div class="content-card"
-                style="width:100%;  margin-top: 2px; float: right;background-color: white; margin-right: 10px;margin-left: 10px;">
-                <mat-card-content style="width: 100%;margin-right: 5px;">
+                style="width:100%;  margin-top: 2px;background-color: white;">
+                <mat-card-content style="width: 100%;">
 
                     <div fxLayout="column">
 
@@ -39,7 +39,7 @@
                                         
                                     </span> -->
                                         </div>
-                                        <form [formGroup]="registeredForm" style="display: flex;" #f="ngForm" #aForm>
+                                        <form [formGroup]="registeredForm"  #f="ngForm" #aForm>
 
                                             <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between"
                                                 fxLayoutGap="5px" style="margin-top: 20px;margin-left: 20px;">
@@ -69,13 +69,8 @@
 
 
                             <div fxFlex="100" fxFlex.gt-sm="100" fxLayout="row" fxLayout.gt-xs="column"
-                                style="width:90%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
+                                style="width:100%; ;margin-left: 1px;margin-top: 7px;margin-left: 7px;">
 
-
-                                <ng-template mat-tab-label style="color: black; font-size: 17px bold; height: 100px; ">
-                                    <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
-                                    Bill list
-                                </ng-template>
                                 <div>
                                     <div class="col-md-12">
                                         <!-- ================= Charges List Table ======================= -->
@@ -295,7 +290,7 @@
                                                 <mat-form-field appearance="outline" style="width:100px;">
                                                     <mat-label>IGST</mat-label>
                                                     <input matInput [(ngModel)]="IGST" name="IGST"
-                                                        formControlName="IGST" required (keyup)="calculateIGST()">
+                                                        formControlName="IGST"  (keyup)="calculateIGST()">
                                                     <!-- <mat-error
                                                     *ngIf="registeredForm.get('netAmount').invalid && registeredForm.get('netAmount').touched">
                                                     NetAmount is required</mat-error> -->
@@ -330,7 +325,7 @@
                             </div>
 
                             <div style="float: right;margin-top: 20px;">
-                                <button class="next-btn" color="accent" (click)="onSaveOPBill()">
+                                <button class="next-btn" color="accent" (click)="onSaveInvoice()">
                                     <span style="display: flex;justify-content: center;">
                                         <span>Save</span>
                                     </span>
@@ -347,3 +342,6 @@
                   
                 </mat-card-content>
             </div>
+        </div>
+    </div>
+</div>

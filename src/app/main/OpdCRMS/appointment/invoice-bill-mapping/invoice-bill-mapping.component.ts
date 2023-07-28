@@ -243,7 +243,7 @@ export class InvoiceBillMappingComponent implements OnInit {
     let netAmt;
     netAmt = element.reduce((sum, { TotalBillAmt }) => sum += +(TotalBillAmt || 0), 0);
     this.TaxableAmount = netAmt;
-
+    this.FinalTotalAmount=netAmt;
     return netAmt
   }
 
@@ -315,7 +315,7 @@ export class InvoiceBillMappingComponent implements OnInit {
 
   }
 
-  onSaveOPBill() {
+  onSaveInvoice() {
 
     debugger;
     let insertInvoiceDetail = {};
@@ -333,7 +333,7 @@ export class InvoiceBillMappingComponent implements OnInit {
     insertInvoiceDetail['ApprovalStatus'] = 0,// this.registeredForm.get('ApprovalStatus').value || 0;
       insertInvoiceDetail['ApprovedBy'] = "",//this.registeredForm.get('ApprovedBy').value || '';
       insertInvoiceDetail['ApprovedDate'] = this.dateTimeObj.date;// this.dateTimeObj.date;//this.registerObj.ApprovedDate;
-    insertInvoiceDetail['InvoiceStatus'] = "";//this.registeredForm.get('InvoiceStatus').value || '';
+    insertInvoiceDetail['InvoiceStatus'] = "Final";//this.registeredForm.get('InvoiceStatus').value || '';
     insertInvoiceDetail['CashCounterId'] = 0;// this.registeredForm.get('CashCounterId').value || 0;
     insertInvoiceDetail['createdBy'] = this.accountService.currentUserValue.user.id;
 

@@ -79,6 +79,18 @@
                                             <mat-date-range-picker #picker></mat-date-range-picker>
                                         </mat-form-field>
 
+                                        
+                                        <mat-form-field appearance="outline" fxFlex>
+                                            <mat-label>StudyId</mat-label>
+                                            <mat-select formControlName="CaseId" name="CaseId"
+                                             >
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let m of caseList" [value]="m">
+                                                    {{m.StudyId}} || {{m.ProtocolNo}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
                                         <mat-form-field appearance="outline" fxFlex>
                                             <mat-label>Receipt No</mat-label>
                                             <input name="ReceiptNo" formControlName="ReceiptNo" matInput>
@@ -226,13 +238,13 @@
                             </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="PBillNo">
+                        <!-- <ng-container matColumnDef="PBillNo">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>PBillNo
                             </mat-header-cell>
                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                 {{contact.PBillNo}}
                             </mat-cell>
-                        </ng-container>
+                        </ng-container> -->
 
                         <ng-container matColumnDef="ReceiptNo">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>ReceiptNo

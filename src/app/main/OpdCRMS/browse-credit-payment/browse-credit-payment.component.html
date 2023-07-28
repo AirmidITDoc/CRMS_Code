@@ -62,6 +62,19 @@
                                         <mat-date-range-picker #picker></mat-date-range-picker>
                                     </mat-form-field>
 
+                                    
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>StudyId</mat-label>
+                                        <mat-select formControlName="CaseId" name="CaseId"
+                                           >
+                                            <mat-option></mat-option>
+                                            <mat-option *ngFor="let m of caseList" [value]="m">
+                                                {{m.StudyId}} || {{m.ProtocolNo}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Bill No</mat-label>
                                         <input name="PBillNo" formControlName="PBillNo" matInput keyup="onShow($event)">
@@ -147,13 +160,13 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="BillNo">
+                                    <!-- <ng-container matColumnDef="BillNo">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>BillNo
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                             {{contact.BillNo}}
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
                                     <ng-container matColumnDef="StudyId">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>StudyId
