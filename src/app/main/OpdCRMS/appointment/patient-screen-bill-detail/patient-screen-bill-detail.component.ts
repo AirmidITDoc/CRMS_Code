@@ -12,8 +12,7 @@ import { Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NewAPIIntergrateComponent } from './new-apiintergrate/new-apiintergrate.component';
-import { GeturlService } from './new-apiintergrate/geturl.service';
+import { GeturlService } from './geturl.service';
 
 @Component({
   selector: 'app-patient-screen-bill-detail',
@@ -172,12 +171,11 @@ export class PatientScreenBillDetailComponent implements OnInit {
 getApiVisitList(){
 
   var D_data = {
-  "RegId": 111023
-
+  "mrno": this._AppointmentService.myFilterform.get('MrNo').value || 0
 };
 setTimeout(() => {
 
-this._GeturlService.getVisitData().subscribe(Visit => {
+this._GeturlService.getVisitData(D_data).subscribe(Visit => {
   this.dataSource1.data = Visit as ApiMaster[];
   // this.dataSource.sort = this.sort;
   // this.dataSource.paginator = this.paginator;
@@ -189,14 +187,15 @@ console.log(Visit)
 }, 1000);
 }
 
-getApiBillList(){
+getApiBillList(contact){
+
 this.sIsLoading = 'loading-data';
 var D_data = {
-  // "RegId": this.data.element.RegId
+  "visitid":contact.VisitId
 };
 setTimeout(() => {
 this.sIsLoading = 'loading-data';
-this._GeturlService.getBillData().subscribe(Visit => {
+this._GeturlService.getBillData(D_data).subscribe(Visit => {
   this.dataSource2.data = Visit as ApiMaster[];
   this.dataSource2.sort = this.sort;
   this.dataSource2.paginator = this.paginator;
@@ -210,14 +209,15 @@ this._GeturlService.getBillData().subscribe(Visit => {
 }
 
 
-getApiBilldetail(){
+getApiBilldetail(contact){
+  debugger
 this.sIsLoading = 'loading-data';
 var D_data = {
-  // "RegId": this.data.element.RegId
+  "billid": contact.BillId
 };
 setTimeout(() => {
 this.sIsLoading = 'loading-data';
-this._GeturlService.getBillDetData().subscribe(Visit => {
+this._GeturlService.getBillDetData(D_data).subscribe(Visit => {
   this.dataSource3.data = Visit as ApiMaster[];
   this.dataSource3.sort = this.sort;
   this.dataSource3.paginator = this.paginator;
@@ -230,26 +230,7 @@ this._GeturlService.getBillDetData().subscribe(Visit => {
 }, 1000);
 }
 
-  APIPAGE(){
-    const dialogRef = this._matDialog.open(NewAPIIntergrateComponent,
-      {
-        maxWidth: "95vw",
-        height: '800px',
-        width: '100%',
-        // data: {
-        //   registerObj: m_data,
-        // }
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed - Insert Action', result);
-      
-    });
-
-    error => {
-      this.sIsLoading = '';
-
-    }
-  }
+ 
 
   // toggle sidebar
   toggleSidebar(name): void {
@@ -258,17 +239,12 @@ this._GeturlService.getBillDetData().subscribe(Visit => {
 
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
-    // console.log('dateTimeObj==', dateTimeObj);
+    
     this.dateTimeObj = dateTimeObj;
   }
 
   onClear() {
-    // this._AppointmentService.myFilterform.reset(
-    //   {
-    //     start: [],
-    //     end: []
-    //   }
-    // );
+    
   }
 
 

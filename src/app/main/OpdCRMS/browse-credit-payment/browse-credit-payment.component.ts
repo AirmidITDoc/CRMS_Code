@@ -96,11 +96,11 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
     debugger;
     var D_data = {
-      "StudyId":this._BrowseOPDBillsService.myFilterform.get("StudyId").value || 1,
+      "StudyId":this._BrowseOPDBillsService.myFilterform.get("StudyId").value || 0,
       "F_Name": "%",
       "L_Name": "%",
-      "From_Dt": '2023-07-17 00:00:00.000',//this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "To_Dt": '2023-07-17 00:00:00.000',// this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
+      "From_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
+      "To_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
       "Reg_No": 0,
       "PBillNo": '%',
     }

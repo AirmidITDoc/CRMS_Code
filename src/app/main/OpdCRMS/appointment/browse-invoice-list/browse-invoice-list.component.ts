@@ -92,12 +92,10 @@ export class BrowseInvoiceListComponent implements OnInit {
 
     debugger;
     var D_data = {
-      // "F_Name": "%",
-      // "L_Name": "%",
-      "StudyId": this._InvoiceBilllsService.myFilterform.get("StudyId").value || 0,
+         
       "FromDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "ToDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900'
-          
+      "ToDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
+      "StudyId": this._InvoiceBilllsService.myFilterform.get("StudyId").value || 0
     }
     console.log(D_data);
 

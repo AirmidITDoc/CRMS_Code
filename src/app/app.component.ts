@@ -10,7 +10,7 @@ import { FuseNavigationService } from '@fuse/components/navigation/navigation.se
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
-import { Idle } from 'idlejs/dist';
+// import { Idle } from 'idlejs/dist';
 import { navigation } from 'app/navigation/navigation';
 import { locale as navigationEnglish } from 'app/navigation/i18n/en';
 import { locale as navigationTurkish } from 'app/navigation/i18n/tr';
@@ -55,16 +55,16 @@ export class AppComponent implements OnInit, OnDestroy {
      * @param {TranslateService} _translateService
      */
 
-    idle = new Idle().whenNotInteractive().within(5).do(() => {
-        this.url = this.router.url;
-        console.log('this.url==', this.url);
-        if (this.url !== '/auth/login') {
-          alert('You are being timed out due to inactivity. Please Log-In again.');
-          this.dialogRef ? this.dialogRef.closeAll() : '';
-          this.router.navigate(['auth/login'], { replaceUrl: true });
-        //   this.logoutService();
-        }
-      }).start();
+    // idle = new Idle().whenNotInteractive().within(5).do(() => {
+    //     this.url = this.router.url;
+    //     console.log('this.url==', this.url);
+    //     if (this.url !== '/auth/login') {
+    //       alert('You are being timed out due to inactivity. Please Log-In again.');
+    //       this.dialogRef ? this.dialogRef.closeAll() : '';
+    //       this.router.navigate(['auth/login'], { replaceUrl: true });
+    //     //   this.logoutService();
+    //     }
+    //   }).start();
 
     constructor(
         @Inject(DOCUMENT) private document: any,

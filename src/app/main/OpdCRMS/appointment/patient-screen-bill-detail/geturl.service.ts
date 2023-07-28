@@ -11,7 +11,7 @@ export class GeturlService {
     private handler: HttpBackend, private _httpClient: HttpClient
   ) { }
 
-  getVisitData() {
+  getVisitData(emp) {
     this._httpClient = new HttpClient(this.handler);
     let headers = new HttpHeaders()
       .set("Content-Type", "application/json")
@@ -19,9 +19,9 @@ export class GeturlService {
     let httpOptions = {
       headers: headers,
     };
-
+    // { "mrno": 111023 },
     return this._httpClient
-      .post<any>("http://49.248.20.2:5003/api/Generic/GetByProc?procName=crms_visitdetails", { "mrno": 111023 }, httpOptions)
+      .post<any>("http://49.248.20.2:5003/api/Generic/GetByProc?procName=crms_visitdetails", emp, httpOptions)
       .pipe(catchError((error: HttpErrorResponse) => {
         console.log(error);
         if (error.status === 401) {
@@ -32,7 +32,7 @@ export class GeturlService {
       }));
   }
   
-  getBillData() {
+  getBillData(emp) {
     this._httpClient = new HttpClient(this.handler);
     let headers = new HttpHeaders()
       .set("Content-Type", "application/json")
@@ -40,9 +40,9 @@ export class GeturlService {
     let httpOptions = {
       headers: headers,
     };
-
+    // { "visitid":2652762 }
     return this._httpClient
-      .post<any>("http://49.248.20.2:5003/api/Generic/GetByProc?procName=crms_bill", { "visitid":2652762 }, httpOptions)
+      .post<any>("http://49.248.20.2:5003/api/Generic/GetByProc?procName=crms_bill", emp, httpOptions)
       .pipe(catchError((error: HttpErrorResponse) => {
         console.log(error);
         if (error.status === 401) {
@@ -52,7 +52,7 @@ export class GeturlService {
         }
       }));
   }
-  getBillDetData() {
+  getBillDetData(emp) {
     this._httpClient = new HttpClient(this.handler);
     let headers = new HttpHeaders()
       .set("Content-Type", "application/json")
@@ -60,9 +60,9 @@ export class GeturlService {
     let httpOptions = {
       headers: headers,
     };
-
+    // { "billid": 2623564 }
     return this._httpClient
-      .post<any>("http://49.248.20.2:5003/api/Generic/GetByProc?procName=crms_billdetails", { "billid": 2623564 }, httpOptions)
+      .post<any>("http://49.248.20.2:5003/api/Generic/GetByProc?procName=crms_billdetails", emp, httpOptions)
       .pipe(catchError((error: HttpErrorResponse) => {
         console.log(error);
         if (error.status === 401) {

@@ -1,5 +1,5 @@
 <div fxFlexFill fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px"
-    style="width: 100%; background:#F5F5F5;overflow: auto; ">
+    style="width: 100%; background:#F5F5F5;overflow: auto;">
     <!-- <div class="col-md-12" style="padding:10px;" *ngIf="selectedView == 'Dropdown'"> -->
     <div class="container" style="width: 100%;">
         <div style="width: 100%;">
@@ -16,8 +16,7 @@
                         style="width: 80%;font-size: 16px;">
                         Patient Bill Detail List || ( {{selectedAdvanceObj.RegNo}} ) {{selectedAdvanceObj.PatientName}}
                         (
-                        {{selectedAdvanceObj.AgeYear}}) Yrs | {{selectedAdvanceObj.Doctorname}} | Visit Id
-                        {{selectedAdvanceObj.VisitId}} | Visit Date {{selectedAdvanceObj.VistDateTime}} </span>
+                        {{selectedAdvanceObj.AgeYear}}) Yrs | {{selectedAdvanceObj.Doctorname}}  </span>
 
                     <div fxLayout="row" fxLayoutAlign="start center" style="float: right; margin-right: 5px;  ">
 
@@ -181,24 +180,24 @@
                                         <mat-form-field appearance="outline"
                                             style="border-style: groove;color: rgb(179, 174, 174);width: 170px;">
                                             <mat-label>MrNo</mat-label>
-                                            <input name="MrNo" formControlName="MrNo" matInput (keyup)="getApiVisitList()">
+                                            <input name="MrNo" formControlName="MrNo" matInput (keyup)="getApiVisitList()" required>
                                             <!-- <span class="error" *ngIf="f.MrNo.invalid && f.MrNo.touched">MrNo is
                                                 required Enter only Alphabets</span> -->
                                         </mat-form-field>
 
 
 
-                                        <button mat-raised-button class="searchButton" (click)="APIPAGE()"
+                                        <button mat-raised-button class="searchButton" (click)="getApiVisitList()"
                                             matTooltip="search" style="width: 40px;margin-right: 650px;">
                                             <mat-icon class="searchiconbutton">search</mat-icon>
                                         </button>
 
 
                                         
-                                        <button mat-raised-button class="searchButton" (click)="getApiVisitList()"
+                                        <!-- <button mat-raised-button class="searchButton" (click)="getApiVisitList()"
                                             matTooltip="search" style="width: 40px;margin-left: 30px;">
                                             <mat-icon class="searchiconbutton">API Data</mat-icon>
-                                        </button>
+                                        </button> -->
                                         <!-- <button mat-raised-button (click)="onClear()" class="clearbutton"
                                             matTooltip="close" style="width: 40px;margin-right: 600px;">
                                             <mat-icon class="cleariconbutton">close</mat-icon>
@@ -344,7 +343,7 @@
                                         </mat-header-row>
                                         <mat-row *matRowDef="let contact; columns: displayedColumns1;" class="contact"
                                             [@animate]="{value:'*',params:{y:'100%'}}"
-                                            (click)="getApiBillList()"></mat-row>
+                                            (click)="getApiBillList(contact)"></mat-row>
                                         <mat-footer-row *matFooterRowDef="['loading']"
                                             [ngClass]="{'hide': !(sIsLoading == 'loading-data')}">
                                         </mat-footer-row>
@@ -448,7 +447,7 @@
                                         </mat-header-row>
                                         <mat-row *matRowDef="let contact; columns: displayedColumns2;" class="contact"
                                             [@animate]="{value:'*',params:{y:'100%'}}"
-                                            (click)="getApiBilldetail()"></mat-row>
+                                            (click)="getApiBilldetail(contact)"></mat-row>
                                         <mat-footer-row *matFooterRowDef="['loading']"
                                             [ngClass]="{'hide': !(sIsLoading == 'loading-data')}">
                                         </mat-footer-row>
