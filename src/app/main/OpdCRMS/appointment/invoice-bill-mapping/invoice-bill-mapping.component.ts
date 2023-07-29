@@ -243,7 +243,7 @@ export class InvoiceBillMappingComponent implements OnInit {
     let netAmt;
     netAmt = element.reduce((sum, { TotalBillAmt }) => sum += +(TotalBillAmt || 0), 0);
     this.TaxableAmount = netAmt;
-    this.FinalTotalAmount=netAmt;
+    // this.FinalTotalAmount = netAmt;
     return netAmt
   }
 
@@ -302,11 +302,11 @@ export class InvoiceBillMappingComponent implements OnInit {
       this.sIsLoading = 'loading-data';
       this._opappointmentService.getCaseIDList(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as CaseDetail[];
-        this.chargeslist= this.dataSource.data
+        this.chargeslist = this.dataSource.data
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.sIsLoading = '';
-        
+
       },
         error => {
           this.sIsLoading = '';
@@ -347,7 +347,7 @@ export class InvoiceBillMappingComponent implements OnInit {
       InvoiceBillDetail['CreatedBy'] = this.accountService.currentUserValue.user.id;
 
       insertInvoiceBillDetailarray.push(InvoiceBillDetail);
-      
+
     })
 
 
@@ -383,7 +383,7 @@ export class InvoiceBillMappingComponent implements OnInit {
       "BillNo": 1,// el,
     }
 
-    let printContents; 
+    let printContents;
     this.subscriptionArr.push(
       this._opappointmentService.getFinancialSummarybudgetPrint(D_data).subscribe(res => {
 
@@ -521,37 +521,30 @@ export class InvoiceBillMappingComponent implements OnInit {
     if (this.CGST == null || this.CGST == 0) {
       this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
       this.registeredForm.get('CGSTAmount').setValue(0);
-   
+
 
       if (this.SGST != 0 || this.SGST != null) {
-        
+
         let amt = this.TaxableAmount + this.SGSTAmount
-       
-        if (this.SGST != 0 || this.SGST != null) {
-          this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
-          let amt = this.FinalTotalAmount + this.SGSTAmount
-       
-       
-        if (this.IGST != 0 || this.IGST != null) {
-          
-          let amt = this.FinalTotalAmount + this.IGSTAmount
-          this.FinalTotalAmount = amt;
-        }
-
-        this.FinalTotalAmount = amt;
-
-      }
-
-
         this.FinalTotalAmount = amt;
       }
+        // if (this.CGST != 0 || this.CGST != null) {
+        //   // this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
+        //   let amt = this.FinalTotalAmount + this.SGSTAmount
+        //   this.FinalTotalAmount = amt;
+
+          if (this.IGST != 0 || this.IGST != null) {
+
+            let amt = this.FinalTotalAmount + this.IGSTAmount
+            this.FinalTotalAmount = amt;
+          }
+        // }
+
+      //  this.FinalTotalAmount = amt;
+     
 
       this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
     }
-
-
-
-
 
     else {
       this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
@@ -559,7 +552,7 @@ export class InvoiceBillMappingComponent implements OnInit {
       if (this.TaxableAmount && this.CGST) {
         this.CGSTAmount = (Math.round((parseInt(this.TaxableAmount) * parseInt(this.CGST)) / 100));
         this.FinalTotalAmount = this.TaxableAmount + parseInt(this.CGSTAmount);
-
+        this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
       }
     }
 
@@ -567,22 +560,44 @@ export class InvoiceBillMappingComponent implements OnInit {
 
 
   calculateSGST() {
+    debugger;
 
+  
     if (this.SGST == null || this.SGST == 0) {
+      this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
       this.registeredForm.get('SGSTAmount').setValue(0);
 
-      this.registeredForm.get('TotalAmount').setValue(this.TaxableAmount);
-    }
-    else {
 
-      this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
+      if (this.CGST != 0 || this.CGST != null) {
+
+        let amt = this.TaxableAmount + this.CGSTAmount
+        this.FinalTotalAmount = amt;
+      }
+        // if (this.CGST != 0 || this.CGST != null) {
+        //   // this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
+        //   let amt = this.FinalTotalAmount + this.SGSTAmount
+        //   this.FinalTotalAmount = amt;
+
+          if (this.IGST != 0 || this.IGST != null) {
+
+            let amt = this.FinalTotalAmount + this.IGSTAmount
+            this.FinalTotalAmount = amt;
+          }
+        // }
+
+      //  this.FinalTotalAmount = amt;
+     
+
+      this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
+    }
+
+    else {
+      // this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
 
       if (this.TaxableAmount && this.SGST) {
-
         this.SGSTAmount = (Math.round((parseInt(this.TaxableAmount) * parseInt(this.SGST)) / 100));
-
-        this.FinalTotalAmount = this.FinalTotalAmount + parseInt(this.SGSTAmount);
-
+        this.FinalTotalAmount = this.TaxableAmount + parseInt(this.SGSTAmount);
+        this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
       }
     }
   }
@@ -590,28 +605,51 @@ export class InvoiceBillMappingComponent implements OnInit {
 
 
   calculateIGST() {
+    debugger;
 
+  
     if (this.IGST == null || this.IGST == 0) {
-      this.registeredForm.get('IGSTAmount').setValue(0);
-      this.registeredForm.get('TotalAmount').setValue(this.TaxableAmount);
-    }
-    else {
-
       this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
+      this.registeredForm.get('IGSTAmount').setValue(0);
+
+
+      if (this.CGST != 0 || this.CGST != null) {
+
+        let amt = this.TaxableAmount + this.CGSTAmount
+        this.FinalTotalAmount = amt;
+      }
+        // if (this.CGST != 0 || this.CGST != null) {
+        //   // this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
+        //   let amt = this.FinalTotalAmount + this.SGSTAmount
+        //   this.FinalTotalAmount = amt;
+
+          if (this.SGST != 0 || this.SGST != null) {
+
+            let amt = this.FinalTotalAmount + this.SGSTAmount
+            this.FinalTotalAmount = amt;
+          }
+        // }
+
+      //  this.FinalTotalAmount = amt;
+     
+
+      this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
+    }
+
+    else {
+      // this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
 
       if (this.TaxableAmount && this.IGST) {
-
         this.IGSTAmount = (Math.round((parseInt(this.TaxableAmount) * parseInt(this.IGST)) / 100));
-
-        this.FinalTotalAmount = this.FinalTotalAmount + parseInt(this.IGSTAmount);
-
+        this.FinalTotalAmount = this.TaxableAmount + parseInt(this.IGSTAmount);
+        this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
       }
     }
   }
 
   onKeydown(event) {
     if (event.key === "Enter") {
-      }
+    }
   }
 
 
