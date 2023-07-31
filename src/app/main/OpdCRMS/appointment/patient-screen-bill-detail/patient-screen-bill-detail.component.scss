@@ -56,7 +56,32 @@
   app-patient-screen-bill-detail{
     
   .table1{
-    height:550px !important;
+    height:260px !important;
+  }
+  .BillDettable{
+    height:350px !important;
+
+    .mat-column-VisitDate {
+      width: 150px;
+      max-width: 150px;
+      min-width: 150px;
+      text-align: left;
+     
+       justify-content:left; 
+    }
+
+    .mat-column-Servicename {
+      width: 600px;
+      max-width: 600px;
+      min-width: 600px;
+      text-align: left;
+      white-space: nowrap; 
+      overflow: hidden;
+      text-overflow: ellipsis; 
+      overflow: hidden !important;
+      display: inline-block;
+     justify-content:left; 
+    }
   }
 
   .mat-header-row {

@@ -48,7 +48,7 @@ export class ServiceMasterService {
             TariffId: [""],
             ClassId: ["0"],
             ClassRate: ["0"],
-            DoctorID:[""],
+            DoctorID:[0],
             EffectiveDate:[{ value: this.registerObj.EffectiveDate }],
         });
     }
@@ -120,9 +120,9 @@ export class ServiceMasterService {
         return this._httpClient.post("Master/ServiceUpdate", param);
     }
 
-    public serviceDetailInsert(param) {
-        return this._httpClient.post("Billing/ServiceSave", param);
-    }
+    // public serviceDetailInsert(param) {
+    //     return this._httpClient.post("Billing/ServiceSave", param);
+    // }
 
     public serviceDetDelete(param) {
         return this._httpClient.post("Billing/ServiceUpdate", param);

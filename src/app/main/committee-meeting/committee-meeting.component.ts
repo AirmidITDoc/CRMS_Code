@@ -256,7 +256,7 @@ newMember() {
      const dialogRef = this._matDialog.open(NewCommitteeMeetingComponent,
         {
           maxWidth: "80vw",
-        height: '640px',
+        height: '680px',
         width: '100%',
         data : {
           registerObj : m_data,

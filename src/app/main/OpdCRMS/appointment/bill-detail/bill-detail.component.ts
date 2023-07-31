@@ -22,33 +22,6 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
 import * as converter from 'number-to-words';
 import { MatSelect } from '@angular/material/select';
 
-type NewType = Observable<any[]>;
-export class ILookup {
-  BalanceQty: number;
-  ItemID: number;
-  ItemName: string;
-  UOM: string;
-  UnitofMeasurementId: number;
-}
-
-interface FoodNode {
-  name: string;
-  children?: FoodNode[];
-}
-// const TREE_DATA: FoodNode[] = [
-//   {
-//     name: 'Visit Date Schdule',
-//     children: [{ name: 'Visit1' }, { name: 'Visit2' }, { name: 'Visit3' },]
-//   },
-
-// ];
-/** Flat node with expandable and level information */
-interface ExampleFlatNode {
-  expandable: boolean;
-  name: string;
-  level: number;
-  VisitDate: any;
-}
 
 @Component({
   selector: 'app-bill-detail',
@@ -113,7 +86,7 @@ export class BillDetailComponent implements OnInit {
   FinalAmt: any;
   DoctorFinalId = 'N';
   b_price = '0';
-  b_qty = '1';
+  b_qty = '0';
   b_totalAmount = '';
   tettotalAmount: any;
   b_netAmount = '';
@@ -156,13 +129,14 @@ export class BillDetailComponent implements OnInit {
   BillingClassCmbList: any = [];
   IPBillingInfor: any = [];
   registeredForm: FormGroup;
+  ServiceForm:FormGroup;
   myShowAdvanceForm: FormGroup;
   concessionAmtOfNetAmt: any = 0;
   netPaybleAmt: any;
   netPaybleAmt1: any;
   TotalnetPaybleAmt: any;
 
-  private lookups: ILookup[] = [];
+  
   private nextPage$ = new Subject();
   noOptionFound: boolean = false;
   SrvcName: any;
@@ -196,14 +170,15 @@ export class BillDetailComponent implements OnInit {
     public _httpClient: HttpClient,
     private formBuilder: FormBuilder) { }
 
-  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
+  
   ngOnInit(): void {
 
-
+    
     this.createForm();
+    this.createServForm();
 
-    if (this.advanceDataStored.storage) {
-      this.selectedAdvanceObj = this.advanceDataStored.storage;
+    if (this.data) {
+      this.selectedAdvanceObj = this.data.registerObj;
       console.log(this.selectedAdvanceObj)
     }
 
@@ -294,13 +269,19 @@ z
     });
   }
 
-  private getDrugs(startsWith: string, page: number): Observable<ILookup[]> {
-    const take = 10;
-    const skip = page > 0 ? (page - 1) * take : 0;
-    const filtered = this.lookups
-      .filter(option => option.ItemName.toLowerCase().startsWith(startsWith.toLowerCase()));
-    return of(filtered.slice(skip, skip + take));
-  }
+
+  createServForm() {
+    this.ServiceForm = this.formBuilder.group({
+      price: [Validators.required,
+      Validators.pattern("^[0-9]*$")],
+      qty: [Validators.required,
+      Validators.pattern("^[0-9]*$")],
+      totalAmount: [Validators.required],
+      SrvcName:  [Validators.required],
+      DoctorID:['']
+         });
+      }
+  
 
   //  ===================================================================================
   filterStates(name: string) {
@@ -729,7 +710,7 @@ debugger;
     let PatientHeaderObj = {};
 
     PatientHeaderObj['Date'] = this.dateTimeObj.date;
-    PatientHeaderObj['VisitId'] = this.selectedAdvanceObj.RegId;
+    PatientHeaderObj['VisitId'] = this.selectedAdvanceObj.VisitId;
     PatientHeaderObj['PatientName'] = this.selectedAdvanceObj.PatientName;
     PatientHeaderObj['OPD_IPD_Id'] = this.selectedAdvanceObj.OPD_IPD_ID;
     PatientHeaderObj['NetPayAmount'] = this.FinalAmt; //this.netPaybleAmt1; //this.registeredForm.get('FinalAmt').value;//this.TotalnetPaybleAmt,//this.FinalAmt || 0,//
@@ -846,9 +827,9 @@ debugger;
 
   onSaveEntry() {
     debugger;
-    if (this.registeredForm.get("DoctorID").value) {
-      this.DoctornewId = this.registeredForm.get("DoctorID").value.DoctorID;
-      this.ChargesDoctorname = this.registeredForm.get("DoctorID").value.DoctorName;
+    if (this.ServiceForm.get("DoctorID").value) {
+      this.DoctornewId = this.ServiceForm.get("DoctorID").value.DoctorID;
+      this.ChargesDoctorname = this.ServiceForm.get("DoctorID").value.DoctorName;
     } else {
       this.DoctornewId = 0;
       this.ChargesDoctorname = '';
@@ -909,10 +890,10 @@ debugger;
   }
 
   onClearServiceAddList() {
-    this.registeredForm.get('SrvcName').reset();
-    this.registeredForm.get('price').reset();
-    this.registeredForm.get('qty').reset('1');
-    this.registeredForm.get('totalAmount').reset();
+    this.ServiceForm.get('SrvcName').reset();
+    this.ServiceForm.get('price').reset();
+    this.ServiceForm.get('qty').reset('1');
+    this.ServiceForm.get('totalAmount').reset();
     // this.registeredForm.get('DoctorId').reset();
     this.registeredForm.get('discPer').reset();
     this.registeredForm.get('discAmount').reset();
@@ -1650,7 +1631,7 @@ export class SearchInforObj {
   SubCompanyId: any;
   IsBillGenerated: any;
   UnitId: any;
-  RegId: number;
+  RegId: any;
   RefId: number;
   OPD_IPD_ID: any;
   storage: any;

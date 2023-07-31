@@ -91,9 +91,6 @@ export class AppointmentComponent implements OnInit {
     if (this._ActRoute.url == '/opd/appointment') {
 
       this.menuActions.push('Update Registration');
-      this.menuActions.push('Add New Visit Date');
-      this.menuActions.push('Bill');
-
       this.menuActions.push('Invoice Bill');
       // this.menuActions.push('Upload Document');
     } else if (this._ActRoute.url == '/opd/bill') {
@@ -143,7 +140,7 @@ export class AppointmentComponent implements OnInit {
     console.log(element);
     const dialogRef = this._matDialog.open(PatientScreenBillDetailComponent,
       {
-        maxWidth: '180vw',
+        maxWidth: '100vw',
         height: '900px',
         width: '100%',
         data : {
@@ -300,44 +297,7 @@ export class AppointmentComponent implements OnInit {
         });
     
     }
-    else if (m == "Bill") {
-      console.log(contact);
-    
-        let xx = {
-          RegNo: contact.RegId,
-          RegId: contact.RegId,
-          AdmissionID: contact.VisitId,
-          PatientName: contact.PatientName,
-          Doctorname: contact.Doctorname,
-          AdmDateTime: contact.AdmDateTime,
-          AgeYear: contact.AgeYear,
-          ClassId: contact.ClassId,
-          ClassName: contact.ClassName,
-          TariffName: contact.TariffName,
-          TariffId: contact.TariffId,
-          VisitId: contact.VisitId,
-          VistDateTime: contact.VistDateTime
-        };
-        // this._AppointmentSreviceService.populateFormpersonal(xx);
-        this.advanceDataStored.storage = new SearchInforObj(xx);
-        const dialogRef = this._matDialog.open(BillDetailComponent,
-          {
-            maxWidth: "98%",
-            height: '600px',
-            width: '100%',
-            data: {
-              registerObj: xx,
-            }
-          });
-        dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed - Insert Action', result);
-          this.getVisitList();
-        });
-     
-        error => {
-          this.sIsLoading = '';
-        }
-    }
+  
     else if (m == "Invoice Bill") {
       console.log(contact);
 
@@ -451,52 +411,7 @@ export class AppointmentComponent implements OnInit {
         });
      
     }
-    else if (m == "Add New Visit Date") {
-      console.log(contact);
-
-      var m_data1 = {
-
-        "VisitId": contact.VisitId,
-        "RegNo": contact.RegId,
-        "VisitDate": contact.VisitDate,
-        "DVisitDate": contact.DVisitDate,
-        "VisitTime": contact.VisitTime,
-        "PatientTypeId": contact.PatientTypeId,
-        "PatientType": contact.PatientType,
-        "VistDateTime": contact.VistDateTime,
-        "Expr1": contact.Expr1,
-        "OPDNo": contact.OPDNo,
-        "TariffId": contact.TariffId,
-        "TariffName": contact.TariffName,
-        "CompanyId": 0,
-        "CompanyName": "",
-        "ClassId": 1,
-        "ClassName": "OPD",
-        "DoctorId": contact.DoctorId,
-        "Doctorname": contact.Doctorname,
-        "RefDocId": contact.DoctorId,
-        "RefDocName": contact.RefDocName,
-        "RegNoWithPrefix": "GMH11587",
-        "PatientName": contact.PatientName,
-        "AgeYear": contact.AgeYear
-
-
-      }
-      
-      const dialogRef = this._matDialog.open(NewVistDateComponent,
-        {
-          maxWidth: "75vw",
-          height: '290px',
-          width: '100%',
-          data: {
-            registerObj: m_data1,
-          }
-        });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed - Insert Action', result);
-        this.getVisitList();
-      });
-    }
+ 
     error => {
       this.sIsLoading = '';
 

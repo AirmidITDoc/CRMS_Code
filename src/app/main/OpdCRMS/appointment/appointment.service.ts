@@ -384,99 +384,11 @@ public getBillList(employee){
   return this._httpClient.post("Generic/GetByProc?procName=Rtrv_BrowseOPBillList ", employee)
 }
 
-public getBilldetailsList(employee){
-  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_BrowseOPBillList ", employee)
+public getMainBillDetData(employee){
+  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_T_BillDetailList ", employee)
 }
 
 //API Connection
-
-public InsertLabDetail(employee){
-
-this._httpClient = new HttpClient(this.handler);
-
-
-let headers = new HttpHeaders()
-    .set("Content-Type", "application/json")
-    .set("Accept", "application/json")
-let  httpOptions = {
-    
-    headers: headers,
-  };
-
-let newjson={
-  "mobile": "",
-  "email": "",
-  "designation": "Mrs.",
-  "fullName": "Test",
-  "age": 81,
-  "gender": "Female",
-  "area": "",
-  "city": "",
-  "patientType": "IPD",
-  "labPatientId": "HISPATIENTID",
-  "pincode": " ",
-  "patientId": "",
-  "dob": "",
-  "passportNo": "",
-  "panNumber": "",
-  "aadharNumber": "",
-  "insuranceNo": "",
-  "nationalityethnicity": "",
-  "ethnicity": "",
-  "nationalIdentityNumber": "",
-  "workerCode": "w12",
-  "doctorCode": "",
-  "billDetails": {
-      "emergencyFlag": "0",
-      "billTotalAmount": "",
-      "advance": "0",
-      "billDate": "",
-      "paymentType": "CREDIT",
-      "referralName": " ",
-      "otherReferral": "",
-      "sampleId": "",
-      "orderNumber": " ",
-      "referralIdLH": "",
-      "organisationName": "",
-      "billConcession": "0",
-      "additionalAmount": "0",
-      "organizationIdLH": "440132",
-      "comments": "CGHS",
-      "testList": [
-          {
-              "testCode": "Blood Group & Rh Type"
-          },
-          {
-              "testCode": "Blood Group & Rh Type"
-          }
-
-      ],
-      "paymentList": [
-          {
-              "paymentType": "CREDIT",
-              "paymentAmount": "",
-              "chequeNo": "",
-              "issueBank": ""
-          }
-      ]
-  }
-};
-
-//return this._httpClient.post('https://livehealth.solutions/LHRegisterBillAPI/e57fda5e-995b-11ed-ac02-0a6c65d93ce2/',newjson,httpOptions);
-
-debugger
-return this._httpClient
-     .post<any>("https://49.248.20.2:5003/swagger/index.html", newjson, httpOptions)
-     .pipe( catchError((error: HttpErrorResponse)=>{
-      console.log(error);
-      if (error.status === 401) {
-       
-      } else {
-       
-        return throwError(error);
-      }
-    }));
-  }
-
+p
 
 }

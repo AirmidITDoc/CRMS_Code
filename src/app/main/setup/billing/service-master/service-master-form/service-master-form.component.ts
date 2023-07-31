@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewChild, ViewEncapsulation } from "@angula
 import { ServiceMaster, ServiceMasterComponent, Servicedetail } from "../service-master.component";
 import { fuseAnimations } from "@fuse/animations";
 import { MatTableDataSource } from "@angular/material/table";
-import { FormControl } from "@angular/forms";
+import { FormControl, Validators } from "@angular/forms";
 import { ReplaySubject, Subject } from "rxjs";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { ServiceMasterService } from "../service-master.service";
@@ -90,8 +90,9 @@ export class ServiceMasterFormComponent implements OnInit {
       console.log(this.data.registerObj);
 
       if (this.data.IsSubmitFlag == true) {
-        this.butDisabled = true
-        this.butDisabled1 = false
+        /////chk....
+        // this.butDisabled = true
+        // this.butDisabled1 = false
         this.ServiceId = this.data.ServiceId;
 
       }
@@ -260,7 +261,7 @@ export class ServiceMasterFormComponent implements OnInit {
     };
     this._serviceMasterService.getServiceClassMasterUpdateList(m).subscribe(Menu => {
       this.dataSource.data = Menu as Servicedetail[];
-      console.log(Menu)
+      console.log(this.dataSource.data)
     })
   }
 
@@ -269,7 +270,7 @@ export class ServiceMasterFormComponent implements OnInit {
     debugger
     this._serviceMasterService.getServiceClassMasterList().subscribe(Menu => {
       this.dataSource.data = Menu as Servicedetail[];
-      console.log(Menu)
+      console.log(this.dataSource.data)
     })
   }
 
@@ -311,13 +312,13 @@ export class ServiceMasterFormComponent implements OnInit {
   }
 
 
-  getClassRate(element) {
-    debugger;
-    this.ClassRate = element.ClassRate;
+  // getClassRate(element) {
+  //   debugger;
+  //   this.ClassRate = element.ClassRate;
 
-    this.ClassRate = this._serviceMasterService.myform.get("ClassRate").value;
-    console.log(this.ClassRate)
-  }
+  //   this.ClassRate = this._serviceMasterService.myform.get("ClassRate").value;
+  //   console.log(this.ClassRate)
+  // }
 
   onSubmit() {
     debugger;
@@ -348,8 +349,6 @@ export class ServiceMasterFormComponent implements OnInit {
       serviceMasterInsert['serviceId'] = 0;
 
 
-
-
       let serviceDetailInsertarray = [];
       let serviceDetailInsert = {};
 
@@ -361,7 +360,7 @@ export class ServiceMasterFormComponent implements OnInit {
         serviceDetailInsert['ServiceId'] = 0;
         serviceDetailInsert['TariffId'] = this._serviceMasterService.myform.get("TariffId").value.TariffId || 0;
         serviceDetailInsert['ClassId'] = element.ClassId || 0;
-        serviceDetailInsert['ClassRate'] = 122;//element.ClassRate || 0;
+        serviceDetailInsert['ClassRate'] = element.ClassRate || '';
         serviceDetailInsert['EffectiveDate'] = this._serviceMasterService.myform.get("EffectiveDate").value.value || "01/01/1900";
 
         serviceDetailInsertarray.push(serviceDetailInsert);
@@ -370,12 +369,19 @@ export class ServiceMasterFormComponent implements OnInit {
 
       let submitData = {
         "serviceMasterInsert": serviceMasterInsert,
-        "serviceDetailInsert": serviceDetailInsertarray,
-
+        "serviceDetailInsert": serviceDetailInsertarray
       };
       console.log(submitData);
-      this._serviceMasterService.serviceDetailInsert(submitData).subscribe(data => {
-        this.msg = data;
+      this._serviceMasterService.serviceMasterInsert(submitData).subscribe(data => {
+        if (data) {
+          Swal.fire('New Service Save !', ' Service Save Successfully !', 'success').then((result) => {
+            if (result.isConfirmed) {
+              // this._matDialog.closeAll();
+            }
+          });
+        } else {
+          Swal.fire('Error !', 'Service not saved', 'error');
+        }
       });
 
     }
@@ -391,9 +397,9 @@ export class ServiceMasterFormComponent implements OnInit {
       serviceMasterUpdate['IsPathology'] = parseInt(this._serviceMasterService.myform.get("IsPathology").value) || 0;
       serviceMasterUpdate['IsRadiology'] = parseInt(this._serviceMasterService.myform.get("IsRadiology").value) || 0;
       serviceMasterUpdate['IsActive'] = 1,//Boolean(JSON.parse(this._serviceMasterService.myform.get("IsActive").value)) ||0;
-        serviceMasterUpdate['PrintOrder'] = 0,//this._serviceMasterService.myform.get("PrintOrder").value || 1;
+      serviceMasterUpdate['PrintOrder'] = 0,//this._serviceMasterService.myform.get("PrintOrder").value || 1;
 
-        serviceMasterUpdate['IsPackage'] = parseInt(this._serviceMasterService.myform.get("IsPackage").value) || 0;
+       serviceMasterUpdate['IsPackage'] = parseInt(this._serviceMasterService.myform.get("IsPackage").value) || 0;
       serviceMasterUpdate['SubGroupId'] = 1;
       serviceMasterUpdate['DoctorId'] = this._serviceMasterService.myform.get("DoctorID").value.DoctorId || 0;
       serviceMasterUpdate['IsEmergency'] = Boolean(JSON.parse(this._serviceMasterService.myform.get("IsEmergency").value)) || 0;
@@ -430,7 +436,15 @@ export class ServiceMasterFormComponent implements OnInit {
       };
       console.log(submitData);
       this._serviceMasterService.serviceMasterUpdate(submitData).subscribe(data => {
-        this.msg = data;
+        if (data) {
+          Swal.fire(' Service Updated !', ' Service Updated Successfully !', 'success').then((result) => {
+            if (result.isConfirmed) {
+              // this._matDialog.closeAll();
+            }
+          });
+        } else {
+          Swal.fire('Error !', 'Service not saved', 'error');
+        }
       });
 
     }
@@ -446,6 +460,11 @@ export class ServiceMasterFormComponent implements OnInit {
       this.IsDoctor = false;
     } else {
       this.IsDoctor = true;
+
+      this._serviceMasterService.myform.get('DoctorID').reset();
+      this._serviceMasterService.myform.get('DoctorID').setValidators([Validators.required]);
+      this._serviceMasterService.myform.get('DoctorID').enable;
+      
     }
   }
 

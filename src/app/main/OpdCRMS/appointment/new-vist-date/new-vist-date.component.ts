@@ -108,8 +108,6 @@ export class NewVistDateComponent implements OnInit {
   ngOnInit(): void {
 
     
-
-    
     // this.personalFormGroup.markAllAsTouched();
     this.VisitFormGroup = this.createVisitdetailForm();
    

@@ -77,13 +77,6 @@
                 Digits</span>
         </mat-form-field>
 
-
-    </div>
-
-
-    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-
-
         <mat-form-field appearance="outline" fxFlex style="margin-right: 10px;">
             <mat-label>Tariff Name</mat-label>
             <mat-select formControlName="TariffId" placeholder="Bank" #singleSelect>
@@ -96,6 +89,13 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
+    </div>
+
+
+    <!-- <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"> -->
+
+
+    
 
         <!-- <mat-form-field appearance="outline" fxFlex id="DoctorID" style="margin-right: 10px;">
             <mat-label>Doctor Name</mat-label>
@@ -130,7 +130,7 @@
         </mat-form-field> -->
 
 
-    </div>
+    <!-- </div> -->
 
 
     <hr>
@@ -142,7 +142,7 @@
 
                 <div fxFlex.gt-sm="50%">
                     <div style="width: 70%;">
-                        <mat-table #table matSort [dataSource]="dataSource" class="mat-elevation-z8"
+                        <mat-table #table matSort [dataSource]="dataSource" class="table1"
                             [@animateStagger]="{value:'50'}" style="overflow:auto;border: rgb(72, 195, 236);">
 
                           
@@ -152,53 +152,30 @@
                                 <mat-cell *matCellDef="let classelement" fxShow.gt-sm> {{classelement.ClassName}} </mat-cell>
                             </ng-container>
 
-                            
-                           
-<!-- 
                             <ng-container matColumnDef="ClassRate">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Class Rate </mat-header-cell>
+                                <mat-cell *matCellDef="let classelement" fxShow.gt-sm>
+                                     <!-- {{classelement.ClassRate}} -->
+                                     <mat-form-field appearance="legacy">
+                                        <input matInput [(ngModel)]="classelement.ClassRate">
+                                    </mat-form-field>
+                                    
+                                    </mat-cell>
+                            </ng-container>
+
+
+                          
+                            <!-- <ng-container matColumnDef="ClassRate">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
                                     fxShow.gt-md>
                                     ClassRate
                                 </mat-header-cell>
                                 <mat-cell *matCellDef="let classelement" fxShow.gt-sm>
-                                    <mat-form-field [appearance]="somevariable ? 'none' : 'legacy'">
+                                    <mat-form-field appearance="legacy">
                                         <input matInput [(ngModel)]="classelement.ClassRate">
                                     </mat-form-field>
                                 </mat-cell>
-
                             </ng-container> -->
-
-
-                            
-                            <ng-container matColumnDef="ClassRate">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                    fxShow.gt-md>
-                                    ClassRate
-                                </mat-header-cell>
-                                <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                    <mat-form-field appearance="legacy">
-                                        <input matInput [(ngModel)]="contact.ClassRate">
-                                    </mat-form-field>
-                                </mat-cell>
-
-                            </ng-container>
-
-
-
-<!-- 
-                            <ng-container matColumnDef="ClassRate">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
-                                    ClassRate
-                                </mat-header-cell>
-
-                                <mat-cell *matCellDef="let element" fxShow.gt-sm>
-                                    <mat-form-field appearance="legacy" formControlName="ClassRate">
-                                        <input matInput [(ngModel)]="element.ClassRate"  (keyup)="getClassRate(element)">
-                                    </mat-form-field>
-                                </mat-cell>
-
-                            </ng-container> -->
-
 
 
 
@@ -264,7 +241,7 @@
                                     <mat-option *ngFor="let element of filteredDoctor | async" [value]="element">
                                         {{element.DoctorName}}
                                     </mat-option>
-                                    <mat-hint>Plz Select Doctor Name</mat-hint>
+                                    <!-- <mat-hint>Plz Select Doctor Name</mat-hint> -->
 
                                 </mat-select>
                             </mat-form-field>
@@ -354,7 +331,7 @@
         <!-- <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()"
             [disabled]="butDisabled1">Update</button> -->
 
-        <button class="footer-btn" id="btncancel" (click)="onClear()">Cancel</button>
+        <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
     </div>
 </div>
 <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar></div>

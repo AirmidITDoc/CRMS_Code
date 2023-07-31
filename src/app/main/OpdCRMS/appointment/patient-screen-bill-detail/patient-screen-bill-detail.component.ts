@@ -15,6 +15,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GeturlService } from './geturl.service';
 import { EditAppointmentComponent } from '../edit-appointment/edit-appointment.component';
 import { NewVistDateComponent } from '../new-vist-date/new-vist-date.component';
+import { BillDetailComponent } from '../bill-detail/bill-detail.component';
+import { InvoiceBillMappingComponent } from '../invoice-bill-mapping/invoice-bill-mapping.component';
 
 @Component({
   selector: 'app-patient-screen-bill-detail',
@@ -43,7 +45,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
   reportPrintObjList: BrowseOPDBill[] = [];
   reportPrintObj: BrowseOPDBill;
   Billbutton = false;
-  RegId:any;
+  RegId: any;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -58,6 +60,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
     'BillAmount',
     'BillId',
     'action',
+    'buttons'
   ];
 
 
@@ -94,6 +97,16 @@ export class PatientScreenBillDetailComponent implements OnInit {
   ];
   dataSource3 = new MatTableDataSource<ApiMaster>();
 
+
+  displayedColumns4 = [
+    'Servicename',
+    'TotalAmount',
+  ];
+  dataSource4 = new MatTableDataSource<ApiMaster>();
+
+
+
+
   menuActions: Array<string> = [];
   //datePipe: any;
 
@@ -113,24 +126,27 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (this._ActRoute.url == '/opd/appointment') {
 
-    if (this.data) {
-      // console.log(this.data);
-      this.StudyId = this.data.element.Title;
-
-      this.selectedAdvanceObj = this.data.element;
-      // console.log(this.selectedAdvanceObj)
+      this.menuActions.push('Add Visit');
+      this.menuActions.push('Edit Visit');
+      this.menuActions.push('Bill');
 
 
     }
-   
-    this.getBillList();
-    // this.getVisitdetail();
-    
+    if (this.data) {
 
+      this.StudyId = this.data.element.Title;
+
+      this.selectedAdvanceObj = this.data.element;
+      console.log(this.selectedAdvanceObj)
+    }
+
+    this.getBillList();
+    
   }
 
-  
+
 
   getBillList() {
     this.sIsLoading = 'loading-data';
@@ -152,77 +168,94 @@ export class PatientScreenBillDetailComponent implements OnInit {
         });
     }, 1000);
 
-}
+  }
 
-
-
- 
-getApiVisitList(){
-var D_data = {
-  "mrno": this._AppointmentService.myFilterform.get('MrNo').value || 0
-};
-setTimeout(() => {
-this._GeturlService.getVisitData(D_data).subscribe(Visit => {
-  this.dataSource1.data = Visit as ApiMaster[];
-},
-  error => {
-  });
-}, 1000);
-}
-
-getApiBillList(contact){
-this.sIsLoading = 'loading-data';
-var D_data = {
-  "visitid":contact.VisitId
-};
-setTimeout(() => {
-this.sIsLoading = 'loading-data';
-this._GeturlService.getBillData(D_data).subscribe(Visit => {
-  this.dataSource2.data = Visit as ApiMaster[];
-  this.sIsLoading = '';
-},
-  error => {
-    this.sIsLoading = '';
-  });
-}, 1000);
-}
-
-
-getApiBilldetail(contact){
-this.sIsLoading = 'loading-data';
-var D_data = {
-  "billid": contact.BillId
-};
-setTimeout(() => {
-this.sIsLoading = 'loading-data';
-this._GeturlService.getBillDetData(D_data).subscribe(Visit => {
-  this.dataSource3.data = Visit as ApiMaster[];
-  this.sIsLoading = '';
-},
-  error => {
-    this.sIsLoading = '';
-  });
-}, 1000);
-}
-
-getVisitUpdate(contact){
- 
-console.log(contact)
-  const dialogRef = this._matDialog.open(NewVistDateComponent,
-    {
-      maxWidth: "75vw",
-          height: '290px',
-          width: '100%',
-          data: {
-            registerObj: contact,
-          }
+  getbilldetail(contact){
+    console.log(contact)
+    this.sIsLoading = 'loading-data';
+    var D_data = {
+      "BillNo": 17,//contact.BillId
+    };
+    setTimeout(() => {
+      this.sIsLoading = 'loading-data';
+      this._AppointmentService.getMainBillDetData(D_data).subscribe(Visit => {
+        this.dataSource4.data = Visit as ApiMaster[];
+        this.sIsLoading = '';
+      },
+        error => {
+          this.sIsLoading = '';
         });
-  dialogRef.afterClosed().subscribe(result => {
-    // console.log('The dialog was closed - Insert Action', result);
-    
-  });
-}
- 
+    }, 1000);
+  }
+
+
+  getApiVisitList() {
+    var D_data = {
+      "mrno": this._AppointmentService.myFilterform.get('MrNo').value || 0
+    };
+    setTimeout(() => {
+      this._GeturlService.getVisitData(D_data).subscribe(Visit => {
+        this.dataSource1.data = Visit as ApiMaster[];
+      },
+        error => {
+        });
+    }, 1000);
+  }
+
+  getApiBillList(contact) {
+    this.sIsLoading = 'loading-data';
+    var D_data = {
+      "visitid": contact.VisitId
+    };
+    setTimeout(() => {
+      this.sIsLoading = 'loading-data';
+      this._GeturlService.getBillData(D_data).subscribe(Visit => {
+        this.dataSource2.data = Visit as ApiMaster[];
+        this.sIsLoading = '';
+      },
+        error => {
+          this.sIsLoading = '';
+        });
+    }, 1000);
+  }
+
+
+  getApiBilldetail(contact) {
+    this.sIsLoading = 'loading-data';
+    var D_data = {
+      "billid": contact.BillId
+    };
+    setTimeout(() => {
+      this.sIsLoading = 'loading-data';
+      this._GeturlService.getBillDetData(D_data).subscribe(Visit => {
+        this.dataSource3.data = Visit as ApiMaster[];
+        this.sIsLoading = '';
+      },
+        error => {
+          this.sIsLoading = '';
+        });
+    }, 1000);
+  }
+
+
+  getVisitUpdate(contact) {
+
+    console.log(contact)
+    const dialogRef = this._matDialog.open(NewVistDateComponent,
+      {
+        maxWidth: "75vw",
+        height: '290px',
+        width: '100%',
+        data: {
+          registerObj: contact,
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed - Insert Action', result);
+
+    });
+  }
+
 
   // toggle sidebar
   toggleSidebar(name): void {
@@ -231,12 +264,12 @@ console.log(contact)
 
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
-    
+
     this.dateTimeObj = dateTimeObj;
   }
 
   onClear() {
-    
+
   }
 
 
@@ -380,24 +413,204 @@ console.log(contact)
   }
 
 
+  getRecord(contact, m): void {
+    debugger;
+    console.log(contact);
+
+    this.VisitID = contact.VisitId;
+
+
+
+    if (m == "Bill") {
+      console.log(contact);
+
+      let xx = {
+        RegNo: this.selectedAdvanceObj.RegNo,
+        RegId: this.selectedAdvanceObj.RegId,
+        AdmissionID: contact.VisitId,
+        // PatientName: contact.PatientName,
+        Doctorname:this.selectedAdvanceObj.Doctorname,
+        AdmDateTime: contact.AdmDateTime,
+        AgeYear: this.selectedAdvanceObj.AgeYear,
+        ClassId: contact.ClassId,
+        ClassName: contact.ClassName,
+        TariffName: contact.TariffName,
+        TariffId: contact.TariffId,
+        VisitId: contact.VisitId,
+        VistDateTime: contact.VistDateTime,
+        PatientName:  this.selectedAdvanceObj.PatientName,
+
+      };
+     
+      const dialogRef = this._matDialog.open(BillDetailComponent,
+        {
+          maxWidth: "78%",
+          height: '700px',
+          width: '100%',
+          data: {
+            registerObj: xx,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+        this.getBillList();
+      });
+
+      error => {
+        this.sIsLoading = '';
+      }
+    }
+    else if (m == "Invoice Bill") {
+      console.log(contact);
+
+
+      let xx = {
+        RegNo: contact.RegNo,
+        RegId: contact.RegId,
+        AdmissionID: contact.VisitId,
+        PatientName: contact.PatientName,
+        Doctorname: contact.Doctorname,
+        AdmDateTime: contact.AdmDateTime,
+        AgeYear: contact.AgeYear,
+        ClassId: contact.ClassId,
+        ClassName: contact.ClassName,
+        TariffName: contact.TariffName,
+        TariffId: contact.TariffId,
+        VisitId: contact.VisitId,
+        VistDateTime: contact.VistDateTime
+      };
+
+      // this.advanceDataStored.storage = new SearchInforObj(xx);
+      const dialogRef = this._matDialog.open(InvoiceBillMappingComponent,
+        {
+          maxWidth: "65%",
+          height: '800px',
+          width: '100%',
+          data: {
+            registerObj: xx,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+        this.getBillList();
+      });
+    }
+    else if (m == "Add Visit") {
+      console.log(contact);
+
+      var m_data1 = {
+
+        "VisitId": contact.VisitId,
+        "RegNo": contact.RegId,
+        "VisitDate": contact.VisitDate,
+        "DVisitDate": contact.DVisitDate,
+        "VisitTime": contact.VisitTime,
+        "PatientTypeId": contact.PatientTypeId,
+        "PatientType": contact.PatientType,
+        "VistDateTime": contact.VistDateTime,
+        "Expr1": contact.Expr1,
+        "OPDNo": contact.OPDNo,
+        "TariffId": contact.TariffId,
+        "TariffName": contact.TariffName,
+        "CompanyId": 0,
+        "CompanyName": "",
+        "ClassId": 1,
+        "ClassName": "OPD",
+        "DoctorId": contact.DoctorId,
+        "Doctorname": contact.Doctorname,
+        "RefDocId": contact.DoctorId,
+        "RefDocName": contact.RefDocName,
+        "RegNoWithPrefix": "GMH11587",
+        "PatientName": contact.PatientName,
+        "AgeYear": contact.AgeYear
+  }
+
+      const dialogRef = this._matDialog.open(NewVistDateComponent,
+        {
+          maxWidth: "75vw",
+          height: '290px',
+          width: '100%',
+          data: {
+            registerObj: m_data1,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+        this.getBillList();
+      });
+    }
+    else if (m == "Edit Visit") {
+      console.log(contact);
+
+      var m_data1 = {
+
+        "VisitId": contact.VisitId,
+        "RegNo": contact.RegId,
+        "VisitDate": contact.VisitDate,
+        "DVisitDate": contact.DVisitDate,
+        "VisitTime": contact.VisitTime,
+        "PatientTypeId": contact.PatientTypeId,
+        "PatientType": contact.PatientType,
+        "VistDateTime": contact.VistDateTime,
+        "Expr1": contact.Expr1,
+        "OPDNo": contact.OPDNo,
+        "TariffId": contact.TariffId,
+        "TariffName": contact.TariffName,
+        "CompanyId": 0,
+        "CompanyName": "",
+        "ClassId": 1,
+        "ClassName": "OPD",
+        "DoctorId": contact.DoctorId,
+        "Doctorname": contact.Doctorname,
+        "RefDocId": contact.DoctorId,
+        "RefDocName": contact.RefDocName,
+        "RegNoWithPrefix": "GMH11587",
+        "PatientName": contact.PatientName,
+        "AgeYear": contact.AgeYear
+
+
+      }
+
+      const dialogRef = this._matDialog.open(NewVistDateComponent,
+        {
+          maxWidth: "75vw",
+          height: '290px',
+          width: '100%',
+          data: {
+            registerObj: m_data1,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+        this.getBillList();
+      });
+    }
+    error => {
+      this.sIsLoading = '';
+
+    }
+
+
+  }
+
   onClose() {
     this._matDialog.closeAll();
   }
 
 }
- 
+
 
 
 
 export class ApiMaster {
   VisitId: Number;
-  MRNo:any;
-  FirstName:any;
-  MiddleName:any;
-  LastName:any;
-  Address:any;
+  MRNo: any;
+  FirstName: any;
+  MiddleName: any;
+  LastName: any;
+  Address: any;
   Date: Date;
-  ContactNo:any;
+  ContactNo: any;
   DateofBirth: Date;
   Gender: any;
   date: Date;
@@ -406,20 +619,20 @@ export class ApiMaster {
   TotalBillAmount: any;
   Servicename: any;
   TotalAmount: any;
-  currentDate=new Date();
-  AgeYear:any;
+  currentDate = new Date();
+  AgeYear: any;
   /**
    * Constructor
    *
    * @param ApiMaster
    */
 
- 
+
   constructor(ApiMaster) {
     {
-      this.Date = ApiMaster.Date ||this.currentDate;
+      this.Date = ApiMaster.Date || this.currentDate;
       this.VisitId = ApiMaster.VisitId || 0,
-      this.MRNo = ApiMaster.MRNo || '';
+        this.MRNo = ApiMaster.MRNo || '';
       this.FirstName = ApiMaster.FirstName || '';
       this.MiddleName = ApiMaster.MiddleName || '';
       this.LastName = ApiMaster.LastName || '';
@@ -433,8 +646,8 @@ export class ApiMaster {
       this.TotalBillAmount = ApiMaster.TotalBillAmount || '';
       this.Servicename = ApiMaster.Servicename || '';
       this.TotalAmount = ApiMaster.TotalAmount || '';
-     
+
     }
-    }
-  
+  }
+
 }

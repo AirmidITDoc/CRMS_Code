@@ -69,6 +69,9 @@
 .mat-label {
     font-weight: bold;
 }
+.table1{
+    height: 200px !important;
+}
 
 .mat-column-ClassId {
     width: 70px;
@@ -82,9 +85,9 @@
     min-width: 150px;
 }
 .mat-column-ClassRate {
-    width: 100px;
-    max-width: 100px;
-    min-width: 100px;
+    width: 150px;
+    max-width: 150px;
+    min-width: 150px;
 }
 
 .mat-column-ChangeClassRate {

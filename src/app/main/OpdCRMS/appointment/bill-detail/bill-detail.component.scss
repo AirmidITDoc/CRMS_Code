@@ -14,8 +14,8 @@ app-bill-detail {
         width: 100%;
         background: transparent;
         box-shadow: none;
-        border-color: #b4babe;
-        border-style: groove;
+        // border-color: #b4babe;
+        // border-style: groove;
 
         .mat-column-checkbox {
             flex: 0 1 64px;
@@ -623,14 +623,14 @@ padding-bottom: 2px;
 .table1{
 .mat-header-row {
     width: 100%;
-    max-width:1200px;
-    min-width:1200px; 
+    max-width:1150px;
+    min-width:1150px; 
     min-height: 40px;     
 }
 .mat-row {
     width: 100%;
-    max-width:1200px;
-    min-width:1200px; 
+    max-width:1150px;
+    min-width:1150px; 
     min-height: 30px;            
 }
 // PatientData
@@ -643,9 +643,9 @@ padding-bottom: 2px;
 }
 
 .mat-column-ChargesDate {
-    width:110px;
-    max-width:110px;
-    min-width:10px;
+    width:80px;
+    max-width:80px;
+    min-width:80px;
     text-align: right;
 }
 
@@ -740,9 +740,9 @@ padding-bottom: 2px;
 }
 
 .mat-column-ChargesAddedName {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
+    width:80px;
+    max-width:80px;
+    min-width:80px;
     // justify-content:left;
     text-align:center;
     white-space: nowrap; 
@@ -752,9 +752,9 @@ padding-bottom: 2px;
 }
 .mat-column-action {
     // color: white !important;
-    width:70px;
-    max-width:70px;
-    min-width:70px;
+    width:50px;
+    max-width:50px;
+    min-width:50px;
    
     text-align: right;
     justify-content:right; 
@@ -786,13 +786,11 @@ padding-bottom: 2px;
    
 }
 
-button:disabled {
+.mat-raised-button:disabled {
     color: white;
-   background-color: #32566c  !important;
+   background-color: #7bd3ff  !important;
    //background-color: #b7e6fd ;
-    border-radius: 1px;
-    width: 20px !important;
-    height: 20px;
+    border-radius: 2px;
    // border: 1px solid #CCCCCC;
    border: 1px solid  #b7e6fd ;
 }
