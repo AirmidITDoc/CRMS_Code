@@ -95,6 +95,7 @@ export class StudySchduleComponent implements OnInit {
       this.dataSource1.data = Visit as VisitDetail[];
       // console.log(this.dataSource1.data)
       this.dataSource1.sort = this.sort;
+      this.chargeslist= this.dataSource1.data;
       this.chargeslist1= this.dataSource1.data;
       this.dataSource1.paginator = this.paginator;
       // this.sIsLoading = '';
@@ -165,6 +166,7 @@ export class StudySchduleComponent implements OnInit {
 
   onAddVisitDetail() {
     debugger;
+    this.chargeslist=[];
     this.VisitList.data = [];
     this.chargeslist=this.chargeslist1;
     this.chargeslist.push(

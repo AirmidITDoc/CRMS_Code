@@ -19,6 +19,7 @@ import { PaymentDetailComponent } from './payment-detail/payment-detail.componen
 import { InvoiceBillMappingComponent } from './invoice-bill-mapping/invoice-bill-mapping.component';
 import { MatDrawer } from '@angular/material/sidenav';
 import { PatientScreenBillDetailComponent } from './patient-screen-bill-detail/patient-screen-bill-detail.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 
 @Component({
@@ -94,6 +95,7 @@ export class AppointmentComponent implements OnInit {
       this.menuActions.push('Bill');
 
       this.menuActions.push('Invoice Bill');
+      // this.menuActions.push('Upload Document');
     } else if (this._ActRoute.url == '/opd/bill') {
       this.menuActions.push('New Bill');
     }
@@ -263,6 +265,41 @@ export class AppointmentComponent implements OnInit {
 
       }
     }
+    else if (m == "Upload Document") {
+      console.log(contact);
+    
+        let xx = {
+          RegNo: contact.RegId,
+          RegId: contact.RegId,
+          AdmissionID: contact.VisitId,
+          PatientName: contact.PatientName,
+          Doctorname: contact.Doctorname,
+          AdmDateTime: contact.AdmDateTime,
+          AgeYear: contact.AgeYear,
+          ClassId: contact.ClassId,
+          ClassName: contact.ClassName,
+          TariffName: contact.TariffName,
+          TariffId: contact.TariffId,
+          VisitId: contact.VisitId,
+          VistDateTime: contact.VistDateTime
+        };
+        // this._AppointmentSreviceService.populateFormpersonal(xx);
+        this.advanceDataStored.storage = new SearchInforObj(xx);
+        const dialogRef = this._matDialog.open(FileUploadComponent,
+          {
+            maxWidth: "20%",
+            height: '100px',
+            width: '100%',
+            data: {
+              registerObj: xx,
+            }
+          });
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed - Insert Action', result);
+          this.getVisitList();
+        });
+    
+    }
     else if (m == "Bill") {
       console.log(contact);
     
@@ -325,7 +362,7 @@ export class AppointmentComponent implements OnInit {
       const dialogRef = this._matDialog.open(InvoiceBillMappingComponent,
         {
           maxWidth: "65%",
-          height: '760px',
+          height: '800px',
           width: '100%',
           data: {
             registerObj: xx,
@@ -813,6 +850,8 @@ export class RegInsert {
   VisitDate: any;
   VisitTime: any;
   Opration:any;
+  PatientName:any;
+  Doctorname:any;
   /**
    * Constructor
    *
@@ -859,6 +898,8 @@ export class RegInsert {
       this.VisitDate = RegInsert.VisitDate || this.currentDate;
       this.VisitTime = RegInsert.VisitTime || this.currentDate;
       this.Opration = RegInsert.Opration || 0;
+      this.PatientName=RegInsert.PatientName || '';
+      this.Doctorname=RegInsert.Doctorname || '';
     }
   }
 }

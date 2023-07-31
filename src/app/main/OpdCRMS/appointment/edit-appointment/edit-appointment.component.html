@@ -1,15 +1,30 @@
 <div fxlayout="row" fxFlex.gt-sm="100%" fxFlex class="page-layout simple right-sidebar"
   style="height: 530px !important;">
   <div class="center" fusePerfectScrollbar style="overflow: auto;">
+    <div fxLayout="row" fxLayoutAlign="start center" class="accent" style="width:100% ; height:37px;color: white;">
 
-    <mat-toolbar matDialogTitle class="mat-accent m-0">
-      <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"  style="background-color:rgb(18, 87, 134) !important;" >
-        <h3>Edit Registration </h3>
-        <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
-          <mat-icon>close</mat-icon>
+      <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
+        <button mat-icon-button class="sidebar-toggle mr-12">
+          <mat-icon>menu</mat-icon>
         </button>
-      </mat-toolbar-row>
-    </mat-toolbar>
+
+        <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
+          style="width: 80%;font-size: 16px;">
+        Edit Registration
+          || ( {{registerObj.RegId}} ) {{registerObj.PatientName}} (
+          {{registerObj.AgeYear}}) Yrs | {{registerObj.Doctorname}} 
+          <!-- | Visit Id
+          {{registerObj.VisitId}} | Visit Date {{registerObj.VistDateTime}} -->
+
+        </span>
+
+        <div fxLayout="row" fxLayoutAlign="start center" style="margin-left:150px;">
+          <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
+            close
+          </span>
+        </div>
+      </div>
+    </div>
 
     <div style="padding:10px; height: 100%;" fxLayoutGap="2px">
       <div class="dialog-content-wrapper" style="align-items: flex-end;margin-right:10px;">
@@ -47,7 +62,8 @@
                   {{element.PrefixName}}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="_registerService.personalFormGroup.get('PrefixID').invalid && _registerService.personalFormGroup.get('PrefixID').touched">
+              <mat-error
+                *ngIf="_registerService.personalFormGroup.get('PrefixID').invalid && _registerService.personalFormGroup.get('PrefixID').touched">
                 Prefix is required</mat-error>
             </mat-form-field>
 
@@ -65,8 +81,8 @@
             <mat-form-field appearance="outline" fxFlex>
               <mat-label>Middle Name</mat-label>
               <input name="MiddleName" formControlName="MiddleName" placeholder="Middle Name"
-                [ngClass]="{ 'is-invalid': submitted && _registerService.personalFormGroup.get('MiddleName').errors }" matInput
-                [(ngModel)]="registerObj.MiddleName" onkeypress=" (event.charCode > 64 && 
+                [ngClass]="{ 'is-invalid': submitted && _registerService.personalFormGroup.get('MiddleName').errors }"
+                matInput [(ngModel)]="registerObj.MiddleName" onkeypress=" (event.charCode > 64 && 
           event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
               <mat-error class="error"
                 *ngIf="_registerService.personalFormGroup.get('MiddleName').invalid && _registerService.personalFormGroup.get('MiddleName').touched">
@@ -78,8 +94,8 @@
             <mat-form-field appearance="outline" fxFlex>
               <mat-label>Last Name</mat-label>
               <input name="LastName" formControlName="LastName" placeholder="Last Name"
-                [ngClass]="{ 'is-invalid': submitted && _registerService.personalFormGroup.get('LastName').errors }" matInput required
-                [(ngModel)]="registerObj.LastName" onkeypress=" (event.charCode > 64 && 
+                [ngClass]="{ 'is-invalid': submitted && _registerService.personalFormGroup.get('LastName').errors }"
+                matInput required [(ngModel)]="registerObj.LastName" onkeypress=" (event.charCode > 64 && 
           event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
               <mat-error class="error"
                 *ngIf="_registerService.personalFormGroup.get('LastName').invalid && _registerService.personalFormGroup.get('LastName').touched">Last
@@ -120,8 +136,8 @@
 
             <mat-form-field appearance="outline" fxFlex>
               <mat-label>Age (Y)</mat-label>
-              <input name="AgeYear" formControlName="AgeYear" placeholder="Age (Y)" matInput [ngModel]="registerObj.AgeYear"
-                (ngModelChange)="registerObj.AgeYear = $event" type="number">
+              <input name="AgeYear" formControlName="AgeYear" placeholder="Age (Y)" matInput
+                [ngModel]="registerObj.AgeYear" (ngModelChange)="registerObj.AgeYear = $event" type="number">
               <mat-error
                 *ngIf="_registerService.personalFormGroup.get('AgeYear').invalid && _registerService.personalFormGroup.get('AgeYear').touched">Please
                 enter Age Year </mat-error>
@@ -163,7 +179,8 @@
                   {{m.GenderName}}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="_registerService.personalFormGroup.get('GenderId').invalid && _registerService.personalFormGroup.get('GenderId').touched">
+              <mat-error
+                *ngIf="_registerService.personalFormGroup.get('GenderId').invalid && _registerService.personalFormGroup.get('GenderId').touched">
                 <span *ngIf="_registerService.personalFormGroup.get('GenderId').hasError('required')">
                   Gender is required</span>
               </mat-error>
@@ -235,7 +252,8 @@
                   {{element.CityName}}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="_registerService.personalFormGroup.get('CityId').invalid && _registerService.personalFormGroup.get('CityId').touched">
+              <mat-error
+                *ngIf="_registerService.personalFormGroup.get('CityId').invalid && _registerService.personalFormGroup.get('CityId').touched">
                 City Name is required</mat-error>
             </mat-form-field>
 
@@ -271,7 +289,8 @@
               <input name="PhoneNo" formControlName="PhoneNo" placeholder="Phone Number" matInput
                 [(ngModel)]="registerObj.PhoneNo" type="number">
               <mat-error class="error"
-                *ngIf="_registerService.personalFormGroup.get('PhoneNo').invalid && _registerService.personalFormGroup.get('PhoneNo').touched">10 Degits
+                *ngIf="_registerService.personalFormGroup.get('PhoneNo').invalid && _registerService.personalFormGroup.get('PhoneNo').touched">10
+                Degits
                 number is required
               </mat-error>
             </mat-form-field>
@@ -296,7 +315,8 @@
                 IsCharity</mat-slide-toggle>
 
 
-              <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()"    [disabled]="_registerService.personalFormGroup.invalid">Update</button>
+              <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()"
+                [disabled]="_registerService.personalFormGroup.invalid">Update</button>
 
               <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
 
@@ -311,4 +331,4 @@
 
 </div>
 
-<div id="snackbar">{{snackmessage}}</div>
+<!-- <div id="snackbar">{{snackmessage}}</div> -->

@@ -159,13 +159,8 @@ export class EditAppointmentComponent implements OnInit {
 
 
     if (this.data) {
-      // this.IsSave="false";
-      // this.IsSaveupdate='false';
+   
       this.registerObj = this.data.registerObj;
-
-      console.log(this.registerObj);
-
-      // this.AgeYear = this.data.PatObj.AgeYear;
       this.Prefix = this.data.registerObj.PrefixID;
      
       // this.setDropdownObjs1();

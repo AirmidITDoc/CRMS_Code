@@ -1,4 +1,4 @@
-<div fxFlexFill fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" style="width: 100%; background:#F5F5F5;padding: 10px; ">
+<div fxFlexFill fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" style="width: 100%; background:#F5F5F5;padding:2px; ">
     <!-- <div class="col-md-12" style="padding:10px;" *ngIf="selectedView == 'Dropdown'"> -->
     <div class="container" style="width: 100%;">
         <div style="width: 100%;">
@@ -10,7 +10,7 @@
 
                     <span style="font-size: 22px; font-weight: 500; color: #fff;margin-left: 10px;">Invoice </span>
 
-                    <div fxLayout="row" fxLayoutAlign="start center" style="margin-left: 1100px;">
+                    <div fxLayout="row" style="margin-left:1100px;">
 
                         <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
                             close
@@ -32,7 +32,7 @@
                                     <!-- ================================ LABEL HEADER  -->
 
                                     <mat-card fxFlex.gt-sm="100%" fxFlex
-                                        style="padding: 0 5px; height: fit-content; background-color: white;">
+                                        style="padding: 0 2px; height: fit-content; background-color: white;">
                                         &nbsp;
                                         <div style="float: right;">
                                             <!-- <span style="margin-right: 40px;color: black;font-weight: bold;">
@@ -41,7 +41,7 @@
                                         </div>
                                         <form [formGroup]="registeredForm"  #f="ngForm" #aForm>
 
-                                            <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between"
+                                            <div  fxLayout="row" fxLayoutAlign="space-between"
                                                 fxLayoutGap="5px" style="margin-top: 20px;margin-left: 20px;">
 
                                                 <mat-form-field appearance="outline" style="width: 20%;">
@@ -226,7 +226,7 @@
                                     <!-- ================================ LABEL HEADER  -->
 
                                     <mat-card fxFlex.gt-sm="100%" fxFlex
-                                        style="padding: 0 5px; height: fit-content; background-color: white;">
+                                        style="padding: 0 px; height: fit-content; background-color: white;">
                                         &nbsp;
                                         <form [formGroup]="registeredForm" style="display: flex;" #f="ngForm" #aForm>
 

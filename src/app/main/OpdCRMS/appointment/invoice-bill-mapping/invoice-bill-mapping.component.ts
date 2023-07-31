@@ -59,7 +59,7 @@ export class InvoiceBillMappingComponent implements OnInit {
   FianlamtCGST: any = 0;
   FianlamtIGST: any = 0;
   Fianlamt: any = 0;
-
+Tabamt=0;
   // reportPrintObjList: BrowseOPDBill[] = [];
   chargeslist: any = [];
   screenFromString = 'OP-billing';
@@ -243,7 +243,8 @@ export class InvoiceBillMappingComponent implements OnInit {
     let netAmt;
     netAmt = element.reduce((sum, { TotalBillAmt }) => sum += +(TotalBillAmt || 0), 0);
     this.TaxableAmount = netAmt;
-    // this.FinalTotalAmount = netAmt;
+    this.Tabamt = netAmt;
+    this.FinalTotalAmount= this.Tabamt;
     return netAmt
   }
 

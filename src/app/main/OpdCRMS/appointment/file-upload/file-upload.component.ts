@@ -43,4 +43,10 @@ export class FileUploadComponent implements OnInit {
             }
         );
     }
+
+
+
+    getFiledetials(element) {
+        console.log(element.value);
+     }
 }

@@ -108,6 +108,7 @@ export class StudyServicesComponent implements OnInit {
       console.log(this.dataSource1.data);
       this.dataSource1.sort = this.sort;
       this.chargeslist1= this.dataSource1.data;
+      this.chargeslist= this.dataSource1.data;
       this.dataSource1.paginator = this.paginator;
       // this.sIsLoading = '';
     },
@@ -250,7 +251,7 @@ debugger;
 
 
   onAddStudyService() {
-
+    this.chargeslist=[];
     debugger;
     this.VisitList.data = [];
     this.chargeslist=this.chargeslist1;
