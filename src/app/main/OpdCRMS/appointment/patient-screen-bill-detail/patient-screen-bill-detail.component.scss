@@ -54,11 +54,11 @@
   }
   
   app-patient-screen-bill-detail{
+    
+  .table1{
+    height:550px !important;
+  }
 
-
-    .table1{
-        height:650px !important;
-    }
   .mat-header-row {
     width: 100%;
     max-width: 910px;
@@ -72,21 +72,16 @@
     min-width: 910px;      
     min-height: 20px;            
   }
-  
-  .mat-column-BillId {
+  .mat-column-PBillNo {
     width:70px;
     max-width: 70px;
     min-width: 70px;
   }
-
-
   .mat-column-action {
     width:100px;
     max-width: 100px;
     min-width: 100px;
   }
-
-  
   .mat-column-ProtocolNo {
     width: 110px;
     max-width:110px;
@@ -101,14 +96,10 @@
     text-align: center;
     justify-content:center; 
   }
-
-  
- 
-
   .mat-column-SubjectName {
-    width: 250px;
-    max-width: 250px;
-    min-width: 250px;
+    width: 200px;
+    max-width: 200px;
+    min-width: 200px;
     text-align: left;
     justify-content:left; 
   }
@@ -248,28 +239,28 @@ height: 150px !important;
 
 .mat-header-row {
   width: 100%;
-  max-width: 750px;
-  min-width: 750px;  
+  max-width: 400px;
+  min-width: 400px;  
   min-height: 20px;     
 }
 
 .mat-row {
   width: 100%;
-  max-width: 750px;
-  min-width: 750px;      
+  max-width: 400px;
+  min-width: 400px;      
   min-height: 20px;            
 }
 
 .mat-column-date {
-  width:120px;
-  max-width: 120px;
-  min-width: 120px;
+  width:150px;
+  max-width: 150px;
+  min-width: 150px;
 }
 
 .mat-column-BillNo {
-  width: 120px;
-  max-width: 120px;
-  min-width: 120px;
+  width: 100px;
+  max-width: 100px;
+  min-width: 100px;
   text-align: left;
   justify-content:left; 
 }
@@ -290,21 +281,21 @@ height: 150px !important;
     
 .mat-header-row {
   width: 100%;
-  max-width: 750px;
-  min-width: 750px;  
+  max-width: 350px;
+  min-width: 350px;  
   min-height: 20px;     
 }
 
 .mat-row {
   width: 100%;
-  max-width: 750px;
-  min-width: 750px;      
+  max-width: 350px;
+  min-width: 350px;      
   min-height: 20px;            
 }
 .mat-column-Servicename {
-  width: 400px;
-  max-width: 400px;
-  min-width: 400px;
+  width: 200px;
+  max-width: 200px;
+  min-width: 200px;
   text-align: left;
   white-space: nowrap; 
   overflow: hidden;
@@ -314,14 +305,14 @@ height: 150px !important;
  justify-content:left; 
 }
    
-    .mat-column-TotalAmount {
-      width: 120px;
-      max-width: 120px;
-      min-width: 120px;
-      text-align: left;
-      justify-content:left; 
-    }
-  }
+.mat-column-TotalAmount {
+  width: 100px;
+  max-width: 100px;
+  min-width: 100px;
+  text-align: left;
+ justify-content:left; 
+ }
+}
   
   }
  
