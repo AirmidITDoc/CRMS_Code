@@ -38,7 +38,7 @@ export class ServiceMasterFormComponent implements OnInit {
   interimArray: any = [];
   msg: any;
   ClassRate: any;
-
+  screenFromString = 'OP-billing';
 
   dataSource = new MatTableDataSource<Servicedetail>();
   dataSource1 = new MatTableDataSource<Servicedetail>();
