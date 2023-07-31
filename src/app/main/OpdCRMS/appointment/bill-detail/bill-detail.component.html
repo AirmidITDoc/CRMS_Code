@@ -75,7 +75,7 @@
                                                 <mat-label>Price</mat-label>
                                                 <input matInput [(ngModel)]="b_price" name="bPrice"
                                                     (keyup)="calculateTotalAmt()" formControlName="price" required
-                                                    id="Price" (keydown.enter)="focusNextQty()">
+                                                    id="Price" (keydown.enter)="focusNextQty()" type="number">
                                                 <mat-error
                                                     *ngIf="ServiceForm.get('price').invalid && ServiceForm.get('price').touched">
                                                     Price is required</mat-error>
@@ -84,7 +84,7 @@
                                                 <mat-label>Qty</mat-label>
                                                 <input matInput [(ngModel)]="b_qty" name="bQty"
                                                     (keyup)="calculateTotalAmt()" formControlName="qty" required
-                                                    id="qty" (keydown.enter)="focusNextbtnAdd()">
+                                                    id="qty" (keydown.enter)="focusNextbtnAdd()" type="number">
                                                 <mat-error
                                                     *ngIf="ServiceForm.get('qty').invalid && ServiceForm.get('qty').touched">
                                                     Qty is required</mat-error>

@@ -87,7 +87,8 @@ export class ServiceMasterFormComponent implements OnInit {
   ngOnInit(): void {
     debugger;
     if (this.data) {
-      console.log(this.data.registerObj);
+      this.registerObj=this.data.registerObj;
+      // console.log(this.data.registerObj);
 
       if (this.data.IsSubmitFlag == true) {
         /////chk....
@@ -421,7 +422,7 @@ export class ServiceMasterFormComponent implements OnInit {
         serviceDetailInsert1['TariffId'] = this._serviceMasterService.myform.get("TariffId").value.TariffId || 0;
         serviceDetailInsert1['ClassId'] = element.ClassId;
         serviceDetailInsert1['ClassRate'] = element.ClassRate;
-        serviceDetailInsert1['EffectiveDate'] = this._serviceMasterService.myform.get("EffectiveDate").value.value || "01/01/1900";
+        serviceDetailInsert1['EffectiveDate'] = this.dateTimeObj.date;//this._serviceMasterService.myform.get("EffectiveDate").value.value || "01/01/1900";
 
         serviceDetailInsert.push(serviceDetailInsert1);
         // console.log(InsertAdddetArr.length);
@@ -462,13 +463,16 @@ export class ServiceMasterFormComponent implements OnInit {
       this.IsDoctor = true;
 
       this._serviceMasterService.myform.get('DoctorID').reset();
-      this._serviceMasterService.myform.get('DoctorID').setValidators([Validators.required]);
+      // this._serviceMasterService.myform.get('DoctorID').setValidators([Validators.required]);
       this._serviceMasterService.myform.get('DoctorID').enable;
       
     }
   }
 
-
+  dateTimeObj: any;
+  getDateTime(dateTimeObj) {
+    this.dateTimeObj = dateTimeObj;
+  }
 
 
   onIsEmergencyCheckboxChange(event) {

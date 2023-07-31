@@ -6,9 +6,17 @@
                 Service Master"}}</h3>
 
                 
-            <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
-                <mat-icon>close</mat-icon>
-            </button>
+                <div fxLayout="row" fxLayoutAlign="start center" style="float: right; margin-right: 5px;">
+                    <diV style="margin-top:21px;color: aliceblue;">
+                        <span style="margin-right: 40px;color: black;color: aliceblue;">
+                            <app-common-date [screenFrom]="screenFromString"
+                                (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
+                        </span>
+                    </diV>&nbsp;&nbsp;
+                    <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
+                        close
+                    </span>
+                </div>
         </mat-toolbar-row>
     </mat-toolbar>
 </div>
