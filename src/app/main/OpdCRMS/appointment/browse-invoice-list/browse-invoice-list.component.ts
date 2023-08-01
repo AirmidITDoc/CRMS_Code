@@ -100,10 +100,10 @@ export class BrowseInvoiceListComponent implements OnInit {
 
     debugger;
     var D_data = {
-         
-      "FromDate":'2023-07-28 00:00:00.000',// this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '2023-07-28 00:00:00.000',
-      "ToDate":'2023-07-28 00:00:00.000',// this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '2023-07-28 00:00:00.000',
-      "StudyId": this._InvoiceBilllsService.myFilterform.get("StudyId").value.StudyId || 1
+      // '2023-07-06 00:00:00.000'
+      "FromDate":this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '2023-07-28 00:00:00.000',
+      "ToDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '2023-07-28 00:00:00.000',
+      "StudyId": this._InvoiceBilllsService.myFilterform.get("StudyId").value.StudyId || 0
     }
     console.log(D_data);
 
@@ -179,16 +179,17 @@ export class BrowseInvoiceListComponent implements OnInit {
     // this._InvoiceBilllsService.myFilterform.get('FirstName').reset('');
     // this._InvoiceBilllsService.myFilterform.get('LastName').reset('');
     // this._InvoiceBilllsService.myFilterform.get('RegNo').reset('');
-    this._InvoiceBilllsService.myFilterform.get('InvoiceId').reset('');
+    this._InvoiceBilllsService.myFilterform.get('StudyId').reset('');
   }
 
 
 
   getInvoiceBilllsList() {
+    debugger
     this.sIsLoading = 'loading-data';
 
     var D_data = {
-      "StudyId": this._InvoiceBilllsService.myFilterform.get("StudyId").value || 0,
+      "StudyId": this._InvoiceBilllsService.myFilterform.get("StudyId").value.StudyId || 0,
       "FromDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
       "ToDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900'
          
@@ -349,7 +350,7 @@ export class BrowseInvoiceListComponent implements OnInit {
   getPrint(el) {
     debugger;
     var D_data = {
-      "InvoiceId": 9,// el.InvoiceId,
+      "InvoiceId": el.InvoiceId,
 
     }
     // el.bgColor = 'red';

@@ -52,16 +52,7 @@ export class ServiceMasterComponent implements OnInit {
     ngOnInit(): void {
         this.getServiceMasterList();
     }
-    // onSearch() {
-    //     this.getServiceMasterList();
-    // }
-
-    // onSearchClear() {
-    //     this._serviceMasterService.myformSearch.reset({
-    //         ServiceNameSearch: "",
-    //         IsDeletedSearch: "2",
-    //     });
-    // }
+   
     get f() {
         return this._serviceMasterService.myform.controls;
     }
@@ -70,7 +61,7 @@ export class ServiceMasterComponent implements OnInit {
         var m={
                      
                 "ServiceName":'%',       
-               "TariffId":1,      
+               "TariffId":1
             //    "GroupId":1      
                  
         };
@@ -159,11 +150,11 @@ export class ServiceMaster {
     Price: number;
     IsEditable: boolean;
     CreditedtoDoctor: boolean;
-    IsPathology: number;
-    IsRadiology: number;
+    IsPathology:  boolean;
+    IsRadiology: boolean;
     IsDeleted: boolean;
     PrintOrder: number;
-    IsPackage: number;
+    IsPackage: boolean;
     SubGroupId: number;
     DoctorId: number;
     IsEmergency: boolean;
@@ -192,7 +183,7 @@ export class ServiceMaster {
             this.EffectiveDate = ServiceMaster.EffectiveDate || this.currentDate;
             this.IsPathology = ServiceMaster.IsPathology || 0;
             this.IsRadiology = ServiceMaster.IsRadiology || 0;
-            this.IsDeleted = ServiceMaster.IsDeleted || "false";
+            this.IsDeleted = ServiceMaster.IsDeleted || 0;
             this.PrintOrder = ServiceMaster.PrintOrder || "";
             this.IsPackage = ServiceMaster.IsPackage || 0;
             this.SubGroupId = ServiceMaster.SubGroupId || "";

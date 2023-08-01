@@ -323,7 +323,7 @@ Tabamt=0;
 
 
     insertInvoiceDetail['InvoiceId'] = 0;
-    insertInvoiceDetail['CaseId'] = this.registeredForm.get('CaseId').value.CaseId || 0;
+    insertInvoiceDetail['CaseId'] = this.registeredForm.get('CaseId').value.StudyId || 0;
     insertInvoiceDetail['InvoiceDate'] = this.dateTimeObj.date;// this.registerObj.InvoiceDate;
     insertInvoiceDetail['InvoiceTime'] = this.dateTimeObj.time;
     insertInvoiceDetail['TaxableAmount'] = this.registeredForm.get('TaxableAmount').value || 0;
@@ -341,7 +341,7 @@ Tabamt=0;
 
     let insertInvoiceBillDetailarray = [];
 
-    this.dataSource1.data.forEach((element) => {
+    this.dataSource.data.forEach((element) => {
       let InvoiceBillDetail = {};
       InvoiceBillDetail['InvoiceId'] = 0,
         InvoiceBillDetail['BillNo'] = element.BillNo || 0;

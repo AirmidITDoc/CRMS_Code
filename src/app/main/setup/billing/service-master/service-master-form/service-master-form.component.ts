@@ -79,8 +79,8 @@ export class ServiceMasterFormComponent implements OnInit {
     // 'checkbox',
     // 'ClassId',
     'ClassName',
-    'ClassRate'
-    // 'ChangeClassRate'
+    'ClassRate',
+    'ChangeClassRate'
 
   ];
 
@@ -88,7 +88,7 @@ export class ServiceMasterFormComponent implements OnInit {
     debugger;
     if (this.data) {
       this.registerObj=this.data.registerObj;
-      // console.log(this.data.registerObj);
+      console.log(this.registerObj);
 
       if (this.data.IsSubmitFlag == true) {
         /////chk....
@@ -327,7 +327,7 @@ export class ServiceMasterFormComponent implements OnInit {
     if (this.ServiceId == 0) {
 
       let serviceMasterInsert = {};
-      serviceMasterInsert['groupId'] = 1,//this._serviceMasterService.myform.get("GroupId").value.GroupId || 0;
+      serviceMasterInsert['groupId'] = this._serviceMasterService.myform.get("GroupId").value.GroupId || 0;
         serviceMasterInsert['ServiceShortDesc'] = this._serviceMasterService.myform.get("ServiceShortDesc").value || "";
       serviceMasterInsert['ServiceName'] = (this._serviceMasterService.myform.get("ServiceName").value).trim() || "";
       serviceMasterInsert['Price'] = this._serviceMasterService.myform.get("Price").value || "0";
@@ -388,7 +388,7 @@ export class ServiceMasterFormComponent implements OnInit {
     }
     else {
       let serviceMasterUpdate = {};
-      serviceMasterUpdate['groupId'] = 1;
+      serviceMasterUpdate['groupId'] =  this._serviceMasterService.myform.get("GroupId").value.GroupId || 0;
       serviceMasterUpdate['ServiceShortDesc'] = this._serviceMasterService.myform.get("ServiceShortDesc").value || "";
       serviceMasterUpdate['ServiceName'] = (this._serviceMasterService.myform.get("ServiceName").value).trim() || "";
       serviceMasterUpdate['Price'] = this._serviceMasterService.myform.get("Price").value || "0";
@@ -398,7 +398,7 @@ export class ServiceMasterFormComponent implements OnInit {
       serviceMasterUpdate['IsPathology'] = parseInt(this._serviceMasterService.myform.get("IsPathology").value) || 0;
       serviceMasterUpdate['IsRadiology'] = parseInt(this._serviceMasterService.myform.get("IsRadiology").value) || 0;
       serviceMasterUpdate['IsActive'] = 1,//Boolean(JSON.parse(this._serviceMasterService.myform.get("IsActive").value)) ||0;
-      serviceMasterUpdate['PrintOrder'] = 0,//this._serviceMasterService.myform.get("PrintOrder").value || 1;
+      serviceMasterUpdate['PrintOrder'] = this._serviceMasterService.myform.get("PrintOrder").value || 1;
 
        serviceMasterUpdate['IsPackage'] = parseInt(this._serviceMasterService.myform.get("IsPackage").value) || 0;
       serviceMasterUpdate['SubGroupId'] = 1;

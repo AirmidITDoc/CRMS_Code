@@ -49,7 +49,7 @@ export class ServiceMasterService {
             ClassId: ["0"],
             ClassRate: ["0"],
             DoctorID:[0],
-            EffectiveDate:[{ value: this.registerObj.EffectiveDate }],
+            EffectiveDate: [{ value: this.registerObj.EffectiveDate }]
         });
     }
     createSearchForm(): FormGroup {
