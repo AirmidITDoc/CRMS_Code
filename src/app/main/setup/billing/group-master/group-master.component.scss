@@ -4,16 +4,16 @@
 
 app-group-master{
     .mat-header-row {
-        width: 900px;
-        max-width: 900px;
-        min-width: 900px;
+        width: 1000px;
+        max-width: 1000px;
+        min-width: 1000px;
         font-weight: bold;
     }
 
     .mat-row {
-        width: 900px;
-        max-width: 900px;
-        min-width: 900px;
+        width: 1000px;
+        max-width: 1000px;
+        min-width: 1000px;
     }
 
     .mat-column-GroupId {
@@ -22,12 +22,12 @@ app-group-master{
         min-width: 70px;
     }
     .mat-column-GroupName {
-        width: 250px;
-        max-width: 250px;
-        min-width: 250px;
+        width: 450px;
+        max-width: 450px;
+        min-width: 450px;
     }
 
-    .mat-column-Isconsolidated {
+    .mat-column-IsConsolidated {
         width: 100px;
         max-width: 100px;
         min-width: 100px;
@@ -37,32 +37,32 @@ app-group-master{
         max-width: 150px;
         min-width: 150px;
     }
-    .mat-column-PrintSeqNo {
-        width: 120px;
-        max-width: 120px;
-        min-width: 70px;
-    }
+    // .mat-column-PrintSeqNo {
+    //     width: 120px;
+    //     max-width: 120px;
+    //     min-width: 70px;
+    // }
 
-    .mat-column-IsDeleted {
+    .mat-column-IsActive {
         width: 70px;
         max-width: 70px;
         min-width: 70px;
         text-align: center;
         justify-content: center;
     }
-    .mat-column-AddedByName {
-        width: 120px;
-        max-width: 120px;
-        min-width: 120px;
-    }
+    // .mat-column-AddedByName {
+    //     width: 120px;
+    //     max-width: 120px;
+    //     min-width: 120px;
+    // }
 
     .mat-column-action {
-        // color: white !important;
+        color: white !important;
         width: 120px;
         max-width: 120px;
         min-width: 70px;
-        text-align: right;
-        justify-content: right;
+        text-align: center;
+        justify-content: center;
     }
     .mat-icon-button {
         padding: 0;

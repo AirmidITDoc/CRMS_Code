@@ -24,17 +24,17 @@ export class GroupMasterComponent implements OnInit {
     displayedColumns: string[] = [
         "GroupId",
         "GroupName",
-        "Isconsolidated",
+        "IsConsolidated",
         "IsConsolidatedDR",
-        "PrintSeqNo",
-        "AddedByName",
-        "IsDeleted",
+        // "PrintSeqNo",
+        // "AddedByName",
+        "IsActive",
         "action",
     ];
 
     DSGroupMasterList = new MatTableDataSource<GroupMaster>();
 
-    constructor(public _groupService: GroupMasterService) {}
+    constructor(public _groupService: GroupMasterService) { }
 
     ngOnInit(): void {
         this.getGroupMasterList();
@@ -55,7 +55,8 @@ export class GroupMasterComponent implements OnInit {
 
     getGroupMasterList() {
         var param = {
-            GroupName: "%",
+            GroupName: this._groupService.myformSearch.get('GroupNameSearch').value + "%" || "%",
+            IsActive: this._groupService.myformSearch.get('IsDeletedSearch').value || 0
         };
         this._groupService.getGroupMasterList(param).subscribe((Menu) => {
             this.DSGroupMasterList.data = Menu as GroupMaster[];
@@ -65,7 +66,9 @@ export class GroupMasterComponent implements OnInit {
     }
 
     onClear() {
-        this._groupService.myform.reset({ IsDeleted: "false" });
+        this._groupService.myform.reset({ IsActive: "false" });
+        this._groupService.myform.reset({ Isconsolidated: "true" });
+        this._groupService.myform.reset({ IsConsolidatedDR: "false" });
         this._groupService.initializeFormGroup();
     }
 
@@ -77,30 +80,13 @@ export class GroupMasterComponent implements OnInit {
                         groupName: this._groupService.myform
                             .get("GroupName")
                             .value.trim(),
-                        isconsolidated: Boolean(
-                            JSON.parse(
-                                this._groupService.myform.get("Isconsolidated")
-                                    .value
-                            )
-                        ),
-                        isConsolidatedDR: Boolean(
-                            JSON.parse(
-                                this._groupService.myform.get(
-                                    "IsConsolidatedDR"
-                                ).value
-                            )
-                        ),
+                        isconsolidated: this._groupService.myform.get("IsConsolidated").value || true,
+                        isConsolidatedDR: this._groupService.myform.get("IsConsolidatedDR").value || false,
 
-                        isActive: Boolean(
-                            JSON.parse(
-                                this._groupService.myform.get("IsDeleted").value
-                            )
-                        ),
-                        PrintSeqNo:
-                            this._groupService.myform.get("PrintSeqNo").value,
-                    },
+                        IsActive: this._groupService.myform.get("IsActive").value || false
+                           },
                 };
-
+                console.log(m_data)
                 this._groupService
                     .groupMasterInsert(m_data)
                     .subscribe((data) => {
@@ -125,36 +111,18 @@ export class GroupMasterComponent implements OnInit {
                         this.getGroupMasterList();
                     });
             } else {
+                debugger
                 var m_dataUpdate = {
                     groupMasterUpdate: {
                         groupId: this._groupService.myform.get("GroupId").value,
-                        groupName: this._groupService.myform
-                            .get("GroupName")
-                            .value.trim(),
-                        isconsolidated: Boolean(
-                            JSON.parse(
-                                this._groupService.myform.get("Isconsolidated")
-                                    .value
-                            )
-                        ),
-                        isConsolidatedDR: Boolean(
-                            JSON.parse(
-                                this._groupService.myform.get(
-                                    "IsConsolidatedDR"
-                                ).value
-                            )
-                        ),
-
-                        isActive: Boolean(
-                            JSON.parse(
-                                this._groupService.myform.get("IsDeleted").value
-                            )
-                        ),
-                        PrintSeqNo:
-                            this._groupService.myform.get("PrintSeqNo").value,
+                        groupName: this._groupService.myform.get("GroupName").value.trim() || '',
+                        isconsolidated: this._groupService.myform.get("IsConsolidated").value || 'true',
+                        isConsolidatedDR: this._groupService.myform.get("IsConsolidatedDR").value || 'true',
+                        IsActive: this._groupService.myform.get("IsActive").value || false
+                           
                     },
                 };
-
+                console.log(m_dataUpdate)
                 this._groupService
                     .groupMasterUpdate(m_dataUpdate)
                     .subscribe((data) => {
@@ -186,10 +154,10 @@ export class GroupMasterComponent implements OnInit {
         var m_data = {
             GroupId: row.GroupId,
             GroupName: row.GroupName.trim(),
-            Isconsolidated: JSON.stringify(row.Isconsolidated),
+            IsConsolidated: JSON.stringify(row.IsConsolidated),
             IsConsolidatedDR: JSON.stringify(row.IsConsolidatedDR),
             PrintSeqNo: row.PrintSeqNo,
-            IsDeleted: JSON.stringify(row.IsDeleted),
+            IsActive: JSON.stringify(row.IsActive),
             UpdatedBy: row.UpdatedBy,
         };
         this._groupService.populateForm(m_data);
@@ -199,10 +167,10 @@ export class GroupMasterComponent implements OnInit {
 export class GroupMaster {
     GroupId: number;
     GroupName: string;
-    Isconsolidated: boolean;
+    IsConsolidated: boolean;
     IsConsolidatedDR: boolean;
     PrintSeqNo: Number;
-    IsDeleted: boolean;
+    IsActive: boolean;
     AddedBy: number;
     UpdatedBy: number;
     AddedByName: string;
@@ -216,10 +184,10 @@ export class GroupMaster {
         {
             this.GroupId = GroupMaster.GroupId || "";
             this.GroupName = GroupMaster.GroupName || "";
-            this.Isconsolidated = GroupMaster.Isconsolidated || "false";
+            this.IsConsolidated = GroupMaster.IsConsolidated || "false";
             this.IsConsolidatedDR = GroupMaster.IsConsolidatedDR || "false";
             this.PrintSeqNo = GroupMaster.PrintSeqNo || "";
-            this.IsDeleted = GroupMaster.IsDeleted || "false";
+            this.IsActive = GroupMaster.IsActive || "false";
             this.AddedBy = GroupMaster.AddedBy || "";
             this.UpdatedBy = GroupMaster.UpdatedBy || "";
             this.AddedByName = GroupMaster.AddedByName || "";

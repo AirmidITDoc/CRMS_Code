@@ -89,7 +89,7 @@ export class NewsponserinformationComponent implements OnInit {
     this._sponserService.UpdateSponserInformation(m_data1).subscribe(response => {
       if (response) {
         Swal.fire('Update Sponser Information Save !', ' Sponser Information Updated Successfully !', 'success').then((result) => {
-          if (result.isConfirmed) {
+          if (result) {
             this._matDialog.closeAll();
           }
         });
@@ -102,6 +102,6 @@ export class NewsponserinformationComponent implements OnInit {
   }
 
   onClose(){
-    
+    this._matDialog.closeAll();
   }
 }

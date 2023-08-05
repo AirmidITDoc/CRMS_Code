@@ -37,7 +37,7 @@ export class ServiceMasterComponent implements OnInit {
         "AddedByName",
         "IsEditable",
         "CreditedtoDoctor",
-        "IsDeleted",
+        "IsActive",
         "action",
     ];
 
@@ -69,6 +69,7 @@ export class ServiceMasterComponent implements OnInit {
             (Menu) => {
                 this.DSServiceMasterList.data = Menu as ServiceMaster[];
                 this.isLoading = false;
+                console.log(Menu)
                 this.DSServiceMasterList.sort = this.sort;
                 this.DSServiceMasterList.paginator = this.paginator;
             },
@@ -96,7 +97,7 @@ export class ServiceMasterComponent implements OnInit {
             CreditedtoDoctor: JSON.stringify(row.CreditedtoDoctor),
             IsPathology: JSON.stringify(row.IsPathology),
             IsRadiology: JSON.stringify(row.IsRadiology),
-            IsDeleted: JSON.stringify(row.IsDeleted),
+            IsActive: JSON.stringify(row.IsActive),
             PrintOrder: row.PrintOrder,
             IsPackage: JSON.stringify(row.IsPackage),
             SubGroupId: row.SubGroupId,
@@ -148,24 +149,25 @@ export class ServiceMaster {
     ServiceShortDesc: string;
     ServiceName: string;
     Price: number;
-    IsEditable: boolean;
-    CreditedtoDoctor: boolean;
-    IsPathology:  boolean;
-    IsRadiology: boolean;
-    IsDeleted: boolean;
+    IsEditable: any;
+    CreditedtoDoctor: any;
+    IsPathology:  any;
+    IsRadiology: any;
+    IsActive: any;
     PrintOrder: number;
-    IsPackage: boolean;
+    IsPackage: any;
     SubGroupId: number;
     DoctorId: number;
-    IsEmergency: boolean;
+    IsEmergency: any;
     EmgAmt: number;
     EmgPer: number;
-    IsDocEditable: boolean;
+    IsDocEditable: any;
     AddedBy: number;
     UpdatedBy: number;
     AddedByName: string;
     currentDate = new Date();
     EffectiveDate:any;
+    
     /**
      * Constructor
      *
@@ -183,17 +185,17 @@ export class ServiceMaster {
             this.EffectiveDate = ServiceMaster.EffectiveDate || this.currentDate;
             this.IsPathology = ServiceMaster.IsPathology || 0;
             this.IsRadiology = ServiceMaster.IsRadiology || 0;
-            this.IsDeleted = ServiceMaster.IsDeleted || 0;
+            this.IsActive = ServiceMaster.IsActive || 0;
             this.PrintOrder = ServiceMaster.PrintOrder || "";
             this.IsPackage = ServiceMaster.IsPackage || 0;
-            this.SubGroupId = ServiceMaster.SubGroupId || "";
-            this.DoctorId = ServiceMaster.DoctorId || "";
+            this.SubGroupId = ServiceMaster.SubGroupId || 0;
+            this.DoctorId = ServiceMaster.DoctorId || 0;
             this.IsEmergency = ServiceMaster.IsEmergency || 0;
             this.EmgAmt = ServiceMaster.EmgAmt || "";
             this.EmgPer = ServiceMaster.EmgPer || "";
             this.IsDocEditable = ServiceMaster.DoctorId || 0;
-            this.AddedBy = ServiceMaster.AddedBy || "";
-            this.UpdatedBy = ServiceMaster.UpdatedBy || "";
+            this.AddedBy = ServiceMaster.AddedBy || 0;
+            this.UpdatedBy = ServiceMaster.UpdatedBy || 0;
             this.AddedByName = ServiceMaster.AddedByName || "";
         }
     }

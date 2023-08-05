@@ -140,8 +140,8 @@ export class AppointmentComponent implements OnInit {
     console.log(element);
     const dialogRef = this._matDialog.open(PatientScreenBillDetailComponent,
       {
-        maxWidth: '100vw',
-        height: '900px',
+        maxWidth: '110vw',
+        height: '920px',
         width: '100%',
         data : {
           element : element,
@@ -348,13 +348,14 @@ export class AppointmentComponent implements OnInit {
           TariffName: contact.TariffName,
           TariffId: contact.TariffId,
           VisitId: contact.VisitId,
-          VistDateTime: contact.VistDateTime
+          VistDateTime: contact.VistDateTime,
+          BillStatus:1
         };
         // this._AppointmentSreviceService.populateFormpersonal(xx);
         this.advanceDataStored.storage = new SearchInforObj(xx);
         const dialogRef = this._matDialog.open(BillDetailComponent,
           {
-            maxWidth: "99%",
+            maxWidth: "80%",
             height: '700px',
             width: '100%',
             data: {

@@ -400,7 +400,7 @@ debugger
       this._opappointmentService.VisitUpdate(submissionObj).subscribe(response => {
         console.log(response);
         if (response) {
-          Swal.fire('Congratulations !', 'New Visit Update Successfully !', 'success').then((result) => {
+          Swal.fire('Congratulations !', 'Visit Update Successfully !', 'success').then((result) => {
             if (result.isConfirmed) {
               this._matDialog.closeAll();
                         

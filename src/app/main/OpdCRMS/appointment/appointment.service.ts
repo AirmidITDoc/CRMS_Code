@@ -377,18 +377,20 @@ public getBillGeneration(employee){
 
 //Bill detail
 public getVisitdetailsList(employee){
-  return this._httpClient.post("Generic/GetByProc?procName=crms_visitdetails ", employee)
+  return this._httpClient.post("Generic/GetByProc?procName=crms_visitdetails", employee)
 }
 
 public getBillList(employee){
-  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_BrowseOPBillList ", employee)
+  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_bill", employee)
 }
 
 public getMainBillDetData(employee){
-  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_T_BillDetailList ", employee)
+  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_T_BillDetailList", employee)
 }
 
 //API Connection
-p
 
+public getstudywiseservicelist(employee){
+  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_VisitWiseStudyServiceInform", employee)
+}
 }

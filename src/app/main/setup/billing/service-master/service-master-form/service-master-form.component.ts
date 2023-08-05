@@ -39,6 +39,12 @@ export class ServiceMasterFormComponent implements OnInit {
   msg: any;
   ClassRate: any;
   screenFromString = 'OP-billing';
+  IsEditable: any;
+  IsActive: any;
+  CreditedtoDoctor: any;
+  IsDocEditable: any;
+  // CreditedtoDoctor:any;
+
 
   dataSource = new MatTableDataSource<Servicedetail>();
   dataSource1 = new MatTableDataSource<Servicedetail>();
@@ -86,9 +92,64 @@ export class ServiceMasterFormComponent implements OnInit {
 
   ngOnInit(): void {
     debugger;
+
+
     if (this.data) {
-      this.registerObj=this.data.registerObj;
+      this.registerObj = this.data.registerObj;
       console.log(this.registerObj);
+
+      if(this.registerObj.IsEmergency=="true")
+      {
+        this._serviceMasterService.myform.get('IsEmergency').setValue(1);
+      }else{
+        this._serviceMasterService.myform.get('IsEmergency').setValue(0);
+      }
+
+      if(this.registerObj.IsDocEditable=="true")
+      {
+        this._serviceMasterService.myform.get('IsDocEditable').setValue(1);
+      }else{
+        this._serviceMasterService.myform.get('IsDocEditable').setValue(0);
+      }
+
+
+      if(this.registerObj.IsEditable=="true")
+      {
+        this._serviceMasterService.myform.get('IsEditable').setValue(1);
+      }else{
+        this._serviceMasterService.myform.get('IsEditable').setValue(0);
+      }
+
+
+      if(this.registerObj.CreditedtoDoctor=="true")
+      {
+        this._serviceMasterService.myform.get('CreditedtoDoctor').setValue(1);
+      }else{
+        this._serviceMasterService.myform.get('CreditedtoDoctor').setValue(0);
+      }
+
+      if(this.registerObj.IsActive=="true")
+      {
+        this._serviceMasterService.myform.get('IsActive').setValue(1);
+      }else{
+        this._serviceMasterService.myform.get('IsActive').setValue(0);
+      }
+      if(this.registerObj.IsPathology=="true")
+      {
+        this._serviceMasterService.myform.get('IsPathology').setValue(1);
+      }else{
+        this._serviceMasterService.myform.get('IsPathology').setValue(0);
+      }
+
+      if(this.registerObj.IsRadiology=="true")
+      {
+        this._serviceMasterService.myform.get('IsRadiology').setValue(1);
+      }else{
+        this._serviceMasterService.myform.get('IsRadiology').setValue(0);
+      }
+
+
+
 
       if (this.data.IsSubmitFlag == true) {
         /////chk....
@@ -99,7 +160,7 @@ export class ServiceMasterFormComponent implements OnInit {
       }
       this.getClassListforUpdate();
     } else {
-
+      this._serviceMasterService.myform.reset();
       this.getClassListforNew();
     }
 
@@ -328,7 +389,7 @@ export class ServiceMasterFormComponent implements OnInit {
 
       let serviceMasterInsert = {};
       serviceMasterInsert['groupId'] = this._serviceMasterService.myform.get("GroupId").value.GroupId || 0;
-        serviceMasterInsert['ServiceShortDesc'] = this._serviceMasterService.myform.get("ServiceShortDesc").value || "";
+      serviceMasterInsert['ServiceShortDesc'] = this._serviceMasterService.myform.get("ServiceShortDesc").value || "";
       serviceMasterInsert['ServiceName'] = (this._serviceMasterService.myform.get("ServiceName").value).trim() || "";
       serviceMasterInsert['Price'] = this._serviceMasterService.myform.get("Price").value || "0";
       serviceMasterInsert['IsEditable'] = Boolean(JSON.parse(this._serviceMasterService.myform.get("IsEditable").value)) || 0;
@@ -388,7 +449,7 @@ export class ServiceMasterFormComponent implements OnInit {
     }
     else {
       let serviceMasterUpdate = {};
-      serviceMasterUpdate['groupId'] =  this._serviceMasterService.myform.get("GroupId").value.GroupId || 0;
+      serviceMasterUpdate['groupId'] = this._serviceMasterService.myform.get("GroupId").value.GroupId || 0;
       serviceMasterUpdate['ServiceShortDesc'] = this._serviceMasterService.myform.get("ServiceShortDesc").value || "";
       serviceMasterUpdate['ServiceName'] = (this._serviceMasterService.myform.get("ServiceName").value).trim() || "";
       serviceMasterUpdate['Price'] = this._serviceMasterService.myform.get("Price").value || "0";
@@ -398,9 +459,9 @@ export class ServiceMasterFormComponent implements OnInit {
       serviceMasterUpdate['IsPathology'] = parseInt(this._serviceMasterService.myform.get("IsPathology").value) || 0;
       serviceMasterUpdate['IsRadiology'] = parseInt(this._serviceMasterService.myform.get("IsRadiology").value) || 0;
       serviceMasterUpdate['IsActive'] = 1,//Boolean(JSON.parse(this._serviceMasterService.myform.get("IsActive").value)) ||0;
-      serviceMasterUpdate['PrintOrder'] = this._serviceMasterService.myform.get("PrintOrder").value || 1;
+        serviceMasterUpdate['PrintOrder'] = this._serviceMasterService.myform.get("PrintOrder").value || 1;
 
-       serviceMasterUpdate['IsPackage'] = parseInt(this._serviceMasterService.myform.get("IsPackage").value) || 0;
+      serviceMasterUpdate['IsPackage'] = parseInt(this._serviceMasterService.myform.get("IsPackage").value) || 0;
       serviceMasterUpdate['SubGroupId'] = 1;
       serviceMasterUpdate['DoctorId'] = this._serviceMasterService.myform.get("DoctorID").value.DoctorId || 0;
       serviceMasterUpdate['IsEmergency'] = Boolean(JSON.parse(this._serviceMasterService.myform.get("IsEmergency").value)) || 0;
@@ -422,7 +483,7 @@ export class ServiceMasterFormComponent implements OnInit {
         serviceDetailInsert1['TariffId'] = this._serviceMasterService.myform.get("TariffId").value.TariffId || 0;
         serviceDetailInsert1['ClassId'] = element.ClassId;
         serviceDetailInsert1['ClassRate'] = element.ClassRate;
-        serviceDetailInsert1['EffectiveDate'] = this.dateTimeObj.date;//this._serviceMasterService.myform.get("EffectiveDate").value.value || "01/01/1900";
+        serviceDetailInsert1['EffectiveDate'] = this._serviceMasterService.myform.get("EffectiveDate").value.value || "01/01/1900";
 
         serviceDetailInsert.push(serviceDetailInsert1);
         // console.log(InsertAdddetArr.length);
@@ -462,10 +523,14 @@ export class ServiceMasterFormComponent implements OnInit {
     } else {
       this.IsDoctor = true;
 
+      // this._serviceMasterService.myform.get('DoctorID').reset();
+      // // this._serviceMasterService.myform.get('DoctorID').setValidators([Validators.required]);
+      // this._serviceMasterService.myform.get('DoctorID').enable;
+
       this._serviceMasterService.myform.get('DoctorID').reset();
-      // this._serviceMasterService.myform.get('DoctorID').setValidators([Validators.required]);
-      this._serviceMasterService.myform.get('DoctorID').enable;
-      
+      this._serviceMasterService.myform.get('DoctorID').setValidators([Validators.required]);
+      this._serviceMasterService.myform.get('DoctorID').reset();
+      this._serviceMasterService.myform.get('DoctorID').disable;
     }
   }
 

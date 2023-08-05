@@ -502,7 +502,7 @@ export class NewAppointmentComponent implements OnInit {
   getDepartmentList() {
     this._opappointmentService.getDepartmentCombo().subscribe(data => {
       this.DepartmentList = data;
-      console.log(data);
+      // console.log(data);
       this.filteredDepartment.next(this.DepartmentList.slice());
     });
   }

@@ -21,9 +21,10 @@ export class GroupMasterService {
             GroupId: [""],
             GroupName: ["", Validators.required],
             PrintSeqNo: ["", Validators.pattern("[0-9]+")],
-            Isconsolidated: [""],
-            IsConsolidatedDR: [""],
-            IsDeleted: ["false"],
+            Isconsolidated: ["1"],
+            IsConsolidatedDR: ["0"],
+
+            IsActive: ["false"],
             AddedBy: ["0"],
             UpdatedBy: ["0"],
             AddedByName: [""],
@@ -48,11 +49,11 @@ export class GroupMasterService {
     }
 
     public groupMasterInsert(param) {
-        return this._httpClient.post("Billing/GroupSave", param);
+        return this._httpClient.post("Master/GroupSave", param);
     }
 
     public groupMasterUpdate(param) {
-        return this._httpClient.post("Billing/GroupUpdate", param);
+        return this._httpClient.post("Master/GroupUpdate", param);
     }
 
     populateForm(param) {

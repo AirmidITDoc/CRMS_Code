@@ -46,7 +46,11 @@ export class TariffMasterComponent implements OnInit {
         });
     }
     getTariffMasterList() {
-        var param = { TariffName: "%" };
+        var param = {
+             TariffName: this._tariffService.myformSearch.get('TariffNameSearch').value + "%" || "%" ,
+             IsActive: this._tariffService.myformSearch.get('IsDeletedSearch').value  || 1 
+
+            };
         this._tariffService.getTariffMasterList(param).subscribe((Menu) => {
             this.DSTariffMasterList.data = Menu as TariffMaster[];
             this.DSTariffMasterList.sort = this.sort;

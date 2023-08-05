@@ -13,7 +13,7 @@
                 </span>
 
                 <button mat-raised-button (click)="onAdd()" fxLayoutAlign="center center"
-                style="margin-left: 1300px;">
+                style="margin-left: 1600px;">
                 <mat-icon color="Primary" title=" Appointment Form ">how_to_reg</mat-icon>
             </button>
             </div>
@@ -41,7 +41,7 @@
                     <div fxFlex.gt-sm="99%" fxFlex>
                         <div style="width: 100%;">
                             <mat-table #table matSort [dataSource]="DSServiceMasterList"
-                                [@animateStagger]="{value:'50'}" style="overflow:auto" class="table1">
+                                [@animateStagger]="{value:'50'}" style="overflow:auto;width: 99%;" class="table1">
 
                                 <ng-container matColumnDef="ServiceId">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Code
@@ -98,41 +98,60 @@
                                 </ng-container>
 
 
+                              
+
                                 <ng-container matColumnDef="IsEditable">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm> IsEditable
+                                    <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: white;">IsEditable
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
-                                        <mat-icon *ngIf="!element.IsEditable"
-                                            class="active-icon green-600 s-16">check_circle</mat-icon>
-                                        <mat-icon *ngIf="element.IsEditable"
-                                            class="active-icon red-500 s-16">close</mat-icon>
+                                    <mat-cell *matCellDef="let contact">
+                                        <mat-icon
+                                            style="font-size: 70px;width: 25px !important; height:25px !important;border-radius:100% ;"
+                                            *ngIf="contact.IsEditable=='1'|| contact.IsEditable=='2' "
+                                            matTooltip="IsEditable" class=" red-600 s-16">circle</mat-icon>
+                                        <mat-icon
+                                            style="font-size: 70px;width: 25px !important; border: black 1px solid; height:25px !important;border-radius:100% ;"
+                                            *ngIf="contact.IsEditable=='0' " matTooltip="Did not IsEditable"
+                                            class=" white-600 s-16">
+                                            circle</mat-icon>
                                     </mat-cell>
                                 </ng-container>
 
+
+                                
                                 <ng-container matColumnDef="CreditedtoDoctor">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
-                                        CreditedtoDoctor </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
-                                        <mat-icon *ngIf="!element.CreditedtoDoctor"
-                                            class="active-icon green-600 s-16">check_circle</mat-icon>
-                                        <mat-icon *ngIf="element.CreditedtoDoctor"
-                                            class="active-icon red-500 s-16">close</mat-icon>
-                                    </mat-cell>
-                                </ng-container>
-
-
-                                <ng-container matColumnDef="IsDeleted">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm> IsActive
+                                    <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: white;">CreditedtoDoctor
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
-                                        <mat-icon *ngIf="!element.IsDeleted"
-                                            class="active-icon green-600 s-16">check_circle</mat-icon>
-                                        <mat-icon *ngIf="element.IsDeleted"
-                                            class="active-icon red-500 s-16">close</mat-icon>
+                                    <mat-cell *matCellDef="let contact">
+                                        <mat-icon
+                                            style="font-size: 70px;width: 25px !important; height:25px !important;border-radius:100% ;"
+                                            *ngIf="contact.CreditedtoDoctor=='1'|| contact.CreditedtoDoctor=='2' "
+                                            matTooltip="CreditedtoDoctor" class=" red-600 s-16">circle</mat-icon>
+                                        <mat-icon
+                                            style="font-size: 70px;width: 25px !important; border: black 1px solid; height:25px !important;border-radius:100% ;"
+                                            *ngIf="contact.CreditedtoDoctor=='0' " matTooltip="Did not CreditedtoDoctor"
+                                            class=" white-600 s-16">
+                                            circle</mat-icon>
                                     </mat-cell>
                                 </ng-container>
 
+                                <ng-container matColumnDef="IsActive">
+                                    <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: white;">IsActive
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let contact">
+                                        <mat-icon
+                                            style="font-size: 70px;width: 25px !important; height:25px !important;border-radius:100% ;"
+                                            *ngIf="contact.IsActive=='1'|| contact.IsActive=='2' "
+                                            matTooltip="Active" class=" red-600 s-16">circle</mat-icon>
+                                        <mat-icon
+                                            style="font-size: 70px;width: 25px !important; border: black 1px solid; height:25px !important;border-radius:100% ;"
+                                            *ngIf="contact.IsActive=='0' " matTooltip="Did not Active"
+                                            class=" white-600 s-16">
+                                            circle</mat-icon>
+                                    </mat-cell>
+                                </ng-container>
 
+                                
+                           
                                 <ng-container matColumnDef="action" stickyEnd>
                                     <mat-header-cell *matHeaderCellDef class="table-actions" style="color: aliceblue;"> Action </mat-header-cell>
                                     <mat-cell *matCellDef="let row">

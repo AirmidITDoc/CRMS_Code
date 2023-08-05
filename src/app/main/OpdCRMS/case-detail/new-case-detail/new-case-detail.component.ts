@@ -266,7 +266,7 @@ export class NewCaseDetailComponent implements OnInit {
   getCompanyList() {
     this._CasedetailService.getCompanyCombo().subscribe(data => {
       this.CompanyList = data;
-      console.log(data);
+
       this.filteredCompany.next(this.CompanyList.slice());
       this._CasedetailService.personalFormGroup
         .get("CompanyId")
@@ -277,7 +277,7 @@ export class NewCaseDetailComponent implements OnInit {
   getInstitutionList() {
     this._CasedetailService.getInstitutionCombo().subscribe(data => {
       this.Institutionist = data;
-      console.log(data);
+      
       this.filteredInstitution.next(this.Institutionist.slice());
       this._CasedetailService.personalFormGroup
         .get("Institution")

@@ -80,37 +80,39 @@
 
   
   .mat-column-ProtocolNo {
-    width: 150px; 
-    max-width:150px;
-    min-width: 150px;
-    text-align: center;
-  }
-  .mat-column-ProtocolTitle {
-    width: 250px;
-    max-width: 250px;
+    width: 250px; 
+    max-width:250px;
     min-width: 250px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis; 
      overflow: hidden !important;
-     display: inline-block;
-     margin-top: 7px;
-     margin-right: 7px;
+     
      justify-content:left; 
   }
-  .mat-column-StudyProduct {
-    width:250px;
-    max-width:250px;
-    min-width:250px;
+  .mat-column-ProtocolTitle {
+    width: 350px;
+    max-width: 350px;
+    min-width: 350px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis; 
      overflow: hidden !important;
-     display: inline-block;
-     margin-top: 7px;
-     margin-right: 7px;
+    
+     justify-content:left; 
+  }
+  .mat-column-StudyProduct {
+    width:350px;
+    max-width:350px;
+    min-width:350px;
+    text-align: left;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+     overflow: hidden !important;
+   
      justify-content:left; 
   }
   .mat-column-action {
@@ -140,9 +142,7 @@
     overflow: hidden;
     text-overflow: ellipsis; 
      overflow: hidden !important;
-     display: inline-block;
-     margin-top: 7px;
-     margin-right: 7px;
+   
      justify-content:left; 
      
   }
@@ -157,9 +157,7 @@
     overflow: hidden;
     text-overflow: ellipsis; 
      overflow: hidden !important;
-     display: inline-block;
-     margin-top: 7px;
-     margin-right: 7px;
+   
      justify-content:left; 
   }
   
@@ -183,9 +181,7 @@
     overflow: hidden;
     text-overflow: ellipsis; 
      overflow: hidden !important;
-     display: inline-block;
-     margin-top: 7px;
-     margin-right: 7px;
+    
      justify-content:left; 
   }
 
@@ -198,9 +194,7 @@
     overflow: hidden;
     text-overflow: ellipsis; 
      overflow: hidden !important;
-     display: inline-block;
-     margin-top: 7px;
-     margin-right: 7px;
+    
      justify-content:left; 
   }
 

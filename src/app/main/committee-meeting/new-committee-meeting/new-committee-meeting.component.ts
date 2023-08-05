@@ -27,13 +27,19 @@ export class NewCommitteeMeetingComponent implements OnInit {
   lngCommitteeId: any;
   sIsLoading: string = '';
   NetAmount: any;
-  Meetstatus ='false'
+  // Meetstatus ='false'
 
   results: Result[] = [
     { value: 'ONLINE', viewValue: 'ONLINE'},
     { value: 'OFFLINE', viewValue: 'OFFLINE' },
   ];
 
+  public MeetStatus: Array<any> = [
+    { title: "ONLINE", description: "ONLINE" },
+    { title: "OFFLINE", description: "OFFLINE" },
+   
+  ];
+  ngSelect="OFFLINE";
 
   constructor(public _CommitteMeetingService: CommitteMeetingService,
 
@@ -85,7 +91,7 @@ export class NewCommitteeMeetingComponent implements OnInit {
 
           this.chargeslist1 = Visit as CommitteeMeetingMemberList[];
           this.dataSource.data = this.chargeslist1;
-          this.dataSource.data['MeetingStatus'] = "Offline";
+          this.dataSource.data['MeetingStatus'] = " ";
           this.sIsLoading = '';
         },
           error => {
@@ -98,7 +104,7 @@ export class NewCommitteeMeetingComponent implements OnInit {
 
   ChnageMeetstatus(){
     debugger
-    this.Meetstatus = 'true'
+    // this.Meetstatus = 'true'
   }
 
   getCommitteListCombobox() {
@@ -193,12 +199,13 @@ export class NewCommitteeMeetingComponent implements OnInit {
 
       let insertCommitteeMeetingMemberDetarry = [];
       this.dataSource.data.forEach((element) => {
+        debugger
         console.log(element)
         let insertCommitteeMeetingMemberDet = {};
         insertCommitteeMeetingMemberDet['committeeMeetingId'] = 0;
         insertCommitteeMeetingMemberDet['memberId'] = element.MemberId;
         insertCommitteeMeetingMemberDet['studyId'] = 0,// element.studyId;
-          insertCommitteeMeetingMemberDet['memberAmount'] = element.StudyAmount || 0;
+        insertCommitteeMeetingMemberDet['memberAmount'] = element.StudyAmount || 0;
         insertCommitteeMeetingMemberDet['memberMeetingStatus'] = element.MeetingStatus;
         insertCommitteeMeetingMemberDet['createdBy'] = this.accountService.currentUserValue.user.id;
         insertCommitteeMeetingMemberDetarry.push(insertCommitteeMeetingMemberDet);
@@ -223,7 +230,6 @@ export class NewCommitteeMeetingComponent implements OnInit {
     } else {
       let updateCommitteeMeeting = {};
 
-    
 
       updateCommitteeMeeting['committeeMeetingId'] = this._CommitteMeetingService.personalFormGroup.get('CommitteeMeetingId').value || 0;
       updateCommitteeMeeting['committeeMeetingDate'] = this.dateTimeObj.date;
@@ -241,7 +247,7 @@ export class NewCommitteeMeetingComponent implements OnInit {
         insertCommitteeMeetingMemberDet['memberId'] = element.MemberId;
         insertCommitteeMeetingMemberDet['studyId'] = 0,// element.studyId;
           insertCommitteeMeetingMemberDet['memberAmount'] = element.StudyAmount || 0;
-        insertCommitteeMeetingMemberDet['memberMeetingStatus'] = element.MeetingStatus.select;
+        insertCommitteeMeetingMemberDet['memberMeetingStatus'] = element.MeetingStatus;
         insertCommitteeMeetingMemberDet['createdBy'] = this.accountService.currentUserValue.user.id;
         insertCommitteeMeetingMemberDetarry.push(insertCommitteeMeetingMemberDet);
       });
@@ -297,7 +303,7 @@ export class CommitteeMeetingMemberList {
       this.MemberId = CommitteeMeetingMemberList.MemberId || '';
       this.MemberName = CommitteeMeetingMemberList.MemberName || '';
       this.StudyAmount = CommitteeMeetingMemberList.StudyAmount || '';
-      this.MeetingStatus = CommitteeMeetingMemberList.MeetingStatus || 'Offline';
+      this.MeetingStatus = CommitteeMeetingMemberList.MeetingStatus || ' ';
     }
   }
 }

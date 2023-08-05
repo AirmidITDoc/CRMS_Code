@@ -3,32 +3,39 @@ app-service-master {
         height: 700px !important;
     }
     .mat-header-row {
-        width: 1500px;
-        max-width: 1500px;
-        min-width: 1500px;
+        width: 1800px;
+        max-width: 1800px;
+        min-width: 1800px;
         font-weight: bold;
     }
     .mat-row {
-        width: 1500px;
-        max-width: 1500px;
-        min-width: 1500px;
+        width: 1800px;
+        max-width: 1800px;
+        min-width: 1800px;
     }
 
     .mat-column-ServiceId {
-        width: 70px;
-        max-width: 70px;
-        min-width: 70px;
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
     }
 
     .mat-column-ServiceName {
-        width: 450px;
-        max-width: 450px;
-        min-width: 420px;
+        width: 650px;
+        max-width: 650px;
+        min-width: 650px;
+        text-align: left;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+         overflow: hidden !important;
+         
+         justify-content:left; 
     }
     .mat-column-GroupName {
-        width: 90px;
-        max-width: 90px;
-        min-width: 90px;
+        width: 190px;
+        max-width: 190px;
+        min-width: 190px;
     }
     .mat-column-IsEditable {
         width: 70px;
@@ -49,12 +56,26 @@ app-service-master {
         width: 100px;
         max-width: 100px;
         min-width: 100px;
+        text-align: left;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+         overflow: hidden !important;
+         
+         justify-content:left; 
     }
 
     .mat-column-ServiceShortDesc {
-        width: 2%;
-        max-width: 200px;
-        min-width: 200px;
+        width: 400px;
+        max-width: 400px;
+        min-width: 400px;
+        text-align: left;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+         overflow: hidden !important;
+         
+         justify-content:left; 
     }
 
     .mat-column-EmgAmt {
@@ -70,12 +91,12 @@ app-service-master {
     }
 
     .mat-column-AddedByName {
-        width: 90px;
-        max-width: 90px;
-        min-width: 90px;
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
     }
 
-    .mat-column-IsDeleted {
+    .mat-column-IsActive {
         width: 70px;
         max-width: 70px;
         min-width: 70px;

@@ -40,7 +40,7 @@
                                 <div class="dialog-content-wrapper">
                                     <mat-form-field class="mr-sm-12" fxFlex>
                                         <input matInput placeholder="Search --> Tariff Name" autocomplete="off"
-                                            name="TariffNameSearch" formControlName="TariffNameSearch" />
+                                            name="TariffNameSearch" formControlName="TariffNameSearch" (keyup)="getTariffMasterList()"/>
                                         <button mat-button matSuffix mat-icon-button aria-label="Clear"
                                             (click)="onSearchClear()">
                                             <mat-icon>close</mat-icon>
@@ -48,7 +48,7 @@
                                     </mat-form-field>
 
                                     <mat-radio-group name="IsDeletedSearch" formControlName="IsDeletedSearch" value="2"
-                                        fxLayoutAlign="center center">
+                                        fxLayoutAlign="center center" (change)="onSearch()">
                                         <mat-radio-button value="2">All</mat-radio-button>
                                         <mat-radio-button mat-fab value="0">IsActive</mat-radio-button>
                                         <mat-radio-button mat-fab value="1">IsDeactive</mat-radio-button>
@@ -103,8 +103,8 @@
                                         <mat-cell *matCellDef="let row">
                                             <button mat-icon-button (click)="onEdit(row)"><mat-icon
                                                     title="Edit Menu">launch</mat-icon></button>
-                                            <button mat-icon-button (click)="onDeactive(row.TariffId)"
-                                                color="warn"><mat-icon>delete_outline</mat-icon></button>
+                                            <!-- <button mat-icon-button (click)="onDeactive(row.TariffId)"
+                                                color="warn"><mat-icon>delete_outline</mat-icon></button> -->
                                         </mat-cell>
                                     </ng-container>
 
