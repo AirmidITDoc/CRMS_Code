@@ -82,7 +82,6 @@ export class StudySchduleComponent implements OnInit {
 
   if (this.data) {
       this.registerObj = this.data.registerObj;
-      // this.StudyId=this.data.registerObj.StudyId;
       console.log(this.registerObj);
       this.Study = true;
 
@@ -108,8 +107,6 @@ export class StudySchduleComponent implements OnInit {
 
 
   deleteTableRow(element) {
-    debugger;
-    
     let index = this.chargeslist.indexOf(element);
     if (index >= 0) {
       this.chargeslist.splice(index, 1);
@@ -130,7 +127,6 @@ export class StudySchduleComponent implements OnInit {
 
 
   getNetAmtSum(element) {
-    debugger;
     let netAmt;
     netAmt = element.reduce((sum, { Amount }) => sum += +(Amount || 0), 0);
     this.TotalAmount = netAmt;
@@ -172,7 +168,7 @@ export class StudySchduleComponent implements OnInit {
     this.chargeslist.push(
       {
         VisitName: this.VisitName,
-        VisitDescription: this.VisitDescription,
+        VisitDescription: this.VisitName,
         Amount: this.Amount
       });
     this.isLoading = '';

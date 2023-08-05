@@ -308,11 +308,11 @@ export class CaseDetail {
   CaseRepresentative: string;
   HospitalRepresentative: string;
   AgreementFileName: String;
-ContactId:any;
-CompanyId:any;
-StudyId:any;
-
-ProtocolTitle:any;
+  ContactId:any;
+  CompanyId:any;
+  StudyId:any;
+  ProtocolNo:any;
+  ProtocolTitle:any;
 
 
   /**
@@ -339,6 +339,7 @@ ProtocolTitle:any;
       this.CompanyId=CaseDetail.CompanyId ||0;
       this.StudyId=CaseDetail.StudyId ||0;
       this.ProtocolTitle=CaseDetail.ProtocolTitle ||0;
+      this.ProtocolNo=CaseDetail.ProtocolNo ||0;
     }
   }
 }

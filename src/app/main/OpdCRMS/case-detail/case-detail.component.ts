@@ -145,12 +145,9 @@ export class CaseDetailComponent implements OnInit {
  
   
   getRecord(contact, m): void {
-    debugger;
-    console.log(contact);
-
     if (m == "Update All Study Detail") {
       var m_data = {
-        StudyId:contact.StudyId,
+      StudyId:contact.StudyId,
       ProtocolNo:contact.ProtocolNo,
       ProtocolTitle:contact.ProtocolTitle,
       StudyProduct: contact.StudyProduct,
@@ -188,7 +185,7 @@ export class CaseDetailComponent implements OnInit {
       }
     }else if (m == "Update Study Detail") {
       var m_data = {
-        StudyId:contact.StudyId,
+      StudyId:contact.StudyId,
       ProtocolNo:contact.ProtocolNo,
       ProtocolTitle:contact.ProtocolTitle,
       StudyProduct: contact.StudyProduct,
@@ -246,8 +243,8 @@ export class CaseDetailComponent implements OnInit {
 
       const dialogRef = this._matDialog.open(StudySchduleComponent,
         {
-          maxWidth: "85vw",
-          height: '590px',
+          maxWidth: "90%",
+          height: '700px',
           width: '100%',
           data: {
             registerObj: m_data,
@@ -323,8 +320,8 @@ export class CaseDetailComponent implements OnInit {
 
       const dialogRef = this._matDialog.open(StudyServicesComponent,
         {
-          maxWidth: "85vw",
-          height: '590px',
+          maxWidth: "90%",
+          height: '700px',
           width: '100%',
           data: {
             registerObj: m_data,

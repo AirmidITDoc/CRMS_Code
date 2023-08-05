@@ -93,9 +93,8 @@ export class ServiceMasterComponent implements OnInit {
     
 
     onEdit1(){}
+
     onEdit(row) {
-        debugger;
-        console.log(row)
         var m_data = {
             ServiceId: row.ServiceId,
             ServiceShortDesc: row.ServiceShortDesc.trim(),
@@ -116,15 +115,11 @@ export class ServiceMasterComponent implements OnInit {
             IsDocEditable: JSON.stringify(row.IsDocEditable),
             UpdatedBy: row.UpdatedBy,
         };
-
-        console.log(m_data);
         this._serviceMasterService.populateForm(m_data);
-
         const dialogRef = this._matDialog.open(ServiceMasterFormComponent, {
             maxWidth: "80vw",
             maxHeight: "850px",
             width: "100%",
-                   
             data: {
                 ServiceId:row.ServiceId,
                 IsSubmitFlag: true,

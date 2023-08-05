@@ -1,12 +1,9 @@
-<div fxlayout="row" fxFlex.gt-sm="100%" fxFlex class="page-layout simple right-sidebar"
-    style="height:550px !important;">
+<div fxlayout="row" fxFlex.gt-sm="100%" fxFlex class="page-layout simple right-sidebar">
     <div class="center" fusePerfectScrollbar style="overflow: auto;">
-
-
         <mat-toolbar matDialogTitle class="mat-accent m-0">
             <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
                 style="background-color:rgb(18, 87, 134) !important;">
-                <h3 style="font-family: sans-serif;">Modify Study Schdule | Study Id:{{registerObj.StudyId}} StudyTitle :{{registerObj.ProtocolTitle}}</h3>
+                <h3 style="font-family: sans-serif;">Modify Study Schdule | Study Id:{{registerObj.StudyId}} || StudyTitle :{{registerObj.ProtocolTitle}}</h3>
                 <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
                     <mat-icon>close</mat-icon>
                 </button>
@@ -54,18 +51,13 @@
 
 
 
-                                                    <mat-form-field appearance="outline" style="width:50%;">
+                                                    <!-- <mat-form-field appearance="outline" style="width:50%;">
                                                         <mat-label>VisitDescription</mat-label>
                                                         <input name="VisitDescription"
                                                             formControlName="VisitDescription"
                                                             placeholder="VisitDescription"
-                                                            [(ngModel)]="VisitDescription" matInput required>
-                                                        <!-- <mat-error class="error"
-                                                            *ngIf="personalFormGroup.get('Location').invalid && personalFormGroup.get('Location').touched">
-                                                            Middle Name is required
-                                                            Enter
-                                                            only Alphabets</mat-error> -->
-                                                    </mat-form-field>
+                                                            [(ngModel)]="VisitDescription" matInput>
+                                                    </mat-form-field> -->
 
 
 
@@ -82,9 +74,8 @@
 
                                                     <div matTooltip="Select Member name to enable this button!!"
                                                         [matTooltipPosition]="'above'">
-                                                        <button mat-raised-button id="btnAdd"
-                                                            (click)="onAddVisitDetail()" [disabled]="_CasedetailService.studySchFormGroup.invalid">
-                                                            <mat-icon> add </mat-icon> &nbsp;Add
+                                                        <button mat-raised-button (click)="onAddVisitDetail()" [disabled]="_CasedetailService.studySchFormGroup.invalid">
+                                                            <mat-icon> add </mat-icon> Add
                                                         </button>
                                                     </div>
 
@@ -102,22 +93,19 @@
 
 
                         <div fxLayout="row" style="width: 100%;">
-
-
                             <div fxFlex="100" fxFlex.gt-sm="100" fxLayout="row" fxLayout.gt-xs="column"
                                 style="width:100%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
                                 <ng-template mat-tab-label
                                     style="color: black; font-size: 17px bold; height: 80px; ">
-                                    <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
                                     Member List
                                 </ng-template>
                                 <div>
 
                                     <div class="col-md-12">
                                         <!-- ================= Charges List Table ======================= -->
-                                        <mat-table #table matSort [dataSource]="dataSource1"
+                                        <mat-table #table1 matSort [dataSource]="dataSource1"
                                             [@animateStagger]="{value:'50'}"
-                                            style="height:285px !important;overflow: auto;" class="table1" fuseScrollbar>
+                                            style="height:375px !important;overflow: auto;" class="table1" fuseScrollbar>
 
                                             <ng-container matColumnDef="VisitName">
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header
@@ -152,14 +140,10 @@
                                                     Action
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let row">
-                                                    <!-- <button mat-icon-button (click)="onEdit(row)">
-                                                                <mat-icon title="Edit Menu">launch</mat-icon>
-                                                            </button> -->
                                                     <button mat-icon-button (click)="deleteTableRow(row)"
                                                         color="warn">
                                                         <mat-icon>delete_outline</mat-icon>
                                                     </button>
-                                                    <!-- <button mat-icon-button (click)="onDeactive(row.RegId)" color="warn"><mat-icon>delete_outline</mat-icon></button>       -->
                                                 </mat-cell>
                                             </ng-container>
 
@@ -186,7 +170,7 @@
                                                 [ngClass]="{'row-yellow': contact.ServiceName == 'CBC'}"
                                                 [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
                                             <mat-footer-row *matFooterRowDef="['loading']"
-                                                [ngClass]="{'hide':dataSource!=null}">
+                                                [ngClass]="{'hide':dataSource1!=null}">
                                             </mat-footer-row>
                                             <mat-footer-row *matFooterRowDef="['noData']"
                                                 [ngClass]="{'hide':!(dataSource1!=null && dataSource1.data.length==0)}">
@@ -204,27 +188,18 @@
 
                         <mat-form-field appearance="outline" style="width:10%;margin-left:820px">
                             <mat-label>Total Amount</mat-label>
-                            <input name="TotalAmount" formControlName="TotalAmount"
-                                placeholder="TotalAmount" matInput required
-                                [(ngModel)]="TotalAmount">
+                            <input name="TotalAmount" formControlName="TotalAmount" placeholder="TotalAmount" matInput required [(ngModel)]="TotalAmount">
                             <!-- <mat-error class="error"
                                 *ngIf="personalFormGroup.get('Location').invalid && personalFormGroup.get('Location').touched">
                                 Middle Name is required
                                 Enter
                                 only Alphabets</mat-error> -->
                         </mat-form-field>
-                        <div fxLayout="row" style="margin-left:1100px;">
-
-                            <!-- [disabled]="_CasedetailService.studySchFormGroup.invalid" -->
-                                <button class="next-btn" (click)="onStudyUpdate()" style="border-radius: 16px;" 
-                                >Save</button>
-     
-                                 <button class="footer-btn" (click)="onClose()"
-                                     style="border-radius: 16px;">Close</button>
-     
+                        <div fxLayout="row" style="margin-left:90%;margin-top:50px;">
+                                <button class="next-btn" (click)="onStudyUpdate()" style="border-radius: 16px;" >Save</button>
+                                <button class="footer-btn" (click)="onClose()" style="border-radius: 16px;">Close</button>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>

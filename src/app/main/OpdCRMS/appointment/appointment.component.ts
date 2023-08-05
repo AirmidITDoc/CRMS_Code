@@ -116,12 +116,10 @@ export class AppointmentComponent implements OnInit {
       "To_Dt": this.datePipe.transform(this._AppointmentSreviceService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
       "StudyId":this._AppointmentSreviceService.myFilterform.get("StudyId").value.StudyId  || 0,
     }
-    console.log(D_data);
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._AppointmentSreviceService.getAppointmentList(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as VisitMaster[];
-        console.log( this.dataSource.data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.sIsLoading = '';
@@ -132,12 +130,8 @@ export class AppointmentComponent implements OnInit {
     }, 1000);
 
   }
-
-
-
   
   getPatScrBillList(element) {
-    console.log(element);
     const dialogRef = this._matDialog.open(PatientScreenBillDetailComponent,
       {
         maxWidth: '100vw',
@@ -263,8 +257,6 @@ export class AppointmentComponent implements OnInit {
       }
     }
     else if (m == "Upload Document") {
-      console.log(contact);
-    
         let xx = {
           RegNo: contact.RegId,
           RegId: contact.RegId,
@@ -299,9 +291,6 @@ export class AppointmentComponent implements OnInit {
     }
   
     else if (m == "Invoice Bill") {
-      console.log(contact);
-
-
       let xx = {
         RegNo: contact.RegId,
         RegId: contact.RegId,
@@ -333,8 +322,6 @@ export class AppointmentComponent implements OnInit {
         this.getVisitList();
       });
     } else if (m == "New Bill") {
-      console.log(contact);
-    
         let xx = {
           RegNo: contact.RegId,
           RegId: contact.RegId,
@@ -368,8 +355,6 @@ export class AppointmentComponent implements OnInit {
     
     }
     else if (m == "Payment") {
-      console.log(contact);
-      
         let xx = {
           RegNo: contact.RegId,
           RegId: contact.RegId,
@@ -390,8 +375,8 @@ export class AppointmentComponent implements OnInit {
 
         PatientHeaderObj['Date'] = contact.VisitDate
         PatientHeaderObj['PatientName'] = contact.PatientName,
-          PatientHeaderObj['OPD_IPD_Id'] = contact.VisitId,
-          PatientHeaderObj['NetPayAmount'] = contact.TotalAmt
+        PatientHeaderObj['OPD_IPD_Id'] = contact.VisitId,
+        PatientHeaderObj['NetPayAmount'] = contact.TotalAmt
 
         // this._AppointmentSreviceService.populateFormpersonal(xx);
         this.advanceDataStored.storage = new SearchInforObj(xx);
@@ -421,14 +406,11 @@ export class AppointmentComponent implements OnInit {
   }
 
   newappointment() {
-
-    debugger;
     const dialogRef = this._matDialog.open(NewAppointmentComponent,
       {
         maxWidth: "95vw",
         height: '700px',
         width: '100%',
-
       });
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed - Insert Action', result);
