@@ -1,15 +1,11 @@
-<div fxlayout="row" fxFlex.gt-sm="100%" fxFlex class="page-layout simple right-sidebar"
-    style="height:550px !important;">
+<div fxlayout="row" fxFlex.gt-sm="100%" fxFlex class="page-layout simple right-sidebar">
     <div class="center" fusePerfectScrollbar style="overflow: auto;">
-
 
         <mat-toolbar matDialogTitle class="mat-accent m-0">
             <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
                 style="background-color:rgb(18, 87, 134) !important;">
-                <!-- <h3>Add Study Services | Study Id : {{registerObj.StudyId}}</h3> -->
-
                 <h3 style="font-family: serif;">{{_StudyServicesService.studyServicesFormGroup.controls.StudyId.value?"Modify Study Service Master":"New
-                    Study Service Master"}} | Study Id:{{registerObj.StudyId}} StudyTitle :{{registerObj.ProtocolTitle}}</h3>
+                    Study Service Master"}} | Study Id:{{registerObj.StudyId}} - StudyTitle :{{registerObj.ProtocolTitle}}</h3>
                 <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
                     <mat-icon>close</mat-icon>
                 </button>
@@ -130,7 +126,7 @@
                                         <!-- ================= Charges List Table ======================= -->
                                         <mat-table #table matSort [dataSource]="dataSource1"
                                             [@animateStagger]="{value:'50'}"
-                                            style="height: 300px !important;overflow: auto;" class="table1" fuseScrollbar>
+                                            style="height: 375px !important;overflow: auto;" class="table1" fuseScrollbar>
 
                                             <ng-container matColumnDef="VisitName">
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header
@@ -199,44 +195,20 @@
                                                 [ngClass]="{'row-yellow': contact.ServiceName == 'CBC'}"
                                                 [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
                                             <mat-footer-row *matFooterRowDef="['loading']"
-                                                [ngClass]="{'hide':dataSource!=null}">
+                                                [ngClass]="{'hide':dataSource1!=null}">
                                             </mat-footer-row>
                                             <mat-footer-row *matFooterRowDef="['noData']"
                                                 [ngClass]="{'hide':!(dataSource1!=null && dataSource1.data.length==0)}">
                                             </mat-footer-row>
                                         </mat-table>
-                                        <!-- ================= Charges List Footer Table ======================= -->
-                                        <!-- <div class="net-amt">
-                                            <span class="net-amt-label" style="margin-left: 400px;color: rgb(7, 63, 91);"></span>&nbsp;<span
-                                                class="net-amt-value" style="color: aliceblue;">{{getNetAmtSum(dataSource1.data)}}</span>
-                                        </div> -->
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     
-                        <div fxLayout="row" style="margin-left:1100px;margin-top:50px;">
-
-                            <!-- <mat-form-field appearance="outline" style="width:40%;margin-right: 20px;">
-                                <mat-label>Total Amount</mat-label>
-                                <input name="TotalAmount" formControlName="TotalAmount"
-                                    placeholder="TotalAmount" matInput required
-                                    [(ngModel)]="TotalAmount">
-                                 <mat-error class="error"
-                                    *ngIf="personalFormGroup.get('Location').invalid && personalFormGroup.get('Location').touched">
-                                    Middle Name is required
-                                    Enter
-                                    only Alphabets</mat-error> -->
-                            <!-- </mat-form-field> --> 
-                            <!-- [disabled]="_CasedetailService.studySchFormGroup.invalid"  -->
-                            <button class="next-btn" (click)="onStudyUpdate()" style="border-radius: 16px;"
-                           >Save</button>
-
-                            <button class="footer-btn" (click)="onClose()"
-                                style="border-radius: 16px;">Close</button>
-
-
+                        <div fxLayout="row" style="margin-left:90%;margin-top:50px;">
+                            <button class="next-btn" (click)="onStudyUpdate()" style="border-radius: 16px;">Save</button>
+                            <button class="footer-btn" (click)="onClose()" style="border-radius: 16px;">Close</button>
                         </div>
                     </div>
 
