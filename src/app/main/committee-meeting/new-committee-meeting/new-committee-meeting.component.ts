@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReplaySubject, Subject } from 'rxjs';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@fuse/animations';
 import Swal from 'sweetalert2';
@@ -27,20 +27,13 @@ export class NewCommitteeMeetingComponent implements OnInit {
   lngCommitteeId: any;
   sIsLoading: string = '';
   NetAmount: any;
-  // Meetstatus ='false'
-
+  // selected = 'option1';
   results: Result[] = [
     { value: 'ONLINE', viewValue: 'ONLINE'},
     { value: 'OFFLINE', viewValue: 'OFFLINE' },
   ];
 
-  public MeetStatus: Array<any> = [
-    { title: "ONLINE", description: "ONLINE" },
-    { title: "OFFLINE", description: "OFFLINE" },
-   
-  ];
-  ngSelect="OFFLINE";
-
+  
   constructor(public _CommitteMeetingService: CommitteMeetingService,
 
     private formBuilder: FormBuilder,
@@ -206,8 +199,8 @@ export class NewCommitteeMeetingComponent implements OnInit {
         insertCommitteeMeetingMemberDet['memberId'] = element.MemberId;
         insertCommitteeMeetingMemberDet['studyId'] = 0,// element.studyId;
         insertCommitteeMeetingMemberDet['memberAmount'] = element.StudyAmount || 0;
-        insertCommitteeMeetingMemberDet['memberMeetingStatus'] = element.MeetingStatus;
-        insertCommitteeMeetingMemberDet['createdBy'] = this.accountService.currentUserValue.user.id;
+        insertCommitteeMeetingMemberDet['memberMeetingStatus'] = element.MeetingStatus.value;
+        insertCommitteeMeetingMemberDet['createdBy'] =1// this.accountService.currentUserValue.user.id;
         insertCommitteeMeetingMemberDetarry.push(insertCommitteeMeetingMemberDet);
       });
 

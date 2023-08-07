@@ -73,12 +73,12 @@ DSSponserInformationList = new MatTableDataSource<SponserInformation>();
 
   getServiceMasterList() {
     var Params={
-            "SponserName":'%',       
+            "SponserName": this._sponserService.myFilterform.get('SponserName').value + '%' || '%',       
     };
     this._sponserService.getSponserInformationList(Params).subscribe(
         (Menu) => {
             this.DSSponserInformationList.data = Menu as SponserInformation[];
-            console.log(this.DSSponserInformationList.data);
+            // console.log(this.DSSponserInformationList.data);
             this.isLoading = false;
             this.DSSponserInformationList.sort = this.sort;
             this.DSSponserInformationList.paginator = this.paginator;

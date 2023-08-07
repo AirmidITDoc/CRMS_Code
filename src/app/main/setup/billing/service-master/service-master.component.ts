@@ -60,7 +60,7 @@ export class ServiceMasterComponent implements OnInit {
     getServiceMasterList() {
         var m={
                      
-                "ServiceName":'%',       
+                "ServiceName":this._serviceMasterService.myformSearch.get('ServiceNameSearch').value + '%' || '%',       
                "TariffId":1
             //    "GroupId":1      
                  
@@ -77,12 +77,15 @@ export class ServiceMasterComponent implements OnInit {
         );
     }
 
-    onClear() {
-        this._serviceMasterService.myform.reset({ IsDeleted: "false" });
-        this._serviceMasterService.initializeFormGroup();
-    }
+   
 
     
+    onSearchClear() {
+        this._serviceMasterService.myformSearch.reset({
+            ServiceNameSearch: "",
+            IsDeletedSearch: "2",
+        });
+    }
 
     onEdit1(){}
 

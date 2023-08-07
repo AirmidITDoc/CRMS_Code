@@ -21,7 +21,7 @@ export class GroupMasterService {
             GroupId: [""],
             GroupName: ["", Validators.required],
             PrintSeqNo: ["", Validators.pattern("[0-9]+")],
-            Isconsolidated: ["1"],
+            IsConsolidated: ["1"],
             IsConsolidatedDR: ["0"],
 
             IsActive: ["false"],

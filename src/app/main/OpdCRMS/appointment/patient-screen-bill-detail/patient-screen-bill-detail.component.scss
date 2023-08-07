@@ -56,10 +56,41 @@
   app-patient-screen-bill-detail{
     
   .table1{
-    height:260px !important;
+    height:240px !important;
+  }
+
+  .Bill{
+    height:200px !important;
+
+    .mat-column-date {
+      width: 150px;
+      max-width: 150px;
+      min-width: 150px;
+      text-align: left;
+     
+       justify-content:left; 
+    }
+
+    .mat-column-BillNo {
+      width: 150px;
+      max-width: 150px;
+      min-width: 150px;
+      text-align: left;
+     
+       justify-content:left; 
+    }
+
+    .mat-column-NetPayableAmt {
+      width: 250px;
+      max-width: 250px;
+      min-width: 250px;
+      text-align: left;
+     
+       justify-content:left; 
+    }
   }
   .BillDettable{
-    height:350px !important;
+    height:200px !important;
 
     .mat-column-VisitDate {
       width: 150px;

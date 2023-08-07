@@ -21,6 +21,7 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import * as converter from 'number-to-words';
 import { MatSelect } from '@angular/material/select';
+import { StudyServicesDetail } from '../../case-detail/study-sevices/study-services/study-services.component';
 
 
 @Component({
@@ -47,6 +48,8 @@ export class BillDetailComponent implements OnInit {
   printTemplate: any;
   reportPrintObjList: BrowseOPDBill[] = [];
   chargeslist: any = [];
+  chargeslist1: any = [];
+  OPD_IPD_ID:any;
   screenFromString = 'OP-billing';
   displayedColumns = [
     // 'checkbox',
@@ -66,27 +69,30 @@ export class BillDetailComponent implements OnInit {
   ];
 
   tableColumns = [
+    'ServiceId',
     'ServiceName',
-    'Price',
-    'Qty',
+    'Amount',
     'action'
   ];
 
 
   dataSource = new MatTableDataSource<ChargesList>();
+  dataSource1 = new MatTableDataSource<StudyServicesDetail>();
+
+
   myControl = new FormControl();
   filteredOptions: any;
   billingServiceList = [];
   showAutocomplete = false;
 
   isDoctor: boolean = false;
-  Consession: boolean = true;
+  Consession: boolean = false;
   VisitDateList: any = [];
   ConcessionReasonList: any = [];
   FinalAmt: any;
   DoctorFinalId = 'N';
   b_price = '0';
-  b_qty = '0';
+  b_qty = '1';
   b_totalAmount = '';
   tettotalAmount: any;
   b_netAmount = '';
@@ -111,7 +117,9 @@ export class BillDetailComponent implements OnInit {
   DoctornewId: any;
   ChargesDoctorname: any;
   finalAmt: any;
-
+  sIsLoading: any;
+  Billstatus1: any;
+  Billstatus2: any;
   // @ViewChild('Price', {static: false}) inputEl: ElementRef;
 
   @ViewChild('Price') inputEl: ElementRef;
@@ -129,14 +137,14 @@ export class BillDetailComponent implements OnInit {
   BillingClassCmbList: any = [];
   IPBillingInfor: any = [];
   registeredForm: FormGroup;
-  ServiceForm:FormGroup;
+  ServiceForm: FormGroup;
   myShowAdvanceForm: FormGroup;
   concessionAmtOfNetAmt: any = 0;
-  netPaybleAmt: any;
+  netPaybleAmt: any = 0;
   netPaybleAmt1: any;
-  TotalnetPaybleAmt: any;
+  TotalnetPaybleAmt: any = 0;
+Chargetot:any=0;
 
-  
   private nextPage$ = new Subject();
   noOptionFound: boolean = false;
   SrvcName: any;
@@ -150,8 +158,10 @@ export class BillDetailComponent implements OnInit {
   public filteredService: ReplaySubject<any> = new ReplaySubject<any>(1);
 
   private _onDestroy = new Subject<void>();
-
+  @ViewChild('TotallistAmount') TotallistAmount;
   resBillId: Post;
+  paginator: any;
+  sort: any;
 
 
   constructor(
@@ -162,6 +172,7 @@ export class BillDetailComponent implements OnInit {
     private _ActRoute: Router,
     public _matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data1: any,
     private advanceDataStored: AdvanceDataStored,
     private renderer: Renderer2,
     public datePipe: DatePipe,
@@ -170,10 +181,10 @@ export class BillDetailComponent implements OnInit {
     public _httpClient: HttpClient,
     private formBuilder: FormBuilder) { }
 
-  
+
   ngOnInit(): void {
 
-    
+
     this.createForm();
     this.createServForm();
 
@@ -181,6 +192,16 @@ export class BillDetailComponent implements OnInit {
       this.selectedAdvanceObj = this.data.registerObj;
       console.log(this.selectedAdvanceObj)
     }
+    debugger
+    if (this.data1.registerObj.BillStatus == 2) {
+      this.Billstatus1 = false;
+      this.Billstatus2 = true;
+      this.getstudywiseservice(this.data.registerObj);
+    } else {
+      this.Billstatus1 = true;
+      this.Billstatus2 = false;
+    }
+
 
     this.getServiceListCombobox();
     this.getAdmittedDoctorCombo();
@@ -196,9 +217,10 @@ export class BillDetailComponent implements OnInit {
       });
 
 
+
   }
 
- 
+
 
   focusNextPrice() {
     this.renderer.selectRootElement('#Price').focus();
@@ -210,6 +232,32 @@ export class BillDetailComponent implements OnInit {
 
   focusNextbtnAdd() {
     this.renderer.selectRootElement('#DoctorId').focus();
+
+  }
+
+
+
+  getstudywiseservice(obj) {
+    var m = {
+      StudyId: 6,//obj.StudyId,
+      StudyVisitId: 29//obj.StudyVisitId
+    };
+
+    setTimeout(() => {
+      this.sIsLoading = 'loading-data';
+      this._opappointmentService.getstudywiseservicelist(m).subscribe(Visit => {
+        this.dataSource1.data = Visit as StudyServicesDetail[];
+        this.chargeslist1 = Visit as StudyServicesDetail[];
+        // console.log(Visit)
+        this.dataSource1.sort = this.sort;
+        this.dataSource1.paginator = this.paginator;
+        this.sIsLoading = '';
+
+      },
+        error => {
+          this.sIsLoading = '';
+        });
+    }, 1000);
 
   }
   // doctorone filter code  
@@ -232,7 +280,7 @@ export class BillDetailComponent implements OnInit {
       this.doctorNameCmbList.filter(bank => bank.DoctorName.toLowerCase().indexOf(search) > -1)
     );
   }
-z
+  z
   // Create registered form group
   createForm() {
     this.registeredForm = this.formBuilder.group({
@@ -272,16 +320,14 @@ z
 
   createServForm() {
     this.ServiceForm = this.formBuilder.group({
-      price: [Validators.required,
-      Validators.pattern("^[0-9]*$")],
-      qty: [Validators.required,
-      Validators.pattern("^[0-9]*$")],
+      price: ['',Validators.pattern("^[0-9]*$")],
+      qty: ['', Validators.pattern("^[0-9]*$")],
       totalAmount: [Validators.required],
-      SrvcName:  [Validators.required],
-      DoctorID:['']
-         });
-      }
-  
+      SrvcName: [''],
+      DoctorID: ['']
+    });
+  }
+
 
   //  ===================================================================================
   filterStates(name: string) {
@@ -308,7 +354,7 @@ z
     this.b_isRad = selectedItem.IsRadiology
     this.serviceId = selectedItem.ServiceId;
     this.serviceName = selectedItem.ServiceName;
-    this.DoctorId=selectedItem.DoctorId;
+    this.DoctorId = selectedItem.DoctorId;
     this.calculateTotalAmt();
   }
 
@@ -365,17 +411,17 @@ z
     this.serviceId = obj.ServiceId;
     this.b_isPath = obj.IsPathology;
     this.b_isRad = obj.IsRadiology;
- 
-debugger;
+
+    debugger;
 
     if (obj.IsDocEditable) {
 
       this.isDoctor = true;
     } else {
-     
+
       this.isDoctor = false;
 
-        }
+    }
   }
 
   getTotalAmount(element) {
@@ -422,12 +468,34 @@ debugger;
     netAmt = element.reduce((sum, { NetAmount }) => sum += +(NetAmount || 0), 0);
     this.totalAmtOfNetAmt = netAmt;
     this.netPaybleAmt = netAmt;
+    this.Chargetot = this.netPaybleAmt;
+    this.b_TotalChargesAmount = netAmt;
+
+
+    return netAmt
+
+    this.TotallistAmount.nativeElement.focus();
+  }
+
+  CalNet(){
+    
+    this.TotalnetPaybleAmt = this.Chargetot;
+  }
+
+  getNetAmtSum1(element) {
+
+    let netAmt;
+    netAmt = element.reduce((sum, { Amount }) => sum += +(Amount || 0), 0);
+    this.totalAmtOfNetAmt = netAmt;
+    this.netPaybleAmt = netAmt;
     // this.TotalnetPaybleAmt = netAmt;
     this.b_TotalChargesAmount = netAmt;
-   
+
 
     return netAmt
   }
+
+
   transform(value: string) {
     var datePipe = new DatePipe("en-US");
     value = datePipe.transform(value, 'dd/MM/yyyy hh:mm a');
@@ -546,13 +614,13 @@ debugger;
   //   // let Cal_DiscAmount_OPBillObj = {};
   //   // Cal_DiscAmount_OPBillObj['BillNo'] = 0;
 
-    // let Billdetsarr = [];
-    // this.dataSource.data.forEach((element) => {
-    //   let BillDetailsInsertObj = {};
-    //   BillDetailsInsertObj['BillNo'] = 0;
-    //   BillDetailsInsertObj['ChargesId'] = element.ChargesId;
-    //   Billdetsarr.push(BillDetailsInsertObj);
-    // });
+  // let Billdetsarr = [];
+  // this.dataSource.data.forEach((element) => {
+  //   let BillDetailsInsertObj = {};
+  //   BillDetailsInsertObj['BillNo'] = 0;
+  //   BillDetailsInsertObj['ChargesId'] = element.ChargesId;
+  //   Billdetsarr.push(BillDetailsInsertObj);
+  // });
 
 
   //   let PatientHeaderObj = {};
@@ -696,7 +764,7 @@ debugger;
       this.netPaybleAmt1 = this.TotalnetPaybleAmt;
     }
 
-debugger;
+    debugger;
 
     let Billdetsarr = [];
     this.dataSource.data.forEach((element) => {
@@ -724,10 +792,14 @@ debugger;
       this.FinalAmt = this.TotalnetPaybleAmt;
     }
 
-    let InterimOrFinal = 0;
+    if(this.data.registerObj.BillStatus==2){
+   this.OPD_IPD_ID=this.data.registerObj.RegId
+    }
+    else{
+    this.OPD_IPD_ID =this.selectedAdvanceObj.RegId}
 
     InsertBillUpdateBillNoObj['BillNo'] = 0;
-    InsertBillUpdateBillNoObj['OPD_IPD_ID'] = this.selectedAdvanceObj.RegId;
+    InsertBillUpdateBillNoObj['OPD_IPD_ID'] = this.OPD_IPD_ID ;
     InsertBillUpdateBillNoObj['TotalAmt'] = this.totalAmtOfNetAmt;
     InsertBillUpdateBillNoObj['ConcessionAmt'] = this.concessionAmtOfNetAmt;
     InsertBillUpdateBillNoObj['NetPayableAmt'] = this.FinalAmt; //this.netPaybleAmt1;
@@ -760,8 +832,8 @@ debugger;
 
     this.dataSource.data.forEach((element) => {
       let chargesDetailInsert = {};
-    
-        chargesDetailInsert['ChargesDate'] = this.datePipe.transform(this.currentDate, "MM-dd-yyyy"),
+
+      chargesDetailInsert['ChargesDate'] = this.datePipe.transform(this.currentDate, "MM-dd-yyyy"),
         chargesDetailInsert['opD_IPD_Type'] = 0,
         chargesDetailInsert['opD_IPD_Id'] = this.selectedAdvanceObj.RegId,
         chargesDetailInsert['serviceId'] = element.ServiceId,
@@ -790,7 +862,7 @@ debugger;
         chargesDetailInsert['classId'] = this.selectedAdvanceObj.ClassId,// this.registeredForm.get('ClassId').value;
 
         chargesDetailInsert['BillNo'] = 0;
-        chargesDetailInsert['ChargeID'] = element.ServiceId;
+      chargesDetailInsert['ChargeID'] = element.ServiceId;
 
       InsertAdddetArr.push(chargesDetailInsert);
       // console.log(InsertAdddetArr.length);
@@ -836,7 +908,10 @@ debugger;
     }
     this.isLoading = 'save';
 
-    // if (this.SrvcName && (parseInt(this.b_price) != 0) && this.b_qty) {
+    if (this.SrvcName) {
+      if(parseInt(this.b_price)==0){
+      Swal.fire("Plz Enter Price for Service")}
+      else{
     this.isLoading = 'save';
     this.dataSource.data = [];
     this.chargeslist.push(
@@ -860,16 +935,16 @@ debugger;
         ChargesAddedName: this.accountService.currentUserValue.user.id || 1,
       });
     this.isLoading = '';
-    
-    this.dataSource.data = this.chargeslist;
-    
-    // this.changeDetectorRefs.detectChanges();
 
-    // }
+    this.dataSource.data = this.chargeslist;
+
+    // this.changeDetectorRefs.detectChanges();
+    }
+    }
     this.onClearServiceAddList();
     this.getTotalNetAmount();
 
-    this.isDoctor=false;
+    this.isDoctor = false;
   }
 
 
@@ -901,9 +976,15 @@ debugger;
   }
 
   calculateTotalAmt() {
+
+    debugger
     if (this.b_price && this.b_qty) {
       this.b_totalAmount = Math.round(parseInt(this.b_price) * parseInt(this.b_qty)).toString();
       this.b_netAmount = this.b_totalAmount;
+
+      // this.TotalnetPaybleAmt = this.b_totalAmount;
+
+      // this.registeredForm.get('FinalAmt').setValue(this.b_totalAmount);
       this.calculatePersc();
     }
   }
@@ -933,22 +1014,25 @@ debugger;
 
 
   calculatePersc1() {
+
+    debugger
     this.concessionAmtOfNetAmt = 0;
     let netAmt = this.b_TotalChargesAmount;
-    if (this.concessionDiscPer) {
+
+    if (this.concessionDiscPer > 0) {
       let discAmt1 = (this.b_TotalChargesAmount * parseInt(this.concessionDiscPer)) / 100;
       this.concessionAmtOfNetAmt = Math.round(discAmt1).toString();
       this.TotalnetPaybleAmt = Math.round(this.b_TotalChargesAmount - discAmt1).toString();
       this.registeredForm.get('FinalAmt').setValue(this.TotalnetPaybleAmt);
       this.TotalnetPaybleAmt = parseInt(this.TotalnetPaybleAmt);
-      this.Consession = false;
-    }
-    if (this.concessionDiscPer > 0) {
+      this.Consession = true;
+    // }
+    // if (this.concessionDiscPer >= 0) {
       this.registeredForm.get('ConcessionId').reset();
       this.registeredForm.get('ConcessionId').setValidators([Validators.required]);
       this.registeredForm.get('ConcessionId').enable;
       this.registeredForm.get('ConcessionId').reset();
-      this.Consession = false;
+      // this.Consession = false;
       this.finalAmt = this.totalAmtOfNetAmt;
     }
     if (this.concessionDiscPer <= 0) {
@@ -962,7 +1046,7 @@ debugger;
     this.netPaybleAmt = this.b_TotalChargesAmount - this.concessionAmtOfNetAmt;
     this.netPaybleAmt1 = this.b_TotalChargesAmount - this.concessionAmtOfNetAmt;
     this.TotalnetPaybleAmt = this.netPaybleAmt;
-    this.registeredForm.get('FinalAmt').setValue(this.netPaybleAmt);
+    this.registeredForm.get('FinalAmt').setValue(this.TotalnetPaybleAmt);
   }
 
   calculatechargesDiscamt() {
@@ -985,6 +1069,8 @@ debugger;
     //   else
     //     this.TotalnetPaybleAmt = this.disamt;
     // }
+
+    // this.Consession = false;
   }
 
   calculateDiscamtfinal() {
@@ -997,7 +1083,7 @@ debugger;
         if (this.b_TotalChargesAmount > 0) {
           tot = parseInt(this.b_TotalChargesAmount) - parseInt(this.disamt);
           this.TotalnetPaybleAmt = tot;
-          this.registeredForm.get('FinalAmt').setValue(tot);
+          this.registeredForm.get('FinalAmt').setValue(this.TotalnetPaybleAmt);
         }
       }
       else if (d == null) {
@@ -1010,6 +1096,8 @@ debugger;
     } else {
       Swal.fire("Discount Amount Schoud be Less than Total Amount")
     }
+
+    this.registeredForm.get('ConcessionId').disable;
   }
 
   onKeydown(event) {
@@ -1031,6 +1119,21 @@ debugger;
     }
     Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
   }
+
+
+  deleteTableRow1(element) {
+
+    // debugger;
+    let index = this.chargeslist1.indexOf(element);
+    if (index >= 0) {
+      this.chargeslist1.splice(index, 1);
+      this.dataSource1.data = [];
+      this.dataSource1.data = this.chargeslist1;
+    }
+    Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
+  }
+
+
 
   showAllFilter(event) {
     console.log(event.value);
@@ -1213,7 +1316,7 @@ debugger;
 
 export class Bill {
   BillNo: number;
-  OPD_IPD_ID: number;
+  OPD_IPD_ID: any;
   TotalAmt: number;
   ConcessionAmt: number;
   NetPayableAmt: number;

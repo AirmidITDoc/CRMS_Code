@@ -105,6 +105,14 @@ export class PatientScreenBillDetailComponent implements OnInit {
   dataSource4 = new MatTableDataSource<ApiMaster>();
 
 
+  displayedColumns5 = [
+    'date',
+    'BillNo',
+    'NetPayableAmt',
+  ];
+  dataSource5 = new MatTableDataSource<ApiMaster>();
+
+
 
 
   menuActions: Array<string> = [];
@@ -121,7 +129,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
     private formBuilder: FormBuilder
     // private advanceDataStored: AdvanceDataStored
   ) {
-    this.getBillList();
+    this.getVistdetaillist();
   }
 
   ngOnInit(): void {
@@ -142,13 +150,13 @@ export class PatientScreenBillDetailComponent implements OnInit {
       console.log(this.selectedAdvanceObj)
     }
 
-    this.getBillList();
+    this.getVistdetaillist();
     
   }
 
 
 
-  getBillList() {
+  getVistdetaillist() {
     this.sIsLoading = 'loading-data';
     var D_data = {
       "StudyId": this.data.StudyId,
@@ -168,6 +176,25 @@ export class PatientScreenBillDetailComponent implements OnInit {
         });
     }, 1000);
 
+  }
+
+  
+  getBilllist(contact) {
+    debugger
+    this.sIsLoading = 'loading-data';
+    var D_data = {
+      "visitid": contact.VisitId
+    };
+    setTimeout(() => {
+      this.sIsLoading = 'loading-data';
+      this._AppointmentService.getBillList(D_data).subscribe(Visit => {
+        this.dataSource5.data = Visit as ApiMaster[];
+        this.sIsLoading = '';
+      },
+        error => {
+          this.sIsLoading = '';
+        });
+    }, 1000);
   }
 
   getbilldetail(contact){
@@ -275,25 +302,42 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
   getGeneratebill(contact) {
     debugger
-    let BillId = contact.BillId
-    if (BillId != 0) {
-      Swal.fire("Bill Already Generated")
-    } else {
+    // let BillId = contact.BillId
+    // if (BillId != 0) {
+    //   Swal.fire("Bill Already Generated")
+    // } else {
       var m = {
         "VisitId": contact.VisitId,
         "StudyId": contact.StudyId,
-        "StudyVisitId": contact.StudyVisitId
+        "StudyVisitId": contact.StudyVisitId,
+        "RegId":this.selectedAdvanceObj.RegId,
+        "BillStatus":2
       };
       console.log(m);
-      this._AppointmentService.getBillGeneration(m).subscribe(data => {
-        this.sIsLoading = '';
-        console.log(data)
-      },
-        error => {
-          this.sIsLoading = '';
+      // this._AppointmentService.getBillGeneration(m).subscribe(data => {
+      //   this.sIsLoading = '';
+      //   console.log(data)
+      // },
+      //   error => {
+      //     this.sIsLoading = '';
+      //   });
+
+      const dialogRef = this._matDialog.open(BillDetailComponent,
+        {
+          maxWidth: "80%",
+          height: '700px',
+          width: '100%',
+          data: {
+            registerObj: m,
+          }
         });
-    }
-    this.getBillList();
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+          this._matDialog.closeAll();
+      });
+
+    // }
+    
   }
 
 
@@ -453,7 +497,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
         });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed - Insert Action', result);
-        this.getBillList();
+        this.getVistdetaillist();
       });
 
       error => {
@@ -492,7 +536,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
         });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed - Insert Action', result);
-        this.getBillList();
+        this.getVistdetaillist();
       });
     }
     else if (m == "Add Visit") {
@@ -536,7 +580,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
         });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed - Insert Action', result);
-        this.getBillList();
+        this.getVistdetaillist();
       });
     }
     else if (m == "Edit Visit") {
@@ -582,7 +626,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
         });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed - Insert Action', result);
-        this.getBillList();
+        this.getVistdetaillist();
       });
     }
     error => {
@@ -621,6 +665,7 @@ export class ApiMaster {
   TotalAmount: any;
   currentDate = new Date();
   AgeYear: any;
+  NetPayableAmt
   /**
    * Constructor
    *
@@ -646,7 +691,7 @@ export class ApiMaster {
       this.TotalBillAmount = ApiMaster.TotalBillAmount || '';
       this.Servicename = ApiMaster.Servicename || '';
       this.TotalAmount = ApiMaster.TotalAmount || '';
-
+      this.NetPayableAmt=ApiMaster.NetPayableAmt || 0
     }
   }
 
