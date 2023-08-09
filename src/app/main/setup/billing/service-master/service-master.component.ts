@@ -6,6 +6,7 @@ import { fuseAnimations } from "@fuse/animations";
 import { ServiceMasterService } from "./service-master.service";
 import { MatDialog } from "@angular/material/dialog";
 import { ServiceMasterFormComponent } from "./service-master-form/service-master-form.component";
+import Swal from "sweetalert2";
 
 @Component({
     selector: "app-service-master",
@@ -128,6 +129,16 @@ export class ServiceMasterComponent implements OnInit {
         });
     }
 
+    deleteTableRow(element) {
+        let Query = "Update  ServiceMaster set IsActive=0 where  ServiceId=" + element.ServiceId + " ";
+        console.log(Query)
+          this._serviceMasterService.getdeletemember(Query).subscribe(data => {
+           if(data)
+           Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+    
+          });
+      }
+    
     onAdd() {
         const dialogRef = this._matDialog.open(ServiceMasterFormComponent, {
             maxWidth: "80vw",

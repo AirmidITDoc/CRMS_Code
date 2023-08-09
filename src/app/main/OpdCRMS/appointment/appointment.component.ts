@@ -808,7 +808,7 @@ export class ChargesList {
   ServiceName: String;
   Price: number;
   Qty: number;
-  TotalAmt: number;
+  TotalAmt: any;
   DiscPer: number;
   DiscAmt: number;
   NetAmount: number;
@@ -820,6 +820,7 @@ export class ChargesList {
   ClassId: number;
   ClassName: string;
   ChargesAddedName: string;
+  
 
   constructor(ChargesList) {
     this.ChargesId = ChargesList.ChargesId || '';

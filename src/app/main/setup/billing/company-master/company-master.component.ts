@@ -57,14 +57,14 @@ export class CompanyMasterComponent implements OnInit {
     ngOnInit(): void {
         this.getCompanyMaster();
     }
-    onSearch() {
-        this.getCompanyMaster();
-    }
+    // onSearch() {
+    //     this.getCompanyMaster();
+    // }
 
     onSearchClear() {
         this._companyService.myformSearch.reset({
             CompanyNameSearch: "",
-            IsDeletedSearch: "2",
+            IsDeletedSearch: "0",
         });
     }
     getCompanyMaster() {
@@ -85,7 +85,16 @@ export class CompanyMasterComponent implements OnInit {
         this._companyService.myform.reset({ IsDeleted: "false" });
         this._companyService.initializeFormGroup();
     }
+    
+  deleteTableRow(element) {
+    let Query = "Update  M_CompanyDetails set IsActive=0 where  CompanyId=" + element.CompanyId + " ";
+    console.log(Query)
+      this._companyService.getdeletemember(Query).subscribe(data => {
+       if(data)
+       Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
 
+      });
+  }
     onEdit(row) {
         debugger;
        

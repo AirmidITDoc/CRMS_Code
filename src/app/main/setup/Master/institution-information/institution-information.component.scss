@@ -1,15 +1,15 @@
 app-institution-information{
     // height: 600px !important;
     .mat-header-row {
-        width: 1800px;
-        max-width: 1800px;
-        min-width: 1800px;
+        width: 1900px;
+        max-width: 1900px;
+        min-width: 1900px;
         font-weight: bold;
     }
     .mat-row {
-        width: 1800px;
-        max-width: 1800px;
-        min-width: 1800px;
+        width: 1900px;
+        max-width: 1900px;
+        min-width: 1900px;
     }
 
   
@@ -28,23 +28,17 @@ app-institution-information{
         overflow: hidden;
         text-overflow: ellipsis; 
          overflow: hidden !important;
-         display: inline-block;
-         margin-top: 7px;
-         margin-right: 7px;
          justify-content:left; 
     }
     .mat-column-Address {
-        width: 290px;
-        max-width: 290px;
-        min-width: 290px;
+        width: 350px;
+        max-width: 350px;
+        min-width: 350px;
         text-align: left;
         white-space: nowrap; 
         overflow: hidden;
         text-overflow: ellipsis; 
          overflow: hidden !important;
-         display: inline-block;
-         margin-top: 7px;
-         margin-right: 7px;
          justify-content:left; 
     }
     .mat-column-ContactNo {
@@ -53,14 +47,16 @@ app-institution-information{
         min-width: 90px;
     }
     .mat-column-PinCode {
-        width: 90px;
-        max-width: 9%;
-        min-width: 90px;
+        width: 80px;
+        max-width: 80px;
+        min-width: 80px;
+        justify-content:left; 
     }
     .mat-column-State {
         width: 90px;
         max-width: 9%;
         min-width: 90px;
+        justify-content:left; 
     }
     .mat-column-GSTIN {
         width: 110px;
@@ -89,9 +85,7 @@ app-institution-information{
         overflow: hidden;
         text-overflow: ellipsis; 
          overflow: hidden !important;
-         display: inline-block;
-         margin-top: 7px;
-         margin-right: 7px;
+        
          justify-content:left; 
     }
 
@@ -104,10 +98,7 @@ app-institution-information{
         overflow: hidden;
         text-overflow: ellipsis; 
          overflow: hidden !important;
-         display: inline-block;
-         margin-top: 7px;
-         margin-right: 7px;
-         justify-content:left; 
+        justify-content:left; 
     }
 
     .mat-column-IsActive {
@@ -119,11 +110,11 @@ app-institution-information{
     }
 
     .mat-column-action {
-        // color: white !important;
-        width: 70px;
-        max-width: 70px;
-        min-width: 70px;
-        text-align: right;
+        color: white !important;
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        text-align: left;
         justify-content: right;
     }
     .mat-icon-button {

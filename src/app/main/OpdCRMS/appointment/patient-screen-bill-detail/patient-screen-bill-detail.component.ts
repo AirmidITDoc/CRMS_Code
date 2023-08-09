@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { AppointmentService } from '../appointment.service';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
@@ -122,6 +122,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
     public _AppointmentService: AppointmentService,
     public _GeturlService: GeturlService,
     private _ActRoute: Router,
+    public dialogRef: MatDialogRef<PatientScreenBillDetailComponent>,
     private _fuseSidebarService: FuseSidebarService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public _matDialog: MatDialog,
@@ -157,6 +158,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
   getVistdetaillist() {
+    debugger
     this.sIsLoading = 'loading-data';
     var D_data = {
       "StudyId": this.data.StudyId,
@@ -201,7 +203,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
     console.log(contact)
     this.sIsLoading = 'loading-data';
     var D_data = {
-      "BillNo": 17,//contact.BillId
+      "BillNo": contact.BillId
     };
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
@@ -301,27 +303,24 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
   getGeneratebill(contact) {
+    console.log(contact)
     debugger
-    // let BillId = contact.BillId
-    // if (BillId != 0) {
-    //   Swal.fire("Bill Already Generated")
-    // } else {
+    let BillId = contact.BillId
+    if (BillId != 0) {
+      Swal.fire("Bill Already Generated")
+    } else {
       var m = {
         "VisitId": contact.VisitId,
         "StudyId": contact.StudyId,
         "StudyVisitId": contact.StudyVisitId,
         "RegId":this.selectedAdvanceObj.RegId,
+        "PatientName":this.selectedAdvanceObj.PatientName,
+        "DoctorName":this.selectedAdvanceObj.Doctorname,
+        "AgeYear":this.selectedAdvanceObj.AgeYear,
         "BillStatus":2
       };
       console.log(m);
-      // this._AppointmentService.getBillGeneration(m).subscribe(data => {
-      //   this.sIsLoading = '';
-      //   console.log(data)
-      // },
-      //   error => {
-      //     this.sIsLoading = '';
-      //   });
-
+      
       const dialogRef = this._matDialog.open(BillDetailComponent,
         {
           maxWidth: "80%",
@@ -333,10 +332,10 @@ export class PatientScreenBillDetailComponent implements OnInit {
         });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed - Insert Action', result);
-          this._matDialog.closeAll();
+          this.dialogRef.close();
       });
 
-    // }
+    }
     
   }
 

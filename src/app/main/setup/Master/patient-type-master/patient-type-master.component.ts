@@ -18,7 +18,7 @@ import { fuseAnimations } from '@fuse/animations';
 export class PatientTypeMasterComponent implements OnInit {
 
   msg: any;
-
+  chargeslist: any = [];
   displayedColumns: string[] = [
       "PatientTypeId",
       "PatientType",
@@ -161,6 +161,18 @@ export class PatientTypeMasterComponent implements OnInit {
       console.log(m_data1);
       this._PatientTypeService.populateForm(m_data1);
   }
+
+  
+  deleteTableRow(element) {
+    let Query = "Update  PatientTypeMaster set IsActive=0 where  PatientTypeId=" + element.PatientTypeId + " ";
+    console.log(Query)
+      this._PatientTypeService.getdeletemember(Query).subscribe(data => {
+       if(data)
+       Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+  
+      });
+  }
+
 }
 
 export class PatientTypeMaster {

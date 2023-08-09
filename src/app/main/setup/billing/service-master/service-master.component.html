@@ -188,10 +188,10 @@
                                     <mat-header-cell *matHeaderCellDef class="table-actions" style="color: aliceblue;">
                                         Action </mat-header-cell>
                                     <mat-cell *matCellDef="let row">
-                                        <button mat-icon-button (click)="onEdit(row)"><mat-icon
+                                        <button mat-icon-button (click)="onEdit(row)" style="color: black;"><mat-icon
                                                 title="Edit Menu">launch</mat-icon></button>
-                                        <!-- <button mat-icon-button (click)="onDeactive(row.ServiceId)"
-                                            color="warn"><mat-icon>delete_outline</mat-icon></button>-->
+                                        <button mat-icon-button (click)="deleteTableRow(row)"
+                                            color="warn"><mat-icon>delete_outline</mat-icon></button>
 
                                     </mat-cell>
                                 </ng-container>

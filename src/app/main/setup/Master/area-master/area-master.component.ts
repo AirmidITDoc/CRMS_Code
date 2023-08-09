@@ -22,7 +22,7 @@ export class AreaMasterComponent implements OnInit {
   AreaMasterList: any;
   CitycmbList: any = [];
   msg: any;
-
+  chargeslist: any = [];
   // city filter
   public cityFilterCtrl: FormControl = new FormControl();
   public filteredCity: ReplaySubject<any> = new ReplaySubject<any>(1);
@@ -32,8 +32,8 @@ export class AreaMasterComponent implements OnInit {
   displayedColumns: string[] = [
       "AreaId",
       "AreaName",
-      "CityName",
-      "AddedBy",
+    //   "CityName",
+    //   "AddedBy",
       "IsDeleted",
       "action",
   ];
@@ -94,6 +94,7 @@ export class AreaMasterComponent implements OnInit {
       };
       this._AreaService.getAreaMasterList(param).subscribe((Menu) => {
           this.DSAreaMasterList.data = Menu as AreaMaster[];
+          this.chargeslist=Menu as AreaMaster[];
           this.DSAreaMasterList.sort = this.sort;
           this.DSAreaMasterList.paginator = this.paginator;
       });
@@ -188,6 +189,19 @@ export class AreaMasterComponent implements OnInit {
           this.onClear();
       }
   }
+
+
+  deleteTableRow(element) {
+    let Query = "Update  M_AreaMaster set IsActive=0 where  AreaId=" + element.AreaId + " ";
+    console.log(Query)
+      this._AreaService.getdeletemember(Query).subscribe(data => {
+       if(data)
+       Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+
+      });
+  }
+
+
 
   onEdit(row) {
       var m_data = {

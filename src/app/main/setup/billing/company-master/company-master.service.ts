@@ -84,4 +84,8 @@ export class CompanyMasterService {
     populateForm(param) {
         this.myform.patchValue(param);
     }
+    
+public getdeletemember(data){
+    return this._httpClient.post("Generic/GetBySelectQuery?query="+data, {})
+  }
 }

@@ -85,7 +85,7 @@ export class SubGroupMasterComponent implements OnInit {
     }
 
     getSubgroupMasterList() {
-        var param = { SubGroupName: "%" };
+        var param = this._subgroupService.myformSearch.get('SubGroupNameSearch').value + "%" || "%"  // { SubGroupName: "%" };
         this._subgroupService.getSubgroupMasterList(param).subscribe((Menu) => {
             this.DSSubGroupMasterList.data = Menu as SubGroupMaster[];
             this.DSSubGroupMasterList.sort = this.sort;
@@ -102,6 +102,17 @@ export class SubGroupMasterComponent implements OnInit {
                 .setValue(this.GroupcmbList[0]);
         });
     }
+
+    deleteTableRow(element) {
+        let Query = "Update  M_CompanyDetails set IsActive=0 where  MemberId=" + element.MemberId + " ";
+        console.log(Query)
+          this._subgroupService.getdeletemember(Query).subscribe(data => {
+           if(data)
+           Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+    
+          });
+      }
+    
     onClear() {
         this._subgroupService.myform.reset({ IsDeleted: "false" });
         this._subgroupService.initializeFormGroup();

@@ -58,5 +58,9 @@ export class PatientTypeService {
   populateForm(param) {
       this.myForm.patchValue(param);
   }
+
+  public getdeletemember(data){
+    return this._httpClient.post("Generic/GetBySelectQuery?query="+data, {})
+  }
 }
 

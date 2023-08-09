@@ -147,7 +147,7 @@ export class DoctorMasterComponent implements OnInit {
 
             {
                 maxWidth: "80vw",
-                maxHeight: "85vh",
+                maxHeight: "90vh",
                 width: "100%",
                 height: "100%",
             }

@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MemberMasterService } from './member-master.service';
 import { MatSort } from '@angular/material/sort';
 import { fuseAnimations } from '@fuse/animations';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-member-master',
@@ -19,7 +20,7 @@ export class MemberMasterComponent implements OnInit {
   isLoading = true;
   sIsLoading: string = '';
   hasSelectedContacts: boolean;
-  
+  chargeslist: any = [];
   displayedColumns: string[] = [
     "MemberId",
     "FirstName",
@@ -51,7 +52,7 @@ export class MemberMasterComponent implements OnInit {
     this._MemberMasterService.getMemberList(Params).subscribe(
       (Menu) => {
         this.MemberList.data = Menu as MemberDetail[];
-        console.log(this.MemberList.data);
+        this.chargeslist = Menu as MemberDetail[];
         this.isLoading = false;
         this.MemberList.sort = this.sort;
         this.MemberList.paginator = this.paginator;
@@ -94,7 +95,7 @@ export class MemberMasterComponent implements OnInit {
     this._MemberMasterService.getMemberList(Params).subscribe(
       (Menu) => {
         this.MemberList.data = Menu as MemberDetail[];
-        console.log(this.MemberList.data);
+        this.chargeslist= Menu as MemberDetail[];
         this.isLoading = false;
         this.MemberList.sort = this.sort;
         this.MemberList.paginator = this.paginator;
@@ -103,6 +104,24 @@ export class MemberMasterComponent implements OnInit {
     );
   }
 
+
+  deleteTableRow(element) {
+    let index = this.chargeslist.indexOf(element);
+    // if (index >= 0) {
+    //   this.chargeslist.splice(index, 1);
+    //   this.MemberList.data = [];
+    //   this.MemberList.data = this.chargeslist;
+    // }
+   
+
+    let Query = "Update  M_MemberMaster set IsActive=0 where  MemberId=" + element.MemberId + " ";
+    console.log(Query)
+      this._MemberMasterService.getdeletemember(Query).subscribe(data => {
+       if(data)
+       Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+
+      });
+  }
 
 
   onEdit(row) {

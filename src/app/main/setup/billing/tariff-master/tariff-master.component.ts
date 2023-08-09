@@ -35,20 +35,21 @@ export class TariffMasterComponent implements OnInit {
     ngOnInit(): void {
         this.getTariffMasterList();
     }
-    onSearch() {
-        this.getTariffMasterList();
-    }
+    // onSearch() {
+    //     this.getTariffMasterList();
+    // }
 
     onSearchClear() {
         this._tariffService.myformSearch.reset({
             TariffNameSearch: "",
-            IsDeletedSearch: "2",
+            IsDeletedSearch: "0",
         });
     }
     getTariffMasterList() {
+        debugger
         var param = {
-             TariffName: this._tariffService.myformSearch.get('TariffNameSearch').value + "%" || "%" ,
-             IsActive: this._tariffService.myformSearch.get('IsDeletedSearch').value  || 1 
+            tariffName: this._tariffService.myformSearch.get('TariffNameSearch').value + "%" || "%" ,
+            IsActive: this._tariffService.myformSearch.get('IsDeletedSearch').value  || 0
 
             };
         this._tariffService.getTariffMasterList(param).subscribe((Menu) => {
@@ -57,6 +58,18 @@ export class TariffMasterComponent implements OnInit {
             this.DSTariffMasterList.paginator = this.paginator;
         });
     }
+
+
+    deleteTableRow(element) {
+        let Query = "Update  TariffMaster set IsActive=0 where  TariffId=" + element.TariffId + " ";
+        console.log(Query)
+          this._tariffService.getdeletemember(Query).subscribe(data => {
+           if(data)
+           Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+    
+          });
+      }
+    
 
     onClear() {
         this._tariffService.myform.reset({ IsDeleted: "false" });

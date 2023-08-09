@@ -40,7 +40,7 @@
                                 <div class="dialog-content-wrapper">
                                     <mat-form-field class="mr-sm-12" fxFlex>
                                         <input matInput placeholder="Search --> Department Name" autocomplete="off"
-                                            name="DepartmentNameSearch" formControlName="DepartmentNameSearch" (keyup)="onSearch()"/>
+                                            name="DepartmentNameSearch" formControlName="DepartmentNameSearch" (keyup)="getDepartmentMasterList()"/>
                                         <button mat-button matSuffix mat-icon-button aria-label="Clear"
                                             (click)="onSearchClear()">
                                             <mat-icon>close</mat-icon>
@@ -54,7 +54,7 @@
                                         <mat-radio-button mat-fab value="1">IsDeactive</mat-radio-button>
                                     </mat-radio-group>
 
-                                    <button mat-raised-button (click)="onSearch()" fxLayoutAlign="center center">
+                                    <button mat-raised-button (click)="getDepartmentMasterList()" fxLayoutAlign="center center">
                                         <mat-icon>search</mat-icon>
                                         Search
                                     </button>
@@ -102,8 +102,8 @@
                                         <mat-header-cell *matHeaderCellDef class="table-actions"> Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
-                                            <button mat-icon-button (click)="onEdit(row)"><mat-icon
-                                                    title="Edit Menu">launch</mat-icon></button>
+                                            <button mat-icon-button (click)="onEdit(row)" style="color: black;"><mat-icon
+                                                title="Edit Menu">launch</mat-icon></button>
                                             <button mat-icon-button (click)="onDeactive(row.DepartmentId)"
                                                 color="warn"><mat-icon>delete_outline</mat-icon></button>
 

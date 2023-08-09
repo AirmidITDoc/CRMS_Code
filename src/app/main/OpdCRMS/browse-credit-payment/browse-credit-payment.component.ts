@@ -15,7 +15,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { ViewBillPaymentComponent } from './view-bill-payment/view-bill-payment.component';
 import { InvoiceBillMappingComponent } from '../appointment/invoice-bill-mapping/invoice-bill-mapping.component';
 
-// import * as converter from 'number-to-words';
+import * as converter from 'number-to-words';
 
 @Component({
   selector: 'app-browse-credit-payment',
@@ -357,7 +357,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
       }
       var objPrintWordInfo = this.reportPrintObjList[0];
 
-      this.printTemplate = this.printTemplate.replace('StrTotalPaidAmountInWords', this.convertToWord(objPrintWordInfo.PaidAmount));
+      this.printTemplate = this.printTemplate.replace('StrTotalPaidAmountInWords', this.convertToWord(objPrintWordInfo.TotalBillAmount));
 
       // this.printTemplate = this.printTemplate.replace('StrBalanceAmt', '₹' + (objPrintWordInfo.BalanceAmt.toFixed(2)));
       // this.printTemplate = this.printTemplate.replace('StrTotalBillAmount', '₹' + (objPrintWordInfo.TotalBillAmount.toFixed(2)));
@@ -401,7 +401,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
   }
   convertToWord(e) {
     // this.numberInWords= converter.toWords(this.mynumber);
-    // return converter.toWords(e);
+    return converter.toWords(e);
   }
   // GET DATA FROM DATABASE 
 

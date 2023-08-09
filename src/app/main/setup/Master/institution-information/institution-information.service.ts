@@ -69,4 +69,7 @@ export class InstitutionInformationService {
   populateForm(param) {
     this.personalFormGroup.patchValue(param);
 }
+public getdeletemember(data){
+  return this._httpClient.post("Generic/GetBySelectQuery?query="+data, {})
+}
 }

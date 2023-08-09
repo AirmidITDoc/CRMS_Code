@@ -98,10 +98,10 @@
                                         <mat-header-cell *matHeaderCellDef class="table-actions"> Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
-                                            <button mat-icon-button (click)="onEdit(row)">
+                                            <button mat-icon-button (click)="onEdit(row)"  style="color: rgb(11, 12, 13);">
                                                 <mat-icon title="Edit Menu">launch</mat-icon>
                                             </button>
-                                            <button mat-icon-button (click)="onDeactive(row.BankId)" color="warn">
+                                            <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
                                                 <mat-icon>delete_outline</mat-icon>
                                             </button>
                                             <!-- <button mat-icon-button [routerLink]="['/auth/menu-configure/menu-configure',row.menu_master_id]">

@@ -7,6 +7,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { NewsponserinformationComponent } from './newsponserinformation/newsponserinformation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sponser-information',
@@ -20,7 +21,7 @@ export class SponserInformationComponent implements OnInit {
   isLoading = true;
   hasSelectedContacts: boolean;
   sIsLoading: string = '';
-
+  chargeslist: any = [];
   displayedColumns: string[] = [
     "SponserId", 
     "SponserName",  
@@ -78,7 +79,7 @@ DSSponserInformationList = new MatTableDataSource<SponserInformation>();
     this._sponserService.getSponserInformationList(Params).subscribe(
         (Menu) => {
             this.DSSponserInformationList.data = Menu as SponserInformation[];
-            // console.log(this.DSSponserInformationList.data);
+            this.chargeslist = Menu as SponserInformation[];
             this.isLoading = false;
             this.DSSponserInformationList.sort = this.sort;
             this.DSSponserInformationList.paginator = this.paginator;
@@ -87,6 +88,17 @@ DSSponserInformationList = new MatTableDataSource<SponserInformation>();
     );
 }
 
+
+deleteTableRow(element) {
+  
+  let Query = "Update  M_SponserInformation set IsActive=0 where  SponserId=" + element.SponserId + " ";
+  console.log(Query)
+    this._sponserService.getdeletemember(Query).subscribe(data => {
+     if(data)
+     Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+
+    });
+}
 
 onEdit(row) {
   console.log(row);

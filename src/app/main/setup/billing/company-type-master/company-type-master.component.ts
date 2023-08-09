@@ -47,7 +47,9 @@ export class CompanyTypeMasterComponent implements OnInit {
         });
     }
     getCompanytypeMasterList() {
-        var param = { TypeName: "%" };
+        // var param = this._companytypeService.myformSearch.get('TypeNameSearch').value + "%" || "%" //{ TypeName: "%" };
+
+        var param ={ TypeName: this._companytypeService.myformSearch.get('TypeNameSearch').value + "%" || "%" };
         this._companytypeService
             .getCompanytypeMasterList(param)
             .subscribe((Menu) => {
@@ -62,6 +64,16 @@ export class CompanyTypeMasterComponent implements OnInit {
         this._companytypeService.initializeFormGroup();
     }
 
+    deleteTableRow(element) {
+        let Query = "Update  M_CompanyDetails set IsActive=0 where  CompanyTypeId=" + element.CompanyTypeId + " ";
+        console.log(Query)
+          this._companytypeService.getdeletemember(Query).subscribe(data => {
+           if(data)
+           Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+    
+          });
+      }
+    
     onSubmit() {
         if (this._companytypeService.myform.valid) {
             if (!this._companytypeService.myform.get("CompanyTypeId").value) {

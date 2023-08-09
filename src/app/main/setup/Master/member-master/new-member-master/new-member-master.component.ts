@@ -103,6 +103,7 @@ export class NewMemberMasterComponent implements OnInit {
     this._MemberMasterService.getCityList().subscribe(data => {
       this.cityList = data;
       this.filteredCity.next(this.cityList.slice());
+      this._MemberMasterService.personalFormGroup.get('CityId').setValue(this.cityList[0]);
     });
   }
 

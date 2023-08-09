@@ -85,22 +85,34 @@
   }
   
   .mat-column-ProtocolNo {
-    width:150px;
-    max-width: 150px;
-    min-width: 150px;
+    width:200px;
+    max-width: 200px;
+    min-width: 200px;
     text-align: left;
   }
   .mat-column-VisitTitle {
-    width: 150px; 
-    max-width:150px;
-    min-width: 150px;
-    text-align: center;
+    width: 200px; 
+    max-width:200px;
+    min-width: 200px;
+    text-align: left;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+     overflow: hidden !important;
+     
+     justify-content:left; 
   }
   .mat-column-SubjectName {
     width: 300px; 
     max-width:300px;
     min-width: 300px;
-    text-align: center;
+    text-align: left;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+     overflow: hidden !important;
+     
+     justify-content:left; 
   }
 
   .mat-column-RegNoWithPrefix {
@@ -154,9 +166,7 @@
     overflow: hidden;
     text-overflow: ellipsis; 
      overflow: hidden !important;
-     display: inline-block;
-     margin-top: 7px;
-     margin-right: 7px;
+    
      justify-content:left; 
   }
   .mat-column-RefDocName {
@@ -169,9 +179,7 @@
     overflow: hidden;
     text-overflow: ellipsis; 
      overflow: hidden !important;
-     display: inline-block;
-     margin-top: 7px;
-     margin-right: 7px;
+     
      justify-content:left; 
   }
   
@@ -189,9 +197,7 @@
     overflow: hidden;
     text-overflow: ellipsis; 
      overflow: hidden !important;
-     display: inline-block;
-     margin-top: 7px;
-     margin-right: 7px;
+   
      justify-content:left; 
   }
   .mat-icon-button {

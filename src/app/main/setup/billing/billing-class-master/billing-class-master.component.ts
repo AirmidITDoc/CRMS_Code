@@ -48,7 +48,7 @@ export class BillingClassMasterComponent implements OnInit {
     }
     getClassMasterList() {
         var param = {
-            ClassName: "%",
+            ClassName:  this._billingClassService.myformSearch.get('ClassNameSearch').value + "%" || "%",
         };
         this._billingClassService
             .getClassMasterList(param)
@@ -160,6 +160,16 @@ export class BillingClassMasterComponent implements OnInit {
         };
         this._billingClassService.populateForm(m_data);
     }
+
+    deleteTableRow(element) {
+        let Query = "Update  ClassMaster set IsActive=0 where  ClassId=" + element.ClassId + " ";
+        console.log(Query)
+          this._billingClassService.getdeletemember(Query).subscribe(data => {
+           if(data)
+           Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+    
+          });
+      }
 }
 export class BillingClassMaster {
     ClassId: number;

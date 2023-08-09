@@ -159,19 +159,19 @@ export class DoctorMasterService {
     }
 
     public doctortMasterInsert(param) {
-        return this._httpClient.post("DoctorMaster/DoctorSave", param);
+        return this._httpClient.post("Master/DoctorSave", param);
     }
 
     public doctortMasterUpdate(param) {
-        return this._httpClient.post("DoctorMaster/DoctorUpdate", param);
+        return this._httpClient.post("Master/DoctorUpdate", param);
     }
 
     public assignDoctorDepartmentDet(param) {
-        return this._httpClient.post("DoctorMaster/DoctorSave", param);
+        return this._httpClient.post("OutPatient/DocDeparttmentTypeInsert", param);
     }
 
     public deleteAssignSupplierToStore(param) {
-        return this._httpClient.post("DoctorMaster/DoctorUpdate", param);
+        return this._httpClient.post("OutPatient/DocDeparttmentTypeUpdate", param);
     }
 
     populateForm(param) {

@@ -40,7 +40,7 @@
                                 <div class="dialog-content-wrapper">
                                     <mat-form-field class="mr-sm-12" fxFlex>
                                         <input matInput placeholder="Search --> Cash Counter Name" autocomplete="off"
-                                            name="CashCounterNameSearch" formControlName="CashCounterNameSearch" />
+                                            name="CashCounterNameSearch" formControlName="CashCounterNameSearch" (keyup)="getCashcounterMasterList()"/>
                                         <button mat-button matSuffix mat-icon-button aria-label="Clear"
                                             (click)="onSearchClear()">
                                             <mat-icon>close</mat-icon>
@@ -54,7 +54,7 @@
                                         <mat-radio-button mat-fab value="1">IsDeactive</mat-radio-button>
                                     </mat-radio-group>
 
-                                    <button mat-raised-button (click)="onSearch()" fxLayoutAlign="center center">
+                                    <button mat-raised-button (click)="getCashcounterMasterList()" fxLayoutAlign="center center">
                                         <mat-icon>search</mat-icon>
                                         Search
                                     </button>
@@ -112,7 +112,7 @@
                                         <mat-header-cell *matHeaderCellDef class="table-actions"> Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
-                                            <button mat-icon-button (click)="onEdit(row)"><mat-icon
+                                            <button mat-icon-button (click)="onEdit(row)" style="color: rgb(29, 32, 34);"><mat-icon
                                                     title="Edit Menu">launch</mat-icon></button>
                                             <button mat-icon-button (click)="onDeactive(row.BankId)"
                                                 color="warn"><mat-icon>delete_outline</mat-icon></button>

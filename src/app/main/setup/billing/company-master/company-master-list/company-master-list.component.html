@@ -39,7 +39,7 @@
 
         <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
             <input name="PinCode" placeholder="Select PinCode"
-            [(ngModel)]="PinCode" formControlName="PinCode" maxlength="6"
+            formControlName="PinCode" maxlength="6"
                 matInput>
             <span class="error" *ngIf="f.PinCode.invalid && f.PinCode.touched">PinCode is required Enter only
                 Digits</span>
@@ -58,7 +58,7 @@
 
         <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
             <input name="StateCode" placeholder="Select StateCode"
-            [(ngModel)]="StateCode" formControlName="StateCode" maxlength="6"
+             formControlName="StateCode" maxlength="6"
                 matInput>
             <span class="error" *ngIf="f.StateCode.invalid && f.StateCode.touched">StateCode is required Enter only
                 Digits</span>

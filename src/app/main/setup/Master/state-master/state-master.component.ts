@@ -198,6 +198,17 @@ export class StateMasterComponent implements OnInit {
       }
   }
 
+  deleteTableRow(element) {
+  
+    let Query = "Update  M_StateMaster set IsActive=0 where  StateId=" + element.StateId + " ";
+    console.log(Query)
+      this._stateService.getdeletemember(Query).subscribe(data => {
+       if(data)
+       Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+  
+      });
+  }
+
   onEdit(row) {
       var m_data = {
           StateId: row.StateId,

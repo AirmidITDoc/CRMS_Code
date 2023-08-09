@@ -19,9 +19,9 @@ app-area-master {
     }
 
     .mat-column-AreaName {
-        width: 300px;
-        max-width: 300px;
-        min-width: 300px;
+        width: 600px;
+        max-width: 600px;
+        min-width: 600px;
     }
 
     .mat-column-CityName {
@@ -45,12 +45,12 @@ app-area-master {
     }
 
     .mat-column-action {
-        // color: white !important;
-        width: 70px;
-        max-width: 70px;
-        min-width: 70px;
-        text-align: right;
-        justify-content: right;
+        color: white !important;
+        width: 90px;
+        max-width: 90px;
+        min-width: 90px;
+        text-align: left;
+        justify-content: left;
     }
     .mat-icon-button {
         padding: 0;

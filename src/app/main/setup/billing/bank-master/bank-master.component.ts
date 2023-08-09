@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { BankMasterService } from './bank-master.service';
 import { fuseAnimations } from '@fuse/animations';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-bank-master',
@@ -24,7 +25,7 @@ export class BankMasterComponent implements OnInit {
   displayedColumns: string[] = [
       "BankId",
       "BankName",
-      "AddedByName",
+    //   "AddedByName",
       "IsDeleted",
       "action",
   ];
@@ -87,6 +88,23 @@ export class BankMasterComponent implements OnInit {
               console.log(m_data);
               this._bankService.bankMasterInsert(m_data).subscribe((data) => {
                   this.msg = data;
+                  if (data) {
+                    Swal.fire(
+                        "Saved !",
+                        "Record saved Successfully !",
+                        "success"
+                    ).then((result) => {
+                        if (result.isConfirmed) {
+                            this.getBankMasterList();
+                        }
+                    });
+                } else {
+                    Swal.fire(
+                        "Error !",
+                        "Bank Name not saved",
+                        "error"
+                    );
+                }
                   this.getBankMasterList();
               });
           } else {
@@ -106,11 +124,38 @@ export class BankMasterComponent implements OnInit {
                   .bankMasterUpdate(m_dataUpdate)
                   .subscribe((data) => {
                       this.msg = data;
+                      if (data) {
+                        Swal.fire(
+                            "Updated !",
+                            "Record Updated Successfully !",
+                            "success"
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+                                this.getBankMasterList();
+                            }
+                        });
+                    } else {
+                        Swal.fire(
+                            "Error !",
+                            "Bank Name not saved",
+                            "error"
+                        );
+                    }
                       this.getBankMasterList();
                   });
           }
           this.onClear();
       }
+  }
+
+  deleteTableRow(element) {
+    let Query = "Update  M_BankMaster set IsActive=0 where  BankId=" + element.BankId + " ";
+    console.log(Query)
+      this._bankService.getdeletemember(Query).subscribe(data => {
+       if(data)
+       Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+
+      });
   }
   onEdit(row) {
       var m_data = {

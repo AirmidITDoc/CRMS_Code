@@ -36,7 +36,7 @@ export class NewInstitutionInformationComponent implements OnInit {
     this._institutionService.personalFormGroup.reset();
   }
   onClose(){
-    
+    this._matDialog.closeAll();
   }
   onSubmit() {
     this.isLoading = 'submit';

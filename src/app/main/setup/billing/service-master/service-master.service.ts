@@ -143,4 +143,9 @@ export class ServiceMasterService {
         {}
     );
 }
+
+
+public getdeletemember(data){
+    return this._httpClient.post("Generic/GetBySelectQuery?query="+data, {})
+  }
 }

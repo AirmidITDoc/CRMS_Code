@@ -123,8 +123,8 @@
                                         <mat-cell *matCellDef="let row">
                                             <button mat-icon-button (click)="onEdit(row)"><mat-icon
                                                     title="Edit Menu" style="color: black;">launch</mat-icon></button>
-                                            <!-- <button mat-icon-button (click)="onDeactive(row.GroupId)"
-                                                color="warn"><mat-icon>delete_outline</mat-icon></button> -->
+                                            <button mat-icon-button (click)="deleteTableRow(row)"
+                                                color="warn"><mat-icon>delete_outline</mat-icon></button>
                                         </mat-cell>
                                     </ng-container>
 

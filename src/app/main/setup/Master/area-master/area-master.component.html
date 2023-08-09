@@ -5,10 +5,10 @@
 
         <!-- APP TITLE -->
         <div fxLayout="row" fxLayoutAlign="start center">
-            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="color: aliceblue;">
                 <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">account_box
                 </mat-icon>
-                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" >
                     Area Master
                 </span>
             </div>
@@ -41,7 +41,7 @@
                                 <div class="dialog-content-wrapper">
                                     <mat-form-field class="mr-sm-12" fxFlex>
                                         <input matInput placeholder="Search --> Area Name" autocomplete="off"
-                                            name="AreaNameSearch" formControlName="AreaNameSearch" (keyup)="onSearch()"/>
+                                            name="AreaNameSearch" formControlName="AreaNameSearch" (keyup)="getAreaMasterList()"/>
                                         <button mat-button matSuffix mat-icon-button aria-label="Clear"
                                             (click)="onSearchClear()">
                                             <mat-icon>close</mat-icon>
@@ -55,7 +55,7 @@
                                         <mat-radio-button mat-fab value="1">IsDeactive</mat-radio-button>
                                     </mat-radio-group>
 
-                                    <button mat-raised-button (click)="onSearch()" fxLayoutAlign="center center">
+                                    <button mat-raised-button (click)="getAreaMasterList()" fxLayoutAlign="center center">
                                         <mat-icon>search</mat-icon>
                                         Search
                                     </button>
@@ -81,7 +81,7 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="CityName">
+                                    <!-- <ng-container matColumnDef="CityName">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header> City Name
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.CityName}}
@@ -92,7 +92,7 @@
                                         <mat-header-cell *matHeaderCellDef mat-sort-header> User Name </mat-header-cell>
                                         <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.AddedBy}}
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
                                     <ng-container matColumnDef="IsDeleted">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm> IsActive
@@ -108,13 +108,13 @@
 
 
                                     <ng-container matColumnDef="action" stickyEnd>
-                                        <mat-header-cell *matHeaderCellDef class="table-actions" style="color: white;">
+                                        <mat-header-cell *matHeaderCellDef class="table-actions">
                                             Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
-                                            <button mat-icon-button (click)="onEdit(row)"><mat-icon
+                                            <button mat-icon-button (click)="onEdit(row)"  style="color: rgb(20, 19, 19);"><mat-icon
                                                     title="Edit Menu">launch</mat-icon></button>
-                                            <button mat-icon-button (click)="onDeactive(row.AreaId)"
+                                            <button mat-icon-button (click)="deleteTableRow(row)"
                                                 color="warn"><mat-icon>delete_outline</mat-icon></button>
 
                                         </mat-cell>

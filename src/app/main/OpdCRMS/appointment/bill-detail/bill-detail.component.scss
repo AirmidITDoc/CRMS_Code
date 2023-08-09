@@ -622,14 +622,14 @@ padding-bottom: 2px;
 .table1{
 .mat-header-row {
     width: 100%;
-    max-width:1150px;
-    min-width:1150px; 
+    max-width:1200px;
+    min-width:1200px; 
     min-height: 40px;     
 }
 .mat-row {
     width: 100%;
-    max-width:1150px;
-    min-width:1150px; 
+    max-width:1200px;
+    min-width:1200px; 
     min-height: 30px;            
 }
 // PatientData
@@ -642,16 +642,16 @@ padding-bottom: 2px;
 }
 
 .mat-column-ChargesDate {
-    width:80px;
-    max-width:80px;
-    min-width:80px;
-    text-align: right;
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+    text-align: left;
 }
 
 .mat-column-ServiceName {
-    width:300px;
-    max-width:300px;
-    min-width:300px;
+    width:350px;
+    max-width:350px;
+    min-width:350px;
     text-align:left;
     white-space: nowrap; 
     overflow: hidden;
@@ -674,9 +674,9 @@ padding-bottom: 2px;
 }
 
 .mat-column-TotalAmt {
-    width:90px;
-    max-width:90px;
-    min-width:90px;
+    width:110px;
+    max-width:110px;
+    min-width:110px;
     text-align:center;
 }
 

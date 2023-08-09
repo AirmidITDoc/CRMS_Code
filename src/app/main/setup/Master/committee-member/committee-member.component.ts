@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import {  NewCommitteeMemberComponent } from './new-committee-member/new-committee-member.component';
 import { fuseAnimations } from '@fuse/animations';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-committee-member',
@@ -26,7 +27,7 @@ export class CommitteeMemberComponent implements OnInit {
   isLoading = true;
   currentDate=new Date();
   subscriptions: Subscription[] = [];
-  
+  chargeslist: any = [];
   printTemplate: any;
   hasSelectedContacts: boolean;
   subscriptionArr: Subscription[] = [];
@@ -77,11 +78,12 @@ export class CommitteeMemberComponent implements OnInit {
       this.sIsLoading = 'loading-data';
 
       var m = {
-        CommitteeId: this._CasedetailService.myFilterform.get('CommitteeId').value || 1
+        CommitteeId: this._CasedetailService.myFilterform.get('CommitteeId').value || 0
       };
 
       this._CasedetailService.getCommitteeMemberMeetingList(m).subscribe(Visit => {
         this. dataSource.data = Visit as CommitteeMemberDetail[];
+        this. chargeslist = Visit as CommitteeMemberDetail[];
         this. dataSource.sort = this.sort;
         this. dataSource.paginator = this.paginator;
         this.sIsLoading = '';
@@ -242,6 +244,16 @@ export class CommitteeMemberComponent implements OnInit {
     this.selectRow = row;
   }
 
+
+  deleteTableRow(element) {
+    let Query = "Update  M_CompanyDetails set IsActive=0 where  CommitteeId=" + element.CommitteeId + " ";
+    console.log(Query)
+      this._CasedetailService.getdeletemember(Query).subscribe(data => {
+       if(data)
+       Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+
+      });
+  }
 
    
   onEdit(row) {

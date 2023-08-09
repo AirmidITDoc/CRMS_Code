@@ -37,9 +37,9 @@ export class CashCounterMasterComponent implements OnInit {
     ngOnInit(): void {
         this.getCashcounterMasterList();
     }
-    onSearch() {
-        this.getCashcounterMasterList();
-    }
+    // onSearch() {
+    //     this.getCashcounterMasterList();
+    // }
 
     onSearchClear() {
         this._cashcounterService.myformSearch.reset({
@@ -48,7 +48,10 @@ export class CashCounterMasterComponent implements OnInit {
         });
     }
     getCashcounterMasterList() {
-        var param = { CashCounterName: "%" };
+        // var param = this._cashcounterService.myformSearch.get('CashCounterNameSearch').value + "%" || "%" //{ CashCounterName: "%" };
+
+        var param = { CashCounterName:  this._cashcounterService.myformSearch.get('CashCounterNameSearch').value + "%" || "%" };
+
         this._cashcounterService
             .getCashcounterMasterList(param)
             .subscribe((Menu) => {
@@ -166,6 +169,17 @@ export class CashCounterMasterComponent implements OnInit {
         };
         this._cashcounterService.populateForm(m_data);
     }
+
+    deleteTableRow(element) {
+        let Query = "Update  M_CashCounterMaster set IsActive=0 where  CashCounterId=" + element.CashCounterId + " ";
+        console.log(Query)
+          this._cashcounterService.getdeletemember(Query).subscribe(data => {
+           if(data)
+           Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+    
+          });
+      }
+    
 }
 
 export class CashCounterMaster {

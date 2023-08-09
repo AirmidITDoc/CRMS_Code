@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DepartmentMasterService } from './department-master.service';
 import { fuseAnimations } from '@fuse/animations';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-department-master',
@@ -34,9 +35,9 @@ export class DepartmentMasterComponent implements OnInit {
     ngOnInit(): void {
         this.getDepartmentMasterList();
     }
-    onSearch() {
-        this.getDepartmentMasterList();
-    }
+    // onSearch() {
+    //     this.getDepartmentMasterList();
+    // }
 
     onSearchClear() {
         this._departmentService.myformSearch.reset({
@@ -66,7 +67,7 @@ export class DepartmentMasterComponent implements OnInit {
         if (this._departmentService.myform.valid) {
             if (!this._departmentService.myform.get("DepartmentId").value) {
                 var m_data = {
-                    departmentMasterInsert: {
+                    departmentSave: {
                         departmentName: this._departmentService.myform
                             .get("DepartmentName")
                             .value.trim(),
@@ -79,11 +80,28 @@ export class DepartmentMasterComponent implements OnInit {
                     .departmentMasterInsert(m_data)
                     .subscribe((data) => {
                         this.msg = data;
+                        if (data) {
+                            Swal.fire(
+                                "Saved !",
+                                "Record saved Successfully !",
+                                "success"
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    this.getDepartmentMasterList();
+                                }
+                            });
+                        } else {
+                            Swal.fire(
+                                "Error !",
+                                "Department Name not saved",
+                                "error"
+                            );
+                        }
                         this.getDepartmentMasterList();
                     });
             } else {
                 var m_dataUpdate = {
-                    departmentMasterUpdate: {
+                    departmentUpdate: {
                         departmentId:
                             this._departmentService.myform.get("DepartmentId")
                                 .value,
@@ -99,6 +117,23 @@ export class DepartmentMasterComponent implements OnInit {
                     .departmentMasterUpdate(m_dataUpdate)
                     .subscribe((data) => {
                         this.msg = data;
+                        if (data) {
+                            Swal.fire(
+                                "Saved !",
+                                "Record saved Successfully !",
+                                "success"
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    this.getDepartmentMasterList();
+                                }
+                            });
+                        } else {
+                            Swal.fire(
+                                "Error !",
+                                "Department Name not saved",
+                                "error"
+                            );
+                        }
                         this.getDepartmentMasterList();
                     });
             }

@@ -25,9 +25,9 @@ app-company-type-master {
     }
 
     .mat-column-AddedByName {
-        width: 70px;
-        max-width: 70px;
-        min-width: 70px;
+        width: 90px;
+        max-width: 90px;
+        min-width: 90px;
     }
 
     .mat-column-IsDeleted {
@@ -39,10 +39,10 @@ app-company-type-master {
     }
 
     .mat-column-action {
-        // color: white !important;
+        color: white !important;
         width: 120px;
         max-width: 120px;
-        min-width: 70px;
+        min-width: 120px;
         text-align: right;
         justify-content: right;
     }

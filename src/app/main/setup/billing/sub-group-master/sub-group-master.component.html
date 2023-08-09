@@ -40,7 +40,7 @@
                                 <div class="dialog-content-wrapper">
                                     <mat-form-field class="mr-sm-12" fxFlex>
                                         <input matInput placeholder="Search --> Sub Group Name" autocomplete="off"
-                                            name="SubGroupNameSearch" formControlName="SubGroupNameSearch" />
+                                            name="SubGroupNameSearch" formControlName="SubGroupNameSearch" (keyup)="getSubgroupMasterList()" />
                                         <button mat-button matSuffix mat-icon-button aria-label="Clear"
                                             (click)="onSearchClear()">
                                             <mat-icon>close</mat-icon>
@@ -108,7 +108,7 @@
                                         <mat-header-cell *matHeaderCellDef class="table-actions"> Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
-                                            <button mat-icon-button (click)="onEdit(row)"><mat-icon
+                                            <button mat-icon-button (click)="onEdit(row)" style="color: black;"><mat-icon
                                                     title="Edit Menu">launch</mat-icon></button>
                                             <button mat-icon-button (click)="onDeactive(row.SubGroupId)"
                                                 color="warn"><mat-icon>delete_outline</mat-icon></button>

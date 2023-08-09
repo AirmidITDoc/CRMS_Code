@@ -38,9 +38,9 @@ export class ConcessionReasonMasterComponent implements OnInit {
     ngOnInit(): void {
         this.getConcessionreasonMasterList();
     }
-    onSearch() {
-        this.getConcessionreasonMasterList();
-    }
+    // onSearch() {
+    //     this.getConcessionreasonMasterList();
+    // }
 
     onSearchClear() {
         this._consessionreasonService.myformSearch.reset({
@@ -50,7 +50,7 @@ export class ConcessionReasonMasterComponent implements OnInit {
     }
 
     getConcessionreasonMasterList() {
-        var param = { ConcessionReasonName: "%" };
+        var param = { ConcessionReasonName:   this._consessionreasonService.myformSearch.get('ConcessionReasonNameSearch').value + "%" || "%" };
         this._consessionreasonService
             .getConcessionreasonMasterList(param)
             .subscribe((Menu) => {
@@ -168,6 +168,17 @@ export class ConcessionReasonMasterComponent implements OnInit {
         };
         this._consessionreasonService.populateForm(m_data);
     }
+
+    deleteTableRow(element) {
+        let Query = "Update  M_ConcessionReasonMaster set IsDeleted=0 where  ConcessionId=" + element.ConcessionId + " ";
+        console.log(Query)
+          this._consessionreasonService.getdeletemember(Query).subscribe(data => {
+           if(data)
+           Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+    
+          });
+      }
+    
 }
 
 export class ConcessionReasonMaster {

@@ -21,14 +21,14 @@ export class NewDoctorComponent implements OnInit {
 
     submitted = false;
     data1: [];
-    isLoading:any;
+    isLoading: any;
     PrefixcmbList: any = [];
     GendercmbList: any = [];
     DoctortypecmbList: any = [];
     DepartmentcmbList: any = [];
     selectedGenderID: any;
-    registerObj:DoctorMaster;
-    docobject:DoctorDepartmentDet;
+    registerObj: DoctorMaster;
+    docobject: DoctorDepartmentDet;
     msg: any;
 
     deptlist: any = [];
@@ -50,9 +50,9 @@ export class NewDoctorComponent implements OnInit {
 
     private _onDestroy = new Subject<void>();
 
-        DeptSource = new MatTableDataSource<ChargesList>();
+    DeptSource = new MatTableDataSource<ChargesList>();
 
-        dataSource = new MatTableDataSource<ChargesList>();
+    dataSource = new MatTableDataSource<ChargesList>();
     constructor(
         public _doctorService: DoctorMasterService,
         private accountService: AuthenticationService,
@@ -92,40 +92,40 @@ export class NewDoctorComponent implements OnInit {
         return this._doctorService.myform.controls;
     }
 
-    
-  setDropdownObjs1() {
-    debugger;
 
-    debugger;
-    const toSelect = this.PrefixcmbList.find(c => c.PrefixID == this.registerObj.PrefixID);
-    this._doctorService.myform.get('PrefixID').setValue(toSelect);
+    setDropdownObjs1() {
+        debugger;
 
-    const toSelect1= this.DepartmentcmbList.find(c => c.Departmentid == this.docobject.DepartmentId);
-    this._doctorService.myform.get('Departmentid').setValue(toSelect1);
+        debugger;
+        const toSelect = this.PrefixcmbList.find(c => c.PrefixID == this.registerObj.PrefixID);
+        this._doctorService.myform.get('PrefixID').setValue(toSelect);
 
-    // const toSelectReligion = this.ReligionList.find(c => c.ReligionId == this.registerObj.ReligionId);
-    // this._doctorService.myform.get('ReligionId').setValue(toSelectReligion);
+        const toSelect1 = this.DepartmentcmbList.find(c => c.Departmentid == this.docobject.DepartmentId);
+        this._doctorService.myform.get('Departmentid').setValue(toSelect1);
 
-    // const toSelectArea = this.AreaList.find(c => c.AreaId == this.registerObj.AreaId);
-    // this._doctorService.myform.get('AreaId').setValue(toSelectArea);
+        // const toSelectReligion = this.ReligionList.find(c => c.ReligionId == this.registerObj.ReligionId);
+        // this._doctorService.myform.get('ReligionId').setValue(toSelectReligion);
 
-    // const toSelectCity = this.cityList.find(c => c.CityId == this.registerObj.CityId);
-    // this._doctorService.myform.get('CityId').setValue(toSelectCity);
+        // const toSelectArea = this.AreaList.find(c => c.AreaId == this.registerObj.AreaId);
+        // this._doctorService.myform.get('AreaId').setValue(toSelectArea);
 
-    // const toSelectMat = this.cityList.find(c => c.CityId == this.registerObj.CityId);
-    // this._doctorService.myform.get('CityId').setValue(toSelectCity);
+        // const toSelectCity = this.cityList.find(c => c.CityId == this.registerObj.CityId);
+        // this._doctorService.myform.get('CityId').setValue(toSelectCity);
+
+        // const toSelectMat = this.cityList.find(c => c.CityId == this.registerObj.CityId);
+        // this._doctorService.myform.get('CityId').setValue(toSelectCity);
 
 
-    // this.onChangeGenderList(this._doctorService.myform.get('PrefixID').value);
+        // this.onChangeGenderList(this._doctorService.myform.get('PrefixID').value);
 
-    // this.onChangeCityList(this.registerObj.CityId);
+        // this.onChangeCityList(this.registerObj.CityId);
 
-    this._doctorService.myform.updateValueAndValidity();
-    // this.dialogRef.close();
+        this._doctorService.myform.updateValueAndValidity();
+        // this.dialogRef.close();
 
-  }
+    }
 
-  
+
     private filterPrefix() {
         if (!this.PrefixcmbList) {
             return;
@@ -233,11 +233,11 @@ export class NewDoctorComponent implements OnInit {
                 var data2 = [];
                 // for (var val of this._doctorService.myform.get("Departmentid")
                 //     .value.Departmentid) {
-                    var data = {
-                        DepartmentId:this._doctorService.myform.get("Departmentid").value.Departmentid,
-                        DoctorId: 0,
-                    };
-                    data2.push(data);
+                var data = {
+                    DepartmentId: this._doctorService.myform.get("Departmentid").value.Departmentid,
+                    DoctorId: 0,
+                };
+                data2.push(data);
                 // }
                 console.log(data2);
                 var m_data = {
@@ -259,7 +259,7 @@ export class NewDoctorComponent implements OnInit {
                             this._doctorService.myform
                                 .get("LastName")
                                 .value.trim() || "%",
-                        dateOfBirth:this._doctorService.myform.get("DateofBirth").value || '01/0/1900',
+                        dateOfBirth: this._doctorService.myform.get("DateofBirth").value || '01/0/1900',
                         address:
                             this._doctorService.myform
                                 .get("Address")
@@ -440,9 +440,9 @@ export class NewDoctorComponent implements OnInit {
                                     .value
                             )
                         ),
-                        DoctorTypeId:0,
-                            // this._doctorService.myform.get("DoctorTypeId")
-                            //     .value,
+                        DoctorTypeId: 0,
+                        // this._doctorService.myform.get("DoctorTypeId")
+                        //     .value,
                         AgeYear:
                             this._doctorService.myform
                                 .get("AgeYear")
@@ -453,7 +453,7 @@ export class NewDoctorComponent implements OnInit {
                                 .value.trim() || "0",
                         AgeDay: this._doctorService.myform
                             .get("AgeDay")
-                            .value.trim() || "0" ,
+                            .value.trim() || "0",
                         PassportNo:
                             this._doctorService.myform
                                 .get("PassportNo")
@@ -578,28 +578,29 @@ export class NewDoctorComponent implements OnInit {
         }
     }
 
-SaveEnter(element){
-    debugger
-    this.isLoading = 'save';
-      this.dataSource.data = [];
-    this.deptlist.push(
-        {
-          DeptId:element.Departmentid,
-          DeptName: element.departmentName,
-        
-        });
+    SaveEnter(element) {
+        debugger
+        this.isLoading = 'save';
+        this.dataSource.data = [];
+        this.deptlist.push(
+            {
+                DeptId: element.Departmentid,
+                DeptName: element.departmentName,
+
+            });
         this.dataSource.data = this.deptlist;
         console.log(this.deptlist);
-}
+    }
 }
 
 
-export class ChargesList{
+export class ChargesList {
     DeptId: number;
     DeptName: number;
-   
-  
-    constructor(ChargesList){
-            this.DeptId = ChargesList.DeptId || '';
-            this.DeptName = ChargesList.DeptName || '';
-    }}
+
+
+    constructor(ChargesList) {
+        this.DeptId = ChargesList.DeptId || '';
+        this.DeptName = ChargesList.DeptName || '';
+    }
+}

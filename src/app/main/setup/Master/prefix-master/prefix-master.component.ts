@@ -36,9 +36,9 @@ export class PrefixMasterComponent implements OnInit {
         this.getGenderNameCombobox();
     }
 
-    onSearch() {
-        this.getPrefixMasterList();
-    }
+    // onSearch() {
+    //     this.getPrefixMasterList();
+    // }
 
     onSearchClear() {
         this._PrefixService.myformSearch.reset({
@@ -55,8 +55,7 @@ export class PrefixMasterComponent implements OnInit {
 
     getPrefixMasterList() {
         var Param = {
-            PrefixName:
-                this._PrefixService.myformSearch
+            PrefixName: this._PrefixService.myformSearch
                     .get("PrefixNameSearch")
                     .value.trim() + "%" || "%",
             // p_IsDeleted:

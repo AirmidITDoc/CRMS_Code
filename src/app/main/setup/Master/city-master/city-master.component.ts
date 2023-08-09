@@ -21,7 +21,7 @@ export class CityMasterComponent implements OnInit {
   CityMasterList: any;
     StatecmbList: any = [];
     msg: any;
-
+    chargeslist: any = [];
     //state filter
     public stateFilterCtrl: FormControl = new FormControl();
     public filteredState: ReplaySubject<any> = new ReplaySubject<any>(1);
@@ -90,6 +90,7 @@ export class CityMasterComponent implements OnInit {
              };
         this._cityService.getCityMasterList(param).subscribe((Menu) => {
             this.DSCityMasterList.data = Menu as CityMaster[];
+            this.chargeslist = Menu as CityMaster[];
             this.DSCityMasterList.sort = this.sort;
             this.DSCityMasterList.paginator = this.paginator;
         });
@@ -201,6 +202,19 @@ export class CityMasterComponent implements OnInit {
         };
         this._cityService.populateForm(m_data);
     }
+
+
+    
+  deleteTableRow(element) {
+    let Query = "Update  M_CityMaster set IsActive=0 where  CityId=" + element.CityId + " ";
+    console.log(Query)
+      this._cityService.getdeletemember(Query).subscribe(data => {
+       if(data)
+       Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+
+      });
+  }
+
 }
 
 export class CityMaster {

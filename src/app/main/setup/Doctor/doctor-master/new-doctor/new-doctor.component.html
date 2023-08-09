@@ -241,25 +241,24 @@
       <!-- <section class="example-section">
               <mat-checkbox class="example-margin" name="IsConsultant" formControlName="IsConsultant" value='true'>IsConsultant</mat-checkbox>
               </section> -->
-      <section class="example-section">
-        <mat-slide-toggle class="example-margin" name="IsConsultant" formControlName="IsConsultant">
+      <!-- <section class="example-section"> -->
+        <mat-slide-toggle class="example-margin" name="IsConsultant" formControlName="IsConsultant" style="margin-right: 10px;">
           IsConsultant
         </mat-slide-toggle>
-      </section>
-    </div>
+      <!-- </section> -->
+    <!-- </div> -->
 
-    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-    <div>
-      <section class="example-section">
-        <mat-slide-toggle class="example-margin" name="IsRefDoc" formControlName="IsRefDoc">
+   
+      <!-- <section class="example-section"> -->
+        <mat-slide-toggle class="example-margin" name="IsRefDoc" formControlName="IsRefDoc" style="margin-right: 10px;">
           IsRefDoctor
         </mat-slide-toggle>
-      </section>
+      <!-- </section> -->
 
-      <section class="example-section">
+      <!-- <section class="example-section"> -->
         <mat-checkbox style="text-align:right;" class="example-margin" name="IsDeleted" formControlName="IsDeleted"
           value='false'>IsActive</mat-checkbox>
-      </section>
+      <!-- </section> -->
 
       <!-- <section class="example-section">
               <mat-checkbox class="example-margin" name="IsRefDoc" formControlName="IsRefDoc" value='true' >IsRefDoc</mat-checkbox>
@@ -271,7 +270,7 @@
   <hr>
   
 
-  <mat-table #table matSort [dataSource]="dataSource" class="table2" [@animateStagger]="{value:'50'}" style="width: 250px;height: 100px;">
+  <mat-table #table matSort [dataSource]="dataSource" class="table2" [@animateStagger]="{value:'50'}" style="width: 250px;height: 100px !important;">
 
     <ng-container matColumnDef="DeptId">
       <mat-header-cell *matHeaderCellDef mat-sort-header style="margin-right: 5px;">Dept Id</mat-header-cell>

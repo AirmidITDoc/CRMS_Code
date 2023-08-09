@@ -80,6 +80,14 @@
                                         </mat-cell>
                                     </ng-container>
 
+                                   
+
+                                    <!-- <ng-container matColumnDef="AddedByName">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> User Name </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.AddedByName}}
+                                        </mat-cell>
+                                    </ng-container> -->
+
                                     <ng-container matColumnDef="IsDeleted">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm> IsActive
                                         </mat-header-cell>
@@ -91,17 +99,11 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="AddedByName">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header> User Name </mat-header-cell>
-                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.AddedByName}}
-                                        </mat-cell>
-                                    </ng-container>
-
                                     <ng-container matColumnDef="action" stickyEnd>
                                         <mat-header-cell *matHeaderCellDef class="table-actions"> Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
-                                            <button mat-icon-button (click)="onEdit(row)"><mat-icon
+                                            <button mat-icon-button (click)="onEdit(row)" style="color: rgb(12, 13, 14);"><mat-icon
                                                     title="Edit Menu">launch</mat-icon></button>
                                             <button mat-icon-button (click)="onDeactive(row.BankId)"
                                                 color="warn"><mat-icon>delete_outline</mat-icon></button>

@@ -32,7 +32,7 @@
             <div class="content-card">
 
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
-                    <div fxFlex.gt-sm="80%" fxFlex>
+                    <div fxFlex.gt-sm="93%" fxFlex>
 
                         <div fxlayout="row" style="
                         background-color: white;
@@ -42,7 +42,7 @@
                                 <div class="dialog-content-wrapper">
                                     <mat-form-field class="mr-sm-12" fxFlex>
                                         <input matInput placeholder="Search --> Company Name" autocomplete="off"
-                                            name="CompanyNameSearch" formControlName="CompanyNameSearch" keyup="onSearch()" />
+                                            name="CompanyNameSearch" formControlName="CompanyNameSearch" (keyup)="getCompanyMaster()" />
                                         <button mat-button matSuffix mat-icon-button aria-label="Clear"
                                             (click)="onSearchClear()">
                                             <mat-icon>close</mat-icon>
@@ -56,7 +56,7 @@
                                         <mat-radio-button mat-fab value="1">IsDeactive</mat-radio-button>
                                     </mat-radio-group>
 
-                                    <button mat-raised-button (click)="onSearch()" fxLayoutAlign="center center">
+                                    <button mat-raised-button (click)="getCompanyMaster()" fxLayoutAlign="center center">
                                         <mat-icon>search</mat-icon>
                                         Search
                                     </button>
@@ -71,7 +71,7 @@
                                 [@animateStagger]="{value:'50'}" style="overflow:auto">
 
                                 <ng-container matColumnDef="CompanyId">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>CompanyId
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Code
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> {{element.CompanyId}}
                                     </mat-cell>
@@ -145,8 +145,8 @@
                                     <mat-cell *matCellDef="let row">
                                         <button mat-icon-button (click)="onEdit(row)" style="color: black;"><mat-icon
                                                 title="Edit Menu">launch</mat-icon></button>
-                                        <!-- <button mat-icon-button (click)="onDeactive(row.ServiceId)"
-                                            color="warn"><mat-icon>delete_outline</mat-icon></button> -->
+                                        <button mat-icon-button (click)="deleteTableRow(row)"
+                                            color="warn"><mat-icon>delete_outline</mat-icon></button>
 
                                     </mat-cell>
                                 </ng-container>

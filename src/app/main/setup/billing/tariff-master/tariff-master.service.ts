@@ -29,7 +29,7 @@ export class TariffMasterService {
     createSearchForm(): FormGroup {
         return this._formBuilder.group({
             TariffNameSearch: [""],
-            IsDeletedSearch: ["2"],
+            IsDeletedSearch: ["0"],
         });
     }
     initializeFormGroup() {
@@ -54,4 +54,8 @@ export class TariffMasterService {
     populateForm(param) {
         this.myform.patchValue(param);
     }
+    
+public getdeletemember(data){
+    return this._httpClient.post("Generic/GetBySelectQuery?query="+data, {})
+  }
 }

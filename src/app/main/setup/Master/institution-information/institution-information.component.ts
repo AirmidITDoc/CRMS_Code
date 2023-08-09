@@ -6,6 +6,7 @@ import { InstitutionInformationService } from './institution-information.service
 import { MatDialog } from '@angular/material/dialog';
 import { fuseAnimations } from '@fuse/animations';
 import { NewInstitutionInformationComponent } from './new-institution-information/new-institution-information.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-institution-information',
@@ -18,7 +19,7 @@ export class InstitutionInformationComponent implements OnInit {
   isLoading = true;
   sIsLoading: string = '';
   hasSelectedContacts: boolean;
-
+  chargeslist: any = [];
   
   displayedColumns: string[] = [
     "InstitutionId", 
@@ -72,7 +73,7 @@ export class InstitutionInformationComponent implements OnInit {
     this._InstitutionService.getInstitutionInformationList(Params).subscribe(
       (Menu) => {
         this.DSInstitutionInformationList.data = Menu as InstitutionInformation[];
-        // console.log(this.DSInstitutionInformationList.data);
+        this.chargeslist = Menu as InstitutionInformation[];
         this.isLoading = false;
         this.DSInstitutionInformationList.sort = this.sort;
         this.DSInstitutionInformationList.paginator = this.paginator;
@@ -130,6 +131,19 @@ export class InstitutionInformationComponent implements OnInit {
   }
 
   onClear(){}
+
+  
+  deleteTableRow(element) {
+    let index = this.chargeslist.indexOf(element);
+    let Query = "Update  M_InstitutionInformation set IsActive=0 where  InstitutionId=" + element.InstitutionId + " ";
+    console.log(Query)
+      this._InstitutionService.getdeletemember(Query).subscribe(data => {
+       if(data)
+       Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+
+      });
+  }
+
 }
 
 export class InstitutionInformation {

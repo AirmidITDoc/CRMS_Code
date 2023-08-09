@@ -16,9 +16,9 @@
             </span>
         </div>
         <button mat-raised-button (click)="newappointmentSchdule()" fxLayoutAlign="center center"
-        style="margin-left:800px;">New Appointment 
-        <!-- <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon> -->
-    </button>
+            style="margin-left:800px;">New Appointment
+            <!-- <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon> -->
+        </button>
     </mat-toolbar>
     <!-- / HEADER -->
 
@@ -50,66 +50,69 @@
                     <!-- SIDEBAR CONTENT -->
                     <div class="content py-16 pl-10 p-12" fusePerfectScrollbar>
                         <div class="nav material2">
-                            <form [formGroup]="_AppointmentSreviceService.myFilterform" style="padding: 6px 6px 5px 5px;"
-                            fusePerfectScrollbar>
-                            <div fxLayout="column" fxLayoutAlign="start none">
-                                <br />
+                            <form [formGroup]="_AppointmentSreviceService.myFilterform"
+                                style="padding: 6px 6px 5px 5px;" fusePerfectScrollbar>
+                                <div fxLayout="column" fxLayoutAlign="start none">
+                                    <br />
 
-                                <mat-form-field appearance="outline" fxFlex>
-                                    <mat-label>ProtocolNo</mat-label>
-                                    <mat-select formControlName="StudyId" name="StudyId" style="color: blue;" required  (selectionChange)="getVisitList()">
-                                        <mat-option></mat-option>
-                                        <mat-option *ngFor="let m of CaseIdList" [value]="m">
-                                            {{m.ProtocolNo}}  : ( {{m.StudyId}} )
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>ProtocolNo</mat-label>
+                                        <mat-select formControlName="StudyId" name="StudyId" style="color: blue;"
+                                            required (selectionChange)="getVisitList()">
+                                            <mat-option></mat-option>
+                                            <mat-option *ngFor="let m of CaseIdList" [value]="m">
+                                                {{m.ProtocolNo}} : ( {{m.StudyId}} )
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
 
 
-                                <mat-form-field appearance="outline" style="margin-left: 2%;">
-                                    <mat-label>Enter a date range</mat-label>
-                                    <mat-date-range-input [rangePicker]="picker">
-                                        <input matStartDate formControlName="start" placeholder="Start date" (dateChange)="getVisitList()">
-                                        <input matEndDate formControlName="end" placeholder="End date">
-                                    </mat-date-range-input>
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-date-range-picker #picker></mat-date-range-picker>
-                                </mat-form-field>
+                                    <mat-form-field appearance="outline" style="margin-left: 2%;">
+                                        <mat-label>Enter a date range</mat-label>
+                                        <mat-date-range-input [rangePicker]="picker">
+                                            <input matStartDate formControlName="start" placeholder="Start date"
+                                                (dateChange)="getVisitList()">
+                                            <input matEndDate formControlName="end" placeholder="End date">
+                                        </mat-date-range-input>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-date-range-picker #picker></mat-date-range-picker>
+                                    </mat-form-field>
 
-                                <mat-form-field appearance="outline" fxFlex>
-                                    <mat-label>First Name</mat-label>
-                                    <input name="FirstName" formControlName="FirstName" matInput (keyup)="getVisitList()">
-                                    <!-- <span class="error" *ngIf="f.FirstName.invalid && f.FirstName.touched">FirstName is
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>First Name</mat-label>
+                                        <input name="FirstName" formControlName="FirstName" matInput
+                                            (keyup)="getVisitList()">
+                                        <!-- <span class="error" *ngIf="f.FirstName.invalid && f.FirstName.touched">FirstName is
                                         required Enter only Alphabets</span> -->
-                                </mat-form-field>
+                                    </mat-form-field>
 
-                                <mat-form-field appearance="outline" fxFlex>
-                                    <mat-label>Last Name</mat-label>
-                                    <input name="LastName" formControlName="LastName" matInput>
-                                    <!-- <span class="error" *ngIf="f.LastName.invalid && f.LastName.touched">LastName is
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Last Name</mat-label>
+                                        <input name="LastName" formControlName="LastName" matInput>
+                                        <!-- <span class="error" *ngIf="f.LastName.invalid && f.LastName.touched">LastName is
                                         required Enter only Alphabets</span> -->
-                                </mat-form-field>
+                                    </mat-form-field>
 
-                                <!-- <mat-form-field appearance="outline" fxFlex>
+                                    <!-- <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>StudyId</mat-label>
                                     <input name="StudyId" formControlName="StudyId" matInput type="number">
                                     <span class="error" *ngIf="f.StudyId.invalid && f.StudyId.touched">StudyId is
                                         required Enter only Digits</span>
                                 </mat-form-field> -->
 
-                                <div style="margin-top: 10px;">
-                                    <button mat-raised-button (click)="onClear()" class="clearbutton"
-                                        matTooltip="close">
-                                        <mat-icon class="cleariconbutton">close</mat-icon>
-                                    </button>&nbsp;
-                                    <button mat-raised-button class="searchButton" (click)="getVisitList()"
-                                        matTooltip="search">
-                                        <mat-icon class="searchiconbutton">search</mat-icon>
-                                    </button>
+                                    <div style="margin-top: 10px;">
+                                        <button mat-raised-button (click)="onClear()" class="clearbutton"
+                                            matTooltip="close">
+                                            <mat-icon class="cleariconbutton">close</mat-icon>
+                                        </button>&nbsp;
+                                        <button mat-raised-button class="searchButton" (click)="getVisitList()"
+                                            matTooltip="search">
+                                            <mat-icon class="searchiconbutton">search</mat-icon>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
 
-                        </form>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -136,23 +139,27 @@
                                 </div>
                                 <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
                                     class="table1" style="overflow: auto;">
-                                
+
                                     <ng-container matColumnDef="ProtocolNo">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>ProtocolNo</mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm (click)="getPatScrBillList(contact)">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header
+                                            fxShow.gt-sm>ProtocolNo</mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm
+                                            (click)="getPatScrBillList(contact)">
                                             {{contact.ProtocolNo}}
                                         </mat-cell>
                                     </ng-container>
-                                    
+
                                     <ng-container matColumnDef="VisitTitle">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>VisitTitle</mat-header-cell>
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header
+                                            fxShow.gt-sm>VisitTitle</mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                             {{contact.VisitTitle}}
                                         </mat-cell>
                                     </ng-container>
-                                    
+
                                     <ng-container matColumnDef="SubjectName">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>SubjectName</mat-header-cell>
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header
+                                            fxShow.gt-sm>SubjectName</mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                             {{contact.SubjectName}}
                                         </mat-cell>
@@ -263,7 +270,7 @@
                                     <mat-header-row class="accent" *matHeaderRowDef="displayedColumns; sticky: true">
                                     </mat-header-row>
                                     <mat-row *matRowDef="let contact; columns: displayedColumns;" class="contact"
-                                        [@animate]="{value:'*',params:{y:'100%'}}" ></mat-row>
+                                        [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
                                     <mat-footer-row *matFooterRowDef="['loading']"
                                         [ngClass]="{'hide': !(sIsLoading == 'loading-data')}">
                                     </mat-footer-row>

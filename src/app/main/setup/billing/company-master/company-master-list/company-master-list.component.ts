@@ -60,7 +60,7 @@ export class CompanyMasterListComponent implements OnInit {
         this._companyService.getStateList().subscribe(data => {
           this.stateList = data;
           this.selectedState = this.stateList[0].StateName;
-          
+          this._companyService.myform.get('State').setValue(this.stateList[0]);
         });
       
     }

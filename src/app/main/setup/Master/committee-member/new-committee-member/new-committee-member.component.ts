@@ -99,7 +99,7 @@ export class NewCommitteeMemberComponent implements OnInit {
     // filter
     this.filteredMember.next(
       this.MembercmbList.filter(
-        (bank) => bank.FirstName.toLowerCase().indexOf(search) > -1
+        (bank) => bank.MemberName.toLowerCase().indexOf(search) > -1
       )
     );
   }
@@ -208,7 +208,7 @@ export class NewCommitteeMemberComponent implements OnInit {
     this.chargeslist.push(
       {
         MemberId: element.MemberId,
-        MemberName: element.FirstName
+        MemberName: element.MemberName
       });
     this.isLoading = '';
     // console.log(this.chargeslist);

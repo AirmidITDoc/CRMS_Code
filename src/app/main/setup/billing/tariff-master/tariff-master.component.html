@@ -48,13 +48,13 @@
                                     </mat-form-field>
 
                                     <mat-radio-group name="IsDeletedSearch" formControlName="IsDeletedSearch" value="2"
-                                        fxLayoutAlign="center center" (change)="onSearch()">
+                                        fxLayoutAlign="center center" (change)="getTariffMasterList()">
                                         <mat-radio-button value="2">All</mat-radio-button>
                                         <mat-radio-button mat-fab value="0">IsActive</mat-radio-button>
                                         <mat-radio-button mat-fab value="1">IsDeactive</mat-radio-button>
                                     </mat-radio-group>
 
-                                    <button mat-raised-button (click)="onSearch()" fxLayoutAlign="center center">
+                                    <button mat-raised-button (click)="getTariffMasterList()" fxLayoutAlign="center center">
                                         <mat-icon>search</mat-icon>
                                         Search
                                     </button>
@@ -101,10 +101,10 @@
                                         <mat-header-cell *matHeaderCellDef class="table-actions"> Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
-                                            <button mat-icon-button (click)="onEdit(row)"><mat-icon
+                                            <button mat-icon-button (click)="onEdit(row)" style="color: black;"><mat-icon
                                                     title="Edit Menu">launch</mat-icon></button>
-                                            <!-- <button mat-icon-button (click)="onDeactive(row.TariffId)"
-                                                color="warn"><mat-icon>delete_outline</mat-icon></button> -->
+                                            <button mat-icon-button (click)="deleteTableRow(row)"
+                                                color="warn"><mat-icon>delete_outline</mat-icon></button>
                                         </mat-cell>
                                     </ng-container>
 

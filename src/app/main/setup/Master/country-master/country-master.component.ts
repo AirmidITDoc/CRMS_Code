@@ -16,7 +16,7 @@ import { fuseAnimations } from '@fuse/animations';
 export class CountryMasterComponent implements OnInit {
 
   msg: any;
-
+  chargeslist: any = [];
     displayedColumns: string[] = [
         "CountryId",
         "CountryName",
@@ -47,6 +47,7 @@ export class CountryMasterComponent implements OnInit {
     getCountryMasterList() {
         this._CountryService.getCountryMasterList().subscribe((Menu) => {
             this.DSCountryMasterList.data = Menu as CountryMaster[];
+            this.chargeslist = Menu as CountryMaster[];
             this.DSCountryMasterList.sort = this.sort;
             this.DSCountryMasterList.paginator = this.paginator;
         });
@@ -153,6 +154,18 @@ export class CountryMasterComponent implements OnInit {
         };
         this._CountryService.populateForm(m_data);
     }
+
+    
+  deleteTableRow(element) {
+    let Query = "Update  M_CountryMaster set IsActive=0 where  CountryId=" + element.CountryId + " ";
+    console.log(Query)
+      this._CountryService.getdeletemember(Query).subscribe(data => {
+       if(data)
+       Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+
+      });
+  }
+
 }
 
 export class CountryMaster {

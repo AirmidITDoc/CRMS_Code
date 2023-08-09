@@ -72,6 +72,16 @@ export class GroupMasterComponent implements OnInit {
         this._groupService.initializeFormGroup();
     }
 
+    deleteTableRow(element) {
+        let Query = "Update  GroupMaster set IsActive=0 where  GroupId=" + element.GroupId + " ";
+        console.log(Query)
+          this._groupService.getdeletemember(Query).subscribe(data => {
+           if(data)
+           Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
+    
+          });
+      }
+    
     onSubmit() {
         if (this._groupService.myform.valid) {
             if (!this._groupService.myform.get("GroupId").value) {
