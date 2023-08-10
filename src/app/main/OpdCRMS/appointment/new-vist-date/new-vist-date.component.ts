@@ -133,8 +133,6 @@ export class NewVistDateComponent implements OnInit {
     
       this.registerObj = this.data.registerObj;
 
-      console.log(this.registerObj);
-
       this.setDropdownObjs1();
     }
 
@@ -142,9 +140,7 @@ export class NewVistDateComponent implements OnInit {
 
 
   setDropdownObjs1() {
-    debugger;
-
-    
+ 
     const toSelect = this.DepartmentList.find(c => c.Departmentid == this.registerObj.DepartmentId);
     this.VisitFormGroup.get('Departmentid').setValue(toSelect);
 
@@ -154,8 +150,7 @@ export class NewVistDateComponent implements OnInit {
     
 
     this.VisitFormGroup.updateValueAndValidity();
-    // this.dialogRef.close();
-
+    
   }
  
   createVisitdetailForm() {
@@ -175,10 +170,7 @@ export class NewVistDateComponent implements OnInit {
       RefDocId: '',
       Doctorname: '',
       RefDocName: '',
-      // CaseId:['', [
-      //   Validators.required]],
-
-      IsMark: '',
+          IsMark: '',
       
       Comments: '',
       Intime: '',
@@ -191,18 +183,11 @@ export class NewVistDateComponent implements OnInit {
     this._opappointmentService.getCaseIDCombo().subscribe(data => { this.CaseIdList = data; })
     }
 
-  // getPatientTypeList() {
-  //   this._opappointmentService.getPatientTypeCombo().subscribe(data => {
-  //     this.PatientTypeList = data;
-  //     this.VisitFormGroup.get('PatientTypeID').setValue(this.PatientTypeList[0]);
-  //   })
-  // }
 
- 
   getDepartmentList() {
     this._opappointmentService.getDepartmentCombo().subscribe(data => {
       this.DepartmentList = data;
-      console.log(data);
+      
       this.filteredDepartment.next(this.DepartmentList.slice());
       this.VisitFormGroup.get('Departmentid').setValue(this.DepartmentList[0]);
     });
@@ -276,11 +261,11 @@ export class NewVistDateComponent implements OnInit {
     this._opappointmentService.getDoctorMasterCombo(departmentObj.Departmentid).subscribe(
       data => {
         this.DoctorList = data;
-        console.log(this.DoctorList);
+        
         this.filteredDoctor.next(this.DoctorList.slice());
       })
 
-debugger;
+
       if (this.data) {
         const ddValue = this.DoctorList.find(c => c.DoctorId == this.data.registerObj.DoctorId);
         this._opappointmentService.personalFormGroup.get('DoctorID').setValue(ddValue);
@@ -302,15 +287,13 @@ debugger;
   }
 
   getSelectedObj(obj) {
-  debugger;
-    console.log('obj==', obj);
+ 
     let a,b,c ;
 
     a =obj.AgeDay.trim();;
     b =obj.AgeMonth.trim();
     c =obj.AgeYear.trim();
-    console.log(a,b,c);
-    obj.AgeDay=a;
+        obj.AgeDay=a;
     obj.AgeMonth=b;
     obj.AgeYear=c;
     this.registerObj = obj;
@@ -327,7 +310,7 @@ debugger;
  
 
   VisitAdd() {
-debugger
+
     if(this.Onsave==1){
     
       this.isLoading = 'submit';
@@ -364,7 +347,7 @@ debugger
 
       console.log(submissionObj);
       this._opappointmentService.VisitInsert(submissionObj).subscribe(response => {
-        console.log(response);
+        
         if (response) {
           Swal.fire('Congratulations !', 'New Visit save Successfully !', 'success').then((result) => {
             if (result.isConfirmed) {
@@ -393,12 +376,11 @@ debugger
         visitMasterUpdate['createdBy'] = this.accountService.currentUserValue.user.id;
      
       submissionObj['visitMasterUpdate'] = visitMasterUpdate;
-  
       
-      // submissionObj['tokenNumberWithDoctorWiseSave'] = tokenNumberWithDoctorWiseInsert;
+      
       console.log(submissionObj);
       this._opappointmentService.VisitUpdate(submissionObj).subscribe(response => {
-        console.log(response);
+        
         if (response) {
           Swal.fire('Congratulations !', 'Visit Update Successfully !', 'success').then((result) => {
             if (result.isConfirmed) {
@@ -417,18 +399,8 @@ debugger
    
   }
 
-  // createSearchForm() {
-    
-  //   return this.formBuilder.group({
-  //     regRadio: ['NewVisit'],
-  //     RegId: [{ value: '', disabled: this.IsNewvisit },]
-  //     // [Validators.required]]
-  //   });
-  // }
-
   onChangeReg(event) {
 
-    debugger;
     
     if (event.value != 'NewVisit') {
      this.changeText ='Update'
@@ -443,18 +415,10 @@ debugger
   }
 
  
-  onDoctorOneChange(value) {
-    console.log(this.VisitFormGroup.get('DoctorIdOne').value.reset(''));
-  }
-
-  backClicked() {
-    this.appointmentFormStepper.previous();
-  }
-
-
+ 
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
-    // console.log('dateTimeObj==', dateTimeObj);
+    
     this.dateTimeObj = dateTimeObj;
   }
 

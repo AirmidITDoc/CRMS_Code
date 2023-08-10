@@ -84,7 +84,7 @@ export class StudySevicesComponent implements OnInit {
       this.sIsLoading = 'loading-data';
       this._StudyServicesService.getStudyserviceList(Params).subscribe(Visit => {
         this.dataSource.data = Visit as StudyServicesDetail[];
-        console.log(this.dataSource.data);
+        
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.sIsLoading = '';
@@ -114,10 +114,7 @@ export class StudySevicesComponent implements OnInit {
  
   
   getRecord(contact): void {
-    debugger;
-    console.log(contact);
-
-   
+  
       var m_data = {
         StudyId:contact.StudyId,
       ProtocolNo:contact.ProtocolNo,
@@ -170,7 +167,7 @@ export class StudySevicesComponent implements OnInit {
         
       });
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed - Insert Action', result);
+      
       this.getStudyserviceList();
     });
   }

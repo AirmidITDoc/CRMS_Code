@@ -22,18 +22,7 @@ app-add-member{
         -webkit-overflow-scrolling: touch;
     }
     
-    // .next-btn {
-    //     width: 100px;
-    //     font-size: 14px;
-    //     padding: 1px;
-    //     border-radius: 2px;
-    //     background-color: #054a53;
-    //     // border: 1px solid #f76bd8;
-    //     color: white;
-    //     cursor: pointer;
-    // }
-    
-    
+       
     .footer-navigation-container {
         text-align: right;
         display: flex;
@@ -77,12 +66,7 @@ app-add-member{
     .mat-dialog-title{
         margin-bottom: 2px;
     }
-    // input.ng-invalid{
-    //     border-left: 5px solid red;
-    // } 
-    // input.ng-valid{
-    //     border-left: 5px solid green;
-    // } 
+   
     .error{
         color:red;
     }
@@ -162,13 +146,7 @@ app-add-member{
       
        border: 1px solid  #b7e6fd ;
     }
-    // button:disabled {
-    //     color: white;
-    //     background-color: #bce7f5;
-    //     border-radius: 2px;
-    //     border: 1px solid #CCCCCC;
-    // }
-    
+   
     
     .mat-autocomplete-panel{
         width: 49%;

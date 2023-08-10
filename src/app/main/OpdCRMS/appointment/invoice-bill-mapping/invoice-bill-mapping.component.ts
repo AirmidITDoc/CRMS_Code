@@ -198,7 +198,7 @@ Tabamt=0;
 
 
   getTotalAmount(element) {
-    // debugger
+    
     if (element.Price && element.Qty) {
       let totalAmt;
       totalAmt = parseInt(element.Price) * parseInt(element.Qty);
@@ -318,10 +318,7 @@ Tabamt=0;
 
   onSaveInvoice() {
 
-    debugger;
-    let insertInvoiceDetail = {};
-
-
+        let insertInvoiceDetail = {};
     insertInvoiceDetail['InvoiceId'] = 0;
     insertInvoiceDetail['CaseId'] = this.registeredForm.get('CaseId').value.StudyId || 0;
     insertInvoiceDetail['InvoiceDate'] = this.dateTimeObj.date;// this.registerObj.InvoiceDate;
@@ -379,7 +376,7 @@ Tabamt=0;
 
 
   getPrint(el) {
-    debugger;
+    
     var D_data = {
       "BillNo": 1,// el,
     }
@@ -405,7 +402,7 @@ Tabamt=0;
 
       this.printTemplate = resData[0].TempDesign;
       let keysArray = ['HospitalName', 'HospitalAddress', 'Phone', 'EmailId', 'PhoneNo', 'RegNo', 'BillNo', 'AgeYear', 'AgeDay', 'AgeMonth', 'PBillNo', 'PatientName', 'BillDate', 'VisitDate', 'ConsultantDocName', 'DepartmentName', 'ServiceName', 'ChargesDoctorName', 'Price', 'Qty', 'ChargesTotalAmount', 'TotalBillAmount', 'NetPayableAmt', 'NetAmount', 'ConcessionAmt', 'PaidAmount', 'BalanceAmt', 'AddedByName']; // resData[0].TempKeys;
-      debugger;
+      
       for (let i = 0; i < keysArray.length; i++) {
         let reString = "{{" + keysArray[i] + "}}";
         let re = new RegExp(reString, "g");
@@ -413,7 +410,7 @@ Tabamt=0;
       }
       var strrowslist = "";
       for (let i = 1; i <= this.reportPrintObjList.length; i++) {
-        // console.log(this.reportPrintObjList);
+        
         var objreportPrint = this.reportPrintObjList[i - 1];
 
         let docname;
@@ -422,30 +419,7 @@ Tabamt=0;
         else
           docname = '';
 
-        //   var strabc = `<hr style="border-color:white" >
-        //   <div style="display:flex;margin:8px 0">
-        //   <div style="display:flex;width:60px;margin-left:20px;">
-        //       <div>`+ i + `</div> <!-- <div>BLOOD UREA</div> -->
-        //   </div>
-        //   <div style="display:flex;width:370px;margin-left:10px;text-align:left;">
-        //       <div>`+ objreportPrint.ServiceName + `</div> <!-- <div>BLOOD UREA</div> -->
-        //   </div>
-        //   // <div style="display:flex;width:370px;margin-left:30px;text-align:left;">
-        //   // <div>`+ docname + `</div> <!-- <div>BLOOD UREA</div> -->
-        //   // </div>
-        //   <div style="display:flex;width:90px;margin-left:40px;text-align:right;">
-        //       <div>`+ '₹' + objreportPrint.Price.toFixed(2) + `</div> <!-- <div>450</div> -->
-        //   </div>
-        //   <div style="display:flex;width:60px;margin-left:40px;text-align:right;">
-        //       <div>`+ objreportPrint.Qty + `</div> <!-- <div>1</div> -->
-        //   </div>
-        //   <div style="display:flex;width:140px;margin-left:40px;text-align:left;">
-        //       <div>`+ '₹' + objreportPrint.NetAmount.toFixed(2) + `</div> <!-- <div>450</div> -->
-        //   </div>
-        //   </div>`;
-        //   strrowslist += strabc;
-        // }
-
+    
         var strabc = `<hr style="border-color:white" >
         <div style="display:flex;margin:8px 0">
         <div style="display:flex;width:60px;margin-left:20px;">
@@ -471,26 +445,13 @@ Tabamt=0;
       }
       var objPrintWordInfo = this.reportPrintObjList[0];
       let concessinamt;
-      // if (objPrintWordInfo.ConcessionAmt > 0) {
-      //   this.printTemplate = this.printTemplate.replace('StrConcessionAmt', '₹' + (objPrintWordInfo.ConcessionAmt.toFixed(2)));
-      // }
-      // else {
-      //   this.printTemplate = this.printTemplate.replace('StrConcessionAmt', '₹' + (objPrintWordInfo.ConcessionAmt.toFixed(2)));
-      // }
+     
 
       this.printTemplate = this.printTemplate.replace('StrTotalPaidAmountInWords', this.convertToWord(objPrintWordInfo.PaidAmount));
       this.printTemplate = this.printTemplate.replace('StrPrintDate', this.transform2(this.currentDate.toString()));
       this.printTemplate = this.printTemplate.replace('SetMultipleRowsDesign', strrowslist);
-      // this.printTemplate = this.printTemplate.replace('StrBalanceAmt', '₹' + (objPrintWordInfo.BalanceAmt.toFixed(2)));
-      // this.printTemplate = this.printTemplate.replace('StrTotalBillAmount', '₹' + (objPrintWordInfo.TotalBillAmount.toFixed(2)));
-      // this.printTemplate = this.printTemplate.replace('StrConcessionAmt', '₹' + (objPrintWordInfo.ConcessionAmt.toFixed(2)));
-      // this.printTemplate = this.printTemplate.replace('StrNetPayableAmt', '₹' + (objPrintWordInfo.NetPayableAmt.toFixed(2)));
-      // this.printTemplate = this.printTemplate.replace('StrPaidAmount', '₹' + (objPrintWordInfo.PaidAmount.toFixed(2)));
-      // this.printTemplate = this.printTemplate.replace('StrBillDate', this.transformBilld(this.reportPrintObj.BillDate));
-      this.printTemplate = this.printTemplate.replace('SetMultipleRowsDesign', strrowslist);
-
-
-      this.printTemplate = this.printTemplate.replace(/{{.*}}/g, '');
+      
+            this.printTemplate = this.printTemplate.replace(/{{.*}}/g, '');
       setTimeout(() => {
         this.print();
       }, 1000);
@@ -666,29 +627,13 @@ Tabamt=0;
     Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
   }
 
-  showAllFilter(event) {
-    // console.log(event.value);
-    this.isFilteredDateDisabled = event.value;
-  }
-
-  backNavigate() {
-    // this._location.back();
-  }
-
-
-
-
-
+ 
   convertToWord(e) {
 
     // return converter.toWords(e);
   }
 
-  transform1(value: string) {
-    var datePipe = new DatePipe("en-US");
-    value = datePipe.transform(value, 'dd/MM/yyyy hh:mm a');
-    return value;
-  }
+
 
   transform2(value: string) {
     var datePipe = new DatePipe("en-US");
@@ -696,11 +641,8 @@ Tabamt=0;
     return value;
   }
 
-  transformBilld(value: string) {
-    // var datePipe = new DatePipe("en-US");
-    // value = datePipe.transform(this.reportPrintObj.BillDate, 'dd/MM/yyyy');
-    // return value;
-  }
+
+
   // PRINT 
   print() {
     // HospitalName, HospitalAddress, AdvanceNo, PatientName

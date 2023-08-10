@@ -143,7 +143,7 @@ export class AppointmentComponent implements OnInit {
         }
       });
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed - Insert Action', result);
+      
       
     });
   }
@@ -170,15 +170,12 @@ export class AppointmentComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // changes.prop contains the old and the new value...
-    // console.log(changes.dataArray.currentValue, 'new arrrrrrr');
-    // this.isLoading = true;
+  
     this.dataSource.data = changes.dataArray.currentValue as VisitMaster[];
     this.isLoading = false;
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    // this.isLoading = false;
-  }
+      }
 
   onClick(){
 
@@ -187,17 +184,14 @@ export class AppointmentComponent implements OnInit {
 
 
   getRecord(contact, m): void {
-    debugger;
-    console.log(contact);
-
-    this.VisitID = contact.VisitId;
+   
     let AgeDay,AgeMonth,AgeYear,Age
     if (contact.Age != null || contact.AgeDay != null || contact.AgeMonth != null || contact.AgeYear != null) {
     
       AgeDay = contact.AgeDay.trim();
       AgeMonth = contact.AgeMonth.trim();
       AgeYear = contact.AgeYear.trim();
-      // Age=contact.Age.trim();
+      
     }
 
     if (m == "Update Registration") {
@@ -327,7 +321,7 @@ export class AppointmentComponent implements OnInit {
           RegId: contact.RegId,
           AdmissionID: contact.VisitId,
           PatientName: contact.PatientName,
-          Doctorname: contact.Doctorname,
+          DoctorName: contact.Doctorname,
           AdmDateTime: contact.AdmDateTime,
           AgeYear: contact.AgeYear,
           ClassId: contact.ClassId,
@@ -414,97 +408,11 @@ export class AppointmentComponent implements OnInit {
         width: '100%',
       });
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed - Insert Action', result);
+      
       this.getVisitList();
     });
   }
 
-
-
-
-  onExport(exprtType) {
-    // debugger;
-    // let columnList = [];
-    // if (this.dataSource.data.length == 0) {
-    //   // this.toastr.error("No Data Found");
-    //   Swal.fire('Error !', 'No Data Found', 'error');
-    // }
-    // else {
-    //   var excelData = [];
-    //   var a = 1;
-    //   for (var i = 0; i < this.dataSource.data.length; i++) {
-    //     let singleEntry = {
-    //       // "Sr No":a+i,
-    //       "Reg No": this.dataSource.data[i]["RegNoWithPrefix"],
-    //       "PatientOldNew": this.dataSource.data[i]["PatientOldNew"] ? this.dataSource.data[i]["PatientOldNew"] : "N/A",
-    //       "Patient Name": this.dataSource.data[i]["PatientName"] ? this.dataSource.data[i]["PatientName"] : "N/A",
-    //       "VisitDate": this.dataSource.data[i]["DVisitDate"] ? this.dataSource.data[i]["DVisitDate"] : "N/A",
-    //       "Visit Time": this.dataSource.data[i]["VisitTime"] ? this.dataSource.data[i]["VisitTime"] : "N/A",
-    //       "OPDNo": this.dataSource.data[i]["OPDNo"] ? this.dataSource.data[i]["OPDNo"] : "N/A",
-    //       "Doctorname": this.dataSource.data[i]["Doctorname"] ? this.dataSource.data[i]["Doctorname"] : "N/A",
-    //       "RefDocName": this.dataSource.data[i]["RefDocName"] ? this.dataSource.data[i]["RefDocName"] : "N/A",
-    //       "PatientType": this.dataSource.data[i]["PatientType"] ? this.dataSource.data[i]["PatientType"] : "N/A",
-
-
-    //     };
-    //     excelData.push(singleEntry);
-    //   }
-    //   var fileName = "OutDoor-Appointment-Patient-List " + new Date() + ".xlsx";
-    //   if (exprtType == "Excel") {
-    //     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(excelData);
-    //     var wscols = [];
-    //     if (excelData.length > 0) {
-    //       var columnsIn = excelData[0];
-    //       for (var key in columnsIn) {
-    //         let headerLength = { wch: (key.length + 1) };
-    //         let columnLength = headerLength;
-    //         try {
-    //           columnLength = { wch: Math.max(...excelData.map(o => o[key].length), 0) + 1 };
-    //         }
-    //         catch {
-    //           columnLength = headerLength;
-    //         }
-    //         if (headerLength["wch"] <= columnLength["wch"]) {
-    //           wscols.push(columnLength)
-    //         }
-    //         else {
-    //           wscols.push(headerLength)
-    //         }
-    //       }
-    //     }
-    //     ws['!cols'] = wscols;
-    //     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    //     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    //     XLSX.writeFile(wb, fileName);
-    //   } else {
-    //     let doc = new jsPDF('p', 'pt', 'a4');
-    //     doc.page = 0;
-    //     var col = [];
-    //     for (var k in excelData[0]) col.push(k);
-    //     console.log(col.length)
-    //     var rows = [];
-    //     excelData.forEach(obj => {
-    //       console.log(obj)
-    //       let arr = [];
-    //       col.forEach(col => {
-    //         arr.push(obj[col]);
-    //       });
-    //       rows.push(arr);
-    //     });
-
-    //     doc.autoTable(col, rows, {
-    //       margin: { left: 5, right: 5, top: 5 },
-    //       theme: "grid",
-    //       styles: {
-    //         fontSize: 3
-    //       }
-    //     });
-    //     doc.setFontSize(3);
-    //     // doc.save("Indoor-Patient-List.pdf");
-    //     window.open(URL.createObjectURL(doc.output("blob")))
-    //   }
-    // }
-  }
 
   // field validation 
   get f() { return this._AppointmentSreviceService.myFilterform.controls; }
@@ -515,30 +423,23 @@ export class AppointmentComponent implements OnInit {
 
 
   getTemplate() {
-    debugger;
-
-
-
+   
     let query = 'select TempId,TempDesign,TempKeys as TempKeys from Tg_Htl_Tmp where TempId=12';
-    console.log(query);
+    
     this._AppointmentSreviceService.getTemplate(query).subscribe((resData: any) => {
-      console.log(resData);
+      
       this.printTemplate = resData[0].TempDesign;
-      console.log(this.printTemplate);
+      
       let keysArray = ['RegNo', 'PrecriptionId', 'PatientName', 'OPDNo', 'Diagnosis', 'PatientName', 'Weight', 'Pluse', 'BP', 'BSL', 'DoseName', 'Days', 'GenderName', 'AgeYear', 'DrugName', 'ConsultantDocName', 'SecondRefDoctorName', 'MobileNo', 'Address', 'VisitDate']; // resData[0].TempKeys;
 
       for (let i = 0; i < keysArray.length; i++) {
         let reString = "{{" + keysArray[i] + "}}";
         let re = new RegExp(reString, "g");
-        // this.printTemplate = this.printTemplate.replace(re, this.reportPrintObj[keysArray[i]]);
+        
       }
-
-
-      // this.printTemplate = this.printTemplate.replace('StrVisitDate', this.transform2(this.reportPrintObj.VisitDate));
+      
       this.printTemplate = this.printTemplate.replace('StrPrintDate', this.transform2(this.currentDate.toString()));
-      // this.printTemplate = this.printTemplate.replace('StrConsultantDr', (this.reportPrintObj.ConsultantDocName));
-      // this.printTemplate = this.printTemplate.replace('StrOPDDate', this.transform1(this.reportPrintObj.VisitDate));
-
+    
       this.printTemplate = this.printTemplate.replace(/{{.*}}/g, '');
       setTimeout(() => {
         this.print();
@@ -546,11 +447,6 @@ export class AppointmentComponent implements OnInit {
     });
   }
 
-  transform1(value: string) {
-    var datePipe = new DatePipe("en-US");
-    value = datePipe.transform(value, 'dd/MM/yyyy hh:mm a');
-    return value;
-  }
 
   transform2(value: string) {
     var datePipe = new DatePipe("en-US");
@@ -560,14 +456,14 @@ export class AppointmentComponent implements OnInit {
 
 
   getPrint() {
-    debugger;
+    
     var D_data = {
       "VisitId": 82973,//this.selectedAdvanceObj.AdmissionID || 0,
       "PatientType": 0,//this.selectedAdvanceObj.PatientType || 0
 
     }
     // el.bgColor = 'red';
-    console.log(D_data);
+    
     let printContents;
     this.subscriptionArr.push(
       // this._AppointmentSreviceService.getOPDPrecriptionPrint(D_data).subscribe(res => {
@@ -578,7 +474,7 @@ export class AppointmentComponent implements OnInit {
 
       //   this.getTemplate();
 
-      //   console.log(D_data);
+      
       // })
     );
   }

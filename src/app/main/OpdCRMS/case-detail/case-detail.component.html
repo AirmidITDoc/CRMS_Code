@@ -67,7 +67,7 @@
                                 <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>CaseId</mat-label>
                                     <mat-select formControlName="CaseId" name="CaseId"
-                                        (selectionChange)="getCaseList()">
+                                        (selectionChange)="getCaseList()" (datachange)="getCaseList()">
                                         <mat-option></mat-option>
                                         <mat-option *ngFor="let m of caseList" [value]="m">
                                             {{m.StudyId}} || {{m.ProtocolNo}}
@@ -75,13 +75,13 @@
                                     </mat-select>
                                 </mat-form-field>
                                 
-                                <mat-form-field appearance="outline" fxFlex>
+                                <mat-form-field appearance="outline" fxFlex (keyup)="getCaseList()">
                                     <mat-label>Protocol Number</mat-label>
                                     <input name="CaseId" formControlName="CaseId" matInput>
                                 </mat-form-field>
 
 
-                                <mat-form-field appearance="outline" fxFlex>
+                                <mat-form-field appearance="outline" fxFlex (keyup)="getCaseList()">
                                     <mat-label>Protocol Name</mat-label>
                                     <input name="CaseName" formControlName="CaseName" matInput>
                                 </mat-form-field>

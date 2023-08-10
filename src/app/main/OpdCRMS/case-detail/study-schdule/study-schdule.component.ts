@@ -71,20 +71,16 @@ export class StudySchduleComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public datePipe: DatePipe,
     private router: Router,
-    // private toastr: ToastrService
+    
   ) { }
 
 
   ngOnInit(): void {
 
-    console.log(this.data)
-
-
   if (this.data) {
       this.registerObj = this.data.registerObj;
-      console.log(this.registerObj);
+      
       this.Study = true;
-
     
     var m = {
       StudyId: this.registerObj.StudyId
@@ -92,15 +88,15 @@ export class StudySchduleComponent implements OnInit {
 
     this._CasedetailService.getStudyschdulebyStuIdList(m).subscribe(Visit => {
       this.dataSource1.data = Visit as VisitDetail[];
-      // console.log(this.dataSource1.data)
+      
       this.dataSource1.sort = this.sort;
       this.chargeslist= this.dataSource1.data;
       this.chargeslist1= this.dataSource1.data;
       this.dataSource1.paginator = this.paginator;
-      // this.sIsLoading = '';
+      
     },
       error => {
-        // this.sIsLoading = '';
+        
       });
     }
   }
@@ -130,7 +126,7 @@ export class StudySchduleComponent implements OnInit {
     let netAmt;
     netAmt = element.reduce((sum, { Amount }) => sum += +(Amount || 0), 0);
     this.TotalAmount = netAmt;
-    // this._CasedetailService.studySchFormGroup.get('TotalAmount').setValue(this.TotalAmount);
+    
     return netAmt
   }
 
@@ -139,7 +135,7 @@ export class StudySchduleComponent implements OnInit {
 
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
-    console.log('dateTimeObj ==', dateTimeObj);
+    
     this.dateTimeObj = dateTimeObj;
   }
 
@@ -149,19 +145,9 @@ export class StudySchduleComponent implements OnInit {
   }
 
 
-  myFunction(s) {
-    this.snackmessage = s;
-    console.log(s);
-    console.log(this.snackmessage);
-    var x = document.getElementById("snackbar");
-    x.className = "show";
-    setTimeout(function () { x.className = x.className.replace("show", ""); }, 15000);
-  }
-
-
-
+ 
   onAddVisitDetail() {
-    debugger;
+    
     this.chargeslist=[];
     this.VisitList.data = [];
     this.chargeslist=this.chargeslist1;
@@ -172,7 +158,7 @@ export class StudySchduleComponent implements OnInit {
         Amount: this.Amount
       });
     this.isLoading = '';
-    console.log(this.chargeslist);
+    
 
     this.dataSource1.data = this.chargeslist;
 
@@ -183,45 +169,7 @@ export class StudySchduleComponent implements OnInit {
     this._CasedetailService.studySchFormGroup.get('Amount').reset(0)
 
   }
-  // onStudySave() {
-
-  //   debugger;
-  //   let insertStudySchedulearr = [];
-  //   this.dataSource1.data.forEach((element) => {
-  //     let insertStudySchedule = {};
-  //     // insertStudySchedule['studyVisitId'] = 0;
-  //     insertStudySchedule['studyId'] = this.registerObj.StudyId;
-
-  //     insertStudySchedule['visitName'] = element.VisitName;
-  //     insertStudySchedule['visitDescription'] = element.VisitDescription;
-  //     insertStudySchedule['visitAmount'] = element.Amount;
-  //     insertStudySchedule['createdBy'] = this.accountService.currentUserValue.user.id;
-  //     insertStudySchedulearr.push(insertStudySchedule);
-  //   });
-
-  //   let submitData = {
-  //     "insertStudySchedule": insertStudySchedulearr
-  //   };
-
-  //   console.log(submitData);
-  //   this._CasedetailService.StudySchduleUpdate(submitData).subscribe(response => {
-  //     console.log(response)
-  //     if (response) {
-  //       Swal.fire('Edit StudySchedule  !', ' StudySchedule Update Successfully !', 'success').then((result) => {
-
-  //         console.log(result)
-  //         if (result) {
-
-  //           this._matDialog.closeAll();
-  //         }
-  //       });
-  //     } else {
-  //       Swal.fire('Error !', 'StudySchedule not saved', 'error');
-  //     }
-  //   });
-
-  // }
-
+ 
   onStudyUpdate() {
     let updateStudySchedulearr = [];
     this.dataSource1.data.forEach((element) => {

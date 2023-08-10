@@ -59,17 +59,17 @@ app-committee-master-member{
 app-committee-master-member{
 
 
-    .table{
+    .table1{
 .mat-header-row {
     // width: 100%;
-    max-width:1100px;
-    min-width:1100px; 
+    max-width:900px;
+    min-width:900px; 
     min-height: 30px;     
 }
 .mat-row {
     // width: 100%;
-    max-width:1100px;
-    min-width:1100px; 
+    max-width:900px;
+    min-width:900px; 
     min-height: 30px;            
 }
 // PatientData
@@ -89,9 +89,9 @@ app-committee-master-member{
 }
 
 .mat-column-MemberName {
-    width:950px;
-    max-width:950px;
-    min-width:950px;
+    width:750px;
+    max-width:750px;
+    min-width:750px;
     text-align:left;
     white-space: nowrap; 
     overflow: hidden;
@@ -239,15 +239,7 @@ app-committee-master-member{
         margin: 0 5px 20px 5px;
         // height: 200px;
     }
-    
-    // .tables-contianer {
-    //     display: flex;
-    //     flex-direction: row;
-    //     padding: 0 15px;
-    //     @media (min-width: 100px) and (max-width: 700px) {
-    //         flex-direction: column;
-    //     }
-    // }
+  
     .header-labels {
         font-size: 16px;
         font-weight: 500;
@@ -259,16 +251,7 @@ app-committee-master-member{
         margin: 3px 0;
     }
     
-    // .top-heading {
-    //     display: flex;
-    //     padding: 2px;
-    //     align-items: center;
-    //     background-color: #3c9ce5;
-    //     color: white;
-    //     padding: 10px;
-    //     display: flex;
-    //     justify-content: space-between;
-    // }
+    
     
     .ip-billing {
         font-size: 20px;
@@ -708,9 +691,7 @@ button:disabled {
    background-color: #32566c  !important;
    //background-color: #b7e6fd ;
     border-radius: 1px;
-    width: 20px !important;
-    height: 20px;
-   // border: 1px solid #CCCCCC;
+ 
    border: 1px solid  #b7e6fd ;
 }
 

@@ -70,7 +70,7 @@ export class CommitteeMasterMemberComponent implements OnInit {
   }
  
   private MemberDepartment() {
-    // debugger;
+
     if (!this.MembercmbList) {
         return;
     }
@@ -96,7 +96,7 @@ getMemberNameCombobox() {
   };
   this._CommitteMeetingService.getMemberMasterList(m).subscribe((data) => {
       this.MembercmbList = data;
-      console.log(data);
+      
       this.filteredMember.next(this.MembercmbList.slice());
   });
 }
@@ -106,7 +106,7 @@ onSubmit() {
 
   this.isLoading = 'submit';
    let committeeInsertObj = {};
-   committeeInsertObj['committeeId']= 0,//this.personalFormGroup.get('CommitteeId').value.CommitteeId || 0,
+   committeeInsertObj['committeeId']= 0,
    committeeInsertObj['commiteeName']= this.personalFormGroup.get('CommitteeName').value || 0,
    committeeInsertObj['createdBy']= this.accountService.currentUserValue.user.id
   
@@ -142,8 +142,7 @@ onSubmit() {
 
 
 deleteTableRow(element) {
-  debugger;
-  
+    
   let index = this.chargeslist.indexOf(element);
   if (index >= 0) {
     this.chargeslist.splice(index, 1);
@@ -162,16 +161,16 @@ onSaveEntry(element) {
       MemberName: element.MemberName
     });
   this.isLoading = '';
-  // console.log(this.chargeslist);
+  
   this.dataSource.data = this.chargeslist;
-  // console.log(this.dataSource.data);
+  
 }
 
 
 
 dateTimeObj: any;
 getDateTime(dateTimeObj) {
-  // console.log('dateTimeObj==', dateTimeObj);
+  
   this.dateTimeObj = dateTimeObj;
 }
 

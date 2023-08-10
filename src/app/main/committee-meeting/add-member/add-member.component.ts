@@ -38,7 +38,7 @@ export class AddMemberComponent implements OnInit {
   public filteredCity: ReplaySubject<any> = new ReplaySubject<any>(1);
 
   private _onDestroy = new Subject<void>();
-  // private _onDestroy1 = new Subject<void>();
+  
 
   constructor(public _CommitteMeetingService: CommitteMeetingService,
     private formBuilder: FormBuilder,
@@ -99,7 +99,7 @@ export class AddMemberComponent implements OnInit {
   }
 
   closeDialog() {
-    console.log("closed")
+    
     //  this.dialogRef.close();
     // this.personalFormGroup.reset();
   }
@@ -123,7 +123,7 @@ export class AddMemberComponent implements OnInit {
 
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
-    console.log('dateTimeObj ==', dateTimeObj);
+    
     this.dateTimeObj = dateTimeObj;
   }
 
@@ -173,14 +173,6 @@ export class AddMemberComponent implements OnInit {
   }
 
 
-  myFunction(s) {
-    this.snackmessage = s;
-    console.log(s);
-    console.log(this.snackmessage);
-    var x = document.getElementById("snackbar");
-    x.className = "show";
-    setTimeout(function () { x.className = x.className.replace("show", ""); }, 15000);
-  }
 }
 
 

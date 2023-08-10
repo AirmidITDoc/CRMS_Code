@@ -131,7 +131,7 @@ export class NewCommitteeMeetingComponent implements OnInit {
 
   onAdd() {
     this.lngCommitteeId = this._CommitteMeetingService.personalFormGroup.get("CommitteeId").value.CommitteeId;
-    console.log(this.lngCommitteeId);
+    
     this.getCommitteeMemberList(this.lngCommitteeId)
   }
 
@@ -168,10 +168,9 @@ export class NewCommitteeMeetingComponent implements OnInit {
         MemberName: e.MemberName
       });
     this.isLoading = '';
-    console.log(this.chargeslist);
-
+    
     this.dataSource.data = this.chargeslist;
-    console.log(this.dataSource.data);
+    
 
   }
 
@@ -193,13 +192,13 @@ export class NewCommitteeMeetingComponent implements OnInit {
       let insertCommitteeMeetingMemberDetarry = [];
       this.dataSource.data.forEach((element) => {
         debugger
-        console.log(element)
+        
         let insertCommitteeMeetingMemberDet = {};
         insertCommitteeMeetingMemberDet['committeeMeetingId'] = 0;
         insertCommitteeMeetingMemberDet['memberId'] = element.MemberId;
         insertCommitteeMeetingMemberDet['studyId'] = 0,// element.studyId;
         insertCommitteeMeetingMemberDet['memberAmount'] = element.StudyAmount || 0;
-        insertCommitteeMeetingMemberDet['memberMeetingStatus'] = element.MeetingStatus.value;
+        insertCommitteeMeetingMemberDet['memberMeetingStatus'] = element.MeetingStatus;
         insertCommitteeMeetingMemberDet['createdBy'] =1// this.accountService.currentUserValue.user.id;
         insertCommitteeMeetingMemberDetarry.push(insertCommitteeMeetingMemberDet);
       });
@@ -234,7 +233,7 @@ export class NewCommitteeMeetingComponent implements OnInit {
       let insertCommitteeMeetingMemberDetarry = [];
       this.dataSource.data.forEach((element) => {
         debugger
-        console.log(element)
+        
         let insertCommitteeMeetingMemberDet = {};
         insertCommitteeMeetingMemberDet['committeeMeetingId'] = 0;
         insertCommitteeMeetingMemberDet['memberId'] = element.MemberId;
@@ -272,7 +271,7 @@ export class NewCommitteeMeetingComponent implements OnInit {
 
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
-    // console.log('dateTimeObj==', dateTimeObj);
+    
     this.dateTimeObj = dateTimeObj;
   }
 

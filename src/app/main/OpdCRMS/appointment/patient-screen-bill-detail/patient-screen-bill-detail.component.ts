@@ -148,8 +148,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
       this.StudyId = this.data.element.Title;
 
       this.selectedAdvanceObj = this.data.element;
-      console.log(this.selectedAdvanceObj)
-    }
+          }
 
     this.getVistdetaillist();
     
@@ -158,7 +157,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
   getVistdetaillist() {
-    debugger
+    
     this.sIsLoading = 'loading-data';
     var D_data = {
       "StudyId": this.data.StudyId,
@@ -182,7 +181,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
   
   getBilllist(contact) {
-    debugger
+    
     this.sIsLoading = 'loading-data';
     var D_data = {
       "visitid": contact.VisitId
@@ -200,7 +199,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
   }
 
   getbilldetail(contact){
-    console.log(contact)
+    
     this.sIsLoading = 'loading-data';
     var D_data = {
       "BillNo": contact.BillId
@@ -269,7 +268,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
   getVisitUpdate(contact) {
 
-    console.log(contact)
+    
     const dialogRef = this._matDialog.open(NewVistDateComponent,
       {
         maxWidth: "75vw",
@@ -280,8 +279,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
         }
       });
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed - Insert Action', result);
-
+      
     });
   }
 
@@ -303,10 +301,9 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
   getGeneratebill(contact) {
-    console.log(contact)
-    debugger
-    let BillId = contact.BillId
-    if (BillId != 0) {
+   
+    
+    if (contact.BillId != 0) {
       Swal.fire("Bill Already Generated")
     } else {
       var m = {
@@ -319,8 +316,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
         "AgeYear":this.selectedAdvanceObj.AgeYear,
         "BillStatus":2
       };
-      console.log(m);
-      
+            
       const dialogRef = this._matDialog.open(BillDetailComponent,
         {
           maxWidth: "80%",
@@ -332,7 +328,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
         });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed - Insert Action', result);
-          this.dialogRef.close();
+          this._matDialog.closeAll();
       });
 
     }
@@ -402,9 +398,6 @@ export class PatientScreenBillDetailComponent implements OnInit {
       }
       var objPrintWordInfo = this.reportPrintObjList[0];
 
-      // this.printTemplate = this.printTemplate.replace('StrTotalPaidAmountInWords', this.convertToWord(objPrintWordInfo.PaidAmount));
-
-      // this.printTemplate = this.printTemplate.replace('StrBillDate', this.transformBilld(this.reportPrintObj.BillDate));
       this.printTemplate = this.printTemplate.replace(/{{.*}}/g, '');
       setTimeout(() => {
         this.print();
@@ -414,18 +407,17 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
   getPrint(el) {
-    debugger;
+    
     var D_data = {
       "BillNo": el.BillNo,
     }
-    el.bgColor = 'red';
-    //console.log(el);
+   
     let printContents; //`<div style="padding:20px;height:550px"><div><div style="display:flex"><img src="http://localhost:4200/assets/images/logos/Airmid_NewLogo.jpeg" width="90"><div><div style="font-weight:700;font-size:16px">YASHODHARA SUPER SPECIALITY HOSPITAL PVT. LTD.</div><div style="color:#464343">6158, Siddheshwar peth, near zilla parishad, solapur-3 phone no.: (0217) 2323001 / 02</div><div style="color:#464343">www.yashodharahospital.org</div></div></div><div style="border:1px solid grey;border-radius:16px;text-align:center;padding:8px;margin-top:5px"><span style="font-weight:700">IP ADVANCE RECEIPT</span></div></div><hr style="border-color:#a0a0a0"><div><div style="display:flex;justify-content:space-between"><div style="display:flex"><div style="width:100px;font-weight:700">Advance No</div><div style="width:10px;font-weight:700">:</div><div>6817</div></div><div style="display:flex"><div style="width:60px;font-weight:700">Reg. No</div><div style="width:10px;font-weight:700">:</div><div>117399</div></div><div style="display:flex"><div style="width:60px;font-weight:700">Date</div><div style="width:10px;font-weight:700">:</div><div>26/06/2019&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:15:49PM</div></div></div><div style="display:flex;margin:8px 0"><div style="display:flex;width:477px"><div style="width:100px;font-weight:700">Patient Name</div><div style="width:10px;font-weight:700">:</div><div>Mrs. Suglabai Dhulappa Waghmare</div></div><div style="display:flex"><div style="width:60px;font-weight:700">IPD No</div><div style="width:10px;font-weight:700">:</div><div>IP/53757/2019</div></div></div><div style="display:flex;margin:8px 0"><div style="display:flex"><div style="width:100px;font-weight:700">DOA</div><div style="width:10px;font-weight:700">:</div><div>30/10/2019</div></div></div><div style="display:flex"><div style="display:flex"><div style="width:100px;font-weight:700">Patient Type</div><div style="width:10px;font-weight:700">:</div><div>Self</div></div></div></div><hr style="border-color:#a0a0a0"><div><div style="display:flex"><div style="display:flex"><div style="width:150px;font-weight:700">Advacne Amount</div><div style="width:10px;font-weight:700">:</div><div>4,000.00</div></div></div><div style="display:flex;margin:8px 0"><div style="display:flex"><div style="width:150px;font-weight:700">Amount in Words</div><div style="width:10px;font-weight:700">:</div><div>FOUR THOUSANDS RUPPEE ONLY</div></div></div><div style="display:flex"><div style="display:flex"><div style="width:150px;font-weight:700">Reason of Advance</div><div style="width:10px;font-weight:700">:</div><div></div></div></div></div><div style="position:relative;top:100px;text-align:right"><div style="font-weight:700;font-size:16px">YASHODHARA SUPER SPECIALITY HOSPITAL PVT. LTD.</div><div style="font-weight:700;font-size:16px">Cashier</div><div>Paresh Manlor</div></div></div>`;
     this.subscriptionArr.push(
       this._AppointmentService.getBillPrint(D_data).subscribe(res => {
 
         this.reportPrintObjList = res as BrowseOPDBill[];
-        console.log(this.reportPrintObjList);
+        // console.log(this.reportPrintObjList);
         this.reportPrintObj = res[0] as BrowseOPDBill;
 
         this.getTemplate();
@@ -437,9 +429,9 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
   // PRINT 
   print() {
-    // HospitalName, HospitalAddress, AdvanceNo, PatientName
+    
     let popupWin, printContents;
-    // printContents =this.printTemplate; // document.getElementById('print-section').innerHTML;
+  
 
     popupWin = window.open('', '_blank', 'top=0,left=0,height=800px !important,width=auto,width=2200px !important');
     // popupWin.document.open();
@@ -457,22 +449,13 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
   getRecord(contact, m): void {
-    debugger;
-    console.log(contact);
-
-    this.VisitID = contact.VisitId;
-
-
-
-    if (m == "Bill") {
-      console.log(contact);
-
-      let xx = {
+        
+        if (m == "Bill") {
+            let xx = {
         RegNo: this.selectedAdvanceObj.RegNo,
         RegId: this.selectedAdvanceObj.RegId,
         AdmissionID: contact.VisitId,
-        // PatientName: contact.PatientName,
-        Doctorname:this.selectedAdvanceObj.Doctorname,
+         Doctorname:this.selectedAdvanceObj.Doctorname,
         AdmDateTime: contact.AdmDateTime,
         AgeYear: this.selectedAdvanceObj.AgeYear,
         ClassId: contact.ClassId,
@@ -482,12 +465,12 @@ export class PatientScreenBillDetailComponent implements OnInit {
         VisitId: contact.VisitId,
         VistDateTime: contact.VistDateTime,
         PatientName:  this.selectedAdvanceObj.PatientName,
-
+        DoctorName:this.selectedAdvanceObj.Doctorname
       };
      
       const dialogRef = this._matDialog.open(BillDetailComponent,
         {
-          maxWidth: "78%",
+          maxWidth: "80%",
           height: '700px',
           width: '100%',
           data: {
@@ -504,9 +487,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
       }
     }
     else if (m == "Invoice Bill") {
-      console.log(contact);
-
-
+      
       let xx = {
         RegNo: contact.RegNo,
         RegId: contact.RegId,
@@ -523,7 +504,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
         VistDateTime: contact.VistDateTime
       };
 
-      // this.advanceDataStored.storage = new SearchInforObj(xx);
+      
       const dialogRef = this._matDialog.open(InvoiceBillMappingComponent,
         {
           maxWidth: "65%",
@@ -539,8 +520,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
       });
     }
     else if (m == "Add Visit") {
-      console.log(contact);
-
+      
       var m_data1 = {
 
         "VisitId": contact.VisitId,
@@ -564,8 +544,9 @@ export class PatientScreenBillDetailComponent implements OnInit {
         "RefDocId": contact.DoctorId,
         "RefDocName": contact.RefDocName,
         "RegNoWithPrefix": "GMH11587",
-        "PatientName": contact.PatientName,
-        "AgeYear": contact.AgeYear
+        // "PatientName": contact.PatientName,
+        PatientName:  this.selectedAdvanceObj.PatientName,
+        "AgeYear":this.selectedAdvanceObj.AgeYear
   }
 
       const dialogRef = this._matDialog.open(NewVistDateComponent,
@@ -583,8 +564,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
       });
     }
     else if (m == "Edit Visit") {
-      console.log(contact);
-
+      
       var m_data1 = {
 
         "VisitId": contact.VisitId,
@@ -608,10 +588,10 @@ export class PatientScreenBillDetailComponent implements OnInit {
         "RefDocId": contact.DoctorId,
         "RefDocName": contact.RefDocName,
         "RegNoWithPrefix": "GMH11587",
-        "PatientName": contact.PatientName,
-        "AgeYear": contact.AgeYear
-
-
+        // "PatientName": contact.PatientName,
+        // "AgeYear": contact.AgeYear
+        "PatientName":  this.selectedAdvanceObj.PatientName,
+        "AgeYear":this.selectedAdvanceObj.AgeYear
       }
 
       const dialogRef = this._matDialog.open(NewVistDateComponent,

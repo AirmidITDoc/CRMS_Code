@@ -14,7 +14,9 @@
                     <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
                         style="width: 80%;font-size: 16px;">
                         OPD BILLING  || ( {{selectedAdvanceObj.VisitId}} ) {{selectedAdvanceObj.PatientName}} (
-                        {{selectedAdvanceObj.AgeYear}}) Yrs | Dr.{{selectedAdvanceObj.Doctorname}}
+                        {{selectedAdvanceObj.AgeYear}}) Yrs |
+                        
+                        <!-- Dr.{{selectedAdvanceObj.DoctorName}} -->
                     </span>
 
                     <div fxLayout="row" fxLayoutAlign="start center" style="float: right; margin-right: 5px;">
@@ -53,8 +55,8 @@
                                                 <input type="text" name="SrvcName" formControlName="SrvcName"
                                                     placeholder="Service Name" matInput [matAutocomplete]="auto"
                                                     (input)="getServiceListCombobox()" required
-                                                    (keydown.enter)="focusNextPrice()" id="myInput">
-
+                                                 id="myInput">
+<!--    (keydown.enter)="focusNextPrice()"  -->
                                                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText"
                                                     showPanel="true" (optionsScroll)="onScroll()"
                                                     (optionSelected)='getSelectedObj($event.option.value)'
@@ -77,21 +79,22 @@
                                                 <mat-label>Price</mat-label>
                                                 <input matInput [(ngModel)]="b_price" name="bPrice"
                                                     (keyup)="calculateTotalAmt()" formControlName="price" required
-                                                    id="Price" (keydown.enter)="focusNextQty()" type="number">
+                                                    id="Price" type="number">
                                                 <mat-error
                                                     *ngIf="ServiceForm.get('price').invalid && ServiceForm.get('price').touched">
                                                     Price is required</mat-error>
                                             </mat-form-field>
+                                            <!-- (keydown.enter)="focusNextQty()"  -->
                                             <mat-form-field appearance="outline" fxFlex>
                                                 <mat-label>Qty</mat-label>
                                                 <input matInput [(ngModel)]="b_qty" name="bQty"
                                                     (keyup)="calculateTotalAmt()" formControlName="qty" required
-                                                    id="qty" (keydown.enter)="focusNextbtnAdd()" type="number">
+                                                    id="qty" type="number">
                                                 <mat-error
                                                     *ngIf="ServiceForm.get('qty').invalid && ServiceForm.get('qty').touched">
                                                     Qty is required</mat-error>
                                             </mat-form-field>
-
+                                            <!-- (keydown.enter)="focusNextbtnAdd()"  -->
                                             <mat-form-field appearance="outline" fxFlex>
                                                 <mat-label>TotalAmt</mat-label>
                                                 <input matInput [(ngModel)]="b_totalAmount" name="bTotalAmt" readonly
@@ -299,13 +302,7 @@
                                             </mat-table>
                                             <!-- ================= Charges List Footer Table ======================= -->
                                             <div>
-                                                <!-- <div class="paginator-div">
-                                                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"
-                                                        showFirstLastButtons>
-                                                    </mat-paginator>
-                                                    <span class="net-amt-label">Total:</span>&nbsp;<span
-                                                        class="net-amt-value">{{chargeslist.length}}</span>
-                                                </div> -->
+                                               
                                                 <div class="net-amt">
                                                     <span class="net-amt-label">Net Amount:</span>&nbsp;<span
                                                         class="net-amt-value">{{getNetAmtSum(dataSource.data)}}</span>

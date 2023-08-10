@@ -259,7 +259,7 @@
 
                         <div fxLayout="row" style="margin-left:1000px;">
                             <button class="next-btn" color="accent" (click)="onSubmit()"
-                            style="border-radius: 16px;">
+                            style="border-radius: 16px;" [disabled]="_CommitteMeetingService.personalFormGroup.invalid">
                              <span style="display: flex;justify-content: center;">
                                    <span style="margin-left: 6px;">Save</span>
                              </span>

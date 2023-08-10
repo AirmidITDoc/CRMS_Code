@@ -105,15 +105,14 @@ export class StudyServicesComponent implements OnInit {
 
     this._StudyServicesService.getStudyservicebyStuIdList(m).subscribe(Visit => {
       this.dataSource1.data = Visit as StudyServicesDetail[];
-      console.log(this.dataSource1.data);
-      this.dataSource1.sort = this.sort;
+            this.dataSource1.sort = this.sort;
       this.chargeslist1= this.dataSource1.data;
       this.chargeslist= this.dataSource1.data;
       this.dataSource1.paginator = this.paginator;
-      // this.sIsLoading = '';
+      
     },
       error => {
-        // this.sIsLoading = '';
+        
       });
     }
     this.getVisitNameCombobox();
@@ -187,7 +186,7 @@ export class StudyServicesComponent implements OnInit {
 
 
   closeDialog() {
-    console.log("closed")
+    
     //  this.dialogRef.close();
     // this._StudyServicesService.personalFormGroup.reset();
   }
@@ -216,11 +215,10 @@ export class StudyServicesComponent implements OnInit {
   }
 
   getNetAmtSum(element) {
-debugger;
     let netAmt;
     netAmt = element.reduce((sum, { Amount }) => sum += +(Amount || 0), 0);
      this.TotalAmount = netAmt;
-      // this._StudyServicesService.studySchFormGroup.get('TotalAmount').setValue(this.TotalAmount);
+      
     return netAmt
   }
 
@@ -229,7 +227,7 @@ debugger;
 
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
-    console.log('dateTimeObj ==', dateTimeObj);
+    
     this.dateTimeObj = dateTimeObj;
   }
  
@@ -239,20 +237,9 @@ debugger;
   }
 
 
-  myFunction(s) {
-    this.snackmessage = s;
-    // console.log(s);
-    // console.log(this.snackmessage);
-    var x = document.getElementById("snackbar");
-    x.className = "show";
-    setTimeout(function () { x.className = x.className.replace("show", ""); }, 15000);
-  }
-
-
-
   onAddStudyService() {
     this.chargeslist=[];
-    debugger;
+    
     this.VisitList.data = [];
     this.chargeslist=this.chargeslist1;
     this.chargeslist.push(
@@ -264,7 +251,7 @@ debugger;
         Amount: this.Price
       });
     this.isLoading = '';
-    console.log(this.chargeslist);
+    
     this.dataSource1.data = this.chargeslist;
     
     this._StudyServicesService.studyServicesFormGroup.get('VisitName').reset('')
@@ -277,7 +264,7 @@ debugger;
 
   onStudyServiceSave(){
  
-    debugger;
+    
     let insertStudyServicearr = [];
     this.dataSource1.data.forEach((element) => {
       let insertStudyService = {};
@@ -297,11 +284,10 @@ debugger;
 
     console.log(submitData);
     this._StudyServicesService.StudyServiceInsert(submitData).subscribe(response => {
-      console.log(response)
+      
       if (response) {
         Swal.fire('New StudyService  !', ' StudyService Save Successfully !', 'success').then((result) => {
 
-          console.log(result)
           if (result) {
 
             this._matDialog.closeAll();
@@ -316,7 +302,6 @@ debugger;
 
   
 deleteTableRow(element) {
-  debugger;
   
   let index = this.chargeslist.indexOf(element);
   if (index >= 0) {

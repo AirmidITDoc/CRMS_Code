@@ -80,16 +80,14 @@ export class StudyDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.data)
-
+    
     this.studySchFormGroup = this.createstudySchForm();
     this.documentFormGroup = this.createdocumentForm();
 
 
     if (this.data) {
       this.registerObj = this.data.registerObj;
-      // this.StudyId=this.data.registerObj.StudyId;
-      console.log(this.registerObj.StudyId);
+     
       this.Study = true;
     }
 
@@ -120,7 +118,7 @@ export class StudyDetailComponent implements OnInit {
   }
 
   closeDialog() {
-    console.log("closed")
+    
     //  this.dialogRef.close();
     // this._CasedetailService.personalFormGroup.reset();
   }
@@ -217,7 +215,7 @@ export class StudyDetailComponent implements OnInit {
   getCompanyList() {
     this._CasedetailService.getCompanyCombo().subscribe(data => {
       this.CompanyList = data;
-      console.log(data);
+      
       this.filteredCompany.next(this.CompanyList.slice());
       this._CasedetailService.personalFormGroup
         .get("CompanyId")
@@ -228,7 +226,7 @@ export class StudyDetailComponent implements OnInit {
   getInstitutionList() {
     this._CasedetailService.getInstitutionCombo().subscribe(data => {
       this.Institutionist = data;
-      console.log(data);
+      
       this.filteredInstitution.next(this.Institutionist.slice());
       this._CasedetailService.personalFormGroup
         .get("Institution")
@@ -255,11 +253,9 @@ export class StudyDetailComponent implements OnInit {
 
     this._CasedetailService.getDocumentList(mdata).subscribe(data => {
       this.DocumentList = data;
-      // console.log(this.VisitFrequencyList);
+      
       this.filteredDocument.next(this.DocumentList.slice());
-      // this._CasedetailService.personalFormGroup
-      // .get("Document")
-      // .setValue(this.DocumentList[0]);
+     
     });
   }
 
@@ -267,7 +263,7 @@ export class StudyDetailComponent implements OnInit {
 
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
-    console.log('dateTimeObj ==', dateTimeObj);
+    
     this.dateTimeObj = dateTimeObj;
   }
 
@@ -311,7 +307,7 @@ export class StudyDetailComponent implements OnInit {
     //     }
     //   });
     // } else {
-debugger;
+
       var m_data1 = {
         "updateStudyInformation": {
           "operation": "UPDATE",
@@ -334,7 +330,7 @@ debugger;
       };
       console.log(m_data1);
       this._CasedetailService.StudyInfoUpdate(m_data1).subscribe(response => {
-        console.log(response);
+        
         if (response) {
           Swal.fire('Congratulations !', 'Study Detail Updated Successfully !', 'success').then((result) => {
             if (result.isConfirmed) {
@@ -359,17 +355,7 @@ debugger;
   }
 
 
-  myFunction(s) {
-    this.snackmessage = s;
-    console.log(s);
-    console.log(this.snackmessage);
-    var x = document.getElementById("snackbar");
-    x.className = "show";
-    setTimeout(function () { x.className = x.className.replace("show", ""); }, 15000);
-  }
-
-
-
+ 
 }
 
 export class CaseDetail {
