@@ -39,13 +39,13 @@ export class InvoiceBillMappingComponent implements OnInit {
   InvoiceDate: any;
   InvoiceTime: any;
   TaxableAmount: any;
-  CGST: any;
-  SGST: any;
-  IGST: any;
+  CGST = 0;
+  SGST = 0;
+  IGST = 0;
 
-  CGSTAmount: any;
-  SGSTAmount: any;
-  IGSTAmount: any;
+  CGSTAmount = 0;
+  SGSTAmount = 0;
+  IGSTAmount = 0;
   TotalAmount = 0;
   FinalTotalAmount = 0;
   caseList: any = [];
@@ -59,7 +59,7 @@ export class InvoiceBillMappingComponent implements OnInit {
   FianlamtCGST: any = 0;
   FianlamtIGST: any = 0;
   Fianlamt: any = 0;
-Tabamt=0;
+  Tabamt = 0;
   // reportPrintObjList: BrowseOPDBill[] = [];
   chargeslist: any = [];
   screenFromString = 'OP-billing';
@@ -198,7 +198,7 @@ Tabamt=0;
 
 
   getTotalAmount(element) {
-    
+
     if (element.Price && element.Qty) {
       let totalAmt;
       totalAmt = parseInt(element.Price) * parseInt(element.Qty);
@@ -244,7 +244,7 @@ Tabamt=0;
     netAmt = element.reduce((sum, { TotalBillAmt }) => sum += +(TotalBillAmt || 0), 0);
     this.TaxableAmount = netAmt;
     this.Tabamt = netAmt;
-    this.FinalTotalAmount= this.Tabamt;
+    this.FinalTotalAmount = this.Tabamt;
     return netAmt
   }
 
@@ -295,6 +295,7 @@ Tabamt=0;
 
 
   getCaseList() {
+    this.registeredForm.reset;
     this.sIsLoading = 'loading-data';
     var D_data = {
       "StudyId": this.registeredForm.get('CaseId').value.StudyId || 0
@@ -318,7 +319,7 @@ Tabamt=0;
 
   onSaveInvoice() {
 
-        let insertInvoiceDetail = {};
+    let insertInvoiceDetail = {};
     insertInvoiceDetail['InvoiceId'] = 0;
     insertInvoiceDetail['CaseId'] = this.registeredForm.get('CaseId').value.StudyId || 0;
     insertInvoiceDetail['InvoiceDate'] = this.dateTimeObj.date;// this.registerObj.InvoiceDate;
@@ -376,7 +377,7 @@ Tabamt=0;
 
 
   getPrint(el) {
-    
+
     var D_data = {
       "BillNo": 1,// el,
     }
@@ -402,7 +403,7 @@ Tabamt=0;
 
       this.printTemplate = resData[0].TempDesign;
       let keysArray = ['HospitalName', 'HospitalAddress', 'Phone', 'EmailId', 'PhoneNo', 'RegNo', 'BillNo', 'AgeYear', 'AgeDay', 'AgeMonth', 'PBillNo', 'PatientName', 'BillDate', 'VisitDate', 'ConsultantDocName', 'DepartmentName', 'ServiceName', 'ChargesDoctorName', 'Price', 'Qty', 'ChargesTotalAmount', 'TotalBillAmount', 'NetPayableAmt', 'NetAmount', 'ConcessionAmt', 'PaidAmount', 'BalanceAmt', 'AddedByName']; // resData[0].TempKeys;
-      
+
       for (let i = 0; i < keysArray.length; i++) {
         let reString = "{{" + keysArray[i] + "}}";
         let re = new RegExp(reString, "g");
@@ -410,7 +411,7 @@ Tabamt=0;
       }
       var strrowslist = "";
       for (let i = 1; i <= this.reportPrintObjList.length; i++) {
-        
+
         var objreportPrint = this.reportPrintObjList[i - 1];
 
         let docname;
@@ -419,7 +420,7 @@ Tabamt=0;
         else
           docname = '';
 
-    
+
         var strabc = `<hr style="border-color:white" >
         <div style="display:flex;margin:8px 0">
         <div style="display:flex;width:60px;margin-left:20px;">
@@ -445,13 +446,13 @@ Tabamt=0;
       }
       var objPrintWordInfo = this.reportPrintObjList[0];
       let concessinamt;
-     
+
 
       this.printTemplate = this.printTemplate.replace('StrTotalPaidAmountInWords', this.convertToWord(objPrintWordInfo.PaidAmount));
       this.printTemplate = this.printTemplate.replace('StrPrintDate', this.transform2(this.currentDate.toString()));
       this.printTemplate = this.printTemplate.replace('SetMultipleRowsDesign', strrowslist);
-      
-            this.printTemplate = this.printTemplate.replace(/{{.*}}/g, '');
+
+      this.printTemplate = this.printTemplate.replace(/{{.*}}/g, '');
       setTimeout(() => {
         this.print();
       }, 1000);
@@ -482,29 +483,22 @@ Tabamt=0;
 
     if (this.CGST == null || this.CGST == 0) {
       this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
+    
+      this.FinalTotalAmount = this.FinalTotalAmount - this.CGSTAmount;
       this.registeredForm.get('CGSTAmount').setValue(0);
+      this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
 
-
-      if (this.SGST != 0 || this.SGST != null) {
+      if (this.SGST != 0) {
 
         let amt = this.TaxableAmount + this.SGSTAmount
         this.FinalTotalAmount = amt;
       }
-        // if (this.CGST != 0 || this.CGST != null) {
-        //   // this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
-        //   let amt = this.FinalTotalAmount + this.SGSTAmount
-        //   this.FinalTotalAmount = amt;
 
-          if (this.IGST != 0 || this.IGST != null) {
+      if (this.IGST != 0) {
 
-            let amt = this.FinalTotalAmount + this.IGSTAmount
-            this.FinalTotalAmount = amt;
-          }
-        // }
-
-      //  this.FinalTotalAmount = amt;
-     
-
+        let amt = this.FinalTotalAmount + this.IGSTAmount
+        this.FinalTotalAmount = amt;
+      }
       this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
     }
 
@@ -512,10 +506,13 @@ Tabamt=0;
       this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
 
       if (this.TaxableAmount && this.CGST) {
-        this.CGSTAmount = (Math.round((parseInt(this.TaxableAmount) * parseInt(this.CGST)) / 100));
-        this.FinalTotalAmount = this.TaxableAmount + parseInt(this.CGSTAmount);
+        this.CGSTAmount = (Math.round((parseInt(this.TaxableAmount) * this.CGST) / 100));
+        this.FinalTotalAmount = this.FinalTotalAmount + this.CGSTAmount;
         this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
       }
+
+
+    
     }
 
   }
@@ -524,41 +521,35 @@ Tabamt=0;
   calculateSGST() {
     debugger;
 
-  
+
     if (this.SGST == null || this.SGST == 0) {
       this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
+      this.FinalTotalAmount = this.FinalTotalAmount - this.SGSTAmount;
       this.registeredForm.get('SGSTAmount').setValue(0);
+      this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
 
-
-      if (this.CGST != 0 || this.CGST != null) {
+      if (this.CGST != 0) {
 
         let amt = this.TaxableAmount + this.CGSTAmount
         this.FinalTotalAmount = amt;
       }
-        // if (this.CGST != 0 || this.CGST != null) {
-        //   // this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
-        //   let amt = this.FinalTotalAmount + this.SGSTAmount
-        //   this.FinalTotalAmount = amt;
 
-          if (this.IGST != 0 || this.IGST != null) {
 
-            let amt = this.FinalTotalAmount + this.IGSTAmount
-            this.FinalTotalAmount = amt;
-          }
-        // }
+      if (this.IGST != 0) {
 
-      //  this.FinalTotalAmount = amt;
-     
+        let amt = this.FinalTotalAmount + this.IGSTAmount
+        this.FinalTotalAmount = amt;
+      }
 
       this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
     }
 
     else {
-      // this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
+      this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
 
       if (this.TaxableAmount && this.SGST) {
-        this.SGSTAmount = (Math.round((parseInt(this.TaxableAmount) * parseInt(this.SGST)) / 100));
-        this.FinalTotalAmount = this.TaxableAmount + parseInt(this.SGSTAmount);
+        this.SGSTAmount = (Math.round((parseInt(this.TaxableAmount) * this.SGST) / 100));
+        this.FinalTotalAmount = this.FinalTotalAmount + this.SGSTAmount;
         this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
       }
     }
@@ -569,41 +560,39 @@ Tabamt=0;
   calculateIGST() {
     debugger;
 
-  
+
     if (this.IGST == null || this.IGST == 0) {
       this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
+
+      this.FinalTotalAmount = this.FinalTotalAmount - this.IGSTAmount;
       this.registeredForm.get('IGSTAmount').setValue(0);
+      this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
+
+      
 
 
-      if (this.CGST != 0 || this.CGST != null) {
+      if (this.CGST != 0) {
 
         let amt = this.TaxableAmount + this.CGSTAmount
         this.FinalTotalAmount = amt;
       }
-        // if (this.CGST != 0 || this.CGST != null) {
-        //   // this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
-        //   let amt = this.FinalTotalAmount + this.SGSTAmount
-        //   this.FinalTotalAmount = amt;
 
-          if (this.SGST != 0 || this.SGST != null) {
+      if (this.SGST != 0) {
 
-            let amt = this.FinalTotalAmount + this.SGSTAmount
-            this.FinalTotalAmount = amt;
-          }
-        // }
+        let amt = this.FinalTotalAmount + this.SGSTAmount
+        this.FinalTotalAmount = amt;
+      }
 
-      //  this.FinalTotalAmount = amt;
-     
 
       this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
     }
 
     else {
-      // this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
+      this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
 
       if (this.TaxableAmount && this.IGST) {
-        this.IGSTAmount = (Math.round((parseInt(this.TaxableAmount) * parseInt(this.IGST)) / 100));
-        this.FinalTotalAmount = this.TaxableAmount + parseInt(this.IGSTAmount);
+        this.IGSTAmount = (Math.round((parseInt(this.TaxableAmount) * this.IGST) / 100));
+        this.FinalTotalAmount = this.FinalTotalAmount + this.IGSTAmount;
         this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
       }
     }
@@ -627,7 +616,7 @@ Tabamt=0;
     Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
   }
 
- 
+
   convertToWord(e) {
 
     // return converter.toWords(e);
