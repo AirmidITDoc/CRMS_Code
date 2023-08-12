@@ -527,7 +527,10 @@ Chargetot:any=0;
 
 
   onSaveOPBill() {
-    
+    debugger
+    // this.totalAmtOfNetAmt=this.registeredForm.get('TotallistAmount').value
+    // this.FinalAmt=this.registeredForm.get('FinalAmt').value
+
         let Billdetsarr = [];
     this.dataSource.data.forEach((element) => {
       let BillDetailsInsertObj = {};
@@ -540,9 +543,9 @@ Chargetot:any=0;
  
     InsertBillUpdateBillNoObj['BillNo'] = 0;
     InsertBillUpdateBillNoObj['OPD_IPD_ID'] = this.data.registerObj.VisitId;
-    InsertBillUpdateBillNoObj['TotalAmt'] = this.totalAmtOfNetAmt;
+    InsertBillUpdateBillNoObj['TotalAmt'] = this.registeredForm.get('TotallistAmount').value || 0;
     InsertBillUpdateBillNoObj['ConcessionAmt'] = this.concessionAmtOfNetAmt;
-    InsertBillUpdateBillNoObj['NetPayableAmt'] = this.FinalAmt; //this.netPaybleAmt1;
+    InsertBillUpdateBillNoObj['NetPayableAmt'] = this.registeredForm.get('FinalAmt').value || 0;
     InsertBillUpdateBillNoObj['PaidAmt'] = this.paidamt;
     InsertBillUpdateBillNoObj['BalanceAmt'] = this.balanceamt;
     InsertBillUpdateBillNoObj['BillDate'] = this.dateTimeObj.date;

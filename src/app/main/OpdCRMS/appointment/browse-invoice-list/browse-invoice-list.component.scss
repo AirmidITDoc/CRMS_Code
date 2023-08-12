@@ -131,7 +131,7 @@ app-browse-invoice-list{
         background-color: rgb(13, 67, 102) !important;
         max-width: 100%;
         min-width: 1440px;
-        min-height: 20px;
+        min-height: 25px;
         width: 100%;
 
     }
@@ -142,38 +142,8 @@ app-browse-invoice-list{
         min-width: 1440px;
         display: flex;
     }
-    .mat-column-checkbox {
-        width:80px;
-        max-width:80px;
-        min-width:80px;
-        text-align:left;
-        justify-content: left;
-    }
-    .mat-column-InvoiceId {
-        width: 100px;
-        max-width: 100px;
-        min-width: 100px;
-        text-align: center;
-    }
-
-    .mat-column-BillNo {
-        width: 80px;
-        max-width: 70px;
-        min-width: 70px;
-        text-align: right;
-        justify-content: left;
-    }
-
-    .mat-column-InvoiceNumber {
-        width: 110px;
-        max-width: 110px;
-        min-width: 110px;
-        text-align: right;
-        justify-content: center;
-    }
-
-  
-
+   
+   
     .mat-column-CaseId {
         width: 80px;
         max-width: 80px;
@@ -181,28 +151,13 @@ app-browse-invoice-list{
         text-align: right;
         //justify-content:right;
         justify-content: center;
-
-
-
     }
 
-    .mat-column-InvoiceTime {
-        width: 10px;
-        max-width: 140px;
-        min-width: 140px;
-        text-align: center;
-        //justify-content:right;
-        justify-content: left;
-
-
-
-    }
-
-    
+       
     .mat-column-ProtocolNo {
-        width: 150px;
-        max-width: 150px;
-        min-width: 150px;
+        width: 250px;
+        max-width: 250px;
+        min-width: 250px;
      
         text-align: left;
         white-space: nowrap;
@@ -216,9 +171,9 @@ app-browse-invoice-list{
     }
 
     .mat-column-ProtocolTitle {
-        width: 200px;
-        max-width: 200px;
-        min-width: 200px;
+        width: 300px;
+        max-width: 300px;
+        min-width: 300px;
         text-align: left;
         white-space: nowrap;
         overflow: hidden;
@@ -231,9 +186,9 @@ app-browse-invoice-list{
     }
 
     .mat-column-InvoiceDate {
-        width: 110px;
-        max-width: 110px;
-        min-width: 110px;
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
         justify-content: center;
         text-align: center;
     }
@@ -247,25 +202,25 @@ app-browse-invoice-list{
     }
 
     .mat-column-CGST {
-        width: 80px;
-        max-width: 80px;
-        min-width: 80px;
+        width: 70px;
+        max-width: 70px;
+        min-width: 70px;
         text-align: center;
         justify-content: center;
     }
 
     .mat-column-SGST {
-        width: 80px;
-        max-width: 80px;
-        min-width: 80px;
+        width: 70px;
+        max-width: 70px;
+        min-width: 70px;
         text-align: right;
         justify-content: center;
     }
 
     .mat-column-IGST {
-        width: 80px;
-        max-width: 80px;
-        min-width: 80px;
+        width: 70px;
+        max-width: 70px;
+        min-width: 70px;
         text-align: right;
         justify-content: center;
     }

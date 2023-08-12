@@ -165,7 +165,8 @@
                                                 MeetingStatus
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                <!-- <mat-form-field appearance="legacy" hidden="Meetstatus">
+                                                <!-- <mat-form-field appearance="legacy">
+                                                    <mat-placeholder class="placeholder">ONLINE/OFFLINE"</mat-placeholder>
                                                     <input matInput [(ngModel)]="contact.MeetingStatus">
                                                 </mat-form-field> -->
                                                 <mat-select placeholder="OFFLINE" >
@@ -177,7 +178,7 @@
 
                                         </ng-container>
 
-
+                                        <!-- Rtrv_CommitteeMemberList -->
 
 <!-- 
                                         <ng-container matColumnDef="MeetingStatus">

@@ -105,7 +105,7 @@ export class BrowseInvoiceListComponent implements OnInit {
       "ToDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '2023-07-28 00:00:00.000',
       "StudyId": this._InvoiceBilllsService.myFilterform.get("StudyId").value.StudyId || 0
     }
-    
+    console.log(D_data)
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._InvoiceBilllsService.getBrowseInvoiceBillsList(D_data).subscribe(Visit => {
