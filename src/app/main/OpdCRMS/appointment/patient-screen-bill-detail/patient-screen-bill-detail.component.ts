@@ -181,7 +181,6 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
   
   getBilllist(contact) {
-    
     this.sIsLoading = 'loading-data';
     var D_data = {
       "visitid": contact.VisitId
@@ -198,12 +197,13 @@ export class PatientScreenBillDetailComponent implements OnInit {
     }, 1000);
   }
 
-  getbilldetail(contact){
-    
+  getbilldetail(Param){
+    console.log(Param);
     this.sIsLoading = 'loading-data';
     var D_data = {
-      "BillNo": contact.BillId
+      "BillNo": Param.BillNo
     };
+    console.log(D_data);
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._AppointmentService.getMainBillDetData(D_data).subscribe(Visit => {
@@ -301,8 +301,6 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
   getGeneratebill(contact) {
-   
-    
     if (contact.BillId != 0) {
       Swal.fire("Bill Already Generated")
     } else {

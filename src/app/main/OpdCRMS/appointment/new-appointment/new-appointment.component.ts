@@ -1087,7 +1087,7 @@ debugger;
 
   onClose() {
     this._opappointmentService.mySaveForm.reset();
-     this.dialogRef.close();
+    this.dialogRef.close();
   }
 
   onChangeGenderList(prefixObj) {
