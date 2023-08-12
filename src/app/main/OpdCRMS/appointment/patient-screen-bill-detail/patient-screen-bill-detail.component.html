@@ -189,16 +189,16 @@
                                         <ng-container matColumnDef="date">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>VisitDate
                                             </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.date | date:shortDate}}
+                                            <mat-cell *matCellDef="let m" fxShow.gt-sm>
+                                                {{m.date | date:shortDate}}
                                             </mat-cell>
                                         </ng-container>
 
                                         <ng-container matColumnDef="BillNo">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>BillNo
                                             </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.BillNo}}
+                                            <mat-cell *matCellDef="let m" fxShow.gt-sm>
+                                                {{m.BillNo}}
                                             </mat-cell>
                                         </ng-container>
 
@@ -206,8 +206,8 @@
                                             <mat-header-cell *matHeaderCellDef mat-sort-header
                                                 fxShow.gt-sm>TotalBillAmount
                                             </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.NetPayableAmt}}
+                                            <mat-cell *matCellDef="let m" fxShow.gt-sm>
+                                                {{m.NetPayableAmt}}
                                             </mat-cell>
                                         </ng-container>
 
@@ -225,9 +225,9 @@
                                         <mat-header-row class="accent"
                                             *matHeaderRowDef="displayedColumns5; sticky: true">
                                         </mat-header-row>
-                                        <mat-row *matRowDef="let contact; columns: displayedColumns5;" class="contact"
+                                        <mat-row *matRowDef="let m; columns: displayedColumns5;" class="contact"
                                             [@animate]="{value:'*',params:{y:'100%'}}"
-                                            (click)="getbilldetail(contact)"></mat-row>
+                                            (click)="getbilldetail(m)"></mat-row>
                                         <mat-footer-row *matFooterRowDef="['loading']"
                                             [ngClass]="{'hide': !(sIsLoading == 'loading-data')}">
                                         </mat-footer-row>
@@ -242,10 +242,10 @@
                                     class="BillDettable" style="overflow: auto;">
 
                                     <ng-container matColumnDef="Servicename">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Servicename
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>ServiceName
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                            {{contact.Servicename}}
+                                            {{contact.ServiceName}}
                                         </mat-cell>
                                     </ng-container>
 
