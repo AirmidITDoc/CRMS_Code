@@ -231,13 +231,7 @@ export class InvoiceBillMappingComponent implements OnInit {
     }
   }
 
-  openBillInfo() {
-
-  }
-
-
-
-
+  
   getNetAmtSum(element) {
 
     let netAmt;
@@ -342,10 +336,22 @@ export class InvoiceBillMappingComponent implements OnInit {
     this.dataSource.data.forEach((element) => {
       let InvoiceBillDetail = {};
       InvoiceBillDetail['InvoiceId'] = 0,
-        InvoiceBillDetail['BillNo'] = element.BillNo || 0;
+      InvoiceBillDetail['BillNo'] = element.BillNo || 0;
       InvoiceBillDetail['CreatedBy'] = this.accountService.currentUserValue.user.id;
 
       insertInvoiceBillDetailarray.push(InvoiceBillDetail);
+
+    })
+
+    let UpdateInvoiceBillarray = [];
+
+    this.dataSource.data.forEach((element) => {
+      let UpdateInvoiceBill = {};
+      UpdateInvoiceBill['BillNo'] = element.BillNo;
+      UpdateInvoiceBill['IsInvoiceGenerated'] = 1;
+      UpdateInvoiceBill['InvoiceId'] = 0,
+
+      UpdateInvoiceBillarray.push(UpdateInvoiceBill);
 
     })
 
@@ -353,8 +359,8 @@ export class InvoiceBillMappingComponent implements OnInit {
     let submitData = {
 
       "insertInvoiceDetail": insertInvoiceDetail,
-      "insertInvoiceBillDetail": insertInvoiceBillDetailarray
-
+      "insertInvoiceBillDetail": insertInvoiceBillDetailarray,
+      "updatebillInvoice":UpdateInvoiceBillarray
     };
     console.log(submitData);
     this._opappointmentService.InvoiceBillMappingInsert(submitData).subscribe(response => {

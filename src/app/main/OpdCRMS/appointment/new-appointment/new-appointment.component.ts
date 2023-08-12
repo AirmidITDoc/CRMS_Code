@@ -1086,7 +1086,7 @@ debugger;
   }
 
   onClose() {
-    this._opappointmentService.mySaveForm.reset();
+    // this._opappointmentService.mySaveForm.reset();
      this.dialogRef.close();
   }
 

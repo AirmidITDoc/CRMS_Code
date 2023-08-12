@@ -506,7 +506,7 @@ export class AppointmentComponent implements OnInit {
     const dialogRef = this._matDialog.open(NewAppointmentComponent,
       {
         maxWidth: "95vw",
-        height: '700px',
+        height: '800px',
         width: '100%',
         // height: "100%"
       });
@@ -559,6 +559,7 @@ export class VisitMaster {
   RegId:any;
   BillId:any;
   PBillNo:any;
+  ExtRegNo:any;
   /**
    * Constructor
    *
@@ -598,6 +599,7 @@ export class VisitMaster {
       this.VisitTitle = VisitMaster.VisitTitle || '';
       this.BillId = VisitMaster.BillId || '';
       this.PBillNo=VisitMaster.PBillNo|| '';
+      this.ExtRegNo =VisitMaster.ExtRegNo || 0;
     }
     }
   

@@ -350,6 +350,9 @@ public InvoiceBillMappingUpdate(employee){
   return this._httpClient.post("OutPatient/InvoiceBillMappinngUpdate", employee);
 }
 
+public UpdateInvoiceBill(employee){
+  return this._httpClient.post("OutPatient/UpdateInvoiceRegno", employee);
+}
 // public getBrowseBillsList(employee){
 //   return this._httpClient.post("Generic/GetByProc?procName=Rtrv_InvoiceBill", employee)
 // }
