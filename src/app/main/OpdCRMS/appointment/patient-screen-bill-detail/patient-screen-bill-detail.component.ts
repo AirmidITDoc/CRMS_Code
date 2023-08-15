@@ -46,6 +46,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
   reportPrintObj: BrowseOPDBill;
   Billbutton = false;
   RegId: any;
+  MRNo:any =0;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -142,13 +143,13 @@ export class PatientScreenBillDetailComponent implements OnInit {
       this.menuActions.push('Edit Visit');
       this.menuActions.push('Bill');
 
-
     }
     if (this.data) {
 
       this.StudyId = this.data.element.Title;
 
       this.selectedAdvanceObj = this.data.element;
+      this.MRNo=this.selectedAdvanceObj.ExtRegNo;
           }
 
     this.getVistdetaillist();
