@@ -22,6 +22,7 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
 import * as converter from 'number-to-words';
 import { MatSelect } from '@angular/material/select';
 import { StudyServicesDetail } from '../../case-detail/study-sevices/study-services/study-services.component';
+import { Console } from 'console';
 
 
 @Component({
@@ -49,7 +50,7 @@ export class BillDetailComponent implements OnInit {
   reportPrintObjList: BrowseOPDBill[] = [];
   chargeslist: any = [];
   chargeslist1: any = [];
-  OPD_IPD_ID:any;
+  OPD_IPD_ID: any;
   screenFromString = 'OP-billing';
   displayedColumns = [
     // 'checkbox',
@@ -69,7 +70,7 @@ export class BillDetailComponent implements OnInit {
   ];
 
   dataSource = new MatTableDataSource<ChargesList>();
-  
+
   myControl = new FormControl();
   filteredOptions: any;
   billingServiceList = [];
@@ -110,7 +111,7 @@ export class BillDetailComponent implements OnInit {
   sIsLoading: any;
   Billstatus1: any;
   Billstatus2: any;
-  
+
 
   @ViewChild('Price') inputEl: ElementRef;
   @ViewChild(MatAccordion) accordion: MatAccordion;
@@ -133,7 +134,7 @@ export class BillDetailComponent implements OnInit {
   netPaybleAmt: any = 0;
   netPaybleAmt1: any;
   TotalnetPaybleAmt: any = 0;
-Chargetot:any=0;
+  Chargetot: any = 0;
 
   private nextPage$ = new Subject();
   noOptionFound: boolean = false;
@@ -173,25 +174,19 @@ Chargetot:any=0;
 
 
   ngOnInit(): void {
-
-
     this.createForm();
     this.createServForm();
 
     if (this.data) {
       this.selectedAdvanceObj = this.data.registerObj;
-      
     }
-    
     if (this.data1.registerObj.BillStatus == 2) {
       this.getstudywiseservice(this.data.registerObj);
     } else {
     }
-
-
     this.getServiceListCombobox();
     this.getAdmittedDoctorCombo();
-   
+
     this.getBillingClassCombo();
     this.getConcessionReasonList();
 
@@ -200,18 +195,13 @@ Chargetot:any=0;
       .subscribe(() => {
         this.filterDoctor();
       });
-
-
-
   }
 
   getstudywiseservice(obj) {
-  
     var m = {
-      StudyId:6,// obj.StudyId,
-      StudyVisitId:30//obj.StudyVisitId
+      StudyId: obj.StudyId,
+      StudyVisitId: obj.StudyVisitId
     };
-
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._opappointmentService.getstudywiseservicelist(m).subscribe(Visit => {
@@ -221,28 +211,21 @@ Chargetot:any=0;
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.sIsLoading = '';
-
       },
         error => {
           this.sIsLoading = '';
         });
     }, 1000);
-
-    // this.dataSource.data.forEach((element) => {
-    //  element.Price=element.NetAmount;
-    //  element.Qty=1
-    // });
-
   }
 
-  calTotamt(element){
+  calTotamt(element) {
     let netAmt;
-        netAmt =  element.reduce((sum, { TotalAmt }) => sum += +(TotalAmt || 0), 0);
-        this.totalAmtOfNetAmt = netAmt;
-        this.netPaybleAmt = netAmt;
-        
-        this.b_TotalChargesAmount = netAmt;
-      this.registeredForm.get('TotallistAmount').setValue(netAmt);
+    netAmt = element.reduce((sum, { TotalAmt }) => sum += +(TotalAmt || 0), 0);
+    this.totalAmtOfNetAmt = netAmt;
+    this.netPaybleAmt = netAmt;
+
+    this.b_TotalChargesAmount = netAmt;
+    this.registeredForm.get('TotallistAmount').setValue(netAmt);
   }
   // doctorone filter code  
   private filterDoctor() {
@@ -293,7 +276,7 @@ Chargetot:any=0;
       concessionAmt: [''],
       TotallistAmount: [''],
       FinalAmt: ['', Validators.required],
-     
+
 
     });
   }
@@ -301,7 +284,7 @@ Chargetot:any=0;
 
   createServForm() {
     this.ServiceForm = this.formBuilder.group({
-      price: ['',Validators.pattern("^[0-9]*$")],
+      price: ['', Validators.pattern("^[0-9]*$")],
       qty: ['', Validators.pattern("^[0-9]*$")],
       totalAmount: [Validators.required],
       SrvcName: [''],
@@ -324,7 +307,7 @@ Chargetot:any=0;
 
   onOptionSelected(selectedItem) {
 
-    
+
     this.b_price = selectedItem.Price
     this.b_totalAmount = selectedItem.Price  //* parseInt(this.b_qty)
     this.b_disAmount = '0';
@@ -349,27 +332,23 @@ Chargetot:any=0;
   }
 
   getServiceListCombobox() {
-
-      var m_data = {
+    var m_data = {
       SrvcName: `${this.registeredForm.get('SrvcName').value}%`,
-      TariffId: 1,//this.selectedAdvanceObj.TariffId,
+      TariffId: this.selectedAdvanceObj.StudyId,
       ClassId: 1,//this.selectedAdvanceObj.ClassId
     };
-    
-    // if (this.registeredForm.get('SrvcName').value.length >= 1) {
     this._opappointmentService.getBillingServiceList(m_data).subscribe(data => {
-            this.filteredOptions = data;
-            if (this.filteredOptions.length == 0) {
+      this.filteredOptions = data;
+      if (this.filteredOptions.length == 0) {
         this.noOptionFound = true;
       } else {
         this.noOptionFound = false;
       }
     });
-   
   }
 
   getOptionText(option) {
-    
+
     if (!option)
       return '';
     return option.ServiceName;  // + ' ' + option.Price ; //+ ' (' + option.TariffId + ')';
@@ -377,8 +356,8 @@ Chargetot:any=0;
   }
 
   getSelectedObj(obj) {
-    
-   
+
+
     this.SrvcName = obj.ServiceName;
     this.b_price = obj.Price;
     this.b_totalAmount = obj.Price;
@@ -387,7 +366,7 @@ Chargetot:any=0;
     this.b_isPath = obj.IsPathology;
     this.b_isRad = obj.IsRadiology;
 
-    
+
     if (obj.IsDocEditable) {
 
       this.isDoctor = true;
@@ -399,7 +378,7 @@ Chargetot:any=0;
   }
 
   getTotalAmount(element) {
-    
+
     if (element.Price && element.Qty) {
       let totalAmt;
       totalAmt = parseInt(element.Price) * parseInt(element.Qty);
@@ -445,14 +424,14 @@ Chargetot:any=0;
     this.Chargetot = this.netPaybleAmt;
     this.b_TotalChargesAmount = netAmt;
 
-    this.TotalnetPaybleAmt=netAmt;
+    this.TotalnetPaybleAmt = netAmt;
     return netAmt
 
-    
+
   }
 
-  CalNet(){
-    
+  CalNet() {
+
     this.TotalnetPaybleAmt = this.Chargetot;
   }
 
@@ -470,7 +449,7 @@ Chargetot:any=0;
   }
 
 
-  
+
   getTotalNetAmount() {
     this.TotalnetPaybleAmt = this.b_TotalChargesAmount - this.concessionAmtOfNetAmt;
   }
@@ -523,13 +502,13 @@ Chargetot:any=0;
         this.isLoading = 'list-loaded';
       });
   }
- 
+
 
 
   onSaveOPBill() {
     debugger
-    
-        let Billdetsarr = [];
+
+    let Billdetsarr = [];
     this.dataSource.data.forEach((element) => {
       let BillDetailsInsertObj = {};
       BillDetailsInsertObj['BillNo'] = 0;
@@ -538,7 +517,7 @@ Chargetot:any=0;
     });
 
     let InsertBillUpdateBillNoObj = {};
- 
+
     InsertBillUpdateBillNoObj['BillNo'] = 0;
     InsertBillUpdateBillNoObj['OPD_IPD_ID'] = this.data.registerObj.VisitId;
     InsertBillUpdateBillNoObj['TotalAmt'] = this.registeredForm.get('TotallistAmount').value || 0;
@@ -549,8 +528,8 @@ Chargetot:any=0;
     InsertBillUpdateBillNoObj['BillDate'] = this.dateTimeObj.date;
     InsertBillUpdateBillNoObj['OPD_IPD_Type'] = 0;
     InsertBillUpdateBillNoObj['AddedBy'] = this.accountService.currentUserValue.user.id,
-    InsertBillUpdateBillNoObj['TotalAdvanceAmount'] = 0,
-    InsertBillUpdateBillNoObj['BillTime'] = this.dateTimeObj.time;
+      InsertBillUpdateBillNoObj['TotalAdvanceAmount'] = 0,
+      InsertBillUpdateBillNoObj['BillTime'] = this.dateTimeObj.time;
     InsertBillUpdateBillNoObj['ConcessionReasonId'] = this.registeredForm.get('ConcessionId').value.ConcessionId || 0;
     InsertBillUpdateBillNoObj['IsSettled'] = 0;
     InsertBillUpdateBillNoObj['IsPrinted'] = 0;
@@ -563,7 +542,7 @@ Chargetot:any=0;
     InsertBillUpdateBillNoObj['ConcessionAuthorizationName'] = '';
     InsertBillUpdateBillNoObj['TaxPer'] = 0;
     InsertBillUpdateBillNoObj['TaxAmount'] = 0;
-      InsertBillUpdateBillNoObj['CashCounterId'] = 1;
+    InsertBillUpdateBillNoObj['CashCounterId'] = 1;
     InsertBillUpdateBillNoObj['DiscComments'] = 'Remark';// 
     //
 
@@ -576,7 +555,7 @@ Chargetot:any=0;
       chargesDetailInsert['ChargesDate'] = this.datePipe.transform(this.currentDate, "MM-dd-yyyy"),
         chargesDetailInsert['opD_IPD_Type'] = 0,
         chargesDetailInsert['opD_IPD_Id'] = this.data.registerObj.VisitId
-        chargesDetailInsert['serviceId'] = element.ServiceId,
+      chargesDetailInsert['serviceId'] = element.ServiceId,
         chargesDetailInsert['price'] = element.Price,
         chargesDetailInsert['qty'] = element.Qty,
         chargesDetailInsert['totalAmt'] = element.TotalAmt,
@@ -605,7 +584,7 @@ Chargetot:any=0;
       chargesDetailInsert['ChargeID'] = element.ServiceId;
 
       InsertAdddetArr.push(chargesDetailInsert);
-      
+
     })
 
 
@@ -637,7 +616,7 @@ Chargetot:any=0;
 
 
   onSaveEntry() {
-    
+
     if (this.ServiceForm.get("DoctorID").value) {
       this.DoctornewId = this.ServiceForm.get("DoctorID").value.DoctorID;
       this.ChargesDoctorname = this.ServiceForm.get("DoctorID").value.DoctorName;
@@ -648,37 +627,38 @@ Chargetot:any=0;
     this.isLoading = 'save';
 
     if (this.SrvcName) {
-      if(parseInt(this.b_price)==0){
-      Swal.fire("Plz Enter Price for Service")}
-      else{
-    this.isLoading = 'save';
-    this.dataSource.data = [];
-    this.chargeslist=this.chargeslist1;
-    this.chargeslist.push(
-      {
-        ChargesId: 0,// this.serviceId,
-        ServiceId: this.serviceId,
-        ServiceName: this.SrvcName,
-        Price: this.b_price || 0,
-        Qty: this.b_qty || 0,
-        TotalAmt: this.b_totalAmount || 0,
-        ConcessionPercentage: this.formDiscPersc || 0,
-        DiscAmt: this.b_disAmount || 0,
-        NetAmount: this.b_netAmount || 0,
-        ClassId: this.selectedAdvanceObj.ClassId || 0,
-        DoctorId: this.DoctornewId,// (this.registeredForm.get("DoctorID").value.DoctorName).toString() || '',
-        DoctorName: this.ChargesDoctorname,
-        ChargesDate: this.dateTimeObj.date,
-        IsPathology: this.b_isPath,
-        IsRadiology: this.b_isRad,
-        ClassName: this.selectedAdvanceObj.ClassName || '',
-        ChargesAddedName: this.accountService.currentUserValue.user.id || 1,
-      });
-    this.isLoading = '';
+      if (parseInt(this.b_price) == 0) {
+        Swal.fire("Plz Enter Price for Service")
+      }
+      else {
+        this.isLoading = 'save';
+        this.dataSource.data = [];
+        this.chargeslist = this.chargeslist1;
+        this.chargeslist.push(
+          {
+            ChargesId: 0,// this.serviceId,
+            ServiceId: this.serviceId,
+            ServiceName: this.SrvcName,
+            Price: this.b_price || 0,
+            Qty: this.b_qty || 0,
+            TotalAmt: this.b_totalAmount || 0,
+            ConcessionPercentage: this.formDiscPersc || 0,
+            DiscAmt: this.b_disAmount || 0,
+            NetAmount: this.b_netAmount || 0,
+            ClassId: this.selectedAdvanceObj.ClassId || 0,
+            DoctorId: this.DoctornewId,// (this.registeredForm.get("DoctorID").value.DoctorName).toString() || '',
+            DoctorName: this.ChargesDoctorname,
+            ChargesDate: this.dateTimeObj.date,
+            IsPathology: this.b_isPath,
+            IsRadiology: this.b_isRad,
+            ClassName: this.selectedAdvanceObj.ClassName || '',
+            ChargesAddedName: this.accountService.currentUserValue.user.id || 1,
+          });
+        this.isLoading = '';
 
-    this.dataSource.data = this.chargeslist;
+        this.dataSource.data = this.chargeslist;
 
-    }
+      }
     }
     this.onClearServiceAddList();
     this.getTotalNetAmount();
@@ -716,7 +696,7 @@ Chargetot:any=0;
 
   calculateTotalAmt() {
 
-        if (this.b_price && this.b_qty) {
+    if (this.b_price && this.b_qty) {
       this.b_totalAmount = Math.round(parseInt(this.b_price) * parseInt(this.b_qty)).toString();
       this.b_netAmount = this.b_totalAmount;
 
@@ -759,15 +739,15 @@ Chargetot:any=0;
       this.registeredForm.get('FinalAmt').setValue(this.TotalnetPaybleAmt);
       this.TotalnetPaybleAmt = parseInt(this.TotalnetPaybleAmt);
       this.Consession = true;
-    
+
     }
-   
+
     this.TotalnetPaybleAmt = this.b_TotalChargesAmount - this.concessionAmtOfNetAmt;
     this.registeredForm.get('FinalAmt').setValue(this.TotalnetPaybleAmt);
   }
 
   calculatechargesDiscamt() {
-    
+
     let d = this.registeredForm.get('discAmount').value;
     this.disamt = this.registeredForm.get('discAmount').value;
     let Netamt = parseInt(this.b_netAmount);
@@ -814,18 +794,18 @@ Chargetot:any=0;
       Swal.fire("Discount Amount Schoud be Less than Total Amount")
     }
 
-    
+
   }
 
   onKeydown(event) {
     if (event.key === "Enter") {
-      
+
     }
   }
 
 
   deleteTableRow(element) {
-    if(this.data.registerObj.BillStatus=2){
+    if (this.data.registerObj.BillStatus = 2) {
       let index1 = this.chargeslist1.indexOf(element);
       if (index1 >= 0) {
         this.chargeslist1.splice(index1, 1);
@@ -834,7 +814,7 @@ Chargetot:any=0;
       }
       Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
     }
-    
+
     let index = this.chargeslist.indexOf(element);
     if (index >= 0) {
       this.chargeslist.splice(index, 1);
@@ -851,7 +831,7 @@ Chargetot:any=0;
 
     this._opappointmentService.getAdmittedDoctorCombo().subscribe(data => {
       this.doctorNameCmbList = data;
-      
+
       this.filteredDoctor.next(this.doctorNameCmbList.slice());
     })
 
@@ -872,7 +852,7 @@ Chargetot:any=0;
     })
   }
 
- 
+
 
 
   getTemplate() {
@@ -880,7 +860,7 @@ Chargetot:any=0;
     this._opappointmentService.getTemplate(query).subscribe((resData: any) => {
 
       this.printTemplate = resData[0].TempDesign;
-      let keysArray = ['HospitalName', 'HospitalAddress', 'Phone','EmailId', 'PhoneNo', 'RegNo', 'BillNo', 'AgeYear', 'AgeDay', 'AgeMonth', 'PBillNo', 'PatientName', 'BillDate', 'VisitDate', 'ConsultantDocName', 'DepartmentName', 'ServiceName', 'ChargesDoctorName', 'Price', 'Qty', 'ChargesTotalAmount', 'TotalBillAmount', 'NetPayableAmt', 'NetAmount', 'ConcessionAmt', 'PaidAmount', 'BalanceAmt', 'AddedByName','Address','MobileNo']; // resData[0].TempKeys;
+      let keysArray = ['HospitalName', 'HospitalAddress', 'Phone', 'EmailId', 'PhoneNo', 'RegNo', 'BillNo', 'AgeYear', 'AgeDay', 'AgeMonth', 'PBillNo', 'PatientName', 'BillDate', 'VisitDate', 'ConsultantDocName', 'DepartmentName', 'ServiceName', 'ChargesDoctorName', 'Price', 'Qty', 'ChargesTotalAmount', 'TotalBillAmount', 'NetPayableAmt', 'NetAmount', 'ConcessionAmt', 'PaidAmount', 'BalanceAmt', 'AddedByName', 'Address', 'MobileNo']; // resData[0].TempKeys;
 
       for (let i = 0; i < keysArray.length; i++) {
         let reString = "{{" + keysArray[i] + "}}";
@@ -899,7 +879,7 @@ Chargetot:any=0;
         else
           docname = '';
 
-          // <hr style="border-color:white" >
+        // <hr style="border-color:white" >
         var strabc = ` <div style="display:flex;margin:8px 0">
         <div style="display:flex;width:60px;margin-left:20px;">
             <div>`+ i + `</div> <!-- <div>BLOOD UREA</div> -->
@@ -974,12 +954,12 @@ Chargetot:any=0;
 
 
   getPrint(el) {
-    
+
     var D_data = {
       "BillNo": el.BillNo,
-      
+
     }
-        
+
     let printContents; //`<div style="padding:20px;height:550px"><div><div style="display:flex"><img src="http://localhost:4200/assets/images/logos/Airmid_NewLogo.jpeg" width="90"><div><div style="font-weight:700;font-size:16px">YASHODHARA SUPER SPECIALITY HOSPITAL PVT. LTD.</div><div style="color:#464343">6158, Siddheshwar peth, near zilla parishad, solapur-3 phone no.: (0217) 2323001 / 02</div><div style="color:#464343">www.yashodharahospital.org</div></div></div><div style="border:1px solid grey;border-radius:16px;text-align:center;padding:8px;margin-top:5px"><span style="font-weight:700">IP ADVANCE RECEIPT</span></div></div><hr style="border-color:#a0a0a0"><div><div style="display:flex;justify-content:space-between"><div style="display:flex"><div style="width:100px;font-weight:700">Advance No</div><div style="width:10px;font-weight:700">:</div><div>6817</div></div><div style="display:flex"><div style="width:60px;font-weight:700">Reg. No</div><div style="width:10px;font-weight:700">:</div><div>117399</div></div><div style="display:flex"><div style="width:60px;font-weight:700">Date</div><div style="width:10px;font-weight:700">:</div><div>26/06/2019&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:15:49PM</div></div></div><div style="display:flex;margin:8px 0"><div style="display:flex;width:477px"><div style="width:100px;font-weight:700">Patient Name</div><div style="width:10px;font-weight:700">:</div><div>Mrs. Suglabai Dhulappa Waghmare</div></div><div style="display:flex"><div style="width:60px;font-weight:700">IPD No</div><div style="width:10px;font-weight:700">:</div><div>IP/53757/2019</div></div></div><div style="display:flex;margin:8px 0"><div style="display:flex"><div style="width:100px;font-weight:700">DOA</div><div style="width:10px;font-weight:700">:</div><div>30/10/2019</div></div></div><div style="display:flex"><div style="display:flex"><div style="width:100px;font-weight:700">Patient Type</div><div style="width:10px;font-weight:700">:</div><div>Self</div></div></div></div><hr style="border-color:#a0a0a0"><div><div style="display:flex"><div style="display:flex"><div style="width:150px;font-weight:700">Advacne Amount</div><div style="width:10px;font-weight:700">:</div><div>4,000.00</div></div></div><div style="display:flex;margin:8px 0"><div style="display:flex"><div style="width:150px;font-weight:700">Amount in Words</div><div style="width:10px;font-weight:700">:</div><div>FOUR THOUSANDS RUPPEE ONLY</div></div></div><div style="display:flex"><div style="display:flex"><div style="width:150px;font-weight:700">Reason of Advance</div><div style="width:10px;font-weight:700">:</div><div></div></div></div></div><div style="position:relative;top:100px;text-align:right"><div style="font-weight:700;font-size:16px">YASHODHARA SUPER SPECIALITY HOSPITAL PVT. LTD.</div><div style="font-weight:700;font-size:16px">Cashier</div><div>Paresh Manlor</div></div></div>`;
     this.subscriptionArr.push(
       this._opappointmentService.getBillPrint(D_data).subscribe(res => {
@@ -997,9 +977,9 @@ Chargetot:any=0;
 
   // PRINT 
   print() {
-  
+
     let popupWin, printContents;
-  
+
     popupWin = window.open('', '_blank', 'top=0,left=0,height=800px !important,width=auto,width=2200px !important');
     // popupWin.document.open();
     popupWin.document.write(` <html>
@@ -1448,7 +1428,7 @@ export class SearchInforObj {
   IsMLC: any;
   NetPayableAmt: any;
   VistDateTime: any;
-
+  StudyId : any;
   /**
   * Constructor
   *
@@ -1487,7 +1467,7 @@ export class SearchInforObj {
       this.PatientTypeID = SearchInforObj.PatientTypeID || 0;
       this.NetPayableAmt = SearchInforObj.NetPayableAmt || 0;
       this.VistDateTime = SearchInforObj.VistDateTime || '';
-
+      this.StudyId = SearchInforObj.StudyId || 0;
 
     }
   }

@@ -199,12 +199,10 @@ export class PatientScreenBillDetailComponent implements OnInit {
   }
 
   getbilldetail(Param){
-    console.log(Param);
     this.sIsLoading = 'loading-data';
     var D_data = {
       "BillNo": Param.BillNo
     };
-    console.log(D_data);
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._AppointmentService.getMainBillDetData(D_data).subscribe(Visit => {

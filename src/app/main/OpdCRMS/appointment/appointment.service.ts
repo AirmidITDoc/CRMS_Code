@@ -304,7 +304,7 @@ public CaseDetailInsert(employee){
   }
    // Get billing Service List 
    public getBillingServiceList(employee) {
-    return this._httpClient.post("Generic/GetByProc?procName=RetrieveServices", employee)
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_ServiceList", employee)
   }
   public InsertOPBilling(employee) : Observable<any> {
     return this._httpClient.post("OutPatient/BillInsert", employee)
