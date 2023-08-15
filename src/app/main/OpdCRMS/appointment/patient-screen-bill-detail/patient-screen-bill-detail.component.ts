@@ -338,33 +338,25 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
   UpdateInvoice() {
     
-  
-      // var m = {
-      //   "RegId": this.selectedAdvanceObj.RegId,
-      //   "ExtRegNo":this._AppointmentService.myFilterform.get('MrNo').value
-       
-      // };
 
       let UpdateRegNo = {};
       UpdateRegNo['RegId'] = this.selectedAdvanceObj.RegId,
       UpdateRegNo['ExtRegNo'] =this._AppointmentService.myFilterform.get('MrNo').value
       
     let submitData = {
-
       "updateRegno": UpdateRegNo
-    
     };
       console.log(submitData);
-      this._AppointmentService.UpdateInvoiceBill(menubar).subscribe(response => {
+      this._AppointmentService.UpdateInvoiceBill(submitData).subscribe(response => {
         if (response) {
-          Swal.fire('Updated Invoice Bill  !', 'Invoice Bill UpdatedSuccessfully !', 'success').then((result) => {
+          Swal.fire('Updated Invoice Bill  !', 'Invoice Bill Updated Successfully !', 'success').then((result) => {
             if (result.isConfirmed) {
               
               this._matDialog.closeAll();
             }
           });
         } else {
-          Swal.fire('Error !', ' Invoice Bill not saved', 'error');
+          Swal.fire('Error !', ' Invoice Bill not Updated', 'error');
         }
         
       });
