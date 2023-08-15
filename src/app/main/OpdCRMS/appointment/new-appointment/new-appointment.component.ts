@@ -1086,8 +1086,8 @@ debugger;
   }
 
   onClose() {
-    this._opappointmentService.mySaveForm.reset();
-    this.dialogRef.close();
+    // this._opappointmentService.mySaveForm.reset();
+     this.dialogRef.close();
   }
 
   onChangeGenderList(prefixObj) {

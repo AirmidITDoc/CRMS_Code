@@ -28,7 +28,11 @@
 
     .mat-header-row {
         min-height: 30px;
-       
+        background-color: rgb(118, 12, 151) !important;
+    }
+
+    .accent header p-12 {
+        background-color: rgb(224, 15, 84) !important;
     }
     .mat-sort-header-content {
         color: white; 

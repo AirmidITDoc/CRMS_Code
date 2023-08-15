@@ -528,9 +528,7 @@ Chargetot:any=0;
 
   onSaveOPBill() {
     debugger
-    // this.totalAmtOfNetAmt=this.registeredForm.get('TotallistAmount').value
-    // this.FinalAmt=this.registeredForm.get('FinalAmt').value
-
+    
         let Billdetsarr = [];
     this.dataSource.data.forEach((element) => {
       let BillDetailsInsertObj = {};

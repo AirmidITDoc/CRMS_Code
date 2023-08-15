@@ -35,9 +35,7 @@ export class TariffMasterComponent implements OnInit {
     ngOnInit(): void {
         this.getTariffMasterList();
     }
-    // onSearch() {
-    //     this.getTariffMasterList();
-    // }
+  
 
     onSearchClear() {
         this._tariffService.myformSearch.reset({
