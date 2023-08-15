@@ -53,8 +53,6 @@
                             <form [formGroup]="_AppointmentSreviceService.myFilterform"
                                 style="padding: 6px 6px 5px 5px;" fusePerfectScrollbar>
                                 <div fxLayout="column" fxLayoutAlign="start none">
-                                    <br />
-
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>ProtocolNo</mat-label>
                                         <mat-select formControlName="StudyId" name="StudyId" style="color: blue;"
@@ -65,7 +63,6 @@
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
-
 
                                     <mat-form-field appearance="outline" style="margin-left: 2%;">
                                         <mat-label>Enter a date range</mat-label>
@@ -92,13 +89,6 @@
                                         <!-- <span class="error" *ngIf="f.LastName.invalid && f.LastName.touched">LastName is
                                         required Enter only Alphabets</span> -->
                                     </mat-form-field>
-
-                                    <!-- <mat-form-field appearance="outline" fxFlex>
-                                    <mat-label>StudyId</mat-label>
-                                    <input name="StudyId" formControlName="StudyId" matInput type="number">
-                                    <span class="error" *ngIf="f.StudyId.invalid && f.StudyId.touched">StudyId is
-                                        required Enter only Digits</span>
-                                </mat-form-field> -->
 
                                     <div style="margin-top: 10px;">
                                         <button mat-raised-button (click)="onClear()" class="clearbutton"
@@ -181,22 +171,6 @@
                                             {{contact.PatientName}}
                                         </mat-cell>
                                     </ng-container>
-
-                                    <!-- <ng-container matColumnDef="DVisitDate">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Date
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.DVisitDate }}
-                                        </mat-cell>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="VisitTime">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Time
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.VisitTime}}
-                                        </mat-cell>
-                                    </ng-container> -->
 
                                     <ng-container matColumnDef="OPDNo">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>OPDNo
@@ -286,15 +260,8 @@
                 </div>
             </div>
             <!-- / CONTENT -->
-
         </div>
         <!-- / CENTER -->
-
     </div>
     <!-- / CONTENT-->
-
 </div>
-
-
-
-//
