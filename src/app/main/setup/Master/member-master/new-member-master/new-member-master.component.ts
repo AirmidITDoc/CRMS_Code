@@ -134,7 +134,6 @@ export class NewMemberMasterComponent implements OnInit {
   onSubmit() {
 debugger
     this.isLoading = 'submit';
-
     if(!this._MemberMasterService.personalFormGroup.get("MemberId").value) {
     var m_data = {
       "insertMemberMaster": {
@@ -148,21 +147,17 @@ debugger
         "MobileNo": this._MemberMasterService.personalFormGroup.get('MobileNo').value || 0,
         "EmailId": this._MemberMasterService.personalFormGroup.get('EmailId').value || '',
         "StudyAmount": this._MemberMasterService.personalFormGroup.get('StudyAmount').value || '',
-
         // "AgreementFileName": this._MemberMasterService.personalFormGroup.get('AgreementFileName').value || '',
         "createdBy": this.accountService.currentUserValue.user.id
 
       }
     }
-    console.log(m_data);
     this._MemberMasterService.MemberDetailInsert(m_data).subscribe(response => {
       if (response) {
         Swal.fire('New MemberDetail Save !', ' MemberDetail Save Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {
             this._matDialog.closeAll();
-
           }
-
         });
       } else {
         Swal.fire('Error !', 'MemberDetail not saved', 'error');
@@ -183,18 +178,14 @@ debugger
         "EmailId": this._MemberMasterService.personalFormGroup.get('EmailId').value || '',
         "StudyAmount": this._MemberMasterService.personalFormGroup.get('StudyAmount').value || '',
         "updatedBy": this.accountService.currentUserValue.user.id
-
       }
     }
-    console.log(m_data1);
     this._MemberMasterService.MemberDetailUpdate(m_data1).subscribe(response => {
       if (response) {
         Swal.fire('Edit MemberDetail  !', ' MemberDetail Edit Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {
             this._matDialog.closeAll();
-
           }
-
         });
       } else {
         Swal.fire('Error !', 'MemberDetail not Updated', 'error');

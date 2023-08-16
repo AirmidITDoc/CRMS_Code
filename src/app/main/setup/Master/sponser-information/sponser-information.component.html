@@ -13,18 +13,9 @@
                 style="color: aliceblue;">
                 Sponser Information List
             </span>
-
-            <!-- <button mat-raised-button (click)="newMember()" style="margin-left:10%;width:180px;">Add
-                Member
-            </button> -->
-            <button mat-raised-button (click)="onAdd()" 
-                style="margin-left:1100px;width:200px;">Sponser
+            <button mat-raised-button (click)="onAdd()" style="margin-left:1100px;width:200px;">Sponser
                 <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
             </button>
-            <!-- <button mat-raised-button (click)="newcommitteemeeting()" 
-                style="margin-left:10px;width:200px;">Committee Meeting
-                <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
-            </button> -->
         </div>
 
     </mat-toolbar>
@@ -53,25 +44,9 @@
                             <div fxLayout="column" fxLayoutAlign="start none">
 
                                 <mat-form-field appearance="outline" fxFlex>
-                                    <mat-label>SponserId</mat-label>
-                                    <input name="SponserId" formControlName="SponserId" matInput (keyup)="getServiceMasterList()">
-                                    <!-- <span class="error" *ngIf="f.SponserId.invalid && f.SponserId.touched">SponserId is
-                                        required Enter</span> -->
-                                </mat-form-field>
-                                
-                                
-                                <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>SponserName</mat-label>
                                     <input name="SponserName" formControlName="SponserName" matInput (keyup)="getServiceMasterList()">
                                     <!-- <span class="error" *ngIf="f.SponserName.invalid && f.SponserName.touched">SponserName is
-                                        required Enter</span> -->
-                                </mat-form-field>
-
-                                
-                                <mat-form-field appearance="outline" fxFlex>
-                                    <mat-label>ContactNo</mat-label>
-                                    <input name="ContactNo" formControlName="ContactNo" matInput (keyup)="getServiceMasterList()">
-                                    <!-- <span class="error" *ngIf="f.ContactNo.invalid && f.ContactNo.touched">ContactNo is
                                         required Enter</span> -->
                                 </mat-form-field>
 
@@ -201,7 +176,6 @@
                                                 title="Edit Menu">launch</mat-icon></button>
                                         <button mat-icon-button (click)="deleteTableRow(element)"
                                             color="warn"><mat-icon>delete_outline</mat-icon></button>
-
                                     </mat-cell>
                                 </ng-container>
 

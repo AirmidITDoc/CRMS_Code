@@ -36,17 +36,9 @@ export class SponserService {
     });
   }
 
-
-  
-
   filterForm(): FormGroup {
     return this._formBuilder.group({
-      SponserId:'',
-      SponserName:'',
-      ContactNo:''
-      // start: [(new Date()).toISOString()],
-      // end: [(new Date()).toISOString()],
-
+      SponserName:''
     });
   }
 

@@ -34,7 +34,6 @@ export class NewsponserinformationComponent implements OnInit {
 
   onSubmit() {
     this.isLoading = 'submit';
-
     if(!this._sponserService.personalFormGroup.get('SponserId').value){
     var m_data = {
       "insertSponserInformation": {
@@ -53,7 +52,6 @@ export class NewsponserinformationComponent implements OnInit {
         "createdBy": this.accountService.currentUserValue.user.id
       }
     }
-    console.log(m_data);
     this._sponserService.InsertSponserInformation(m_data).subscribe(response => {
       if (response) {
         Swal.fire('New Sponser Information Save !', ' Sponser Information Save Successfully !', 'success').then((result) => {
@@ -70,7 +68,7 @@ export class NewsponserinformationComponent implements OnInit {
     var m_data1 = {
       "updateSponserInformation": {
         "operation": "UPDATE",
-        "sponserId":this._sponserService.personalFormGroup.get('SponserId').value.sponserId || 0,
+        "sponserId":this._sponserService.personalFormGroup.get('SponserId').value || 0,
         "SponserName": this._sponserService.personalFormGroup.get('SponserName').value || '',
         "Address": this._sponserService.personalFormGroup.get('Address').value || '',
         "ContactNo": this._sponserService.personalFormGroup.get('ContactNo').value || 0,
@@ -85,7 +83,6 @@ export class NewsponserinformationComponent implements OnInit {
         "updatedBy": this.accountService.currentUserValue.user.id
       }
     }
-    console.log(m_data1);
     this._sponserService.UpdateSponserInformation(m_data1).subscribe(response => {
       if (response) {
         Swal.fire('Update Sponser Information Save !', ' Sponser Information Updated Successfully !', 'success').then((result) => {

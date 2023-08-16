@@ -13,18 +13,11 @@
                 style="color: aliceblue;">
              Member Master Information List
             </span>
-
-            <!-- <button mat-raised-button (click)="newMember()" style="margin-left:10%;width:180px;">Add
-                Member
-            </button> -->
             <button mat-raised-button (click)="onAdd()" 
                 style="margin-left:1100px;width:200px;">New Members
                 <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
             </button>
-            <!-- <button mat-raised-button (click)="newcommitteemeeting()" 
-                style="margin-left:10px;width:200px;">Committee Meeting
-                <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
-            </button> -->
+         
         </div>
 
     </mat-toolbar>
@@ -52,14 +45,6 @@
                             fusePerfectScrollbar>
                             <div fxLayout="column" fxLayoutAlign="start none">
 
-                                <mat-form-field appearance="outline" fxFlex>
-                                    <mat-label>MemberId</mat-label>
-                                    <input name="MemberId" formControlName="MemberId" matInput (keyup)="getMemberMasterList()">
-                                    <!-- <span class="error" *ngIf="f.CommitteeId.invalid && f.CommitteeId.touched">CommitteeId is
-                                        required Enter</span> -->
-                                </mat-form-field>
-                                
-                                
                                 <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>FirstName</mat-label>
                                     <input name="FirstName" formControlName="FirstName" matInput (keyup)="getMemberMasterList()">

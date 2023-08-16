@@ -15,10 +15,7 @@
                         style="width: 80%;font-size: 16px;">
                         OPD BILLING  || ( {{selectedAdvanceObj.VisitId}} ) {{selectedAdvanceObj.PatientName}} (
                         {{selectedAdvanceObj.AgeYear}}) Yrs |
-                        
-                        <!-- Dr.{{selectedAdvanceObj.DoctorName}} -->
                     </span>
-
                     <div fxLayout="row" fxLayoutAlign="start center" style="float: right; margin-right: 5px;">
                         <diV style="margin-top:21px;color: aliceblue;">
                             <span style="margin-right: 40px;color: black;color: aliceblue;">
@@ -45,18 +42,16 @@
                                 <mat-card fxFlex.gt-sm="100%" fxFlex
                                     style="padding: 0 5px; height: fit-content; background-color: white;">
                                     <!-- &nbsp; #f="ngForm" #aForm -->
-
-
                                     <form [formGroup]="ServiceForm" style="display: flex;" #f="ngForm" #aForm>
-
                                         <div fxFlexFill fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="5px">
-
-                                            <mat-form-field appearance="outline" fxFlex>
+                                            <mat-form-field appearance="outline" fxFlex style="width: 300px;">
                                                 <input type="text" name="SrvcName" formControlName="SrvcName"
                                                     placeholder="Service Name" matInput [matAutocomplete]="auto"
                                                     (input)="getServiceListCombobox()" required
                                                  id="myInput">
-<!--    (keydown.enter)="focusNextPrice()"  -->
+
+                                                    <!--    (keydown.enter)="focusNextPrice()"  -->
+
                                                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText"
                                                     showPanel="true" (optionsScroll)="onScroll()"
                                                     (optionSelected)='getSelectedObj($event.option.value)'
@@ -75,7 +70,7 @@
                                                 </mat-error>
                                             </mat-form-field>
 
-                                            <mat-form-field appearance="outline" fxFlex #Price>
+                                            <mat-form-field appearance="outline" fxFlex #Price style="width: 50px;">
                                                 <mat-label>Price</mat-label>
                                                 <input matInput [(ngModel)]="b_price" name="bPrice"
                                                     (keyup)="calculateTotalAmt()" formControlName="price" required
@@ -85,7 +80,7 @@
                                                     Price is required</mat-error>
                                             </mat-form-field>
                                             <!-- (keydown.enter)="focusNextQty()"  -->
-                                            <mat-form-field appearance="outline" fxFlex>
+                                            <mat-form-field appearance="outline" fxFlex style="width: 50px;">
                                                 <mat-label>Qty</mat-label>
                                                 <input matInput [(ngModel)]="b_qty" name="bQty"
                                                     (keyup)="calculateTotalAmt()" formControlName="qty" required
@@ -95,7 +90,7 @@
                                                     Qty is required</mat-error>
                                             </mat-form-field>
                                             <!-- (keydown.enter)="focusNextbtnAdd()"  -->
-                                            <mat-form-field appearance="outline" fxFlex>
+                                            <mat-form-field appearance="outline" fxFlex style="width: 50px;">
                                                 <mat-label>TotalAmt</mat-label>
                                                 <input matInput [(ngModel)]="b_totalAmount" name="bTotalAmt" readonly
                                                     formControlName="totalAmount" required>
