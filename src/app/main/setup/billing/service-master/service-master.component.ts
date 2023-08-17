@@ -21,7 +21,6 @@ export class ServiceMasterComponent implements OnInit {
     RadiologytemplateMasterList: any;
     isLoading = true;
     msg: any;
-    
 
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -46,7 +45,6 @@ export class ServiceMasterComponent implements OnInit {
 
     constructor(
         public _serviceMasterService: ServiceMasterService,
-
         public _matDialog: MatDialog
     ) {}
 
@@ -60,17 +58,13 @@ export class ServiceMasterComponent implements OnInit {
 
     getServiceMasterList() {
         var m={
-                     
-                "ServiceName":this._serviceMasterService.myformSearch.get('ServiceNameSearch').value + '%' || '%',       
-               "TariffId":1
-            //    "GroupId":1      
-                 
+            "ServiceName":this._serviceMasterService.myformSearch.get('ServiceNameSearch').value + '%' || '%',       
+            "TariffId":1
         };
         this._serviceMasterService.getServiceMasterList(m).subscribe(
             (Menu) => {
                 this.DSServiceMasterList.data = Menu as ServiceMaster[];
                 this.isLoading = false;
-                console.log(Menu)
                 this.DSServiceMasterList.sort = this.sort;
                 this.DSServiceMasterList.paginator = this.paginator;
             },
