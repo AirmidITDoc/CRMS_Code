@@ -41,6 +41,7 @@ export class StudySchduleComponent implements OnInit {
   VisitName: any;
   VisitDescription: any;
   Amount: any;
+  b_VisitFrequency: any=0;
   TotalAmount1: any;
   TotalAmount = 0;
 
@@ -51,10 +52,10 @@ export class StudySchduleComponent implements OnInit {
   Study: boolean = false;
 
   displayedColumns = [
-
     'VisitName',
     'VisitDescription',
     'Amount',
+    'VisitFrequency',
     'action'
   ];
 
@@ -79,21 +80,16 @@ export class StudySchduleComponent implements OnInit {
 
   if (this.data) {
       this.registerObj = this.data.registerObj;
-      
       this.Study = true;
-    
     var m = {
       StudyId: this.registerObj.StudyId
     };
-
     this._CasedetailService.getStudyschdulebyStuIdList(m).subscribe(Visit => {
       this.dataSource1.data = Visit as VisitDetail[];
-      
       this.dataSource1.sort = this.sort;
       this.chargeslist= this.dataSource1.data;
       this.chargeslist1= this.dataSource1.data;
       this.dataSource1.paginator = this.paginator;
-      
     },
       error => {
         
@@ -126,28 +122,19 @@ export class StudySchduleComponent implements OnInit {
     let netAmt;
     netAmt = element.reduce((sum, { Amount }) => sum += +(Amount || 0), 0);
     this.TotalAmount = netAmt;
-    
     return netAmt
   }
 
-
-
-
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
-    
     this.dateTimeObj = dateTimeObj;
   }
-
 
   onClose() {
     this.dialogRef.close();
   }
-
-
  
   onAddVisitDetail() {
-    
     this.chargeslist=[];
     this.VisitList.data = [];
     this.chargeslist=this.chargeslist1;
@@ -155,19 +142,16 @@ export class StudySchduleComponent implements OnInit {
       {
         VisitName: this.VisitName,
         VisitDescription: this.VisitName,
-        Amount: this.Amount
+        Amount: this.Amount,
+        VisitFrequency: this.b_VisitFrequency
       });
     this.isLoading = '';
     
-
     this.dataSource1.data = this.chargeslist;
-
-    this._CasedetailService.studySchFormGroup.get('VisitName').reset('')
-
-    this._CasedetailService.studySchFormGroup.get('VisitDescription').reset('')
-
-    this._CasedetailService.studySchFormGroup.get('Amount').reset(0)
-
+    this._CasedetailService.studySchFormGroup.get('VisitName').reset('');
+    this._CasedetailService.studySchFormGroup.get('VisitDescription').reset('');
+    this._CasedetailService.studySchFormGroup.get('Amount').reset(0);
+    this._CasedetailService.studySchFormGroup.get('VisitFrequency').reset(0);
   }
  
   onStudyUpdate() {
@@ -180,6 +164,7 @@ export class StudySchduleComponent implements OnInit {
       updateStudySchedule['visitName'] = element.VisitName;
       updateStudySchedule['visitDescription'] = element.VisitDescription;
       updateStudySchedule['visitAmount'] = element.Amount;
+      updateStudySchedule['VisitFrequency'] = element.VisitFrequency;
       updateStudySchedule['UpdatedBy'] = this.accountService.currentUserValue.user.id;
       updateStudySchedulearr.push(updateStudySchedule);
     });
@@ -219,6 +204,7 @@ export class VisitDetail {
   Amount: any;
   StudyVisitId: any;
   StudyId: any;
+  VisitFrequency:any;
   /**
    * Constructor
    *
@@ -232,8 +218,7 @@ export class VisitDetail {
       this.Amount = VisitDetail.Amount || '';
       this.StudyVisitId = VisitDetail.StudyVisitId || 0;
       this.StudyId = VisitDetail.StudyId || 0;
-
-
+      this.VisitFrequency = VisitDetail.VisitFrequency || 0;
     }
   }
 }

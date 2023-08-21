@@ -85,9 +85,9 @@ app-study-schdule {
         }
 
         .mat-column-VisitDescription {
-            width: 500px;
-            max-width: 500px;
-            min-width: 500px;
+            width: 300px;
+            max-width: 300px;
+            min-width: 300px;
             text-align: left;
             white-space: nowrap;
             overflow: hidden;
@@ -128,127 +128,7 @@ app-study-schdule {
         cursor: pointer;
     }
 
-    .mat-dialog-content {
-        display: block;
-        margin: 0px 0px;
-        // padding: 0px 5px;
-        max-height: 95vh;
-        overflow: auto;
-        padding: 0;
-    }
-
-    .dob {
-        width: 20px;
-    }
-
-    .mat-card {
-        padding: 5px;
-        border-radius: 4px;
-    }
-
-    .mat-h1,
-    .mat-headline,
-    .mat-typography h1 {
-        margin: 0 0 5px;
-    }
-
-    .mat-dialog-title {
-        margin-bottom: 2px;
-    }
-
-    // input.ng-invalid{
-    //     border-left: 5px solid red;
-    // } 
-    // input.ng-valid{
-    //     border-left: 5px solid green;
-    // } 
-    .error {
-        color: red;
-    }
-
-    .main-content {
-        display: flex;
-        height: 700px;
-    }
-
-    .profile-section {
-        width: 20%;
-        background-color: #2d323e;
-        text-align: center;
-    }
-
-    .form-section {
-        width: 100%;
-        padding: 20px;
-        // height: 500px;
-    }
-
-    .profile-picture {
-        border: 1px solid #7c7b71;
-        border-radius: 50%;
-        width: 120px;
-        height: 120px;
-        margin: auto;
-        background-color: #7c7b71;
-        cursor: pointer;
-    }
-
-    .captured-picture {
-        border: 1px solid grey;
-        border-radius: 50%;
-        width: 120px;
-        height: 120px;
-        margin: auto;
-        cursor: pointer;
-    }
-
-    .captured-picture img {
-        width: fit-content;
-        height: 100%;
-    }
-
-    .upload-picture-btn {
-        background: #7c7b71 !important;
-        border-radius: 34px;
-        border: 1px solid #7c7b71;
-        color: #ffffff !important;
-        height: 42px;
-        font-size: 15px;
-    }
-
-    .form-section .mat-form-field .mat-form-field-subscript-wrapper {
-        position: relative !important;
-    }
-
-    .register-container {
-        margin-top: 5px;
-        // padding: 0 0 0 24px;
-        // align-items: center;
-    }
-
-    .footer-navigation-container {
-        text-align: right;
-        display: flex;
-        justify-content: space-between;
-    }
-
-
-    button:disabled {
-        color: white;
-        background-color: #7bd3ff !important;
-
-        border-radius: 2px;
-
-        border: 1px solid #b7e6fd;
-    }
-
-    // button:disabled {
-    //     color: white;
-    //     background-color: #bce7f5;
-    //     border-radius: 2px;
-    //     border: 1px solid #CCCCCC;
-    // }
-
+   
 
     .mat-autocomplete-panel {
         width: 49%;

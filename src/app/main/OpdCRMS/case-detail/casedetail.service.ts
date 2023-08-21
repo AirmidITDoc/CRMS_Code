@@ -72,35 +72,23 @@ export class CasedetailService {
       VisitName: '',
       VisitDescription: '',
       Amount: '',
-      TotalAmount:' '
+      TotalAmount:' ',
+      VisitFrequency:0
     });
   }
-  // createStudyservicesForm(){
-  //   return this._formBuilder.group({
-  //     VisitId: '',
-  //     VisitName: '',
-  //     ServiceName: '',
-  //     Price: '',
-  //     TotalAmount:' '
-  //   });
-  // }
-
   createdocumentForm() {
     return this._formBuilder.group({
       StudyId: '',
       DocumentTypeId: '',
       DocumentName: '',
       DocumentPath: '',
-
     });
-  }z
-
+  }
 
   public StudyInfoInsert(employee){
     return this._httpClient.post("CRMSTran/Save_StudyInformation", employee);
   }
 
- 
   public StudyInfoUpdate(employee)
   {    
     return this._httpClient.post("CRMSTran/Update_StudyInformation",employee);
