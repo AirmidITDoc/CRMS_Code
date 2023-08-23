@@ -399,12 +399,12 @@ reset() {
           "studyStartDate": this.datePipe.transform(this.registerObj.StudyStartDate, "MM-dd-yyyy"),// this.registerObj.DateofBirth || "2021-03-31",
           "studyEndDate": this.datePipe.transform(this.registerObj.StudyEndDate, "MM-dd-yyyy"),
           "AgreementFileName": 1,//this._CasedetailService.personalFormGroup.get('AgreementFileName').value.ConstantId || 0,
-          "createdBy": this.accountService.currentUserValue.user.id
+          "createdBy": this.accountService.currentUserValue.user.id,
+          "StudyPrefix": this._CasedetailService.personalFormGroup.get('StudyPrefix').value ||'',
+          "StudyNumber": this._CasedetailService.personalFormGroup.get('StudyNumber').value || 0
 
         }
       }
-      console.log(m_data);
-      debugger
       this._CasedetailService.StudyInfoInsert(m_data).subscribe(response => {
         if (response) {
           this.StudyId=response;
@@ -413,16 +413,13 @@ reset() {
             console.log(result);
             if (result.isConfirmed) {
               this._matDialog.closeAll();
-
             }
-
           });
         } else {
           Swal.fire('Error !', 'StudyDetail not saved', 'error');
         }
       });
     } else {
-debugger;
       var m_data1 = {
         "updateStudyInformation": {
           "operation": "UPDATE",
@@ -440,19 +437,14 @@ debugger;
           "studyEndDate": this.datePipe.transform(this.registerObj.StudyEndDate, "MM-dd-yyyy"),
           "AgreementFileName": this._CasedetailService.personalFormGroup.get('AgreementFileName').value.ConstantId || 0,
           "UpdatedBy": this.accountService.currentUserValue.user.id
-
         }
       }
-      console.log(m_data1);
       this._CasedetailService.StudyInfoUpdate(m_data1).subscribe(response => {
-
         if (response) {
           Swal.fire('Edit StudyDetail Save !', 'Edit StudyDetail save Successfully !', 'success').then((result) => {
             if (result.isConfirmed) {
               this._matDialog.closeAll();
-
             }
-
           });
         } else {
           Swal.fire('Error !', 'StudyDetail not saved', 'error');

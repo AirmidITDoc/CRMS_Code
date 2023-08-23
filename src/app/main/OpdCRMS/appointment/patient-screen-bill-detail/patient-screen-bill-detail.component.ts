@@ -17,6 +17,7 @@ import { EditAppointmentComponent } from '../edit-appointment/edit-appointment.c
 import { NewVistDateComponent } from '../new-vist-date/new-vist-date.component';
 import { BillDetailComponent } from '../bill-detail/bill-detail.component';
 import { InvoiceBillMappingComponent } from '../invoice-bill-mapping/invoice-bill-mapping.component';
+import { AssignVisitInforComponent } from '../assign-visit-infor/assign-visit-infor.component';
 
 @Component({
   selector: 'app-patient-screen-bill-detail',
@@ -57,7 +58,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
     'VisitTime',
     'ProtocolNo',
     'SubjectName',
-    // 'PBillNo',
+    'VisitTitle',
     // 'BillAmount',
     // 'BillId',
     'action',
@@ -139,8 +140,9 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
     if (this._ActRoute.url == '/opd/appointment') {
 
-      this.menuActions.push('Add Visit');
+      this.menuActions.push('Add New Visit');
       this.menuActions.push('Edit Visit');
+      this.menuActions.push('Assign Visit Information');
       this.menuActions.push('Bill');
 
     }
@@ -267,8 +269,6 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
   getVisitUpdate(contact) {
-
-
     const dialogRef = this._matDialog.open(NewVistDateComponent,
       {
         maxWidth: "75vw",
@@ -279,7 +279,6 @@ export class PatientScreenBillDetailComponent implements OnInit {
         }
       });
     dialogRef.afterClosed().subscribe(result => {
-
     });
   }
 
@@ -361,20 +360,11 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
   }
 
-
-
-
-
   // field validation 
   // get f() { return this._AppointmentService.myFilterform.controls; }
   selectRow(row) {
     this.selectRow = row;
   }
-
-
-
-
-
   getTemplate() {
     let query = 'select TempId,TempDesign,TempKeys as TempKeys from Tg_Htl_Tmp where TempId=2';
     this._AppointmentService.getTemplate(query).subscribe((resData: any) => {
@@ -512,36 +502,6 @@ export class PatientScreenBillDetailComponent implements OnInit {
         this.sIsLoading = '';
       }
     }
-    else if (m == "Invoice Bill") {
-      let xx = {
-        RegNo: contact.RegNo,
-        RegId: contact.RegId,
-        AdmissionID: contact.VisitId,
-        PatientName: contact.PatientName,
-        Doctorname: contact.Doctorname,
-        AdmDateTime: contact.AdmDateTime,
-        AgeYear: contact.AgeYear,
-        ClassId: contact.ClassId,
-        ClassName: contact.ClassName,
-        TariffName: contact.TariffName,
-        TariffId: contact.TariffId,
-        VisitId: contact.VisitId,
-        VistDateTime: contact.VistDateTime
-      };
-      const dialogRef = this._matDialog.open(InvoiceBillMappingComponent,
-        {
-          maxWidth: "65%",
-          height: '800px',
-          width: '100%',
-          data: {
-            registerObj: xx,
-          }
-        });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed - Insert Action', result);
-        this.getVistdetaillist();
-      });
-    }
     else if (m == "Add Visit") {
       var m_data1 = {
         "VisitId": contact.VisitId,
@@ -624,9 +584,24 @@ export class PatientScreenBillDetailComponent implements OnInit {
         this.getVistdetaillist();
       });
     }
+    else if (m == "Assign Visit Information") {
+      console.log(contact);
+      const dialogRef = this._matDialog.open(AssignVisitInforComponent,
+        {
+          maxWidth: "75vw",
+          height: '290px',
+          width: '100%',
+          data: {
+            registerObj: contact,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+        this.getVistdetaillist();
+      });
+    }
     error => {
       this.sIsLoading = '';
-
     }
 
 

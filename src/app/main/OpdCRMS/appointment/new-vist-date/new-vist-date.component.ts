@@ -130,9 +130,7 @@ export class NewVistDateComponent implements OnInit {
            
 
     if (this.data) {
-    
       this.registerObj = this.data.registerObj;
-
       this.setDropdownObjs1();
     }
 
@@ -147,16 +145,12 @@ export class NewVistDateComponent implements OnInit {
     const ss = this.DoctorList.find(c => c.DoctorId == this.registerObj.DoctorId);
     this.VisitFormGroup.get('DoctorID').setValue(ss);
 
-    
-
     this.VisitFormGroup.updateValueAndValidity();
     
   }
  
   createVisitdetailForm() {
     return this.formBuilder.group({
-      
-    
       DoctorId: '',
       DoctorID: '',
       DepartmentId: '',
@@ -170,8 +164,7 @@ export class NewVistDateComponent implements OnInit {
       RefDocId: '',
       Doctorname: '',
       RefDocName: '',
-          IsMark: '',
-      
+      IsMark: '',
       Comments: '',
       Intime: '',
       OutTime: ''

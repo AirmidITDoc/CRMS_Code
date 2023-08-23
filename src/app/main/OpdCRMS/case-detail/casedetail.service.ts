@@ -61,7 +61,9 @@ export class CasedetailService {
         Institution:' ',
         AgreementFileName: '',
         CompanyId:'',
-        StudyId:''
+        StudyId:'',
+        StudyPrefix:'',
+        StudyNumber:0
     });
   }
 

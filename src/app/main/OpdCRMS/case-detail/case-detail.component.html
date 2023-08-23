@@ -205,6 +205,26 @@
                                         </mat-cell>
                                     </ng-container>
 
+                                    <ng-container matColumnDef="StudyPrefix">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
+                                            StudyPrefix
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
+                                            style="margin-top: 1px;">
+                                            {{contact.StudyPrefix}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="StudyNumber">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
+                                            StudyNumber
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
+                                            style="margin-top: 1px;">
+                                            {{contact.StudyNumber}}
+                                        </mat-cell>
+                                    </ng-container>
+
                                     <ng-container matColumnDef="StudyStartDate">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
                                             fxShow.gt-md>StudyStartDate

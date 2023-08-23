@@ -381,6 +381,8 @@ export class CaseDetail {
   BillNo: any;
   StudyId: any;
   operation: any;
+  StudyPrefix: any;
+  StudyNumber: any;
   /**
    * Constructor
    *
@@ -401,7 +403,6 @@ export class CaseDetail {
       this.Investigator = CaseDetail.Investigator || '';
       this.Institution = CaseDetail.Institution || '';
       this.AgreementFileName = CaseDetail.AgreementFileName || '';
-
       this.PatientName = CaseDetail.PatientName || '';
       this.RegNo = CaseDetail.RegNo || '';
       this.MobileNo = CaseDetail.MobileNo || '';
@@ -409,6 +410,8 @@ export class CaseDetail {
       this.TotalBillAmt = CaseDetail.TotalBillAmt || '';
       this.BillNo = CaseDetail.BillNo || 0;
       this.StudyId = CaseDetail.StudyId || 0;
+      this.StudyPrefix = CaseDetail.StudyPrefix || '';
+      this.StudyNumber = CaseDetail.StudyNumber || 0;
       this.operation = CaseDetail.operation || 0;
     }
   }

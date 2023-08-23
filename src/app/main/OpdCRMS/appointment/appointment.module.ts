@@ -49,6 +49,7 @@ import { BrowseInvoiceListComponent } from './browse-invoice-list/browse-invoice
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { PatientScreenBillDetailComponent } from './patient-screen-bill-detail/patient-screen-bill-detail.component';
+import { AssignVisitInforComponent } from './assign-visit-infor/assign-visit-infor.component';
 
 
 const routes: Routes = [
@@ -71,8 +72,7 @@ const routes: Routes = [
         FileUploadComponent,
         ImageUploadComponent,
         PatientScreenBillDetailComponent,
-        
-      
+        AssignVisitInforComponent,
     ],
     imports: [
         RouterModule.forChild(routes),

@@ -89,9 +89,8 @@ export class AppointmentComponent implements OnInit {
   ngOnInit(): void {
 
     if (this._ActRoute.url == '/opd/appointment') {
-
       this.menuActions.push('Update Registration');
-      this.menuActions.push('Invoice Bill');
+      // this.menuActions.push('Invoice Bill');
       // this.menuActions.push('Upload Document');
     } else if (this._ActRoute.url == '/opd/bill') {
       this.menuActions.push('New Bill');
@@ -501,8 +500,6 @@ export class AppointmentComponent implements OnInit {
 
 
   newappointmentSchdule() {
-
-
     const dialogRef = this._matDialog.open(NewAppointmentComponent,
       {
         maxWidth: "95vw",

@@ -59,6 +59,8 @@ export class CaseDetailComponent implements OnInit {
     'Institution',
     'StudyStartDate',
     'StudyEndDate',
+    'StudyPrefix',
+    'StudyNumber',
     'buttons',
   ];
 
@@ -337,13 +339,10 @@ export class CaseDetailComponent implements OnInit {
 
       }
     }
- 
-   
   }
 
 
   newCaseDetail() {
-
     const dialogRef = this._matDialog.open(NewCaseDetailComponent,
       {
         maxWidth: "85vw",
