@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class StudyServicesService {
   studyServicesFormGroup: FormGroup;
   myFilterform: FormGroup;
-  
+  myStudyServiceform: FormGroup;
   now = Date.now();
   sIsLoading: string = '';
   constructor(public _httpClient: HttpClient,
@@ -17,6 +17,7 @@ export class StudyServicesService {
   
     this.studyServicesFormGroup = this.createStudyservicesForm();
     this.myFilterform = this.filterForm();
+    this.myStudyServiceform =this.createStudyServiceUpdate();
   }
 
   filterForm(): FormGroup {
@@ -46,6 +47,20 @@ export class StudyServicesService {
       TotalAmount:' ',
       StudyId:''
     });
+  }
+  createStudyServiceUpdate():FormGroup{
+    return this._formBuilder.group({
+      StudyServicesId:0,
+      VisitName:0,
+      StudyVisitId:0,
+      ServiceId: 0,
+      ServiceName:0,
+      Amount: 0,
+    });
+  }
+  
+  populateStudyServiceUpdateForm(param) {
+    this.myStudyServiceform.patchValue(param);
   }
 
   public getStudyservicebyStuIdList(employee){

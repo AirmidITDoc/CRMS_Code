@@ -6,7 +6,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   providedIn: 'root'
 })
 export class CasedetailService {
-  
+  myStudyScheduleform: FormGroup;
+
   personalFormGroup: FormGroup;
   myFilterform: FormGroup;
   mySaveForm: FormGroup;
@@ -22,6 +23,8 @@ export class CasedetailService {
     // this.mySaveForm = this.saveForm();
     this.studySchFormGroup = this.createstudySchForm();
     this.personalFormGroup = this.createPesonalForm();
+    this.myStudyScheduleform =this.createStudyScheduleUpdate();
+  
     // this.studyServicesFormGroup = this.createStudyservicesForm();
   }
 
@@ -85,6 +88,19 @@ export class CasedetailService {
       DocumentName: '',
       DocumentPath: '',
     });
+  }
+
+  createStudyScheduleUpdate(): FormGroup {
+    return this._formBuilder.group({
+      StudyVisitId:0,
+      VisitDescription: [""],
+      VisitFrequency: 0,
+    });
+  }
+
+ 
+  populateStudyScheduleUpdateForm(param) {
+    this.myStudyScheduleform.patchValue(param);
   }
 
   public StudyInfoInsert(employee){

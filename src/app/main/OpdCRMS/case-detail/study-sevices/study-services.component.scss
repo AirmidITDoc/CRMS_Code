@@ -1,16 +1,18 @@
-app-study-schdule {
+app-study-services{
+
     .p-sm-24 {
         padding: 15px !important;
     }
-    .table1 {
+    .table1{
         .mat-header-row {
-            max-width: 800px;
-            min-width: 800px;
+            max-width: 1000px;
+            min-width: 1000px;
             min-height: 30px;
         }
+
         .mat-row {
-            max-width: 800px;
-            min-width: 800px;
+            max-width: 1000px;
+            min-width: 1000px;
             min-height: 30px;
         }
 
@@ -26,16 +28,16 @@ app-study-schdule {
         }
 
         .mat-column-Amount {
-            width: 100px;
-            max-width: 100px;
-            min-width: 100px;
+            width: 160px;
+            max-width: 160px;
+            min-width: 160px;
             text-align: right;
         }
 
-        .mat-column-VisitDescription {
-            width: 200px;
-            max-width: 200px;
-            min-width: 200px;
+        .mat-column-ServiceName {
+            width: 500px;
+            max-width: 500px;
+            min-width: 500px;
             text-align: left;
             white-space: nowrap;
             overflow: hidden;
@@ -44,17 +46,18 @@ app-study-schdule {
         }
     }
 
-    .mat-column-action {
-        // color: white !important;
-        width: 130px;
-        max-width: 130px;
-        min-width: 130px;
-        text-align: right;
-        justify-content: right;
+        .mat-column-action {
+            width: 120px;
+            max-width: 120px;
+            min-width: 120px;
+            text-align: right;
+            justify-content: right;
 
-    }
-
+        }
    
+    
 
-
-}
+    
+    }
+    
+    

@@ -21,8 +21,6 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import * as converter from 'number-to-words';
 import { MatSelect } from '@angular/material/select';
-import { StudyServicesDetail } from '../../case-detail/study-sevices/study-services/study-services.component';
-import { Console, log } from 'console';
 
 
 @Component({

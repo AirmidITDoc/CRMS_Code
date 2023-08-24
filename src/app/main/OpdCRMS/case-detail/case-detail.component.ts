@@ -16,8 +16,8 @@ import { CaseIdDetailComponent } from 'app/main/dashboard/case-id-detail/case-id
 import { StudyDetailComponent } from './study-detail/study-detail.component';
 import { StudySchduleComponent } from './study-schdule/study-schdule.component';
 import { UploadDocumentComponent } from '../appointment/upload-document/upload-document.component';
-import { StudyServicesComponent } from './study-sevices/study-services/study-services.component';
 import { FileUploadComponent } from '../appointment/file-upload/file-upload.component';
+import { StudyServicesComponent } from './study-sevices/study-services.component';
 
 @Component({
   selector: 'app-case-detail',
@@ -302,7 +302,7 @@ export class CaseDetailComponent implements OnInit {
     }else if (m == "Study Services") {
       
       var m_data = {
-        StudyId:contact.StudyId,
+      StudyId:contact.StudyId,
       ProtocolNo:contact.ProtocolNo,
       ProtocolTitle:contact.ProtocolTitle,
       StudyProduct: contact.StudyProduct,
@@ -319,7 +319,6 @@ export class CaseDetailComponent implements OnInit {
       "operation":"UPDATE"
       }
       this._CasedetailService.populateFormpersonal(m_data);
-
       const dialogRef = this._matDialog.open(StudyServicesComponent,
         {
           maxWidth: "90%",

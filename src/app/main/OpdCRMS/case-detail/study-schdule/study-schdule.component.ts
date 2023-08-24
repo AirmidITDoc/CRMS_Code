@@ -174,13 +174,10 @@ export class StudySchduleComponent implements OnInit {
     let submitData = {
       "deleteStudySchedule": deleteStudySchedule,
       "updateStudySchedule": updateStudySchedulearr
-
     };
-
-    console.log(submitData);
     this._CasedetailService.StudySchduleUpdate(submitData).subscribe(response => {
       if (response) {
-        Swal.fire('StudySchedule Update !', ' StudySchedule Update Successfully !', 'success').then((result) => {
+        Swal.fire('Study Schedule Update!', 'Study Schedule Update Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {
             this._matDialog.closeAll();
           }
@@ -192,7 +189,19 @@ export class StudySchduleComponent implements OnInit {
 
   }
 
+  onUpdate(){
 
+  }
+  
+  onEdit(row) {
+    var m_data = {
+      StudyVisitId: row.StudyVisitId,
+      VisitDescription: row.VisitDescription,
+      VisitFrequency: row.VisitFrequency,
+    };
+    console.log(m_data);
+    this._CasedetailService.populateStudyScheduleUpdateForm(m_data);
+}
 
 }
 
