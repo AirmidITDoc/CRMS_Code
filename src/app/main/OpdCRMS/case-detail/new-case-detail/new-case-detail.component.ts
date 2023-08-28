@@ -17,6 +17,10 @@ import Swal from 'sweetalert2';
 import { MatTableDataSource } from '@angular/material/table';
 import { HttpClient } from '@angular/common/http';
 
+interface Result {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-new-case-detail',
@@ -74,6 +78,12 @@ export class NewCaseDetailComponent implements OnInit {
   fileName = '';
   uploadProgress:number;
   uploadSub: Subscription;
+
+  results: Result[] = [
+    { value: 'FirstVisit', viewValue: 'FirstVisit'},
+    { value: 'LastVisit', viewValue: 'LastVisit' },
+  ];
+
 
   //company filter
   public companyFilterCtrl: FormControl = new FormControl();
@@ -393,6 +403,7 @@ reset() {
           "TotalSubjects": this._CasedetailService.personalFormGroup.get('TotalSubjects').value || 0,
           "TotalVisits": this._CasedetailService.personalFormGroup.get('TotalVisits').value || '',
           "VisitFrequency": this._CasedetailService.personalFormGroup.get('VisitFrequency').value || 0,
+          "visitStartsFrom": this._CasedetailService.personalFormGroup.get('VisitStartsFrom').value || '', //'VisitStartsFrom',
           "sponser": this._CasedetailService.personalFormGroup.get('CompanyId').value.CompanyId || 0,
           "investigator": this._CasedetailService.personalFormGroup.get('Investigator').value || '',
           "institution": this._CasedetailService.personalFormGroup.get('Institution').value.InstitutionId || 0,

@@ -163,6 +163,8 @@ export class CaseDetailComponent implements OnInit {
       Institution: contact.Institution,
       HospitalRepresentative: contact.HospitalRepresentative,
       AgreementFileName: contact.AgreementFileName,
+      StudyPrefix:contact.StudyPrefix,
+      StudyNumber:contact.StudyNumber,
       "operation":"UPDATE"
       }
       this._CasedetailService.populateFormpersonal(m_data);
@@ -201,6 +203,8 @@ export class CaseDetailComponent implements OnInit {
       Institution: contact.Institution,
       HospitalRepresentative: contact.HospitalRepresentative,
       AgreementFileName: contact.AgreementFileName,
+      StudyPrefix:contact.StudyPrefix,
+      StudyNumber:contact.StudyNumber,
       "operation":"UPDATE"
       }
       this._CasedetailService.populateFormpersonal(m_data);
@@ -239,6 +243,8 @@ export class CaseDetailComponent implements OnInit {
       Institution: contact.Institution,
       HospitalRepresentative: contact.HospitalRepresentative,
       AgreementFileName: contact.AgreementFileName,
+      StudyPrefix:contact.StudyPrefix,
+      StudyNumber:contact.StudyNumber,
       "operation":"UPDATE"
       }
       this._CasedetailService.populateFormpersonal(m_data);
@@ -277,6 +283,8 @@ export class CaseDetailComponent implements OnInit {
       Institution: contact.Institution,
       HospitalRepresentative: contact.HospitalRepresentative,
       AgreementFileName: contact.AgreementFileName,
+      StudyPrefix:contact.StudyPrefix,
+      StudyNumber:contact.StudyNumber,
       "operation":"UPDATE"
       }
       this._CasedetailService.populateFormpersonal(m_data);
@@ -300,7 +308,6 @@ export class CaseDetailComponent implements OnInit {
 
       }
     }else if (m == "Study Services") {
-      
       var m_data = {
       StudyId:contact.StudyId,
       ProtocolNo:contact.ProtocolNo,
@@ -316,6 +323,8 @@ export class CaseDetailComponent implements OnInit {
       Institution: contact.Institution,
       HospitalRepresentative: contact.HospitalRepresentative,
       AgreementFileName: contact.AgreementFileName,
+      StudyPrefix:contact.StudyPrefix,
+      StudyNumber:contact.StudyNumber,
       "operation":"UPDATE"
       }
       this._CasedetailService.populateFormpersonal(m_data);

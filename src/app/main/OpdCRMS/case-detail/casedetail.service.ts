@@ -56,17 +56,18 @@ export class CasedetailService {
         Validators.required,
         Validators.maxLength(1),
         Validators.pattern("^[0-9]*$")]],
-        VisitFrequency:'',
-        StudyStartDate:[(new Date()).toISOString()],
-        StudyEndDate:[(new Date()).toISOString()],
-        Sponser: '',
-        Investigator: '',
-        Institution:' ',
-        AgreementFileName: '',
-        CompanyId:'',
-        StudyId:'',
-        StudyPrefix:'',
-        StudyNumber:0
+      VisitFrequency:'',
+      StudyStartDate:[(new Date()).toISOString()],
+      StudyEndDate:[(new Date()).toISOString()],
+      Sponser: '',
+      Investigator: '',
+      Institution:' ',
+      AgreementFileName: '',
+      CompanyId:'',
+      StudyId:'',
+      StudyPrefix:'',
+      StudyNumber:0,
+      VisitStartsFrom:''
     });
   }
 

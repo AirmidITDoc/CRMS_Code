@@ -11,6 +11,11 @@ import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@fuse/animations';
 
+interface Result {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-study-detail',
   templateUrl: './study-detail.component.html',
@@ -48,6 +53,11 @@ export class StudyDetailComponent implements OnInit {
   DocumentList: any = [];
   Study: boolean = false;
 
+  results: Result[] = [
+    { value: 'FirstVisit', viewValue: 'FirstVisit'},
+    { value: 'LastVisit', viewValue: 'LastVisit' },
+  ];
+  
   //company filter
   public companyFilterCtrl: FormControl = new FormControl();
   public filteredCompany: ReplaySubject<any> = new ReplaySubject<any>(1);
@@ -318,6 +328,7 @@ export class StudyDetailComponent implements OnInit {
           "TotalSubjects": this._CasedetailService.personalFormGroup.get('TotalSubjects').value || 0,
           "TotalVisits": this._CasedetailService.personalFormGroup.get('TotalVisits').value || '',
           "VisitFrequency": this._CasedetailService.personalFormGroup.get('VisitFrequency').value || 0,
+          "visitStartsFrom":  this._CasedetailService.personalFormGroup.get('VisitStartsFrom').value || '', //'VisitStartsFrom',
           "sponser": this._CasedetailService.personalFormGroup.get('CompanyId').value.CompanyId || 0,
           "investigator": this._CasedetailService.personalFormGroup.get('Investigator').value || '',
           "institution": this._CasedetailService.personalFormGroup.get('Institution').value.InstitutionId || 0,
@@ -330,7 +341,6 @@ export class StudyDetailComponent implements OnInit {
       };
       console.log(m_data1);
       this._CasedetailService.StudyInfoUpdate(m_data1).subscribe(response => {
-        
         if (response) {
           Swal.fire('Congratulations !', 'Study Detail Updated Successfully !', 'success').then((result) => {
             if (result.isConfirmed) {
