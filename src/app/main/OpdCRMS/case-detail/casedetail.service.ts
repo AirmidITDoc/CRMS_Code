@@ -79,7 +79,8 @@ export class CasedetailService {
       VisitDescription: '',
       Amount: '',
       TotalAmount:' ',
-      VisitFrequency:0
+      VisitFrequency:0,
+      VisitStartsFrom:''
     });
   }
   createdocumentForm() {

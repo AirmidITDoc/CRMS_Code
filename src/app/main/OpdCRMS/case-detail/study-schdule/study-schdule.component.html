@@ -30,7 +30,7 @@
                                                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
                                                     fxLayoutGap="4px">
 
-                                                    <mat-form-field appearance="outline" style="width:40%;">
+                                                    <mat-form-field appearance="outline" style="width:30%;">
                                                         <mat-label>Visit Name</mat-label>
                                                         <input name="VisitName" formControlName="VisitName"
                                                             placeholder="Visit Name" matInput
@@ -49,6 +49,19 @@
                                                         <mat-error class="error"
                                                             *ngIf="_CasedetailService.studySchFormGroup.get('VisitFrequency').invalid && _CasedetailService.studySchFormGroup.get('VisitFrequency').touched">
                                                             Visit Frequency Not Zero</mat-error>
+                                                    </mat-form-field>
+
+                                                    <mat-form-field appearance="outline" style="width:20%;">
+                                                        <!-- <mat-label>VisitStartsFrom</mat-label> -->
+                                                        <!-- <input name="VisitStartsFrom" formControlName="VisitStartsFrom"
+                                                            placeholder="VisitStartsFrom" matInput required> -->
+                
+                                                            <mat-select placeholder="Status" formControlName="VisitStartsFrom"  [(ngModel)]="b_VisitStartsFrom" required>
+                                                                <mat-option *ngFor="let Result of results" [value]="Result.value">
+                                                                    {{ Result.viewValue }}
+                                                                </mat-option>
+                                                            </mat-select>
+                
                                                     </mat-form-field>
 
                                                     <mat-form-field appearance="outline" style="width:20%;">
@@ -123,6 +136,16 @@
                                                         </mat-header-cell>
                                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                                             {{contact.VisitFrequency}}
+                                                        </mat-cell>
+                                                    </ng-container>
+
+                                                    <ng-container matColumnDef="VisitStartsFrom">
+                                                        <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                            fxShow.gt-sm>
+                                                            VisitStartsFrom
+                                                        </mat-header-cell>
+                                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                            {{contact.VisitStartsFrom}}
                                                         </mat-cell>
                                                     </ng-container>
 
@@ -210,6 +233,18 @@
                                                         </mat-error>
                                                     </mat-form-field>
                                                 </div>
+                                                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                                <mat-form-field appearance="outline" fxFlex>
+                                                    <!-- <mat-label>VisitStartsFrom</mat-label> -->
+                                                    <!-- <input name="VisitStartsFrom" formControlName="VisitStartsFrom"
+                                                        placeholder="VisitStartsFrom" matInput required> -->
+                                                        <mat-select placeholder="Status" formControlName="VisitStartsFrom" required>
+                                                            <mat-option *ngFor="let Result of results" [value]="Result.value">
+                                                                {{ Result.viewValue }}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                </mat-form-field>
+                                            </div>
                                             </form>
                                         </div>
                                         <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
