@@ -116,6 +116,11 @@ export class StudySchduleComponent implements OnInit {
     });
   }
 
+  
+  chks(s){
+console.log(s)
+  }
+
   deleteTableRow(element) {
     let index = this.chargeslist.indexOf(element);
     if (index >= 0) {
@@ -162,7 +167,8 @@ export class StudySchduleComponent implements OnInit {
         VisitDescription: this.VisitName,
         Amount: this.Amount,
         VisitFrequency: this.b_VisitFrequency,
-        VisitStartsFrom: this.b_VisitStartsFrom.Name
+        VisitStartsFrom: this.b_VisitStartsFrom.Name,
+        // ConstantId:this._CasedetailService.myStudyScheduleform.get('VisitStartsFrom').value.ConstantId
       });
     this.isLoading = '';
     console.log(this.chargeslist);
@@ -211,13 +217,16 @@ export class StudySchduleComponent implements OnInit {
   }
 
   onUpdate() {
+    debugger
+
+    
     let updateStudySchedule = {};
     updateStudySchedule['Operation'] = 'UPDATE_ID';
     updateStudySchedule['visitName'] = '';
     updateStudySchedule['visitDescription'] = this._CasedetailService.myStudyScheduleform.get('VisitDescription').value;
     updateStudySchedule['visitAmount'] = 0;
     updateStudySchedule['VisitFrequency'] = this._CasedetailService.myStudyScheduleform.get('VisitFrequency').value;
-    updateStudySchedule['VisitStartsFrom'] = this._CasedetailService.myStudyScheduleform.get('VisitStartsFrom').value.Name ||0;
+    updateStudySchedule['VisitStartsFrom'] = this._CasedetailService.myStudyScheduleform.get('VisitStartsFrom').value.Name || '';
     updateStudySchedule['studyVisitId'] = this._CasedetailService.myStudyScheduleform.get('StudyVisitId').value;
     updateStudySchedule['studyId'] = 0;
     updateStudySchedule['UpdatedBy'] = this.accountService.currentUserValue.user.id;
@@ -240,7 +249,7 @@ export class StudySchduleComponent implements OnInit {
   }
 
   onEdit(row) {
-    console.log(row);
+  debugger
     var m_data = {
       StudyVisitId: row.StudyVisitId,
       VisitDescription: row.VisitDescription,
@@ -249,6 +258,11 @@ export class StudySchduleComponent implements OnInit {
     };
     console.log(m_data);
     this._CasedetailService.populateStudyScheduleUpdateForm(m_data);
+
+   
+    // const toSelect = this.vConstantslist.find(c => c.ConstantId == row.ConstantId);
+    // this._CasedetailService.myStudyScheduleform.get('VisitStartsFrom').setValue(toSelect);
+
   }
 
 }

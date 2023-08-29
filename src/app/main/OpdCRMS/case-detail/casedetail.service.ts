@@ -80,8 +80,8 @@ export class CasedetailService {
       Amount: '',
       TotalAmount:' ',
       VisitFrequency:0,
-      VisitStartsFrom:''
-    });
+      VisitStartsFrom:'',
+      });
   }
   createdocumentForm() {
     return this._formBuilder.group({
@@ -94,9 +94,10 @@ export class CasedetailService {
 
   createStudyScheduleUpdate(): FormGroup {
     return this._formBuilder.group({
-      StudyVisitId:0,
+      StudyVisitId:[0],
       VisitDescription: [""],
-      VisitFrequency: 0,
+      VisitFrequency: [0],
+      VisitStartsFrom:['']
     });
   }
 

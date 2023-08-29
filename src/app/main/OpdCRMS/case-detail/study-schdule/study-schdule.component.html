@@ -51,17 +51,20 @@
                                                             Visit Frequency Not Zero</mat-error>
                                                     </mat-form-field>
 
-                                                    <mat-form-field appearance="outline" style="width:20%;">
+                                                     <mat-form-field appearance="outline" style="width:20%;">
                                                         <!-- <mat-label>VisitStartsFrom</mat-label> -->
                                                         <!-- <input name="VisitStartsFrom" formControlName="VisitStartsFrom"
                                                             placeholder="VisitStartsFrom" matInput required> -->
-                                                            <mat-select placeholder="Status" formControlName="VisitStartsFrom" [(ngModel)]="b_VisitStartsFrom" required>
+                                                     <mat-select placeholder="Status" formControlName="VisitStartsFrom" [(ngModel)]="b_VisitStartsFrom" required>
                                                                 <mat-option *ngFor="let a of vConstantslist" [value]="a">
                                                                   {{a.Name}}
                                                                 </mat-option>
                                                             </mat-select>
-                                                    </mat-form-field>
+                                                    </mat-form-field> 
 
+                                                    
+
+                      
                                                     <mat-form-field appearance="outline" style="width:20%;">
                                                         <mat-label>Amount</mat-label>
                                                         <input name="Amount" formControlName="Amount"
