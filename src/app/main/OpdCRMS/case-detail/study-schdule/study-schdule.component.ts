@@ -217,9 +217,6 @@ console.log(s)
   }
 
   onUpdate() {
-    debugger
-
-    
     let updateStudySchedule = {};
     updateStudySchedule['Operation'] = 'UPDATE_ID';
     updateStudySchedule['visitName'] = '';
@@ -249,20 +246,16 @@ console.log(s)
   }
 
   onEdit(row) {
-  debugger
     var m_data = {
       StudyVisitId: row.StudyVisitId,
       VisitDescription: row.VisitDescription,
       VisitFrequency: row.VisitFrequency,
       VisitStartsFrom: row.VisitStartsFrom,
     };
-    console.log(m_data);
     this._CasedetailService.populateStudyScheduleUpdateForm(m_data);
 
-   
-    // const toSelect = this.vConstantslist.find(c => c.ConstantId == row.ConstantId);
-    // this._CasedetailService.myStudyScheduleform.get('VisitStartsFrom').setValue(toSelect);
-
+    const toSelect = this.vConstantslist.find(c => c.Name == row.VisitStartsFrom);
+    this._CasedetailService.myStudyScheduleform.get('VisitStartsFrom').setValue(toSelect);
   }
 
 }
