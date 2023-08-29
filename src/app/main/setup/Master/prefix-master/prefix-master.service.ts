@@ -57,11 +57,15 @@ export class PrefixMasterService {
 
     // Insert Perfix Master
     public insertPrefixMaster(Param) {
-        return this._httpClient.post("PersonalDetails/PrefixSave", Param);
+        return this._httpClient.post("Master/PrefixSave", Param);
     }
 
     // Update Perfix Master
     public updatePrefixMaster(Param) {
-        return this._httpClient.post("PersonalDetails/PrefixUpdate", Param);
+        return this._httpClient.post("Master/PrefixUpdate", Param);
+    }
+
+    populateForm(param) {
+        this.myform.patchValue(param);
     }
 }

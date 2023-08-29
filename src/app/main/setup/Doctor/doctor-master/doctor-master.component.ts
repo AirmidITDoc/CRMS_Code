@@ -150,6 +150,9 @@ export class DoctorMasterComponent implements OnInit {
                 maxHeight: "90vh",
                 width: "100%",
                 height: "100%",
+                data : {
+                  registerObj : m_data,
+                  }
             }
         );
 
@@ -162,8 +165,8 @@ export class DoctorMasterComponent implements OnInit {
     onAdd() {
         const dialogRef = this._matDialog.open(NewDoctorComponent, {
             maxWidth: "80vw",
-            maxHeight: "85vh",
-            width: "100%",
+            maxHeight: "90vh",
+             width: "100%",
             height: "100%",
         });
         dialogRef.afterClosed().subscribe((result) => {
@@ -179,7 +182,7 @@ export class DoctorMaster {
     FirstName: string;
     MiddleName: string;
     LastName: string;
-    DateofBirth: Date;
+    DateofBirth: any;
     Address: string;
     City: string;
     Pin: string;
@@ -191,9 +194,9 @@ export class DoctorMaster {
     IsRefDoc: boolean;
     IsDeleted: boolean;
     DoctorTypeId: number;
-    AgeYear: string;
-    AgeMonth: string;
-    AgeDay: string;
+    AgeYear: any;
+    AgeMonth: any;
+    AgeDay: any;
     PassportNo: string;
     ESINO: string;
     RegNo: string;

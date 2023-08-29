@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import { ReplaySubject, Subject } from 'rxjs';
 import { DoctorMasterService } from '../doctor-master.service';
@@ -30,6 +30,10 @@ export class NewDoctorComponent implements OnInit {
     registerObj: DoctorMaster;
     docobject: DoctorDepartmentDet;
     msg: any;
+    b_AgeYear:any=0;
+    b_AgeMonth:any=0;
+    b_AgeDay:any=0;
+
 
     deptlist: any = [];
 
@@ -56,12 +60,18 @@ export class NewDoctorComponent implements OnInit {
     constructor(
         public _doctorService: DoctorMasterService,
         private accountService: AuthenticationService,
-        // public notification: NotificationServiceService,
+        @Inject(MAT_DIALOG_DATA) public data: any,
         public dialogRef: MatDialogRef<NewDoctorComponent>
     ) { }
 
     ngOnInit(): void {
-        // this.editor = new Editor();
+   
+        if (this.data) {
+            this.registerObj = this.data.registerObj;
+        }
+        else{
+            this._doctorService.myform.reset();
+        }
 
         this.getPrefixNameCombobox();
         this.getGenderNameCombobox();
@@ -85,6 +95,8 @@ export class NewDoctorComponent implements OnInit {
             .subscribe(() => {
                 this.filterDoctortype();
             });
+
+       
     }
 
     // validation
@@ -188,17 +200,21 @@ export class NewDoctorComponent implements OnInit {
         );
     }
     getPrefixNameCombobox() {
-        // this._doctorService.getPrefixMasterCombo().subscribe(data =>this.PrefixcmbList =data);
+        debugger
         this._doctorService.getPrefixMasterCombo().subscribe((data) => {
             this.PrefixcmbList = data;
             this.filteredPrefix.next(this.PrefixcmbList.slice());
+            const ddValue = this.PrefixcmbList.find(c => c.PrefixID == this.data.registerObj.PrefixID);
+            this._doctorService.myform.get('PrefixID').setValue(ddValue);  
+            this.onChangeGenderList(ddValue);  
         });
+
+        // debugger
+        // this.onChangeGenderList(this._doctorService.myform.get('PrefixID').value.PrefixID);  
     }
 
     getGenderNameCombobox() {
-        this._doctorService
-            .getGenderMasterCombo()
-            .subscribe((data) => (this.GendercmbList = data));
+        this._doctorService.getGenderMasterCombo().subscribe((data) => (this.GendercmbList = data));
     }
 
     getDoctortypeNameCombobox() {
@@ -254,7 +270,7 @@ export class NewDoctorComponent implements OnInit {
                                 .value.trim() || "%",
                         middleName: this._doctorService.myform
                             .get("MiddleName")
-                            .value.trim() || "%",
+                            .value || "%",
                         lastName:
                             this._doctorService.myform
                                 .get("LastName")
@@ -267,18 +283,18 @@ export class NewDoctorComponent implements OnInit {
                         city:
                             this._doctorService.myform
                                 .get("City")
-                                .value.trim() || "%",
+                                .value || "%",
                         pin:
                             this._doctorService.myform
                                 .get("Pin")
-                                .value.trim() || "0",
+                                .value || "0",
                         phone:
                             this._doctorService.myform
                                 .get("Phone")
-                                .value.trim() || "0",
+                                .value|| "0",
                         mobile: this._doctorService.myform
                             .get("Mobile")
-                            .value.trim() || "%",
+                            .value || "%",
                         genderId:
                             this._doctorService.myform.get("GenderId").value.GenderId || 0,
                         education:
@@ -306,27 +322,27 @@ export class NewDoctorComponent implements OnInit {
                         ageYear:
                             this._doctorService.myform
                                 .get("AgeYear")
-                                .value.trim() || "0",
+                                .value || "0",
                         ageMonth:
                             this._doctorService.myform
                                 .get("AgeMonth")
-                                .value.trim() || "0",
+                                .value || "0",
                         ageDay:
                             this._doctorService.myform
                                 .get("AgeDay")
-                                .value.trim() || "0",
+                                .value || "0",
                         passportNo:
                             this._doctorService.myform
                                 .get("PassportNo")
-                                .value.trim() || "0",
+                                .value || "0",
                         esino:
                             this._doctorService.myform
                                 .get("ESINO")
-                                .value.trim() || "0",
+                                .value || "0",
                         regNo:
                             this._doctorService.myform
                                 .get("RegNo")
-                                .value.trim() || "0",
+                                .value || "0",
                         regDate:
                             this._doctorService.myform.get("RegDate").value ||
                             "01/01/1900",
@@ -337,18 +353,19 @@ export class NewDoctorComponent implements OnInit {
                             this._doctorService.myform.get("MahRegDate")
                                 .value || "01/01/1900",
                         addedBy: this.accountService.currentUserValue.user.id,
-                        refDocHospitalName:
+                        RefDocHospitalName:
                             this._doctorService.myform
                                 .get("RefDocHospitalName")
-                                .value.trim() || "%",
+                                .value|| "%",
                     },
                     assignDoctorDepartmentDet: data2,
                 };
                 console.log(m_data);
+                debugger
                 this._doctorService
                     .doctortMasterInsert(m_data)
                     .subscribe((data) => {
-                        this.msg = data;
+                        // this.msg = data;
                         if (data) {
                             Swal.fire(
                                 "Saved !",
@@ -370,29 +387,29 @@ export class NewDoctorComponent implements OnInit {
                 // this.notification.success("Record added successfully");
             } else {
                 var data3 = [];
-                for (var val of this._doctorService.myform.get("DepartmentId")
-                    .value) {
-                    var data4 = {
-                        DepartmentId: val,
-                        DoctorId:
-                            this._doctorService.myform.get("DoctorId").value,
-                    };
-                    data3.push(data4);
-                }
+               
+                this.dataSource.data.forEach((element) => {
+                    let DocInsertObj = {};
+                    DocInsertObj['DepartmentId'] = element.DeptId;
+                    DocInsertObj['DoctorId'] = this._doctorService.myform.get("DoctorId").value;
+                    data3.push(DocInsertObj);
+                  });
+
+
                 var m_dataUpdate = {
                     updateDoctorMaster: {
                         DoctorId:
                             this._doctorService.myform.get("DoctorId").value ||
                             "0",
                         PrefixID:
-                            this._doctorService.myform.get("PrefixID").value,
+                            this._doctorService.myform.get("PrefixID").value.PrefixID,
                         FirstName: this._doctorService.myform
                             .get("FirstName")
                             .value.trim() || "%",
                         MiddleName:
                             this._doctorService.myform
                                 .get("MiddleName")
-                                .value.trim() || "%",
+                                .value || "%",
                         LastName: this._doctorService.myform
                             .get("LastName")
                             .value.trim() || "%",
@@ -409,11 +426,11 @@ export class NewDoctorComponent implements OnInit {
                         Pin:
                             this._doctorService.myform
                                 .get("Pin")
-                                .value.trim() || "0",
+                                .value || "0",
                         Phone:
                             this._doctorService.myform
                                 .get("Phone")
-                                .value.trim() || "0",
+                                .value || "0",
                         Mobile: this._doctorService.myform
                             .get("Mobile")
                             .value.trim(),
@@ -446,26 +463,26 @@ export class NewDoctorComponent implements OnInit {
                         AgeYear:
                             this._doctorService.myform
                                 .get("AgeYear")
-                                .value.trim() || "0",
+                                .value || "0",
                         AgeMonth:
                             this._doctorService.myform
                                 .get("AgeMonth")
-                                .value.trim() || "0",
+                                .value || "0",
                         AgeDay: this._doctorService.myform
                             .get("AgeDay")
-                            .value.trim() || "0",
+                            .value || "0",
                         PassportNo:
                             this._doctorService.myform
                                 .get("PassportNo")
-                                .value.trim() || "0",
+                                .value || "0",
                         ESINO:
                             this._doctorService.myform
                                 .get("ESINO")
-                                .value.trim() || "0",
+                                .value || "0",
                         RegNo:
                             this._doctorService.myform
                                 .get("RegNo")
-                                .value.trim() || "0",
+                                .value || "0",
                         RegDate:
                             this._doctorService.myform.get("RegDate").value ||
                             "01/01/1900", //"01/01/2018",
@@ -478,7 +495,7 @@ export class NewDoctorComponent implements OnInit {
                         RefDocHospitalName:
                             this._doctorService.myform
                                 .get("RefDocHospitalName")
-                                .value.trim() || "%",
+                                .value || "%",
                         UpdatedBy: this.accountService.currentUserValue.user.id,
                     },
                     deleteAssignDoctorToDepartment: {
@@ -516,45 +533,7 @@ export class NewDoctorComponent implements OnInit {
             this.onClose();
         }
     }
-    onEdit(row) {
-        var m_data = {
-            DoctorId: row.DoctorId,
-            PrefixID: row.PrefixID,
-            FirstName: row.ServiceShortDesc.trim(),
-            MiddleName: row.MiddleName.trim(),
-            LastName: row.LastName.trim(),
-            DateofBirth: row.DateofBirth,
-            Address: row.Address.trim(),
-            City: row.City.trim(),
-            Pin: row.Pin.trim(),
-            Phone: row.Phone.trim(),
-            Mobile: row.Mobile.trim(),
-            GenderId: row.GenderId,
-            Education: row.Education.trim(),
-            IsConsultant: Boolean(JSON.stringify(row.IsConsultant)),
-            IsRefDoc: Boolean(JSON.stringify(row.IsRefDoc)),
-            IsDeleted: Boolean(JSON.stringify(row.IsDeleted)),
-            DoctorTypeId: row.DoctorTypeId,
-            AgeYear: row.AgeYear.trim(),
-            AgeMonth: row.AgeMonth.trim(),
-            AgeDay: row.AgeDay.trim(),
-            PassportNo: row.PassportNo.trim(),
-            ESINO: row.ESINO.trim(),
-            RegNo: row.RegNo.trim(),
-            RegDate: row.RegDate,
-            MahRegNo: row.MahRegNo.trim(),
-            MahRegDate: row.MahRegDate,
-            AddedByName: row.AddedByName.trim(),
-            RefDocHospitalName: row.RefDocHospitalName.trim(),
-            UpdatedBy: row.UpdatedBy,
-            DepartmentId: row.DepartmentId,
-            DepartmentName: row.DepartmentName.trim(),
-        };
-
-        this._doctorService.populateForm(m_data);
-        console.log(row);
-    }
-
+    
     onClear() {
         this._doctorService.myform.reset();
     }
@@ -563,15 +542,28 @@ export class NewDoctorComponent implements OnInit {
         this.dialogRef.close();
     }
 
+    onChangeDateofBirth(DateOfBirth) {
+        if (DateOfBirth) {
+          const todayDate = new Date();
+          const dob = new Date(DateOfBirth);
+          const timeDiff = Math.abs(Date.now() - dob.getTime());
+          this.b_AgeYear = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
+          this.b_AgeMonth = Math.abs(todayDate.getMonth() - dob.getMonth());
+          this.b_AgeDay = Math.abs(todayDate.getDate() - dob.getDate());
+        //   this.registerObj.DateofBirth = DateOfBirth;
+        //   this._doctorService.myform.get('DateOfBirth').setValue(DateOfBirth);
+        }
+    
+      }
+
     onChangeGenderList(prefixObj) {
+        debugger
         if (prefixObj) {
             this._doctorService
                 .getGenderCombo(prefixObj.PrefixID)
                 .subscribe((data) => {
                     this.GendercmbList = data;
-                    this._doctorService.myform
-                        .get("GenderId")
-                        .setValue(this.GendercmbList[0]);
+                    this._doctorService.myform.get("GenderId").setValue(this.GendercmbList[0]);
                     // this.selectedGender = this.GenderList[0];
                     this.selectedGenderID = this.GendercmbList[0].GenderId;
                 });

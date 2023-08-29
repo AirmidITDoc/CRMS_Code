@@ -89,9 +89,10 @@
   </div>
 
   <div>
+    
     <mat-form-field appearance="outline" fxFlex>
       <input matInput [matDatepicker]="picker" placeholder="Choose a DateofBirth" name="DateofBirth"
-        formControlName="DateofBirth">
+        formControlName="DateofBirth"  (dateChange)="onChangeDateofBirth($event.value)">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
@@ -99,14 +100,14 @@
 
     <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
       <input name="AgeYear" formControlName="AgeYear" matInput
-        [ngClass]="{ 'is-invalid': submitted && f.AgeYear.errors }" placeholder="Enter AgeYear">
+        [ngClass]="{ 'is-invalid': submitted && f.AgeYear.errors }" placeholder="Enter AgeYear" [(ngModel)]="b_AgeYear">
       <span class="error" *ngIf="f.AgeYear.invalid && f.AgeYear.touched">AgeYear required Enter only 4 Number</span>
     </mat-form-field>
     &nbsp;&nbsp;&nbsp;
 
     <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
       <input name="AgeMonth" formControlName="AgeMonth" matInput
-        [ngClass]="{ 'is-invalid': submitted && f.AgeMonth.errors }" placeholder="Enter AgeMonth">
+        [ngClass]="{ 'is-invalid': submitted && f.AgeMonth.errors }" placeholder="Enter AgeMonth" [(ngModel)]="b_AgeMonth">
       <span class="error" *ngIf="f.AgeMonth.invalid && f.AgeMonth.touched">AgeMonth required Enter only 1-12
         Number</span>
     </mat-form-field>
@@ -114,7 +115,7 @@
 
     <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
       <input name="AgeDay" formControlName="AgeDay" matInput [ngClass]="{ 'is-invalid': submitted && f.AgeDay.errors }"
-        placeholder="Enter AgeDay">
+        placeholder="Enter AgeDay" [(ngModel)]="b_AgeDay">
       <span class="error" *ngIf="f.AgeDay.invalid && f.AgeDay.touched">AgeDay required Enter only 1-31 Number</span>
     </mat-form-field>
 
@@ -318,9 +319,9 @@
 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
   <div class="button-row">
     <button mat-raised-button color="primary" type="submit" (click)="onSubmit()"
-      [disabled]="_doctorService.myform.invalid">Save</button>
+    >Save</button>
     <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
-
+<!--   [disabled]="_doctorService.myform.invalid" -->
   </div>
 </div>
 <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar></div>

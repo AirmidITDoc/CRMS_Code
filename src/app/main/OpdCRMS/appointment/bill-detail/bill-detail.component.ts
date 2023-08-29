@@ -370,10 +370,17 @@ export class BillDetailComponent implements OnInit {
     if (obj.IsDocEditable) {
 
       this.isDoctor = true;
+      this.registeredForm.get('DoctorID').reset();
+      this.registeredForm.get('DoctorID').setValidators([Validators.required]);
+      this.registeredForm.get('DoctorID').enable();
+      
     } else {
 
       this.isDoctor = false;
-
+      this.registeredForm.get('DoctorID').reset();
+      this.registeredForm.get('DoctorID').setValidators([Validators.required]);
+      this.registeredForm.get('DoctorID').enable();
+      
     }
   }
 

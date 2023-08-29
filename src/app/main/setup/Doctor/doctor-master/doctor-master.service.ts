@@ -43,7 +43,7 @@ export class DoctorMasterService {
                     Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
                 ],
             ],
-            DateofBirth:[{ value: this.currentDate }],
+            DateofBirth:[],
             Address: [""],
             City: ["", Validators.pattern("[a-zA-Z]+$")],
             Pin: ["", [Validators.minLength(6), Validators.maxLength(6)]],

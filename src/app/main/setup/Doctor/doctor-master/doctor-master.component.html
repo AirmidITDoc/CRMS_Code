@@ -11,6 +11,10 @@
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     Doctor Master
                 </span>
+
+                <button mat-raised-button (click)="onAdd()" fxLayoutAlign="center center" style="margin-left: 1600px;">
+                    <mat-icon color="Primary" title=" Doctor Form ">how_to_reg</mat-icon>
+                </button>
             </div>
         </div>
         <!-- / APP TITLE -->
@@ -33,66 +37,45 @@
 
 
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
-                    <div fxFlex.gt-sm="90%" fxFlex>
+                    <div fxFlex.gt-sm="99%" fxFlex>
+                        <div fxlayout="row" style="
+                        background-color: white;
+                        padding: 5px 10px 5px 10px;">
+                           <form [formGroup]="_doctorService.myformSearch">
+                            <div class="dialog-content-wrapper">
 
+                                <mat-form-field class="mr-sm-12" fxFlex>
+                                    <input matInput placeholder="Search --> Doctor First Name"
+                                        autocomplete="off" name="DoctorNameSearch"
+                                        formControlName="DoctorNameSearch" (keyup)="onSearch()">
 
-                        <div fxlayout="row" style="background-color: white; padding: 5px 10px 5px 10px;">
+                                    <button mat-button matSuffix [ngStyle]="{'color':'white'}"
+                                        mat-icon-button aria-label="Clear" (click)="onSearchClear()">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
 
-                            <mat-accordion class="example-headers-align">
+                                </mat-form-field>
 
-                                <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(0)">
+                                <mat-radio-group name="IsDeletedSearch"
+                                    formControlName="IsDeletedSearch" value='2'
+                                    fxLayoutAlign="center center">
+                                    <mat-radio-button value='2'>All</mat-radio-button>
+                                    <mat-radio-button value='0'>IsActive</mat-radio-button>
+                                    <mat-radio-button value='1'>IsDeactive</mat-radio-button>
+                                </mat-radio-group>
 
-                                    <mat-expansion-panel-header style="font-size: small;font-weight: bold;">
-                                        <mat-panel-title>
-                                            Search data---->
-                                        </mat-panel-title>
-                                        <mat-panel-description>
-                                            Doctor First name
-                                        </mat-panel-description>
-                                    </mat-expansion-panel-header>
+                                <button mat-raised-button style="background-color: #FBF8EF;"
+                                    (click)="onSearch()">Search
 
-                                    <div fxlayout="row" style="background-color: white; padding: 5px 5px 5px 5px;">
-                                        <form [formGroup]="_doctorService.myformSearch">
-                                            <div class="dialog-content-wrapper">
+                                    <mat-icon>search</mat-icon>
+                                </button>
 
-                                                <mat-form-field class="mr-sm-12" fxFlex>
-                                                    <input matInput placeholder="Search --> Doctor First Name"
-                                                        autocomplete="off" name="DoctorNameSearch"
-                                                        formControlName="DoctorNameSearch" (keyup)="onSearch()">
-
-                                                    <button mat-button matSuffix [ngStyle]="{'color':'white'}"
-                                                        mat-icon-button aria-label="Clear" (click)="onSearchClear()">
-                                                        <mat-icon>close</mat-icon>
-                                                    </button>
-
-                                                </mat-form-field>
-
-                                                <mat-radio-group name="IsDeletedSearch"
-                                                    formControlName="IsDeletedSearch" value='2'
-                                                    fxLayoutAlign="center center">
-                                                    <mat-radio-button value='2'>All</mat-radio-button>
-                                                    <mat-radio-button value='0'>IsActive</mat-radio-button>
-                                                    <mat-radio-button value='1'>IsDeactive</mat-radio-button>
-                                                </mat-radio-group>
-
-                                                <button mat-raised-button style="background-color: #FBF8EF;"
-                                                    (click)="onSearch()">Search
-
-                                                    <mat-icon>search</mat-icon>
-                                                </button>
-
-                                            </div>
-                                        </form>
-                                    </div>
-                                </mat-expansion-panel>
-                            </mat-accordion>
-
+                            </div>
+                        </form>
                         </div>
 
-
-                        <div fxlayout="row">
-                            <div style="width: 100%;">
-                                <mat-table #table matSort [dataSource]="DSDoctorMasterList"
+                        <div style="width: 100%;">
+                            <mat-table #table matSort [dataSource]="DSDoctorMasterList"
                                     [@animateStagger]="{value:'50'}" style="overflow:auto">
 
                                     <ng-container matColumnDef="DoctorId">
@@ -264,7 +247,7 @@
                                     </ng-container>
 
 
-                                    <ng-container matColumnDef="action" stickyEnd>
+                                    <ng-container matColumnDef="action" stickyEnd style="color: #FBF8EF;">
                                         <mat-header-cell *matHeaderCellDef class="table-actions"> Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
@@ -298,26 +281,23 @@
 
 
                                 </mat-table>
+                            <mat-card *ngIf="isLoading"
+                                style="display: flex; justify-content: center; align-items: center; background: white;">
+                                <mat-progress-spinner color="primary" mode="indeterminate">
+                                </mat-progress-spinner>
+                            </mat-card>
 
 
-
-                                <mat-card *ngIf="isLoading"
-                                    style="display: flex; justify-content: center; align-items: center; background: white;">
-                                    <mat-progress-spinner color="primary" mode="indeterminate">
-                                    </mat-progress-spinner>
-                                </mat-card>
-
-                            </div>
-                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="15"
-                                showFirstLastButtons></mat-paginator>
                         </div>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="16"
+                            showFirstLastButtons></mat-paginator>
                     </div>
-                    <div fxFlex.gt-sm="10%" fxFlex style="background-color: rgb(255, 255, 255);">
-                        <button mat-raised-button style="background-color:cadetblue;border:blue;" (click)="onAdd()">Add
+                    <!-- <div fxFlex.gt-sm="20%" fxFlex style="background-color: white;">
+                        <button mat-raised-button color="pine" (click)="onAdd()">Add
                             <mat-icon>add_to_photos</mat-icon>
                         </button>
 
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
