@@ -133,18 +133,13 @@
                                 readonly>
                         </mat-form-field>
                         <mat-form-field appearance="outline" fxFlex>
-                            <!-- <mat-label>VisitStartsFrom</mat-label> -->
-                            <!-- <input name="VisitStartsFrom" formControlName="VisitStartsFrom"
-                                placeholder="VisitStartsFrom" matInput required> -->
-
-                                <mat-select placeholder="OFFLINE" formControlName="VisitStartsFrom" required>
-                                    <mat-option *ngFor="let Result of results" [value]="Result.value">
-                                        {{ Result.viewValue }}
-                                    </mat-option>
-                                </mat-select>
-
+                            <mat-select placeholder="Status" formControlName="VisitStartsFrom" required>
+                                <mat-option *ngFor="let Result of vConstantslist" [value]="Result">
+                                    {{Result.Name}}
+                                </mat-option>
+                            </mat-select>
                         </mat-form-field>
-                        
+
                     </div>
                     <div class="footer-navigation-container" fxLayout.gt-xs="row"
                         style="float: right;margin-top:100px !important;">

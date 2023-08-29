@@ -145,6 +145,9 @@ export class CasedetailService {
   public StudySchduleUpdate(employee){
     return this._httpClient.post("CRMSTran/Update_UpdateStudySchedule", employee)
   }
+  public Update_UpdateStudyScheduleId(employee){
+    return this._httpClient.post("CRMSTran/Update_UpdateStudyScheduleId", employee)
+  }
 
   public DocumentInsert(employee){
     return this._httpClient.post("CRMSTran/Save_StudyUploadDocument", employee)
@@ -182,5 +185,10 @@ export class CasedetailService {
 
   public getCaseIDCombo(){
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_StudyInformationCombo", {});
+  }
+
+  public getVisitStartsFrom(Params)
+  {
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_Constants",Params);
   }
 }

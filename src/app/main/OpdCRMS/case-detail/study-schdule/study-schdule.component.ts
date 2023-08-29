@@ -12,10 +12,6 @@ import Swal from 'sweetalert2';
 import { CaseDetail } from '../edit-casedetail/edit-casedetail.component';
 import { fuseAnimations } from '@fuse/animations';
 
-interface Result {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-study-schdule',
@@ -56,6 +52,8 @@ export class StudySchduleComponent implements OnInit {
   VisitList: any = []
 
   Study: boolean = false;
+  
+  vConstantslist: any = [];
 
   displayedColumns = [
     'VisitName',
@@ -69,12 +67,6 @@ export class StudySchduleComponent implements OnInit {
   dataSource1 = new MatTableDataSource<VisitDetail>();
   paginator: any;
   sort: any;
-
-  results: Result[] = [
-    { value: 'FirstVisit', viewValue: 'FirstVisit' },
-    { value: 'LastVisit', viewValue: 'LastVisit' },
-  ];
-
 
   constructor(public _CasedetailService: CasedetailService,
     private formBuilder: FormBuilder,
@@ -90,7 +82,11 @@ export class StudySchduleComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getStudySchedule();
+    this.getVisitStartsFromlist();
+  }
 
+  getStudySchedule(){
     if (this.data) {
       this.registerObj = this.data.registerObj;
       this.Study = true;
@@ -110,6 +106,15 @@ export class StudySchduleComponent implements OnInit {
     }
   }
 
+  getVisitStartsFromlist() {
+    var mdata = {
+      ConstanyType: "VisitStartsFrom"
+    };
+    this._CasedetailService.getVisitStartsFrom(mdata).subscribe(data => {
+      this.vConstantslist = data;
+      console.log(this.vConstantslist);
+    });
+  }
 
   deleteTableRow(element) {
     let index = this.chargeslist.indexOf(element);
@@ -157,7 +162,7 @@ export class StudySchduleComponent implements OnInit {
         VisitDescription: this.VisitName,
         Amount: this.Amount,
         VisitFrequency: this.b_VisitFrequency,
-        VisitStartsFrom: this.b_VisitStartsFrom
+        VisitStartsFrom: this.b_VisitStartsFrom.Name
       });
     this.isLoading = '';
     console.log(this.chargeslist);
@@ -212,7 +217,7 @@ export class StudySchduleComponent implements OnInit {
     updateStudySchedule['visitDescription'] = this._CasedetailService.myStudyScheduleform.get('VisitDescription').value;
     updateStudySchedule['visitAmount'] = 0;
     updateStudySchedule['VisitFrequency'] = this._CasedetailService.myStudyScheduleform.get('VisitFrequency').value;
-    updateStudySchedule['VisitStartsFrom'] = 'FirstVisit';//this._CasedetailService.myStudyScheduleform.get('VisitStartsFrom').value.viewValue ||0;
+    updateStudySchedule['VisitStartsFrom'] = this._CasedetailService.myStudyScheduleform.get('VisitStartsFrom').value.Name ||0;
     updateStudySchedule['studyVisitId'] = this._CasedetailService.myStudyScheduleform.get('StudyVisitId').value;
     updateStudySchedule['studyId'] = 0;
     updateStudySchedule['UpdatedBy'] = this.accountService.currentUserValue.user.id;
@@ -221,11 +226,11 @@ export class StudySchduleComponent implements OnInit {
       "updateStudyScheduleId": updateStudySchedule
     };
     console.log(submitData)
-    this._CasedetailService.StudySchduleUpdate(submitData).subscribe(response => {
+    this._CasedetailService.Update_UpdateStudyScheduleId(submitData).subscribe(response => {
       if (response) {
         Swal.fire('Study Schedule Update!', 'Study Schedule Update Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {
-            this._matDialog.closeAll();
+            this.getStudySchedule();
           }
         });
       } else {
@@ -235,6 +240,7 @@ export class StudySchduleComponent implements OnInit {
   }
 
   onEdit(row) {
+    console.log(row);
     var m_data = {
       StudyVisitId: row.StudyVisitId,
       VisitDescription: row.VisitDescription,

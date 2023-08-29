@@ -43,6 +43,7 @@ export class StudyDetailComponent implements OnInit {
   VisitName: any;
   VisitDescription: any;
   Amount: any;
+  vConstantslist: any = [];
 
  
   StudyAmount: any;
@@ -103,7 +104,7 @@ export class StudyDetailComponent implements OnInit {
 
     this.getCompanyList();
     this.getInstitutionList();
-    
+    this.getVisitStartsFromlist();
     this.DocumentComboList();
 
     this.companyFilterCtrl.valueChanges
@@ -125,6 +126,16 @@ export class StudyDetailComponent implements OnInit {
       });
 
 
+  }
+
+  getVisitStartsFromlist() {
+    var mdata = {
+      ConstanyType: "VisitStartsFrom"
+    };
+    this._CasedetailService.getVisitStartsFrom(mdata).subscribe(data => {
+      this.vConstantslist = data;
+      console.log(this.vConstantslist);
+    });
   }
 
   closeDialog() {
@@ -260,10 +271,8 @@ export class StudyDetailComponent implements OnInit {
     var mdata = {
       ConstanyType: "CaseDocuments"
     };
-
     this._CasedetailService.getDocumentList(mdata).subscribe(data => {
       this.DocumentList = data;
-      
       this.filteredDocument.next(this.DocumentList.slice());
      
     });

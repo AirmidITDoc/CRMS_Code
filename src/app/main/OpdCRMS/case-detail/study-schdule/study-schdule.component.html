@@ -55,13 +55,11 @@
                                                         <!-- <mat-label>VisitStartsFrom</mat-label> -->
                                                         <!-- <input name="VisitStartsFrom" formControlName="VisitStartsFrom"
                                                             placeholder="VisitStartsFrom" matInput required> -->
-                
-                                                            <mat-select placeholder="Status" formControlName="VisitStartsFrom"  [(ngModel)]="b_VisitStartsFrom" required>
-                                                                <mat-option *ngFor="let Result of results" [value]="Result.value">
-                                                                    {{ Result.viewValue }}
+                                                            <mat-select placeholder="Status" formControlName="VisitStartsFrom" [(ngModel)]="b_VisitStartsFrom" required>
+                                                                <mat-option *ngFor="let a of vConstantslist" [value]="a">
+                                                                  {{a.Name}}
                                                                 </mat-option>
                                                             </mat-select>
-                
                                                     </mat-form-field>
 
                                                     <mat-form-field appearance="outline" style="width:20%;">
@@ -239,8 +237,8 @@
                                                     <!-- <input name="VisitStartsFrom" formControlName="VisitStartsFrom"
                                                         placeholder="VisitStartsFrom" matInput required> -->
                                                         <mat-select placeholder="Status" formControlName="VisitStartsFrom" required>
-                                                            <mat-option *ngFor="let Result of results" [value]="Result.value">
-                                                                {{ Result.viewValue }}
+                                                            <mat-option *ngFor="let a of vConstantslist" [value]="a">
+                                                                {{ a.Name }}
                                                             </mat-option>
                                                         </mat-select>
                                                 </mat-form-field>
