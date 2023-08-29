@@ -54,19 +54,8 @@
                             <form [formGroup]="_CasedetailService.myFilterform" style="padding: 6px 6px 5px 5px;"
                             fusePerfectScrollbar>
                             <div fxLayout="column" fxLayoutAlign="start none">
-                                <br />
-                                <!-- <mat-form-field appearance="outline" style="margin-left: 2%;">
-                                    <mat-label>Enter a date range</mat-label>
-                                    <mat-date-range-input [rangePicker]="picker">
-                                        <input matStartDate formControlName="start" placeholder="Start date" (dateChange)="getCaseList()">
-                                        <input matEndDate formControlName="end" placeholder="End date">
-                                    </mat-date-range-input>
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-date-range-picker #picker></mat-date-range-picker>
-                                </mat-form-field> -->
-
                                 <mat-form-field appearance="outline" fxFlex>
-                                    <mat-label>CaseId</mat-label>
+                                    <mat-label>Protocol Number</mat-label>
                                     <mat-select formControlName="CaseId" name="CaseId"
                                         (selectionChange)="getCaseList()" (datachange)="getCaseList()">
                                         <mat-option></mat-option>
@@ -76,10 +65,10 @@
                                     </mat-select>
                                 </mat-form-field>
                                 
-                                <mat-form-field appearance="outline" fxFlex (keyup)="getCaseList()">
+                                <!-- <mat-form-field appearance="outline" fxFlex (keyup)="getCaseList()">
                                     <mat-label>Protocol Number</mat-label>
                                     <input name="CaseId" formControlName="CaseId" matInput>
-                                </mat-form-field>
+                                </mat-form-field> -->
 
 
                                 <mat-form-field appearance="outline" fxFlex (keyup)="getCaseList()">
@@ -213,6 +202,26 @@
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
                                             style="margin-top: 1px;">
                                             {{contact.Institution}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="StudyPrefix">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
+                                            StudyPrefix
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
+                                            style="margin-top: 1px;">
+                                            {{contact.StudyPrefix}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="StudyNumber">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
+                                            StudyNumber
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md
+                                            style="margin-top: 1px;">
+                                            {{contact.StudyNumber}}
                                         </mat-cell>
                                     </ng-container>
 

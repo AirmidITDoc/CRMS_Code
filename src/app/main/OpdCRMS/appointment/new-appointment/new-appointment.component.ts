@@ -995,7 +995,6 @@ debugger;
       let registrationSave = {};
       let visitSave = {};
       
-      
       registrationSave['regId'] = 0;
       registrationSave['regDate'] = this.dateTimeObj.date //this.registerObj.RegDate;
       registrationSave['regTime'] = this.dateTimeObj.time;
@@ -1020,15 +1019,14 @@ debugger;
       registrationSave['stateId'] = this.personalFormGroup.get('StateId').value.StateId;
       registrationSave['cityId'] = this.personalFormGroup.get('CityId').value.CityId;
       registrationSave['maritalStatusId'] = this.personalFormGroup.get('MaritalStatusId').value ? this.personalFormGroup.get('MaritalStatusId').value.MaritalStatusId : 0;
-     
       registrationSave['religionId'] = this.personalFormGroup.get('ReligionId').value ? this.personalFormGroup.get('ReligionId').value.ReligionId : 0;
       registrationSave['areaId'] = this.personalFormGroup.get('AreaId').value ? this.personalFormGroup.get('AreaId').value.AreaId : 0;
-     registrationSave['isSeniorCitizen'] = false; //this.personalFormGroup.get('isSeniorCitizen').value ? this.personalFormGroup.get('VillageId').value.VillageId : 0; //this.registerObj.VillageId;
-     registrationSave['RationCardNo'] = '00000'; 
-     registrationSave['IsMember'] =1;// this.personalFormGroup.get('IsMember').value || '';
+      registrationSave['isSeniorCitizen'] = false; //this.personalFormGroup.get('isSeniorCitizen').value ? this.personalFormGroup.get('VillageId').value.VillageId : 0; //this.registerObj.VillageId;
+      registrationSave['RationCardNo'] = '00000'; 
+      registrationSave['IsMember'] =1;// this.personalFormGroup.get('IsMember').value || '';
    
       submissionObj['registrationSave'] = registrationSave;
-debugger;
+
       visitSave['VisitId'] = 0;
       visitSave['RegID'] = 0;
       visitSave['VisitDate'] = this.dateTimeObj.date;
@@ -1038,32 +1036,25 @@ debugger;
       visitSave['PatientTypeId'] = this.VisitFormGroup.get('PatientTypeID').value.PatientTypeId || 0;//.PatientTypeID;//? this.VisitFormGroup.get('PatientTypeID').value.PatientTypeID : 0;
       visitSave['ConsultantDocId'] = this.VisitFormGroup.get('DoctorID').value.DoctorId || 0;//? this.VisitFormGroup.get('DoctorId').value.DoctorId : 0;
       visitSave['RefDocId'] = this.VisitFormGroup.get('DoctorIdOne').value.DoctorId ||0;// ? this.VisitFormGroup.get('DoctorIdOne').value.DoctorIdOne : 0;
-
       visitSave['TariffId'] = this.VisitFormGroup.get('TariffId').value.TariffId ? this.VisitFormGroup.get('TariffId').value.TariffId : 0;
       visitSave['CompanyId'] = this.VisitFormGroup.get('CompanyId').value.CompanyId ? this.VisitFormGroup.get('CompanyId').value.CompanyId : 0;
       visitSave['createdBy'] = this.accountService.currentUserValue.user.id;
       visitSave['IsCancelled'] = 0;
       visitSave['IsCancelledBy'] = 0;
       visitSave['IsCancelledDate'] = '2023-06-22T09:52:54.616Z';
-
       visitSave['ClassId'] = 1; // this.VisitFormGroup.get('ClassId').value.ClassId ? this.VisitFormGroup.get('ClassId').value.ClassId : 0;
       visitSave['DepartmentId'] = this.VisitFormGroup.get('DoctorID').value.DepartmentId;//? this.VisitFormGroup.get('DepartmentId').value.DepartmentId : 0;
-   
       visitSave['PatientOldNew'] = this.Patientnewold;
       visitSave['FirstFollowupVisit'] = 0,// this.VisitFormGroup.get('RelativeAddress').value ? this.VisitFormGroup.get('RelativeAddress').value : '';
       visitSave['appPurposeId'] = 0,//this.VisitFormGroup.get('PurposeId').value.PurposeId;// ? this.VisitFormGroup.get('RelativeAddress').value : '';
       visitSave['FollowupDate'] = "2023-06-22T09:52:54.616Z";
       visitSave['IsMark'] = 0,// this.VisitFormGroup.get('RelatvieMobileNo').value ? this.personalFormGroup.get('MobileNo').value : '';
- 
-    visitSave['Comments'] = this.VisitFormGroup.get('Comments').value ? this.VisitFormGroup.get('Comments').value : '';
-    visitSave['Intime'] = '2023-06-22T09:52:54.616Z';
-    visitSave['outTime'] = '2023-06-22T09:52:54.616Z';
-
-
+      visitSave['Comments'] = this.VisitFormGroup.get('Comments').value ? this.VisitFormGroup.get('Comments').value : '';
+      visitSave['Intime'] = '2023-06-22T09:52:54.616Z';
+      visitSave['outTime'] = '2023-06-22T09:52:54.616Z';
       submissionObj['visitSave'] = visitSave;
 
     
-      console.log(submissionObj);
       this._opappointmentService.appointregInsert(submissionObj).subscribe(response => {
         
         if (response) {

@@ -21,7 +21,7 @@ export class GeturlService {
     };
     // { "mrno": 111023 },
     return this._httpClient
-      .post<any>("http://49.248.20.2:5003/api/Generic/GetByProc?procName=crms_visitdetails", emp, httpOptions)
+      .post<any>("http://49.248.20.2:5006/api/Generic/GetByProc?procName=crms_visitdetails", emp, httpOptions)
       .pipe(catchError((error: HttpErrorResponse) => {
         console.log(error);
         if (error.status === 401) {
@@ -42,7 +42,7 @@ export class GeturlService {
     };
     // { "visitid":2652762 }
     return this._httpClient
-      .post<any>("http://49.248.20.2:5003/api/Generic/GetByProc?procName=crms_bill", emp, httpOptions)
+      .post<any>("http://49.248.20.2:5006/api/Generic/GetByProc?procName=crms_bill", emp, httpOptions)
       .pipe(catchError((error: HttpErrorResponse) => {
         console.log(error);
         if (error.status === 401) {
@@ -62,7 +62,7 @@ export class GeturlService {
     };
     // { "billid": 2623564 }
     return this._httpClient
-      .post<any>("http://49.248.20.2:5003/api/Generic/GetByProc?procName=crms_billdetails", emp, httpOptions)
+      .post<any>("http://49.248.20.2:5006/api/Generic/GetByProc?procName=crms_billdetails", emp, httpOptions)
       .pipe(catchError((error: HttpErrorResponse) => {
         console.log(error);
         if (error.status === 401) {

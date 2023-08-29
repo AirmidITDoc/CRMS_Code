@@ -21,8 +21,6 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import * as converter from 'number-to-words';
 import { MatSelect } from '@angular/material/select';
-import { StudyServicesDetail } from '../../case-detail/study-sevices/study-services/study-services.component';
-import { Console } from 'console';
 
 
 @Component({
@@ -35,8 +33,6 @@ import { Console } from 'console';
 
 
 export class BillDetailComponent implements OnInit {
-
-
   click: boolean = false;
   hasSelectedContacts: boolean;
   paidamt: number;
@@ -52,9 +48,9 @@ export class BillDetailComponent implements OnInit {
   chargeslist1: any = [];
   OPD_IPD_ID: any;
   screenFromString = 'OP-billing';
+
   displayedColumns = [
     // 'checkbox',
-
     'ChargesDate',
     'ServiceName',
     'Price',
@@ -81,6 +77,7 @@ export class BillDetailComponent implements OnInit {
   VisitDateList: any = [];
   ConcessionReasonList: any = [];
   FinalAmt: any;
+  
   DoctorFinalId = 'N';
   b_price = '0';
   b_qty = '1';
@@ -95,6 +92,7 @@ export class BillDetailComponent implements OnInit {
   b_isRad = '';
   b_IsEditable = '';
   b_IsDocEditable = '';
+
   totalamt = 0;
   TotalAmount = 0;
   concessionDiscPer: any = 0;
@@ -176,17 +174,18 @@ export class BillDetailComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.createServForm();
-
-    if (this.data) {
+    
+    if (this.data.registerObj.BillStatus == 1)
+    {
       this.selectedAdvanceObj = this.data.registerObj;
-    }
-    if (this.data1.registerObj.BillStatus == 2) {
       this.getstudywiseservice(this.data.registerObj);
-    } else {
+    }
+    else if (this.data.registerObj.BillStatus == 2)
+    {
+      this.selectedAdvanceObj = this.data.registerObj;
     }
     this.getServiceListCombobox();
     this.getAdmittedDoctorCombo();
-
     this.getBillingClassCombo();
     this.getConcessionReasonList();
 
@@ -281,7 +280,6 @@ export class BillDetailComponent implements OnInit {
     });
   }
 
-
   createServForm() {
     this.ServiceForm = this.formBuilder.group({
       price: ['', Validators.pattern("^[0-9]*$")],
@@ -296,7 +294,6 @@ export class BillDetailComponent implements OnInit {
   //  ===================================================================================
   filterStates(name: string) {
     let tempArr = [];
-
     this.billingServiceList.forEach((element) => {
       if (element.ServiceName.toString().toLowerCase().search(name) !== -1) {
         tempArr.push(element);
@@ -306,8 +303,6 @@ export class BillDetailComponent implements OnInit {
   }
 
   onOptionSelected(selectedItem) {
-
-
     this.b_price = selectedItem.Price
     this.b_totalAmount = selectedItem.Price  //* parseInt(this.b_qty)
     this.b_disAmount = '0';
@@ -348,16 +343,12 @@ export class BillDetailComponent implements OnInit {
   }
 
   getOptionText(option) {
-
     if (!option)
       return '';
     return option.ServiceName;  // + ' ' + option.Price ; //+ ' (' + option.TariffId + ')';
-
   }
 
   getSelectedObj(obj) {
-
-
     this.SrvcName = obj.ServiceName;
     this.b_price = obj.Price;
     this.b_totalAmount = obj.Price;
@@ -365,17 +356,13 @@ export class BillDetailComponent implements OnInit {
     this.serviceId = obj.ServiceId;
     this.b_isPath = obj.IsPathology;
     this.b_isRad = obj.IsRadiology;
-
-
     if (obj.IsDocEditable) {
-
       this.isDoctor = true;
       this.registeredForm.get('DoctorID').reset();
       this.registeredForm.get('DoctorID').setValidators([Validators.required]);
       this.registeredForm.get('DoctorID').enable();
       
     } else {
-
       this.isDoctor = false;
       this.registeredForm.get('DoctorID').reset();
       this.registeredForm.get('DoctorID').setValidators([Validators.required]);
@@ -385,7 +372,6 @@ export class BillDetailComponent implements OnInit {
   }
 
   getTotalAmount(element) {
-
     if (element.Price && element.Qty) {
       let totalAmt;
       totalAmt = parseInt(element.Price) * parseInt(element.Qty);
@@ -393,12 +379,7 @@ export class BillDetailComponent implements OnInit {
       element.NetAmount = totalAmt;
       this.totalAmtOfNetAmt = totalAmt;
       this.getDiscAmount(element);
-
     }
-  }
-
-  toggleSidebar(name): void {
-    this._fuseSidebarService.getSidebar(name).toggleOpen();
   }
 
   getDiscAmount(element) {
@@ -418,10 +399,6 @@ export class BillDetailComponent implements OnInit {
     }
   }
 
-  openBillInfo() {
-    this.isExpanded = !this.isExpanded;
-  }
-
   getNetAmtSum(element) {
 
     let netAmt;
@@ -430,15 +407,11 @@ export class BillDetailComponent implements OnInit {
     this.netPaybleAmt = netAmt;
     this.Chargetot = this.netPaybleAmt;
     this.b_TotalChargesAmount = netAmt;
-
     this.TotalnetPaybleAmt = netAmt;
     return netAmt
-
-
   }
 
   CalNet() {
-
     this.TotalnetPaybleAmt = this.Chargetot;
   }
 
@@ -473,45 +446,6 @@ export class BillDetailComponent implements OnInit {
     }
   }
 
-
-  getChargesList1() {
-    this.chargeslist = [];
-    this.dataSource.data = [];
-    this.isLoading = 'list-loading';
-    let Query = "Select * from lvwAddCharges where IsGenerated=0 and IsPackage=0 and IsCancelled =0 AND OPD_IPD_ID=" + this.selectedAdvanceObj.AdmissionID + " and OPD_IPD_Type=0 Order by Chargesid"
-    this._opappointmentService.getchargesList(Query).subscribe(data => {
-      this.chargeslist = data as ChargesList[];
-      this.dataSource.data = data as ChargesList[];
-      this.getNetAmtSum(this.dataSource.data);
-      this.isLoading = 'list-loaded';
-    },
-      (error) => {
-        this.isLoading = 'list-loaded';
-      });
-  }
-
-  getChargesList() {
-    this.chargeslist = [];
-    this.dataSource.data = [];
-    this.isLoading = 'list-loading';
-    let Query = "Select * from lvwAddCharges where IsGenerated=0 and IsPackage=0 and IsCancelled =0 AND OPD_IPD_ID=" + this.selectedAdvanceObj.AdmissionID + " and OPD_IPD_Type=0 Order by Chargesid"
-    this._opappointmentService.getchargesList(Query).subscribe(data => {
-      this.chargeslist = data as ChargesList[];
-      this.dataSource.data = data as ChargesList[];
-      this.getNetAmtSum(this.dataSource.data);
-      this.getTotalNetAmount();
-      if (this.dataSource.data.length > 0) {
-        this.onSaveOPBill();
-      }
-      this.isLoading = 'list-loaded';
-    },
-      (error) => {
-        this.isLoading = 'list-loaded';
-      });
-  }
-
-
-
   onSaveOPBill() {
     debugger
 
@@ -535,8 +469,8 @@ export class BillDetailComponent implements OnInit {
     InsertBillUpdateBillNoObj['BillDate'] = this.dateTimeObj.date;
     InsertBillUpdateBillNoObj['OPD_IPD_Type'] = 0;
     InsertBillUpdateBillNoObj['AddedBy'] = this.accountService.currentUserValue.user.id,
-      InsertBillUpdateBillNoObj['TotalAdvanceAmount'] = 0,
-      InsertBillUpdateBillNoObj['BillTime'] = this.dateTimeObj.time;
+    InsertBillUpdateBillNoObj['TotalAdvanceAmount'] = 0,
+    InsertBillUpdateBillNoObj['BillTime'] = this.dateTimeObj.time;
     InsertBillUpdateBillNoObj['ConcessionReasonId'] = this.registeredForm.get('ConcessionId').value.ConcessionId || 0;
     InsertBillUpdateBillNoObj['IsSettled'] = 0;
     InsertBillUpdateBillNoObj['IsPrinted'] = 0;
@@ -560,7 +494,7 @@ export class BillDetailComponent implements OnInit {
       let chargesDetailInsert = {};
 
       chargesDetailInsert['ChargesDate'] = this.datePipe.transform(this.currentDate, "MM-dd-yyyy"),
-        chargesDetailInsert['opD_IPD_Type'] = 0,
+      chargesDetailInsert['opD_IPD_Type'] = 0,
         chargesDetailInsert['opD_IPD_Id'] = this.data.registerObj.VisitId
       chargesDetailInsert['serviceId'] = element.ServiceId,
         chargesDetailInsert['price'] = element.Price,
@@ -1080,105 +1014,6 @@ export class BillDetails {
     }
   }
 }
-export class Cal_DiscAmount {
-  BillNo: number;
-
-  constructor(Cal_DiscAmount_OPBillObj) {
-    {
-      this.BillNo = Cal_DiscAmount_OPBillObj.BillNo || 0;
-    }
-  }
-}
-
-export class PathologyReportHeader {
-
-  PathDate: Date;
-  PathTime: Date;
-  OPD_IPD_Type: number;
-  OPD_IPD_Id: number;
-  PathTestID: number;
-  AddedBy: number;
-  ChargeID: number;
-  IsCompleted: Boolean;
-  IsPrinted: Boolean;
-  IsSampleCollection: Boolean;
-  TestType: Boolean;
-
-  /**
-   * Constructor
-   *
-   * @param PathologyReportHeaderObj
-   */
-  constructor(PathologyReportHeaderObj) {
-    {
-      this.PathDate = PathologyReportHeaderObj.PathDate || '';
-      this.PathTime = PathologyReportHeaderObj.PathTime || '';
-      this.OPD_IPD_Type = PathologyReportHeaderObj.OPD_IPD_Type || 0;
-      this.OPD_IPD_Id = PathologyReportHeaderObj.OPD_IPD_Id || 0;
-      this.PathTestID = PathologyReportHeaderObj.PathTestID || 0;
-      this.AddedBy = PathologyReportHeaderObj.AddedBy || 0;
-      this.ChargeID = PathologyReportHeaderObj.ChargeID || 0;
-      this.IsCompleted = PathologyReportHeaderObj.IsCompleted || 0;
-      this.IsPrinted = PathologyReportHeaderObj.IsPrinted || 0;
-      this.IsSampleCollection = PathologyReportHeaderObj.IsSampleCollection || 0;
-      this.TestType = PathologyReportHeaderObj.TestType || 0;
-
-    }
-  }
-}
-
-export class RadiologyReportHeader {
-
-  RadDate: Date;
-  RadTime: Date;
-  OPD_IPD_Type: number;
-  OPD_IPD_Id: number;
-  RadTestID: number;
-  AddedBy: number;
-  IsCancelled: Boolean;
-  ChargeID: number;
-  IsCompleted: Boolean;
-  IsPrinted: Boolean;
-  TestType: Boolean;
-
-  /**
-   * Constructor
-   *
-   * @param RadiologyReportHeaderObj
-   */
-  constructor(RadiologyReportHeaderObj) {
-    {
-      this.RadDate = RadiologyReportHeaderObj.RadDate || '';
-      this.RadTime = RadiologyReportHeaderObj.RadTime || '';
-      this.OPD_IPD_Type = RadiologyReportHeaderObj.OPD_IPD_Type || 0;
-      this.OPD_IPD_Id = RadiologyReportHeaderObj.OPD_IPD_Id || 1;
-      this.RadTestID = RadiologyReportHeaderObj.RadTestID || 0;
-      this.AddedBy = RadiologyReportHeaderObj.AddedBy || 0;
-      this.ChargeID = RadiologyReportHeaderObj.ChargeID || 0;
-      this.IsCompleted = RadiologyReportHeaderObj.IsCompleted || 0;
-      this.IsPrinted = RadiologyReportHeaderObj.IsPrinted || 0;
-      this.TestType = RadiologyReportHeaderObj.TestType || 0;
-
-    }
-  }
-}
-
-export class OPDoctorShareGroupAdmCharge {
-
-  BillNo: number;
-
-  /**
-  * Constructor
-  *
-  * @param OPDoctorShareGroupAdmChargeObj
-  */
-  constructor(OPDoctorShareGroupAdmChargeObj) {
-    {
-      this.BillNo = OPDoctorShareGroupAdmChargeObj.BillNo || 0;
-    }
-  }
-}
-
 
 export class PaymentInsert {
   PaymentId: number;
@@ -1276,8 +1111,6 @@ export class patientinfo {
 
 
 export class AddChargesInsert {
-
-
   ChargeID: number;
   ChargesDate: Date;
   OPD_IPD_Type: number;
@@ -1381,7 +1214,6 @@ export class advanceHeader {
 }
 export class Post {
   BillNo: any;
-
   constructor(Post) {
     {
       this.BillNo = Post.BillNo || 0;
@@ -1389,17 +1221,9 @@ export class Post {
   }
 }
 
-
-
 function takeWhileInclusive(arg0: (p: any) => boolean): import("rxjs").OperatorFunction<unknown, unknown> {
   throw new Error('Function not implemented.');
 }
-// select * from Bill order by 1 desc
-// select * from BillDetails order by 1 desc
-// select * from lvwBill order by 1 desc
-// select * from AddCharges where ChargesId=21
-// select * from ServiceMaster where ServiceId=21
-// exec rptBillPrint 611755
 
 
 export class SearchInforObj {

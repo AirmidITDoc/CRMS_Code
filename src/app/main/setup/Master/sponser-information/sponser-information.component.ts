@@ -74,7 +74,7 @@ DSSponserInformationList = new MatTableDataSource<SponserInformation>();
 
   getServiceMasterList() {
     var Params={
-            "SponserName": this._sponserService.myFilterform.get('SponserName').value + '%' || '%',       
+      "SponserName": this._sponserService.myFilterform.get('SponserName').value + '%' || '%',       
     };
     this._sponserService.getSponserInformationList(Params).subscribe(
         (Menu) => {
@@ -90,18 +90,14 @@ DSSponserInformationList = new MatTableDataSource<SponserInformation>();
 
 
 deleteTableRow(element) {
-  
   let Query = "Update  M_SponserInformation set IsActive=0 where  SponserId=" + element.SponserId + " ";
-  console.log(Query)
     this._sponserService.getdeletemember(Query).subscribe(data => {
      if(data)
      Swal.fire('Success !', 'List Row is Deactivate Successfully', 'success');
-
     });
 }
 
 onEdit(row) {
-  console.log(row);
   var m_data = {
     SponserId:row.SponserId,
     SponserName:row.SponserName,
@@ -121,16 +117,11 @@ onEdit(row) {
     UpdatedBy: row.UpdatedBy,
     UpdatedOn:row.UpdatedOn,
   };
-
-  console.log(m_data);
   this._sponserService.populateForm(m_data);
-
-  const dialogRef = this._matDialog.open(
-    NewsponserinformationComponent,
-
+  const dialogRef = this._matDialog.open(NewsponserinformationComponent,
     {
-      maxWidth: "70vw",
-      maxHeight: "55vh",
+      maxWidth: "80vw",
+      maxHeight: "65vh",
       width: "100%",
       height: "100%",
       // data : {
@@ -138,7 +129,6 @@ onEdit(row) {
       // }
     }
   );
-
   dialogRef.afterClosed().subscribe((result) => {
     console.log("The dialog was closed - Insert Action", result);
     this.getServiceMasterList();
@@ -167,12 +157,6 @@ export class SponserInformation {
   CreatedOn: Date;
   UpdatedBy: number;
   UpdatedOn: Date;
-  // IsDocEditable: boolean;
-  // AddedBy: number;
-  // UpdatedBy: number;
-  // AddedByName: string;
-  // currentDate = new Date();
-  // EffectiveDate:any;
   /**
    * Constructor
    *

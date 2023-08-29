@@ -60,15 +60,15 @@
     }
   .mat-header-row {
     width: 100%;
-    max-width: 1850px;
-    min-width: 1850px;  
+    max-width: 2150px;
+    min-width: 2150px;  
     min-height: 20px;     
   }
   
   .mat-row {
     width: 100%;
-    max-width: 1850px;
-    min-width: 1850px;      
+    max-width: 2150px;
+    min-width: 2150px;      
     min-height: 20px;            
   }
   
@@ -80,21 +80,20 @@
 
   
   .mat-column-ProtocolNo {
-    width: 250px; 
-    max-width:250px;
-    min-width: 250px;
+    width: 200px; 
+    max-width:200px;
+    min-width: 200px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis; 
-     overflow: hidden !important;
-     
-     justify-content:left; 
+    overflow: hidden !important;
+    justify-content:left; 
   }
   .mat-column-ProtocolTitle {
-    width: 350px;
-    max-width: 350px;
-    min-width: 350px;
+    width: 300px;
+    max-width: 300px;
+    min-width: 300px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
@@ -104,16 +103,15 @@
      justify-content:left; 
   }
   .mat-column-StudyProduct {
-    width:350px;
-    max-width:350px;
-    min-width:350px;
+    width:250px;
+    max-width:250px;
+    min-width:250px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis; 
-     overflow: hidden !important;
-   
-     justify-content:left; 
+    overflow: hidden !important;
+    justify-content:left; 
   }
   .mat-column-action {
     width:100px;
@@ -125,7 +123,6 @@
     max-width:100px;
     min-width:100px;
   }
-  
   
   .mat-column-TotalVisits {
     width: 90px;
@@ -141,16 +138,15 @@
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis; 
-     overflow: hidden !important;
-   
-     justify-content:left; 
+    overflow: hidden !important;
+    justify-content:left; 
      
   }
  
   .mat-column-Sponser {
-    width: 100px;
-    max-width: 100px;
-    min-width: 100px;
+    width: 250px;
+    max-width: 250px;
+    min-width: 250px;
     justify-content:left;
     text-align: left;
     white-space: nowrap; 
@@ -173,9 +169,9 @@
   }
 
   .mat-column-Investigator {
-    width: 100px;
-    max-width: 100px;
-    min-width: 100px;
+    width: 250px;
+    max-width: 250px;
+    min-width: 250px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
@@ -186,9 +182,9 @@
   }
 
   .mat-column-Institution {
-    width: 100px;
-    max-width: 100px;
-    min-width: 100px;
+    width: 250px;
+    max-width: 250px;
+    min-width: 250px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
@@ -197,7 +193,16 @@
     
      justify-content:left; 
   }
-
+  .mat-column-StudyPrefix {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+  }
+  .mat-column-StudyNumber {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+  }
   
   .mat-icon-button {
     padding: 0;

@@ -59,7 +59,6 @@ export class NewInstitutionInformationComponent implements OnInit {
         "createdBy": this.accountService.currentUserValue.user.id
       }
     }
-    console.log(m_data);
     this._institutionService.InsertInstitutionInformation(m_data).subscribe(response => {
       if (response) {
         Swal.fire('New Institute Information Save !', ' Institute Information Save Successfully !', 'success').then((result) => {
@@ -76,7 +75,7 @@ export class NewInstitutionInformationComponent implements OnInit {
     var m_data1 = {
       "updateInstitutionInformation": {
         "operation":"UPDATE",
-        "InstitutionId":this._institutionService.personalFormGroup.get('InstitutionId').value.InstitutionId || 0,
+        "InstitutionId":this._institutionService.personalFormGroup.get('InstitutionId').value || 0,
         "InstitutionName": this._institutionService.personalFormGroup.get('InstitutionName').value || '',
         "Address": this._institutionService.personalFormGroup.get('Address').value || '',
         "ContactNo": this._institutionService.personalFormGroup.get('ContactNo').value || 0,
@@ -91,7 +90,6 @@ export class NewInstitutionInformationComponent implements OnInit {
         "updatedBy": this.accountService.currentUserValue.user.id
       }
     }
-    console.log(m_data1);
     this._institutionService.UpdateInstitutionInformation(m_data1).subscribe(response => {
       if (response) {
         Swal.fire('Update Institute Information Save !', ' Institute Information Update Successfully !', 'success').then((result) => {

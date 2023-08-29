@@ -82,24 +82,24 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="PBillNo">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>BillNo
+                                    <ng-container matColumnDef="VisitTitle">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Visit Title
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                            {{contact.PBillNo}}
+                                            {{contact.VisitTitle}}
                                         </mat-cell>
                                     </ng-container>
 
 
-                                    <ng-container matColumnDef="BillAmount">
+                                    <!-- <ng-container matColumnDef="BillAmount">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>BillAmount
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                             {{contact.BillAmount}}
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
-                                    <ng-container matColumnDef="BillId" sticky>
+                                    <!-- <ng-container matColumnDef="BillId" sticky>
                                         <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: white;">
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
@@ -112,7 +112,7 @@
                                                 *ngIf="contact.BillId !=0 " matTooltip="Bill Generated"
                                                 class="c2">circle</mat-icon>
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
                                     <ng-container matColumnDef="action" stickyEnd>
                                         <mat-header-cell *matHeaderCellDef style="color: white;">Action

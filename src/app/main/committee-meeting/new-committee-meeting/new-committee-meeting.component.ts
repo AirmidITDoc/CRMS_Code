@@ -144,9 +144,7 @@ export class NewCommitteeMeetingComponent implements OnInit {
       this.sIsLoading = 'loading-data';
       this._CommitteMeetingService.getCommitteeMemberList(m).subscribe(Visit => {
         this.dataSource.data = Visit as CommitteeMeetingMemberList[];
-
         this.chargeslist = Visit as CommitteeMeetingMemberList[];
-
         this.dataSource.data = this.chargeslist;
         // this.dscommitteeMemberList.paginator = this.paginator;
         this.sIsLoading = '';

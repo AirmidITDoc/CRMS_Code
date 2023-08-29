@@ -11,6 +11,11 @@ import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@fuse/animations';
 
+interface Result {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-study-detail',
   templateUrl: './study-detail.component.html',
@@ -38,6 +43,7 @@ export class StudyDetailComponent implements OnInit {
   VisitName: any;
   VisitDescription: any;
   Amount: any;
+  vConstantslist: any = [];
 
  
   StudyAmount: any;
@@ -48,6 +54,11 @@ export class StudyDetailComponent implements OnInit {
   DocumentList: any = [];
   Study: boolean = false;
 
+  results: Result[] = [
+    { value: 'FirstVisit', viewValue: 'FirstVisit'},
+    { value: 'LastVisit', viewValue: 'LastVisit' },
+  ];
+  
   //company filter
   public companyFilterCtrl: FormControl = new FormControl();
   public filteredCompany: ReplaySubject<any> = new ReplaySubject<any>(1);
@@ -93,7 +104,7 @@ export class StudyDetailComponent implements OnInit {
 
     this.getCompanyList();
     this.getInstitutionList();
-    
+    this.getVisitStartsFromlist();
     this.DocumentComboList();
 
     this.companyFilterCtrl.valueChanges
@@ -115,6 +126,16 @@ export class StudyDetailComponent implements OnInit {
       });
 
 
+  }
+
+  getVisitStartsFromlist() {
+    var mdata = {
+      ConstanyType: "VisitStartsFrom"
+    };
+    this._CasedetailService.getVisitStartsFrom(mdata).subscribe(data => {
+      this.vConstantslist = data;
+      console.log(this.vConstantslist);
+    });
   }
 
   closeDialog() {
@@ -250,10 +271,8 @@ export class StudyDetailComponent implements OnInit {
     var mdata = {
       ConstanyType: "CaseDocuments"
     };
-
     this._CasedetailService.getDocumentList(mdata).subscribe(data => {
       this.DocumentList = data;
-      
       this.filteredDocument.next(this.DocumentList.slice());
      
     });
@@ -318,6 +337,7 @@ export class StudyDetailComponent implements OnInit {
           "TotalSubjects": this._CasedetailService.personalFormGroup.get('TotalSubjects').value || 0,
           "TotalVisits": this._CasedetailService.personalFormGroup.get('TotalVisits').value || '',
           "VisitFrequency": this._CasedetailService.personalFormGroup.get('VisitFrequency').value || 0,
+          "visitStartsFrom":  this._CasedetailService.personalFormGroup.get('VisitStartsFrom').value || '', //'VisitStartsFrom',
           "sponser": this._CasedetailService.personalFormGroup.get('CompanyId').value.CompanyId || 0,
           "investigator": this._CasedetailService.personalFormGroup.get('Investigator').value || '',
           "institution": this._CasedetailService.personalFormGroup.get('Institution').value.InstitutionId || 0,
@@ -330,7 +350,6 @@ export class StudyDetailComponent implements OnInit {
       };
       console.log(m_data1);
       this._CasedetailService.StudyInfoUpdate(m_data1).subscribe(response => {
-        
         if (response) {
           Swal.fire('Congratulations !', 'Study Detail Updated Successfully !', 'success').then((result) => {
             if (result.isConfirmed) {
@@ -381,6 +400,8 @@ export class CaseDetail {
   BillNo: any;
   StudyId: any;
   operation: any;
+  StudyPrefix: any;
+  StudyNumber: any;
   /**
    * Constructor
    *
@@ -401,7 +422,6 @@ export class CaseDetail {
       this.Investigator = CaseDetail.Investigator || '';
       this.Institution = CaseDetail.Institution || '';
       this.AgreementFileName = CaseDetail.AgreementFileName || '';
-
       this.PatientName = CaseDetail.PatientName || '';
       this.RegNo = CaseDetail.RegNo || '';
       this.MobileNo = CaseDetail.MobileNo || '';
@@ -409,6 +429,8 @@ export class CaseDetail {
       this.TotalBillAmt = CaseDetail.TotalBillAmt || '';
       this.BillNo = CaseDetail.BillNo || 0;
       this.StudyId = CaseDetail.StudyId || 0;
+      this.StudyPrefix = CaseDetail.StudyPrefix || '';
+      this.StudyNumber = CaseDetail.StudyNumber || 0;
       this.operation = CaseDetail.operation || 0;
     }
   }

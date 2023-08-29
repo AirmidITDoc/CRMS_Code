@@ -1,7 +1,6 @@
 <div fxlayout="row" fxFlex.gt-sm="100%" fxFlex class="page-layout simple right-sidebar" style="height:100% !important;">
     <div class="center" fusePerfectScrollbar style="overflow: auto;">
 
-
         <mat-toolbar matDialogTitle class="mat-accent m-0">
             <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
                 style="background-color:rgb(18, 87, 134) !important;">
@@ -12,7 +11,6 @@
                 </button>
             </mat-toolbar-row>
         </mat-toolbar>
-
 
         <mat-tab-group mat-align-tabs="start" class="tabs-group" mat-stretch-tabs style="margin-right: 7px">
             <mat-card>
@@ -27,11 +25,8 @@
 
                             <form [formGroup]="_CasedetailService.personalFormGroup">
                                 <input type="hidden" name="StudyId" formControlName="StudyId" [(ngModel)]="StudyId">
-
                                 <ng-template matStepLabel>Personal</ng-template>
-
                                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" *ngIf="Study">
-
                                     <mat-form-field appearance="outline" style="width: 25%;font-weight: bolder;">
                                         <mat-label>Study Id</mat-label>
                                         <input name="StudyId" formControlName="StudyId" placeholder="StudyId" matInput
@@ -39,9 +34,7 @@
                                     </mat-form-field>
                                 </div>
 
-
                                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-
                                     <mat-form-field appearance="outline" style="width: 25%;font-weight: bolder;">
                                         <mat-label>Protocol Number</mat-label>
                                         <input name="ProtocolNo" formControlName="ProtocolNo"
@@ -60,15 +53,10 @@
                                         <mat-label>Protocol Description</mat-label>
                                         <textarea name="StudyProduct" formControlName="StudyProduct"
                                             placeholder="StudyProduct" matInput required>
-
                                      </textarea>
-
                                     </mat-form-field>
-
-
                                 </div>
                                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-
 
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Study Start Date</mat-label>
@@ -137,14 +125,6 @@
                                             placeholder="Investigator" matInput required>
                                     </mat-form-field>
 
-                                    <!-- <mat-form-field appearance="outline" fxFlex>
-                                        <mat-label>Institution / Site </mat-label>
-                                        <input name="Institution" formControlName="Institution"
-                                            placeholder="Institution Name" matInput required
-                                            [(ngModel)]="registerObj.Institution">
-                                    </mat-form-field> -->
-
-
                                     <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
                                         <mat-label>Institution Name /Site </mat-label>
                                         <mat-select formControlName="Institution" placeholder="Bank" #singleSelect>
@@ -163,34 +143,30 @@
 
                                 </div>
 
-
                                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>StudyPrefix</mat-label>
+                                        <input name="StudyPrefix" formControlName="StudyPrefix"
+                                            placeholder="StudyPrefix" matInput required>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>StudyNumber</mat-label>
+                                        <input name="StudyNumber" formControlName="StudyNumber"
+                                            placeholder="StudyNumber" matInput required>
+                                    </mat-form-field>
 
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <!-- <mat-label>VisitStartsFrom</mat-label> -->
+                                        <!-- <input name="VisitStartsFrom" formControlName="VisitStartsFrom"
+                                            placeholder="VisitStartsFrom" matInput required> -->
 
-                                    <!-- <mat-form-field appearance="outline" fxFlex style="margin-right: 5px;">
-                                        <mat-label>Document Name </mat-label>
-                                        <mat-select formControlName="Document" placeholder="Bank" #singleSelect>
-                                            <mat-option>
-                                                <ngx-mat-select-search [formControl]="documentFilterCtrl"
-                                                    [placeholderLabel]="'Search'"
-                                                    [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
-                                            </mat-option>
-                                            <mat-option *ngFor="let element of filteredDocument | async"
-                                                [value]="element">
-                                                {{element.Name}}
-                                            </mat-option>
-                                        </mat-select>
+                                            <mat-select placeholder="OFFLINE" formControlName="VisitStartsFrom" required>
+                                                <mat-option *ngFor="let Result of results" [value]="Result.value">
+                                                    {{ Result.viewValue }}
+                                                </mat-option>
+                                            </mat-select>
 
-                                    </mat-form-field> -->
-
-                                    <!-- 
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Agreement File Name</mat-label>
-                            <input name="AgreementFileName" formControlName="AgreementFileName"
-                                placeholder="AgreementFileName" matInput (click)="UploadDoc()"
-                                [(ngModel)]="registerObj.AgreementFileName">
-                          
-                        </mat-form-field> -->
+                                    </mat-form-field>
 
                                 </div>
 
@@ -209,13 +185,8 @@
                         </div>
                     </div>
                 </mat-tab>
-
-             
             </mat-card>
         </mat-tab-group>
-
-
-
     </div>
 
 </div>

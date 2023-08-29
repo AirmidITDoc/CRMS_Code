@@ -2,7 +2,6 @@ import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReplaySubject, Subject } from 'rxjs';
-import { CasedetailService } from '../../casedetail.service';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,7 +10,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { fuseAnimations } from '@fuse/animations';
 import { takeUntil } from 'rxjs/operators';
-import { StudyServicesService } from '../study-services.service';
+import { StudyServicesService } from './study-services.service';
 
 @Component({
   selector: 'app-study-services',
@@ -21,10 +20,6 @@ import { StudyServicesService } from '../study-services.service';
   animations: fuseAnimations
 })
 export class StudyServicesComponent implements OnInit {
-
- 
- 
-  
   chargeslist: any = [];
   chargeslist1: any = [];
 
@@ -57,18 +52,12 @@ export class StudyServicesComponent implements OnInit {
   public visitnameFilterCtrl: FormControl = new FormControl();
   public filteredVisitname: ReplaySubject<any> = new ReplaySubject<any>(1);
 
-   
   public servicenameFilterCtrl: FormControl = new FormControl();
   public filteredServicename: ReplaySubject<any> = new ReplaySubject<any>(1);
 
-
   private _onDestroy = new Subject<void>();
-  
-
-
 
   displayedColumns = [
-
     'VisitName',
     'ServiceName',
     'Amount',
@@ -94,29 +83,24 @@ export class StudyServicesComponent implements OnInit {
 
   ngOnInit(): void {
 
-         
-
     if (this.data) {
       this.registerObj = this.data.registerObj;
-           this.Study = true;
+      this.Study = true;
     var m = {
       StudyId: this.registerObj.StudyId
     };
-
     this._StudyServicesService.getStudyservicebyStuIdList(m).subscribe(Visit => {
       this.dataSource1.data = Visit as StudyServicesDetail[];
-            this.dataSource1.sort = this.sort;
+      this.dataSource1.sort = this.sort;
       this.chargeslist1= this.dataSource1.data;
       this.chargeslist= this.dataSource1.data;
       this.dataSource1.paginator = this.paginator;
-      
     },
       error => {
-        
       });
     }
-    this.getVisitNameCombobox();
 
+    this.getVisitNameCombobox();
     this.getServiceNameCombobox();
 
     this.visitnameFilterCtrl.valueChanges
@@ -125,15 +109,11 @@ export class StudyServicesComponent implements OnInit {
       this.filteredVisit();
     });
 
-
     this.servicenameFilterCtrl.valueChanges
     .pipe(takeUntil(this._onDestroy))
     .subscribe(() => {
       this.filterService();
     });
-
-
-
     
   }
 
@@ -159,8 +139,6 @@ export class StudyServicesComponent implements OnInit {
     );
 
   }
-
-
   
   // Service filter code  
   private filterService() {
@@ -184,7 +162,6 @@ export class StudyServicesComponent implements OnInit {
 
   }
 
-
   closeDialog() {
     
     //  this.dialogRef.close();
@@ -195,21 +172,17 @@ export class StudyServicesComponent implements OnInit {
   getVisitNameCombobox() {
     var m={
       StudyId:this.registerObj.StudyId            
-    
     };
     this._StudyServicesService.getVistNameList(m).subscribe((data) => {
         this.VisitList = data;
-        
         this.filteredVisitname.next(this.VisitList.slice());
     });
   }
 
 
   getServiceNameCombobox() {
-  
     this._StudyServicesService.getServviceNameList().subscribe((data) => {
         this.ServiceList = data;
-        
         this.filteredServicename.next(this.ServiceList.slice());
     });
   }
@@ -218,19 +191,13 @@ export class StudyServicesComponent implements OnInit {
     let netAmt;
     netAmt = element.reduce((sum, { Amount }) => sum += +(Amount || 0), 0);
      this.TotalAmount = netAmt;
-      
     return netAmt
   }
 
-
-
-
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
-    
     this.dateTimeObj = dateTimeObj;
   }
- 
 
   onClose() {
     this.dialogRef.close();
@@ -239,7 +206,6 @@ export class StudyServicesComponent implements OnInit {
 
   onAddStudyService() {
     this.chargeslist=[];
-    
     this.VisitList.data = [];
     this.chargeslist=this.chargeslist1;
     this.chargeslist.push(
@@ -251,20 +217,13 @@ export class StudyServicesComponent implements OnInit {
         Amount: this.Price
       });
     this.isLoading = '';
-    
     this.dataSource1.data = this.chargeslist;
-    
     this._StudyServicesService.studyServicesFormGroup.get('VisitName').reset('')
-
     this._StudyServicesService.studyServicesFormGroup.get('ServiceName').reset('')
-
     this._StudyServicesService.studyServicesFormGroup.get('Price').reset(0)
-
   }
 
   onStudyServiceSave(){
- 
-    
     let insertStudyServicearr = [];
     this.dataSource1.data.forEach((element) => {
       let insertStudyService = {};
@@ -273,7 +232,6 @@ export class StudyServicesComponent implements OnInit {
       insertStudyService['ServiceId'] = element.ServiceId;
       insertStudyService['Amount'] = element.Amount;
       insertStudyService['isActive'] =1,//element.serviceId;
-
       insertStudyService['createdBy'] = this.accountService.currentUserValue.user.id;
       insertStudyServicearr.push(insertStudyService);
     });
@@ -281,15 +239,10 @@ export class StudyServicesComponent implements OnInit {
     let submitData = {
       "insertStudyservice": insertStudyServicearr
     };
-
-    console.log(submitData);
     this._StudyServicesService.StudyServiceInsert(submitData).subscribe(response => {
-      
       if (response) {
         Swal.fire('New StudyService  !', ' StudyService Save Successfully !', 'success').then((result) => {
-
           if (result) {
-
             this._matDialog.closeAll();
           }
         });
@@ -297,12 +250,29 @@ export class StudyServicesComponent implements OnInit {
         Swal.fire('Error !', 'StudyService not saved', 'error');
       }
     });
+  }
+  onUpdate(){
+
+  }
+ 
+  onEdit(row){
+    var m_data = {
+      StudyServicesId:row.StudyServicesId,
+      StudyVisitId: row.StudyVisitId,
+      ServiceId: row.ServiceId,
+      Amount: row.Amount,
+    };
+    this._StudyServicesService.populateStudyServiceUpdateForm(m_data);
+
+    const toStudyVisit = this.VisitList.find(c => c.StudyVisitId == row.StudyVisitId);
+    this._StudyServicesService.myStudyServiceform.get('VisitName').setValue(toStudyVisit);
+
+    const toStudyService = this.ServiceList.find(c => c.ServiceId == row.ServiceId);
+    this._StudyServicesService.myStudyServiceform.get('ServiceName').setValue(toStudyService);
 
   }
 
-  
-deleteTableRow(element) {
-  
+  deleteTableRow(element) {
   let index = this.chargeslist.indexOf(element);
   if (index >= 0) {
     this.chargeslist.splice(index, 1);
@@ -311,8 +281,6 @@ deleteTableRow(element) {
   }
   Swal.fire('Success !', 'List Row Deleted Successfully', 'success');
 }
-
-
 
   onStudyUpdate() {
     let updateStudyservicearr = [];
@@ -350,8 +318,6 @@ deleteTableRow(element) {
     });
 
   }
-
-
 
 }
 

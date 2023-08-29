@@ -6,7 +6,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   providedIn: 'root'
 })
 export class CasedetailService {
-  
+  myStudyScheduleform: FormGroup;
+
   personalFormGroup: FormGroup;
   myFilterform: FormGroup;
   mySaveForm: FormGroup;
@@ -22,6 +23,8 @@ export class CasedetailService {
     // this.mySaveForm = this.saveForm();
     this.studySchFormGroup = this.createstudySchForm();
     this.personalFormGroup = this.createPesonalForm();
+    this.myStudyScheduleform =this.createStudyScheduleUpdate();
+  
     // this.studyServicesFormGroup = this.createStudyservicesForm();
   }
 
@@ -53,15 +56,18 @@ export class CasedetailService {
         Validators.required,
         Validators.maxLength(1),
         Validators.pattern("^[0-9]*$")]],
-        VisitFrequency:'',
-        StudyStartDate:[(new Date()).toISOString()],
-        StudyEndDate:[(new Date()).toISOString()],
-        Sponser: '',
-        Investigator: '',
-        Institution:' ',
-        AgreementFileName: '',
-        CompanyId:'',
-        StudyId:''
+      VisitFrequency:'',
+      StudyStartDate:[(new Date()).toISOString()],
+      StudyEndDate:[(new Date()).toISOString()],
+      Sponser: '',
+      Investigator: '',
+      Institution:' ',
+      AgreementFileName: '',
+      CompanyId:'',
+      StudyId:'',
+      StudyPrefix:'',
+      StudyNumber:0,
+      VisitStartsFrom:''
     });
   }
 
@@ -72,35 +78,37 @@ export class CasedetailService {
       VisitName: '',
       VisitDescription: '',
       Amount: '',
-      TotalAmount:' '
+      TotalAmount:' ',
+      VisitFrequency:0,
+      VisitStartsFrom:''
     });
   }
-  // createStudyservicesForm(){
-  //   return this._formBuilder.group({
-  //     VisitId: '',
-  //     VisitName: '',
-  //     ServiceName: '',
-  //     Price: '',
-  //     TotalAmount:' '
-  //   });
-  // }
-
   createdocumentForm() {
     return this._formBuilder.group({
       StudyId: '',
       DocumentTypeId: '',
       DocumentName: '',
       DocumentPath: '',
-
     });
-  }z
+  }
 
+  createStudyScheduleUpdate(): FormGroup {
+    return this._formBuilder.group({
+      StudyVisitId:0,
+      VisitDescription: [""],
+      VisitFrequency: 0,
+    });
+  }
+
+ 
+  populateStudyScheduleUpdateForm(param) {
+    this.myStudyScheduleform.patchValue(param);
+  }
 
   public StudyInfoInsert(employee){
     return this._httpClient.post("CRMSTran/Save_StudyInformation", employee);
   }
 
- 
   public StudyInfoUpdate(employee)
   {    
     return this._httpClient.post("CRMSTran/Update_StudyInformation",employee);
@@ -136,6 +144,9 @@ export class CasedetailService {
 
   public StudySchduleUpdate(employee){
     return this._httpClient.post("CRMSTran/Update_UpdateStudySchedule", employee)
+  }
+  public Update_UpdateStudyScheduleId(employee){
+    return this._httpClient.post("CRMSTran/Update_UpdateStudyScheduleId", employee)
   }
 
   public DocumentInsert(employee){
@@ -174,5 +185,10 @@ export class CasedetailService {
 
   public getCaseIDCombo(){
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_StudyInformationCombo", {});
+  }
+
+  public getVisitStartsFrom(Params)
+  {
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_Constants",Params);
   }
 }

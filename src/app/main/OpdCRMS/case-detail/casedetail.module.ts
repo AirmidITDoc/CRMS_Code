@@ -39,11 +39,7 @@ import { CasedetailService } from './casedetail.service';
 import { EditCasedetailComponent } from './edit-casedetail/edit-casedetail.component';
 import { StudySchduleComponent } from './study-schdule/study-schdule.component';
 import { StudyDetailComponent } from './study-detail/study-detail.component';
-import { StudyServicesComponent } from './study-sevices/study-services/study-services.component';
-// import { StudyServicesComponent } from './study-sevices/study-services/study-services.component';
-// import { StudySevicesComponent } from './study-sevices/study-sevices.component';
-
-// import { SharedModule } from 'app/main/shared/shared.module';
+import { StudyServicesComponent } from './study-sevices/study-services.component';
 
 const routes: Routes = [
     {
@@ -58,9 +54,7 @@ const routes: Routes = [
         EditCasedetailComponent,
         StudySchduleComponent,
         StudyDetailComponent,
-                StudyServicesComponent,
-                // StudySevicesComponent
-      
+        StudyServicesComponent,
     ],
     imports: [
         RouterModule.forChild(routes),
