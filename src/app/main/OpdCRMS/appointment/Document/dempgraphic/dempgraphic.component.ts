@@ -21,7 +21,7 @@ export class DempgraphicComponent implements OnInit {
   Doctor1List:any = [];
   GenderList: any = [];
   selectedGenderID: any;
-
+  submitted = false;
 
   // prefix filter
   public prefixFilterCtrl: FormControl = new FormControl();
