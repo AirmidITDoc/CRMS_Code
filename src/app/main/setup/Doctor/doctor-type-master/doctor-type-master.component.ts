@@ -34,12 +34,13 @@ export class DoctorTypeMasterComponent implements OnInit {
     }
 
     getDoctortypeMasterList() {
+        
         var m = {
-            "DoctorType":this._doctortypeService.myformSearch.get('DoctorTypeSearch').value + '%' || 0
-        };
+            "DoctorType":this._doctortypeService.myformSearch.get('DoctorTypeSearch').value + '%' || '%'
+        }
         this._doctortypeService.getDoctortypeMasterList(m).subscribe((Menu) => {
             this.DSDoctorTypeMasterList.data = Menu as DoctortypeMaster[];
-            console.log(Menu);
+            
             this.DSDoctorTypeMasterList.sort = this.sort;
             this.DSDoctorTypeMasterList.paginator = this.paginator;
         });
@@ -55,7 +56,7 @@ export class DoctorTypeMasterComponent implements OnInit {
         });
     }
     onClear() {
-        this._doctortypeService.myform.reset({ IsDeleted: "false" });
+        this._doctortypeService.myform.reset({ isActive: "false" });
         this._doctortypeService.initializeFormGroup();
     }
 
@@ -69,7 +70,7 @@ export class DoctorTypeMasterComponent implements OnInit {
                             .value.trim(),
                         IsActive: Boolean(
                             JSON.parse(
-                                this._doctortypeService.myform.get("IsDeleted")
+                                this._doctortypeService.myform.get("isActive")
                                     .value
                             )
                         ),
@@ -91,7 +92,7 @@ export class DoctorTypeMasterComponent implements OnInit {
                                 .value,
                                 IsActive: Boolean(
                             JSON.parse(
-                                this._doctortypeService.myform.get("IsDeleted")
+                                this._doctortypeService.myform.get("isActive")
                                     .value
                             )
                         ),
@@ -120,7 +121,7 @@ export class DoctorTypeMasterComponent implements OnInit {
 export class DoctortypeMaster {
     Id: number;
     DoctorType: string;
-    IsDeleted: boolean;
+    isActive: boolean;
     /**
      * Constructor
      *
@@ -130,7 +131,7 @@ export class DoctortypeMaster {
         {
             this.Id = DoctortypeMaster.Id || "";
             this.DoctorType = DoctortypeMaster.DoctorType || "";
-            this.IsDeleted = DoctortypeMaster.IsDeleted || "false";
+            this.isActive = DoctortypeMaster.isActive || "false";
         }
     }
 }

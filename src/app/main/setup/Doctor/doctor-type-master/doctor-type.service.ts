@@ -37,7 +37,7 @@ export class DoctorTypeService {
 
   public getDoctortypeMasterList(param) {
       return this._httpClient.post(
-          "Generic/GetByProc?procName=Retrieve_DoctorList",
+          "Generic/GetByProc?procName=Rtrv_DoctorTypeMasteList_by_Name",
           param
       );
   }

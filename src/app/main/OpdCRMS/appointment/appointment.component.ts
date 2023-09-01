@@ -20,6 +20,8 @@ import { InvoiceBillMappingComponent } from './invoice-bill-mapping/invoice-bill
 import { MatDrawer } from '@angular/material/sidenav';
 import { PatientScreenBillDetailComponent } from './patient-screen-bill-detail/patient-screen-bill-detail.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
+import { DempgraphicComponent } from './Document/dempgraphic/dempgraphic.component';
+import { PresentationComponent } from './Document/presentation/presentation.component';
 
 
 @Component({
@@ -91,7 +93,7 @@ export class AppointmentComponent implements OnInit {
     if (this._ActRoute.url == '/opd/appointment') {
       this.menuActions.push('Update Registration');
       // this.menuActions.push('Invoice Bill');
-      // this.menuActions.push('Upload Document');
+      this.menuActions.push('Upload Document');
     } else if (this._ActRoute.url == '/opd/bill') {
       this.menuActions.push('New Bill');
     }
@@ -267,10 +269,10 @@ export class AppointmentComponent implements OnInit {
         };
         // this._AppointmentSreviceService.populateFormpersonal(xx);
         this.advanceDataStored.storage = new SearchInforObj(xx);
-        const dialogRef = this._matDialog.open(FileUploadComponent,
+        const dialogRef = this._matDialog.open(PresentationComponent,
           {
-            maxWidth: "20%",
-            height: '100px',
+            maxWidth: "80%",
+            height: '900px',
             width: '100%',
             data: {
               registerObj: xx,
@@ -645,6 +647,7 @@ export class RegInsert {
   Opration:any;
   PatientName:any;
   Doctorname:any;
+  EmailId:any;
   /**
    * Constructor
    *
@@ -693,6 +696,7 @@ export class RegInsert {
       this.Opration = RegInsert.Opration || 0;
       this.PatientName=RegInsert.PatientName || '';
       this.Doctorname=RegInsert.Doctorname || '';
+      this.EmailId=RegInsert.EmailId || '';
     }
   }
 }

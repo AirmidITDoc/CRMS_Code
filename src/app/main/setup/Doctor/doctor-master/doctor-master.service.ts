@@ -43,7 +43,7 @@ export class DoctorMasterService {
                     Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
                 ],
             ],
-            DateofBirth:[],
+            DateofBirth:[{ value: new Date() }],
             Address: [""],
             City: ["", Validators.pattern("[a-zA-Z]+$")],
             Pin: ["", [Validators.minLength(6), Validators.maxLength(6)]],
@@ -67,9 +67,9 @@ export class DoctorMasterService {
             GenderId: ["", Validators.required],
             GenderName: [""],
             Education: ["", Validators.pattern("^[A-Za-z]*[a-zA-Z]*$")],
-            IsConsultant: ["true"],
-            IsRefDoc: ["true"],
-            IsDeleted: ["false"],
+            IsConsultant: ['1'],
+            IsRefDoc: ['1'],
+            isActive: ['1'],
             DoctorTypeId: [""],
             DoctorType: [""],
             AgeYear: ["", Validators.pattern("[0-9]+")],
@@ -84,9 +84,9 @@ export class DoctorMasterService {
             // ],
             ESINO: [""],
             RegNo: [""],
-            RegDate:[{ value: this.currentDate}],
+            RegDate:[{ value: new Date() }],
             MahRegNo: [""],
-            MahRegDate:[{ value: this.currentDate }],
+            MahRegDate:[{ value: new Date() }],
             RefDocHospitalName: [
                 "",
                 Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
@@ -155,6 +155,13 @@ export class DoctorMasterService {
         return this._httpClient.post(
             "Generic/GetByProc?procName=RetrieveDoctorTypeMasterForCombo",
             {}
+        );
+    }
+
+    public getDocDeptwiseList(emp){
+         return this._httpClient.post(
+            "Generic/GetByProc?procName=Rtrv_M_DoctorDepartmentDet",
+           emp
         );
     }
 

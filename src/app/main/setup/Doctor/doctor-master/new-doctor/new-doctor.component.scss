@@ -85,20 +85,20 @@ app-new-doctor{
 
     .table2{
         // height: 600px !important;
-    }
+  
 .mat-header-row {
     background-color:rgb(18, 87, 134) !important;
-   max-width: 100%; 
-     min-width: 220px; 
+      max-width: 520px; 
+     min-width: 520px; 
      min-height: 20px;  
      width: 100%; 
     
 }
 
 .mat-row {
-    max-width: 100%;
-    min-height: 22px;  
-    min-width: 220px; 
+    max-width:520px; 
+    min-height: 20px;  
+    min-width: 520px; 
     display: flex;      
 }
 
@@ -115,4 +115,16 @@ app-new-doctor{
     text-align: left;
     justify-content:left; 
 }
+
+.mat-column-action {
+    // color: white !important;
+    width:80px;
+    max-width: 80px;
+    min-width: 80px;
+    text-align: left;
+    justify-content: last baseline;
+
+}
+}
+
 }

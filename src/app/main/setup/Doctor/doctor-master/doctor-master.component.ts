@@ -96,6 +96,7 @@ export class DoctorMasterComponent implements OnInit {
             (Menu) => {
                 this.DSDoctorMasterList.data = Menu as DoctorMaster[];
                 this.isLoading = false;
+                console.log(this.DSDoctorMasterList.data)
                 this.DSDoctorMasterList.sort = this.sort;
                 this.DSDoctorMasterList.paginator = this.paginator;
             },
@@ -103,10 +104,15 @@ export class DoctorMasterComponent implements OnInit {
         );
     }
 
-    onEdit1(){}
 
     onEdit(row) {
-        console.log(row);
+       debugger
+        let Year,Day,Month;
+        if(row.AgeYear !=null || row.AgeDay !=null || row.AgeMonth !=null){
+            Year=row.AgeYear.trim();
+            Day=row.AgeDay.trim();
+            Month=row.AgeMonth.trim();
+        }
         var m_data = {
             DoctorId: row.DoctorId,
             PrefixID: row.PrefixID,
@@ -125,9 +131,9 @@ export class DoctorMasterComponent implements OnInit {
             IsRefDoc: JSON.stringify(row.IsRefDoc),
             IsActive: Boolean(JSON.stringify(row.IsDeleted)),
             DoctorTypeId: row.DoctorTypeId,
-            AgeYear: row.AgeYear,
-            AgeMonth: row.AgeMonth,
-            AgeDay: row.AgeDay,
+            AgeYear: Year,
+            AgeMonth: Month,
+            AgeDay: Day,
             PassportNo: row.PassportNo,
             ESINO: row.ESINO,
             RegNo: row.RegNo,
@@ -182,7 +188,7 @@ export class DoctorMaster {
     FirstName: string;
     MiddleName: string;
     LastName: string;
-    DateofBirth: any;
+    DateofBirth: Date;
     Address: string;
     City: string;
     Pin: string;
@@ -206,7 +212,7 @@ export class DoctorMaster {
     UpdatedBy: number;
     RefDocHospitalName: string;
     AddedBy: String;
-    currentDate=new Date();
+    currentDate = new Date();
     IsDeletedSearch: number;
     /**
      * Constructor
@@ -238,9 +244,9 @@ export class DoctorMaster {
             this.PassportNo = DoctorMaster.PassportNo || "";
             this.ESINO = DoctorMaster.ESINO || "";
             this.RegNo = DoctorMaster.RegNo || "";
-            this.RegDate = DoctorMaster.RegDate || this.currentDate;
+            this.RegDate = DoctorMaster.RegDate || this.currentDate;;
             this.MahRegNo = DoctorMaster.MahRegNo || "";
-            this.MahRegDate = DoctorMaster.MahRegDate || this.currentDate;
+            this.MahRegDate = DoctorMaster.MahRegDate ||this.currentDate;
             this.UpdatedBy = DoctorMaster.UpdatedBy || "";
             this.AddedBy = DoctorMaster.AddedBy || "";
 

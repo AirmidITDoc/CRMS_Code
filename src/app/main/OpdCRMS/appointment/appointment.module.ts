@@ -50,6 +50,13 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { PatientScreenBillDetailComponent } from './patient-screen-bill-detail/patient-screen-bill-detail.component';
 import { AssignVisitInforComponent } from './assign-visit-infor/assign-visit-infor.component';
+import { ResultComponent } from './Document/result/result.component';
+import { CardiacFactorComponent } from './Document/cardiac-factor/cardiac-factor.component';
+import { LesionPreprationComponent } from './Document/lesion-prepration/lesion-prepration.component';
+import { ProcedureHemodynamicsComponent } from './Document/procedure-hemodynamics/procedure-hemodynamics.component';
+import { AngioplastiComponent } from './Document/angioplasti/angioplasti.component';
+import { DempgraphicComponent } from './Document/dempgraphic/dempgraphic.component';
+import { PresentationComponent } from './Document/presentation/presentation.component';
 
 
 const routes: Routes = [
@@ -73,6 +80,13 @@ const routes: Routes = [
         ImageUploadComponent,
         PatientScreenBillDetailComponent,
         AssignVisitInforComponent,
+        ResultComponent,
+        CardiacFactorComponent,
+        LesionPreprationComponent,
+        ProcedureHemodynamicsComponent,
+        AngioplastiComponent,
+        DempgraphicComponent,
+        PresentationComponent,
     ],
     imports: [
         RouterModule.forChild(routes),

@@ -446,50 +446,6 @@ let date = datePipe.transform((new Date), "yyyy-MM-dd");
       Swal.fire("Invoice is Already Approved Successfully")
     }
 
-    //   if (m == "Approval") {
-    //     console.log(contact);
-    //    let xx = {
-    //         RegNo: contact.RegId,
-    //         RegId: contact.RegId,
-    //         AdmissionID: contact.VisitId,
-    //         PatientName: contact.PatientName,
-    //         Doctorname: contact.Doctorname,
-    //         AdmDateTime: contact.AdmDateTime,
-    //         AgeYear: contact.AgeYear,
-    //         ClassId: contact.ClassId,
-    //         ClassName: contact.ClassName,
-    //         TariffName: contact.TariffName,
-    //         TariffId: contact.TariffId,
-    //         VisitId: contact.VisitId,
-    //         VisitDate: contact.VisitDate,
-    //         BillNo:contact.BillNo
-    //       };
-
-    //       let PatientHeaderObj = {};
-
-    //       PatientHeaderObj['Date'] = contact.VisitDate
-    //       PatientHeaderObj['PatientName'] =contact.PatientName,
-    //       PatientHeaderObj['OPD_IPD_Id'] =contact.RegId,
-    //       PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt
-    //       PatientHeaderObj['BillNo'] = contact.BillNo
-    //       //  PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt
-    //       // this._AppointmentSreviceService.populateFormpersonal(xx);
-    //       this.advanceDataStored.storage = new SearchInforObj(xx);
-    //       const dialogRef = this._matDialog.open(BillApproveComponent,
-    //         {
-    //           maxWidth: "90%",
-    //           height: '600px',
-    //           width: '100%',
-    //           data: {
-    //             advanceObj: PatientHeaderObj,
-    //             FromName: "OP-Bill"
-    //           }
-    //         });
-    //       dialogRef.afterClosed().subscribe(result => {
-    //         console.log('The dialog was closed - Insert Action', result);
-    //         // this.getVisitList();
-    //       });
-    //     }
 
   }
 

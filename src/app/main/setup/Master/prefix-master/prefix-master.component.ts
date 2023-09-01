@@ -69,103 +69,103 @@ export class PrefixMasterComponent implements OnInit {
     }
 
     onSubmit() {
-//         if (this._PrefixService.myform.valid) {
-//             if (!this._PrefixService.myform.get("PrefixID").value) {
-//                 var m_data = {
-//                     prefixMasterInsert: {
-//                         prefixName: this._PrefixService.myform
-//                             .get("PrefixName")
-//                             .value.trim(),
-//                         sexID: this._PrefixService.myform.get("SexID").value,
-//                         addedBy: 1,
-//                         IsActive: Boolean(
-//                             JSON.parse(
-//                                 this._PrefixService.myform.get("IsDeleted")
-//                                     .value
-//                             )
-//                         ),
-//                     },
-//                 };
-// console.log(m_data);
-//                 this._PrefixService
-//                     .insertPrefixMaster(m_data)
-//                     .subscribe((data) => {
-//                         this.msg = data;
-//                         if (data) {
-//                             Swal.fire(
-//                                 "Saved !",
-//                                 "Record saved Successfully !",
-//                                 "success"
-//                             ).then((result) => {
-//                                 if (result.isConfirmed) {
-//                                     this.getPrefixMasterList();
-//                                 }
-//                             });
-//                         } else {
-//                             Swal.fire(
-//                                 "Error !",
-//                                 "Prefix not saved",
-//                                 "error"
-//                             );
-//                         }
-//                         this.getPrefixMasterList();
-//                     });
-//             } else {
-//                 var m_dataUpdate = {
-//                     prefixMasterUpdate: {
-//                         prefixID:
-//                             this._PrefixService.myform.get("PrefixID").value,
-//                         prefixName: this._PrefixService.myform
-//                             .get("PrefixName")
-//                             .value.trim(),
-//                         sexID: this._PrefixService.myform.get("SexID").value,
-//                         IsActive: Boolean(
-//                             JSON.parse(
-//                                 this._PrefixService.myform.get("IsDeleted")
-//                                     .value
-//                             )
-//                         )
-//                       //  updatedBy: 1,
-//                     },
-//                 };
-//                 console.log(m_dataUpdate);
-//                 this._PrefixService
-//                     .updatePrefixMaster(m_dataUpdate)
-//                     .subscribe((data) => {
-//                         this.msg = data;
-//                         if (data) {
-//                             Swal.fire(
-//                                 "Updated !",
-//                                 "Record updated Successfully !",
-//                                 "success"
-//                             ).then((result) => {
-//                                 if (result.isConfirmed) {
-//                                     this.getPrefixMasterList();
-//                                 }
-//                             });
-//                         } else {
-//                             Swal.fire(
-//                                 "Error !",
-//                                 "Appoinment not updated",
-//                                 "error"
-//                             );
-//                         }
-//                         this.getPrefixMasterList();
-//                     });
-//             }
-//             this.onClear();
-//         }
+        if (this._PrefixService.myform.valid) {
+            if (!this._PrefixService.myform.get("PrefixID").value) {
+                var m_data = {
+                    prefixMasterInsert: {
+                        prefixName: this._PrefixService.myform
+                            .get("PrefixName")
+                            .value.trim(),
+                        sexID: this._PrefixService.myform.get("SexID").value,
+                        addedBy: 1,
+                        IsActive: Boolean(
+                            JSON.parse(
+                                this._PrefixService.myform.get("IsDeleted")
+                                    .value
+                            )
+                        ),
+                    },
+                };
+console.log(m_data);
+                this._PrefixService
+                    .insertPrefixMaster(m_data)
+                    .subscribe((data) => {
+                        this.msg = data;
+                        if (data) {
+                            Swal.fire(
+                                "Saved !",
+                                "Record saved Successfully !",
+                                "success"
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    this.getPrefixMasterList();
+                                }
+                            });
+                        } else {
+                            Swal.fire(
+                                "Error !",
+                                "Prefix not saved",
+                                "error"
+                            );
+                        }
+                        this.getPrefixMasterList();
+                    });
+            } else {
+                var m_dataUpdate = {
+                    prefixMasterUpdate: {
+                        prefixID:
+                            this._PrefixService.myform.get("PrefixID").value,
+                        prefixName: this._PrefixService.myform
+                            .get("PrefixName")
+                            .value.trim(),
+                        sexID: this._PrefixService.myform.get("SexID").value,
+                        IsActive: Boolean(
+                            JSON.parse(
+                                this._PrefixService.myform.get("IsDeleted")
+                                    .value
+                            )
+                        )
+                      //  updatedBy: 1,
+                    },
+                };
+                console.log(m_dataUpdate);
+                this._PrefixService
+                    .updatePrefixMaster(m_dataUpdate)
+                    .subscribe((data) => {
+                        this.msg = data;
+                        if (data) {
+                            Swal.fire(
+                                "Updated !",
+                                "Record updated Successfully !",
+                                "success"
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    this.getPrefixMasterList();
+                                }
+                            });
+                        } else {
+                            Swal.fire(
+                                "Error !",
+                                "Appoinment not updated",
+                                "error"
+                            );
+                        }
+                        this.getPrefixMasterList();
+                    });
+            }
+            this.onClear();
+        }
     }
 
     onEdit(row) {
-        // var m_data = {
-        //     PrefixID: row.PrefixID,
-        //     PrefixName: row.PrefixName,
-        //     SexID: row.SexID,
-        //     IsDeleted: JSON.stringify(row.IsActive),
-        //     UpdatedBy: row.UpdatedBy,
-        // };
-        // this._PrefixService.populateForm(m_data);
+        var m_data = {
+            PrefixID: row.PrefixID,
+            PrefixName: row.PrefixName,
+            SexID: row.SexID,
+            IsDeleted: JSON.stringify(row.IsActive),
+            UpdatedBy: row.UpdatedBy,
+        };
+        this._PrefixService.populateForm(m_data);
     }
 
     onClear() {
