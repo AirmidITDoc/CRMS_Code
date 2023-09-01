@@ -161,8 +161,7 @@
                                 <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>Email</mat-label>
                                     <input name="Email" formControlName="EmailId" placeholder="Email" matInput
-                                        [ngModel]="registerObj.Email" (ngModelChange)="registerObj.EmailId = $event"
-                                        required type="number" appCharmaxLength="4">
+                                     >
                                     <mat-error
                                         *ngIf="personalFormGroup.get('EmailId').invalid && personalFormGroup.get('EmailId').touched">Please
                                         enter Email</mat-error>
