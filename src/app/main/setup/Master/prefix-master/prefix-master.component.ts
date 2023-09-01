@@ -29,7 +29,7 @@ export class PrefixMasterComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
-    constructor(public _PrefixService: PrefixMasterService) {}
+    constructor(public _PrefixService: PrefixMasterService) { }
 
     ngOnInit(): void {
         this.getPrefixMasterList();
@@ -56,8 +56,8 @@ export class PrefixMasterComponent implements OnInit {
     getPrefixMasterList() {
         var Param = {
             PrefixName: this._PrefixService.myformSearch
-                    .get("PrefixNameSearch")
-                    .value.trim() + "%" || "%",
+                .get("PrefixNameSearch")
+                .value.trim() + "%" || "%",
             // p_IsDeleted:
             //     this._PrefixService.myformSearch.get("IsDeletedSearch").value,
         };
