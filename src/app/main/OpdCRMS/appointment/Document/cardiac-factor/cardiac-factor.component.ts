@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-cardiac-factor',
   templateUrl: './cardiac-factor.component.html',
-  styleUrls: ['./cardiac-factor.component.scss']
+  styleUrls: ['./cardiac-factor.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class CardiacFactorComponent implements OnInit {
 
@@ -114,6 +117,43 @@ debugger
     this.dateTimeObj = dateTimeObj;
   }
 
+  onChangeLabTest($event){
+    if($event.checked==true){
+      // this.LabTestdiv=true
+      }
+      else{
+        // this.LabTestdiv=false
+      }
+  }
+
+  onChangeDyslip($event){
+
+  }
+
+ 
+  onChangeDialysis($event){
+
+  }
+
+  onChangeSmoking($event){
+
+  }
+
+  onChangeTobacco($event){
+
+  }
+
+  onChangeInflammatory($event){
+
+  }
+
+  onChangeCKD($event){
+
+  }
+
+  onChangeHypertension
+
+  
   onClose(){
 
   }

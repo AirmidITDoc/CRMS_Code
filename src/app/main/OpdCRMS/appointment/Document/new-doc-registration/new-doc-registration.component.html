@@ -1,0 +1,234 @@
+<div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+  <!-- HEADER -->
+  <mat-toolbar class="accent" style="height:50px; justify-content: space-between;width: 100%;">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      
+
+      <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" style="color: aliceblue;">
+        Registration Information
+      </span>
+     
+    </div>
+
+  </mat-toolbar>
+  <!-- / HEADER -->
+
+  <!-- SELECTED BAR -->
+  <!-- <app-main class="accent-600" *ngIf="hasSelectedContacts" [@slideInTop]></app-main> -->
+  <!-- / SELECTED BAR -->
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- SIDEBAR -->
+
+    <!-- / SIDEBAR -->
+
+    <!-- CENTER -->
+    <div class="center p-12 pb-56">
+
+      <!-- CONTENT -->
+      <div class="content-card" style="border-radius:4px;width: 100%; ">
+        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
+          <div fxFlex.gt-sm="100%" fxFlex>
+
+            <div fxlayout="row">
+              <div style="width: 100%; overflow: hidden;">
+                <form [formGroup]="personalFormGroup">
+                  <div style="float: right;">
+                  <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
+                  </app-common-date>
+                </div>
+                  <ng-template matStepLabel>Personal Information</ng-template>
+
+                  <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" style="margin-top: 20px;">
+
+                  
+
+                    <mat-form-field appearance="outline" fxFlex>
+                      <mat-label>Prefix</mat-label>
+                      <input matAutocompletePosition="below" type="text" placeholder="Select Prefix" matInput
+                        formControlName="PrefixID" [matAutocomplete]="autoPrefix" required>
+                      <span matSuffix style="display: flex;">
+                        <mat-icon class="mat-icon-close"
+                          (click)="personalFormGroup.get('PrefixID').setValue(''); isPrefixSelected = false;">close</mat-icon>
+                        <mat-icon class="mat-icon-close"
+                          (click)="personalFormGroup.get('PrefixID').setValue(''); isPrefixSelected = false;">search</mat-icon>
+                      </span>
+                      <mat-autocomplete #autoPrefix="matAutocomplete" [displayWith]="getOptionTextPrefix">
+                        <mat-option *ngFor="let option of filteredOptionsPrefix | async" [value]="option"
+                          (onSelectionChange)="onChangeGenderList(option)">
+                          {{option.PrefixName}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+
+
+
+                    <mat-form-field appearance="outline" fxFlex>
+                      <mat-label>First Name</mat-label>
+                      <input name="FirstName" formControlName="FirstName" placeholder="First Name"
+                        [ngClass]="{ 'is-invalid': submitted && personalFormGroup.get('FirstName').errors }" matInput
+                        required [(ngModel)]="registerObj.FirstName">
+                      <!-- onkeypress=" (event.charCode > 64 && 
+                            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"> -->
+                      <mat-error class="error"
+                        *ngIf="personalFormGroup.get('FirstName').invalid && personalFormGroup.get('FirstName').touched">
+                        First
+                        Name is required Enter
+                        only
+                        Alphabets</mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="outline" fxFlex>
+                      <mat-label>Middle Name</mat-label>
+                      <input name="MiddleName" formControlName="MiddleName" placeholder="Middle Name"
+                        [ngClass]="{ 'is-invalid': submitted && personalFormGroup.get('MiddleName').errors }" matInput
+                        [(ngModel)]="registerObj.MiddleName" onkeypress=" (event.charCode > 64 && 
+                            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+                      <mat-error class="error"
+                        *ngIf="personalFormGroup.get('MiddleName').invalid && personalFormGroup.get('MiddleName').touched">
+                        Middle Name is required
+                        Enter
+                        only Alphabets</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex>
+                      <mat-label>Last Name</mat-label>
+                      <input name="LastName" formControlName="LastName" placeholder="Last Name"
+                        [ngClass]="{ 'is-invalid': submitted && personalFormGroup.get('LastName').errors }" matInput
+                        required [(ngModel)]="registerObj.LastName" onkeypress=" (event.charCode > 64 && 
+                            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+                      <mat-error class="error"
+                        *ngIf="personalFormGroup.get('LastName').invalid && personalFormGroup.get('LastName').touched">Last
+                        Name is required Enter
+                        only
+                        Alphabets</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex>
+                      <mat-label>Gender</mat-label>
+                      <mat-select formControlName="GenderId" required>
+                        <mat-option></mat-option>
+                        <mat-option *ngFor="let m of GenderList" [value]="m">
+                          {{m.GenderName}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error
+                        *ngIf="personalFormGroup.get('GenderId').invalid && personalFormGroup.get('GenderId').touched">
+                        <span *ngIf="personalFormGroup.get('GenderId').hasError('required')">
+                          Gender is required</span>
+                      </mat-error>
+                    </mat-form-field>
+
+                  </div>
+                  <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                    <mat-form-field appearance="outline" fxFlex>
+                      <mat-label>Birth date</mat-label>
+                      <input name="DateOfBirth" matInput [matDatepicker]="picker" formControllName="DateOfBirth"
+                        (dateChange)="onChangeDateofBirth($event.value)" [value]="registerObj.DateofBirth"
+                        [readonly]="true">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="outline" fxFlex>
+                      <mat-label>Age (Y)</mat-label>
+                      <input name="AgeYear" formControlName="AgeYear" placeholder="Age (Y)" matInput min="0"
+                        [ngModel]="registerObj.AgeYear" (ngModelChange)="registerObj.AgeYear = $event" type="number"
+                        minlength="1" maxlength="4">
+                      <mat-error
+                        *ngIf="personalFormGroup.get('AgeYear').invalid && personalFormGroup.get('AgeYear').touched">Please
+                        enter Age Year </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex>
+                      <mat-label>Age (M)</mat-label>
+                      <input name="AgeMonth" formControlName="AgeMonth" placeholder="Age (M)" matInput min="0"
+                        [ngModel]="registerObj.AgeMonth" (ngModelChange)="registerObj.AgeMonth = $event" type="number"
+                        minlength="1" maxlength="2">
+                      <mat-error
+                        *ngIf="personalFormGroup.get('AgeMonth').invalid && personalFormGroup.get('AgeMonth').touched">
+                        Please enter Age Month </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex>
+                      <mat-label>Age (D)</mat-label>
+                      <input name="AgeDay" formControlName="AgeDay" placeholder="Age (D)" matInput min="0"
+                        minlength="1" maxlength="2" [ngModel]="registerObj.AgeDay"
+                        (ngModelChange)="registerObj.AgeDay = $event" type="number">
+                      <mat-error
+                        *ngIf="personalFormGroup.get('AgeDay').invalid && personalFormGroup.get('AgeDay').touched">
+                        Please enter Age Day </mat-error>
+                    </mat-form-field>
+
+
+
+                  </div>
+
+                  <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                  
+
+                    <mat-form-field appearance="outline" fxFlex>
+                      <mat-label>PhoneNo</mat-label>
+                      <input name="PhoneNo" formControlName="PhoneNo" placeholder="PhoneNo" matInput min="0"
+                        [ngModel]="registerObj.PhoneNo" (ngModelChange)="registerObj.PhoneNo = $event" type="number"
+                        minlength="1" maxlength="4">
+                      <!-- <mat-error
+                        *ngIf="personalFormGroup.get('PhoneNo').invalid && personalFormGroup.get('PhoneNo').touched">Please
+                        enter Age Year </mat-error> -->
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex>
+                      <mat-label>Ref.Doctor Name</mat-label>
+                      <input name="Doctorname" formControlName="Doctorname" placeholder="Doctorname" matInput 
+                        [ngModel]="registerObj.Doctorname"  type="text" >
+                      <!-- <mat-error
+                        *ngIf="personalFormGroup.get('AgeMonth').invalid && personalFormGroup.get('AgeMonth').touched">
+                        Please enter Age Month </mat-error> -->
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex>
+                      <mat-label>EmailId</mat-label>
+                      <input name="EmailId" formControlName="EmailId" placeholder="EmailId" matInput  [ngModel]="registerObj.EmailId"
+                        (ngModelChange)="registerObj.EmailId = $event" >
+                      <!-- <mat-error
+                        *ngIf="personalFormGroup.get('AgeDay').invalid && personalFormGroup.get('AgeDay').touched">
+                        Please enter Age Day </mat-error> -->
+                    </mat-form-field>
+
+
+                  </div>
+
+
+                  <div class="footer-navigation-container" fxLayout.gt-xs="row">
+                    <button class="next-btn" color="accent" style="border-radius: 16px;width: fit-content;"
+                      (click)="onPresentation()">Presentation</button>
+                    <div style="float: right;margin-top: 20px;">
+                      <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()"
+                        [disabled]="personalFormGroup.invalid">Save</button>
+                      <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / CONTENT -->
+
+  </div>
+  <!-- / CENTER -->
+
+</div>
+<!-- / CONTENT-->
+
+
+
+
+//

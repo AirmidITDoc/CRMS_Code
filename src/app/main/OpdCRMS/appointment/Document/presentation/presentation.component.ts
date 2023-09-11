@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
+// import { MdRadioChange } from '@angular/material';
+
 
 @Component({
   selector: 'app-presentation',
@@ -13,9 +15,9 @@ export class PresentationComponent implements OnInit {
 
   mainform:FormGroup;
   subform:FormGroup;
-  ActCorSyndromediv:boolean=false;
-  Stablecorsyndiv:boolean=false;
-  CADdiv:boolean=false;
+  ActCorSyndromediv:boolean=true;
+  Stablecorsyndiv:boolean=true;
+  CADdiv:boolean=true;
   isLoading:any;
   screenFromString = 'admission-form';
 
@@ -31,9 +33,18 @@ export class PresentationComponent implements OnInit {
   Inflammatorydiv:boolean=false;
   LabTestdiv:boolean=false;
 
+  Stemidiv:boolean=true;
+  Hemodynamicdiv:boolean=true;
+  Cppresentationdiv:boolean=true;
+  Hemodynamicstatusdiv1:boolean=true;
+  Hemodynamicstatusdiv2:boolean=true;
+  Nstemidiv2:boolean=true;
+  PAPressurediv:boolean=true;
+
+
   constructor(  private _formBuilder: FormBuilder) {
     this.mainform = this.MainForm();
-    this.subform = this.MainForm();
+    this.subform = this.SubForm();
    }
 
   ngOnInit(): void {
@@ -59,6 +70,7 @@ export class PresentationComponent implements OnInit {
 
       Hemodynamic:['0'],
       Hemodynamicstatus:['0'],
+      HemodynamicStableStatus:'',
       StemiTypeId:[''],
       Othere :'',
      
@@ -108,21 +120,21 @@ export class PresentationComponent implements OnInit {
 
 
   onChangeActsynd($event){
-debugger
-    console.log($event)
+
+    // console.log($event)
     if($event.checked == true){
-    this.ActCorSyndromediv=true
+    this.ActCorSyndromediv=false
   }
   else{
-    this.ActCorSyndromediv=false
+    this.ActCorSyndromediv=true
   }
   }
 
   onChangeStableCor($event){
     if($event.checked==true){
-    this.Stablecorsyndiv=true
+    this.Stablecorsyndiv=false
     }else{
-      this.Stablecorsyndiv=false
+      this.Stablecorsyndiv=true
     }
   }
 
@@ -145,8 +157,65 @@ debugger
   onClose(){
 
   }
+  // MdRadioChange
+  onChangeStemi($event){
+    debugger
+    console.log($event.value);
+    if($event.source.name==="Stemi"){
+      this.Stemidiv=false
+    }else{
+      this.Stemidiv=true
+    }
+  }
 
-  
+  onChangeCppresentation($event){
+    if($event.checked==true){
+      this.Cppresentationdiv=false
+    }
+  }
+  onChangeHemodynamic($event){
+    if($event.checked==true){
+      this.Hemodynamicdiv=false
+    }else{
+      this.Hemodynamicdiv=false
+    }
+  }
+
+  onChangeHemodynamicstatus1($event){
+    debugger
+    if($event.source.name==="stable"){
+      this.Hemodynamicstatusdiv1=false
+    }else{
+      this.Hemodynamicstatusdiv1=true
+    }
+
+
+  }
+
+  onChangeHemodynamicstatus2($event){
+
+    if($event.source.name==="unstable"){
+      this.Hemodynamicstatusdiv2=false
+    }else{
+      this.Hemodynamicstatusdiv2=true
+    }
+
+  }
+
+  onChangeNstemi($event){
+    if($event.checked==true){
+      this.Nstemidiv2=false
+    }else{
+      this.Nstemidiv2=false
+    }
+  }
+
+
+
+
+
+
+
   //Cardiac part
   onChangeHypertension($event){
     if($event.checked==true){

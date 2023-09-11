@@ -1,4 +1,3 @@
-import { AppointmentComponent } from './appointment.component';
 import { NgModule } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,7 +17,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { RouterModule, Routes } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { NewAppointmentComponent } from './new-appointment/new-appointment.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
@@ -34,66 +32,25 @@ import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { SharedModule } from 'app/main/shared/shared.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { EditAppointmentComponent } from './edit-appointment/edit-appointment.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatNestedTreeNode, MatTree, MatTreeModule } from '@angular/material/tree';
-import { AppointmentService } from './appointment.service';
-import { BillDetailComponent } from './bill-detail/bill-detail.component';
-import { PaymentDetailComponent } from './payment-detail/payment-detail.component';
-// import { EditVisitDateComponent } from './edit-visit-date/edit-visit-date.component';
-import { NewVistDateComponent } from './new-vist-date/new-vist-date.component';
-import { InvoiceBillMappingComponent } from './invoice-bill-mapping/invoice-bill-mapping.component';
-import { UploadDocumentComponent } from './upload-document/upload-document.component';
-import { ViewFinancialSummarybudgetComponent } from './invoice-bill-mapping/view-financial-summarybudget/view-financial-summarybudget.component';
-import { BrowseInvoiceListComponent } from './browse-invoice-list/browse-invoice-list.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
-import { ImageUploadComponent } from './image-upload/image-upload.component';
-import { PatientScreenBillDetailComponent } from './patient-screen-bill-detail/patient-screen-bill-detail.component';
-import { AssignVisitInforComponent } from './assign-visit-infor/assign-visit-infor.component';
-import { ResultComponent } from './Document/result/result.component';
-import { CardiacFactorComponent } from './Document/cardiac-factor/cardiac-factor.component';
-import { LesionPreprationComponent } from './Document/lesion-prepration/lesion-prepration.component';
-import { ProcedureHemodynamicsComponent } from './Document/procedure-hemodynamics/procedure-hemodynamics.component';
-import { AngioplastiComponent } from './Document/angioplasti/angioplasti.component';
-import { DempgraphicComponent } from './Document/dempgraphic/dempgraphic.component';
-import { PresentationComponent } from './Document/presentation/presentation.component';
-import { DocPresentationComponent } from './Document/doc-presentation/doc-presentation.component';
-import { NewDocRegistrationComponent } from './Document/new-doc-registration/new-doc-registration.component';
-import { NewDocumentComponent } from './Document/new-document/new-document.component';
+import { NewDocRegistrationComponent } from './new-doc-registration/new-doc-registration.component';
+import { ClinicalDocumentService } from './clinical-document.service';
+import { NewDocumentComponent } from './new-document/new-document.component';
+import { DocPresentationComponent } from './doc-presentation/doc-presentation.component';
 
 
 const routes: Routes = [
     {
         path: '**',
-        component: AppointmentComponent,
+        component: NewDocRegistrationComponent,
     },
 ];
 @NgModule({
     declarations: [
-        AppointmentComponent,
-        NewAppointmentComponent,
-        EditAppointmentComponent,
-        BillDetailComponent,
-        PaymentDetailComponent,
-         NewVistDateComponent,
-        InvoiceBillMappingComponent,
-        UploadDocumentComponent,
-        ViewFinancialSummarybudgetComponent,
-        FileUploadComponent,
-        ImageUploadComponent,
-        PatientScreenBillDetailComponent,
-        AssignVisitInforComponent,
-        ResultComponent,
-        CardiacFactorComponent,
-        LesionPreprationComponent,
-        ProcedureHemodynamicsComponent,
-        AngioplastiComponent,
-        DempgraphicComponent,
-        PresentationComponent,
-        //   NewDocRegistrationComponent,
-    //   DocPresentationComponent,
-    //   NewDocumentComponent
-        
+      NewDocumentComponent,
+      DocPresentationComponent,
+      NewDocRegistrationComponent
     ],
     imports: [
         RouterModule.forChild(routes),
@@ -143,15 +100,14 @@ const routes: Routes = [
         MatListModule,
         MatTreeModule,
         MatRadioModule
-        // NgxMaterialTimepickerModule
         
     ],
     providers: [
-        AppointmentService,
+      ClinicalDocumentService,
         DatePipe
     ],
     entryComponents: [
-        AppointmentComponent,
+      NewDocRegistrationComponent
     ]
 })
-export class AppointmentModule { }
+export class ClinicalDocumentModule { }

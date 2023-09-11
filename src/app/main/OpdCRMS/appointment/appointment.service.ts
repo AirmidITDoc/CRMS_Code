@@ -246,6 +246,10 @@ export class AppointmentService {
     return this._httpClient.post("Generic/GetByProc?procName=Retrieve_RegistrationList", employee)
   }
 
+  public getSearchRegistrationList1(employee) {
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_PatientRegistrationList1",employee)
+  }
+
   public UpdateQueryByStatement(query) {
     return this._httpClient.post("Generic/ExecByQueryStatement?query="+query, {})
   }
@@ -395,5 +399,9 @@ public getMainBillDetData(employee){
 
 public getstudywiseservicelist(employee){
   return this._httpClient.post("Generic/GetByProc?procName=Rtrv_VisitWiseStudyServiceInform", employee)
+}
+
+public RegDocInsert(employee){
+  return this._httpClient.post("OutPatient/InvoiceBillMappinngSave", employee);
 }
 }

@@ -22,6 +22,12 @@ import { PatientScreenBillDetailComponent } from './patient-screen-bill-detail/p
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { DempgraphicComponent } from './Document/dempgraphic/dempgraphic.component';
 import { PresentationComponent } from './Document/presentation/presentation.component';
+import { ProcedureHemodynamicsComponent } from './Document/procedure-hemodynamics/procedure-hemodynamics.component';
+import { AngioplastiComponent } from './Document/angioplasti/angioplasti.component';
+import { CardiacFactorComponent } from './Document/cardiac-factor/cardiac-factor.component';
+import { LesionPreprationComponent } from './Document/lesion-prepration/lesion-prepration.component';
+import { NewDocRegistrationComponent } from './Document/new-doc-registration/new-doc-registration.component';
+import { NewDocumentComponent } from './Document/new-document/new-document.component';
 
 
 @Component({
@@ -269,10 +275,10 @@ export class AppointmentComponent implements OnInit {
         };
         // this._AppointmentSreviceService.populateFormpersonal(xx);
         this.advanceDataStored.storage = new SearchInforObj(xx);
-        const dialogRef = this._matDialog.open(PresentationComponent,
+        const dialogRef = this._matDialog.open(NewDocumentComponent,
           {
-            maxWidth: "80%",
-            height: '900px',
+            maxWidth: "90%",
+            height: '1900px',
             width: '100%',
             data: {
               registerObj: xx,

@@ -47,10 +47,10 @@ const appRoutes: Routes = [
 },
 
 
-// {
-//   path: "brows-opd-refund",
-//   loadChildren: () => import("../OpdCRMS/case-detail/study-sevices/study-services.module").then((m) => m.StudyServicesModule),
-// },
+{
+  path: "Clinical Document",
+  loadChildren: () => import("../OpdCRMS/appointment/Document/clinical-document.module").then((m) => m.ClinicalDocumentModule),
+},
 
 ];
 @NgModule({
