@@ -2,12 +2,12 @@
   <!-- HEADER -->
   <mat-toolbar class="accent" style="height:50px; justify-content: space-between;width: 100%;">
     <div fxLayout="row" fxLayoutAlign="start center">
-      
+
 
       <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" style="color: aliceblue;">
         Registration Information
       </span>
-     
+
     </div>
 
   </mat-toolbar>
@@ -36,15 +36,41 @@
               <div style="width: 100%; overflow: hidden;">
                 <form [formGroup]="personalFormGroup">
                   <div style="float: right;">
-                  <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
-                  </app-common-date>
-                </div>
-                  <ng-template matStepLabel>Personal Information</ng-template>
+                    <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
+                    </app-common-date>
+                  </div>
+                  <div>
+                    <mat-form-field appearance="outline" style="width:60%;margin-left:15px;">
+                      <input type="text" name="RegId" formControlName="RegId"
+                        placeholder="RegNo / First Name / Last Name / Mobile No" matInput [matAutocomplete]="auto"
+                        (input)="getSearchList()">
+                      <span matSuffix style="display: flex;">
+                        <mat-icon class="mat-icon-close"
+                          (click)="searchFormGroup.get('RegId').setValue(''); isRegIdSelected = false;">close</mat-icon>
+                        <mat-icon class="mat-icon-close"
+                          (click)="searchFormGroup.get('RegId').setValue(''); isRegIdSelected = false;">search</mat-icon>
+                      </span>
+                      <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText"
+                        (optionSelected)='getSelectedObj($event.option.value)'>
+                        <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                          {{option.FirstName}} {{option.MiddleName}} {{option.LastName}} |
+                          {{option.RegNo}} |
+                          {{option.MobileNo}}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-error *ngIf="searchFormGroup.get('RegId').hasError('required')">
+                        Required field cannot be left blank
+                      </mat-error>
+                    </mat-form-field>
+                    <button class="next-btn">Book Patient Appointment</button>
 
+                  </div>
+                  <div style="height:50px;">
+                    <span>Patient Name : {{PatientName}} --Mobile No: {{Mobileno}}</span>
+                  </div>
+                  <!-- <ng-template matStepLabel>Personal Information</ng-template> -->
+                  <!-- 
                   <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px" style="margin-top: 20px;">
-
-                  
-
                     <mat-form-field appearance="outline" fxFlex>
                       <mat-label>Prefix</mat-label>
                       <input matAutocompletePosition="below" type="text" placeholder="Select Prefix" matInput
@@ -63,15 +89,11 @@
                       </mat-autocomplete>
                     </mat-form-field>
 
-
-
                     <mat-form-field appearance="outline" fxFlex>
                       <mat-label>First Name</mat-label>
                       <input name="FirstName" formControlName="FirstName" placeholder="First Name"
                         [ngClass]="{ 'is-invalid': submitted && personalFormGroup.get('FirstName').errors }" matInput
                         required [(ngModel)]="registerObj.FirstName">
-                      <!-- onkeypress=" (event.charCode > 64 && 
-                            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"> -->
                       <mat-error class="error"
                         *ngIf="personalFormGroup.get('FirstName').invalid && personalFormGroup.get('FirstName').touched">
                         First
@@ -79,8 +101,6 @@
                         only
                         Alphabets</mat-error>
                     </mat-form-field>
-
-
                     <mat-form-field appearance="outline" fxFlex>
                       <mat-label>Middle Name</mat-label>
                       <input name="MiddleName" formControlName="MiddleName" placeholder="Middle Name"
@@ -176,36 +196,282 @@
                       <input name="PhoneNo" formControlName="PhoneNo" placeholder="PhoneNo" matInput min="0"
                         [ngModel]="registerObj.PhoneNo" (ngModelChange)="registerObj.PhoneNo = $event" type="number"
                         minlength="1" maxlength="4">
-                      <!-- <mat-error
-                        *ngIf="personalFormGroup.get('PhoneNo').invalid && personalFormGroup.get('PhoneNo').touched">Please
-                        enter Age Year </mat-error> -->
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" fxFlex>
                       <mat-label>Ref.Doctor Name</mat-label>
                       <input name="Doctorname" formControlName="Doctorname" placeholder="Doctorname" matInput 
                         [ngModel]="registerObj.Doctorname"  type="text" >
-                      <!-- <mat-error
-                        *ngIf="personalFormGroup.get('AgeMonth').invalid && personalFormGroup.get('AgeMonth').touched">
-                        Please enter Age Month </mat-error> -->
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" fxFlex>
                       <mat-label>EmailId</mat-label>
                       <input name="EmailId" formControlName="EmailId" placeholder="EmailId" matInput  [ngModel]="registerObj.EmailId"
                         (ngModelChange)="registerObj.EmailId = $event" >
-                      <!-- <mat-error
-                        *ngIf="personalFormGroup.get('AgeDay').invalid && personalFormGroup.get('AgeDay').touched">
-                        Please enter Age Day </mat-error> -->
                     </mat-form-field>
 
 
+                  </div> -->
+                  <div style="height:50px;">
+                    <span>Presentation</span>
+                  </div>
+                  
+
+                  <mat-form-field appearance="outline" style="width: 700px;">
+                    <mat-label>Presentation Name</mat-label>
+                    <mat-select formControlName="DocId" name="DocId" (selectionChange)="onChangeDocList($event.value)">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let m of Doctype" [value]="m">
+                        {{m.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <div style="height:50px;">
+                    <span>2D Echo</span>
+                  </div>
+                  <div>
+                    <div>
+                      <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                        <mat-label>Global GLS</mat-label>
+                        <input name="Global GLS" matInput>
+                        <mat-error>Global GLS</mat-error>
+                      </mat-form-field>
+  
+                    </div>
+                    <div>
+                      <span>Valve</span>
+                      <mat-radio-group value="2">
+                        <span>Mitral </span>
+                        <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                          <mat-label>Stenotic</mat-label>
+                          <input name="Stenotic" matInput>
+                          <mat-error>Stenotic</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                          <mat-label>Stenotic</mat-label>
+                          <input name="Stenotic" matInput>
+                          <mat-error>Stenotic</mat-error>
+                        </mat-form-field>
+                      </mat-radio-group>
+                    
+                      <mat-radio-group value="2">
+                        <span>Mitral</span>
+                        <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                          <mat-label>Stenotic</mat-label>
+                          <input name="Stenotic" matInput>
+                          <mat-error>Stenotic</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                          <mat-label>Stenotic</mat-label>
+                          <input name="Stenotic" matInput>
+                          <mat-error>Stenotic</mat-error>
+                        </mat-form-field>
+                      </mat-radio-group>
+                    </div>
+                    <div>
+                      <span>MV</span>
+                      <mat-radio-group value="2">
+                        <span>MR </span>
+                        <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                        <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                      </mat-radio-group>
+                    
+                      <mat-radio-group value="2">
+                        <span>MS</span>
+                        <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                        <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                    <div>
+                      <span>AV</span>
+                      <mat-radio-group value="2">
+                        <span>AS </span>
+                        <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                        <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                      </mat-radio-group>
+                    
+                    
+                      <mat-radio-group value="2">
+                        <span>AR</span>
+                        <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                        <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                    <div>
+                      <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                        <mat-label>PA Pressure</mat-label>
+                        <input name="PA Pressure" matInput>
+                        <mat-error>PA Pressure</mat-error>
+                      </mat-form-field>
+  
+                    </div>
+                 
+                  </div>
+
+                  <div style="height:50px;">
+                    <span>Past History</span>
+                  </div>
+                  <div>
+                    <div>
+                      <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                        <mat-label>Angioplasty</mat-label>
+                        <input name="Angioplasty" matInput>
+                        <mat-error>Angioplasty</mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                        <mat-label>CABG</mat-label>
+                        <input name="CABG" matInput>
+                        <mat-error>CABG</mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                        <mat-label>Vascular Procedure</mat-label>
+                        <input name="Vascular Procedure" matInput>
+                        <mat-error>Vascular Procedure</mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                        <mat-label>Past Non-Cardiac Procedure</mat-label>
+                        <input name="Past Non-Cardiac Procedure" matInput>
+                        <mat-error>Past Non-Cardiac Procedure</mat-error>
+                      </mat-form-field>
+
+                    </div>
+                  </div>
+
+                  <div style="height:50px;">
+                    <span>Cardiac Risk Factor</span>
+                  </div>
+                  <div>
+                    <div>
+                      <mat-radio-group value="2">
+                        <span>Hypertension </span>
+                        <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                        <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                      </mat-radio-group>
+
+                      <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                        <mat-label>Drug Name</mat-label>
+                        <input name="OnMedication" matInput>
+                        <mat-error>Drug Name</mat-error>
+                      </mat-form-field>
+
+                    </div>
+                    <div>
+                      <mat-radio-group value="2">
+                        <span>CKD </span>
+                        <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                        <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                      </mat-radio-group>
+
+                      <mat-radio-group value="2">
+                        <span>Dialysis Dependent </span>
+                        <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                        <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                      </mat-radio-group>
+
+                      <mat-radio-group value="2">
+                        <span>Smoking </span>
+                        <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                        <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                      </mat-radio-group>
+
+                      <mat-radio-group value="2">
+                        <span>Tobacco Chew </span>
+                        <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                        <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                      </mat-radio-group>
+
+                    </div>
+                    <div>
+                      <mat-radio-group value="2">
+                        <span>Insuline </span>
+                        <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                        <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                      </mat-radio-group>
+
+                      <mat-radio-group value="2">
+                        <span>Oral </span>
+                        <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                        <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                    <div>
+                      <!-- <mat-radio-group value="2">
+                      <span>Hypertension </span>
+                      <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                      <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                    </mat-radio-group> -->
+
+                      <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                        <mat-label>LDL</mat-label>
+                        <input name="OnMedication" matInput>
+                        <mat-error>LDL</mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                        <mat-label>Tri Glyceride</mat-label>
+                        <input name="TriGlyceride" matInput>
+                        <mat-error>Tri Glyceride</mat-error>
+                      </mat-form-field>
+
+                    </div>
+
+                    <div>
+                      <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                        <mat-label>Hba1c</mat-label>
+                        <input name="OnMedication" matInput>
+                        <mat-error>Hba1c</mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                        <mat-label>Creatinine</mat-label>
+                        <input name="Creatinine" matInput>
+                        <mat-error>Creatinine</mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                        <mat-label>Hb</mat-label>
+                        <input name="Hb" matInput>
+                        <mat-error>Hb</mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                        <mat-label>eGFR</mat-label>
+                        <input name="eGFR" matInput>
+                        <mat-error>eGFR</mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                        <mat-label>CKMB</mat-label>
+                        <input name="CKMB" matInput>
+                        <mat-error>CKMB</mat-error>
+                      </mat-form-field>
+
+                      <mat-radio-group value="2">
+                        <span>Iron Deficency </span>
+                        <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                        <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                      </mat-radio-group>
+
+                      <mat-radio-group value="2">
+                        <span>Vit B12 Dificency </span>
+                        <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                        <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                      </mat-radio-group>
+
+                      <mat-radio-group value="2">
+                        <span>cRP </span>
+                        <mat-radio-button mat-fab value="0">Raised</mat-radio-button>
+                        <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
                   </div>
 
 
                   <div class="footer-navigation-container" fxLayout.gt-xs="row">
-                    <button class="next-btn" color="accent" style="border-radius: 16px;width: fit-content;"
-                      (click)="onPresentation()">Presentation</button>
                     <div style="float: right;margin-top: 20px;">
                       <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()"
                         [disabled]="personalFormGroup.invalid">Save</button>
@@ -227,8 +493,3 @@
 
 </div>
 <!-- / CONTENT-->
-
-
-
-
-//

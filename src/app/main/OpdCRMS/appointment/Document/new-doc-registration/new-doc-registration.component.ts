@@ -9,6 +9,7 @@ import { NewDocumentComponent } from '../new-document/new-document.component';
 import { fuseAnimations } from '@fuse/animations';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import Swal from 'sweetalert2';
+import { DocPresentationComponent } from '../doc-presentation/doc-presentation.component';
 
 @Component({
   selector: 'app-new-doc-registration',
@@ -18,30 +19,99 @@ import Swal from 'sweetalert2';
   animations: fuseAnimations
 })
 export class NewDocRegistrationComponent implements OnInit {
+  searchFormGroup: FormGroup;
+  filteredOptions: any;
+  noOptionFound: boolean = false;
 
   registerObj = new RegInsert({});
-  personalFormGroup:FormGroup;
+  personalFormGroup: FormGroup;
   submitted = false;
-  isLoading:any;
-isPrefixSelected: boolean = false;
-optionsPrefix: any[] = [];
-filteredOptionsPrefix: Observable<string[]>;
-PrefixList: any = [];
-GenderList: any = [];
-selectedGenderID: any;
-screenFromString = 'admission-form';
-RegId:any;
+  isLoading: any;
+  isPrefixSelected: boolean = false;
+  optionsPrefix: any[] = [];
+  filteredOptionsPrefix: Observable<string[]>;
+  PrefixList: any = [];
+  GenderList: any = [];
+  selectedGenderID: any;
+  screenFromString = 'admission-form';
+  RegId: any;
+  PatientName: any = '';
+  Mobileno: any = '';
+  isRegIdSelected: boolean = false;
+
+  Doctype = [
+    { id: 1, name: "Acute Coronary Syndrome" },
+    { id: 2, name: "Stable Coronary Syndrome" },
+    { id: 3, name: "Incidental / Detection of CAD" },
+    // {id: 4, name: "Brazil"},
+    // {id: 5, name: "England"}
+  ];
+
   constructor(public _AppointmentService: AppointmentService,
     private accountService: AuthenticationService,
-    private formBuilder: FormBuilder,  public _matDialog: MatDialog,) { }
+    private formBuilder: FormBuilder, public _matDialog: MatDialog,) { }
 
   ngOnInit(): void {
     this.personalFormGroup = this.createPesonalForm();
+    this.searchFormGroup = this.createSearchForm();
 
     this.getPrefixList();
   }
 
+  getOptionText(option) {
+    if (!option) return '';
+    return option.FirstName + ' ' + option.LastName + ' (' + option.RegId + ')';
+  }
 
+  createSearchForm() {
+    return this.formBuilder.group({
+      RegId: ['']
+    });
+  }
+  getSelectedObj(obj) {
+    debugger
+    this.registerObj = obj;
+    this.PatientName = this.registerObj.FirstName + ' ' + this.registerObj.MiddleName + ' ' + this.registerObj.LastName;
+    this.Mobileno = this.registerObj.MobileNo;
+  }
+  getSearchList() {
+    debugger
+
+    var m_data = {
+      "Keyword": `${this.searchFormGroup.get('RegId').value}%`
+    }
+    if (this.searchFormGroup.get('RegId').value.length >= 1) {
+      this._AppointmentService.getSearchRegistrationList1(m_data).subscribe(resData => {
+
+        this.filteredOptions = resData;
+        console.log(resData);
+        if (this.filteredOptions.length == 0) {
+          this.noOptionFound = true;
+        } else {
+          this.noOptionFound = false;
+        }
+
+      });
+    }
+
+  }
+
+  onChangeDocList(Id) {
+    debugger
+    const dialogRef = this._matDialog.open(DocPresentationComponent,
+      {
+        maxWidth: "60%",
+        height: '700px',
+        width: '100%',
+        data: {
+          "DoctypeId": Id.id
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed - Insert Action', result);
+
+    });
+  }
   createPesonalForm() {
     return this.formBuilder.group({
       RegId: '',
@@ -59,7 +129,7 @@ RegId:any;
         Validators.pattern("^[A-Za-z]*[a-zA-z]*$"),
       ]],
       GenderId: '',
-   
+
       DateOfBirth: [{ value: this.registerObj.DateofBirth }],
       AgeYear: ['', [
         Validators.required,
@@ -70,25 +140,25 @@ RegId:any;
       AgeDay: ['', [
 
         Validators.pattern("^[0-9]*$")]],
-      PhoneNo: ['',[Validators.minLength(10),
+      PhoneNo: ['', [Validators.minLength(10),
       Validators.maxLength(15),
       Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")
       ]],
       Doctorname: '',
-      EmailId:''
+      EmailId: ''
     });
   }
 
   private _filterPrex(value: any): string[] {
     if (value) {
       const filterValue = value && value.PrefixName ? value.PrefixName.toLowerCase() : value.toLowerCase();
-       return this.optionsPrefix.filter(option => option.PrefixName.toLowerCase().includes(filterValue));
+      return this.optionsPrefix.filter(option => option.PrefixName.toLowerCase().includes(filterValue));
     }
 
   }
 
-  
-  getOptionTextPrefix(option){
+
+  getOptionTextPrefix(option) {
     return option.PrefixName;
   }
 
@@ -101,18 +171,18 @@ RegId:any;
         startWith(''),
         map(value => value ? this._filterPrex(value) : this.PrefixList.slice()),
       );
-      
+
     });
-    this.onChangeGenderList(this.personalFormGroup.get('PrefixID').value);  
+    this.onChangeGenderList(this.personalFormGroup.get('PrefixID').value);
   }
 
 
   onChangeGenderList(prefixObj) {
-    if(prefixObj) {
+    if (prefixObj) {
       this._AppointmentService.getGenderCombo(prefixObj.PrefixID).subscribe(data => {
         this.GenderList = data;
         this.personalFormGroup.get('GenderId').setValue(this.GenderList[0]);
-        
+
         this.selectedGenderID = this.GenderList[0].GenderId;
       });
     }
@@ -124,8 +194,8 @@ RegId:any;
       const todayDate = new Date();
       const dob = new Date(DateOfBirth);
       const timeDiff = Math.abs(Date.now() - dob.getTime());
-       this.registerObj.AgeYear = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
-       this.registerObj.AgeMonth = Math.abs(todayDate.getMonth() - dob.getMonth());
+      this.registerObj.AgeYear = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
+      this.registerObj.AgeMonth = Math.abs(todayDate.getMonth() - dob.getMonth());
       this.registerObj.AgeDay = Math.abs(todayDate.getDate() - dob.getDate());
       this.registerObj.DateofBirth = DateOfBirth;
       this.personalFormGroup.get('DateOfBirth').setValue(DateOfBirth);
@@ -133,26 +203,26 @@ RegId:any;
 
   }
 
-onPresentation(){
-  const dialogRef = this._matDialog.open(NewDocumentComponent,
-    {
-      maxWidth: "80%",
-      height: '1800px',
-      width: '100%'
-      // data: {
-      //   "Divtype": "Acute Coronary Syndrome"
-      // }
+  onPresentation() {
+    const dialogRef = this._matDialog.open(NewDocumentComponent,
+      {
+        maxWidth: "80%",
+        height: '800px',
+        width: '100%',
+        data: {
+          "Divtype": "Acute Coronary Syndrome"
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed - Insert Action', result);
+
     });
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed - Insert Action', result);
-    
-  });
-}
+  }
 
 
-submitAdmissionForm() {
-  // debugger;
- 
+  submitAdmissionForm() {
+    // debugger;
+
     // this.isLoading = 'submit';
     let submissionObj = {};
     let regInsert = {};
@@ -185,7 +255,7 @@ submitAdmissionForm() {
     regInsert['religionId'] = this.personalFormGroup.get('ReligionId').value ? this.personalFormGroup.get('ReligionId').value.ReligionId : 0;
     regInsert['areaId'] = this.personalFormGroup.get('AreaId').value ? this.personalFormGroup.get('AreaId').value.AreaId : 0;
     regInsert['IsSeniorCitizen'] = 1;//this.personalFormGroup.get('IsSeniorCitizen').value ? this.personalFormGroup.get('ReligionId').value.ReligionId : 0;
-    
+
     // console.log(submissionObj);
     this._AppointmentService.RegDocInsert(submissionObj).subscribe(response => {
       console.log(response);
@@ -206,21 +276,21 @@ submitAdmissionForm() {
     });
 
 
-  
- 
-
-}
-
-onClose(){
-
-}
-
-dateTimeObj: any;
-getDateTime(dateTimeObj) {
-  // console.log('dateTimeObj==', dateTimeObj);
-  this.dateTimeObj = dateTimeObj;
-}
 
 
-onSubmit(){}
+
+  }
+
+  onClose() {
+
+  }
+
+  dateTimeObj: any;
+  getDateTime(dateTimeObj) {
+    // console.log('dateTimeObj==', dateTimeObj);
+    this.dateTimeObj = dateTimeObj;
+  }
+
+
+  onSubmit() { }
 }
