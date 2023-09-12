@@ -38,6 +38,7 @@ export class NewDocRegistrationComponent implements OnInit {
   PatientName: any = '';
   Mobileno: any = '';
   isRegIdSelected: boolean = false;
+  RegNo:any;
 
   Doctype = [
     { id: 1, name: "Acute Coronary Syndrome" },
@@ -73,14 +74,15 @@ export class NewDocRegistrationComponent implements OnInit {
     this.registerObj = obj;
     this.PatientName = this.registerObj.FirstName + ' ' + this.registerObj.MiddleName + ' ' + this.registerObj.LastName;
     this.Mobileno = this.registerObj.MobileNo;
+    this.RegNo=this.registerObj.RegNo;
   }
   getSearchList() {
     debugger
 
     var m_data = {
-      "Keyword": `${this.searchFormGroup.get('RegId').value}%`
+      "Keyword": `${this.personalFormGroup.get('RegID').value}%`
     }
-    if (this.searchFormGroup.get('RegId').value.length >= 1) {
+    if (this.personalFormGroup.get('RegID').value.length >= 1) {
       this._AppointmentService.getSearchRegistrationList1(m_data).subscribe(resData => {
 
         this.filteredOptions = resData;
@@ -145,7 +147,8 @@ export class NewDocRegistrationComponent implements OnInit {
       Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")
       ]],
       Doctorname: '',
-      EmailId: ''
+      EmailId: '',
+      RegID:['']
     });
   }
 

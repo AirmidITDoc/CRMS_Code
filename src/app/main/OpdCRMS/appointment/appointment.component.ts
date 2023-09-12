@@ -28,6 +28,7 @@ import { CardiacFactorComponent } from './Document/cardiac-factor/cardiac-factor
 import { LesionPreprationComponent } from './Document/lesion-prepration/lesion-prepration.component';
 import { NewDocRegistrationComponent } from './Document/new-doc-registration/new-doc-registration.component';
 import { NewDocumentComponent } from './Document/new-document/new-document.component';
+import { ResultComponent } from './Document/result/result.component';
 
 
 @Component({
@@ -275,7 +276,7 @@ export class AppointmentComponent implements OnInit {
         };
         // this._AppointmentSreviceService.populateFormpersonal(xx);
         this.advanceDataStored.storage = new SearchInforObj(xx);
-        const dialogRef = this._matDialog.open(LesionPreprationComponent,
+        const dialogRef = this._matDialog.open(ResultComponent,
           {
             maxWidth: "90%",
             height: '1900px',

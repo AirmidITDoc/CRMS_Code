@@ -10,7 +10,7 @@ export class ResultComponent implements OnInit {
   mainform:FormGroup;
   subform:FormGroup;
   Eventsdiv:boolean=false;
-  ActCorSyndromediv:boolean=false;
+  Resultdiv:boolean=false;
   isLoading:any;
   screenFromString = 'admission-form';
 
@@ -84,9 +84,33 @@ export class ResultComponent implements OnInit {
 
     });
   }
-  onChangeEvents($e){
-
+  onChangeEvents($event){
+    if($event.checked=true){
+      this.Eventsdiv=true
+    }
+    else if($event.checked=false){
+      this.Eventsdiv=false
+    }
   }
+
+  // onChangeEffectivestatus($event){
+  //   if($event.checked=true){
+  //     this.ActCorSyndromediv=true
+  //   }
+  //   else if($event.checked=false){
+  //     this.ActCorSyndromediv=false
+  //   }
+  // }
+
+  onChangeResult($event){
+    if($event.checked=true){
+      this.Resultdiv=true
+    }
+    else if($event.checked=false){
+      this.Resultdiv=false
+    }
+  }
+  
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
 
