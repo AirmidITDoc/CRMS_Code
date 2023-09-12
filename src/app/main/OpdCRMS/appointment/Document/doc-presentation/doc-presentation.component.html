@@ -30,7 +30,7 @@
         </div>
 
         <div>
-            <mat-card-content style="width: 100%;margin-right: 5px;">
+            <mat-card-content style="width: 100%;margin-right: 5px;height: 1800px !important;">
                 <div fxLayout="column">
 
 
@@ -266,8 +266,7 @@
 
                                         </div>
 
-                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
-                                            >
+                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" >
 
 
                                             <mat-form-field style="width: 400px;margin-left: 500px;"  [disabled]="Stablecorsyndiv"
@@ -287,7 +286,7 @@
 
 
                                 <form [formGroup]="subform">
-                                    <div style="padding: 7px;border-style:groove;">
+                                    <div style="padding: 7px;border-style:groove;"  *ngIf="CADdiv">
                                         <!-- *ngIf="CADdiv" -->
                                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
 
@@ -352,7 +351,7 @@
                                                 appearance="outline">
                                                 <mat-label>Critical / Significant/
                                                     Not-Significant</mat-label>
-                                                <mat-select [formControl]="CTType" multiple>
+                                                <mat-select formControlName="CTType" multiple>
 
                                                     <mat-option *ngFor="let name of ScoretypeList"
                                                         [value]="name">{{name}}</mat-option>

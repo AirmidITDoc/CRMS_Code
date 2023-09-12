@@ -275,7 +275,7 @@ export class AppointmentComponent implements OnInit {
         };
         // this._AppointmentSreviceService.populateFormpersonal(xx);
         this.advanceDataStored.storage = new SearchInforObj(xx);
-        const dialogRef = this._matDialog.open(NewDocumentComponent,
+        const dialogRef = this._matDialog.open(LesionPreprationComponent,
           {
             maxWidth: "90%",
             height: '1900px',

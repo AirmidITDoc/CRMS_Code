@@ -28,7 +28,7 @@ export class DocPresentationComponent implements OnInit {
   Stablecorsyndiv:boolean=false;
   Hemodynamicdiv:boolean=false;
   Hemodynamicunstablediv:boolean=false;
-  CADdiv:boolean=true;
+  CADdiv:boolean=false;
 
 
   type:any=0;

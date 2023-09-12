@@ -33,7 +33,7 @@
             <div>
 
 
-                <mat-card-content style="width: 100%;margin-right: 5px;">
+                <mat-card-content style="width: 100%;margin-right: 5px;height: 1800px !important;">
                     <div fxLayout="column">
 
 
@@ -74,7 +74,7 @@
                                             </mat-form-field>
 
 
-                                            <button mat-raised-button class="searchButton" style="width: 100px;"
+                                            <button mat-raised-button class="searchButton" style="width:80px;margin-right:450px !important ;"
                                                 matTooltip="search">
                                                 <mat-icon class="searchiconbutton">search</mat-icon>
                                             </button>
@@ -103,7 +103,7 @@
                                                 style="padding-bottom: 10px;">
 
 
-                                                <mat-form-field appearance="outline" style="width: 700px;">
+                                                <mat-form-field appearance="outline" style="width: 700px;margin-right:60px;">
                                                     <mat-label>Presentation Name</mat-label>
                                                     <mat-select formControlName="DocId" name="DocId"
                                                         (selectionChange)="onChangeDocList($event.value)">
@@ -118,7 +118,7 @@
 
                                                 <button mat-raised-button fxLayoutAlign="center center"
                                                     (click)="onAdd()" [disabled]="personalFormGroup.invalid"
-                                                    style="background-color: blue; color: white; width: 70px;margin-right:400px; ">
+                                                    style="background-color: blue; color: white; width: 70px;">
                                                     <mat-icon> add </mat-icon> &nbsp;Add
                                                 </button>
                                             </div>
@@ -201,6 +201,7 @@
 </div>
 
 <div fxLayout="row" style="width: 100%;">
+<mat-card-content>
 
     <div fxFlex="100" fxFlex.gt-sm="100" fxLayout="row" fxLayout.gt-xs="column"
         style="width:100%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;overflow: auto ;background-color:white !important; "
@@ -271,4 +272,5 @@
 
         </form>
     </div>
+</mat-card-content>
 </div>

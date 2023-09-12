@@ -137,11 +137,11 @@ onPresentation(){
   const dialogRef = this._matDialog.open(NewDocumentComponent,
     {
       maxWidth: "80%",
-      height: '800px',
-      width: '100%',
-      data: {
-        "Divtype": "Acute Coronary Syndrome"
-      }
+      height: '1800px',
+      width: '100%'
+      // data: {
+      //   "Divtype": "Acute Coronary Syndrome"
+      // }
     });
   dialogRef.afterClosed().subscribe(result => {
     console.log('The dialog was closed - Insert Action', result);
