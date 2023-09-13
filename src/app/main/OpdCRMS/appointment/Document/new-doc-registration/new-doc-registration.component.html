@@ -71,8 +71,13 @@
                           Required field cannot be left blank
                         </mat-error>
                       </mat-form-field>
-                      <button class="next-btn" style="width: max-content;margin-left: 10px;">Book Patient
+                      <button class="next-btn" style="width: max-content;margin-left: 10px;" (click)="getappointment()">Book Patient
                         Appointment</button>
+
+                        <button class="next-btn" style="width: max-content;margin-left: 10px;" (click)="gethyamonodynamic()">Hymodyanamic</button>
+                           <button class="next-btn" style="width: max-content;margin-left: 10px;" (click)="getdemographi()">Demographic</button>
+                         <button class="next-btn" style="width: max-content;margin-left: 10px;" (click)="getanigioplasti()">Anjioplasti</button>
+                         <button class="next-btn" style="width: max-content;margin-left: 10px;" (click)="getresult()">Result</button>
 
                     </div>
                     <div style="height:50px;padding:7px;font-size: large;margin-left: 5px;color: rgb(7, 42, 126);">

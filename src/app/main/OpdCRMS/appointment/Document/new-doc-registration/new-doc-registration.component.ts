@@ -10,6 +10,9 @@ import { fuseAnimations } from '@fuse/animations';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import Swal from 'sweetalert2';
 import { DocPresentationComponent } from '../doc-presentation/doc-presentation.component';
+import { AngioplastiComponent } from '../angioplasti/angioplasti.component';
+import { ResultComponent } from '../result/result.component';
+import { ProcedureHemodynamicsComponent } from '../procedure-hemodynamics/procedure-hemodynamics.component';
 
 @Component({
   selector: 'app-new-doc-registration',
@@ -98,6 +101,69 @@ export class NewDocRegistrationComponent implements OnInit {
 
   }
 
+
+getappointment(){
+  const dialogRef = this._matDialog.open(DocPresentationComponent,
+    {
+      maxWidth: "60%",
+      height: '700px',
+      width: '100%',
+      // data: {
+      //   "DoctypeId": Id.id
+      // }
+    });
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed - Insert Action', result);
+
+  });
+}
+
+gethyamonodynamic(){
+  const dialogRef = this._matDialog.open(ProcedureHemodynamicsComponent,
+    {
+      maxWidth: "60%",
+      height: '700px',
+      width: '100%',
+      // data: {
+      //   "DoctypeId": Id.id
+      // }
+    });
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed - Insert Action', result);
+
+  });
+}
+getanigioplasti(){
+  const dialogRef = this._matDialog.open(AngioplastiComponent,
+    {
+      maxWidth: "60%",
+      height: '700px',
+      width: '100%',
+      // data: {
+      //   "DoctypeId": Id.id
+      // }
+    });
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed - Insert Action', result);
+
+  });
+}
+
+getresult(){
+  const dialogRef = this._matDialog.open(ResultComponent,
+    {
+      maxWidth: "60%",
+      height: '700px',
+      width: '100%',
+      // data: {
+      //   "DoctypeId": Id.id
+      // }
+    });
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed - Insert Action', result);
+
+  });
+}
   onChangeDocList(Id) {
     debugger
     const dialogRef = this._matDialog.open(DocPresentationComponent,
