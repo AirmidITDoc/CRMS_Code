@@ -52,26 +52,23 @@
 
                                             <mat-radio-button class="mr-sm-12" fxFlex formControlName="Stemi"
                                                 (change)="onChangeStemi($event)" name="Stemi">STEMI</mat-radio-button>
-
+                                            <!-- <mat-radio-button value="true" class="mr-sm-12" fxFlex
+                                                formControlName="Nstemi"
+                                                (change)="onChangeNstemi($event)">NSTEMI</mat-radio-button> -->
                                         </div>
 
 
                                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-
-
-                                            <mat-form-field appearance="outline" [disable]="Stemidiv"
-                                                style="width:200px;border-style: groove;margin-left:200px;">
-                                                <mat-label style="font-weight: bold;">Cp_Presentation
-                                                    duration</mat-label>
+                                            <mat-form-field appearance="outline" [disable]="Stemidiv" fxFlex>
+                                                <mat-label style="font-weight: bold;">Cp_Presentation duration</mat-label>
                                                 <input name="Cppresentation" formControlName="Cppresentation"
-                                                    [disabled]="Cppresentation" placeholder="Cppresentation" matInput>
+                                                   placeholder="Cppresentation" matInput>
                                             </mat-form-field>
-
                                         </div>
 
 
 
-                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                        <!-- <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
 
                                             <mat-checkbox aria-label="Hemodynamic" formControlName="Hemodynamic"
                                                 [disabled]="Stemidiv"
@@ -80,23 +77,32 @@
                                                 Hemodynamic
                                             </mat-checkbox>
 
-                                        </div>
+                                        </div> -->
 
                                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
 
-                                            <mat-radio-group aria-label="Select an option" [disable]="Hemodynamicdiv"
-                                                formControlName="Hemodynamicstatus1" name="Hemodynamicstatus1"
-                                                (change)="onChangeHemodynamicstatus1($event)">
-                                                <mat-radio-button value="stable" style="margin-bottom: 7px;">Stable YES
-                                                </mat-radio-button>
-                                                <mat-radio-button value="unstable">NO</mat-radio-button>
+                                            <span
+                                                style="font-weight: 500;font-size: large;margin-left:20px;margin-right: 20px;">Hemodynamics</span>
+                                            <mat-radio-group value="2">
+                                                <span>Stable</span>
+                                                <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                                                <mat-radio-button mat-fab value="1">No</mat-radio-button>
                                             </mat-radio-group>
+                                        </div>
 
-
+                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                            <span>UnStable</span>
+                                            <mat-form-field  [disable]="Hemodynamicunstablediv" appearance="outline" fxFlex>
+                                                <mat-label>Document Type</mat-label>
+                                                <mat-select [formControl]="HemodynamicStableStatus" multiple>
+                                                    <mat-option *ngFor="let topping of UnstabletypeList"
+                                                        [value]="topping">{{topping}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
                                         </div>
 
 
-                                        <div fxLayout="column" fxLayout.gt-xs="row">
+                                        <!-- <div fxLayout="column" fxLayout.gt-xs="row">
                                             <mat-form-field style="width: 400px;margin-left: 500px;"
                                                 [disable]="Hemodynamicunstablediv" appearance="outline">
                                                 <mat-label>Document Type</mat-label>
@@ -106,11 +112,10 @@
                                                         [value]="topping">{{topping}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
-                                        </div>
+                                        </div> -->
 
                                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                                            <mat-form-field appearance="outline"
-                                                style="width:200px;margin-left: 300px;border-style: groove;">
+                                            <mat-form-field appearance="outline" fxFlex>
                                                 <mat-label style="font-weight: bold;">Stemi Type</mat-label>
                                                 <mat-select formControlName="StemiTypeId">
                                                     <mat-option></mat-option>
@@ -121,10 +126,16 @@
                                             </mat-form-field>
                                         </div>
 
-                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                        <!-- <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxFlex>
+                                            <mat-form-field appearance="outline" fxFlex>
+                                                <mat-label style="font-weight: bold;">Other
+                                                </mat-label>
+                                                <input name="Other" formControlName="Other" [disabled]="Other" placeholder="Other" matInput>
+                                            </mat-form-field>
+                                        </div> -->
 
-                                            <mat-form-field appearance="outline"
-                                                style="width:300px;border-style: groove;margin-left: 500px;">
+                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                            <mat-form-field appearance="outline" fxFlex>
                                                 <mat-label style="font-weight: bold;">Other
                                                 </mat-label>
                                                 <input name="Other" formControlName="Other" [disabled]="Other"
@@ -147,7 +158,7 @@
                                             </div>
 
 
-                                            <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                            <!-- <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
 
                                                 <mat-checkbox aria-label="Ekgchange" formControlName="Ekgchange"
                                                     [disabled]="Nstemidiv2"
@@ -155,24 +166,47 @@
                                                     EKG Change
                                                 </mat-checkbox>
 
-                                            </div>
+                                            </div> -->
+
 
                                             <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                                                <mat-checkbox aria-label="Hypoxia" formControlName="Hypoxia"
+                                                <mat-radio-group value="2">
+                                                    <span >EKG Change
+                                                    </span>
+                                                    <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                                                    <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                                                  </mat-radio-group>
+
+                                                  <mat-radio-group value="2">
+                                                    <span >EKG Change
+                                                    </span>
+                                                    <mat-radio-button mat-fab value="0">Yes</mat-radio-button>
+                                                    <mat-radio-button mat-fab value="1">No</mat-radio-button>
+                                                  </mat-radio-group>
+
+                                                  <mat-form-field appearance="outline" fxFlex>
+                                                    <mat-label style="font-weight: bold;">Other
+                                                    </mat-label>
+                                                    <input name="Other" formControlName="Other" [disabled]="Other"
+                                                        placeholder="Other" matInput>
+                                                </mat-form-field>
+                            
+                                            
+                                                <!-- <mat-checkbox aria-label="Hypoxia" formControlName="Hypoxia"
                                                     [disabled]="Nstemidiv2"
                                                     style="font-weight: bold;margin-left:300px;width: 300px;">
                                                     Enzyme Raised
-                                                </mat-checkbox>
+                                                </mat-checkbox> -->
 
                                             </div>
 
-                                            <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                            <!-- <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
                                                 <mat-checkbox aria-label="Other2" formControlName="Other2"
                                                     [disabled]="Nstemidiv2"
                                                     style="font-weight: bold;margin-left:300px;width: 300px;">
                                                     Other
                                                 </mat-checkbox>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </form>
@@ -188,15 +222,14 @@
 
                                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
 
-                                            <mat-radio-button  class="mr-sm-12" fxFlex
-                                                [disabled]="Stablecorsyndiv" style="font-weight: bold;"
-                                                formControlName="Angina">Angina
+                                            <mat-radio-button class="mr-sm-12" fxFlex [disabled]="Stablecorsyndiv"
+                                                style="font-weight: bold;" formControlName="Angina">Angina
                                             </mat-radio-button>
 
                                         </div>
 
 
-                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                        <!-- <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
 
                                             <mat-radio-group aria-label="Select an option"
                                                 formControlName="Angniastatus" name="regRadio"
@@ -207,19 +240,13 @@
                                                 <mat-radio-button value="Angniastatus">NO</mat-radio-button>
                                             </mat-radio-group>
 
-                                        </div>
+                                        </div> -->
 
-                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
-                                           >
-
-
-                                            <mat-form-field style="width: 400px;margin-left: 500px;"  [disabled]="Stablecorsyndiv"
-                                                appearance="outline">
+                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                            <mat-form-field [disabled]="Stablecorsyndiv" appearance="outline" fxFlex>
                                                 <mat-label>Stable/Progressive</mat-label>
-                                                <mat-select [formControl]="Condtionstatus" multiple>
-
-                                                    <mat-option *ngFor="let name of AnginatypeList"
-                                                        [value]="name">{{name}}</mat-option>
+                                                <mat-select [formControl]="Condtionstatus" >
+                                                    <mat-option *ngFor="let name of AnginatypeList" [value]="name">{{name}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
 
@@ -230,55 +257,50 @@
                                         <hr>
                                         <!-- <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px"> -->
 
-                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
-                                            >
+                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
 
-                                            <mat-radio-button value="true" class="mr-sm-12" fxFlex  [disabled]="Stablecorsyndiv">Inducible Ischemia
+                                            <mat-radio-button value="true" class="mr-sm-12" fxFlex
+                                                [disabled]="Stablecorsyndiv">Inducible Ischemia
                                             </mat-radio-button>
 
                                         </div>
 
 
-                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
-                                           > 
-                                            <mat-radio-group aria-label="Select an option"  [disabled]="Stablecorsyndiv"
+                                        <!-- <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                            <mat-radio-group aria-label="Select an option" [disabled]="Stablecorsyndiv"
                                                 formControlName="InducibleTypeStatus" name="InducibleTypeStatus"
-                                                (change)="onChangeInducibleTypeStatus($event)" style="margin-left: 300px;width: 300px;">
+                                                (change)="onChangeInducibleTypeStatus($event)"
+                                                style="margin-left: 300px;width: 300px;">
                                                 <mat-radio-button value="InducibleTypeStatus"
                                                     style="margin-bottom: 7px;">YES
                                                 </mat-radio-button>
                                                 <mat-radio-button value="InducibleTypeStatus">NO</mat-radio-button>
                                             </mat-radio-group>
 
-                                        </div>
+                                        </div> -->
 
-                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"  >
-
-                                            <mat-form-field style="width: 400px;margin-left: 500px;"   [disabled]="Stablecorsyndiv"
-                                                appearance="outline">
+                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                            <mat-form-field [disabled]="Stablecorsyndiv" appearance="outline" fxFlex>
                                                 <mat-label>Stable/Progressive</mat-label>
-                                                <mat-select [formControl]="InducibleTypeId" multiple>
-
-                                                    <mat-option *ngFor="let name of InducibletypeList"
-                                                        [value]="name">{{name}}</mat-option>
+                                                <mat-select [formControl]="InducibleTypeId">
+                                                    <mat-option *ngFor="let name of InducibletypeList" [value]="name">{{name}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
 
+                                            <mat-form-field  [disabled]="Stablecorsyndiv" appearance="outline" fxFlex>
+                                            <mat-label> Positive / Negative</mat-label>
+                                            <mat-select [formControl]="InducibleTypeStatus">
+                                                <mat-option *ngFor="let name of PositivetypeList" [value]="name">{{name}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
                                         </div>
 
-                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" >
+                                        <!-- <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
 
 
-                                            <mat-form-field style="width: 400px;margin-left: 500px;"  [disabled]="Stablecorsyndiv"
-                                                appearance="outline">
-                                                <mat-label> Positive / Negative</mat-label>
-                                                <mat-select [formControl]="InducibleTypeStatus" multiple>
-
-                                                    <mat-option *ngFor="let name of PositivetypeList"
-                                                        [value]="name">{{name}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
+                                           
+                                        </div> -->
                                     </div>
 
                                 </form>
@@ -286,31 +308,37 @@
 
 
                                 <form [formGroup]="subform">
-                                    <div style="padding: 7px;border-style:groove;"  *ngIf="CADdiv">
+                                    <div style="padding: 7px;border-style:groove;" *ngIf="CADdiv">
                                         <!-- *ngIf="CADdiv" -->
-                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                        <span>Routine</span>
+                                        <!-- <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
 
-                                            <mat-radio-button value="true" class="mr-sm-12" fxFlex 
+                                            <mat-radio-button value="true" class="mr-sm-12" fxFlex
                                                 style="font-weight: bold;">Routine
                                             </mat-radio-button>
-                                            <!-- [disabled]="CADdiv" -->
-                                        </div>
+                                            [disabled]="CADdiv" -->
+                                        <!-- </div> -->
 
-
+                                        <span>CT</span>
                                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
 
-                                            <mat-form-field appearance="outline" 
-                                                style="width: 500px;border-style: groove;margin-left:300px;">
+                                            <mat-form-field appearance="outline" fxFlex>
                                                 <mat-label style="font-weight: bold;">Calcium Score in Number
                                                 </mat-label>
-                                                <input name="Score" formControlName="CalciumScore"
-                                                    placeholder="CalciumScore" matInput required>
+                                                <input name="Score" formControlName="CalciumScore" placeholder="CalciumScore" matInput required>
+                                            </mat-form-field>
 
+                                            <mat-form-field appearance="outline" fxFlex>
+                                                <mat-label>Critical / Significant/ Not-Significant</mat-label>
+                                                <mat-select formControlName="CTType">
+                                                    <mat-option *ngFor="let name of ScoretypeList"
+                                                        [value]="name">{{name}}</mat-option>
+                                                </mat-select>
                                             </mat-form-field>
 
                                         </div>
 
-                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                        <!-- <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
 
 
                                             <mat-radio-button value="true" class="mr-sm-12"
@@ -330,9 +358,9 @@
 
                                             </mat-radio-button>
 
-                                        </div>
+                                        </div> -->
 
-                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                        <!-- <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
                                             <mat-form-field appearance="outline"
                                                 style="width: 500px;border-style: groove;margin-left:800px;">
                                                 <mat-label style="font-weight: bold;">Score in Number
@@ -342,9 +370,9 @@
 
                                             </mat-form-field>
 
-                                        </div>
+                                        </div> -->
 
-
+<!-- 
                                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
 
                                             <mat-form-field style="width: 400px;margin-left: 500px;"
@@ -357,17 +385,12 @@
                                                         [value]="name">{{name}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
-                                        </div>
+                                        </div> -->
 
                                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-
-                                            <mat-form-field appearance="outline"
-                                                style="width: 500px;border-style: groove;margin-left:800px;">
-                                                <mat-label style="font-weight: bold;">Other
-                                                </mat-label>
-                                                <input name="Other" formControlName="Other" placeholder="Other" matInput
-                                                    required>
-
+                                            <mat-form-field appearance="outline" fxFlex>
+                                                <mat-label style="font-weight: bold;">Other </mat-label>
+                                                <input name="Other" formControlName="Other" placeholder="Other" matInput required>
                                             </mat-form-field>
                                         </div>
 
