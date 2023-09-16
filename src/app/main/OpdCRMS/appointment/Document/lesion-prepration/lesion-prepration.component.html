@@ -9,16 +9,16 @@
         <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
 
           <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
-            style="width: 80%;font-size: 16px;">
-            Lesion Preapration
+            style="width: 80%;font-size: 16px;padding: 10px;">
+            Lesion Preapration | RegNo: {{RegNo}} || PatientName :{{PatientName}}  || MobileNo:{{MobileNo}}
           </span>
 
           <div fxLayout="row" fxLayoutAlign="start center" style="float: right; margin-right: 5px;  ">
             <diV style="margin-top:21px;">
-              <!-- <span style="margin-right: 40px;color: rgb(245, 241, 241);font-weight: bold;">
+              <span style="margin-right: 40px;color: rgb(245, 241, 241);font-weight: bold;">
                 <app-common-date [screenFrom]="screenFromString"
                   (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
-              </span> -->
+              </span>
             </diV>&nbsp;&nbsp;
             <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
               close

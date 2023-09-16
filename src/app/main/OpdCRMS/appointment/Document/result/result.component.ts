@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
-  styleUrls: ['./result.component.scss']
+  styleUrls: ['./result.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
+
 export class ResultComponent implements OnInit {
   mainform:FormGroup;
   subform:FormGroup;
@@ -13,12 +18,29 @@ export class ResultComponent implements OnInit {
   Resultdiv:boolean=false;
   isLoading:any;
   screenFromString = 'admission-form';
+  regobj:any;
+  PatientName:any;
+  RegNo:any;
+  MobileNo:any;
+  StemitypeList:[];
 
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(private _formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<ResultComponent>,
+    ) {
     this.mainform = this.MainForm();
+    
     this.subform = this.MainForm();}
 
   ngOnInit(): void {
+    debugger
+    if(this.data){
+      this.regobj=this.data.advanceObj;
+      this.PatientName=this.regobj.PatientName;
+      this.RegNo=this.regobj.RegNo;
+      this.MobileNo=this.regobj.MobileNo;
+
+    }
   }
 
 
@@ -85,26 +107,27 @@ export class ResultComponent implements OnInit {
     });
   }
   onChangeEvents($event){
-    if($event.checked=true){
-      this.Eventsdiv=true
+    debugger
+    if($event.checked==true){
+      this.Eventsdiv==true
     }
-    else if($event.checked=false){
+    else if($event.checked==false){
       this.Eventsdiv=false
     }
   }
 
-  // onChangeEffectivestatus($event){
-  //   if($event.checked=true){
-  //     this.ActCorSyndromediv=true
-  //   }
-  //   else if($event.checked=false){
-  //     this.ActCorSyndromediv=false
-  //   }
-  // }
+  onChangeEffectivestatus($event){
+    if($event.checked=true){
+      // this.ActCorSyndromediv=true
+    }
+    else if($event.checked=false){
+      // this.ActCorSyndromediv=false
+    }
+  }
 
   onChangeResult($event){
-    if($event.checked=true){
-      this.Resultdiv=true
+    if($event.checked==true){
+      this.Resultdiv==true
     }
     else if($event.checked=false){
       this.Resultdiv=false
@@ -118,7 +141,7 @@ export class ResultComponent implements OnInit {
   }
 
   onClose() {
-
+    this.dialogRef.close();
   }
 
 

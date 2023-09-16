@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-lesion-prepration',
@@ -10,7 +11,7 @@ export class LesionPreprationComponent implements OnInit {
 
   mainform: FormGroup;
   subform: FormGroup;
-
+  screenFromString = 'admission-form';
   MicroCathetercrossdiv: boolean = true;
   Laserdiv: boolean = true;
   Stablecorsyndiv: boolean = true;
@@ -18,12 +19,26 @@ export class LesionPreprationComponent implements OnInit {
   // Stablecorsyndiv:boolean = true;
 
   countryList: any = [];
-  constructor(private _formBuilder: FormBuilder) {
+
+  regobj:any;
+  PatientName:any;
+  RegNo:any;
+  MobileNo:any;
+  constructor(private _formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef:MatDialogRef<LesionPreprationComponent>) {
     this.mainform = this.MainForm();
     this.subform = this.MainForm();
   }
 
   ngOnInit(): void {
+    if(this.data){
+      this.regobj=this.data.advanceObj;
+      this.PatientName=this.regobj.PatientName;
+      this.RegNo=this.regobj.RegNo;
+      this.MobileNo=this.regobj.MobileNo;
+
+    }
   }
 
   MainForm(): FormGroup {
@@ -310,8 +325,8 @@ export class LesionPreprationComponent implements OnInit {
     this.dateTimeObj = dateTimeObj;
   }
 
-  onClose() {
-
+  onClose(){
+    this.dialogRef.close();
   }
 
 

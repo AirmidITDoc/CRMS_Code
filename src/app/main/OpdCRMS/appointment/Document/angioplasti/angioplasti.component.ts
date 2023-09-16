@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-angioplasti',
   templateUrl: './angioplasti.component.html',
-  styleUrls: ['./angioplasti.component.scss']
+  styleUrls: ['./angioplasti.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class AngioplastiComponent implements OnInit {
 
@@ -32,13 +36,42 @@ export class AngioplastiComponent implements OnInit {
   IVUSN: boolean = false;
   MicroCatheterStatusY: boolean = false;
   Other: boolean = false;
+
   
-  constructor(private _formBuilder: FormBuilder) {
+  regobj:any;
+  PatientName:any;
+  RegNo:any;
+  MobileNo:any;
+
+  
+
+  ArterialTypeList: string[] = ['Femoral','Radial'];
+  ArterialSide: string[] = ['Right','Left'];
+  SizeList: string[] = ['4F','23F'];
+  yesnoList: string[] = ['YES','NO'];
+
+  DeviceUsedist: string[] = ['Pace Wire','Impella','IABP','Guide Catheter','Vanous Access'];
+
+  Dynamicist:string[] = ['0.9','0.8','0.7','0,6','0.5'];
+  HDUsedlist:string[] = ['1. 60 MHz HD IVUS','2.6 MHz','3.6 MHz']
+  Refinitylist:string[] = ['2. 45 MHz Refinity','2.6 MHz','3.6 MHz']
+  Opticrosslist:string[] = ['3. 40 MHz Opticross','2.6 MHz','3.6 MHz']
+  
+  constructor(private _formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogref:MatDialogRef<AngioplastiComponent>) {
     this.mainform = this.MainForm();
-    this.subform = this.MainForm();
+    this.subform = this.SubForm();
   }
 
   ngOnInit(): void {
+    if(this.data){
+      this.regobj=this.data.advanceObj;
+      this.PatientName=this.regobj.PatientName;
+      this.RegNo=this.regobj.RegNo;
+      this.MobileNo=this.regobj.MobileNo;
+
+    }
   }
 
   MainForm(): FormGroup {
@@ -179,7 +212,7 @@ export class AngioplastiComponent implements OnInit {
   }
 
   onClose() {
-
+    this.dialogref.close();
   }
 
 

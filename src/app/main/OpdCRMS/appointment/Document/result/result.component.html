@@ -8,13 +8,10 @@
                 style="width:100% ; height:37px;color: white;">
 
                 <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
-                    <button mat-icon-button class="sidebar-toggle mr-12">
-                        <mat-icon>menu</mat-icon>
-                    </button>
-
+                   
                     <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
-                        style="width: 80%;font-size: 16px;">
-                        Result
+                        style="width: 80%;font-size: 16px;padding: 10px;">
+                        Result  | RegNo: {{RegNo}} || PatientName :{{PatientName}}  || MobileNo:{{MobileNo}}
                     </span>
 
                     <div fxLayout="row" fxLayoutAlign="start center" style="float: right; margin-right: 5px;  ">
@@ -35,7 +32,7 @@
 
         </div>
 
-        <!-- Final bill calculation -->
+        
 
         <mat-card-content style="width: 100%;margin-right: 5px;">
             <div fxLayout="column">
@@ -58,17 +55,16 @@
 
                                     <form [formGroup]="mainform">
 
-                                        <div fxLayout="column" fxLayoutAlign="start none"
-                                            style="margin-bottom:100px;">
-                                            <mat-checkbox aria-label="Result" formControlName="Result"
+                                        <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom:100px;">
+                                            <mat-checkbox aria-label="Result" formControlName="Result" (checked)="false"
                                                 style="font-weight: bold;" (change)="onChangeResult($event)"
                                                 (checked)="false">
                                                 Result
                                             </mat-checkbox>
                                         </div>
                                         <div fxLayout="column" fxLayoutAlign="start none"
-                                            style="margin-bottom: 1200px;">
-                                            <mat-checkbox aria-label="Events" formControlName="Events"
+                                            style="margin-bottom:510px;">
+                                            <mat-checkbox aria-label="Events" formControlName="Events" (checked)="false"
                                                 style="font-weight: bold;" (change)="onChangeEvents($event)">
                                                 Events
                                             </mat-checkbox>
@@ -91,13 +87,13 @@
                         <div>
 
                             <form [formGroup]="subform">
-                                <div style="padding: 7px;border-style: groove;" *ngIf="Resultdiv">
-
+                                <div style="padding: 7px;border-style: groove;" >
+                                    <!-- *ngIf="Resultdiv" -->
 
                                     <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                                        <mat-radio-group aria-label="Select an option"
-                                            formControlName="Effectivestatus" name="regRadio"
-                                            (change)="onChangeEffectivestatus($event)" style="width: 500px;">
+                                        <mat-radio-group aria-label="Select an option" formControlName="Effectivestatus"
+                                            name="regRadio" (change)="onChangeEffectivestatus($event)"
+                                            style="width: 500px;">
                                             <mat-radio-button value="EffectivestatusY"
                                                 style="margin-bottom: 7px;">Effective
                                             </mat-radio-button>
@@ -110,89 +106,90 @@
                                 </div>
                             </form>
 
-
-                            //2nd
-
                             <form [formGroup]="subform">
-                                <div style="padding: 7px;border-style: groove;" *ngIf="Eventsdiv">
-
-                                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                                        <mat-radio-button value="true" class="mr-sm-12" fxFlex 
+                                <div style="padding: 7px;border-style: groove;">
+                                    <!-- *ngIf="Eventsdiv" -->
+                                    <div fxLayout="column" fxLayout.gt-xs="row">
+                                        <mat-radio-button value="true" class="mr-sm-12" fxFlex
                                             formControlName="Carhlab">In Cath Lab Events
                                         </mat-radio-button>
                                     </div>
 
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+                                    <div fxLayout="column" fxLayout.gt-xs="row"
+                                        style="margin-bottom: 20px;margin-left: 200px;">
                                         <mat-checkbox aria-label="chestpain" formControlName="chestpain"
-                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
+                                            style="font-weight: 400;" (change)="onChangeEvents($event)">
                                             Chest Pain
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+                                        <!-- </div>
+                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">-->
                                         <mat-checkbox aria-label="EKGchanges" formControlName="EKGchanges"
-                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
+                                            style="font-weight: 400;" (change)="onChangeEvents($event)">
                                             EKGchanges
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+                                        <!-- </div>
+                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;"> -->
                                         <mat-checkbox aria-label="Hypotension" formControlName="Hypotension"
-                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
+                                            style="font-weight: 400;" (change)="onChangeEvents($event)">
                                             Hypotension
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+                                        <!-- </div>
+                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;"> -->
                                         <mat-checkbox aria-label="Bradycardia" formControlName="Bradycardia"
-                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
+                                            style="font-weight: 400;" (change)="onChangeEvents($event)">
                                             Bradycardia
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+                                        <!-- </div>
+                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;"> -->
                                         <mat-checkbox aria-label="Tachycardia" formControlName="Tachycardia"
-                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
+                                            style="font-weight: 400;" (change)="onChangeEvents($event)">
                                             Tachycardia
                                         </mat-checkbox>
+                                        <!-- </div>
+                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;"> -->
+
                                     </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
-                                        <mat-checkbox aria-label="Flow" formControlName="Flow"
-                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
+                                    <div fxLayout="column" fxLayout.gt-xs="row"
+                                        style="margin-bottom: 20px;margin-left:200px;">
+
+                                        <!-- </div>
+                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;"> -->
+                                        <mat-checkbox aria-label="Flow" formControlName="Flow" style="font-weight: 400;"
+                                            (change)="onChangeEvents($event)">
                                             Flow
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
                                         <mat-checkbox aria-label="Perforation" formControlName="Perforation"
-                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
+                                            style="font-weight: 400;" (change)="onChangeEvents($event)">
                                             Perforation
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+
                                         <mat-checkbox aria-label="Inotropes" formControlName="Inotropes"
-                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
+                                            style="font-weight: 400;" (change)="onChangeEvents($event)">
                                             Inotropes
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+                                        <!-- </div>
+                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;"> -->
                                         <mat-checkbox aria-label="Ventilation" formControlName="Ventilation"
-                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
+                                            style="font-weight: 400;" (change)="onChangeEvents($event)">
                                             Ventilation
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
-                                        <mat-checkbox aria-label="CPR" formControlName="CPR"
-                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
+                                        <!-- </div>
+                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;"> -->
+                                        <mat-checkbox aria-label="CPR" formControlName="CPR" style="font-weight: 400;"
+                                            (change)="onChangeEvents($event)">
                                             CPR
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+                                        <!-- </div>
+                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;"> -->
                                         <mat-checkbox aria-label="MICS" formControlName="MICS"
                                             style="font-weight: bold;" (change)="onChangeEvents($event)">
                                             MICS
                                         </mat-checkbox>
                                     </div>
-                                 
-                                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                                        <mat-form-field appearance="outline"
-                                            style="width:200px;margin-left: 500px;border-style: groove;">
-                                            <mat-label style="font-weight: bold;">IABP</mat-label>
+
+                                    <div fxLayout="column" fxLayout.gt-xs="row">
+                                        <mat-form-field appearance="outline" style="width:400px;margin-left:200px;">
+                                            <mat-label style="font-weight: 400;">IABP</mat-label>
                                             <mat-select formControlName="IABP">
                                                 <mat-option></mat-option>
                                                 <mat-option *ngFor="let g of StemitypeList" [value]="g">
@@ -200,10 +197,26 @@
                                                 </mat-option>
                                             </mat-select>
                                         </mat-form-field>
+
+
+                                        <mat-form-field appearance="outline" style="width:400px;margin-left: 20px;">
+                                            <mat-label style="font-weight: 400;">Impella</mat-label>
+                                            <mat-select formControlName="Impella">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let g of StemitypeList" [value]="g">
+                                                    {{g}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                                            <mat-label style="font-weight: 400;">Others</mat-label>
+                                            <input name="Others" formControlName="Others" placeholder="Others" matInput>
+                                        </mat-form-field>
                                     </div>
 
 
-                                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                    <!-- <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
                                         <mat-form-field appearance="outline"
                                             style="width:200px;margin-left: 500px;border-style: groove;">
                                             <mat-label style="font-weight: bold;">Impella</mat-label>
@@ -214,168 +227,185 @@
                                                 </mat-option>
                                             </mat-select>
                                         </mat-form-field>
-                                    </div>
+                                    </div> -->
 
 
-                                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                                        <mat-form-field appearance="outline"
-                                            style="width: 500px;border-style: groove;margin-left: 500px;">
-                                            <mat-label style="font-weight: bold;">Others</mat-label>
-                                            <input name="Others" formControlName="Others" placeholder="Others"
-                                                matInput>
-                                        </mat-form-field>
-                                    </div>
+                                    <div fxLayout="column" fxLayout.gt-xs="row" style="margin-top: 10px;">
 
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+
                                         <mat-checkbox aria-label="Pericardiocentesis"
-                                            formControlName="Pericardiocentesis" style="font-weight: bold;"
+                                            formControlName="Pericardiocentesis"
+                                            style="font-weight: 400;margin-left: 200px;"
                                             (change)="onChangeEvents($event)">
                                             Pericardiocentesis
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
-                                        <mat-checkbox aria-label="EmergencySurgery"
-                                            formControlName="EmergencySurgery" style="font-weight: bold;"
-                                            (change)="onChangeEvents($event)">
+
+                                        <mat-checkbox aria-label="EmergencySurgery" formControlName="EmergencySurgery"
+                                            style="font-weight: 400;" (change)="onChangeEvents($event)">
                                             Emergency Surgery
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+
                                         <mat-checkbox aria-label="EmergencyPacing" formControlName="EmergencyPacing"
-                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
+                                            style="font-weight: 400;" (change)="onChangeEvents($event)">
                                             Emergency Pacing
                                         </mat-checkbox>
                                     </div>
+
+
                                 </div>
 
-                                <div style="padding: 7px;border-style: groove;" *ngIf="Eventsdiv">
-
+                                <div style="padding: 7px;border-style: groove;">
+                                    <!-- *ngIf="Eventsdiv" -->
                                     <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
                                         <mat-radio-button value="true" class="mr-sm-12" fxFlex formC
                                             formControlName="Carhlab">24hrs</mat-radio-button>
                                     </div>
 
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+                                    <div fxLayout="column" fxLayout.gt-xs="row"
+                                        style="margin-bottom: 20px;margin-left:200px;">
+
                                         <mat-checkbox aria-label=" HEKGChanges" formControlName="HEKGChanges"
                                             style="font-weight: bold;" (change)="onChangeEvents($event)">
                                             HEKGChanges
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
-                                        <mat-checkbox aria-label="HMI" formControlName="HMI"
-                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
+                                        <!-- </div>
+                                    <div fxLayout="column" fxLayoutAlign="start none" 
+                                        style="margin-bottom: 20px;margin-left: 300px;">-->
+                                        <mat-checkbox aria-label="HMI" formControlName="HMI" style="font-weight: bold;"
+                                            (change)="onChangeEvents($event)">
                                             MI
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+                                        <!-- </div>
+                                    <div fxLayout="column" fxLayoutAlign="start none" 
+                                        style="margin-bottom: 20px;margin-left: 300px;">-->
                                         <mat-checkbox aria-label="HStroke" formControlName="HStroke"
                                             style="font-weight: bold;" (change)="onChangeEvents($event)">
                                             Stroke
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
-                                        <mat-checkbox aria-label="AKI" formControlName="AKI"
-                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
+                                        <!-- </div>
+                                    <div fxLayout="column" fxLayoutAlign="start none"
+                                        style="margin-bottom: 20px;margin-left: 300px;">-->
+                                        <mat-checkbox aria-label="AKI" formControlName="AKI" style="font-weight: bold;"
+                                            (change)="onChangeEvents($event)">
                                             AKI
                                         </mat-checkbox>
                                     </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+                                    <div fxLayout="column" fxLayout.gt-xs="row"
+                                        style="margin-bottom: 20px;margin-left:200px;">
 
-                                        <mat-form-field appearance="outline"  style="width: 500px;border-style: groove;">
-                                            <mat-lable>CKMB Raised</mat-lable>
-                                            <input name="CKMBRaised" formControlname="CKMBRaised"
+
+                                        <mat-form-field appearance="outline" style="width: 300px;">
+                                            <mat-label style="font-weight: 400;">CKMB Raised</mat-label>
+                                            <input name="CKMBRaised" formControlName="CKMBRaised"
                                                 placeholder="CKMBRaised" matInput>
                                         </mat-form-field>
 
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;">
 
-                                        <mat-form-field appearance="outline"
-                                            style="width: 500px;border-style: groove;margin-left: 300px;">
-                                            <mat-label style="font-weight: bold;">Reduced-LV-function</mat-label>
+                                        <mat-form-field appearance="outline" style="width: 300px;margin-left: 30px;">
+                                            <mat-label style="font-weight: 400;">Reduced-LV-function</mat-label>
                                             <input name="ReducedLVfunction" formControlName="ReducedLVfunction"
                                                 placeholder="ReducedLVfunction" matInput>
                                         </mat-form-field>
+
+
+
                                     </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
-                                        <mat-checkbox aria-label="NeedforInotropes"
-                                            formControlName="NeedforInotropes" style="font-weight: bold;"
-                                            (change)="onChangeEvents($event)">
+                                    <!-- <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;">
+
+                                        
+                                        </div> -->
+                                    <div fxLayout="column" fxLayout.gt-xs="row"
+                                        style="margin-bottom: 20px;margin-left:200px;">
+
+                                        <mat-checkbox aria-label="NeedforInotropes" formControlName="NeedforInotropes"
+                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
                                             Need for Inotropes >48 hrs
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+                                        <!-- </div>
+                                        <div fxLayout="column" fxLayoutAlign="start none"
+                                            style="margin-bottom: 20px;margin-left: 300px;"> -->
                                         <mat-checkbox aria-label="NeedforDialysis" formControlName="NeedforDialysis"
                                             style="font-weight: bold;" (change)="onChangeEvents($event)">
                                             Needfor Dialysis
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+                                        <!-- </div>
+                                        <div fxLayout="column" fxLayoutAlign="start none"
+                                            style="margin-bottom: 20px;margin-left: 300px;"> -->
 
-                                        <mat-form-field appearance="outline"
-                                            style="width: 500px;border-style: groove;">
-                                            <mat-label style="font-weight: bold;">Other</mat-label>
-                                            <input name="HOther" formControlName="HOther" placeholder="HOther"
-                                                matInput>
-                                        </mat-form-field>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+
+                                        <!-- </div>
+                                        <div fxLayout="column" fxLayoutAlign="start none"
+                                            style="margin-bottom: 20px;margin-left: 300px;"> -->
                                         <mat-checkbox aria-label="HDeath" formControlName="HDeath"
                                             style="font-weight: bold;" (change)="onChangeEvents($event)">
                                             Death
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
-                                        <mat-checkbox aria-label="Revascularization"
-                                            formControlName="Revascularization" style="font-weight: bold;"
-                                            (change)="onChangeEvents($event)">
+                                        <!-- </div>
+                                        <div fxLayout="column" fxLayoutAlign="start none"
+                                            style="margin-bottom: 20px;margin-left: 300px;"> -->
+                                        <mat-checkbox aria-label="Revascularization" formControlName="Revascularization"
+                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
                                             Revascularization
                                         </mat-checkbox>
                                     </div>
 
+                                    <div fxLayout="column" fxLayout.gt-xs="row"
+                                    style="margin-bottom: 20px;margin-left:200px;">
+
+                                    <mat-form-field appearance="outline" style="width: 300px;">
+                                        <mat-label style="font-weight: bold;">Other</mat-label>
+                                        <input name="HOther" formControlName="HOther" placeholder="HOther" matInput>
+                                    </mat-form-field>
+                                    </div>
 
                                 </div>
-                                <div style="padding: 7px;border-style: groove;" *ngIf="Eventsdiv">
-
+                                <div style="padding: 7px;border-style: groove;">
+                                    <!-- *ngIf="Eventsdiv" -->
                                     <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
                                         <mat-radio-button value="true" class="mr-sm-12" fxFlex formC
                                             formControlName="Carhlab">30Days</mat-radio-button>
                                     </div>
+                                    <div fxLayout="column" fxLayout.gt-xs="row"
+                                        style="margin-bottom: 20px;margin-left:200px;">
 
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
                                         <mat-checkbox aria-label=" LVFunction" formControlName="LVFunction"
                                             style="font-weight: bold;" (change)="onChangeEvents($event)">
                                             LVFunction
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
-                                        <mat-checkbox aria-label="MI" formControlName="MI"
-                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
+                                        <!-- </div>
+                                        <div fxLayout="column" fxLayoutAlign="start none"
+                                            style="margin-bottom: 20px;margin-left: 300px;"> -->
+                                        <mat-checkbox aria-label="MI" formControlName="MI" style="font-weight: bold;"
+                                            (change)="onChangeEvents($event)">
                                             MI
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+                                        <!-- </div>
+                                        <div fxLayout="column" fxLayoutAlign="start none"
+                                            style="margin-bottom: 20px;margin-left: 300px;"> -->
                                         <mat-checkbox aria-label="Stroke" formControlName="Stroke"
                                             style="font-weight: bold;" (change)="onChangeEvents($event)">
                                             Stroke
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+                                        <!-- </div>
+                                        <div fxLayout="column" fxLayoutAlign="start none"
+                                            style="margin-bottom: 20px;margin-left: 300px;"> -->
                                         <mat-checkbox aria-label="Death" formControlName="Death"
                                             style="font-weight: bold;" (change)="onChangeEvents($event)">
                                             Death
                                         </mat-checkbox>
-                                    </div>
+                                        <!-- </div>
 
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
+                                        <div fxLayout="column" fxLayoutAlign="start none"
+                                            style="margin-bottom: 20px;margin-left: 300px;"> -->
                                         <mat-checkbox aria-label="RepeatPCI" formControlName="RepeatPCI"
                                             style="font-weight: bold;" (change)="onChangeEvents($event)">
                                             Repeat PCI
                                         </mat-checkbox>
-                                    </div>
-                                    <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 20px;margin-left: 300px;">
-                                        <mat-checkbox aria-label="CAB" formControlName="CAB"
-                                            style="font-weight: bold;" (change)="onChangeEvents($event)">
+                                        <!-- </div>
+                                        <div fxLayout="column" fxLayoutAlign="start none"
+                                            style="margin-bottom: 20px;margin-left: 300px;"> -->
+                                        <mat-checkbox aria-label="CAB" formControlName="CAB" style="font-weight: bold;"
+                                            (change)="onChangeEvents($event)">
                                             CAB
                                         </mat-checkbox>
                                     </div>
@@ -383,10 +413,10 @@
                                 </div>
 
 
-                       
-                             </form>
-                        <!-- 3 -->
-                            </div>
+
+                            </form>
+                            <!-- 3 -->
+                        </div>
 
                     </div>
                 </div>

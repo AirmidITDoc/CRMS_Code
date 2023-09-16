@@ -1,0 +1,545 @@
+<div class="container" style="width: 100%;">
+  <div style="width: 100%;">
+    <!-- <div fxFlex> -->
+    <div fxLayout="row" fxLayoutAlign="start center" class="accent" style="width:100% ; height:37px;color: white;">
+
+      <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
+
+        <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
+          style="width: 80%;font-size: 16px;padding: 10px;">
+          Angioplasti | RegNo {{RegNo}} | PatientName:{{PatientName}} | Mobile No {{MobileNo}}
+        </span>
+
+        <span style="margin-right: 40px;color: rgb(245, 241, 241);font-weight: bold;">
+          <app-common-date [screenFrom]="screenFromString"
+            (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
+        </span>
+
+        <div fxLayout="row" fxLayoutAlign="start center" style="float: right; margin-right: 5px;  ">
+
+          <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
+            close
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <mat-card-content style="width: 100%;margin-right: 5px;height: 1800px !important;">
+        <div fxLayout="column">
+
+
+          <div fxLayout="row" style="width: 100%;">
+
+            <div fxFlex="100" fxFlex.gt-sm="100" fxLayout="row" fxLayout.gt-xs="column"
+              style="width:100%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;overflow: auto ;background-color:white !important; "
+              fusePerfectScrollbar>
+
+              <div>
+
+                <form [formGroup]="subform">
+                  <div style="padding: 7px;border-style: groove;">
+
+                    <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
+                      style=" height: 35px;background-color:#0784b1">
+                      <span
+                        style="font-size:18px; font-style: italic;font-weight: normal; color:white;padding:7px;">Access
+                        Type</span>
+                    </div>
+
+                    <div fxLayout="column" fxLayout.gt-xs="row">
+                      <span style="margin-left: 20px;font-weight: bold;">Arterial</span>
+
+                      <mat-form-field appearance="outline" style="width: 300px;margin-left: 60px;">
+                        <mat-label>Femoral/Radial
+                        </mat-label>
+                        <mat-select [formControl]="ArterialType">
+                          <mat-option *ngFor="let name of ArterialTypeList" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" style="width: 300px;margin-left: 20px;">
+                        <mat-label>YES/ NO
+                        </mat-label>
+                        <mat-select [formControl]="ArterialType">
+                          <mat-option *ngFor="let name of ArterialSide" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <label style="margin-left: 20px;font-weight: bold;">Venous</label>
+                      <mat-form-field appearance="outline" style="width: 300px;margin-left: 20px;">
+                        <mat-label>Femoral/Jugular
+                        </mat-label>
+                        <mat-select [formControl]="VenousType">
+                          <mat-option *ngFor="let name of ArterialTypeList" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" style="width: 300px;margin-left: 20px;">
+                        <mat-label>YES/ NO
+                        </mat-label>
+                        <mat-select [formControl]="ArterialType">
+                          <mat-option *ngFor="let name of ArterialSide" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <label style="margin-left: 20px;font-weight: bold;">Other</label>
+                      <mat-form-field appearance="outline" style="width: 300px;margin-left: 20px;">
+                        <mat-label style="font-weight: bold;">Other </mat-label>
+                        <input name="Other" formControlName="Other" placeholder="Other" matInput required>
+                      </mat-form-field>
+
+                    </div>
+
+                    <!-- <label style="margin-left: 20px;font-weight: bold;">Venous</label> -->
+                    <!-- <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
+                    style=" height: 35px;background-color:#0784b1">
+                    <span style="font-size:18px; font-style: italic;font-weight: normal; color:white;padding:7px;">Venous</span>
+                    </div>
+                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                      <mat-form-field appearance="outline" style="width: 300px;margin-left: 20px;">
+                        <mat-label>Femoral/Jugular
+                        </mat-label>
+                        <mat-select [formControl]="VenousType">
+                          <mat-option *ngFor="let name of ArterialTypeList" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" style="width: 300px;margin-left: 20px;">
+                        <mat-label>YES/ NO
+                        </mat-label>
+                        <mat-select [formControl]="ArterialType">
+                          <mat-option *ngFor="let name of ArterialSide" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" style="width: 300px;margin-left: 20px;">
+                        <mat-label style="font-weight: bold;">Other </mat-label>
+                        <input name="Other" formControlName="Other" placeholder="Other" matInput required>
+                      </mat-form-field>
+                    </div> -->
+
+                    <div fxLayout="column" fxLayout.gt-xs="row">
+
+
+                      <mat-form-field appearance="outline" style="width: 300px;margin-left: 120px;">
+                        <mat-label>Size</mat-label>
+                        <mat-select [formControl]="SizeType" multiple>
+                          <mat-option *ngFor="let topping of SizeList" [value]="topping">{{topping}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+
+                      <mat-form-field appearance="outline" style="width: 300px;margin-left: 20px;">
+                        <mat-label> USG Guidance</mat-label>
+                        <mat-select [formControl]="USGGuidanceStatus">
+                          <mat-option *ngFor="let name of yesnoList" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <mat-form-field appearance="outline" style="width: 300px;margin-left: 20px;">
+                        <mat-label>Micro Puncture</mat-label>
+                        <mat-select [formControl]="MicroPunctureStatus">
+                          <mat-option *ngFor="let name of yesnoList" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                    </div>
+
+
+                  </div>
+
+                </form>
+
+
+
+                <form [formGroup]="subform">
+                  <div style="padding: 7px;border-style:groove;">
+
+                    <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
+                      style=" height: 35px;background-color:#0784b1">
+                      <span
+                        style="font-size:18px; font-style: italic;font-weight: normal; color:white;padding:7px;">Device
+                        Used in Access Site</span>
+                    </div>
+                    <div fxLayout="column" fxLayout.gt-xs="row">
+
+                      <mat-form-field appearance="outline" style="width: 300px;margin-left: 120px;">
+                        <mat-label> Device Used Type</mat-label>
+                        <mat-select [formControl]="DeviceusedType">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <hr>
+                    <div fxLayout="column" fxLayout.gt-xs="row">
+                      <span style="margin-left: 20px;font-weight: bold;width: 100px;">Wire RT
+                      </span>
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;">
+                        <mat-label>RunthroughNS</mat-label>
+                        <mat-select [formControl]="RunthroughNS">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>Pilot50</mat-label>
+                        <mat-select [formControl]="Pilot50">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>Pilot200</mat-label>
+                        <mat-select [formControl]="Pilot200">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label> Gaia1</mat-label>
+                        <mat-select [formControl]="Gaia1">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left:20px;">
+                        <mat-label>Gaia2</mat-label>
+                        <mat-select [formControl]="Gaia2">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>Gaia3</mat-label>
+                        <mat-select [formControl]="Gaia3">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+
+                    </div>
+                    <div fxLayout="column" fxLayout.gt-xs="row">
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 120px;">
+                        <mat-label>GaiaNext1</mat-label>
+                        <mat-select [formControl]="GaiaNext1">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>GaiaNext2</mat-label>
+                        <mat-select [formControl]="GaiaNext1">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>GaiaNext3</mat-label>
+                        <mat-select [formControl]="GaiaNext1">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>ConquestPro9</mat-label>
+                        <mat-select [formControl]="ConquestPro9">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>ConquestPro12</mat-label>
+                        <mat-select [formControl]="ConquestPro12">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>ConquestPro</mat-label>
+                        <mat-select [formControl]="ConquestPro">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                    </div>
+                    <div fxLayout="column" fxLayout.gt-xs="row">
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 120px;">
+                        <mat-label>FielderFC</mat-label>
+                        <mat-select [formControl]="FielderFC">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>Whisper</mat-label>
+                        <mat-select [formControl]="Whisper">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>WhisperES</mat-label>
+                        <mat-select [formControl]="WhisperES">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>BMW</mat-label>
+                        <mat-select [formControl]="BMW">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" style="margin-left: 20px;width: 200px;">
+                        <mat-label style="font-weight: bold;">Other
+                        </mat-label>
+                        <input name="Score" formControlName="Other1" placeholder="Other1" matInput>
+                      </mat-form-field>
+
+                    </div>
+                    <hr>
+                 
+                      <!-- <lable style="margin-left: 20px;font-weight: bold;width: 100px;">Micro Catheter
+
+                      </lable> -->
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
+                        style=" height: 35px;background-color:#0784b1">
+                        <span
+                          style="font-size:18px; font-style: italic;font-weight: normal; color:white;padding:7px;">Micro
+                          Catheter
+                        </span>
+                      </div>
+                      <div fxLayout="column" fxLayout.gt-xs="row">
+                      <mat-radio-group value="2">
+
+                        <mat-radio-button mat-fab value="0">MicroCatheterStatusY</mat-radio-button>
+
+                        <mat-radio-button mat-fab value="1">MicroCatheterStatusNO</mat-radio-button>
+                      </mat-radio-group>
+
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>Finecross</mat-label>
+                        <mat-select [formControl]="Finecross">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>CorsairPro</mat-label>
+                        <mat-select [formControl]="CorsairPro">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>CorsairProXS</mat-label>
+                        <mat-select [formControl]="CorsairProXS">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>Crusader</mat-label>
+                        <mat-select [formControl]="Crusader">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>Caravel</mat-label>
+                        <mat-select [formControl]="Caravel">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                        <mat-label>Others1</mat-label>
+                        <mat-select [formControl]="Others1">
+                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+
+                    </div>
+                    <hr>
+
+                    
+                      <!-- <lable style="margin-left: 20px;font-weight: bold;width: 100px;">Imaging
+
+                      </lable> -->
+
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
+                        style=" height: 35px;background-color:#0784b1">
+                        <span
+                          style="font-size:18px; font-style: italic;font-weight: normal; color:white;padding:7px;">Imaging
+                        </span>
+                      </div>
+
+                      <div fxLayout="column" fxLayout.gt-xs="row">
+                      <mat-radio-group value="2">
+
+                        <mat-radio-button mat-fab value="0">ImagingCrossed YES
+                        </mat-radio-button>
+
+
+                        <mat-radio-button mat-fab value="0">IVUS
+                        </mat-radio-button>
+
+                        <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                          <mat-label>1. 60 MHz HD IVUS</mat-label>
+                          <mat-select [formControl]="HD">
+                            <mat-option *ngFor="let name of HDUsedlist" [value]="name">{{name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+
+                        <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                          <mat-label>2. 45 MHz Refinity
+                          </mat-label>
+                          <mat-select [formControl]="Refinity">
+                            <mat-option *ngFor="let name of Refinitylist" [value]="name">{{name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+
+                        <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                          <mat-label>3. 40 MHz Opticross
+                          </mat-label>
+                          <mat-select [formControl]="Opticross">
+                            <mat-option *ngFor="let name of Opticrosslist" [value]="name">{{name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" style="margin-left: 20px;width: 200px;">
+                          <mat-label style="font-weight: bold;">OCT
+                          </mat-label>
+                          <input name="Score" formControlName="OCT" placeholder="OCT" matInput>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" style="margin-left: 20px;width: 200px;">
+                          <mat-label style="font-weight: bold;">Other
+                          </mat-label>
+                          <input name="Score" formControlName="Other2" placeholder="Other2" matInput>
+                        </mat-form-field>
+
+
+                        <mat-radio-button mat-fab value="1" style="margin-left: 10px;">ImagingCrossed NO</mat-radio-button>
+                      </mat-radio-group>
+
+                    </div> 
+
+                    <hr>
+
+                   
+                      <!-- <lable style="margin-left: 20px;font-weight: bold;width: 100px;">Physiology
+
+                    </lable> -->
+
+
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
+                        style=" height: 35px;background-color:#0784b1">
+                        <span
+                          style="font-size:18px; font-style: italic;font-weight: normal; color:white;padding:7px;">Physiology
+                        </span>
+                      </div>
+                      <div fxLayout="column" fxLayout.gt-xs="row">
+                      <mat-radio-group value="2">
+
+                        <mat-radio-button mat-fab value="0">Physiology YES
+                        </mat-radio-button>
+
+
+                        <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                          <mat-label>Dynamic</mat-label>
+                          <mat-select [formControl]="HD">
+                            <mat-option *ngFor="let name of Dynamicist" [value]="name">{{name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+
+                        <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                          <mat-label>dFR
+                          </mat-label>
+                          <mat-select [formControl]="Refinity">
+                            <mat-option *ngFor="let name of Dynamicist" [value]="name">{{name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+
+                        <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
+                          <mat-label>iFR
+                          </mat-label>
+                          <mat-select [formControl]="Opticross">
+                            <mat-option *ngFor="let name of Dynamicist" [value]="name">{{name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+
+
+                        <mat-form-field appearance="outline" style="margin-left: 20px;width: 200px;">
+                          <mat-label style="font-weight: bold;">Option4
+                          </mat-label>
+                          <input name="Score" formControlName="Other2Value" placeholder="Other2Value" matInput>
+                        </mat-form-field>
+
+
+                        <mat-radio-button mat-fab value="1" style="margin-left: 40px;">Physiology NO</mat-radio-button>
+                      </mat-radio-group>
+
+                    </div>
+                  </div>
+
+                </form>
+
+
+
+                <div style="float: right;margin-top: 20px;">
+
+                  <button class="next-btn" color="accent" style="border-radius: 16px;">
+                    <span style="display: flex;justify-content: center;">
+                      <!-- <mat-spinner *ngIf="isLoading=='submit'" [color]="white" [diameter]="20"></mat-spinner> -->
+                      <span style="margin-left: 6px;">Save</span>
+                    </span>
+                  </button>
+                  <button class="footer-btn" (click)="onClose()">Cancel</button>
+                  &nbsp;
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+        </div>
+      </mat-card-content>
+    </div>
+  </div>
+</div>

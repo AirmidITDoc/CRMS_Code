@@ -1,20 +1,20 @@
-<div fxFlexFill fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" style="width: 100%; background:#F5F5F5;" fusePerfectScrollbar >
-  
+<div fxFlexFill fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" style="width: 100%; background:#F5F5F5; ">
+  <!-- <div class="col-md-12" style="padding:10px;" *ngIf="selectedView == 'Dropdown'"> -->
   <div class="container" style="width: 100%;">
     <div style="width: 100%;">
       <!-- <div fxFlex> -->
       <div fxLayout="row" fxLayoutAlign="start center" class="accent" style="width:100% ; height:37px;color: white;">
 
         <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
-      
+
           <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
-            style="width: 80%;font-size: 16px;">
-            Procedural
+            style="width: 80%;font-size: 16px;padding: 10px;">
+            Procedure Hemodynamics | RegNo {{RegNo}} | PatientName:{{PatientName}} | Mobile No {{MobileNo}}
           </span>
 
           <div fxLayout="row" fxLayoutAlign="start center" style="float: right; margin-right: 5px;  ">
             <diV style="margin-top:21px;">
-              <span style="margin-right: 40px;color: rgb(245, 241, 241);font-weight: bold;">
+              <span style="margin-right: 40px;color: aliceblue;font-weight: bold;">
                 <app-common-date [screenFrom]="screenFromString"
                   (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
               </span>
@@ -26,600 +26,544 @@
         </div>
       </div>
 
-      <mat-card-content style="width: 100%;margin-right: 5px;">
-        <div fxLayout="column">
+      <!-- <mat-card-content style="width: 100%;margin-right: 5px;"> -->
+      <div fxLayout="column">
 
+        <div
+          style="width:100%;  margin-top: 2px; float: right;background-color: white; margin-right: 10px;margin-left: 10px;">
 
           <div fxLayout="row" style="width: 100%;">
+            <div fxFlex="100" fxLayout="row" fxLayout.gt-xs="column"
+              style="width:95%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
+
+              <form [formGroup]="subform">
+                <div style="padding: 7px;border-style: groove;">
 
 
-            <div fxFlex="100" fxFlex.gt-sm="25" class="content py-16 pl-10 p-12" fxLayout="row" fxLayout.gt-xs="column"
-              fusePerfectScrollbar
-              style=" width:100%; float: right;  border-radius:4px; background-color: white;
-                            border:rgba(0,0,0,0.12) 1px solid; float: right;  padding: 1em; height: 915px !important; margin-top: 10px;">
-              <div class="nav material2">
+                  <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
+                    style=" height: 35px;background-color:#0784b1">
+                    <span
+                      style="font-size:18px; font-style: italic;font-weight: normal; color:white;padding:7px;">Aortogram</span>
+                  </div>
 
+                  <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">Systolic </mat-label>
+                      <input name="Systolic" formControlName="Systolic" placeholder="Systolic Number (In mm Hg)
+                      " matInput>
 
-                <div style="border-style: groove;border-color: rgb(229, 192, 192);">
+                    </mat-form-field>
 
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">Diastolic</mat-label>
+                      <input name="Diastolic" formControlName="Diastolic" placeholder="Diastolic Number (In mm Hg)
+                      " matInput>
 
-                  <div fxlayout="row" fusePerfectScrollbar style="background: #b4c9f5;">
+                    </mat-form-field>
 
-                    <form [formGroup]="mainform">
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">MAP</mat-label>
+                      <input name="MAP" formControlName="MAP" placeholder="MAP Number (In mm Hg)
+                      " matInput>
 
-                      <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom:300px;">
+                    </mat-form-field>
+                  </div>
 
-                        <mat-checkbox aria-label="Aortogram " formControlName="Aortogram"
-                          style="font-weight: bold;" (change)="onChangeAortogram($event)" (checked)="false">
-                          Aortogram
-                        </mat-checkbox>
+                  <!-- <label style="margin-left: 20px;font-weight: bold;">LVEDP
+                  </label> -->
 
-                      </div>
+                  <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
+                    style=" height: 35px;background-color:#0784b1">
+                    <span
+                      style="font-size:18px; font-style: italic;font-weight: normal; color:white;padding:7px;">LVEDP</span>
+                  </div>
 
-                      <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 300px;">
-                        <mat-checkbox aria-label="LVEDP" formControlName="LVEDP"
-                          style="font-weight: bold;" (change)="onChangeLVEDP($event)">
-                          LVEDP
-                        </mat-checkbox>
-                      </div>
+                  <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">LVEDPValue</mat-label>
+                      <input name="LVEDPValue" formControlName="LVEDPValue" placeholder="LVEDPValue" matInput>
 
+                    </mat-form-field>
+                  </div>
+                  <!-- <label style="margin-left: 20px;font-weight: bold;">pulmonary artery (PA) Pressure
+                  </label> -->
+                  <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
+                    style=" height: 35px;background-color:#0784b1">
+                    <span
+                      style="font-size:18px; font-style: italic;font-weight: normal; color:white;padding:7px;">pulmonary
+                      artery (PA) Pressure</span>
+                  </div>
+                  <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">Systolic</mat-label>
+                      <input name="PSystolic" formControlName="PSystolic" placeholder="PSystolic Number (In mm Hg)
+                      " matInput>
 
-                      <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 300px;">
+                    </mat-form-field>
 
-                        <mat-checkbox aria-label="PAPressure" formControlName="PAPressure"
-                          style="font-weight: bold;" (change)="onChangePAPressure($event)">
-                          PAPressure
-                        </mat-checkbox>
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">Diastolic</mat-label>
+                      <input name="PDiastolic" formControlName="PDiastolic" placeholder="PDiastolic Number (In mm Hg)
+                      " matInput>
 
-                      </div>
+                    </mat-form-field>
 
-                      <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom:300px;">
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">MAP Pressure</mat-label>
+                      <input name="PMap" formControlName="PMap" placeholder="PMap Number (In mm Hg)
+                      " matInput>
 
-                        <mat-checkbox aria-label="A " formControlName="AP"
-                          style="font-weight: bold;" (change)="onChangeAP($event)" (checked)="false">
-                          A
-                        </mat-checkbox>
+                    </mat-form-field>
 
-                      </div>
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">PCWP</mat-label>
+                      <input name="PCWP" formControlName="PCWP" placeholder="PCWP Number (In mm Hg)
+                      " matInput>
 
-                      <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 300px;">
-                        <mat-checkbox aria-label="B" formControlName="BP"
-                          style="font-weight: bold;" (change)="onChangeBP($event)">
-                          B
-                        </mat-checkbox>
-                      </div>
-
-
-                      <div fxLayout="column" fxLayoutAlign="start none" style="margin-bottom: 300px;">
-
-                        <mat-checkbox aria-label="IndexLesion" formControlName="IndexLesion"
-                          style="font-weight: bold;" (change)="onChangeIndexLesion($event)">
-                          Index Lesion
-                        </mat-checkbox>
-
-                      </div>
-                      
-                    </form>
+                    </mat-form-field>
 
                   </div>
 
-                </div>
-              </div>
+                  <!-- <label style="margin-left: 20px;font-weight: bold;">2A--Denovo
+                  </label> -->
 
+                  <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
+                    style=" height: 35px;background-color:#0784b1">
+                    <span
+                      style="font-size:18px; font-style: italic;font-weight: normal; color:white;padding:7px;">2A--Denovo</span>
+                  </div>
+                  <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">NativeLesion</mat-label>
+                      <input name="NativeLesion" formControlName="NativeLesion" placeholder="NativeLesion" matInput>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">Graft</mat-label>
+                      <input name="Graft" formControlName="Graft" placeholder="Graft" matInput>
+
+                    </mat-form-field>
+
+                  
+                    <mat-form-field appearance="outline" style="width:300px;margin-left: 20px;">
+                      <mat-label>LIMA / SVG</mat-label>
+                      <mat-select formControlName="LIMASVG" name="LIMASVG">
+                        <mat-option></mat-option>
+                        <mat-option *ngFor="let m of LIMAList" [value]="m">
+                          {{m}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">AISR</mat-label>
+                      <input name="AISR" formControlName="AISR" placeholder="AISR" matInput>
+
+                    </mat-form-field>
+
+                  </div>
+
+                  <!-- <label style="margin-left: 20px;font-weight: bold;">2B--ISR</label> -->
+
+                  <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
+                    style=" height: 35px;background-color:#0784b1">
+                    <span
+                      style="font-size:18px; font-style: italic;font-weight: normal; color:white;padding:7px;">2B--ISR</span>
+                  </div>
+                  <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">Length</mat-label>
+                      <input name="ISRValue" formControlName="ISRValue" placeholder="Length (In mm)" matInput>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">SYNTAX SCORE</mat-label>
+                      <input name="Score" formControlName="Score" placeholder="Score" matInput>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">Severity</mat-label>
+                      <input name="Severity" formControlName="Severity" placeholder="Severity" matInput>
+
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">Description</mat-label>
+                      <input name="Description" formControlName="Description" placeholder="Description" matInput>
+
+                    </mat-form-field>
+                  </div>
+
+                  <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">Calcified</mat-label>
+                      <input name="Calcified" formControlName="Calcified" placeholder="Calcified" matInput>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">Thrombus</mat-label>
+                      <input name="Thrombus" formControlName="Thrombus" placeholder="Thrombus" matInput>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">Bifurcation</mat-label>
+                      <input name="Severity" formControlName="Bifurcation" placeholder="Bifurcation" matInput>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left: 20px;">
+                      <mat-label>YES / NO</mat-label>
+                      <mat-select formControlName="BifurcationStatus" name="BifurcationStatus">
+                        <mat-option></mat-option>
+                        <mat-option *ngFor="let m of ProximalList" [value]="m">
+                          {{m}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" style="width: 300px;margin-left:20px;">
+                      <mat-label style="font-weight: 300;">AortoOstial</mat-label>
+                      <input name="Severity" formControlName="AortoOstial" placeholder="AortoOstial" matInput>
+
+                    </mat-form-field>
+                  </div>
+
+
+                </div>
+              </form>
             </div>
-            <div fxFlex="100" fxFlex.gt-sm="80" fxLayout="row" fxLayout.gt-xs="column"
-              style="width:100%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;overflow: auto ;background-color:white !important; "
-              fusePerfectScrollbar>
+          </div>
+          <div fxLayout="column" fxLayout.gt-xs="column" fxLayoutGap="3px">
+            <div fxlayout="row" style=" padding: 3px 3px 3px 1px; margin-right: 5px;">
+              <!-- ================================ LABEL HEADER  -->
 
-              <div>
+              <!-- <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"> -->
 
-                <form [formGroup]="subform">
-                  <div style="padding: 7px;border-style: groove;" *ngIf="Aortogramdiv">
+              <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
+                style=" height: 35px;background-color:#0784b1">
+                <span style="font-size:18px; font-style: italic;font-weight: normal; color:white;padding:7px;">Index
+                  Lesion</span>
+              </div>
+              
+              <form [formGroup]="subform" style="display: flex;">
 
+                <div fxFlex="100" fxLayout="row" fxLayout.gt-xs="column"
+                style="width:95%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
   
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline"
-                        style="width: 500px;border-style: groove;margin-left: 300px;">
-                        <mat-label style="font-weight: bold;">Systolic</mat-label>
-                        <input name="Systolic" formControlName="Systolic"
-                          placeholder="Systolic" matInput>
-                        <!-- <mat-error
-                          *ngIf="subform.get('Cppresentationduration').invalid && subform.get('Cppresentationduration').touched">
-                          Cppresentationduration is required Enter only
-                          Alphabets</mat-error> -->
-                      </mat-form-field>
-                    </div>
 
-                    
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline"
-                        style="width: 500px;border-style: groove;margin-left: 300px;">
-                        <mat-label style="font-weight: bold;">Diastolic</mat-label>
-                        <input name="Diastolic" formControlName="Diastolic"
-                          placeholder="Diastolic" matInput>
-                        <!-- <mat-error
-                          *ngIf="subform.get('Cppresentationduration').invalid && subform.get('Cppresentationduration').touched">
-                          Cppresentationduration is required Enter only
-                          Alphabets</mat-error> -->
-                      </mat-form-field>
-                    </div>
+                <div  fxLayout="column" fxLayout.gt-xs="row"
+                style="border-style: groove;color: gray;width: 100%;">
+             
+                  <span style="font-weight: bold;">Severity</span>
+                  <mat-form-field appearance="outline" style="width:150px;margin-left: 20px;">
+                    <mat-label>1+2+3+4</mat-label>
+                    <input matInput [(ngModel)]="LocationValue" name="LocationValue" formControlName="LocationValue"
+                      id="LocationValue">
+                  </mat-form-field>
 
-                    
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline"
-                        style="width: 500px;border-style: groove;margin-left: 300px;">
-                        <mat-label style="font-weight: bold;">MAP</mat-label>
-                        <input name="MAP" formControlName="MAP"
-                          placeholder="MAP" matInput>
-                        <!-- <mat-error
-                          *ngIf="subform.get('Cppresentationduration').invalid && subform.get('Cppresentationduration').touched">
-                          Cppresentationduration is required Enter only
-                          Alphabets</mat-error> -->
-                      </mat-form-field>
-                    </div>
-                                      
+                  <mat-form-field appearance="outline" style="width: 150px;margin-left:20px;">
+                    <mat-label style="font-weight: 300;">SyntaxScore Value</mat-label>
+                    <input name="SyntaxScoreValue" formControlName="SyntaxScoreValue" placeholder="SyntaxScoreValue Number"
+                      matInput>
 
-                    <hr>
+                  </mat-form-field>
 
-                      </div>
-                </form>
+                  <mat-form-field appearance="outline" style="width: 150px;margin-left:20px;">
+                    <mat-label style="font-weight: 300;">IndexLesionValue</mat-label>
+                    <input name="IndexLesionValue" formControlName="IndexLesionValue" placeholder="IndexLesionValue (In mm)"
+                      matInput>
+
+                  </mat-form-field>
 
 
-                //2nd
 
-                <form [formGroup]="subform">
-                  <div style="padding: 7px;border-style: groove;" *ngIf="LVEDPdiv">
-  
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline"
-                        style="width: 500px;border-style: groove;margin-left: 300px;">
-                        <mat-label style="font-weight: bold;">LVEDPValue</mat-label>
-                        <input name="LVEDPValue" formControlName="LVEDPValue"
-                          placeholder="LVEDPValue" matInput>
-                        <!-- <mat-error
-                          *ngIf="subform.get('Cppresentationduration').invalid && subform.get('Cppresentationduration').touched">
-                          Cppresentationduration is required Enter only
-                          Alphabets</mat-error> -->
-                      </mat-form-field>
-                    </div>
+                  <mat-form-field appearance="outline" style="width:250px;margin-left:20px;">
+                    <mat-label style="font-weight: bold;">100 %</mat-label>
+                    <mat-select formControlName="SeverityPer">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of CiticalList" [value]="g">
+                        {{g}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
 
-                  </div>
+                  <mat-form-field appearance="outline" style="width:250px;margin-left:20px;">
+                    <mat-label style="font-weight: bold;">Critical(80-99%)</mat-label>
+                    <mat-select formControlName="Critical">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of CiticalList" [value]="g">
+                        {{g}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
 
-                </form>
+                  <mat-form-field appearance="outline" style="width:250px;margin-left: 20px;">
+                    <mat-label style="font-weight: bold;">Significant (Non-Critical 70-80%)
+                    </mat-label>
+                    <mat-select formControlName="Significant">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of SignificantList" [value]="g">
+                        {{g}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
 
-                //3rd
+                  <mat-form-field appearance="outline" style="width:250px;margin-left:20px;">
+                    <mat-label style="font-weight: bold;">Intermediate (50-70%)
+                    </mat-label>
+                    <mat-select formControlName="Intermediat">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of IntermediateList" [value]="g">
+                        {{g}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
 
-                <form [formGroup]="subform">
-                  <div style="padding: 7px;border-style:groove;" *ngIf="PAPressurediv">
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline"
-                        style="width: 500px;border-style: groove;margin-left: 300px;">
-                        <mat-label style="font-weight: bold;">Systolic</mat-label>
-                        <input name="PSystolic" formControlName="PSystolic"
-                          placeholder="Systolic" matInput>
-                        <!-- <mat-error
-                          *ngIf="subform.get('Cppresentationduration').invalid && subform.get('Cppresentationduration').touched">
-                          Cppresentationduration is required Enter only
-                          Alphabets</mat-error> -->
-                      </mat-form-field>
-                    </div>
-
-                    
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline"
-                        style="width: 500px;border-style: groove;margin-left: 300px;">
-                        <mat-label style="font-weight: bold;">Diastolic</mat-label>
-                        <input name="PDiastolic" formControlName="PDiastolic"
-                          placeholder="Diastolic" matInput>
-                        <!-- <mat-error
-                          *ngIf="subform.get('Cppresentationduration').invalid && subform.get('Cppresentationduration').touched">
-                          Cppresentationduration is required Enter only
-                          Alphabets</mat-error> -->
-                      </mat-form-field>
-                    </div>
-
-                    
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline"
-                        style="width: 500px;border-style: groove;margin-left: 300px;">
-                        <mat-label style="font-weight: bold;">MAP</mat-label>
-                        <input name="PMap" formControlName="PMap"
-                          placeholder="MAP" matInput>
-                        <!-- <mat-error
-                          *ngIf="subform.get('Cppresentationduration').invalid && subform.get('Cppresentationduration').touched">
-                          Cppresentationduration is required Enter only
-                          Alphabets</mat-error> -->
-                      </mat-form-field>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline"
-                        style="width: 500px;border-style: groove;margin-left: 300px;">
-                        <mat-label style="font-weight: bold;">MAP</mat-label>
-                        <input name="PCWP" formControlName="PCWP"
-                          placeholder="MAP" matInput>
-                        <!-- <mat-error
-                          *ngIf="subform.get('Cppresentationduration').invalid && subform.get('Cppresentationduration').touched">
-                          Cppresentationduration is required Enter only
-                          Alphabets</mat-error> -->
-                      </mat-form-field>
-                    </div>
-                  </div>
-
-                </form>
-
-                4//
-                <form [formGroup]="subform">
-                  <div style="padding: 7px;border-style:groove;" *ngIf="APdiv">
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="Denovo" formControlName="Denovo" 
-                        style="font-weight: bold;width:400px;">
-                        Denovo
-                      </mat-checkbox>
-                    </div>
-
-                    
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="NativeLesion" formControlName="NativeLesion" 
-                        style="font-weight: bold;margin-left:300px;width:400px;">
-                        NativeLesion
-                      </mat-checkbox>
-                    </div>
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="Graft" formControlName="Graft" 
-                      style="font-weight: bold;margin-left:300px;width:400px;">
-                      Graft
-                    </mat-checkbox>
-                    </div>
-                    
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline" style="width:500px;margin-left:500px;border-style: groove;">
-                        <mat-label style="font-weight: bold;">LIMA / SVG</mat-label>
-                        <mat-select formControlName="LIMASVG">
-                          <mat-option></mat-option>
-                          <mat-option *ngFor="let g of countryList" [value]="g">
-                            {{g.CountryName}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="AISR" formControlName="AISR" 
-                      style="font-weight: bold;margin-left:300px;width:400px;">
-                      ISR
-                    </mat-checkbox>
-                    </div>
-                  </div>
-
-                </form>
-
-                5//
-                <form [formGroup]="subform">
-                  <div style="padding: 7px;border-style:groove;" *ngIf="BPdiv">
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="BISR" formControlName="BISR" 
-                      style="font-weight: bold;width:200px;">
-                      ISR
-                    </mat-checkbox>
-                    </div>
-
-                    
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline"
-                        style="width: 200px;border-style: groove;margin-left: 300px;">
-                        <mat-label style="font-weight: bold;">Length</mat-label>
-                        <input name="ISRValue" formControlName="ISRValue"
-                          placeholder="ISRValue" matInput>
-                        <!-- <mat-error
-                          *ngIf="subform.get('Cppresentationduration').invalid && subform.get('Cppresentationduration').touched">
-                          Cppresentationduration is required Enter only
-                          Alphabets</mat-error> -->
-                      </mat-form-field>
-                    </div>
-
-                    
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline"
-                        style="width: 200px;border-style: groove;margin-left: 300px;">
-                        <mat-label style="font-weight: bold;">Syntax Score</mat-label>
-                        <input name="Score" formControlName="Score"
-                          placeholder="Score" matInput>
-                        <!-- <mat-error
-                          *ngIf="subform.get('Cppresentationduration').invalid && subform.get('Cppresentationduration').touched">
-                          Cppresentationduration is required Enter only
-                          Alphabets</mat-error> -->
-                      </mat-form-field>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline"
-                        style="width: 200px;border-style: groove;margin-left: 300px;">
-                        <mat-label style="font-weight: bold;">Severity</mat-label>
-                        <input name="Severity" formControlName="Severity"
-                          placeholder="Severity" matInput>
-                        <!-- <mat-error
-                          *ngIf="subform.get('Cppresentationduration').invalid && subform.get('Cppresentationduration').touched">
-                          Cppresentationduration is required Enter only
-                          Alphabets</mat-error> -->
-                      </mat-form-field>
-                    </div>
-
-                    
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="Description" formControlName="Description" 
-                        style="font-weight: bold;margin-left:300px;width:400px;">
-                        Description
-                      </mat-checkbox>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="Calcified" formControlName="Calcified" 
-                        style="font-weight: bold;margin-left:500px;width:400px;">
-                        Calcified
-                      </mat-checkbox>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="Thrombus" formControlName="Thrombus" 
-                        style="font-weight: bold;margin-left:500px;width:400px;">
-                        Thrombus
-                      </mat-checkbox>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="Bifurcation" formControlName="Bifurcation" 
-                        style="font-weight: bold;margin-left:500px;width:400px;">
-                        Bifurcation
-                      </mat-checkbox>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline" style="width:800px;margin-left:800px;border-style: groove;">
-                        <mat-label style="font-weight: bold;">YES / NO</mat-label>
-                        <mat-select formControlName="BifurcationStatus">
-                          <mat-option></mat-option>
-                          <mat-option *ngFor="let g of countryList" [value]="g">
-                            {{g.CountryName}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="AortoOstial" formControlName="AortoOstial" 
-                        style="font-weight: bold;margin-left:500px;width:400px;">
-                        AortoOstial
-                      </mat-checkbox>
-                    </div>
-
-                  </div>
-
-                </form>
-                6//
-                  <form [formGroup]="subform">
-                  <div style="padding: 7px;border-style:groove;" *ngIf="IndexLesiondiv">
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="Location1" formControlName="Location1" 
-                        style="font-weight: bold;width:400px;">
-                        Location 
-                      </mat-checkbox>
-                    </div>
-
-                    
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="LocationValue" formControlName="LocationValue" 
-                      style="font-weight: bold;margin-left:300px;width:400px;">
-                      1+2+3+4
-                    </mat-checkbox>
-                    </div>
-
-                    
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="SyntaxScore" formControlName="SyntaxScore" 
-                      style="font-weight: bold;margin-left:300px;width:400px;">
-                      SyntaxScore
-                    </mat-checkbox>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                    <mat-form-field appearance="outline"
-                        style="width: 300px;border-style: groove;margin-left: 500px;">
-                        <mat-label style="font-weight: bold;">SyntaxScoreValue</mat-label>
-                        <input name="SyntaxScoreValue" formControlName="SyntaxScoreValue"
-                          placeholder="SyntaxScoreValue" matInput>
-                        <!-- <mat-error
-                          *ngIf="subform.get('Cppresentationduration').invalid && subform.get('Cppresentationduration').touched">
-                          Cppresentationduration is required Enter only
-                          Alphabets</mat-error> -->
-                      </mat-form-field>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="IndexLesion1" formControlName="IndexLesion1" 
-                      style="font-weight: bold;margin-left:300px;width:400px;">
-                      IndexLesion1
-                    </mat-checkbox>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline"
-                        style="width: 300px;border-style: groove;margin-left:500px;">
-                        <mat-label style="font-weight: bold;">IndexLesionValue</mat-label>
-                        <input name="IndexLesionValue" formControlName="IndexLesionValue"
-                          placeholder="IndexLesionValue" matInput>
-                        <!-- <mat-error
-                          *ngIf="subform.get('Cppresentationduration').invalid && subform.get('Cppresentationduration').touched">
-                          Cppresentationduration is required Enter only
-                          Alphabets</mat-error> -->
-                      </mat-form-field>
-                    </div>
-
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="Severity1" formControlName="Severity1" 
-                      style="font-weight: bold;margin-left:300px;width:400px;">
-                      Severity1
-                    </mat-checkbox>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline" style="width:300px;margin-left:500px;border-style: groove;">
-                        <mat-label style="font-weight: bold;">100 %</mat-label>
-                        <mat-select formControlName="SeverityPer">
-                          <mat-option></mat-option>
-                          <mat-option *ngFor="let g of countryList" [value]="g">
-                            {{g.CountryName}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline" style="width:300px;margin-left:500px;border-style: groove;">
-                        <mat-label style="font-weight: bold;">Critical</mat-label>
-                        <mat-select formControlName="Critical">
-                          <mat-option></mat-option>
-                          <mat-option *ngFor="let g of countryList" [value]="g">
-                            {{g.CountryName}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline" style="width:300px;margin-left: 500px;border-style: groove;">
-                        <mat-label style="font-weight: bold;">Significant</mat-label>
-                        <mat-select formControlName="Significant">
-                          <mat-option></mat-option>
-                          <mat-option *ngFor="let g of countryList" [value]="g">
-                            {{g.CountryName}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline" style="width:300px;margin-left:500px;border-style: groove;">
-                        <mat-label style="font-weight: bold;">Intermediat</mat-label>
-                        <mat-select formControlName="Intermediat">
-                          <mat-option></mat-option>
-                          <mat-option *ngFor="let g of countryList" [value]="g">
-                            {{g.CountryName}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline" style="width:300px;margin-left:500px;border-style: groove;">
-                        <mat-label style="font-weight: bold;">NonSignificant</mat-label>
-                        <mat-select formControlName="NonSignificant">
-                          <mat-option></mat-option>
-                          <mat-option *ngFor="let g of countryList" [value]="g">
-                            {{g.CountryName}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-checkbox aria-label="LesionType" formControlName="LesionType" 
-                      style="font-weight: bold;margin-left:300px;width:400px;">
-                      Lesion Type
-                    </mat-checkbox>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-
-                      <mat-radio-button value="true" class="mr-sm-12" fxFlex [disabled]="ActCorSyndromediv" formControlName="Calcified1" style="margin-left: 500px;">Calcified</mat-radio-button>
-
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline" style="width:300px;margin-left: 800px;border-style: groove;">
-                        <mat-label style="font-weight: bold;">CalcifiedValue</mat-label>
-                        <mat-select formControlName="CalcifiedValue">
-                          <mat-option></mat-option>
-                          <mat-option *ngFor="let g of countryList" [value]="g">
-                            {{g.CountryName}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-
-                      <mat-radio-button value="true" class="mr-sm-12" fxFlex [disabled]="Thrombus1div" formControlName="Thrombus1" style="margin-left: 500px;">Thrombus1</mat-radio-button>
-
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline" style="width:300px;margin-left: 800px;border-style: groove;">
-                        <mat-label style="font-weight: bold;">ThrombusValue</mat-label>
-                        <mat-select formControlName="ThrombusValue">
-                          <mat-option></mat-option>
-                          <mat-option *ngFor="let g of countryList" [value]="g">
-                            {{g.CountryName}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-
-                      <mat-radio-button value="true" class="mr-sm-12" fxFlex  formControlName="ProximalTortuosity" style="margin-left: 500px;">ProximalTortuosity</mat-radio-button>
-
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline" style="width:300px;margin-left: 800px;border-style: groove;">
-                        <mat-label style="font-weight: bold;">ProximalTortuosityValue</mat-label>
-                        <mat-select formControlName="ProximalTortuosityValue">
-                          <mat-option></mat-option>
-                          <mat-option *ngFor="let g of countryList" [value]="g">
-                            {{g.CountryName}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-
-                      <mat-radio-button value="true" class="mr-sm-12" fxFlex  formControlName="ImportantSideBranch" style="margin-left: 500px;">ImportantSideBranch</mat-radio-button>
-
-                    </div>
-
-                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline" style="width:300px;margin-left: 800px;border-style: groove;">
-                        <mat-label style="font-weight: bold;">ImportantSideBranchValue</mat-label>
-                        <mat-select formControlName="ImportantSideBranchValue">
-                          <mat-option></mat-option>
-                          <mat-option *ngFor="let g of countryList" [value]="g">
-                            {{g.CountryName}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-
+                  <mat-form-field appearance="outline" style="width:250px;margin-left:20px;">
+                    <mat-label style="font-weight: bold;">Not Significant (<50%)</mat-label>
+                    <mat-select formControlName="NonSignificant">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of NotSignificantList" [value]="g">
+                        {{g}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
 
-                </form>
-              </div>
+                <div  fxLayout="column" fxLayout.gt-xs="row" style="border-style: groove;color: gray;width: 100%;">
+             
+                <span style="font-weight: bold;">Lesion Type</span>
+                <mat-form-field appearance="outline" style="width:250px;margin-left:20px;">
+                  <mat-label style="font-weight: bold;">CalcifiedValue</mat-label>
+                  <mat-select formControlName="CalcifiedValue">
+                    <mat-option></mat-option>
+                    <mat-option *ngFor="let g of CalcifiedList" [value]="g">
+                      {{g}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="width:250px;margin-left:20px;">
+                  <mat-label style="font-weight: bold;">ThrombusValue</mat-label>
+                  <mat-select formControlName="ThrombusValue">
+                    <mat-option></mat-option>
+                    <mat-option *ngFor="let g of ThrombusList" [value]="g">
+                      {{g}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="width:250px;margin-left:20px;">
+                  <mat-label style="font-weight: bold;">ProximalTortuosityValue</mat-label>
+                  <mat-select formControlName="ProximalTortuosityValue">
+                    <mat-option></mat-option>
+                    <mat-option *ngFor="let g of ProximalList" [value]="g">
+                      {{g}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="width:250px;margin-left:20px;">
+                  <mat-label style="font-weight: bold;">ImportantSideBranchValue</mat-label>
+                  <mat-select formControlName="ImportantSideBranchValue">
+                    <mat-option></mat-option>
+                    <mat-option *ngFor="let g of SidebranchList" [value]="g">
+                      {{g}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                  <button mat-raised-button (click)="onAddData()" [disabled]="subform.invalid"
+                    style="background-color: blue; color: white; width: 90px;margin-left: 20px;margin-top: 5px;">
+                    <mat-icon> add </mat-icon> &nbsp;Add
+                  </button>
+
+
+                </div>
+                
+
+                </div>
+              </form>
+             
+
+            <!-- </div> -->
+          </div>
+        </div>
+        <div fxLayout="row" style="width: 100%;">
+          <div fxFlex="100" fxLayout="row" fxLayout.gt-xs="column"
+            style="width:95%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;background-color: aquamarine;">
+
+            <ng-template mat-tab-label style="color: black; font-size: 17px bold; height: 100px; ">
+              <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
+              Location
+            </ng-template>
+            <div class="col-md-12">
+              <mat-table [dataSource]="dataSource" [@animateStagger]="{value:'50'}" class="table1" style="overflow: auto;">
+
+                <ng-container matColumnDef="LocationValue">
+                  <mat-header-cell *matHeaderCellDef style="margin-right: 5px;">Location</mat-header-cell>
+                  <mat-cell *matCellDef="let contact">
+                    {{contact.LocationValue}}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="SyntaxScoreValue">
+                  <mat-header-cell *matHeaderCellDef fxShow.gt-sm>
+                    Syntax Score
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                    {{contact.SyntaxScoreValue}}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="IndexLesionValue">
+                  <mat-header-cell *matHeaderCellDef style="margin-right: 5px;">Index Lesion</mat-header-cell>
+                  <mat-cell *matCellDef="let contact">
+                    {{contact.IndexLesionValue}}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="SeverityPer">
+                  <mat-header-cell *matHeaderCellDef fxShow.gt-sm>
+                    SeverityPer
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                    {{contact.SeverityPer}}
+                  </mat-cell>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Critical">
+                  <mat-header-cell *matHeaderCellDef fxShow.gt-sm>
+                    Critical
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                    {{contact.Critical}}
+                  </mat-cell>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Significant">
+                  <mat-header-cell *matHeaderCellDef fxShow.gt-sm>
+                    Significant
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                    {{contact.Significant}}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Intermediat">
+                  <mat-header-cell *matHeaderCellDef fxShow.gt-sm>
+                    Intermediat
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                    {{contact.Intermediat}}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="NonSignificant">
+                  <mat-header-cell *matHeaderCellDef fxShow.gt-sm>
+                    NonSignificant
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                    {{contact.NonSignificant}}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="CalcifiedValue">
+                  <mat-header-cell *matHeaderCellDef fxShow.gt-sm>
+                    Calcified
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                    {{contact.CalcifiedValue}}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="ThrombusValue">
+                  <mat-header-cell *matHeaderCellDef fxShow.gt-sm>
+                    Thrombus
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                    {{contact.ThrombusValue}}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="ProximalTortuosityValue">
+                  <mat-header-cell *matHeaderCellDef fxShow.gt-sm>
+                    ProximalTortuosity
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                    {{contact.ProximalTortuosityValue}}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="ImportantSideBranchValue">
+                  <mat-header-cell *matHeaderCellDef fxShow.gt-sm>
+                    ImportantSideBranch
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                    {{contact.ImportantSideBranchValue}}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                  <mat-header-cell *matHeaderCellDef style="color: white;"> Action
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+
+                    <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
+                      <mat-icon>delete_outline</mat-icon>
+                    </button>
+
+                  </mat-cell>
+                </ng-container>
+
+
+                <ng-container matColumnDef="loading">
+                  <mat-footer-cell *matFooterCellDef colspan="6">
+                    loading data...
+                  </mat-footer-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="noData">
+                  <mat-footer-cell *matFooterCellDef colspan="6">
+                    <span>No Data Found</span>
+                  </mat-footer-cell>
+                </ng-container>
+
+                <mat-header-row class="accent" *matHeaderRowDef="displayedColumns; sticky: true">
+                </mat-header-row>
+                <mat-row *matRowDef="let contact; columns: displayedColumns;"
+                  [ngClass]="{'row-yellow': contact.NonSignificant == ' '}"
+                  [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+                <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource!=null}">
+                </mat-footer-row>
+                <mat-footer-row *matFooterRowDef="['noData']"
+                  [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
+                </mat-footer-row>
+              </mat-table>
             </div>
 
           </div>
 
 
 
+
         </div>
-      </mat-card-content>
+
+
+      </div>
+      <!-- </mat-card-content> -->
       <!-- Final bill calculation -->
 
 
     </div>
   </div>
-
-
 </div>

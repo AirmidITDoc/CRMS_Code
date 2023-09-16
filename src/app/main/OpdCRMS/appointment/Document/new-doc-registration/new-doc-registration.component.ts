@@ -4,7 +4,7 @@ import { AppointmentService } from '../../appointment.service';
 import { RegInsert } from '../../appointment.component';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NewDocumentComponent } from '../new-document/new-document.component';
 import { fuseAnimations } from '@fuse/animations';
 import { AuthenticationService } from 'app/core/services/authentication.service';
@@ -13,6 +13,9 @@ import { DocPresentationComponent } from '../doc-presentation/doc-presentation.c
 import { AngioplastiComponent } from '../angioplasti/angioplasti.component';
 import { ResultComponent } from '../result/result.component';
 import { ProcedureHemodynamicsComponent } from '../procedure-hemodynamics/procedure-hemodynamics.component';
+import { DempgraphicComponent } from '../dempgraphic/dempgraphic.component';
+import { id } from '@swimlane/ngx-charts';
+import { LesionPreprationComponent } from '../lesion-prepration/lesion-prepration.component';
 
 @Component({
   selector: 'app-new-doc-registration',
@@ -41,7 +44,8 @@ export class NewDocRegistrationComponent implements OnInit {
   PatientName: any = '';
   Mobileno: any = '';
   isRegIdSelected: boolean = false;
-  RegNo:any;
+  RegNo: any;
+  PatientHeaderObj = {};
 
   Doctype = [
     { id: 1, name: "Acute Coronary Syndrome" },
@@ -51,7 +55,17 @@ export class NewDocRegistrationComponent implements OnInit {
     // {id: 5, name: "England"}
   ];
 
+  Pagestype = [
+    { id: 1, name: "Book Patient Appointment"},
+    { id: 2, name: "Procedure Hemodynamics" },
+    { id: 3, name: "Demographic" },
+    { id: 4, name: "Anjioplasti" },
+    { id: 5, name: "Lesion Preapration"},
+    { id: 6, name: "DocPresentationComponent"},
+    { id: 7, name: "Result" }
+  ];
   constructor(public _AppointmentService: AppointmentService,
+    // public dialogRef: MatDialogRef<NewDocRegistrationComponent>,
     private accountService: AuthenticationService,
     private formBuilder: FormBuilder, public _matDialog: MatDialog,) { }
 
@@ -77,8 +91,9 @@ export class NewDocRegistrationComponent implements OnInit {
     this.registerObj = obj;
     this.PatientName = this.registerObj.FirstName + ' ' + this.registerObj.MiddleName + ' ' + this.registerObj.LastName;
     this.Mobileno = this.registerObj.MobileNo;
-    this.RegNo=this.registerObj.RegNo;
+    this.RegNo = this.registerObj.RegNo;
   }
+
   getSearchList() {
     debugger
 
@@ -101,78 +116,239 @@ export class NewDocRegistrationComponent implements OnInit {
 
   }
 
+  
+  getappointment() {
+    var m={
+      "PatientName":this.PatientName,
+      "RegNo":this.RegNo,
+      "MobileNo":this.Mobileno
+    }
 
-getappointment(){
-  const dialogRef = this._matDialog.open(DocPresentationComponent,
-    {
-      maxWidth: "60%",
-      height: '700px',
-      width: '100%',
-      // data: {
-      //   "DoctypeId": Id.id
-      // }
+    const dialogRef = this._matDialog.open(DocPresentationComponent,
+      {
+        maxWidth: "60%",
+        height: '500px',
+        width: '100%',
+        data: {
+          advanceObj: m,
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed - Insert Action', result);
+
     });
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed - Insert Action', result);
+  }
 
-  });
-}
+  // gethyamonodynamic() {
+  //   const dialogRef = this._matDialog.open(ProcedureHemodynamicsComponent,
+  //     {
+  //       maxWidth: "60%",
+  //       height: '700px',
+  //       width: '100%',
+  //       data: {
+  //         advanceObj:m,
+  //       }
+  //     });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed - Insert Action', result);
 
-gethyamonodynamic(){
-  const dialogRef = this._matDialog.open(ProcedureHemodynamicsComponent,
-    {
-      maxWidth: "60%",
-      height: '700px',
-      width: '100%',
-      // data: {
-      //   "DoctypeId": Id.id
-      // }
+  //   });
+  // }
+  getanigioplasti() {
+
+    var m={
+      "PatientName":this.PatientName,
+      "RegNo":this.RegNo,
+      "MobileNo":this.Mobileno
+    }
+
+    const dialogRef = this._matDialog.open(AngioplastiComponent,
+      {
+        maxWidth: "80%",
+        height: '1000px',
+        width: '100%',
+        data: {
+          advanceObj: m
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed - Insert Action', result);
+
     });
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed - Insert Action', result);
+  }
 
-  });
-}
-getanigioplasti(){
-  const dialogRef = this._matDialog.open(AngioplastiComponent,
-    {
-      maxWidth: "60%",
-      height: '700px',
-      width: '100%',
-      // data: {
-      //   "DoctypeId": Id.id
-      // }
+  getProcedure() {
+
+    var m={
+      "PatientName":this.PatientName,
+      "RegNo":this.RegNo,
+      "MobileNo":this.Mobileno
+    }
+
+    const dialogRef = this._matDialog.open(ProcedureHemodynamicsComponent,
+      {
+        maxWidth: "90%",
+        height: '1000px',
+        width: '100%',
+        data: {
+          advanceObj: m,
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed - Insert Action', result);
+
     });
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed - Insert Action', result);
+  }
 
-  });
-}
+  // getresult() {
+  //   const dialogRef = this._matDialog.open(ResultComponent,
+  //     {
+  //       maxWidth: "60%",
+  //       height: '700px',
+  //       width: '100%',
+  //       data: {
+  //         advanceObj: this.PatientHeaderObj,
+  //       }
+  //     });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed - Insert Action', result);
 
-getresult(){
-  const dialogRef = this._matDialog.open(ResultComponent,
-    {
-      maxWidth: "60%",
-      height: '700px',
-      width: '100%',
-      // data: {
-      //   "DoctypeId": Id.id
-      // }
-    });
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed - Insert Action', result);
+  //   });
+  // }
 
-  });
-}
-  onChangeDocList(Id) {
+  onChangePageList(Id){
     debugger
+    // console.log(Id)
+    
+    this.PatientHeaderObj['PatientName'] = this.PatientName;
+    this.PatientHeaderObj['RegNo'] = this.RegNo;
+    this.PatientHeaderObj['MobileNo'] = this.Mobileno;
+
+
+    if(Id.id == 1){
+      const dialogRef = this._matDialog.open(DocPresentationComponent,
+        {
+          maxWidth: "90%",
+          height: '900px',
+          width: '100%',
+          data: {
+            advanceObj: this.PatientHeaderObj,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+  
+      });
+    }else if(Id.id == 2){
+      const dialogRef = this._matDialog.open(ProcedureHemodynamicsComponent,
+        {
+          maxWidth: "90%",
+          height: '1000px',
+          width: '100%',
+          data: {
+            advanceObj: this.PatientHeaderObj,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+  
+      });
+    }else if(Id.id == 3){
+      const dialogRef = this._matDialog.open(DempgraphicComponent,
+        {
+          maxWidth: "90%",
+          height: '700px',
+          width: '100%',
+          data: {
+            advanceObj: this.PatientHeaderObj,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+  
+      });
+    }else if(Id.id == 4){
+      const dialogRef = this._matDialog.open(AngioplastiComponent,
+        {
+          maxWidth: "90%",
+          height: '900px',
+          width: '100%',
+          data: {
+            advanceObj: this.PatientHeaderObj,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+  
+      });
+    }else if(Id.id == 5){
+    
+    const dialogRef = this._matDialog.open(LesionPreprationComponent,
+      {
+        maxWidth: "60%",
+        height: '700px',
+        width: '100%',
+        data: {
+          advanceObj: this.PatientHeaderObj,
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed - Insert Action', result);
+
+    });
+  }else if(Id.id == 6){
+    
     const dialogRef = this._matDialog.open(DocPresentationComponent,
       {
         maxWidth: "60%",
         height: '700px',
         width: '100%',
         data: {
-          "DoctypeId": Id.id
+          advanceObj: this.PatientHeaderObj,
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed - Insert Action', result);
+
+    });
+  }    
+   else if(Id.id == 7){
+    
+      const dialogRef = this._matDialog.open(ResultComponent,
+        {
+          maxWidth: "60%",
+          height: '700px',
+          width: '100%',
+          data: {
+            advanceObj: this.PatientHeaderObj,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+  
+      });
+    }
+  
+  }
+
+
+
+  onChangeDocList(Id) {
+    debugger
+     
+    this.PatientHeaderObj['PatientName'] = this.PatientName;
+    this.PatientHeaderObj['RegNo'] = this.RegNo;
+    this.PatientHeaderObj['MobileNo'] = this.Mobileno;
+
+
+    const dialogRef = this._matDialog.open(DocPresentationComponent,
+      {
+        maxWidth: "60%",
+        height: '500px',
+        width: '100%',
+        data: {
+          "DoctypeId": Id.id,
+          advanceObj: this.PatientHeaderObj,
         }
       });
     dialogRef.afterClosed().subscribe(result => {
@@ -214,7 +390,8 @@ getresult(){
       ]],
       Doctorname: '',
       EmailId: '',
-      RegID:['']
+      RegID: [''],
+      PageId:['']
     });
   }
 
@@ -276,7 +453,7 @@ getresult(){
     const dialogRef = this._matDialog.open(NewDocumentComponent,
       {
         maxWidth: "80%",
-        height: '800px',
+        height: '600px',
         width: '100%',
         data: {
           "Divtype": "Acute Coronary Syndrome"
@@ -351,7 +528,7 @@ getresult(){
   }
 
   onClose() {
-
+    // this.dialogRef.close();
   }
 
   dateTimeObj: any;

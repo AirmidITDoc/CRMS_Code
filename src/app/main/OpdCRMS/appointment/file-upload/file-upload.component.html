@@ -23,3 +23,762 @@
 
 <input type="file" class="fileControlInput" multiple="multiple" accept=".png,.jpge/*"
        (change)="getFiledetials($event.target)" />
+
+
+
+
+
+
+
+
+       //////
+       <div fxFlexFill fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" style="width: 100%; background:#F5F5F5;"
+  fusePerfectScrollbar>
+
+  <div class="container" style="width: 100%;">
+    <div style="width: 100%;">
+      <!-- <div fxFlex> -->
+      <div fxLayout="row" fxLayoutAlign="start center" class="accent" style="width:100% ; height:37px;color: white;">
+
+        <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
+
+          <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
+            style="width: 80%;font-size: 16px;">
+            Angioplasti   | RegNo: {{RegNo}} || PatientName :{{PatientName}}  || MobileNo:{{MobileNo}}
+          </span>
+
+          <div fxLayout="row" fxLayoutAlign="start center" style="float: right; margin-right: 5px;  ">
+            <diV style="margin-top:21px;">
+              <span style="margin-right: 40px;color: rgb(245, 241, 241);font-weight: bold;">
+                <app-common-date [screenFrom]="screenFromString"
+                  (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
+              </span>
+            </diV>&nbsp;&nbsp;
+            <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
+              close
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <mat-card-content style="width: 100%;margin-right: 5px;">
+        <div fxLayout="column">
+
+
+          <div fxLayout="row" style="width: 100%;">
+
+          <div fxFlex="100" fxFlex.gt-sm="80" fxLayout="row" fxLayout.gt-xs="column"
+            style="width:100%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;overflow: auto ;background-color:white !important; "
+            fusePerfectScrollbar>
+
+            <div>
+
+              <form [formGroup]="subform">
+                <div style="padding: 7px;" *ngIf="AccessTypediv">
+
+
+                  <div fxLayout="column" fxLayoutAlign="start none" style="font-weight: bold;">
+                    <mat-radio-button value="true" class="mr-sm-12" fxFlex [disabled]="AccessTypediv"
+                      ormControlName="Arterial">Arterial</mat-radio-button>
+
+                  </div>
+
+                  <div fxLayout="column" fxLayoutAlign="start none" style="margin-left:300px;">
+
+                    <mat-checkbox aria-label="ArterialType" formControlName="ArterialType" style="font-weight: bold;"
+                      (change)="onChangeArterialType($event)" (checked)="false">
+                      Femoral/Radial
+                    </mat-checkbox>
+
+                  </div>
+
+                  <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                    <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                      <mat-label style="font-weight: bold;">Right / Left</mat-label>
+                      <mat-select formControlName="ArterialSide">
+                        <mat-option></mat-option>
+                        <mat-option *ngFor="let g of countryList" [value]="g">
+                          {{g.CountryName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+
+                  <div fxLayout="column" fxLayoutAlign="start none" style="font-weight: bold;">
+                    <mat-radio-button value="true" class="mr-sm-12" fxFlex
+                      formControlName="Venous">Venous</mat-radio-button>
+                  </div>
+                  <div  fxLayout="column" fxLayout.gt-xs="row" style="margin-left: 300px;">
+
+                    <mat-checkbox aria-label="VenousType " formControlName="VenousType" style="font-weight: bold;"
+                      (change)="onChangeVenousType($event)" (checked)="false">
+                      Femoral/Jugular
+
+                    </mat-checkbox>
+
+                  </div>
+
+                  <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                    <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                      <mat-label style="font-weight: bold;">Right / Left</mat-label>
+                      <mat-select formControlName="VenousSide">
+                        <mat-option></mat-option>
+                        <mat-option *ngFor="let g of countryList" [value]="g">
+                          {{g.CountryName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div fxLayout="column" fxLayoutAlign="start none" style="font-weight: bold;">
+
+                    <mat-radio-button value="true" class="mr-sm-12" fxFlex [disabled]="Otherdiv"
+                      ormControlName="Other">Other</mat-radio-button>
+
+                  </div>
+
+                  <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                    <mat-form-field appearance="outline" style="width: 500px;margin-left: 300px;">
+                      <mat-label style="font-weight: bold;">OtherValue</mat-label>
+                      <input name="OtherValue" formControlName="OtherValue" placeholder="OtherValue" matInput>
+                      <!-- <mat-error
+                            *ngIf="subform.get('Cppresentationduration').invalid && subform.get('Cppresentationduration').touched">
+                            Cppresentationduration is required Enter only
+                            Alphabets</mat-error> -->
+                    </mat-form-field>
+                  </div>
+
+                  <div fxLayout="column" fxLayoutAlign="start none">
+                    <mat-checkbox aria-label="Size" formControlName="Size" style="font-weight: bold;"
+                      (change)="onChangeSize($event)">
+                      Size
+                    </mat-checkbox>
+                  </div>
+
+
+                  <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                    <mat-form-field appearance="outline" style="width:300px;margin-left:300px;">
+                      <mat-label style="font-weight: bold;">Right / Left</mat-label>
+                      <mat-select formControlName="SizeType">
+                        <mat-option></mat-option>
+                        <mat-option *ngFor="let g of countryList" [value]="g">
+                          {{g.CountryName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+
+                  <div fxLayout="column" fxLayoutAlign="start none">
+                    <mat-checkbox aria-label="USGGuidance" formControlName="USGGuidance" style="font-weight: bold;"
+                      (change)="onChangeUSGGuidance($event)">
+                      USGGuidance
+                    </mat-checkbox>
+                  </div>
+
+                  <div fxLayout="column" fxLayoutAlign="start none" style="margin-left: 300px;">
+
+                    <mat-radio-button value="true" class="mr-sm-12" fxFlex [disabled]="USGGuidanceStatusdiv"
+                      ormControlName="USGGuidanceStatus">YES / NO</mat-radio-button>
+
+                  </div>
+
+                  <div fxLayout="column" fxLayoutAlign="start none">
+                    <mat-checkbox aria-label="MicroPuncture" formControlName="MicroPuncture" style="font-weight: bold;"
+                      (change)="onChangeMicroPuncture($event)">
+                      MicroPuncture
+                    </mat-checkbox>
+                  </div>
+
+                  <div fxLayout="column" fxLayoutAlign="start none" style="margin-left: 300px;">
+
+                    <mat-radio-button value="true" class="mr-sm-12" fxFlex [disabled]="Otherdiv"
+                      ormControlName="MicroPunctureStatus">YES / NO</mat-radio-button>
+
+                  </div>
+
+                  <div fxLayout="column" fxLayoutAlign="start none">
+                    <mat-checkbox aria-label="Deviceused" formControlName="Deviceused" style="font-weight: bold;"
+                      (change)="onChangeDeviceused($event)">
+                      Device Used in Access Site
+                    </mat-checkbox>
+                  </div>
+
+                  <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                    <mat-form-field appearance="outline" style="width:300px;margin-left:300px;">
+                      <mat-label style="font-weight: bold;">Pace Wire / Impella/ IABP/Guide Catheter/Vanous Access
+                      </mat-label>
+                      <mat-select formControlName="DeviceusedType">
+                        <mat-option></mat-option>
+                        <mat-option *ngFor="let g of countryList" [value]="g">
+                          {{g.CountryName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <hr>
+
+                </div>
+
+                <div fxLayout="column" fxLayoutAlign="start none" >
+                  <mat-checkbox aria-label="Wire" formControlName="Wire" style="font-weight: bold;">
+                    <!-- (change)="onChangeWire($event)"> -->
+                    Wire
+                  </mat-checkbox>
+                </div>
+
+                <div fxLayout="column" fxLayoutAlign="start none" style="margin-left: 300px;">
+
+                  <mat-radio-button value="true" class="mr-sm-12" fxFlex [disabled]="Otherdiv" formControlName="Rt">RT
+                    (Wire List)
+                  </mat-radio-button>
+
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">Runthrough NS
+                    </mat-label>
+                    <mat-select formControlName="Runthrough">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">Pilot50
+                    </mat-label>
+                    <mat-select formControlName="Pilot50">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">Pilot200
+                    </mat-label>
+                    <mat-select formControlName="Pilot200">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">Gaia1
+                    </mat-label>
+                    <mat-select formControlName="Gaia1">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">Gaia2
+                    </mat-label>
+                    <mat-select formControlName="Gaia2">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">Gaia3
+                    </mat-label>
+                    <mat-select formControlName="Gaia3">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">Gaia Next1
+                    </mat-label>
+                    <mat-select formControlName="GaiaNext1">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">Gaia Next2
+                    </mat-label>
+                    <mat-select formControlName="GaiaNext2">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">Gaia Next3
+                    </mat-label>
+                    <mat-select formControlName="GaiaNext3">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">ConquestPro9
+                    </mat-label>
+                    <mat-select formControlName="ConquestPro9">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">ConquestPro12
+                    </mat-label>
+                    <mat-select formControlName="ConquestPro12">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">ConquestPro
+                    </mat-label>
+                    <mat-select formControlName="ConquestPro">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">FielderFC
+                    </mat-label>
+                    <mat-select formControlName="FielderFC">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">Whisper
+                    </mat-label>
+                    <mat-select formControlName="Whisper">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">WhisperES
+                    </mat-label>
+                    <mat-select formControlName="WhisperES">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:300px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">BMW
+                    </mat-label>
+                    <mat-select formControlName="BMW">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxLayout="column" fxLayoutAlign="start none" style="margin-left: 300px;">
+
+                  <mat-radio-button value="true" class="mr-sm-12" fxFlex [disabled]="Other"
+                    formControlName="Other">Other</mat-radio-button>
+
+                </div>
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+
+                  <mat-checkbox aria-label="MicroCatheter" formControlName="MicroCatheter"
+                    style="font-weight: bold;">
+                    MicroCatheter
+                  </mat-checkbox>
+
+                </div>
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row" style="margin-left: 300px;">
+
+                  <mat-radio-button value="true" class="mr-sm-12" fxFlex [disabled]="MicroCatheterStatusY"
+                    formControlName="MicroCatheterStatusY">YES</mat-radio-button>
+
+                </div>
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:200px;margin-left: 500px;">
+                    <mat-label style="font-weight: bold;">Finecross</mat-label>
+                    <mat-select formControlName="Finecross">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:200px;margin-left: 500px;">
+                    <mat-label style="font-weight: bold;">CorsairPro</mat-label>
+                    <mat-select formControlName="CorsairPro">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:200px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">CorsairProXS</mat-label>
+                    <mat-select formControlName="CorsairProXS">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:200px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">Crusader</mat-label>
+                    <mat-select formControlName="Crusader">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:200px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">Caravel</mat-label>
+                    <mat-select formControlName="Caravel">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:200px;margin-left:500px;">
+                    <mat-label style="font-weight: bold;">Others1</mat-label>
+                    <mat-select formControlName="Others1">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row" style="margin-left: 300px;" >
+
+                  <mat-radio-button value="true" class="mr-sm-12" fxFlex [disabled]="MicroCatheterStatusN"
+                    formControlName="MicroCatheterStatusN">NO</mat-radio-button>
+
+                </div>
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+
+                  <mat-checkbox aria-label="Imaging" formControlName="Imaging"
+                    style="font-weight: bold;width: 300px;">
+                    Imaging
+                  </mat-checkbox>
+
+                </div>
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+
+                  <mat-checkbox aria-label="ImagingCrossed" formControlName="ImagingCrossed"
+                    style="font-weight: bold;margin-left:100px;width:100px;">
+                    ImagingCrossed
+                  </mat-checkbox>
+
+                </div>
+
+                <div  fxLayout="column" fxLayout.gt-xs="row" style="margin-left: 500px;">
+
+                  <mat-radio-button value="true" class="mr-sm-12" fxFlex 
+                    formControlName="ImagingCrossedY">YES</mat-radio-button>
+
+                </div>
+                <div  fxLayout="column" fxLayout.gt-xs="row" style="margin-left:600px;">
+
+                  <mat-radio-button value="true" class="mr-sm-12" fxFlex
+                    formControlName="IVUS">IVUS</mat-radio-button>
+
+                </div>
+                <div  fxLayout="column" fxLayout.gt-xs="row" style="margin-left:700px;">
+
+                  <mat-radio-button value="true" class="mr-sm-12" fxFlex
+                    formControlName="IVUSY">YES</mat-radio-button>
+
+                </div>
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:200px;margin-left:800px;">
+                    <mat-label style="font-weight: bold;">1.60 MHz HD IVUS
+                    </mat-label>
+                    <mat-select formControlName="HD">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:200px;margin-left:800px;">
+                    <mat-label style="font-weight: bold;">2.45 MHz Refinity
+                    </mat-label>
+                    <mat-select formControlName="Refinity">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:200px;margin-left:800px;">
+                    <mat-label style="font-weight: bold;">3.40 MHz Opticross
+                    </mat-label>
+                    <mat-select formControlName="Opticross">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row" style="margin-left:700px;">
+
+                  <mat-radio-button value="true" class="mr-sm-12" fxFlex
+                    formControlName="IVUSN">NO</mat-radio-button>
+
+                </div>
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row" style="margin-left:600px;">
+
+                  <mat-radio-button value="true" class="mr-sm-12" fxFlex [disabled]="OCT"
+                    formControlName="OCT">OCT</mat-radio-button>
+
+                </div>
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row" style="margin-left:800px;">
+
+                  <mat-radio-button value="true" class="mr-sm-12" fxFlex [disabled]="OCTStuatus"
+                    formControlName="OCT">YES/NO</mat-radio-button>
+
+                </div>
+
+                <div  fxLayout="column" fxLayout.gt-xs="row" style="margin-left:600px;">
+
+                  <mat-radio-button value="true" class="mr-sm-12" fxFlex [disabled]="Other2"
+                    formControlName="Other2">Other2</mat-radio-button>
+
+                </div>
+
+                <div  fxLayout="column" fxLayout.gt-xs="row" style="margin-left:500px;">
+
+                  <mat-radio-button value="true" class="mr-sm-12" fxFlex [disabled]="ImagingCrossedN"
+                    formControlName="OCT">NO</mat-radio-button>
+
+                </div>
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row" style="margin-left:700px;">
+                <mat-form-field appearance="outline" style="width: 300px;margin-left:800px;">
+                  <mat-label style="font-weight: bold;">OtherValue
+                  </mat-label>
+                  <input name="OtherValue" formControlName="OtherValue" placeholder="OtherValue" matInput required>
+                  <!-- <mat-error
+                  *ngIf="subform.get('Condtionstatus').invalid && subform.get('Condtionstatus').touched">
+                  Condtionstatus is required Enter only
+                  Alphabets</mat-error> -->
+                </mat-form-field>
+                </div>
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+
+                  <mat-checkbox aria-label="Physiology" formControlName="Physiology"
+                    style="font-weight: bold;width: 300px;">
+                    Physiology
+
+                  </mat-checkbox>
+
+                </div>
+
+                <div  fxLayout="column" fxLayout.gt-xs="row" style="margin-left:500px;">
+
+                  <mat-radio-button value="true" class="mr-sm-12" fxFlex [disabled]="PhysiologystatusY"
+                    formControlName="PhysiologystatusY">YES</mat-radio-button>
+
+                </div>
+
+                <div  fxLayout="column" fxLayout.gt-xs="row" style="margin-left:500px;">
+
+                  <mat-radio-button value="true" class="mr-sm-12" fxFlex
+                    formControlName="PhysiologystatusN">NO</mat-radio-button>
+                    <!-- [disabled]="PhysiologystatusN" -->
+                </div>
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:200px;margin-left:800px;">
+                    <mat-label style="font-weight: bold;">Dynamic</mat-label>
+                    <mat-select formControlName="Dynamic">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:200px;margin-left:800px;">
+                    <mat-label style="font-weight: bold;">dFR</mat-label>
+                    <mat-select formControlName="dFR">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:200px;margin-left:800px;">
+                    <mat-label style="font-weight: bold;">iFR</mat-label>
+                    <mat-select formControlName="iFR">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+
+                <div  fxLayout="column" fxLayout.gt-xs="row">
+                  <mat-form-field appearance="outline" style="width:200px;margin-left:800px;">
+                    <mat-label style="font-weight: bold;">Option4</mat-label>
+                    <mat-select formControlName="Option4">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let g of countryList" [value]="g">
+                        {{g.CountryName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+              </form>
+
+
+
+
+
+
+            </div>
+          </div>
+
+        </div>
+
+
+
+    </div>
+    </mat-card-content>
+    <!-- Final bill calculation -->
+
+
+  </div>
+</div>
+
+
+</div>

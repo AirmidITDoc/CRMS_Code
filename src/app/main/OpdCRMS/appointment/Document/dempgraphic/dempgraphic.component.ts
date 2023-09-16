@@ -23,6 +23,11 @@ export class DempgraphicComponent implements OnInit {
   selectedGenderID: any;
   submitted = false;
 
+
+  regobj:any;
+  PatientName:any;
+  RegNo:any;
+  MobileNo:any;
   // prefix filter
   public prefixFilterCtrl: FormControl = new FormControl();
   public filteredPrefix: ReplaySubject<any> = new ReplaySubject<any>(1);
@@ -41,12 +46,21 @@ export class DempgraphicComponent implements OnInit {
     public dialogRef: MatDialogRef<DempgraphicComponent>,
     public datePipe: DatePipe,
     private formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: any,) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
 
+
     this.personalFormGroup = this.createPesonalForm();
     this.personalFormGroup.markAllAsTouched();
+
+    if(this.data){
+      this.regobj=this.data.advanceObj;
+      this.PatientName=this.regobj.PatientName;
+      this.RegNo=this.regobj.RegNo;
+      this.MobileNo=this.regobj.MobileNo;
+
+    }
 
     this.getPrefixList();
 
@@ -178,7 +192,15 @@ export class DempgraphicComponent implements OnInit {
     }
 
   }
-  onClose(){}
+
+  dateTimeObj: any;
+  getDateTime(dateTimeObj) {
+    // console.log('dateTimeObj==', dateTimeObj);
+    this.dateTimeObj = dateTimeObj;
+  }
+  onClose(){
+    this.dialogRef.close();
+  }
   Submit(){
 
   }

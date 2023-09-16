@@ -14,7 +14,7 @@ export class DocPresentationComponent implements OnInit {
 
   
   subform:FormGroup;
-  toppings  = new FormControl('');
+  // toppings  = new FormControl('');
   UnstabletypeList: string[] = ['Hypotension <90 mmHg','Hypoxia','Tachy','Brady','ROSC'];
   StemitypeList: string[] = ['Anterior','Posterior','Lateral','Inferior'];
   AnginatypeList:string[]=['Stable','Progressive'];
@@ -35,7 +35,10 @@ export class DocPresentationComponent implements OnInit {
   screenFromString = 'admission-form';
   registerObj: any;
   ActCorSyndromediv:boolean=false;
-  
+  regobj:any;
+  PatientName:any;
+  RegNo:any;
+  MobileNo:any;
 
   constructor(private _formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<DocPresentationComponent>,
@@ -47,6 +50,14 @@ export class DocPresentationComponent implements OnInit {
     debugger
     this.registerObj =this.data;
     this.type=this.data.DoctypeId;
+
+    if(this.data){
+      this.regobj=this.data.advanceObj;
+      this.PatientName=this.regobj.PatientName;
+      this.RegNo=this.regobj.RegNo;
+      this.MobileNo=this.regobj.MobileNo;
+
+    }
 
     if(this.type==1){
       this.ActCorSyndromediv=true
