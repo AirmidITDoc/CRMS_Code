@@ -218,7 +218,7 @@ export class NewDocRegistrationComponent implements OnInit {
 
   onChangePageList(Id){
     debugger
-    // console.log(Id)
+    console.log(Id)
     
     this.PatientHeaderObj['PatientName'] = this.PatientName;
     this.PatientHeaderObj['RegNo'] = this.RegNo;

@@ -179,146 +179,21 @@
                       </span>
 
 
-                      <mat-form-field appearance="outline" style="width: 200px;">
+                      <mat-form-field appearance="outline" style="width: 600px;">
                         <mat-label>RunthroughNS</mat-label>
                         <mat-select [formControl]="RunthroughNS">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                          <mat-option *ngFor="let name of WireTypeList" [value]="name">{{name}}</mat-option>
                         </mat-select>
                       </mat-form-field>
 
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>Pilot50</mat-label>
-                        <mat-select [formControl]="Pilot50">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>Pilot200</mat-label>
-                        <mat-select [formControl]="Pilot200">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label> Gaia1</mat-label>
-                        <mat-select [formControl]="Gaia1">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left:20px;">
-                        <mat-label>Gaia2</mat-label>
-                        <mat-select [formControl]="Gaia2">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>Gaia3</mat-label>
-                        <mat-select [formControl]="Gaia3">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-
-
-                    </div>
-                    <div fxLayout="column" fxLayout.gt-xs="row">
-
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 120px;">
-                        <mat-label>GaiaNext1</mat-label>
-                        <mat-select [formControl]="GaiaNext1">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>GaiaNext2</mat-label>
-                        <mat-select [formControl]="GaiaNext1">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>GaiaNext3</mat-label>
-                        <mat-select [formControl]="GaiaNext1">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>ConquestPro9</mat-label>
-                        <mat-select [formControl]="ConquestPro9">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>ConquestPro12</mat-label>
-                        <mat-select [formControl]="ConquestPro12">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>ConquestPro</mat-label>
-                        <mat-select [formControl]="ConquestPro">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-                    </div>
-                    <div fxLayout="column" fxLayout.gt-xs="row">
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 120px;">
-                        <mat-label>FielderFC</mat-label>
-                        <mat-select [formControl]="FielderFC">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>Whisper</mat-label>
-                        <mat-select [formControl]="Whisper">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>WhisperES</mat-label>
-                        <mat-select [formControl]="WhisperES">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>BMW</mat-label>
-                        <mat-select [formControl]="BMW">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-                      <mat-form-field appearance="outline" style="margin-left: 20px;width: 200px;">
+                      <mat-form-field appearance="outline" style="margin-left: 20px;width: 400px;">
                         <mat-label style="font-weight: bold;">Other
                         </mat-label>
                         <input name="Score" formControlName="Other1" placeholder="Other1" matInput>
                       </mat-form-field>
 
                     </div>
+                  
                     <hr>
                  
                       <!-- <lable style="margin-left: 20px;font-weight: bold;width: 100px;">Micro Catheter
@@ -334,58 +209,26 @@
                       <div fxLayout="column" fxLayout.gt-xs="row">
                       <mat-radio-group value="2">
 
-                        <mat-radio-button mat-fab value="0">MicroCatheterStatusY</mat-radio-button>
+                        <mat-radio-button mat-fab value="0" style="font-weight: 400;">MicroCatheterStatusYes</mat-radio-button>
 
-                        <mat-radio-button mat-fab value="1">MicroCatheterStatusNO</mat-radio-button>
+                        <mat-radio-button mat-fab value="1" style="font-weight: 400;">MicroCatheterStatusNo</mat-radio-button>
                       </mat-radio-group>
 
 
 
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>Finecross</mat-label>
-                        <mat-select [formControl]="Finecross">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
+                      <mat-form-field appearance="outline" style="width: 600px;margin-left: 20px;">
+                        <mat-label>MicroCatheter</mat-label>
+                        <mat-select [formControl]="MicroCatheter">
+                          <mat-option *ngFor="let name of MicroCatheterUsedist" [value]="name">{{name}}</mat-option>
                         </mat-select>
                       </mat-form-field>
 
 
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>CorsairPro</mat-label>
-                        <mat-select [formControl]="CorsairPro">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
+                      <mat-form-field appearance="outline" style="margin-left: 20px;width: 400px;">
+                        <mat-label style="font-weight: bold;">Other
+                        </mat-label>
+                        <input name="Score" formControlName="Other1" placeholder="Other1" matInput>
                       </mat-form-field>
-
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>CorsairProXS</mat-label>
-                        <mat-select [formControl]="CorsairProXS">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>Crusader</mat-label>
-                        <mat-select [formControl]="Crusader">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>Caravel</mat-label>
-                        <mat-select [formControl]="Caravel">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-                      <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
-                        <mat-label>Others1</mat-label>
-                        <mat-select [formControl]="Others1">
-                          <mat-option *ngFor="let name of DeviceUsedist" [value]="name">{{name}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-
 
                     </div>
                     <hr>
@@ -405,11 +248,11 @@
                       <div fxLayout="column" fxLayout.gt-xs="row">
                       <mat-radio-group value="2">
 
-                        <mat-radio-button mat-fab value="0">ImagingCrossed YES
+                        <mat-radio-button mat-fab value="0" style="font-weight: 400;">ImagingCrossed YES
                         </mat-radio-button>
 
 
-                        <mat-radio-button mat-fab value="0">IVUS
+                        <mat-radio-button mat-fab value="0" style="font-weight: 400;">IVUS
                         </mat-radio-button>
 
                         <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
@@ -466,7 +309,7 @@
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between"
                         style=" height: 35px;background-color:#0784b1">
                         <span
-                          style="font-size:18px; font-style: italic;font-weight: normal; color:white;padding:7px;">Physiology
+                          style="font-size:18px; font-style: italic;font-weight: normal; color:white;padding:7px;font-weight: 400;">Physiology
                         </span>
                       </div>
                       <div fxLayout="column" fxLayout.gt-xs="row">
@@ -479,7 +322,7 @@
                         <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
                           <mat-label>Dynamic</mat-label>
                           <mat-select [formControl]="HD">
-                            <mat-option *ngFor="let name of Dynamicist" [value]="name">{{name}}</mat-option>
+                            <mat-option *ngFor="let name of DynamicList" [value]="name">{{name}}</mat-option>
                           </mat-select>
                         </mat-form-field>
 
@@ -488,7 +331,7 @@
                           <mat-label>dFR
                           </mat-label>
                           <mat-select [formControl]="Refinity">
-                            <mat-option *ngFor="let name of Dynamicist" [value]="name">{{name}}</mat-option>
+                            <mat-option *ngFor="let name of DynamicList" [value]="name">{{name}}</mat-option>
                           </mat-select>
                         </mat-form-field>
 
@@ -496,7 +339,7 @@
                         <mat-form-field appearance="outline" style="width: 200px;margin-left: 20px;">
                           <mat-label>iFR
                           </mat-label>
-                          <mat-select [formControl]="Opticross">
+                          <mat-select [formControl]="iFR">
                             <mat-option *ngFor="let name of Dynamicist" [value]="name">{{name}}</mat-option>
                           </mat-select>
                         </mat-form-field>

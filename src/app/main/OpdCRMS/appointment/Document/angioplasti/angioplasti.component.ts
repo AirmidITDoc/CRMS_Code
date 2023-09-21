@@ -42,17 +42,12 @@ export class AngioplastiComponent implements OnInit {
   PatientName:any;
   RegNo:any;
   MobileNo:any;
-
-  
-
-  ArterialTypeList: string[] = ['Femoral','Radial'];
-  ArterialSide: string[] = ['Right','Left'];
-  SizeList: string[] = ['4F','23F'];
-  yesnoList: string[] = ['YES','NO'];
-
+ 
+ 
   DeviceUsedist: string[] = ['Pace Wire','Impella','IABP','Guide Catheter','Vanous Access'];
-
-  Dynamicist:string[] = ['0.9','0.8','0.7','0,6','0.5'];
+  WireTypeList: string[] = ['RunthroughNS','Pilot50','Pilot200','Gaia1','Gaia2','Gaia3','GaiaNext1','GaiaNext2','GaiaNext3','ConquestPro9','ConquestPro12','ConquestPro','FielderFC','Whisper','WhisperES','BMW'];
+  DynamicList:string[] = ['0.9','0.8','0.7','0,6','0.5'];
+  MicroCatheterUsedist: string[] = ['Finecross','CorsairPro','CorsairProXS','Crusader','Caravel'];
   HDUsedlist:string[] = ['1. 60 MHz HD IVUS','2.6 MHz','3.6 MHz']
   Refinitylist:string[] = ['2. 45 MHz Refinity','2.6 MHz','3.6 MHz']
   Opticrosslist:string[] = ['3. 40 MHz Opticross','2.6 MHz','3.6 MHz']
@@ -109,29 +104,9 @@ export class AngioplastiComponent implements OnInit {
       Wire: '',
       Rt: '',
       RunthroughNS: '',
-      Pilot50: '',
-      Pilot200: '',
-      Gaia1: '',
-      Gaia2: '',
-      Gaia3: '',
-      GaiaNext1: '',
-      GaiaNext2: '',
-      GaiaNext3: '',
-      ConquestPro9: '',
-      ConquestPro12: '',
-      ConquestPro: '',
-      FielderFC: '',
-      Whisper: '',
-      WhisperES: '',
-      BMW: '',
       Other1: '',
       MicroCatheter: '',
       MicroCatheterStatusY: '',
-      Finecross: '',
-      CorsairPro: '',
-      CorsairProXS: '',
-      Crusader: '',
-      Caravel: '',
       Others1: '',
       MicroCatheterStatusN: '',
       Imaging: '',
