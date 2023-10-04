@@ -492,15 +492,15 @@ app-new-doc-registration {
 
 .mat-header-row {
     width: 100%;
-    max-width:1550px;
-    min-width:1550px; 
+    max-width:1650px;
+    min-width:1650px; 
     min-height: 35px;     
     color: #ffffff !important;
 }
 .mat-row {
     width: 100%;
-    max-width:1550px;
-    min-width:1550px; 
+    max-width:1650px;
+    min-width:1650px; 
     min-height: 25px;            
 }
 
@@ -520,16 +520,16 @@ app-new-doc-registration {
 }
 
 .mat-column-SyntaxScoreValue {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
+    width:70px;
+    max-width:70px;
+    min-width:70px;
     text-align: right;
 }
 
-.mat-column-SeverityPer {
-    width:400px;
-    max-width:400px;
-    min-width:400px;
+.mat-column-Severity {
+    width:300px;
+    max-width:300px;
+    min-width:300px;
     text-align: left;
 }
 
