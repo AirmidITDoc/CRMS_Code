@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { fuseAnimations } from '@fuse/animations';
 
 @Component({
@@ -18,10 +19,26 @@ export class DocPresentationComponent implements OnInit {
   UnstabletypeList: string[] = ['Hypotension <90 mmHg','Hypoxia','Tachy','Brady','ROSC'];
   StemitypeList: string[] = ['Anterior','Posterior','Lateral','Inferior'];
   AnginatypeList:string[]=['Stable','Progressive'];
-  PositivetypeList:string[]=['Positive','Negative'];
+  // PositivetypeList:string[]=['Positive','Negative'];
   ScoretypeList: string[] = ['Critical','Significant',' Not-Significant'];
  
-  InducibletypeList:string[]=['TMT','MPI','MRI Perfusion','Nuclear Scan','DSE'];
+  // InducibletypeList:string[]=['TMT','MPI','MRI Perfusion','Nuclear Scan','DSE'];
+
+  InducibletypeList = [
+    { id: 1, name: "TMT" },
+    { id: 2, name: "MPI" },
+    { id: 3, name: "MRI Perfusion" },
+    {id: 4, name: "Nuclear Scan"},
+    {id: 5, name: "DSE"}
+  ];
+
+  PositivetypeList = [
+    { id: 1, name: "Positive" },
+    { id: 2, name: "Negative" },
+   
+  ];
+
+
   countryList: any = [];
 
   Stemidiv:boolean=true;
@@ -30,7 +47,20 @@ export class DocPresentationComponent implements OnInit {
   Hemodynamicunstablediv:boolean=false;
   CADdiv:boolean=false;
 
+  datalist: any = [];
+  isLoading:any;
+  InducibleTypeId:any;
+  InducibleTypeStatus:any;
 
+  displayedColumns  = [
+    'InducibleTypeId',
+    'InducibleTypeStatus',
+    'action'
+  ];
+
+  dataSource = new MatTableDataSource<InducibleIschemiaDet>();
+
+  
   type:any=0;
   screenFromString = 'admission-form';
   registerObj: any;
@@ -155,6 +185,39 @@ export class DocPresentationComponent implements OnInit {
 
   }
 
+  onChangeType(Id){
+    debugger
+    this.InducibleTypeId=Id.name;
+    
+  }
+
+  onChangeTypestatus(Id){
+    this.InducibleTypeStatus=Id.name;
+  }
+
+  onAddData() {
+
+  debugger
+this.isLoading = 'save';
+    if ((this.InducibleTypeId  != null) && (this.InducibleTypeStatus !=null)) {
+      this.isLoading = 'save';
+      this.dataSource.data = [];
+      
+      this.datalist.push(
+        {
+        
+          InducibleTypeId:  this.InducibleTypeId || 0,
+          InducibleTypeStatus: this.InducibleTypeStatus || 0
+       
+        });
+      this.isLoading = '';
+      this.dataSource.data = this.datalist;
+      
+    }
+
+  }
+
+
   onChangeInducibleTypeStatus(){
 
   }
@@ -171,3 +234,16 @@ export class DocPresentationComponent implements OnInit {
     this.dialogRef.close();
   }
 }
+
+
+export class InducibleIschemiaDet{
+  InducibleTypeId: any;
+  InducibleTypeStatus: any;
+ 
+
+  constructor(InducibleIschemiaDet){
+          this.InducibleTypeId = InducibleIschemiaDet.InducibleTypeId || '';
+          this.InducibleTypeStatus = InducibleIschemiaDet.InducibleTypeStatus || '';
+       
+  }
+} 

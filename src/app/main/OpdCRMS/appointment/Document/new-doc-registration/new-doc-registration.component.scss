@@ -1,60 +1,63 @@
-app-new-doc-registration{
-    .mat-dialog-content{
+app-new-doc-registration {
+    .mat-dialog-content {
         //height: 100%;
-      //  max-height:600px !important;
-        max-height:945px !important;
+        //  max-height:600px !important;
+        max-height: 945px !important;
         display: block;
-       // margin: 0px 0px;
+        // margin: 0px 0px;
     }
-    .dob{
+
+    .dob {
         width: 20px;
     }
-    
+
     .mat-card {
         padding: 5px;
         border-radius: 4px;
     }
-    
-    .mat-h1, .mat-headline, .mat-typography h1 {
+
+    .mat-h1,
+    .mat-headline,
+    .mat-typography h1 {
         margin: 0 0 5px;
     }
-    
-    .mat-dialog-title{
+
+    .mat-dialog-title {
         margin-bottom: 2px;
     }
-   
-    .error{
-        color:red;
+
+    .error {
+        color: red;
     }
-    
+
     .main-content {
         display: flex;
-       
-       
-     // max-height:650px !important;
-      max-height:730px !important;
-    
-       
-       
+
+
+        // max-height:650px !important;
+        max-height: 730px !important;
+
+
+
     }
-    
+
     .profile-section {
         width: 20%;
         //height: 900px;
-       
+
         height: 910px;
-       overflow: auto;
+        overflow: auto;
         background-color: #2d323e;
         text-align: center;
-       // height:700px !important;
+        // height:700px !important;
     }
-    
+
     .form-section {
         width: 100%;
         // padding: 20px;
         // height: 500px;
     }
-    
+
     .profile-picture {
         border: 1px solid #7c7b71;
         border-radius: 50%;
@@ -64,21 +67,21 @@ app-new-doc-registration{
         background-color: #7c7b71;
         cursor: pointer;
     }
-    
+
     .captured-picture {
         border: 1px solid grey;
         border-radius: 50%;
         width: 120px;
         height: 190px;
         margin: auto;
-        cursor: pointer;   
+        cursor: pointer;
     }
-    
+
     .captured-picture img {
         width: fit-content;
         //height: 100%;
     }
-    
+
     .upload-picture-btn {
         background: #7c7b71 !important;
         border-radius: 34px;
@@ -87,22 +90,22 @@ app-new-doc-registration{
         height: 42px;
         font-size: 15px;
     }
-    
+
     .form-section .mat-form-field .mat-form-field-subscript-wrapper {
         position: relative !important;
     }
-    
+
     .register-container {
         padding: 0 0 0 24px;
         align-items: center;
     }
-    
+
     .footer-navigation-container {
         text-align: right;
         display: flex;
         justify-content: space-between;
     }
-        
+
     .next-btn {
         width: 80px;
         font-size: 16px;
@@ -110,40 +113,569 @@ app-new-doc-registration{
         padding: 10px;
         margin-right: 5px;
         border-radius: 16px;
-         border: 1px solid #039be5 ;
-          background-color: white;
-       // background-color: hsl(204, 92%, 38%);
+        border: 1px solid #039be5;
+        background-color: white;
+        // background-color: hsl(204, 92%, 38%);
         //border:2px solid #0430c2;
     }
- 
-    .next-btn:hover{
-        background-color: #039be5 ;
-       // border: 1px solid rgb(247, 97, 97);
-        color:  white;
-       
+
+    .next-btn:hover {
+        background-color: #039be5;
+        // border: 1px solid rgb(247, 97, 97);
+        color: white;
+
     }
-    
- 
+
+
     .header-container {
         height: 40px;
         padding: 0 15px;
         align-items: center !important;
     }
-    
-    .search-btn{
-        text-align: center; 
+
+    .search-btn {
+        text-align: center;
         color: blue;
         border-radius: 16px;
-        border: 1px solid #039be5 ;
+        border: 1px solid #039be5;
         background-color: white;
-      }
-    
-     .search-btn:disabled {
-       color: white;
-       background-color: blue;
-       border-radius: 2px;
-       border: 1px solid  #b7e6fd ;
-      }
-
-           
     }
+
+    .search-btn:disabled {
+        color: white;
+        background-color: blue;
+        border-radius: 2px;
+        border: 1px solid #b7e6fd;
+    }
+
+    .section-header {
+        color: rgb(13, 54, 187);
+        font-size: 18px;
+        font-weight: bolder;
+        padding: 1% 1% 1% 0%;
+        font-family: Muli, Helvetica Neue, Arial, sans-serif;
+    }
+
+    .section-label {
+        padding-right: 10px;
+    }
+
+
+    .presentation-section-label {
+        padding-right: 15px;
+        padding-top: 5%;
+    }
+
+    .past-hist-section-label {
+        //padding-right: 15px;
+        padding-top: 1%;
+    }
+
+    .past-hist-pad3 {
+        padding-right: 15px;
+        padding-top: 3%;
+    }
+
+    .section-dropdown {
+        width: 200px;
+    }
+
+
+    .section-row {
+        padding-right: 10px;
+        padding-left: 20px;
+    }
+
+    .divTable {
+        display: table;
+    }
+
+    .divTitle {
+        display: table-caption;
+        text-align: center;
+        font-weight: bold;
+        font-size: larger;
+    }
+
+    .divHeading {
+        display: table-row;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .divRow {
+        display: table-row;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .divCell {
+        display: table-cell;
+        border: none;
+        padding-left: 5px;
+        padding-right: 25px;
+    }
+
+    .divCellLeftBorder {
+        display: table-cell;
+        padding-left: 10px;
+        padding-right: 5px;
+        border: #80808052;
+        border-Left-style: groove;
+    }
+
+    .divCellRightBorder {
+        display: table-cell;
+        padding-left: 10px;
+        padding-right: 5px;
+        border: #80808052;
+        border-right-style: groove;
+        border-Left-style: groove;
+    }
+
+    .divLargeCell {
+        display: table-cell;
+        border: none;
+        padding-left: 5px;
+        padding-right: 25px;
+        width: 120px;
+    }
+
+    .divCell150 {
+        display: table-cell;
+        border: none;
+        padding-left: 5px;
+        padding-right: 25px;
+        width: 150px;
+    }
+
+    .divCell150-Pad0 {
+        display: table-cell;
+        border: none;
+        padding-left: 5px;
+        padding-right: 0px;
+        width: 150px;
+    }
+
+    .divLineCell {
+        display: table-cell;
+        border: none;
+    }
+
+    .divLineRow {
+        display: table-row;
+        width: 300%;
+    }
+
+
+    .SelectExtraWidth {
+        width: 150px;
+    }
+
+    .divCellNormalWidth {
+        display: table-cell;
+        width: 150px;
+    }
+
+    .first-row-padding {
+        padding-top: 2%;
+    }
+
+    .group-padding {
+        padding-top: 1%;
+    }
+
+
+    .section-2A-Select {
+        padding-left: 25px;
+        padding-right: 20px;
+    }
+
+    .example-margin {
+        margin: 0 20px;
+    }
+
+    .example-section {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        height: 60px;
+    }
+
+    .label-paddingtop5{
+        padding-top: 2%;
+    }
+
+}
+
+
+
+.mat-header-row {
+    width: 100%;
+    max-width:1350px;
+    min-width:1350px; 
+    min-height: 35px;     
+}
+.mat-row {
+    width: 100%;
+    max-width:1350px;
+    min-width:1350px; 
+    min-height: 25px;            
+}
+
+.mat-column-LVEF {
+    width:170px;
+    max-width:170px;
+    min-width:170px;
+    text-align:left;
+    justify-content: left;
+}
+
+.mat-column-GLS {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+    text-align: right;
+}
+.mat-column-RWMA {
+    width:170px;
+    max-width:170px;
+    min-width:170px;
+    text-align:left;
+    justify-content: left;
+}
+
+.mat-column-PApressure {
+    width:170px;
+    max-width:170px;
+    min-width:170px;
+    text-align: right;
+}
+
+.mat-column-Valve {
+    width:170px;
+    max-width:170px;
+    min-width:170px;
+    text-align:left;
+    justify-content: left;
+}
+
+.mat-column-Stenotic {
+    width:200px;
+    max-width:200px;
+    min-width:200px;
+    text-align: right;
+}
+.mat-column-Regurgitation {
+    width:170px;
+    max-width:170px;
+    min-width:170px;
+    text-align:left;
+    justify-content: left;
+}
+
+.mat-column-MSAR {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+    text-align: right;
+}
+.mat-column-MSAS {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+    text-align:left;
+    justify-content: left;
+}
+
+
+.mat-column-action {
+    // color: white !important;
+    width:70px;
+    max-width:70px;
+    min-width:70px;
+   
+    text-align: right;
+    justify-content:right; 
+    
+}
+
+
+
+.mat-header-row {
+    width: 100%;
+    max-width:1450px;
+    min-width:1450px; 
+    min-height: 35px;     
+}
+.mat-row {
+    width: 100%;
+    max-width:1450px;
+    min-width:1450px; 
+    min-height: 25px;            
+}
+
+.mat-column-AccessType {
+    width:200px;
+    max-width:200px;
+    min-width:200px;
+    text-align:left;
+    justify-content: left;
+}
+
+.mat-column-Accessvalue1 {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+    text-align: right;
+}
+
+.mat-column-Accessvalue2 {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+    text-align: right;
+}
+
+.mat-column-Other1 {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+    text-align: right;
+}
+.mat-column-IronDef {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+    text-align: right;
+}
+.mat-column-USG {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+    text-align: right;
+}
+.mat-column-Puncture {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+    text-align: right;
+}
+
+.mat-column-Fluoro {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+    text-align: right;
+}
+.mat-column-Device {
+    width:400px;
+    max-width:400px;
+    min-width:400px;
+    text-align: right;
+}
+
+
+.mat-column-action {
+    // color: white !important;
+    width:70px;
+    max-width:70px;
+    min-width:70px;
+   
+    text-align: right;
+    justify-content:right; 
+    
+}
+
+----
+
+
+.mat-header-row {
+    width: 100%;
+    max-width:1550px;
+    min-width:1550px; 
+    min-height: 35px;     
+    color: #ffffff !important;
+}
+.mat-row {
+    width: 100%;
+    max-width:1550px;
+    min-width:1550px; 
+    min-height: 25px;            
+}
+
+.mat-column-LocationValue {
+    width:200px;
+    max-width:200px;
+    min-width:200px;
+    text-align:left;
+    justify-content: left;
+}
+
+.mat-column-LesionType {
+    width:200px;
+    max-width:200px;
+    min-width:200px;
+    text-align: right;
+}
+
+.mat-column-SyntaxScoreValue {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+    text-align: right;
+}
+
+.mat-column-SeverityPer {
+    width:400px;
+    max-width:400px;
+    min-width:400px;
+    text-align: left;
+}
+
+.mat-column-IndexLesionValue {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+    text-align: right;
+}
+.mat-column-Critical {
+    width:70px;
+    max-width:70px;
+    min-width:70px;
+    text-align: right;
+}
+.mat-column-Significant {
+    width:70px;
+    max-width:70px;
+    min-width:70px;
+    text-align: right;
+}
+.mat-column-Intermediat {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+    text-align: right;
+}
+
+.mat-column-NonSignificant {
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+    text-align: right;
+}
+.mat-column-CalcifiedValue {
+    width:200px;
+    max-width:200px;
+    min-width:100px;
+    text-align: right;
+}
+.mat-column-ProximalTortuosityValue {
+    width:200px;
+    max-width:200px;
+    min-width:200px;
+    text-align: right;
+}
+
+.mat-column-ImportantSideBranchValue {
+    width:200px;
+    max-width:200px;
+    min-width:200px;
+    text-align: right;
+}
+
+
+.mat-column-action {
+    // color: white !important;
+    width:70px;
+    max-width:70px;
+    min-width:70px;
+   
+    text-align: right;
+    justify-content:right; 
+    
+}
+---
+
+
+.mat-header-row {
+    width: 100%;
+    max-width:1450px;
+    min-width:1450px; 
+    min-height: 35px;     
+    color: #ffffff;
+}
+.mat-row {
+    width: 100%;
+    max-width:1450px;
+    min-width:1450px; 
+    min-height: 25px;            
+}
+
+.mat-column-Wiretype {
+    width:400px;
+    max-width:400px;
+    min-width:400px;
+    text-align:left;
+    justify-content: left;
+}
+
+.mat-column-wireOther {
+    width:300px;
+    max-width:300px;
+    min-width:300px;
+    text-align: right;
+}
+
+.mat-column-MicroCatheter {
+    width:400px;
+    max-width:400px;
+    min-width:400px;
+    text-align: right;
+}
+
+.mat-column-Wire1Other {
+    width:300px;
+    max-width:300px;
+    min-width:300px;
+    text-align: right;
+}
+
+
+
+
+.mat-header-row {
+    width: 100%;
+    max-width:1450px;
+    min-width:1450px; 
+    min-height: 35px;     
+    color: #ffffff;
+}
+.mat-row {
+    width: 100%;
+    max-width:1450px;
+    min-width:1450px; 
+    min-height: 25px;            
+}
+
+.mat-column-IVUS {
+    width:400px;
+    max-width:400px;
+    min-width:400px;
+    text-align:left;
+    justify-content: left;
+}
+
+.mat-column-OCT {
+    width:300px;
+    max-width:300px;
+    min-width:300px;
+    text-align: right;
+}
+
+.mat-column-Imgothere {
+    width:400px;
+    max-width:400px;
+    min-width:400px;
+    text-align: right;
+}

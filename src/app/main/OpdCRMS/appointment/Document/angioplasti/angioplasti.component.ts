@@ -55,11 +55,13 @@ export class AngioplastiComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogref:MatDialogRef<AngioplastiComponent>) {
-    this.mainform = this.MainForm();
-    this.subform = this.SubForm();
+   
   }
 
   ngOnInit(): void {
+    this.mainform = this.MainForm();
+    this.subform = this.SubForm();
+    
     if(this.data){
       this.regobj=this.data.advanceObj;
       this.PatientName=this.regobj.PatientName;

@@ -16,6 +16,7 @@ import { ProcedureHemodynamicsComponent } from '../procedure-hemodynamics/proced
 import { DempgraphicComponent } from '../dempgraphic/dempgraphic.component';
 import { id } from '@swimlane/ngx-charts';
 import { LesionPreprationComponent } from '../lesion-prepration/lesion-prepration.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-new-doc-registration',
@@ -26,6 +27,7 @@ import { LesionPreprationComponent } from '../lesion-prepration/lesion-prepratio
 })
 export class NewDocRegistrationComponent implements OnInit {
   searchFormGroup: FormGroup;
+  accessFormGroup: FormGroup;
   filteredOptions: any;
   noOptionFound: boolean = false;
 
@@ -47,6 +49,17 @@ export class NewDocRegistrationComponent implements OnInit {
   RegNo: any;
   PatientHeaderObj = {};
 
+  datalist: any = [];
+  Accessdatalist: any = [];
+  proceduredatalist: any = [];
+  wiredatalist: any = [];
+  Imgimgdatalist: any = [];
+  Physiodatalist: any = [];
+
+  AccType:any;
+  InducibleTypeId:any;
+  InducibleTypeStatus:any;
+
   Doctype = [
     { id: 1, name: "Acute Coronary Syndrome" },
     { id: 2, name: "Stable Coronary Syndrome" },
@@ -56,14 +69,239 @@ export class NewDocRegistrationComponent implements OnInit {
   ];
 
   Pagestype = [
-    { id: 1, name: "Book Patient Appointment"},
+    { id: 1, name: "Book Patient Appointment" },
     { id: 2, name: "Procedure Hemodynamics" },
     { id: 3, name: "Demographic" },
     { id: 4, name: "Anjioplasti" },
-    { id: 5, name: "Lesion Preapration"},
-    { id: 6, name: "DocPresentationComponent"},
+    { id: 5, name: "Lesion Preapration" },
+    { id: 6, name: "DocPresentationComponent" },
     { id: 7, name: "Result" }
   ];
+
+  RWMAList = [
+    { id: 1, name: "Anterior" },
+    { id: 2, name: "Posterior" },
+    { id: 3, name: "Lateral" },
+    { id: 4, name: "Inferior" },
+    { id: 5, name: "Apical Preapration" },
+   
+  ];
+  PApressureList =[
+    { id:1,name:"Normal"},
+    { id:2, name:"Raised"}
+  ]
+  ValveList =[
+    { id: 1, name: "Mitral" },
+    { id: 2, name: "Aortic" },
+  ]
+
+  SeverityList = [
+    { id: 1, name: "100%" },
+    { id: 2, name: "Critical (80-99%)" },
+    { id: 3, name: "Significant (Non-Critical 70-80%)" },
+    { id: 4, name: "Intermediate (50-70%)" },
+    { id: 5, name: "Not Significant (50%) " },
+  ];
+
+  Accessvalue1List  = [
+    { id: 1, name: "Femoral" },
+    { id: 2, name: "Radial" },
+       
+  ];
+  Accessvalue2List  = [
+    { id: 1, name: "Righ" },
+    { id: 2, name: "Left" },
+       
+  ];
+
+  IronDefList = [
+    { id: 1, name: "Yes" },
+    { id: 2, name: "No" },
+       
+  ];
+
+  USGList = [
+    { id: 1, name: "Yes" },
+    { id: 2, name: "No" },
+       
+  ];
+
+  FluoroList = [
+    { id: 1, name: "Yes" },
+    { id: 2, name: "No" },
+       
+  ];
+  PunctureList = [
+    { id: 1, name: "Yes" },
+    { id: 2, name: "No" },
+       
+  ];
+
+
+  DevicetypeList = [
+    { id: 1, name: "Mild" },
+    { id: 2, name: "Moderate" },
+    { id: 3, name: "Severe" },
+    
+  ];
+
+  CalcifiedList = [
+    { id: 1, name: "Pace Wire" },
+    { id: 2, name: "Impella" },
+    { id: 3, name: "IABP" },
+    { id: 4, name: "Guide Catheter" },
+    { id: 5, name: "Vanous Access" },
+  
+  ];
+
+
+  WireList = [
+    { id: 1, name: "Runthrough NS%" },
+    { id: 2, name: "Pilot 50" },
+    { id: 3, name: "Pilot 200" },
+    { id: 4, name: "ULTIMATEbros 3" },
+    { id: 5, name: "Gaia 1" },
+    { id: 6, name: "Gaia 2" },
+    { id: 7, name: "Gaia 3" },
+    { id: 8, name: "Gaia Next 1" },
+    { id: 9, name: "Gaia Next 2" },
+    { id: 10, name: "Gaia Next 3" },
+    { id: 11, name: "Conquest Pro 9" },
+    { id: 12, name: "Conquest Pro 12" },
+    { id: 13, name: "Conquest Pro" },
+    { id: 14, name: "Fielder FC" },
+    { id: 15, name: "Whisper" },
+    { id: 16, name: "Whisper ES" },
+    { id: 17, name: "BMW" },
+    // { id: 10, name: "Whisper ES" },
+  ];
+  MicroCatheterList= [
+    { id: 1, name: "Finecross" },
+    { id: 2, name: "Corsair Pro" },
+    { id: 3, name: "Corsair Pro XS" },
+    { id: 4, name: "Crusader" },
+    { id: 5, name: "Caravel" },
+    { id: 6, name: "Caravel" },
+     ];
+
+     IVUSList= [
+      { id: 1, name: "60 MHz HD IVUS" },
+      { id: 2, name: "45 MHz Refinity" },
+      { id: 3, name: "40 MHz Opticross" },
+    
+       ];
+
+       
+      OCTList= [
+        { id: 1, name: "Yes" },
+        { id: 2, name: "No" },
+      
+         ];
+
+         PhysiologytypeList= [
+          { id: 1, name: "Dynamic" },
+          { id: 2, name: "dFR" },
+          { id: 3, name: "iFR" },
+         
+           ];
+
+           PhysiologyvalueList= [
+            { id: 1, name: "0.9" },
+            { id: 2, name: "0.8" },
+            { id: 3, name: "0.7" },
+            { id: 4, name: "0.6" },
+            { id: 5, name: "0.5" },
+            
+             ];
+
+             LesionTypeList= [
+              { id: 1, name: "Native Lesion"},
+              { id: 2, name: "Graft"},
+              { id: 3, name: "ISR" }
+                          
+               ];
+    
+
+  displayedColumns  = [
+    'LVEF',
+    'GLS',
+    'RWMA',
+    'PApressure',
+    'Valve',
+    'Stenotic',
+    'Regurgitation',
+    'MSAR',
+    'MSAS',
+    
+    'action'
+  ];
+
+  dataSource = new MatTableDataSource<D2EchoDet>();
+
+
+  
+  displayedColumns1  = [
+    'AccessType',
+    'Accessvalue1',
+    'Accessvalue2',
+    'Other1',
+    'IronDef',
+    'USG',
+    'Puncture',
+    'Fluoro',
+    'Device',
+    
+    'action'
+  ];
+
+  dataSource1 = new MatTableDataSource<AngioaccessType>();
+
+    
+  displayedColumns2  = [
+    'LesionType',
+    'Location',
+    'SyntaxScore',
+    'IndexLesion',
+    'Severity',
+    'Calcified',
+    'Thrombus',
+    'Proximal',
+     'Branch',
+    'action'
+  ];
+
+  dataSource2 = new MatTableDataSource<ProcedureType>();
+
+    
+  displayedColumns3 = [
+    'Wiretype',
+    'wireOther',
+    'MicroCatheter',
+    'Wire1Other',
+    'action'
+  ];
+
+  dataSourc3 = new MatTableDataSource<WireType>();
+
+  displayedColumns4 = [
+    'IVUS',
+    'OCT',
+    'Imgothere',
+    'action'
+  ];
+
+  dataSource4 = new MatTableDataSource<ImagingType>();
+
+  displayedColumns5 = [
+    'Physiologytype',
+    'Physiologyvalue',
+    'action'
+  ];
+
+  dataSource5 = new MatTableDataSource<PhysiologyType>();
+
+
+
   constructor(public _AppointmentService: AppointmentService,
     // public dialogRef: MatDialogRef<NewDocRegistrationComponent>,
     private accountService: AuthenticationService,
@@ -72,7 +310,7 @@ export class NewDocRegistrationComponent implements OnInit {
   ngOnInit(): void {
     this.personalFormGroup = this.createPesonalForm();
     this.searchFormGroup = this.createSearchForm();
-
+    // this.accessFormGroup=this.createAccessForm();
     this.getPrefixList();
   }
 
@@ -116,12 +354,12 @@ export class NewDocRegistrationComponent implements OnInit {
 
   }
 
-  
+
   getappointment() {
-    var m={
-      "PatientName":this.PatientName,
-      "RegNo":this.RegNo,
-      "MobileNo":this.Mobileno
+    var m = {
+      "PatientName": this.PatientName,
+      "RegNo": this.RegNo,
+      "MobileNo": this.Mobileno
     }
 
     const dialogRef = this._matDialog.open(DocPresentationComponent,
@@ -154,35 +392,13 @@ export class NewDocRegistrationComponent implements OnInit {
 
   //   });
   // }
-  getanigioplasti() {
-
-    var m={
-      "PatientName":this.PatientName,
-      "RegNo":this.RegNo,
-      "MobileNo":this.Mobileno
-    }
-
-    const dialogRef = this._matDialog.open(AngioplastiComponent,
-      {
-        maxWidth: "80%",
-        height: '1000px',
-        width: '100%',
-        data: {
-          advanceObj: m
-        }
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed - Insert Action', result);
-
-    });
-  }
 
   getProcedure() {
 
-    var m={
-      "PatientName":this.PatientName,
-      "RegNo":this.RegNo,
-      "MobileNo":this.Mobileno
+    var m = {
+      "PatientName": this.PatientName,
+      "RegNo": this.RegNo,
+      "MobileNo": this.Mobileno
     }
 
     const dialogRef = this._matDialog.open(ProcedureHemodynamicsComponent,
@@ -216,16 +432,16 @@ export class NewDocRegistrationComponent implements OnInit {
   //   });
   // }
 
-  onChangePageList(Id){
+  onChangePageList(Id) {
     debugger
     console.log(Id)
-    
+
     this.PatientHeaderObj['PatientName'] = this.PatientName;
     this.PatientHeaderObj['RegNo'] = this.RegNo;
     this.PatientHeaderObj['MobileNo'] = this.Mobileno;
 
 
-    if(Id.id == 1){
+    if (Id.id == 1) {
       const dialogRef = this._matDialog.open(DocPresentationComponent,
         {
           maxWidth: "90%",
@@ -237,9 +453,9 @@ export class NewDocRegistrationComponent implements OnInit {
         });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed - Insert Action', result);
-  
+
       });
-    }else if(Id.id == 2){
+    } else if (Id.id == 2) {
       const dialogRef = this._matDialog.open(ProcedureHemodynamicsComponent,
         {
           maxWidth: "90%",
@@ -251,9 +467,9 @@ export class NewDocRegistrationComponent implements OnInit {
         });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed - Insert Action', result);
-  
+
       });
-    }else if(Id.id == 3){
+    } else if (Id.id == 3) {
       const dialogRef = this._matDialog.open(DempgraphicComponent,
         {
           maxWidth: "90%",
@@ -265,13 +481,14 @@ export class NewDocRegistrationComponent implements OnInit {
         });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed - Insert Action', result);
-  
+
       });
-    }else if(Id.id == 4){
-      const dialogRef = this._matDialog.open(AngioplastiComponent,
+    } else if (Id.id == 5) {
+
+      const dialogRef = this._matDialog.open(LesionPreprationComponent,
         {
-          maxWidth: "90%",
-          height: '900px',
+          maxWidth: "60%",
+          height: '700px',
           width: '100%',
           data: {
             advanceObj: this.PatientHeaderObj,
@@ -279,41 +496,26 @@ export class NewDocRegistrationComponent implements OnInit {
         });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed - Insert Action', result);
-  
-      });
-    }else if(Id.id == 5){
-    
-    const dialogRef = this._matDialog.open(LesionPreprationComponent,
-      {
-        maxWidth: "60%",
-        height: '700px',
-        width: '100%',
-        data: {
-          advanceObj: this.PatientHeaderObj,
-        }
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed - Insert Action', result);
 
-    });
-  }else if(Id.id == 6){
-    
-    const dialogRef = this._matDialog.open(DocPresentationComponent,
-      {
-        maxWidth: "60%",
-        height: '700px',
-        width: '100%',
-        data: {
-          advanceObj: this.PatientHeaderObj,
-        }
       });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed - Insert Action', result);
+    } else if (Id.id == 6) {
 
-    });
-  }    
-   else if(Id.id == 7){
-    
+      const dialogRef = this._matDialog.open(DocPresentationComponent,
+        {
+          maxWidth: "60%",
+          height: '700px',
+          width: '100%',
+          data: {
+            advanceObj: this.PatientHeaderObj,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+
+      });
+    }
+    else if (Id.id == 7) {
+
       const dialogRef = this._matDialog.open(ResultComponent,
         {
           maxWidth: "60%",
@@ -325,17 +527,17 @@ export class NewDocRegistrationComponent implements OnInit {
         });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed - Insert Action', result);
-  
+
       });
     }
-  
+
   }
 
 
 
   onChangeDocList(Id) {
     debugger
-     
+
     this.PatientHeaderObj['PatientName'] = this.PatientName;
     this.PatientHeaderObj['RegNo'] = this.RegNo;
     this.PatientHeaderObj['MobileNo'] = this.Mobileno;
@@ -391,9 +593,61 @@ export class NewDocRegistrationComponent implements OnInit {
       Doctorname: '',
       EmailId: '',
       RegID: [''],
-      PageId:['']
+      PageId: [''],
+
+      LVEF: [''],
+      GLS: [''],
+      RWMA: [''],
+      PApressure: [''],
+      Valve: [''],
+      Stenotic: [''],
+      Regurgitation: [''],
+      MSAR: [''],
+      MSAS: [''],
+
+      LesionType:'',
+      Location:'',
+      SyntaxScore:'',
+      IndexLesion:'',
+      Severity:'',
+      Calcified:'',
+      Thrombus:[''],
+      Proximal:[''],
+      Branch:[''],
+    
+      AccessType:[''],
+      Accessvalue1:[''],
+      Accessvalue2:[''],
+      Other1:[''],
+      IronDef:[''],
+      USG:[''],
+      Puncture:[''],
+      Fluoro:[''],
+      Device:[''],
+
+
+    Wiretype:'',
+    wireOther:'',
+    MicroCatheter:'',
+    Wire1Other:'',
+
+  IVUS:'',
+  OCT:'',
+  Imgothere:'',
+
+
+  Physiologytype:'',
+  Physiologyvalue:''
     });
   }
+
+  // createAccessForm() {
+  //   return this.formBuilder.group({
+    
+
+  //   });
+  // }
+
 
   private _filterPrex(value: any): string[] {
     if (value) {
@@ -539,4 +793,285 @@ export class NewDocRegistrationComponent implements OnInit {
 
 
   onSubmit() { }
+
+  onAddData() {
+
+        this.isLoading = 'save';
+        this.dataSource.data = [];
+      
+        this.datalist.push(
+          {
+          
+            LVEF:  this.personalFormGroup.get('LVEF').value || 0,
+            GLS:this.personalFormGroup.get('GLS').value || 0,
+            RWMA: this.personalFormGroup.get('RWMA').value.name || '',
+            PApressure: this.personalFormGroup.get('PApressure').value.name || '',
+            Valve: this.personalFormGroup.get('Valve').value.name || 0,
+            Stenotic:this.personalFormGroup.get('Stenotic').value || 0,
+            Regurgitation: this.personalFormGroup.get('Regurgitation').value || 0,
+            MSAR: this.personalFormGroup.get('MSAR').value || 0,
+            MSAS:this.personalFormGroup.get('MSAS').value || 0,
+         
+          });
+        this.isLoading = '';
+        this.dataSource.data = this.datalist;
+        
+      // }
+  
+    }
+
+    onAddWiretypeData() {
+    
+    this.isLoading = 'save';
+      
+          this.dataSourc3.data = [];
+        
+          this.wiredatalist.push(
+            {
+            
+              Wiretype:  this.personalFormGroup.get('Wiretype').value.name || '',
+              wireOther:this.personalFormGroup.get('wireOther').value || '',
+              MicroCatheter: this.personalFormGroup.get('MicroCatheter').value.name || '',
+              Wire1Other: this.personalFormGroup.get('Wire1Other').value || '',
+          
+            });
+          this.isLoading = '';
+          this.dataSourc3.data = this.wiredatalist;
+          
+        // }
+    
+      }
+   
+      onAddImagingData() {
+    
+        this.isLoading = 'save';
+          
+              this.dataSource4.data = [];
+            
+              this.Imgimgdatalist.push(
+                {
+                
+                  IVUS:  this.personalFormGroup.get('IVUS').value.name || '',
+                  OCT:this.personalFormGroup.get('OCT').value.name || '',
+                  Imgothere: this.personalFormGroup.get('Imgothere').value || '',
+                               
+                });
+              this.isLoading = '';
+              this.dataSource4.data = this.Imgimgdatalist;
+              
+            // }
+        
+          }
+
+          onAddPhysiologyData() {
+    
+            this.isLoading = 'save';
+              
+                  this.dataSource5.data = [];
+                
+                  this.Physiodatalist.push(
+                    {
+                    
+                      Physiologytype:  this.personalFormGroup.get('Physiologytype').value.name || '',
+                      Physiologyvalue:this.personalFormGroup.get('Physiologyvalue').value.name || '',
+                                                      
+                    });
+                  this.isLoading = '';
+                  this.dataSource5.data = this.Physiodatalist;
+                  
+                // }
+            
+              }
+
+    onAddProceduredata() {
+     
+          this.isLoading = 'save';
+          this.dataSource2.data = [];
+          debugger
+          this.proceduredatalist.push(
+            {
+              
+             LesionType:this.personalFormGroup.get('LesionType').value.name || '',
+              Location:this.personalFormGroup.get('Location').value || '',
+              SyntaxScore:this.personalFormGroup.get('SyntaxScore').value || 0,
+              IndexLesion: this.personalFormGroup.get('IndexLesion').value || '',
+              Severity: this.personalFormGroup.get('Severity').value.name || '',
+              Calcified: this.personalFormGroup.get('Calcified').value.name || '',
+              Thrombus:this.personalFormGroup.get('Thrombus').value || 'false',
+              Proximal: this.personalFormGroup.get('Proximal').value || 'false',
+              Branch: this.personalFormGroup.get('Branch').value || 'false',
+             
+           
+            });
+          this.isLoading = '';
+          this.dataSource2.data = this.proceduredatalist;
+          
+        // }
+    
+      }
+
+
+      onAddAccesstypeData() {
+
+        debugger
+      this.isLoading = 'save';
+          // if ((this.InducibleTypeId  != null) && (this.InducibleTypeStatus !=null)) {
+            if(this.personalFormGroup.get('AccessType').value ==1)
+            {
+              this.AccType='Arterial';
+            }
+            if(this.personalFormGroup.get('AccessType').value ==2)
+            {
+              this.AccType='Venous';
+            }
+
+            if(this.personalFormGroup.get('AccessType').value ==3)
+            {
+              this.AccType='Other';
+            }
+
+
+            this.isLoading = 'save';
+            this.dataSource1.data = [];
+          
+            this.Accessdatalist.push(
+              {
+              
+                AccessType:this.AccType || '',
+                Accessvalue1:this.personalFormGroup.get('Accessvalue1').value.name || 0,
+                Accessvalue2: this.personalFormGroup.get('Accessvalue2').value.name || '',
+                Other1: this.personalFormGroup.get('Other1').value || '',
+                IronDef: this.personalFormGroup.get('IronDef').value.name || '',
+                USG:this.personalFormGroup.get('USG').value.name || '',
+                Puncture: this.personalFormGroup.get('Puncture').value.name || '',
+                Fluoro: this.personalFormGroup.get('Fluoro').value.name || '',
+                Device:this.personalFormGroup.get('Device').value.name || '',
+             
+              });
+            this.isLoading = '';
+            this.dataSource1.data = this.Accessdatalist;
+            
+          // }
+      
+        }
+  
 }
+
+
+
+export class D2EchoDet{
+  LVEF: any;
+  GLS: any;
+  RWMA: any;
+  PApressure: any;
+  Valve: any;
+  Stenotic: any;
+  Regurgitation: any;
+  MSAR: any;
+  MSAS:any;
+  constructor(D2EchoDet){
+          this.LVEF = D2EchoDet.LVEF || '';
+          this.GLS = D2EchoDet.GLS || '';
+          this.RWMA = D2EchoDet.RWMA || '';
+          this.PApressure = D2EchoDet.PApressure || '';
+          this.Valve = D2EchoDet.Valve || '';
+          this.Stenotic = D2EchoDet.Stenotic || '';
+          this.Regurgitation = D2EchoDet.Regurgitation || '';
+          this.MSAR = D2EchoDet.MSAR || '';
+          this.MSAS = D2EchoDet.MSAS || '';
+                 
+  }
+} 
+
+
+
+export class AngioaccessType{
+  AccessType: any;
+  Accessvalue1: any;
+  Accessvalue2: any;
+  Other1: any;
+  IronDef: any;
+  USG: any;
+  Puncture: any;
+  Fluoro: any;
+  Device:any;
+  constructor(AngioaccessType){
+          this.AccessType = AngioaccessType.AccessType || '';
+          this.Accessvalue1 = AngioaccessType.Accessvalue1 || '';
+          this.Accessvalue2 = AngioaccessType.Accessvalue2 || '';
+          this.Other1 = AngioaccessType.Other1 || '';
+          this.IronDef = AngioaccessType.IronDef || '';
+          this.USG = AngioaccessType.USG || '';
+          this.Puncture = AngioaccessType.Puncture || '';
+          this.Fluoro = AngioaccessType.Fluoro || '';
+          this.Device = AngioaccessType.Device || '';
+                 
+  }
+} 
+
+
+export class WireType{
+  Wiretype: any;
+  wireOther: any;
+  MicroCatheter: any;
+  Wire1Other: any;
+
+  constructor(WireType){
+          this.Wiretype = WireType.Wiretype || '';
+          this.wireOther = WireType.wireOther || '';
+          this.MicroCatheter = WireType.MicroCatheter || '';
+          this.Wire1Other = WireType.Wire1Other || '';
+         
+  }
+} 
+
+export class ImagingType{
+  IVUS: any;
+  OCT: any;
+  Imgothere: any;
+  
+
+  constructor(ImagingType){
+          this.IVUS = ImagingType.IVUS || '';
+          this.OCT = ImagingType.OCT || '';
+          this.Imgothere = ImagingType.Imgothere || '';
+                   
+  }
+}
+
+export class PhysiologyType{
+  Physiologytype: any;
+  Physiologyvalue: any;
+   
+
+  constructor(PhysiologyType){
+          this.Physiologytype = PhysiologyType.Physiologytype || '';
+          this.Physiologyvalue = PhysiologyType.Physiologyvalue || '';
+                             
+  }
+}  
+
+
+ export class ProcedureType{
+  LesionType:any;
+  Location:any;
+  SyntaxScore:any;
+  IndexLesion:any;
+  Severity:any;
+  Calcified:any;
+  Thrombus:any;
+  Proximal:any;
+  Branch:any;
+  constructor(ProcedureType){
+          this.LesionType = ProcedureType.LesionType || '';
+          this.Location = ProcedureType.Location || '';
+          this.SyntaxScore = ProcedureType.SyntaxScore || '';
+          this.IndexLesion = ProcedureType.IndexLesion || '';
+          this.Severity = ProcedureType.Severity || '';
+          this.Calcified = ProcedureType.Calcified || '';
+          this.Thrombus = ProcedureType.Thrombus || '';
+          this.Proximal = ProcedureType.Proximal || '';
+          this.Branch = ProcedureType.Branch || '';
+                 
+  }
+} 

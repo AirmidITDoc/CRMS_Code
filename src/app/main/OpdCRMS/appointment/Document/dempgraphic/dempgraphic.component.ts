@@ -22,7 +22,7 @@ export class DempgraphicComponent implements OnInit {
   GenderList: any = [];
   selectedGenderID: any;
   submitted = false;
-
+  screenFromString = 'admission-form';
 
   regobj:any;
   PatientName:any;
