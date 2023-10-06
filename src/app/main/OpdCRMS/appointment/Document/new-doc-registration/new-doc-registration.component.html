@@ -1637,7 +1637,1050 @@
                     </mat-table>
                     </mat-tab>
 
-                    <mat-tab label="Lesion Preperation"></mat-tab>
+                    
+                    <!-- Lesion Preperation Tab -->
+                    <mat-tab label="Lesion Preperation">
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
+                        <span class="section-header">Imaging</span>
+                      </div>
+                      <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                        <div>
+                          <span class="presentation-section-label example-margin">Imaging Done:</span>
+                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                            <mat-label>Imaging Done</mat-label>
+                            <mat-select>
+                              <mat-option value="0">-- Select --</mat-option>
+                              <mat-option value="1">Yes</mat-option>
+                              <mat-option value="2">No</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <section class="example-section">
+                            <label class="example-margin">Other Imaging Type:</label>
+                            <mat-checkbox class="example-margin">IVUS</mat-checkbox>
+                            <mat-checkbox class="example-margin">OCT</mat-checkbox>
+                            <mat-checkbox class="example-margin">Others</mat-checkbox>
+                            <mat-form-field>
+                              <mat-label>Imaging Type</mat-label>
+                              <input matInput name="Imaging Type" formControlName="ImagingType" id="ImagingType">
+                            </mat-form-field>
+                          </section>
+                        </div>
+                      </div>
+                      <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                        <div>
+                          <section class="example-section">
+                            <label class="example-margin">Lesion Composition:</label>
+                            <mat-checkbox class="example-margin">Fibrous</mat-checkbox>
+                            <mat-checkbox class="example-margin">Thrombus</mat-checkbox>
+                            <mat-checkbox class="example-margin">Lipid</mat-checkbox>
+                            <mat-checkbox class="example-margin">Protruding</mat-checkbox>
+                            <mat-checkbox class="example-margin">Non-Protruding</mat-checkbox>
+                            <mat-checkbox class="example-margin">Wire Bias</mat-checkbox>
+                            <label class="example-margin">Calcium:</label>
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>                              
+                              <mat-label>Calcium</mat-label>
+                              <mat-select>
+                                <mat-option value="0">-- Select Calcium --</mat-option>
+                                <mat-option value="1"> < 180 Degree </mat-option>
+                                <mat-option value="2"> > 180 Degree </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </section>
+                        </div>
+                      </div>
+
+                      <!-- Micro Catheter Crossed -->
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
+                        <section class="example-section section-header">
+                          <label class=" label-rightpadding2">Micro Catheter Crossed: </label>
+                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                            <mat-label>-- Select --</mat-label>
+                            <mat-select>
+                              <mat-option value="1">Yes</mat-option>
+                              <mat-option value="2">No</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </section>
+                      </div>
+
+                      <!-- Atherectomy -->
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
+                        <span class="section-header">Atherectomy</span>
+                      </div>
+                      <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                        <div>
+                          <mat-accordion>
+                            <!-- ROTA -->
+                            <mat-expansion-panel hideToggle>
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  ROTA
+                                </mat-panel-title>
+                              </mat-expansion-panel-header>
+                              
+                              <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                <div class="example-margin"> 
+                                  <!-- Crossed Yes -->
+                                  <mat-expansion-panel hideToggle>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Crossed Yes
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                      <div>
+                                        <section class="example-section">
+                                          <label class="example-margin">Size:</label>
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">1.25</mat-option>
+                                              <mat-option value="2">1.50</mat-option>
+                                              <mat-option value="2">1.75</mat-option>
+                                              <mat-option value="2">2.00</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+                                          
+
+                                          <label class="example-margin">Speed:</label>
+                                          <mat-form-field class="label-rightpadding2">
+                                            <mat-label>In KM</mat-label>
+                                            <input matInput name="Speed" formControlName="Speed" id="Speed">
+                                          </mat-form-field>
+
+                                          
+                                          <label class="example-margin">Time:</label>
+                                          <mat-form-field>
+                                            <mat-label>In Minutes</mat-label>
+                                            <input matInput name="Time" formControlName="Time" id="Time">
+                                          </mat-form-field>
+
+                                          <label class="example-margin">Runs:</label>
+                                          <mat-form-field>
+                                            <mat-label>Runs</mat-label>
+                                            <input matInput name="Runs" formControlName="Runs" id="Runs">
+                                          </mat-form-field>
+
+                                          <label class="example-margin">Successful:</label>
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">Yes</mat-option>
+                                              <mat-option value="2">No</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>                                         
+                                        </section>
+                                      </div>
+                                    </div>
+                                  </mat-expansion-panel>
+
+                                  <!-- Crossed No -->
+                                  <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Crossed No
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                      <div>
+                                        <section class="example-section">                   
+                                          <label class="example-margin">Micro Catheter:</label>                       
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">Finecross</mat-option>
+                                              <mat-option value="2">Crusader</mat-option>
+                                              <mat-option value="2">Caravel</mat-option>
+                                              <mat-option value="2">Others</mat-option>                                              
+                                            </mat-select>
+                                          </mat-form-field>
+                                          
+                                          <mat-form-field>
+                                            <mat-label>If Others, Please Specify</mat-label>
+                                            <input matInput name="Others" formControlName="Others" id="Others">
+                                          </mat-form-field>                                            
+                                        </section>
+                                      </div>
+                                    </div>
+                                  </mat-expansion-panel>
+
+                                </div>
+                              </div>
+                            </mat-expansion-panel>
+
+                            <!-- Orbital -->
+                            <mat-expansion-panel>
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  Orbital
+                                </mat-panel-title>
+                              </mat-expansion-panel-header>
+                              <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                <div class="example-margin"> 
+                                  <!-- Crossed Yes -->
+                                  <mat-expansion-panel hideToggle>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Crossed Yes
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                      <div>
+                                        <section class="example-section">
+                                          <label class="example-margin">Size:</label>
+                                          <mat-form-field class="label-rightpadding2">
+                                            <mat-label>Size</mat-label>
+                                            <input matInput name="Size" formControlName="Size" id="Size">
+                                          </mat-form-field>
+                                          
+                                          <label class="example-margin">Speed:</label>
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">80 K</mat-option>
+                                              <mat-option value="2">120 K</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+                                          
+                                          <label class="example-margin">Time:</label>
+                                          <mat-form-field>
+                                            <mat-label>In Minutes</mat-label>
+                                            <input matInput name="Time" formControlName="Time" id="Time">
+                                          </mat-form-field>
+
+                                          <label class="example-margin">Runs:</label>
+                                          <mat-form-field>
+                                            <mat-label>Runs</mat-label>
+                                            <input matInput name="Runs" formControlName="Runs" id="Runs">
+                                          </mat-form-field>
+
+                                          <label class="example-margin">Successful:</label>
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">Yes</mat-option>
+                                              <mat-option value="2">No</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>                                         
+                                        </section>
+                                      </div>
+                                    </div>
+                                  </mat-expansion-panel>
+
+                                  <!-- Crossed No -->
+                                  <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Crossed No
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                      <div>
+                                        <section class="example-section">                   
+                                          <label class="example-margin">Micro Catheter:</label>                       
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">Finecross</mat-option>
+                                              <mat-option value="2">Crusader</mat-option>
+                                              <mat-option value="2">Caravel</mat-option>
+                                              <mat-option value="2">Others</mat-option>                                              
+                                            </mat-select>
+                                          </mat-form-field>
+                                          
+                                          <mat-form-field>
+                                            <mat-label>If Others, Please Specify</mat-label>
+                                            <input matInput name="Others" formControlName="Others" id="Others">
+                                          </mat-form-field>                                            
+                                        </section>
+                                      </div>
+                                    </div>
+                                  </mat-expansion-panel>
+
+                                </div>
+                              </div>
+                            </mat-expansion-panel> 
+
+                            <!-- Laser (ELCA) -->
+                            <mat-expansion-panel>
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  Laser (ELCA)
+                                </mat-panel-title>
+                              </mat-expansion-panel-header>
+                              <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                <div class="example-margin"> 
+                                  <!-- Crossed Yes -->
+                                  <mat-expansion-panel hideToggle>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Crossed Yes
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                      <div>
+                                        <section class="example-section">
+                                          <label class="example-margin">Size:</label>
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">0.9</mat-option>
+                                              <mat-option value="2">1.4</mat-option>
+                                              <mat-option value="2">1.7</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+                                          
+
+                                          <label class="example-margin">Fluence:</label>
+                                          <mat-form-field class="label-rightpadding2">
+                                            <mat-label>Between 30-80 mJ / mm²</mat-label>
+                                            <input matInput name="Fluence" formControlName="Fluence" id="Fluence">
+                                          </mat-form-field>
+
+                                          
+                                          <label class="example-margin">Laser ON/OFF Time:</label>
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">10 / 5 sec</mat-option>
+                                              <mat-option value="2">5 / 10 sec</mat-option>
+                                            </mat-select>
+                                          </mat-form-field> 
+
+                                          <label class="example-margin">Medium:</label>
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">Saline</mat-option>
+                                              <mat-option value="2">Contrast</mat-option>
+                                            </mat-select>
+                                          </mat-form-field> 
+
+                                          <label class="example-margin">Successful:</label>
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">Yes</mat-option>
+                                              <mat-option value="2">No</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>                                         
+                                        </section>
+                                      </div>
+                                    </div>
+                                  </mat-expansion-panel>
+
+                                  <!-- Crossed No -->
+                                  <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Crossed No
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                      <div>
+                                        <section class="example-section">                   
+                                          <label class="example-margin">Micro Catheter:</label>                       
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">Finecross</mat-option>
+                                              <mat-option value="2">Crusader</mat-option>
+                                              <mat-option value="2">Caravel</mat-option>
+                                              <mat-option value="2">Others</mat-option>                                              
+                                            </mat-select>
+                                          </mat-form-field>
+                                          
+                                          <mat-form-field>
+                                            <mat-label>If Others, Please Specify</mat-label>
+                                            <input matInput name="Others" formControlName="Others" id="Others">
+                                          </mat-form-field>                                            
+                                        </section>
+                                      </div>
+                                    </div>
+                                  </mat-expansion-panel>
+
+                                </div>
+                              </div>
+                            </mat-expansion-panel> 
+
+                            <!-- Tornus -->
+                            <mat-expansion-panel>
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  Tornus
+                                </mat-panel-title>
+                              </mat-expansion-panel-header>
+                              <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                <div>
+                                  <section class="example-section">
+                                    <label class="example-margin">Size:</label>
+                                    <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                      <mat-label>-- Select --</mat-label>
+                                      <mat-select>
+                                        <mat-option value="0"></mat-option>
+                                        <mat-option value="1">2.1 F</mat-option>
+                                        <mat-option value="2">2.2 F</mat-option>
+                                        <mat-option value="2">2.3 F</mat-option>
+                                        <mat-option value="2">2.4 F</mat-option>
+                                        <mat-option value="2">2.5 F</mat-option>
+                                        <mat-option value="2">2.6 F</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+
+                                    <label class="example-margin">Successful:</label>
+                                    <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                      <mat-label>-- Select --</mat-label>
+                                      <mat-select>
+                                        <mat-option value="0"></mat-option>
+                                        <mat-option value="1">Yes</mat-option>
+                                        <mat-option value="2">No</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>                                         
+                                  </section>
+                                </div>
+                              </div>
+                            </mat-expansion-panel>
+                          </mat-accordion>
+                        </div>
+                      </div>
+
+
+                      <!-- Balloons -->
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutAlign="space-between">
+                        <span class="section-header">Balloons</span>
+                      </div>
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="2%" class="section-row">
+                        <div>
+                          <span class="presentation-section-label example-margin">Select Balloon:</span>
+                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                            <mat-label>Balloons</mat-label>
+                            <mat-select>
+                              <mat-option value="1">Semi-Compliant</mat-option>
+                              <mat-option value="2">Non-Compliant</mat-option>
+                              <mat-option value="2">Wolverine</mat-option>
+                              <mat-option value="2">OPN NC</mat-option>
+                              <mat-option value="2">Scoring</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div>
+                          <span class="presentation-section-label">Length:</span>
+                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                            <mat-label>Length</mat-label>
+                            <mat-select>
+                              <mat-option value="1">6</mat-option>
+                              <mat-option value="2">8</mat-option>
+                              <mat-option value="2">10</mat-option>
+                              <mat-option value="2">12</mat-option>
+                              <mat-option value="2">14</mat-option>
+                              <mat-option value="2">15</mat-option>
+                              <mat-option value="2">18</mat-option>
+                              <mat-option value="2">20</mat-option>
+                              <mat-option value="2">22</mat-option>
+                              <mat-option value="2">24</mat-option>
+                              <mat-option value="2">28</mat-option>
+                              <mat-option value="2">30</mat-option>
+                              <mat-option value="2">32</mat-option>
+                              <mat-option value="2">33</mat-option>
+                              <mat-option value="2">38</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div>
+                          <span class="presentation-section-label">Diameter:</span>
+                          <mat-form-field>
+                            <mat-label>In mm</mat-label>
+                            <input matInput name="Diameter" formControlName="Diameter" id="Diameter">
+                          </mat-form-field>
+                        </div>
+
+                        <div>
+                          <span class="presentation-section-label">Pressure:</span>
+                          <mat-form-field>
+                            <mat-label>In atm</mat-label>
+                            <input matInput name="Diameter" formControlName="Diameter" id="Diameter">
+                          </mat-form-field>
+                        </div>
+
+                        <div>
+                          <span class="presentation-section-label">Successful:</span>
+                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                            <mat-label>Successful</mat-label>
+                            <mat-select>
+                              <mat-option value="1"></mat-option>
+                              <mat-option value="2">Yes</mat-option>
+                              <mat-option value="2">No</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <!-- Thrombo-Aspiration Catheter -->
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
+                        <section class="example-section section-header">
+                          <mat-checkbox>Thrombo-Aspiration Catheter</mat-checkbox>
+                        </section>
+                      </div>
+
+                      <!-- Guide Extension -->
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
+                        <section class="example-section section-header">
+                          <mat-checkbox>Guide Extension</mat-checkbox>
+                        </section>
+                      </div>
+
+                      <!-- Procedure Events -->
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
+                        <span class="section-header">Procedure Events</span>
+                      </div>
+                      <div fxLayout="row" fxLayoutGap="3%" class="section-row">
+                        <div>
+                          <section class="example-section">
+                            <label class="example-margin">Complete: </label>
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                              <mat-label>-- Select --</mat-label>
+                              <mat-select>
+                                <mat-option value="1"></mat-option>
+                                <mat-option value="2">Yes</mat-option>
+                                <mat-option value="2">No</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <mat-checkbox class="example-margin">Chest Pain Persistant</mat-checkbox>
+                            <mat-checkbox class="example-margin">EKG Changes</mat-checkbox>
+                            <mat-checkbox class="example-margin">Tachycardia</mat-checkbox>
+                            <mat-checkbox class="example-margin">Slow Flow/No Flow</mat-checkbox>
+                            <mat-checkbox class="example-margin">Unforseen Dissection</mat-checkbox>
+                            <mat-checkbox class="example-margin">Inotropes</mat-checkbox>
+                            <mat-checkbox class="example-margin">Ventilation</mat-checkbox>
+                          </section>
+                        </div>
+                      </div>
+                      <div fxLayout="row" fxLayoutGap="3%" class="section-row">
+                        <div>
+                          <section class="example-section">
+                            <label class="example-margin">Perforation: </label>
+                            <mat-form-field>
+                              <mat-label>In Grade</mat-label>
+                              <input matInput name="Perforation" formControlName="Perforation" id="Perforation">
+                            </mat-form-field>
+                            <mat-checkbox class="example-margin">Branch Closure</mat-checkbox>
+                            <mat-checkbox class="example-margin">Pulmonary Edema</mat-checkbox>
+                            <mat-checkbox class="example-margin">CPR</mat-checkbox>
+                            <mat-checkbox class="example-margin">Pericardiocentesis</mat-checkbox>
+                            <mat-checkbox class="example-margin">Emergency Surgery</mat-checkbox>
+                            <mat-checkbox class="example-margin">Emergency Pacing</mat-checkbox>
+                          </section>
+                        </div>
+                      </div>
+
+                      <div fxLayout="row" fxLayoutGap="3%" class="section-row">                          
+                        <div>
+                          <section class="example-section">
+                            <label class="example-margin">Hypertension Sustained: </label>
+                            <mat-checkbox class="example-margin">Hypertension Sustained</mat-checkbox>
+                            <mat-checkbox class="example-margin">Inotropes</mat-checkbox>
+                            <mat-checkbox class="example-margin">MCS</mat-checkbox>
+                          </section>
+                        </div>
+                      </div>
+                      <div fxLayout="row" fxLayoutGap="3%" class="section-row">
+                        <div>
+                          <section class="example-section">
+                            <label class="example-margin">MICS: </label>
+                            <mat-checkbox class="example-margin">IABP</mat-checkbox>
+                            <mat-checkbox class="example-margin">Impella</mat-checkbox>
+                            <label class="example-margin">Others: </label>
+                            <mat-form-field class="mr-sm-12" fxFlex>
+                              <mat-label>If Others, Please Specify</mat-label>
+                              <input name="If Others, Please Specify" matInput>
+                              <mat-error>If Others, Please Specify</mat-error>
+                            </mat-form-field>
+                          </section>
+                        </div>                        
+                      </div>
+
+                      <div fxLayout="row" fxLayoutGap="3%" class="section-row">                          
+                        <div>
+                          <section class="example-section">
+                            <label class="example-margin">Bradycardia: </label>
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                              <mat-label>-- Select --</mat-label>
+                              <mat-select>
+                                <mat-option value="1"></mat-option>
+                                <mat-option value="2">Yes</mat-option>
+                                <mat-option value="2">No</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+
+                            <label class="example-margin">Emergency Pacing: </label>
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                              <mat-label>-- Select --</mat-label>
+                              <mat-select>
+                                <mat-option value="1"></mat-option>
+                                <mat-option value="2">Yes</mat-option>
+                                <mat-option value="2">No</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </section>
+                        </div>
+                      </div>
+
+                      <!-- Imaging -->
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
+                        <span class="section-header">Imaging</span>
+                      </div>
+                      <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                        <div>
+                          <mat-accordion>
+                            <mat-expansion-panel hideToggle>
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  Yes
+                                </mat-panel-title>
+                              </mat-expansion-panel-header>
+                              <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                <div>
+                                  <mat-checkbox class="example-margin">IVUS</mat-checkbox>
+                                  <mat-checkbox class="example-margin">OCT</mat-checkbox>
+                                  <mat-checkbox class="example-margin">Others</mat-checkbox>
+                                  <mat-form-field class="mr-sm-12" fxFlex>
+                                    <mat-label>If Others, Please Specify</mat-label>
+                                    <input name="If Others, Please Specify" matInput>
+                                    <mat-error>If Others, Please Specify</mat-error>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                <div class="example-margin"> 
+                                  <mat-expansion-panel hideToggle>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Side Branch - No (Non Bifurcation)
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                      <div>
+                                        <section class="example-section">
+                                          <label class="example-margin">Length:</label>
+                                          <mat-form-field class="label-rightpadding2">
+                                            <mat-label>Length</mat-label>
+                                            <input matInput name="Length" formControlName="Length" id="Length">
+                                          </mat-form-field>
+
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">Proximal</mat-option>
+                                              <mat-option value="2">Distal</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+                                          <label class="example-margin">RV A/d:</label>
+                                          <mat-form-field>
+                                            <mat-label>RV A/d</mat-label>
+                                            <input matInput name="RV A/d" formControlName="RV A/d" id="RV A/d">
+                                          </mat-form-field>
+
+                                          <label class="example-margin">LV A/d:</label>
+                                          <mat-form-field>
+                                            <mat-label>LV A/d</mat-label>
+                                            <input matInput name="LV A/d" formControlName="LV A/d" id="LV A/d">
+                                          </mat-form-field>
+                                          
+                                          <label class="example-margin">PB:</label>
+                                          <mat-form-field>
+                                            <mat-label>PB</mat-label>
+                                            <input matInput name="PB" formControlName="PB" id="PB">
+                                          </mat-form-field>                                            
+                                        </section>
+                                      </div>
+                                    </div>
+                                  </mat-expansion-panel>
+
+                                  <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Side Branch - Yes (Bifurcation)
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                      <div>
+                                        <section class="example-section">                                          
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">LZ MBp</mat-option>
+                                              <mat-option value="2">LZ MBd</mat-option>
+                                              <mat-option value="2">SBd</mat-option>                                              
+                                            </mat-select>
+                                          </mat-form-field>
+                                          <label class="example-margin">RV A/d:</label>
+                                          <mat-form-field>
+                                            <mat-label>RV A/d</mat-label>
+                                            <input matInput name="RV A/d" formControlName="RV A/d" id="RV A/d">
+                                          </mat-form-field>
+
+                                          <label class="example-margin">LV A/d:</label>
+                                          <mat-form-field>
+                                            <mat-label>LV A/d</mat-label>
+                                            <input matInput name="LV A/d" formControlName="LV A/d" id="LV A/d">
+                                          </mat-form-field>
+                                          
+                                          <label class="example-margin">PB:</label>
+                                          <mat-form-field>
+                                            <mat-label>PB</mat-label>
+                                            <input matInput name="PB" formControlName="PB" id="PB">
+                                          </mat-form-field>                                            
+                                        </section>
+                                      </div>
+                                    </div>
+                                  </mat-expansion-panel>
+
+                                  <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Stented Segment
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                      <div>
+                                        <section class="example-section">
+                                          <label class="example-margin">Patent:</label>
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">Yes</mat-option>
+                                              <mat-option value="2">No</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">Proximal Edge</mat-option>
+                                              <mat-option value="2">Distal Edge</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+
+                                          <label class="example-margin">RV A/d:</label>
+                                          <mat-form-field>
+                                            <mat-label>RV A/d</mat-label>
+                                            <input matInput name="RV A/d" formControlName="RV A/d" id="RV A/d">
+                                          </mat-form-field>
+
+                                          <label class="example-margin">LV A/d:</label>
+                                          <mat-form-field>
+                                            <mat-label>LV A/d</mat-label>
+                                            <input matInput name="LV A/d" formControlName="LV A/d" id="LV A/d">
+                                          </mat-form-field>
+                                          
+                                          <label class="example-margin">PB:</label>
+                                          <mat-form-field>
+                                            <mat-label>PB</mat-label>
+                                            <input matInput name="PB" formControlName="PB" id="PB">
+                                          </mat-form-field>                                            
+                                        </section>
+                                      </div>
+                                    </div>
+                                  </mat-expansion-panel>
+                                </div>
+                              </div>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel>
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  No
+                                </mat-panel-title>
+                              </mat-expansion-panel-header>
+                              <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                <mat-label>-- Select --</mat-label>
+                                <mat-select>
+                                  <mat-option value="0"></mat-option>
+                                  <mat-option value="1">60 MHz HD IVUS</mat-option>
+                                  <mat-option value="2">45 MHz Refinity</mat-option>
+                                  <mat-option value="2">40 MHz Opticross</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </mat-expansion-panel> 
+                          </mat-accordion>
+                        </div>
+                      </div>
+                      
+
+                      <!-- Stent -->
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
+                        <span class="section-header">Stent</span>
+                      </div>
+                      <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                        <div>
+                          <section class="example-section">
+                            <label class="example-margin">Stent:</label>
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                              <mat-label>Stent</mat-label>
+                              <mat-select>
+                                <mat-option value="0">-- Select --</mat-option>
+                                <mat-option value="1">Yes</mat-option>
+                                <mat-option value="2">No</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </section>
+                        </div>
+                        <div>
+                          <section class="example-section">
+                            <label class="example-margin">Stent Name:</label>
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                              <mat-label>Stent</mat-label>
+                              <mat-select>
+                                <mat-option value="0">-- Select --</mat-option>
+                                <mat-option value="1">Synergy</mat-option>
+                                <mat-option value="2">Xience Alpine</mat-option>
+                                <mat-option value="2">Xience Xpedition</mat-option>
+                                <mat-option value="2">Onyx</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            
+                            <label class="example-margin">Diameter:</label>
+                            <mat-form-field class="mr-sm-12" fxFlex>
+                              <mat-label>Minimum Diameter In mm</mat-label>
+                              <input name="Minimum Diameter" matInput>
+                              <mat-error>Minimum Diameter</mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="mr-sm-12" fxFlex>
+                              <mat-label>Maximum Diameter In mm</mat-label>
+                              <input name="Maximum Diameter" matInput>
+                              <mat-error>Maximum Diameter</mat-error>
+                            </mat-form-field>
+                          </section> 
+                        </div>
+                      </div>
+                      <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                        <div>
+                          <section class="example-section">
+                            <label class="example-margin">Total Stent Length:</label>
+                            <mat-form-field class="mr-sm-12" fxFlex>
+                              <mat-label>In mm</mat-label>
+                              <input name="Total Stent Length" matInput>
+                              <mat-error>Total Stent Length</mat-error>
+                            </mat-form-field>
+
+                            <label class="example-margin">Pressure:</label>
+                            <mat-form-field class="mr-sm-12" fxFlex>
+                              <mat-label>In atm</mat-label>
+                              <input name="Pressure" matInput>
+                              <mat-error>Pressure</mat-error>
+                            </mat-form-field>
+
+                            <button mat-raised-button>
+                              <mat-icon> add </mat-icon> &nbsp;Add
+                            </button>
+                          </section>
+                        </div>
+                      </div>
+
+                      <!-- Imaging -->
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
+                        <span class="section-header">Imaging</span>
+                      </div>
+                      <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                        <div>
+                          <mat-accordion>
+                            <mat-expansion-panel hideToggle>
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  Yes
+                                </mat-panel-title>
+                              </mat-expansion-panel-header>
+                              <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                <div>
+                                  <mat-checkbox class="example-margin">IVUS</mat-checkbox>
+                                  <mat-checkbox class="example-margin">OCT</mat-checkbox>
+                                  <mat-checkbox class="example-margin">Others</mat-checkbox>
+                                  <mat-form-field class="mr-sm-12" fxFlex>
+                                    <mat-label>If Others, Please Specify</mat-label>
+                                    <input name="If Others, Please Specify" matInput>
+                                    <mat-error>If Others, Please Specify</mat-error>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                <div class="example-margin"> 
+                                  <mat-expansion-panel hideToggle>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Side Branch - No (Non Bifurcation)
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                      <div>
+                                        <section class="example-section">
+                                          <label class="example-margin">Length:</label>
+                                          <mat-form-field class="label-rightpadding2">
+                                            <mat-label>Length</mat-label>
+                                            <input matInput name="Length" formControlName="Length" id="Length">
+                                          </mat-form-field>
+
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">Proximal</mat-option>
+                                              <mat-option value="2">Distal</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+                                          <label class="example-margin">RV A/d:</label>
+                                          <mat-form-field>
+                                            <mat-label>RV A/d</mat-label>
+                                            <input matInput name="RV A/d" formControlName="RV A/d" id="RV A/d">
+                                          </mat-form-field>
+
+                                          <label class="example-margin">LV A/d:</label>
+                                          <mat-form-field>
+                                            <mat-label>LV A/d</mat-label>
+                                            <input matInput name="LV A/d" formControlName="LV A/d" id="LV A/d">
+                                          </mat-form-field>
+                                          
+                                          <label class="example-margin">PB:</label>
+                                          <mat-form-field>
+                                            <mat-label>PB</mat-label>
+                                            <input matInput name="PB" formControlName="PB" id="PB">
+                                          </mat-form-field>                                            
+                                        </section>
+                                      </div>
+                                    </div>
+                                  </mat-expansion-panel>
+
+                                  <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Side Branch - Yes (Bifurcation)
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                      <div>
+                                        <section class="example-section">                                          
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">LZ MBp</mat-option>
+                                              <mat-option value="2">LZ MBd</mat-option>
+                                              <mat-option value="2">SBd</mat-option>                                              
+                                            </mat-select>
+                                          </mat-form-field>
+                                          <label class="example-margin">RV A/d:</label>
+                                          <mat-form-field>
+                                            <mat-label>RV A/d</mat-label>
+                                            <input matInput name="RV A/d" formControlName="RV A/d" id="RV A/d">
+                                          </mat-form-field>
+
+                                          <label class="example-margin">LV A/d:</label>
+                                          <mat-form-field>
+                                            <mat-label>LV A/d</mat-label>
+                                            <input matInput name="LV A/d" formControlName="LV A/d" id="LV A/d">
+                                          </mat-form-field>
+                                          
+                                          <label class="example-margin">PB:</label>
+                                          <mat-form-field>
+                                            <mat-label>PB</mat-label>
+                                            <input matInput name="PB" formControlName="PB" id="PB">
+                                          </mat-form-field>                                            
+                                        </section>
+                                      </div>
+                                    </div>
+                                  </mat-expansion-panel>
+
+                                  <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Stented Segment
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                                      <div>
+                                        <section class="example-section">
+                                          <label class="example-margin">Patent:</label>
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">Yes</mat-option>
+                                              <mat-option value="2">No</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select>
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="1">Proximal Edge</mat-option>
+                                              <mat-option value="2">Distal Edge</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+
+                                          <label class="example-margin">RV A/d:</label>
+                                          <mat-form-field>
+                                            <mat-label>RV A/d</mat-label>
+                                            <input matInput name="RV A/d" formControlName="RV A/d" id="RV A/d">
+                                          </mat-form-field>
+
+                                          <label class="example-margin">LV A/d:</label>
+                                          <mat-form-field>
+                                            <mat-label>LV A/d</mat-label>
+                                            <input matInput name="LV A/d" formControlName="LV A/d" id="LV A/d">
+                                          </mat-form-field>
+                                          
+                                          <label class="example-margin">PB:</label>
+                                          <mat-form-field>
+                                            <mat-label>PB</mat-label>
+                                            <input matInput name="PB" formControlName="PB" id="PB">
+                                          </mat-form-field>                                            
+                                        </section>
+                                      </div>
+                                    </div>
+                                  </mat-expansion-panel>
+                                </div>
+                              </div>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel>
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  No
+                                </mat-panel-title>
+                              </mat-expansion-panel-header>
+                              <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                <mat-label>-- Select --</mat-label>
+                                <mat-select>
+                                  <mat-option value="0"></mat-option>
+                                  <mat-option value="1">60 MHz HD IVUS</mat-option>
+                                  <mat-option value="2">45 MHz Refinity</mat-option>
+                                  <mat-option value="2">40 MHz Opticross</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </mat-expansion-panel> 
+                          </mat-accordion>
+                        </div>
+                      </div>
+                    </mat-tab>
 
                     <mat-tab label="Result">
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">

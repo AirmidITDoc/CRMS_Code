@@ -54,7 +54,6 @@ import { ResultComponent } from './Document/result/result.component';
 import { CardiacFactorComponent } from './Document/cardiac-factor/cardiac-factor.component';
 import { LesionPreprationComponent } from './Document/lesion-prepration/lesion-prepration.component';
 import { ProcedureHemodynamicsComponent } from './Document/procedure-hemodynamics/procedure-hemodynamics.component';
-import { AngioplastiComponent } from './Document/angioplasti/angioplasti.component';
 import { DempgraphicComponent } from './Document/dempgraphic/dempgraphic.component';
 import { PresentationComponent } from './Document/presentation/presentation.component';
 import { DocPresentationComponent } from './Document/doc-presentation/doc-presentation.component';
@@ -87,7 +86,6 @@ const routes: Routes = [
         CardiacFactorComponent,
         LesionPreprationComponent,
         ProcedureHemodynamicsComponent,
-        AngioplastiComponent,
         DempgraphicComponent,
         PresentationComponent,
         //   NewDocRegistrationComponent,
