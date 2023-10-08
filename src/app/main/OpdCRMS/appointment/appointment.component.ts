@@ -23,7 +23,6 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { DempgraphicComponent } from './Document/dempgraphic/dempgraphic.component';
 import { PresentationComponent } from './Document/presentation/presentation.component';
 import { ProcedureHemodynamicsComponent } from './Document/procedure-hemodynamics/procedure-hemodynamics.component';
-import { AngioplastiComponent } from './Document/angioplasti/angioplasti.component';
 import { CardiacFactorComponent } from './Document/cardiac-factor/cardiac-factor.component';
 import { LesionPreprationComponent } from './Document/lesion-prepration/lesion-prepration.component';
 import { NewDocRegistrationComponent } from './Document/new-doc-registration/new-doc-registration.component';

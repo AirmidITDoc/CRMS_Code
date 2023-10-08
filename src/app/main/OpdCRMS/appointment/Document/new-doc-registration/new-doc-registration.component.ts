@@ -10,7 +10,6 @@ import { fuseAnimations } from '@fuse/animations';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import Swal from 'sweetalert2';
 import { DocPresentationComponent } from '../doc-presentation/doc-presentation.component';
-import { AngioplastiComponent } from '../angioplasti/angioplasti.component';
 import { ResultComponent } from '../result/result.component';
 import { ProcedureHemodynamicsComponent } from '../procedure-hemodynamics/procedure-hemodynamics.component';
 import { DempgraphicComponent } from '../dempgraphic/dempgraphic.component';
