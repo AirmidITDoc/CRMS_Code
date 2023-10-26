@@ -74,7 +74,7 @@ const routes: Routes = [
         EditAppointmentComponent,
         BillDetailComponent,
         PaymentDetailComponent,
-         NewVistDateComponent,
+        NewVistDateComponent,
         InvoiceBillMappingComponent,
         UploadDocumentComponent,
         ViewFinancialSummarybudgetComponent,
