@@ -654,6 +654,7 @@ export class RegInsert {
   PatientName:any;
   Doctorname:any;
   EmailId:any;
+  PatientId: any;
   /**
    * Constructor
    *

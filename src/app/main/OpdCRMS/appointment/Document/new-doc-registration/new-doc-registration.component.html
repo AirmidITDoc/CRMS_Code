@@ -34,17 +34,19 @@
 
             <div fxlayout="row">
               <div style="width: 100%; overflow: hidden;">
-                <form [formGroup]="personalFormGroup">
-                  <div style="float: right;">
-                    <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
-                    </app-common-date>
+
+                <div style="float: right;">
+                  <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
+                  </app-common-date>
+                </div>
+
+                <div>
+                  <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
+                    <span class="section-header">Personal Information</span>
                   </div>
-                  <div>
-                    <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                      <span class="section-header">Personal Information</span>
-                    </div>
-                    <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="40px" class="section-row">
-                      <div class="divTable">
+                  <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="40px" class="section-row">
+                    <div class="divTable">
+                      <form [formGroup]="newSearchForm">
                         <div class="divRow">
                           <div class="divCell">
                             <span>Search Existing Patient:</span>
@@ -57,35 +59,27 @@
                                   [matAutocomplete]="auto" (input)="getSearchList()">
                                 <span matSuffix style="display: flex;">
                                   <mat-icon class="mat-icon-close"
-                                    (click)="personalFormGroup.get('RegID').setValue(''); isRegIdSelected = false;">close</mat-icon>
+                                    (click)="newSearchForm.get('RegID').setValue(''); isRegIdSelected = false;">close</mat-icon>
                                   <mat-icon class="mat-icon-close"
-                                    (click)="personalFormGroup.get('RegID').setValue(''); isRegIdSelected = false;">search</mat-icon>
+                                    (click)="newSearchForm.get('RegID').setValue(''); isRegIdSelected = false;">search</mat-icon>
                                 </span>
                                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText"
                                   (optionSelected)='getSelectedObj($event.option.value)'>
                                   <mat-option *ngFor="let option of filteredOptions" [value]="option">
-                                    {{option.FirstName}} {{option.MiddleName}} {{option.LastName}} |
-                                    {{option.RegNo}} |
-                                    {{option.MobileNo}}
+                                    {{option.FirstName}} {{option.MiddleName}} {{option.LastName}} | {{option.RegNo}}
                                   </mat-option>
                                 </mat-autocomplete>
-                                <mat-error *ngIf="personalFormGroup.get('RegID').hasError('required')">
+                                <mat-error *ngIf="newSearchForm.get('RegID').hasError('required')">
                                   Required field cannot be left blank
                                 </mat-error>
                               </mat-form-field>
                             </span>
                           </div>
-                          <div class="divCell">
+                          <div class="divCell" style="width: 200px;">
                             <span>Registration No: {{RegNo}}</span>
                           </div>
-                          <div class="divCell">
+                          <div class="divCell" style="width: 350px;">
                             <span>Patient Name: {{PatientName}}</span>
-                          </div>
-                          <div class="divCell">
-                            <span>Mobile No: {{Mobileno}}</span>
-                          </div>
-                          <div class="divCell">
-                            <span></span>
                           </div>
                           <div class="divCell">
                             <span>
@@ -94,23 +88,25 @@
                             </span>
                           </div>
                         </div>
-                      </div>
+                      </form>
+
                     </div>
                   </div>
-                  <mat-divider></mat-divider>
-                  <mat-tab-group fitInkBarToContent class="group-padding">
-                    <mat-tab label="Presentation">
-                      <!-- PA Pressure -->
+                </div>
+                <mat-divider></mat-divider>
+                <mat-tab-group fitInkBarToContent class="group-padding">
+                  <mat-tab label="Presentation">
+                    <!-- PA Pressure -->
+                    <form [formGroup]="newAddForm">
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="40px" class="section-row first-row-padding">
                         <div>
                           <span class="presentation-section-label">Symtoms:</span>
                           <mat-form-field class="section-dropdown">
                             <mat-label>-- Select Symtoms --</mat-label>
-                            <mat-select formControlName="DocId" name="DocId"
-                              (selectionChange)="onChangeDocList($event.value)">
+                            <mat-select name="Symtoms" formControlName="Symtoms" (selectionChange)="onChangeDocList($event.value)">
                               <mat-option></mat-option>
-                              <mat-option *ngFor="let m of Doctype" [value]="m">
-                                {{m.name}}
+                              <mat-option *ngFor="let m of vSymtomType" [value]="m">
+                                {{m.DropDownValue}}
                               </mat-option>
                             </mat-select>
                           </mat-form-field>
@@ -118,86 +114,96 @@
                       </div>
 
                       <mat-divider></mat-divider>
+
                       <div>
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
                           <span class="section-header">2D Echo</span>
+
                         </div>
 
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="10%" fxLayoutAlign="flext-start"
-                          class="section-row">
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="flext-start" class="section-row">
                           <div>
                             <span class="presentation-section-label">LVEF:</span>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex="70%">
                               <mat-label>-- Select LVEF --</mat-label>
-                              <mat-select formControlName="LVEF">
+                              <mat-select formControlName="LVEF" required>
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="35">
-                                  35 </mat-option>
-                                <mat-option value="35-50">35 - 50</mat-option>
-                                <mat-option value="50">>50</mat-option>
+                                  catt </mat-option>
+                                <mat-option value="35-50">Lie</mat-option>
+                                <mat-option value="50">g</mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="newAddForm.get('LVEF').invalid && newAddForm.get('LVEF').touched">
+                                LVEF is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
                             <span class="presentation-section-label">Global GLS:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                            <mat-form-field class="mr-sm-12" fxFlex="60%">
                               <mat-label>Global GLS</mat-label>
-                              <input name="Global GLS" matInput formControlName="GLS">
-                              <mat-error>Global GLS</mat-error>
+                              <input name="Global GLS" matInput formControlName="GLS" required>
+                              <mat-error class="error"
+                                *ngIf="newAddForm.get('GLS').invalid && newAddForm.get('GLS').touched">
+                                GLS is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
                             <span class="presentation-section-label">RWMA:</span>
-                            <!--    <mat-form-field class="mr-sm-12" fxFlex>
-                              <mat-label>RWMA</mat-label>
-                              <mat-select class="SelectExtraWidth" formControlName="RWMA">
-                                <mat-option value="0"></mat-option>
-                                <mat-option value="1">Anterior</mat-option>
-                                <mat-option value="2">Posterior</mat-option>
-                                <mat-option value="3">Lateral</mat-option>
-                                <mat-option value="3">Inferior</mat-option>
-                                <mat-option value="3">Apical</mat-option>
-                              </mat-select>
-                            </mat-form-field> -->
-
-
-                            <mat-form-field class="section-dropdown" style="width: 300px;margin-left: 50px;">
+                            <mat-form-field class="section-dropdown" style="width: 240px;margin-left:10px;">
                               <mat-label>-- RWMA--</mat-label>
                               <mat-select formControlName="RWMA" name="RWMA">
                                 <mat-option></mat-option>
-                                <mat-option *ngFor="let m of RWMAList" [value]="m">
-                                  {{m.name}}
+                                <mat-option *ngFor="let m of vRWMAList" [value]="m">
+                                  {{m.DropDownValue}}
                                 </mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="newAddForm.get('RWMA').invalid && newAddForm.get('RWMA').touched">
+                                RWMA is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
-                        </div>
-
-                        <!-- PA Pressure -->
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="10%" fxLayoutAlign="flext-start"
-                          class="section-row">
                           <div>
                             <span class="presentation-section-label">PA Pressure:</span>
-                            <!--   <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
-                              <mat-label>PA Pressure</mat-label>
-                              <mat-select formControlName="PApressure">
-                                <mat-option value="0"></mat-option>
-                                <mat-option value="1">Raised</mat-option>
-                                <mat-option value="2">Normal</mat-option>
-                              </mat-select>
-                            </mat-form-field> -->
-
-                            <mat-form-field class="section-dropdown" style="width: 300px;margin-left: 50px;">
+                            <mat-form-field class="section-dropdown" style="width: 240px;margin-left: 10px;">
                               <mat-label>-- PA Pressure--</mat-label>
-                              <mat-select formControlName="PApressure" name="PApressure">
+                              <mat-select formControlName="PApressure" name="PApressure" required>
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of PApressureList" [value]="m">
                                   {{m.name}}
                                 </mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="newAddForm.get('PApressure').invalid && newAddForm.get('PApressure').touched">
+                                PApressure is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                         </div>
+
+                        <!-- PA Pressure -->
+                        <!-- <div fxFlexFill fxLayout="row" fxLayoutGap="10%" fxLayoutAlign="flext-start"
+                            class="section-row">
+                            <div>
+                              <span class="presentation-section-label">PA Pressure:</span>
+                              <mat-form-field class="section-dropdown" style="width: 300px;margin-left: 50px;">
+                                <mat-label>-- PA Pressure--</mat-label>
+                                <mat-select formControlName="PApressure" name="PApressure" required>
+                                  <mat-option></mat-option>
+                                  <mat-option *ngFor="let m of PApressureList" [value]="m">
+                                    {{m.name}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error class="error"
+                                  *ngIf="newAddForm.get('PApressure').invalid && newAddForm.get('PApressure').touched">
+                                  PApressure is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                          </div> -->
 
                         <!-- Valve -->
                         <div fxFlexFill fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="flext-start" class="section-row">
@@ -214,58 +220,73 @@
 
                             <mat-form-field class="section-dropdown" fxFlex>
                               <mat-label>-- Select Valve--</mat-label>
-                              <mat-select formControlName="Valve" name="Valve">
+                              <mat-select formControlName="Valve" name="Valve" required>
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of ValveList" [value]="m">
                                   {{m.name}}
                                 </mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="newAddForm.get('Valve').invalid && newAddForm.get('Valve').touched">
+                                Valve is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
-                            <span class="presentation-section-label">Valve:</span>
+                            <span class="presentation-section-label">Stenotic:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Stenotic</mat-label>
-                              <input name="Stenotic" matInput formControlName="Valve">
-                              <mat-error>Stenotic</mat-error>
+                              <input name="Stenotic" matInput formControlName="Stenotic" required>
+                              <mat-error class="error"
+                                *ngIf="newAddForm.get('Stenotic').invalid && newAddForm.get('Stenotic').touched">
+                                Stenotic is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
                             <span class="presentation-section-label">Regurgitation:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Regurgitation</mat-label>
-                              <input name="Regurgitation" matInput formControlName="Regurgitation">
-                              <mat-error>Regurgitation</mat-error>
+                              <input name="Regurgitation" matInput formControlName="Regurgitation" required>
+                              <mat-error class="error"
+                                *ngIf="newAddForm.get('Regurgitation').invalid && newAddForm.get('Regurgitation').touched">
+                                Regurgitation is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
                             <span class="presentation-section-label">MR / AR:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>MR/AR</mat-label>
-                              <input name="MR / AR" matInput formControlName="MSAR">
-                              <!-- <mat-error>MR / AR</mat-error> -->
+                              <input name="MR / AR" matInput formControlName="MSAR" required>
+                              <mat-error class="error"
+                                *ngIf="newAddForm.get('MSAR').invalid && newAddForm.get('MSAR').touched">
+                                MSAR is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
                             <span class="presentation-section-label">MS/ AS:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>MS/AS</mat-label>
-                              <input name="MS / AS" matInput formControlName="MSAS">
-                              <!-- <mat-error>MS / AS</mat-error> -->
+                              <input name="MS / AS" matInput formControlName="MSAS" required>
+                              <mat-error class="error"
+                                *ngIf="newAddForm.get('MSAS').invalid && newAddForm.get('MSAS').touched">
+                                MSAS is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
-                          <div matTooltip="Select All to enable this button!!"
-                            [matTooltipDisabled]="!personalFormGroup.invalid" [matTooltipPosition]="'above'">
-                            <button mat-raised-button fxLayoutAlign="center center" (click)="onAddData()"
-                              style="background-color: blue; color: white; width: 70px;margin-left:5px; ">
-                              <mat-icon> add </mat-icon> &nbsp;Add
+                          <div matTooltip="Select All to enable this button!!" [matTooltipPosition]="'above'">
+                            <button mat-raised-button fxLayoutAlign="center center" style="background-color: blue; color: white; 
+                                  width: 70px;margin-left:5px;" (click)="onAddData()" [disabled]="newAddForm.invalid">
+                              <mat-icon>add</mat-icon>&nbsp;Add
                             </button>
-                            <!-- [disabled]="personalFormGroup.invalid" -->
                           </div>
                         </div>
 
+
                         <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
-                          style="height: 150px !important; overflow: auto;margin-top: 5px;">
+                          style="height: 150px !important; overflow: auto;margin-top: 5px; width: 100%;">
 
                           <ng-container matColumnDef="LVEF">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
@@ -352,14 +373,14 @@
                           <ng-container matColumnDef="action" stickyEnd>
                             <mat-header-cell *matHeaderCellDef style="color: white;"> Action
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let row">
-                              <!-- <button mat-icon-button (click)="onEdit(row)">
-                                    <mat-icon title="Edit Menu">launch</mat-icon>
-                                </button> -->
-                              <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
-                                <mat-icon>delete_outline</mat-icon>
-                              </button>
-                              <!-- <button mat-icon-button (click)="onDeactive(row.RegId)" color="warn"><mat-icon>delete_outline</mat-icon></button>       -->
+                            <mat-cell *matCellDef="let contact">
+                              <ng-container class="actions">
+
+                                <span class="material-icons" style="cursor: pointer;color: #5b5858;"
+                                  (click)="deleteTableRow($event ,contact)">
+                                  delete
+                                </span>
+                              </ng-container>
                             </mat-cell>
                           </ng-container>
 
@@ -372,7 +393,7 @@
                           <ng-container matColumnDef="noData">
                             <mat-footer-cell *matFooterCellDef colspan="6">
                               <!-- <mat-spinner  class="spinner" [diameter]="35"
-                    [color]="blue"></mat-spinner> -->
+                              [color]="blue"></mat-spinner> -->
                               <span>No Data Found</span>
                             </mat-footer-cell>
                           </ng-container>
@@ -390,58 +411,104 @@
                         </mat-table>
 
                       </div>
-                      <br>
-                      <mat-divider></mat-divider>
+                    </form>
 
+                    <br>
+
+                    <mat-divider></mat-divider>
+                    <form [formGroup]="newSaveForm">
                       <div>
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
                           <span class="section-header">Past History</span>
                         </div>
                         <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
                           <div class="past-hist-section-label">
-                            <span class="past-hist-pad3">Past Cardiac Procedure:</span>&nbsp;&nbsp;&nbsp;
+                            <!-- <span class="past-hist-pad3">Past Cardiac Procedure:</span>&nbsp;&nbsp;&nbsp; -->
                             <span class="past-hist-pad3">Angioplasty:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Angioplasty</mat-label>
-                              <input name="Angioplasty" matInput>
-                              <mat-error>Angioplasty</mat-error>
+                              <input name="Angioplasty" formControlName="Angioplasty" matInput required>
+                              <mat-error class="error"
+                                *ngIf="newSaveForm.get('Angioplasty').invalid && newSaveForm.get('Angioplasty').touched">
+                                Angioplasty is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
+
                           <div class="past-hist-section-label">
                             <span class="past-hist-pad3">CABG:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>CABG</mat-label>
-                              <input name="CABG" matInput>
-                              <mat-error>CABG</mat-error>
+                              <input name="CABG" formControlName="CABG" matInput required>
+                              <mat-error class="error"
+                                *ngIf="newSaveForm.get('CABG').invalid && newSaveForm.get('CABG').touched">
+                                CABG is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
+
                           <div class="past-hist-section-label">
-                            <span class="past-hist-pad3">Vascular Procedure</span>
+                            <span class="past-hist-pad3">Vascular Procedure:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Vascular Procedure</mat-label>
-                              <input name="Vascular Procedure" matInput>
-                              <mat-error>Vascular Procedure</mat-error>
+                              <input name="VascularProcedure" formControlName="VascularProcedure" matInput required>
+                              <mat-error class="error"
+                                *ngIf="newSaveForm.get('VascularProcedure').invalid && newSaveForm.get('VascularProcedure').touched">
+                                Vascular Procedure is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                         </div>
 
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="10%" fxLayoutAlign="flext-start"
-                          class="section-row">
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
+                          <div>
+                            <span class="past-hist-pad3">Past Cardiac Procedure:</span>
+                            <mat-form-field class="mr-sm-12" fxFlex>
+                              <mat-label>Past Cardiac Procedure</mat-label>
+                              <input name="PastCardiacProcedure" formControlName="PastCardiacProcedure" matInput
+                                required>
+                              <mat-error class="error"
+                                *ngIf="newSaveForm.get('PastCardiacProcedure').invalid && newSaveForm.get('PastCardiacProcedure').touched">
+                                Past Cardiac Procedure is required
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+
                           <div>
                             <span class="past-hist-pad3">Past Non-Cardiac Procedure:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Past Non-Cardiac Procedure</mat-label>
-                              <input name="Past Non-Cardiac Procedure" matInput>
-                              <mat-error>Past Non-Cardiac Procedure</mat-error>
+                              <input name="PastNonCardiacProcedure" formControlName="PastNonCardiacProcedure" matInput
+                                required>
+                              <mat-error class="error"
+                                *ngIf="newSaveForm.get('PastNonCardiacProcedure').invalid && newSaveForm.get('PastNonCardiacProcedure').touched">
+                                Past Non-Cardiac Procedure is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                         </div>
                       </div>
                       <br><br>
 
-                    </mat-tab>
+                      <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;"
+                        matTooltip="Select All to enable this button!!">
+                        <div style="margin-top: 20px;">
+                          <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()"
+                            [disabled]="newSaveForm.invalid">Save</button>
+                          <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
+                        </div>
+                      </div>
+                    </form>
 
-                    <mat-tab label="Cardiac Risk Factor">
+                  </mat-tab>
+
+
+
+                  <!-- Second Tab Start -->
+
+
+                  <mat-tab label="Cardiac Risk Factor">
+                    <form [formGroup]="CardiacRiskFormGroup">
                       <div>
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
                           <span class="section-header">Hypertension</span>
@@ -452,17 +519,21 @@
                             <span class="presentation-section-label">On Medication:</span>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>-- Select OnMedication --</mat-label>
-                              <mat-select>
+                              <mat-select formControlName="OnMedication" name="OnMedication" required>
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="35">Yes</mat-option>
                                 <mat-option value="35-50">No</mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('OnMedication').invalid && CardiacRiskFormGroup.get('OnMedication').touched">
+                                On Medication is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>(If Yes) Specify Drug Details</mat-label>
-                              <input name="(If Yes) Specify Drug Details" matInput>
+                              <input name="DrugDetails" formControlName="DrugDetails" matInput>
                               <mat-error>(If Yes) Specify Drug Details</mat-error>
                             </mat-form-field>
                           </div>
@@ -478,11 +549,15 @@
                             <span class="presentation-section-label">CKD:</span>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>-- Select CKD --</mat-label>
-                              <mat-select>
+                              <mat-select formControlName="CKD" name="CKD" required>
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="35">Yes</mat-option>
                                 <mat-option value="35-50">No</mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('CKD').invalid && CardiacRiskFormGroup.get('CKD').touched">
+                                CKD is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
 
@@ -490,11 +565,15 @@
                             <span class="presentation-section-label">Dialysis Dependent:</span>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>-- Select Dialysis Dependent --</mat-label>
-                              <mat-select>
+                              <mat-select formControlName="DialysisDependent" name="DialysisDependent" required>
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="35">Yes</mat-option>
                                 <mat-option value="35-50">No</mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('DialysisDependent').invalid && CardiacRiskFormGroup.get('DialysisDependent').touched">
+                                Dialysis Dependent is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
 
@@ -502,11 +581,15 @@
                             <span class="presentation-section-label">Smoking:</span>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>-- Select Smoking --</mat-label>
-                              <mat-select>
+                              <mat-select formControlName="Smoking" name="Smoking" required>
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="35">Yes</mat-option>
                                 <mat-option value="35-50">No</mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('Smoking').invalid && CardiacRiskFormGroup.get('Smoking').touched">
+                                Smoking is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
 
@@ -514,11 +597,15 @@
                             <span class="presentation-section-label">Tobaco Chewing:</span>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>-- Select Tobaco Chewing --</mat-label>
-                              <mat-select>
+                              <mat-select formControlName="TobacoChewing" name="TobacoChewing" required>
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="35">Yes</mat-option>
                                 <mat-option value="35-50">No</mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('TobacoChewing').invalid && CardiacRiskFormGroup.get('TobacoChewing').touched">
+                                Tobaco Chewing is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                         </div>
@@ -535,11 +622,15 @@
                             <span class="presentation-section-label">Insuline:</span>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>-- Select Insuline --</mat-label>
-                              <mat-select>
+                              <mat-select formControlName="Insuline" name="Insuline" required>
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="35">Yes</mat-option>
                                 <mat-option value="35-50">No</mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('Insuline').invalid && CardiacRiskFormGroup.get('Insuline').touched">
+                                Insuline is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
 
@@ -547,11 +638,15 @@
                             <span class="presentation-section-label">Oral:</span>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>-- Select Oral --</mat-label>
-                              <mat-select>
+                              <mat-select formControlName="Oral" name="Oral" required>
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="35">Yes</mat-option>
                                 <mat-option value="35-50">No</mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('Oral').invalid && CardiacRiskFormGroup.get('Oral').touched">
+                                Oral is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                         </div>
@@ -567,8 +662,11 @@
                             <span class="presentation-section-label">LDL:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>LDL</mat-label>
-                              <input name="LDL" matInput>
-                              <mat-error>LDL</mat-error>
+                              <input formControlName="LDL" name="LDL" matInput required>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('LDL').invalid && CardiacRiskFormGroup.get('LDL').touched">
+                                LDL is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
 
@@ -576,8 +674,11 @@
                             <span class="presentation-section-label">Tri Glyceride:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Tri Glyceride</mat-label>
-                              <input name="Tri Glyceride" matInput>
-                              <mat-error>Tri Glyceride</mat-error>
+                              <input formControlName="TriGlyceride" name="TriGlyceride" matInput required>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('TriGlyceride').invalid && CardiacRiskFormGroup.get('TriGlyceride').touched">
+                                Tri Glyceride is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                         </div>
@@ -593,19 +694,22 @@
                             <span class="presentation-section-label">Inflammatory Diseases:</span>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>-- Select Inflammatory Diseases --</mat-label>
-                              <mat-select>
-                                <mat-option value="0"></mat-option>
-                                <mat-option value="35">Rheumatoid Arthritis</mat-option>
-                                <mat-option value="35-50">SLE</mat-option>
-                                <mat-option value="35-50">Psoriasis</mat-option>
-                                <mat-option value="35-50">Other</mat-option>
+                              <mat-select formControlName="InflammatoryDiseases" name="InflammatoryDiseases">
+                                <mat-option></mat-option>
+                                <mat-option *ngFor="let m of vInflammatoryDiseasesList" [value]="m">
+                                  {{m.DropDownValue}}
+                                </mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('InflammatoryDiseases').invalid && CardiacRiskFormGroup.get('TriGlInflammatoryDiseasesyceride').touched">
+                                Inflammatory Diseases is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>(If Others) Please Specify</mat-label>
-                              <input name="(If Others) Please Specify" matInput>
+                              <input name="inflDiseasesOthers" formControlName="inflDiseasesOthers" matInput>
                               <mat-error>(If Others) Please Specify</mat-error>
                             </mat-form-field>
                           </div>
@@ -623,24 +727,33 @@
                             <span class="presentation-section-label">Hba1c:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Hba1c</mat-label>
-                              <input name="Hba1c" matInput>
-                              <mat-error>Hba1c</mat-error>
+                              <input formControlName="Hba1c" name="Hba1c" matInput required>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('Hba1c').invalid && CardiacRiskFormGroup.get('Hba1c').touched">
+                                Hba1c is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
                             <span class="presentation-section-label">Creatinine:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Creatinine</mat-label>
-                              <input name="Creatinine" matInput>
-                              <mat-error>Creatinine</mat-error>
+                              <input formControlName="Creatinine" name="Creatinine" matInput required>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('Creatinine').invalid && CardiacRiskFormGroup.get('Creatinine').touched">
+                                Creatinine is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
                             <span class="presentation-section-label">Hb:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Hb</mat-label>
-                              <input name="Hb" matInput>
-                              <mat-error>Hb</mat-error>
+                              <input formControlName="Hb" name="Hb" matInput required>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('Hb').invalid && CardiacRiskFormGroup.get('Hb').touched">
+                                Hb is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
 
@@ -648,8 +761,11 @@
                             <span class="presentation-section-label">eGFR:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>eGFR</mat-label>
-                              <input name="eGFR" matInput>
-                              <mat-error>eGFR</mat-error>
+                              <input formControlName="eGFR" name="eGFR" matInput required>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('eGFR').invalid && CardiacRiskFormGroup.get('eGFR').touched">
+                                eGFR is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                         </div>
@@ -659,33 +775,45 @@
                             <span class="presentation-section-label">Iron Deficency:</span>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>-- Select Iron Deficency --</mat-label>
-                              <mat-select>
+                              <mat-select formControlName="IronDeficency" name="IronDeficency" required>
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="35">Yes</mat-option>
                                 <mat-option value="35-50">No</mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('IronDeficency').invalid && CardiacRiskFormGroup.get('IronDeficency').touched">
+                                Iron Deficency is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
                             <span class="presentation-section-label">Vit B12 Dificency:</span>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>-- Select Vit B12 Dificency --</mat-label>
-                              <mat-select>
+                              <mat-select formControlName="VitB12Dificency" name="VitB12Dificency" required>
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="35">Yes</mat-option>
                                 <mat-option value="35-50">No</mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('VitB12Dificency').invalid && CardiacRiskFormGroup.get('VitB12Dificency').touched">
+                                Vit B12 Deficency is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
                             <span class="presentation-section-label">cRP:</span>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>-- Select Vit cRP --</mat-label>
-                              <mat-select>
+                              <mat-select formControlName="cRP" name="cRP" required>
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="35">Raised</mat-option>
                                 <mat-option value="35-50">No</mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('cRP').invalid && CardiacRiskFormGroup.get('cRP').touched">
+                                cRP is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
 
@@ -693,15 +821,34 @@
                             <span class="presentation-section-label">CKMB:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>CKMB</mat-label>
-                              <input name="CKMB" matInput>
-                              <mat-error>CKMB</mat-error>
+                              <input formControlName="CKMB" name="CKMB" matInput required>
+                              <mat-error class="error"
+                                *ngIf="CardiacRiskFormGroup.get('CKMB').invalid && CardiacRiskFormGroup.get('CKMB').touched">
+                                CKMB is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                         </div>
                       </div>
-                    </mat-tab>
 
-                    <mat-tab label="Procedure">
+                      <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;"
+                        matTooltip="Select All to enable this button!!">
+                        <div style="margin-top: 20px;">
+                          <button class="next-btn" color="accent" style="border-radius: 16px;"
+                            (click)="onSubmitCardiac()" [disabled]="CardiacRiskFormGroup.invalid">Save</button>
+                          <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
+                        </div>
+                      </div>
+                    </form>
+                  </mat-tab>
+
+
+
+                  <!-- Third Tab Start -->
+
+
+                  <mat-tab label="Procedure">
+                    <form [formGroup]="ProcedureForm">
                       <div>
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
                           <span class="section-header">Aortogram</span>
@@ -712,7 +859,11 @@
                             <mat-form-field>
                               <mat-label>Systolic </mat-label>
                               <input name="Systolic" formControlName="Systolic" placeholder="Systolic Number (In mm Hg)"
-                                matInput>
+                                matInput required>
+                              <mat-error class="error"
+                                *ngIf="ProcedureForm.get('Systolic').invalid && ProcedureForm.get('Systolic').touched">
+                                Systolic is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
@@ -721,13 +872,22 @@
                               <mat-label>Diastolic</mat-label>
                               <input name="Diastolic" formControlName="Diastolic"
                                 placeholder="Diastolic Number (In mm Hg)" matInput>
+                              <mat-error class="error"
+                                *ngIf="ProcedureForm.get('Diastolic').invalid && ProcedureForm.get('Diastolic').touched">
+                                Diastolic is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
                             <span class="section-label">MAP:</span>
                             <mat-form-field>
                               <mat-label>MAP</mat-label>
-                              <input name="MAP" formControlName="MAP" placeholder="MAP Number (In mm Hg)" matInput>
+                              <input name="MAP" formControlName="MAP" placeholder="MAP Number (In mm Hg)" matInput
+                                required>
+                              <mat-error class="error"
+                                *ngIf="ProcedureForm.get('MAP').invalid && ProcedureForm.get('MAP').touched">
+                                MAP is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                         </div>
@@ -741,7 +901,11 @@
                             <span class="section-label">LVEDP:</span>
                             <mat-form-field>
                               <mat-label>LVEDP</mat-label>
-                              <input name="LVEDP" formControlName="LVEDP" placeholder="LVEDP" matInput>
+                              <input name="LVEDP" formControlName="LVEDP" placeholder="LVEDP" matInput required>
+                              <mat-error class="error"
+                                *ngIf="ProcedureForm.get('LVEDP').invalid && ProcedureForm.get('LVEDP').touched">
+                                LVEDP is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                         </div>
@@ -755,7 +919,11 @@
                             <mat-form-field>
                               <mat-label>Systolic</mat-label>
                               <input name="PSystolic" formControlName="PSystolic"
-                                placeholder="PSystolic Number (In mm Hg)" matInput>
+                                placeholder="PSystolic Number (In mm Hg)" matInput required>
+                              <mat-error class="error"
+                                *ngIf="ProcedureForm.get('PSystolic').invalid && ProcedureForm.get('PSystolic').touched">
+                                PSystolic is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
@@ -763,21 +931,35 @@
                             <mat-form-field>
                               <mat-label>Diastolic</mat-label>
                               <input name="PDiastolic" formControlName="PDiastolic"
-                                placeholder="PDiastolic Number (In mm Hg)" matInput>
+                                placeholder="PDiastolic Number (In mm Hg)" matInput required>
+                              <mat-error class="error"
+                                *ngIf="ProcedureForm.get('PDiastolic').invalid && ProcedureForm.get('PDiastolic').touched">
+                                PDiastolic is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
                             <span class="section-label">MAP Pressure:</span>
                             <mat-form-field>
                               <mat-label>MAP Pressure</mat-label>
-                              <input name="PMap" formControlName="PMap" placeholder="PMap Number (In mm Hg)" matInput>
+                              <input name="PMap" formControlName="PMap" placeholder="PMap Number (In mm Hg)" matInput
+                                required>
+                              <mat-error class="error"
+                                *ngIf="ProcedureForm.get('PMap').invalid && ProcedureForm.get('PMap').touched">
+                                PMap is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
                             <span class="section-label">PCWP:</span>
                             <mat-form-field>
                               <mat-label>PCWP</mat-label>
-                              <input name="PCWP" formControlName="PCWP" placeholder="PCWP Number (In mm Hg)" matInput>
+                              <input name="PCWP" formControlName="PCWP" placeholder="PCWP Number (In mm Hg)" matInput
+                                required>
+                              <mat-error class="error"
+                                *ngIf="ProcedureForm.get('PCWP').invalid && ProcedureForm.get('PCWP').touched">
+                                PCWP is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                         </div>
@@ -798,13 +980,17 @@
                           </mat-form-field> -->
 
                           <mat-form-field class="section-dropdown" style="width: 500px;">
-                            <mat-label>-- Select  Lesion Type --</mat-label>
-                            <mat-select formControlName="LesionType" name="LesionType">
+                            <mat-label>-- Select Lesion Type --</mat-label>
+                            <mat-select formControlName="LesionType" name="LesionType" required>
                               <mat-option></mat-option>
-                              <mat-option *ngFor="let m of LesionTypeList" [value]="m">
-                                {{m.name}}
+                              <mat-option *ngFor="let m of vLesionTypeList" [value]="m">
+                                {{m.DropDownValue}}
                               </mat-option>
                             </mat-select>
+                            <mat-error class="error"
+                              *ngIf="ProcedureForm.get('LesionType').invalid && ProcedureForm.get('LesionType').touched">
+                              LesionType is required
+                            </mat-error>
                           </mat-form-field>
                         </div>
 
@@ -812,28 +998,39 @@
                           <span class="section-header">Lesion Description</span>
                         </div>
                         <!-- <form> -->
-                          <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start"
-                            class="section-row">
-                            <div>
-                              <mat-form-field>
-                                <mat-label>Location</mat-label>
-                                <input matInput name="Location" formControlName="Location" id="Location">
-                              </mat-form-field>
-                            </div>
-                            <div>
-                              <mat-form-field>
-                                <mat-label>Syntax Score</mat-label>
-                                <input matInput name="Syntax Score" formControlName="SyntaxScore" id="SyntaxScore">
-                              </mat-form-field>
-                            </div>
-                            <div>
-                              <mat-form-field>
-                                <mat-label>Index Lesion</mat-label>
-                                <input matInput name="Index Lesion" formControlName="IndexLesion" id="IndexLesion">
-                              </mat-form-field>
-                            </div>
-                            <div>
-                              <!-- <mat-form-field>
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
+                          <div>
+                            <mat-form-field>
+                              <mat-label>Location</mat-label>
+                              <input matInput name="Location" formControlName="Location" required>
+                              <mat-error class="error"
+                                *ngIf="ProcedureForm.get('Location').invalid && ProcedureForm.get('Location').touched">
+                                Location is required
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                          <div>
+                            <mat-form-field>
+                              <mat-label>Syntax Score</mat-label>
+                              <input matInput name="Syntax Score" formControlName="SyntaxScore" required>
+                              <mat-error class="error"
+                                *ngIf="ProcedureForm.get('SyntaxScore').invalid && ProcedureForm.get('SyntaxScore').touched">
+                                SyntaxScore is required
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                          <div>
+                            <mat-form-field>
+                              <mat-label>Index Lesion</mat-label>
+                              <input matInput name="Index Lesion" formControlName="IndexLesion" required>
+                              <mat-error class="error"
+                                *ngIf="ProcedureForm.get('IndexLesion').invalid && ProcedureForm.get('IndexLesion').touched">
+                                IndexLesion is required
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                          <div>
+                            <!-- <mat-form-field>
                                 <mat-label>Severity</mat-label>
                                 <mat-select class="section-dropdown">
                                   <mat-option value="">-- Select Severity--</mat-option>
@@ -846,24 +1043,28 @@
                               </mat-form-field> -->
 
 
-                              <mat-form-field class="section-dropdown" style="width: 500px;">
-                                <mat-label>-- Select Severity--</mat-label>
-                                <mat-select formControlName="Severity" name="Severity">
-                                  <mat-option></mat-option>
-                                  <mat-option *ngFor="let m of SeverityList" [value]="m">
-                                    {{m.name}}
-                                  </mat-option>
-                                </mat-select>
-                              </mat-form-field>
-                            </div>
+                            <mat-form-field class="section-dropdown" style="width: 500px;">
+                              <mat-label>-- Select Severity--</mat-label>
+                              <mat-select formControlName="Severity" name="Severity" required>
+                                <mat-option></mat-option>
+                                <mat-option *ngFor="let m of vLesionSeverityList" [value]="m">
+                                  {{m.DropDownValue}}
+                                </mat-option>
+                              </mat-select>
+                              <mat-error class="error"
+                                *ngIf="ProcedureForm.get('Severity').invalid && ProcedureForm.get('Severity').touched">
+                                Severity is required
+                              </mat-error>
+                            </mat-form-field>
                           </div>
-                          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="flext-start">
-                            <div class="seaction-top-padding20">
-                              <span class="section-label">Lesion Type:</span>
-                            </div>
-                            <div>
-                              <section class="example-section">
-                                <!-- <mat-checkbox class="example-margin">
+                        </div>
+                        <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="flext-start">
+                          <div class="seaction-top-padding20">
+                            <span class="section-label">Lesion Type:</span>
+                          </div>
+                          <div>
+                            <section class="example-section">
+                              <!-- <mat-checkbox class="example-margin">
                                   Calcified:
                                   <mat-select class="section-2A-Select" formControlName="Calcified">
                                     <mat-option value="0"></mat-option>
@@ -873,161 +1074,181 @@
                                   </mat-select>
                                 </mat-checkbox> -->
 
-                                <mat-form-field class="section-dropdown" fxFlex>
-                                  <mat-label>-- Select Calcified--</mat-label>
-                                  <mat-select formControlName="Calcified" name="Calcified">
-                                    <mat-option></mat-option>
-                                    <mat-option *ngFor="let m of CalcifiedList" [value]="m">
-                                      {{m.name}}
-                                    </mat-option>
-                                  </mat-select>
-                                </mat-form-field>
+                              <mat-form-field class="section-dropdown" fxFlex>
+                                <mat-label>-- Select Calcified--</mat-label>
+                                <mat-select formControlName="Calcified" name="Calcified" required>
+                                  <mat-option></mat-option>
+                                  <mat-option *ngFor="let m of vLesionCalcifiedList" [value]="m">
+                                    {{m.DropDownValue}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error class="error"
+                                  *ngIf="ProcedureForm.get('Calcified').invalid && ProcedureForm.get('Calcified').touched">
+                                  Calcified is required
+                                </mat-error>
+                              </mat-form-field>
 
 
-                                <mat-checkbox class="example-margin" value="3" formControlName="Thrombus" name="Thrombus">Thrombus</mat-checkbox>
-                                <mat-checkbox class="example-margin" value="3" formControlName="Proximal" name="Proximal">Proximal Tortuosity</mat-checkbox>
-                                <mat-checkbox class="example-margin" value="3" formControlName="Branch" name="Branch">Important Side Branch</mat-checkbox>
-                              </section>
-                            </div>
-
-                            <div matTooltip="Select All name to enable this button!!"
-                              [matTooltipPosition]="'above'">
-                              <button mat-raised-button fxLayoutAlign="center center" (click)="onAddProceduredata()"
-                                style="background-color: blue; color: white; width: 70px;margin-left: 20px; ">
-                                <mat-icon> add </mat-icon> &nbsp;Add
-                              </button>
-
-                            </div>
+                              <mat-checkbox class="example-margin" value="3" formControlName="Thrombus"
+                                name="Thrombus">Thrombus</mat-checkbox>
+                              <mat-checkbox class="example-margin" value="3" formControlName="Proximal"
+                                name="Proximal">Proximal Tortuosity</mat-checkbox>
+                              <mat-checkbox class="example-margin" value="3" formControlName="Branch"
+                                name="Branch">Important
+                                Side Branch</mat-checkbox>
+                            </section>
                           </div>
-                          <mat-table #table matSort [dataSource]="dataSource2" [@animateStagger]="{value:'50'}"
-                          style="height: 150px !important; overflow: auto;margin-top: 5px;">
 
-                          
+                          <div matTooltip="Select All name to enable this button!!" [matTooltipPosition]="'above'">
+                            <button mat-raised-button fxLayoutAlign="center center" style="background-color: blue; color: white; 
+                            width: 70px;margin-left: 20px; " (click)="onAddProceduredata()"
+                              [disabled]="ProcedureForm.invalid">
+                              <mat-icon> add </mat-icon> &nbsp;Add
+                            </button>
+
+                          </div>
+                        </div>
+
+                        <mat-table #table matSort [dataSource]="dataSource2" [@animateStagger]="{value:'50'}"
+                          style="height: 150px !important; overflow: auto;margin-top: 5px;width: 100%;">
 
                           <ng-container matColumnDef="LesionType">
-                            <mat-header-cell *matHeaderCellDef style="margin-right: 5px;color: aliceblue;">Lesion Type</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef style="margin-right: 5px;color: aliceblue;">Lesion
+                              Type</mat-header-cell>
                             <mat-cell *matCellDef="let contact">
                               {{contact.LesionType}}
                             </mat-cell>
                           </ng-container>
 
-                            <ng-container matColumnDef="Location">
-                              <mat-header-cell *matHeaderCellDef style="margin-right: 5px;color: aliceblue;">Location</mat-header-cell>
-                              <mat-cell *matCellDef="let contact">
-                                {{contact.Location}}
-                              </mat-cell>
-                            </ng-container>
+                          <ng-container matColumnDef="Location">
+                            <mat-header-cell *matHeaderCellDef
+                              style="margin-right: 5px;color: aliceblue;">Location</mat-header-cell>
+                            <mat-cell *matCellDef="let contact">
+                              {{contact.Location}}
+                            </mat-cell>
+                          </ng-container>
 
-                            <ng-container matColumnDef="SyntaxScore">
-                              <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: aliceblue;">
-                                Syntax Score
-                              </mat-header-cell>
-                              <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                {{contact.SyntaxScore}}
-                              </mat-cell>
-                            </ng-container>
+                          <ng-container matColumnDef="SyntaxScore">
+                            <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: aliceblue;">
+                              Syntax Score
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                              {{contact.SyntaxScore}}
+                            </mat-cell>
+                          </ng-container>
 
-                            <ng-container matColumnDef="IndexLesion">
-                              <mat-header-cell *matHeaderCellDef style="margin-right: 5px;color: aliceblue;">Index
-                                Lesion</mat-header-cell>
-                              <mat-cell *matCellDef="let contact">
-                                {{contact.IndexLesion}}
-                              </mat-cell>
-                            </ng-container>
+                          <ng-container matColumnDef="IndexLesion">
+                            <mat-header-cell *matHeaderCellDef style="margin-right: 5px;color: aliceblue;">Index
+                              Lesion</mat-header-cell>
+                            <mat-cell *matCellDef="let contact">
+                              {{contact.IndexLesion}}
+                            </mat-cell>
+                          </ng-container>
 
-                            <ng-container matColumnDef="Severity">
-                              <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: aliceblue;">
-                                Severity
-                              </mat-header-cell>
-                              <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                {{contact.Severity}}
-                              </mat-cell>
-                            </ng-container>
+                          <ng-container matColumnDef="Severity">
+                            <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: aliceblue;">
+                              Severity
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                              {{contact.Severity}}
+                            </mat-cell>
+                          </ng-container>
 
+                          <ng-container matColumnDef="Calcified">
+                            <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: aliceblue;">
+                              Calcified Value
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                              {{contact.Calcified}}
+                            </mat-cell>
+                          </ng-container>
 
-                            <ng-container matColumnDef="Calcified">
-                              <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: aliceblue;">
-                                Calcified Value
-                              </mat-header-cell>
-                              <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                {{contact.Calcified}}
-                              </mat-cell>
-                            </ng-container>
+                          <ng-container matColumnDef="Thrombus">
+                            <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: aliceblue;">
+                              Thrombus
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                              {{contact.Thrombus}}
+                            </mat-cell>
+                          </ng-container>
 
-                            <ng-container matColumnDef="Thrombus">
-                              <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: aliceblue;">
-                                Thrombus
-                              </mat-header-cell>
-                              <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                {{contact.Thrombus}}
-                              </mat-cell>
-                            </ng-container>
+                          <ng-container matColumnDef="Proximal">
+                            <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: aliceblue;">
+                              Proximal Tortuosity
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                              {{contact.Proximal}}
+                            </mat-cell>
+                          </ng-container>
 
-                            <ng-container matColumnDef="Proximal">
-                              <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: aliceblue;">
-                                Proximal Tortuosity
-                              </mat-header-cell>
-                              <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                {{contact.Proximal}}
-                              </mat-cell>
-                            </ng-container>
+                          <ng-container matColumnDef="Branch">
+                            <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: aliceblue;">
+                              Imp. Side Branch
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                              {{contact.Branch}}
+                            </mat-cell>
+                          </ng-container>
 
-                            <ng-container matColumnDef="Branch">
-                              <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: aliceblue;">
-                                Imp. Side Branch
-                              </mat-header-cell>
-                              <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                {{contact.Branch}}
-                              </mat-cell>
-                            </ng-container>
+                          <ng-container matColumnDef="action" stickyEnd>
+                            <mat-header-cell *matHeaderCellDef style="color: white;"> Action
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let contact">
+                              <ng-container class="actions">
 
-                            <ng-container matColumnDef="action" stickyEnd>
-                              <mat-header-cell *matHeaderCellDef style="color: white;"> Action
-                              </mat-header-cell>
-                              <mat-cell *matCellDef="let row">
-                                  <!-- <button mat-icon-button (click)="onEdit(row)">
-                                  <mat-icon title="Edit Menu">launch</mat-icon>
-                              </button> -->
-                                  <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
-                                      <mat-icon>delete_outline</mat-icon>
-                                  </button>
-                               
-                              </mat-cell>
+                                <span class="material-icons" style="cursor: pointer;color: #5b5858;"
+                                  (click)="deleteTableRowProcedure($event ,contact)">
+                                  delete
+                                </span>
+                              </ng-container>
+                            </mat-cell>
                           </ng-container>
 
                           <ng-container matColumnDef="loading">
-                              <mat-footer-cell *matFooterCellDef colspan="6">
-                                  loading data...
-                              </mat-footer-cell>
+                            <mat-footer-cell *matFooterCellDef colspan="6">
+                              loading data...
+                            </mat-footer-cell>
                           </ng-container>
 
                           <ng-container matColumnDef="noData">
-                              <mat-footer-cell *matFooterCellDef colspan="6">
-                                  
-                                  <span>No Data Found</span>
-                              </mat-footer-cell>
+                            <mat-footer-cell *matFooterCellDef colspan="6">
+
+                              <span>No Data Found</span>
+                            </mat-footer-cell>
                           </ng-container>
 
-                          <mat-header-row class="accent"
-                              *matHeaderRowDef="displayedColumns2; sticky: true">
+                          <mat-header-row class="accent" *matHeaderRowDef="displayedColumns2; sticky: true">
                           </mat-header-row>
                           <mat-row *matRowDef="let contact; columns: displayedColumns2;"
                             [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
-                          <mat-footer-row *matFooterRowDef="['loading']"
-                              [ngClass]="{'hide':dataSource2!=null}">
+                          <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource2!=null}">
                           </mat-footer-row>
                           <mat-footer-row *matFooterRowDef="['noData']"
-                              [ngClass]="{'hide':!(dataSource2!=null && dataSource2.data.length==0)}">
+                            [ngClass]="{'hide':!(dataSource2!=null && dataSource2.data.length==0)}">
                           </mat-footer-row>
-                          </mat-table>
-                        <!-- </form> -->
-
+                        </mat-table>
 
                       </div>
-                      <br><br>
-                    </mat-tab>
+                      <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;"
+                        matTooltip="Select All to enable this button!!">
+                        <div style="margin-top: 20px;">
+                          <button class="next-btn" color="accent" style="border-radius: 16px;"
+                            (click)="onSubmitProcedure()" [disabled]="ProcedureForm.invalid">Save</button>
+                          <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
+                        </div>
+                      </div>
+                    </form>
+                    <br><br>
+                  </mat-tab>
 
-                    <mat-tab label="Angioplasty">
+
+
+                  <!-- Fourth Tab Start -->
+
+
+
+                  <mat-tab label="Angioplasty">
+                    <form [formGroup]="AngioplastyFormGroup">
                       <div>
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="40px"
                           class="section-row first-row-padding">
@@ -1035,8 +1256,11 @@
                             <span class="presentation-section-label">Total Number of Access Required:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Number of Access</mat-label>
-                              <input name="Number of Access" matInput>
-                              <mat-error>Number of Access</mat-error>
+                              <input name="NumberofAccess" formControlName="NumberofAccess" matInput required>
+                              <mat-error class="error"
+                                *ngIf="AngioplastyFormGroup.get('NumberofAccess').invalid && AngioplastyFormGroup.get('NumberofAccess').touched">
+                                NumberofAccess is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                         </div>
@@ -1058,36 +1282,47 @@
                           <div>
                             <mat-form-field class="section-dropdown" style="width: 200px;margin-left:10px;">
                               <mat-label>-- Select Value--</mat-label>
-                              <mat-select formControlName="Accessvalue1" name="Accessvalue1">
+                              <mat-select formControlName="Accessvalue1" name="Accessvalue1" required>
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of Accessvalue1List" [value]="m">
                                   {{m.name}}
                                 </mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="AngioplastyFormGroup.get('Accessvalue1').invalid && AngioplastyFormGroup.get('Accessvalue1').touched">
+                                Accessvalue1 is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
-                                                       
+
                             <mat-form-field class="section-dropdown" style="width:200px;margin-left:10px;">
                               <mat-label>-- Select Value--</mat-label>
-                              <mat-select formControlName="Accessvalue2" name="Accessvalue2">
+                              <mat-select formControlName="Accessvalue2" name="Accessvalue2" required>
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of Accessvalue2List" [value]="m">
                                   {{m.name}}
                                 </mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="AngioplastyFormGroup.get('Accessvalue2').invalid && AngioplastyFormGroup.get('Accessvalue2').touched">
+                                Accessvalue2 is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
 
                           <div>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>If Others, Please Specify</mat-label>
-                              <input name="If Others, Please Specify" matInput formControlName="Other1">
-                              <mat-error>If Others, Please Specify</mat-error>
+                              <input name="If Others, Please Specify" matInput formControlName="AccessvalueOther">
+                              <mat-error class="error"
+                                *ngIf="AngioplastyFormGroup.get('AccessvalueOther').invalid && AngioplastyFormGroup.get('AccessvalueOther').touched">
+                                AccessvalueOther is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
 
-                       
+
                         </div>
 
                         <div fxFlexFill fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="flext-start" class="section-row">
@@ -1106,63 +1341,80 @@
                             <span class="presentation-section-label">USG Guidance:</span>
                             <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
                               <mat-label>-- USG--</mat-label>
-                              <mat-select formControlName="USG" name="USG">
+                              <mat-select formControlName="USG" name="USG" required>
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of USGList" [value]="m">
                                   {{m.name}}
                                 </mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="AngioplastyFormGroup.get('USG').invalid && AngioplastyFormGroup.get('USG').touched">
+                                USG is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           <div>
                             <span class="presentation-section-label">Micro Puncture:</span>
                             <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
-                              <mat-label>--  Select Micro Puncture--</mat-label>
-                              <mat-select formControlName="Puncture" name="Puncture">
+                              <mat-label>-- Select Micro Puncture--</mat-label>
+                              <mat-select formControlName="Puncture" name="Puncture" required>
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of PunctureList" [value]="m">
                                   {{m.name}}
                                 </mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="AngioplastyFormGroup.get('Puncture').invalid && AngioplastyFormGroup.get('Puncture').touched">
+                                Puncture is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
 
                           <div>
                             <span class="presentation-section-label">Fluoro:</span>
                             <mat-form-field class="section-dropdown" style="width:200px;margin-left:10px;">
-                              <mat-label>--  Select Fluoro--</mat-label>
-                              <mat-select formControlName="Fluoro" name="Fluoro">
+                              <mat-label>-- Select Fluoro--</mat-label>
+                              <mat-select formControlName="Fluoro" name="Fluoro" required>
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of FluoroList" [value]="m">
                                   {{m.name}}
                                 </mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="AngioplastyFormGroup.get('Fluoro').invalid && AngioplastyFormGroup.get('Fluoro').touched">
+                                Fluoro is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
 
                           <div>
                             <span class="presentation-section-label">Device Used in Access Site:</span>
                             <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
-                              <mat-label>--  Select Device--</mat-label>
+                              <mat-label>-- Select Device--</mat-label>
                               <mat-select formControlName="Device" name="Device">
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of DevicetypeList" [value]="m">
                                   {{m.name}}
                                 </mat-option>
                               </mat-select>
+                              <mat-error class="error"
+                                *ngIf="AngioplastyFormGroup.get('Device').invalid && AngioplastyFormGroup.get('Device').touched">
+                                Device is required
+                              </mat-error>
                             </mat-form-field>
                           </div>
-                        
-                          <div matTooltip="Select All to enable this button!!"
-                          [matTooltipDisabled]="!personalFormGroup.invalid" [matTooltipPosition]="'above'">
-                          <button mat-raised-button fxLayoutAlign="center center" (click)="onAddAccesstypeData()"
-                            style="background-color: blue; color: white; width: 70px;margin-left: 20px; ">
-                            <mat-icon> add </mat-icon> &nbsp;Add
-                          </button>
+
+                          <div matTooltip="Select All to enable this button!!" [matTooltipPosition]="'above'">
+                            <button mat-raised-button fxLayoutAlign="center center" style="background-color: blue; 
+                            color: white; margin-left: 20px;" (click)="onAddAccesstypeData()"
+                              [disabled]="AngioplastyFormGroup.invalid">
+                              <mat-icon> add </mat-icon> &nbsp;Add
+                            </button>
+                          </div>
                         </div>
-                        </div>
+
                         <mat-table #table matSort [dataSource]="dataSource1" [@animateStagger]="{value:'50'}"
-                          style="height: 150px !important; overflow: auto;margin-top: 5px;">
+                          style="height: 150px !important; overflow: auto;margin-top: 5px; width: 100%;">
 
                           <ng-container matColumnDef="AccessType">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
@@ -1200,14 +1452,14 @@
                             </mat-cell>
                           </ng-container>
 
-                          <ng-container matColumnDef="IronDef">
+                          <!-- <ng-container matColumnDef="IronDef">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
                               IronDef
                             </mat-header-cell>
                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                               {{contact.IronDef}}
                             </mat-cell>
-                          </ng-container>
+                          </ng-container> -->
 
                           <ng-container matColumnDef="USG">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
@@ -1245,16 +1497,17 @@
                             </mat-cell>
                           </ng-container>
 
-
                           <ng-container matColumnDef="action" stickyEnd>
                             <mat-header-cell *matHeaderCellDef style="color: white;"> Action
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let row">
+                            <mat-cell *matCellDef="let contact">
+                              <ng-container class="actions">
 
-                              <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
-                                <mat-icon>delete_outline</mat-icon>
-                              </button>
-
+                                <span class="material-icons" style="cursor: pointer;color: #5b5858;"
+                                  (click)="deleteAccesstypeTableRow($event ,contact)">
+                                  delete
+                                </span>
+                              </ng-container>
                             </mat-cell>
                           </ng-container>
 
@@ -1266,7 +1519,7 @@
 
                           <ng-container matColumnDef="noData">
                             <mat-footer-cell *matFooterCellDef colspan="6">
-                           
+
                               <span>No Data Found</span>
                             </mat-footer-cell>
                           </ng-container>
@@ -1282,192 +1535,226 @@
                           </mat-footer-row>
                         </mat-table>
                         <mat-divider></mat-divider>
+
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
                           <span class="section-header">Wire Description</span>
                         </div>
+                        <form [formGroup]="WireTypeFormGroup">
+                          <div fxFlexFill fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="flext-start"
+                            class="section-row">
 
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="flext-start" class="section-row">
-                          <div>
-                            <span class="presentation-section-label">RT (Wire List) Crossed:</span>
-                           
-                            <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
-                              <mat-label>--  Select Wiretype--</mat-label>
-                              <mat-select formControlName="Wiretype" name="Wiretype">
-                                <mat-option></mat-option>
-                                <mat-option *ngFor="let m of WireList" [value]="m">
-                                  {{m.name}}
-                                </mat-option>
-                              </mat-select>
-                            </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="presentation-section-label">Other:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
-                              <mat-label>If Others, Please Specify</mat-label>
-                              <input name="If Others, Please Specify" matInput formControlName="wireOther" >
-                              <mat-error>If Others, Please Specify</mat-error>
-                            </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="presentation-section-label">Micro Catheter:</span>
-                          
-                            <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
-                              <mat-label>--  Select  Micro Catheter--</mat-label>
-                              <mat-select formControlName="MicroCatheter" name="MicroCatheter">
-                                <mat-option></mat-option>
-                                <mat-option *ngFor="let m of MicroCatheterList" [value]="m">
-                                  {{m.name}}
-                                </mat-option>
-                              </mat-select>
-                            </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="presentation-section-label">Other:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
-                              <mat-label>If Others, Please Specify</mat-label>
-                              <input name="If Others, Please Specify" matInput formControlName="Wire1Other" >
-                              <mat-error>If Others, Please Specify</mat-error>
-                            </mat-form-field>
-                          </div>
+                            <div>
+                              <span class="presentation-section-label">RT (Wire List) Crossed:</span>
 
-                          <div matTooltip="Select All to enable this button!!"
-                           [matTooltipPosition]="'above'">
-                          <button mat-raised-button fxLayoutAlign="center center" (click)="onAddWiretypeData()"
-                            style="background-color: blue; color: white; width: 70px;margin-left: 20px; ">
-                            <mat-icon> add </mat-icon> &nbsp;Add
-                          </button>
-                        </div>
-   
-                        </div>
+                              <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
+                                <mat-label>-- Select Wiretype--</mat-label>
+                                <mat-select formControlName="Wiretype" name="Wiretype" required>
+                                  <mat-option></mat-option>
+                                  <mat-option *ngFor="let m of WireList" [value]="m">
+                                    {{m.name}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error class="error"
+                                  *ngIf="WireTypeFormGroup.get('Wiretype').invalid && WireTypeFormGroup.get('Wiretype').touched">
+                                  Wiretype is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                            <div>
+                              <span class="presentation-section-label">Other:</span>
+                              <mat-form-field class="mr-sm-12" fxFlex>
+                                <mat-label>If Others, Please Specify</mat-label>
+                                <input name="If Others, Please Specify" matInput formControlName="wireOther">
+                                <mat-error class="error"
+                                  *ngIf="WireTypeFormGroup.get('wireOther').invalid && WireTypeFormGroup.get('wireOther').touched">
+                                  wireOther is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                            <div>
+                              <span class="presentation-section-label">Micro Catheter:</span>
+
+                              <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
+                                <mat-label>-- Select Micro Catheter--</mat-label>
+                                <mat-select formControlName="MicroCatheter" name="MicroCatheter" required>
+                                  <mat-option></mat-option>
+                                  <mat-option *ngFor="let m of MicroCatheterList" [value]="m">
+                                    {{m.name}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error class="error"
+                                  *ngIf="WireTypeFormGroup.get('MicroCatheter').invalid && WireTypeFormGroup.get('MicroCatheter').touched">
+                                  MicroCatheter is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                            <div>
+                              <span class="presentation-section-label">Other:</span>
+                              <mat-form-field class="mr-sm-12" fxFlex>
+                                <mat-label>If Others, Please Specify</mat-label>
+                                <input name="If Others, Please Specify" matInput formControlName="MicroWireOther">
+                                <mat-error class="error"
+                                  *ngIf="WireTypeFormGroup.get('MicroWireOther').invalid && WireTypeFormGroup.get('MicroWireOther').touched">
+                                  MicroWireOther is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+
+                            <div matTooltip="Select All to enable this button!!" [matTooltipPosition]="'above'">
+                              <button mat-raised-button fxLayoutAlign="center center" style="background-color: blue; color: white;
+                             width: 70px;margin-left: 20px; " (click)="onAddWiretypeData()"
+                                [disabled]="WireTypeFormGroup.invalid">
+                                <mat-icon> add </mat-icon> &nbsp;Add
+                              </button>
+                            </div>
+
+                          </div>
+                        </form>
                         <mat-table #table matSort [dataSource]="dataSourc3" [@animateStagger]="{value:'50'}"
-                        style="height: 150px !important; overflow: auto;margin-top: 5px;">
-                       
-                        <ng-container matColumnDef="Wiretype">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                            WireType
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                            {{contact.Wiretype}}
-                          </mat-cell>
-                        </ng-container>
+                          style="height: 150px !important; overflow: auto;margin-top: 5px; width: 100%;">
 
-                        <ng-container matColumnDef="wireOther">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                            Wire Other
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                            {{contact.wireOther}}
-                          </mat-cell>
-                        </ng-container>
+                          <ng-container matColumnDef="Wiretype">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                              WireType
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                              {{contact.Wiretype}}
+                            </mat-cell>
+                          </ng-container>
 
-                        <ng-container matColumnDef="MicroCatheter">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                            Micro Catheter
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                            {{contact.MicroCatheter}}
-                          </mat-cell>
-                        </ng-container>
+                          <ng-container matColumnDef="wireOther">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                              Wire Other
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                              {{contact.wireOther}}
+                            </mat-cell>
+                          </ng-container>
 
-                        <ng-container matColumnDef="Wire1Other">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                            MicroCatheter Other
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                            {{contact.Wire1Other}}
-                          </mat-cell>
-                        </ng-container>
+                          <ng-container matColumnDef="MicroCatheter">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                              Micro Catheter
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                              {{contact.MicroCatheter}}
+                            </mat-cell>
+                          </ng-container>
 
-                    
-                        <ng-container matColumnDef="action" stickyEnd>
-                          <mat-header-cell *matHeaderCellDef style="color: white;"> Action
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let row">
+                          <ng-container matColumnDef="Wire1Other">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                              MicroCatheter Other
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                              {{contact.Wire1Other}}
+                            </mat-cell>
+                          </ng-container>
 
-                            <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
-                              <mat-icon>delete_outline</mat-icon>
-                            </button>
+                          <ng-container matColumnDef="action" stickyEnd>
+                            <mat-header-cell *matHeaderCellDef style="color: white;"> Action
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let contact">
+                              <ng-container class="actions">
 
-                          </mat-cell>
-                        </ng-container>
+                                <span class="material-icons" style="cursor: pointer;color: #5b5858;"
+                                  (click)="deleteWiretypeTableRow($event ,contact)">
+                                  delete
+                                </span>
+                              </ng-container>
+                            </mat-cell>
+                          </ng-container>
 
-                        <ng-container matColumnDef="loading">
-                          <mat-footer-cell *matFooterCellDef colspan="6">
-                            loading data...
-                          </mat-footer-cell>
-                        </ng-container>
+                          <ng-container matColumnDef="loading">
+                            <mat-footer-cell *matFooterCellDef colspan="6">
+                              loading data...
+                            </mat-footer-cell>
+                          </ng-container>
 
-                        <ng-container matColumnDef="noData">
-                          <mat-footer-cell *matFooterCellDef colspan="6">
-                         
-                            <span>No Data Found</span>
-                          </mat-footer-cell>
-                        </ng-container>
+                          <ng-container matColumnDef="noData">
+                            <mat-footer-cell *matFooterCellDef colspan="6">
 
-                        <mat-header-row class="accent" *matHeaderRowDef="displayedColumns3; sticky: true">
-                        </mat-header-row>
-                        <mat-row *matRowDef="let contact; columns: displayedColumns3;"
-                          [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
-                        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSourc3!=null}">
-                        </mat-footer-row>
-                        <mat-footer-row *matFooterRowDef="['noData']"
-                          [ngClass]="{'hide':!(dataSourc3!=null && dataSourc3.data.length==0)}">
-                        </mat-footer-row>
-                      </mat-table>
+                              <span>No Data Found</span>
+                            </mat-footer-cell>
+                          </ng-container>
+
+                          <mat-header-row class="accent" *matHeaderRowDef="displayedColumns3; sticky: true">
+                          </mat-header-row>
+                          <mat-row *matRowDef="let contact; columns: displayedColumns3;"
+                            [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+                          <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSourc3!=null}">
+                          </mat-footer-row>
+                          <mat-footer-row *matFooterRowDef="['noData']"
+                            [ngClass]="{'hide':!(dataSourc3!=null && dataSourc3.data.length==0)}">
+                          </mat-footer-row>
+                        </mat-table>
+
                         <mat-divider></mat-divider>
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
                           <span class="section-header">Imaging</span>
                         </div>
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="flext-start" class="section-row">
+                        <form [formGroup]="ImagingFormGroup">
+                          <div fxFlexFill fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="flext-start"
+                            class="section-row">
 
-                          <div>
-                            <span class="presentation-section-label">IVUS:</span>
-                           
-                            <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
-                              <mat-label>--  Select  IVUS--</mat-label>
-                              <mat-select formControlName="IVUS" name="IVUS">
-                                <mat-option></mat-option>
-                                <mat-option *ngFor="let m of IVUSList" [value]="m">
-                                  {{m.name}}
-                                </mat-option>
-                              </mat-select>
-                            </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="presentation-section-label">OCT:</span>
-                                                      
-                            <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
-                              <mat-label>--  Select  OCT--</mat-label>
-                              <mat-select formControlName="OCT" name="OCT">
-                                <mat-option></mat-option>
-                                <mat-option *ngFor="let m of OCTList" [value]="m">
-                                  {{m.name}}
-                                </mat-option>
-                              </mat-select>
-                            </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="presentation-section-label">Other:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
-                              <mat-label>If Others, Please Specify</mat-label>
-                              <input name="If Others, Please Specify" matInput formControlName="Imgothere">
-                              <mat-error>If Others, Please Specify</mat-error>
-                            </mat-form-field>
-                          </div>
+                            <div>
+                              <span class="presentation-section-label">IVUS:</span>
 
-                           
-                          <div matTooltip="Select All to enable this button!!"
-                          [matTooltipDisabled]="!personalFormGroup.invalid" [matTooltipPosition]="'above'">
-                          <button mat-raised-button fxLayoutAlign="center center" (click)="onAddImagingData()"
-                            style="background-color: blue; color: white; width: 70px;margin-left: 20px; ">
-                            <mat-icon> add </mat-icon> &nbsp;Add
-                          </button>
-                        </div>
-                      </div>
-                          <mat-table #table matSort [dataSource]="dataSource4" [@animateStagger]="{value:'50'}"
+                              <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
+                                <mat-label>-- Select IVUS--</mat-label>
+                                <mat-select formControlName="IVUS" name="IVUS" required>
+                                  <mat-option></mat-option>
+                                  <mat-option *ngFor="let m of IVUSList" [value]="m">
+                                    {{m.name}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error class="error"
+                                  *ngIf="ImagingFormGroup.get('IVUS').invalid && ImagingFormGroup.get('IVUS').touched">
+                                  IVUS is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                            <div>
+                              <span class="presentation-section-label">OCT:</span>
+
+                              <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
+                                <mat-label>-- Select OCT--</mat-label>
+                                <mat-select formControlName="OCT" name="OCT" required>
+                                  <mat-option></mat-option>
+                                  <mat-option *ngFor="let m of OCTList" [value]="m">
+                                    {{m.name}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error class="error"
+                                  *ngIf="ImagingFormGroup.get('OCT').invalid && ImagingFormGroup.get('OCT').touched">
+                                  OCT is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                            <div>
+                              <span class="presentation-section-label">Other:</span>
+                              <mat-form-field class="mr-sm-12" fxFlex>
+                                <mat-label>If Others, Please Specify</mat-label>
+                                <input name="If Others, Please Specify" matInput formControlName="Imgothere">
+                                <mat-error class="error"
+                                  *ngIf="ImagingFormGroup.get('Imgothere').invalid && ImagingFormGroup.get('Imgothere').touched">
+                                  Imgothere is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+
+
+                            <div matTooltip="Select All to enable this button!!" [matTooltipPosition]="'above'">
+                              <button mat-raised-button fxLayoutAlign="center center" style="background-color: blue; color: white; 
+                            width: 70px;margin-left: 20px; " (click)="onAddImagingData()"
+                                [disabled]="ImagingFormGroup.invalid">
+                                <mat-icon> add </mat-icon> &nbsp;Add
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+                        <mat-table #table matSort [dataSource]="dataSource4" [@animateStagger]="{value:'50'}"
                           style="height: 150px !important; overflow: auto;margin-top: 5px;">
-                       
-                          
+
+
                           <ng-container matColumnDef="IVUS">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
                               IVUS
@@ -1495,16 +1782,17 @@
                             </mat-cell>
                           </ng-container>
 
-                         
                           <ng-container matColumnDef="action" stickyEnd>
                             <mat-header-cell *matHeaderCellDef style="color: white;"> Action
                             </mat-header-cell>
-                            <mat-cell *matCellDef="let row">
+                            <mat-cell *matCellDef="let contact">
+                              <ng-container class="actions">
 
-                              <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
-                                <mat-icon>delete_outline</mat-icon>
-                              </button>
-
+                                <span class="material-icons" style="cursor: pointer;color: #5b5858;"
+                                  (click)="deleteImagingTableRow($event ,contact)">
+                                  delete
+                                </span>
+                              </ng-container>
                             </mat-cell>
                           </ng-container>
 
@@ -1516,7 +1804,7 @@
 
                           <ng-container matColumnDef="noData">
                             <mat-footer-cell *matFooterCellDef colspan="6">
-                           
+
                               <span>No Data Found</span>
                             </mat-footer-cell>
                           </ng-container>
@@ -1531,114 +1819,142 @@
                             [ngClass]="{'hide':!(dataSource4!=null && dataSource4.data.length==0)}">
                           </mat-footer-row>
                         </mat-table>
-                        
+
                         <mat-divider></mat-divider>
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
                           <span class="section-header">Physiology</span>
                         </div>
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="flext-start" class="section-row">
+                        <form [formGroup]="PhysiologyFormGroup">
+                          <div fxFlexFill fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="flext-start"
+                            class="section-row">
 
-                          <div>
-                            <span class="presentation-section-label">Physiology:</span>
-                          
+                            <div>
+                              <span class="presentation-section-label">Physiology:</span>
 
-                            <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
-                              <mat-label>--  Select  Physiology--</mat-label>
-                              <mat-select formControlName="Physiologytype" name="Physiologytype">
-                                <mat-option></mat-option>
-                                <mat-option *ngFor="let m of PhysiologytypeList" [value]="m">
-                                  {{m.name}}
-                                </mat-option>
-                              </mat-select>
-                            </mat-form-field>
+
+                              <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
+                                <mat-label>-- Select Physiology--</mat-label>
+                                <mat-select formControlName="Physiologytype" name="Physiologytype" required>
+                                  <mat-option></mat-option>
+                                  <mat-option *ngFor="let m of PhysiologytypeList" [value]="m">
+                                    {{m.name}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error class="error"
+                                  *ngIf="PhysiologyFormGroup.get('Physiologytype').invalid && PhysiologyFormGroup.get('Physiologytype').touched">
+                                  Physiologytype is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                            <div>
+
+                              <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
+                                <mat-label>-- Select Value--</mat-label>
+                                <mat-select formControlName="Physiologyvalue" name="Physiologyvalue" required>
+                                  <mat-option></mat-option>
+                                  <mat-option *ngFor="let m of PhysiologyvalueList" [value]="m">
+                                    {{m.name}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error class="error"
+                                  *ngIf="PhysiologyFormGroup.get('Physiologyvalue').invalid && PhysiologyFormGroup.get('Physiologyvalue').touched">
+                                  Physiologyvalue is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+
+                            <div matTooltip="Select All to enable this button!!" [matTooltipPosition]="'above'">
+                              <button mat-raised-button fxLayoutAlign="center center" style="background-color: blue; width: 70px;
+                            color: white;margin-left: 20px;" (click)="onAddPhysiologyData()"
+                                [disabled]="PhysiologyFormGroup.invalid">
+                                <mat-icon> add </mat-icon> &nbsp;Add
+                              </button>
+                            </div>
                           </div>
-                          <div>
-                         
-                            <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
-                              <mat-label>--  Select  Value--</mat-label>
-                              <mat-select formControlName="Physiologyvalue" name="Physiologyvalue">
-                                <mat-option></mat-option>
-                                <mat-option *ngFor="let m of PhysiologyvalueList" [value]="m">
-                                  {{m.name}}
-                                </mat-option>
-                              </mat-select>
-                            </mat-form-field>
-                          </div>
+                        </form>
 
-                          <div matTooltip="Select All to enable this button!!"
-                         [matTooltipPosition]="'above'">
-                        <button mat-raised-button fxLayoutAlign="center center" (click)="onAddPhysiologyData()"
-                          style="background-color: blue; color: white; width: 70px;margin-left: 20px; ">
-                          <mat-icon> add </mat-icon> &nbsp;Add
-                        </button>
-                      </div>
-                        </div>
-                           
-                        
+
                       </div>
 
                       <mat-table #table matSort [dataSource]="dataSource5" [@animateStagger]="{value:'50'}"
-                      style="height: 150px !important; overflow: auto;margin-top: 5px;">
-                   
-                      
-                      <ng-container matColumnDef="Physiologytype">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                          Physiology Type
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                          {{contact.Physiologytype}}
-                        </mat-cell>
-                      </ng-container>
+                        style="height: 150px !important; overflow: auto;margin-top: 5px;width: 100%;">
 
-                      <ng-container matColumnDef="Physiologyvalue">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                          Physiology Value
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                          {{contact.Physiologyvalue}}
-                        </mat-cell>
-                      </ng-container>
 
-                                          
-                      <ng-container matColumnDef="action" stickyEnd>
-                        <mat-header-cell *matHeaderCellDef style="color: white;"> Action
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let row">
+                        <ng-container matColumnDef="Physiologytype">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                            Physiology Type
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                            {{contact.Physiologytype}}
+                          </mat-cell>
+                        </ng-container>
 
-                          <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
-                            <mat-icon>delete_outline</mat-icon>
-                          </button>
+                        <ng-container matColumnDef="Physiologyvalue">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                            Physiology Value
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                            {{contact.Physiologyvalue}}
+                          </mat-cell>
+                        </ng-container>
 
-                        </mat-cell>
-                      </ng-container>
+                        <ng-container matColumnDef="action" stickyEnd>
+                          <mat-header-cell *matHeaderCellDef style="color: white;"> Action
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let contact">
+                            <ng-container class="actions">
 
-                      <ng-container matColumnDef="loading">
-                        <mat-footer-cell *matFooterCellDef colspan="6">
-                          loading data...
-                        </mat-footer-cell>
-                      </ng-container>
+                              <span class="material-icons" style="cursor: pointer;color: #5b5858;"
+                                (click)="deletePhysiologyTableRow($event ,contact)">
+                                delete
+                              </span>
+                            </ng-container>
+                          </mat-cell>
+                        </ng-container>
 
-                      <ng-container matColumnDef="noData">
-                        <mat-footer-cell *matFooterCellDef colspan="6">
-                       
-                          <span>No Data Found</span>
-                        </mat-footer-cell>
-                      </ng-container>
+                        <ng-container matColumnDef="loading">
+                          <mat-footer-cell *matFooterCellDef colspan="6">
+                            loading data...
+                          </mat-footer-cell>
+                        </ng-container>
 
-                      <mat-header-row class="accent" *matHeaderRowDef="displayedColumns5; sticky: true">
-                      </mat-header-row>
-                      <mat-row *matRowDef="let contact; columns: displayedColumns5;"
-                        [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
-                      <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource5!=null}">
-                      </mat-footer-row>
-                      <mat-footer-row *matFooterRowDef="['noData']"
-                        [ngClass]="{'hide':!(dataSource5!=null && dataSource5.data.length==0)}">
-                      </mat-footer-row>
-                    </mat-table>
-                    </mat-tab>
+                        <ng-container matColumnDef="noData">
+                          <mat-footer-cell *matFooterCellDef colspan="6">
 
-                    
-                    <!-- Lesion Preperation Tab -->
+                            <span>No Data Found</span>
+                          </mat-footer-cell>
+                        </ng-container>
+
+                        <mat-header-row class="accent" *matHeaderRowDef="displayedColumns5; sticky: true">
+                        </mat-header-row>
+                        <mat-row *matRowDef="let contact; columns: displayedColumns5;"
+                          [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+                        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource5!=null}">
+                        </mat-footer-row>
+                        <mat-footer-row *matFooterRowDef="['noData']"
+                          [ngClass]="{'hide':!(dataSource5!=null && dataSource5.data.length==0)}">
+                        </mat-footer-row>
+                      </mat-table>
+
+                      <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;"
+                        matTooltip="Select All to enable this button!!">
+                        <div style="margin-top: 20px;">
+                          <button class="next-btn" color="accent" style="border-radius: 16px;"
+                            (click)="onSubmitProcedure()" [disabled]="AngioplastyFormGroup.invalid">Save</button>
+                          <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
+                        </div>
+                      </div>
+                    </form>
+                  </mat-tab>
+
+
+
+
+                  <!-- 5th Tab Start -->
+                  <!-- Lesion Preperation Tab -->
+
+
+                  <form [formGroup]="personalFormGroup">
                     <mat-tab label="Lesion Preperation">
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
                         <span class="section-header">Imaging</span>
@@ -1679,12 +1995,13 @@
                             <mat-checkbox class="example-margin">Non-Protruding</mat-checkbox>
                             <mat-checkbox class="example-margin">Wire Bias</mat-checkbox>
                             <label class="example-margin">Calcium:</label>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>                              
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>Calcium</mat-label>
                               <mat-select>
                                 <mat-option value="0">-- Select Calcium --</mat-option>
-                                <mat-option value="1"> < 180 Degree </mat-option>
-                                <mat-option value="2"> > 180 Degree </mat-option>
+                                <mat-option value="1">
+                                  < 180 Degree </mat-option>
+                                    <mat-option value="2"> > 180 Degree </mat-option>
                               </mat-select>
                             </mat-form-field>
                           </section>
@@ -1719,9 +2036,9 @@
                                   ROTA
                                 </mat-panel-title>
                               </mat-expansion-panel-header>
-                              
+
                               <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
-                                <div class="example-margin"> 
+                                <div class="example-margin">
                                   <!-- Crossed Yes -->
                                   <mat-expansion-panel hideToggle>
                                     <mat-expansion-panel-header>
@@ -1743,7 +2060,7 @@
                                               <mat-option value="2">2.00</mat-option>
                                             </mat-select>
                                           </mat-form-field>
-                                          
+
 
                                           <label class="example-margin">Speed:</label>
                                           <mat-form-field class="label-rightpadding2">
@@ -1751,7 +2068,7 @@
                                             <input matInput name="Speed" formControlName="Speed" id="Speed">
                                           </mat-form-field>
 
-                                          
+
                                           <label class="example-margin">Time:</label>
                                           <mat-form-field>
                                             <mat-label>In Minutes</mat-label>
@@ -1772,7 +2089,7 @@
                                               <mat-option value="1">Yes</mat-option>
                                               <mat-option value="2">No</mat-option>
                                             </mat-select>
-                                          </mat-form-field>                                         
+                                          </mat-form-field>
                                         </section>
                                       </div>
                                     </div>
@@ -1787,8 +2104,8 @@
                                     </mat-expansion-panel-header>
                                     <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
                                       <div>
-                                        <section class="example-section">                   
-                                          <label class="example-margin">Micro Catheter:</label>                       
+                                        <section class="example-section">
+                                          <label class="example-margin">Micro Catheter:</label>
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
                                             <mat-select>
@@ -1796,14 +2113,14 @@
                                               <mat-option value="1">Finecross</mat-option>
                                               <mat-option value="2">Crusader</mat-option>
                                               <mat-option value="2">Caravel</mat-option>
-                                              <mat-option value="2">Others</mat-option>                                              
+                                              <mat-option value="2">Others</mat-option>
                                             </mat-select>
                                           </mat-form-field>
-                                          
+
                                           <mat-form-field>
                                             <mat-label>If Others, Please Specify</mat-label>
                                             <input matInput name="Others" formControlName="Others" id="Others">
-                                          </mat-form-field>                                            
+                                          </mat-form-field>
                                         </section>
                                       </div>
                                     </div>
@@ -1821,7 +2138,7 @@
                                 </mat-panel-title>
                               </mat-expansion-panel-header>
                               <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
-                                <div class="example-margin"> 
+                                <div class="example-margin">
                                   <!-- Crossed Yes -->
                                   <mat-expansion-panel hideToggle>
                                     <mat-expansion-panel-header>
@@ -1837,7 +2154,7 @@
                                             <mat-label>Size</mat-label>
                                             <input matInput name="Size" formControlName="Size" id="Size">
                                           </mat-form-field>
-                                          
+
                                           <label class="example-margin">Speed:</label>
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
@@ -1847,7 +2164,7 @@
                                               <mat-option value="2">120 K</mat-option>
                                             </mat-select>
                                           </mat-form-field>
-                                          
+
                                           <label class="example-margin">Time:</label>
                                           <mat-form-field>
                                             <mat-label>In Minutes</mat-label>
@@ -1868,7 +2185,7 @@
                                               <mat-option value="1">Yes</mat-option>
                                               <mat-option value="2">No</mat-option>
                                             </mat-select>
-                                          </mat-form-field>                                         
+                                          </mat-form-field>
                                         </section>
                                       </div>
                                     </div>
@@ -1883,8 +2200,8 @@
                                     </mat-expansion-panel-header>
                                     <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
                                       <div>
-                                        <section class="example-section">                   
-                                          <label class="example-margin">Micro Catheter:</label>                       
+                                        <section class="example-section">
+                                          <label class="example-margin">Micro Catheter:</label>
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
                                             <mat-select>
@@ -1892,14 +2209,14 @@
                                               <mat-option value="1">Finecross</mat-option>
                                               <mat-option value="2">Crusader</mat-option>
                                               <mat-option value="2">Caravel</mat-option>
-                                              <mat-option value="2">Others</mat-option>                                              
+                                              <mat-option value="2">Others</mat-option>
                                             </mat-select>
                                           </mat-form-field>
-                                          
+
                                           <mat-form-field>
                                             <mat-label>If Others, Please Specify</mat-label>
                                             <input matInput name="Others" formControlName="Others" id="Others">
-                                          </mat-form-field>                                            
+                                          </mat-form-field>
                                         </section>
                                       </div>
                                     </div>
@@ -1907,7 +2224,7 @@
 
                                 </div>
                               </div>
-                            </mat-expansion-panel> 
+                            </mat-expansion-panel>
 
                             <!-- Laser (ELCA) -->
                             <mat-expansion-panel>
@@ -1917,7 +2234,7 @@
                                 </mat-panel-title>
                               </mat-expansion-panel-header>
                               <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
-                                <div class="example-margin"> 
+                                <div class="example-margin">
                                   <!-- Crossed Yes -->
                                   <mat-expansion-panel hideToggle>
                                     <mat-expansion-panel-header>
@@ -1938,7 +2255,7 @@
                                               <mat-option value="2">1.7</mat-option>
                                             </mat-select>
                                           </mat-form-field>
-                                          
+
 
                                           <label class="example-margin">Fluence:</label>
                                           <mat-form-field class="label-rightpadding2">
@@ -1946,7 +2263,7 @@
                                             <input matInput name="Fluence" formControlName="Fluence" id="Fluence">
                                           </mat-form-field>
 
-                                          
+
                                           <label class="example-margin">Laser ON/OFF Time:</label>
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
@@ -1955,7 +2272,7 @@
                                               <mat-option value="1">10 / 5 sec</mat-option>
                                               <mat-option value="2">5 / 10 sec</mat-option>
                                             </mat-select>
-                                          </mat-form-field> 
+                                          </mat-form-field>
 
                                           <label class="example-margin">Medium:</label>
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
@@ -1965,7 +2282,7 @@
                                               <mat-option value="1">Saline</mat-option>
                                               <mat-option value="2">Contrast</mat-option>
                                             </mat-select>
-                                          </mat-form-field> 
+                                          </mat-form-field>
 
                                           <label class="example-margin">Successful:</label>
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
@@ -1975,7 +2292,7 @@
                                               <mat-option value="1">Yes</mat-option>
                                               <mat-option value="2">No</mat-option>
                                             </mat-select>
-                                          </mat-form-field>                                         
+                                          </mat-form-field>
                                         </section>
                                       </div>
                                     </div>
@@ -1990,8 +2307,8 @@
                                     </mat-expansion-panel-header>
                                     <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
                                       <div>
-                                        <section class="example-section">                   
-                                          <label class="example-margin">Micro Catheter:</label>                       
+                                        <section class="example-section">
+                                          <label class="example-margin">Micro Catheter:</label>
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
                                             <mat-select>
@@ -1999,14 +2316,14 @@
                                               <mat-option value="1">Finecross</mat-option>
                                               <mat-option value="2">Crusader</mat-option>
                                               <mat-option value="2">Caravel</mat-option>
-                                              <mat-option value="2">Others</mat-option>                                              
+                                              <mat-option value="2">Others</mat-option>
                                             </mat-select>
                                           </mat-form-field>
-                                          
+
                                           <mat-form-field>
                                             <mat-label>If Others, Please Specify</mat-label>
                                             <input matInput name="Others" formControlName="Others" id="Others">
-                                          </mat-form-field>                                            
+                                          </mat-form-field>
                                         </section>
                                       </div>
                                     </div>
@@ -2014,7 +2331,7 @@
 
                                 </div>
                               </div>
-                            </mat-expansion-panel> 
+                            </mat-expansion-panel>
 
                             <!-- Tornus -->
                             <mat-expansion-panel>
@@ -2048,7 +2365,7 @@
                                         <mat-option value="1">Yes</mat-option>
                                         <mat-option value="2">No</mat-option>
                                       </mat-select>
-                                    </mat-form-field>                                         
+                                    </mat-form-field>
                                   </section>
                                 </div>
                               </div>
@@ -2188,7 +2505,7 @@
                         </div>
                       </div>
 
-                      <div fxLayout="row" fxLayoutGap="3%" class="section-row">                          
+                      <div fxLayout="row" fxLayoutGap="3%" class="section-row">
                         <div>
                           <section class="example-section">
                             <label class="example-margin">Hypertension Sustained: </label>
@@ -2211,10 +2528,10 @@
                               <mat-error>If Others, Please Specify</mat-error>
                             </mat-form-field>
                           </section>
-                        </div>                        
+                        </div>
                       </div>
 
-                      <div fxLayout="row" fxLayoutGap="3%" class="section-row">                          
+                      <div fxLayout="row" fxLayoutGap="3%" class="section-row">
                         <div>
                           <section class="example-section">
                             <label class="example-margin">Bradycardia: </label>
@@ -2266,7 +2583,7 @@
                                 </div>
                               </div>
                               <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
-                                <div class="example-margin"> 
+                                <div class="example-margin">
                                   <mat-expansion-panel hideToggle>
                                     <mat-expansion-panel-header>
                                       <mat-panel-title>
@@ -2301,12 +2618,12 @@
                                             <mat-label>LV A/d</mat-label>
                                             <input matInput name="LV A/d" formControlName="LV A/d" id="LV A/d">
                                           </mat-form-field>
-                                          
+
                                           <label class="example-margin">PB:</label>
                                           <mat-form-field>
                                             <mat-label>PB</mat-label>
                                             <input matInput name="PB" formControlName="PB" id="PB">
-                                          </mat-form-field>                                            
+                                          </mat-form-field>
                                         </section>
                                       </div>
                                     </div>
@@ -2320,14 +2637,14 @@
                                     </mat-expansion-panel-header>
                                     <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
                                       <div>
-                                        <section class="example-section">                                          
+                                        <section class="example-section">
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
                                             <mat-select>
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">LZ MBp</mat-option>
                                               <mat-option value="2">LZ MBd</mat-option>
-                                              <mat-option value="2">SBd</mat-option>                                              
+                                              <mat-option value="2">SBd</mat-option>
                                             </mat-select>
                                           </mat-form-field>
                                           <label class="example-margin">RV A/d:</label>
@@ -2341,12 +2658,12 @@
                                             <mat-label>LV A/d</mat-label>
                                             <input matInput name="LV A/d" formControlName="LV A/d" id="LV A/d">
                                           </mat-form-field>
-                                          
+
                                           <label class="example-margin">PB:</label>
                                           <mat-form-field>
                                             <mat-label>PB</mat-label>
                                             <input matInput name="PB" formControlName="PB" id="PB">
-                                          </mat-form-field>                                            
+                                          </mat-form-field>
                                         </section>
                                       </div>
                                     </div>
@@ -2391,12 +2708,12 @@
                                             <mat-label>LV A/d</mat-label>
                                             <input matInput name="LV A/d" formControlName="LV A/d" id="LV A/d">
                                           </mat-form-field>
-                                          
+
                                           <label class="example-margin">PB:</label>
                                           <mat-form-field>
                                             <mat-label>PB</mat-label>
                                             <input matInput name="PB" formControlName="PB" id="PB">
-                                          </mat-form-field>                                            
+                                          </mat-form-field>
                                         </section>
                                       </div>
                                     </div>
@@ -2420,11 +2737,11 @@
                                   <mat-option value="2">40 MHz Opticross</mat-option>
                                 </mat-select>
                               </mat-form-field>
-                            </mat-expansion-panel> 
+                            </mat-expansion-panel>
                           </mat-accordion>
                         </div>
                       </div>
-                      
+
 
                       <!-- Stent -->
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
@@ -2457,7 +2774,7 @@
                                 <mat-option value="2">Onyx</mat-option>
                               </mat-select>
                             </mat-form-field>
-                            
+
                             <label class="example-margin">Diameter:</label>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Minimum Diameter In mm</mat-label>
@@ -2469,7 +2786,7 @@
                               <input name="Maximum Diameter" matInput>
                               <mat-error>Maximum Diameter</mat-error>
                             </mat-form-field>
-                          </section> 
+                          </section>
                         </div>
                       </div>
                       <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
@@ -2522,7 +2839,7 @@
                                 </div>
                               </div>
                               <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
-                                <div class="example-margin"> 
+                                <div class="example-margin">
                                   <mat-expansion-panel hideToggle>
                                     <mat-expansion-panel-header>
                                       <mat-panel-title>
@@ -2557,12 +2874,12 @@
                                             <mat-label>LV A/d</mat-label>
                                             <input matInput name="LV A/d" formControlName="LV A/d" id="LV A/d">
                                           </mat-form-field>
-                                          
+
                                           <label class="example-margin">PB:</label>
                                           <mat-form-field>
                                             <mat-label>PB</mat-label>
                                             <input matInput name="PB" formControlName="PB" id="PB">
-                                          </mat-form-field>                                            
+                                          </mat-form-field>
                                         </section>
                                       </div>
                                     </div>
@@ -2576,14 +2893,14 @@
                                     </mat-expansion-panel-header>
                                     <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
                                       <div>
-                                        <section class="example-section">                                          
+                                        <section class="example-section">
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
                                             <mat-select>
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">LZ MBp</mat-option>
                                               <mat-option value="2">LZ MBd</mat-option>
-                                              <mat-option value="2">SBd</mat-option>                                              
+                                              <mat-option value="2">SBd</mat-option>
                                             </mat-select>
                                           </mat-form-field>
                                           <label class="example-margin">RV A/d:</label>
@@ -2597,12 +2914,12 @@
                                             <mat-label>LV A/d</mat-label>
                                             <input matInput name="LV A/d" formControlName="LV A/d" id="LV A/d">
                                           </mat-form-field>
-                                          
+
                                           <label class="example-margin">PB:</label>
                                           <mat-form-field>
                                             <mat-label>PB</mat-label>
                                             <input matInput name="PB" formControlName="PB" id="PB">
-                                          </mat-form-field>                                            
+                                          </mat-form-field>
                                         </section>
                                       </div>
                                     </div>
@@ -2647,12 +2964,12 @@
                                             <mat-label>LV A/d</mat-label>
                                             <input matInput name="LV A/d" formControlName="LV A/d" id="LV A/d">
                                           </mat-form-field>
-                                          
+
                                           <label class="example-margin">PB:</label>
                                           <mat-form-field>
                                             <mat-label>PB</mat-label>
                                             <input matInput name="PB" formControlName="PB" id="PB">
-                                          </mat-form-field>                                            
+                                          </mat-form-field>
                                         </section>
                                       </div>
                                     </div>
@@ -2676,7 +2993,7 @@
                                   <mat-option value="2">40 MHz Opticross</mat-option>
                                 </mat-select>
                               </mat-form-field>
-                            </mat-expansion-panel> 
+                            </mat-expansion-panel>
                           </mat-accordion>
                         </div>
                       </div>
@@ -2818,19 +3135,20 @@
                       </div>
                       <mat-divider></mat-divider>
                     </mat-tab>
-                  </mat-tab-group>
 
-                  <!-- <button class="next-btn" style="width: max-content;margin-left: 10px;"
+
+                    <!-- <button class="next-btn" style="width: max-content;margin-left: 10px;"
                   (click)="getProcedure()">Procedure</button> -->
 
-                  <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;">
+                    <!-- <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;">
                     <div style="margin-top: 20px;">
                       <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()"
                         [disabled]="personalFormGroup.invalid">Save</button>
                       <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
                     </div>
-                  </div>
-                </form>
+                  </div> -->
+                  </form>
+                </mat-tab-group>
               </div>
 
             </div>
