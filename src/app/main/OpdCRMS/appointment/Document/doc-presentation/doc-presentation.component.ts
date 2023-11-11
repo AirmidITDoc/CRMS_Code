@@ -1,8 +1,11 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { fuseAnimations } from '@fuse/animations';
+import { AuthenticationService } from 'app/core/services/authentication.service';
+import { ClinicalDocumentService } from '../clinical-document.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-doc-presentation',
@@ -15,6 +18,7 @@ export class DocPresentationComponent implements OnInit {
 
 
   subform: FormGroup;
+  CADdivFormGroup: FormGroup;
   // toppings  = new FormControl('');
   UnstabletypeList: string[] = ['Hypotension <90 mmHg', 'Hypoxia', 'Tachy', 'Brady', 'ROSC'];
   StemitypeList: string[] = ['Anterior', 'Posterior', 'Lateral', 'Inferior'];
@@ -37,7 +41,6 @@ export class DocPresentationComponent implements OnInit {
     { id: 2, name: "Negative" },
 
   ];
-
 
   countryList: any = [];
 
@@ -72,12 +75,16 @@ export class DocPresentationComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<DocPresentationComponent>,
+    private _loggedService: AuthenticationService,
+    public _ClinicalDocumentService: ClinicalDocumentService,
+    public _matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,) { }
 
   ngOnInit(): void {
     this.subform = this.SubForm();
+    this.CADdivFormGroup = this.createCADdivForm();
 
-    debugger
+    // debugger
     this.registerObj = this.data;
     this.type = this.data.DoctypeId;
 
@@ -85,7 +92,7 @@ export class DocPresentationComponent implements OnInit {
       this.regobj = this.data.advanceObj;
       this.PatientName = this.regobj.PatientName;
       this.RegNo = this.regobj.RegNo;
-      this.MobileNo = this.regobj.MobileNo;
+      //this.MobileNo = this.regobj.MobileNo;
 
     }
 
@@ -108,49 +115,47 @@ export class DocPresentationComponent implements OnInit {
       Cppresentation: ['0'],
       Cppresentationduration: [''],
 
-      Hemodynamic: ['0'],
+      Hemodynamic: ['true'],
       Hemodynamicstatus: ['0'],
       Hemodynamicstatus1: ['stable'],
       StemiTypeId: [''],
-      Othere: '',
+      SemiOther: '',
 
-      SVGAElementtablestatus: [''],
-      Hypertension: ['0'],
-      Hypoxia: ['0'],
+      //SVGAElementtablestatus: [''],
+      Hypertension: ['ture'],
+      Hypoxia: ['ture'],
+      Tachy: ['ture'],
+      Brady: ['ture'],
+      Rosc: ['ture'],
 
-      Tachy: '',
-      Brady: ['1'],
-      Rosc: ['1'],
+      EKGChanges: '',
+      Enzyme: ['true'],
+      Other1: [''],
 
-      Ekgchange: '',
-      Enzyme: ['1'],
-      Othere1: ['1'],
 
-      Angnia: ['true'],
+      //Angnia: ['true'],
 
       Induciblestatus: '',
       Angniastatus: ['1'],
-      Condtionstatus: ['1'],
+      Condtionstatus: [''],
       InducibleTypeId: ['1'],
       InducibleTypeStatus: ['1'],
 
+      // TypeofCAD: '',
+      // Routine: ['1'],
+      // CalciumScore: ['1'],
 
+      // CalciumScorestatus: '',
+      // Score: ['1'],
+      // Other3: ['1'],
 
-      TypeofCAD: '',
-      Routine: ['1'],
-      CalciumScore: ['1'],
+      // CTType: ['1'],
 
-      CalciumScorestatus: '',
-      Score: ['1'],
-      Other3: ['1'],
-
-      CTType: ['1'],
-
-      Echo: '',
-      LVEF: ['1'],
-      GLS: ['1'],
-      RWMA: ['1'],
-      LVEFType: ['1'],
+      // Echo: '',
+      // LVEF: ['1'],
+      // GLS: ['1'],
+      // RWMA: ['1'],
+      // LVEFType: ['1'],
 
     });
   }
@@ -186,7 +191,6 @@ export class DocPresentationComponent implements OnInit {
   onChangeType(Id) {
     debugger
     this.InducibleTypeId = Id.name;
-
   }
 
   onChangeTypestatus(Id) {
@@ -194,12 +198,10 @@ export class DocPresentationComponent implements OnInit {
   }
 
   onAddData() {
-    debugger
     this.isLoading = 'save';
     if ((this.InducibleTypeId != null) && (this.InducibleTypeStatus != null)) {
       this.isLoading = 'save';
       this.dataSource.data = [];
-
       this.datalist.push(
         {
           InducibleTypeId: this.InducibleTypeId || 0,
@@ -208,8 +210,18 @@ export class DocPresentationComponent implements OnInit {
       this.isLoading = '';
       this.dataSource.data = this.datalist;
     }
+     
   }
-
+  deleteTableRow(event, element) {
+    // if (this.key == "Delete") {
+      let index = this.datalist.indexOf(element);
+      if (index >= 0) {
+        this.datalist.splice(index, 1);
+        this.dataSource.data = [];
+        this.dataSource.data = this.datalist;
+      }
+      Swal.fire('Success !', 'Patient2DEcho Row Deleted Successfully', 'success');
+  }
 
   onChangeInducibleTypeStatus() {
 
@@ -222,6 +234,130 @@ export class DocPresentationComponent implements OnInit {
 
   onClose() {
     this.dialogRef.close();
+  }
+  createCADdivForm() {
+    return this._formBuilder.group({
+      CT: '',
+      Calcium: '',
+      Severity: '',
+      Other: ''
+    })
+  }    
+  OnSaveAcute() {
+    this.isLoading = 'submit';
+    let submissionObj = {};
+    let saveAcsPatientDetails = {};
+
+    saveAcsPatientDetails['acsPatientId'] = 0;
+    saveAcsPatientDetails['patientId'] = this.RegNo;
+    saveAcsPatientDetails['visitId'] = 0;
+    saveAcsPatientDetails['acsType'] = this.subform.get('StemiTypeId').value;
+    saveAcsPatientDetails['cpPresentation'] = this.subform.get('Cppresentation').value;
+    saveAcsPatientDetails['hemodynamics'] = this.subform.get('Hemodynamic').value;
+    saveAcsPatientDetails['hypotension'] = this.subform.get('Hypertension').value;
+    saveAcsPatientDetails['tachy'] = this.subform.get('Tachy').value;
+    saveAcsPatientDetails['brady'] = this.subform.get('Brady').value;
+    saveAcsPatientDetails['rosc'] = this.subform.get('Rosc').value;
+    saveAcsPatientDetails['anatomicalPosition'] = 0;// this.subform.get('CABG').value;
+    saveAcsPatientDetails['stemiOther'] = this.subform.get('SemiOther').value;
+    saveAcsPatientDetails['ekgChange'] = this.subform.get('EKGChanges').value;
+    saveAcsPatientDetails['enzymeRaised'] = this.subform.get('Enzyme').value;
+    saveAcsPatientDetails['other'] = this.subform.get('Other1').value;
+    saveAcsPatientDetails['nstemiOther'] = this.subform.get('SemiOther').value;
+    saveAcsPatientDetails['createdBy'] = this._loggedService.currentUserValue.user.id;
+
+    submissionObj['saveAcsPatientDetails'] = saveAcsPatientDetails;
+
+    console.log(submissionObj);
+    this._ClinicalDocumentService.SaveAcuteCorSyndrome(submissionObj).subscribe(response => {
+      console.log(response);
+      if (response) {
+        Swal.fire('Congratulations !', 'Acute Coronary Syndrome Saved Successfully  !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+          }
+        });
+      } else {
+        Swal.fire('Error !', 'Acute Coronary Syndrome Not Updated', 'error');
+      }
+      this.isLoading = '';
+    }, error => {
+      Swal.fire('Data not saved !, Please check API error..', 'Error !')
+      // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
+    });
+
+  }
+ 
+  OnSaveStable() {
+    this.isLoading = 'submit';
+    let submissionObj = {};
+    let saveScsPatientDetails = {};
+
+    saveScsPatientDetails['scsPatientId'] = 0;
+    saveScsPatientDetails['patientId'] = this.RegNo;
+    saveScsPatientDetails['visitId'] = 0;
+    saveScsPatientDetails['symtomTypeId'] =0; //this.data.DropDownId;
+    saveScsPatientDetails['angina'] = this.subform.get('Condtionstatus').value;
+    saveScsPatientDetails['inducibleIschemia'] = this.subform.get('InducibleTypeId').value.id;
+    saveScsPatientDetails['inducibleIschemiaResult'] = this.subform.get('InducibleTypeStatus').value.name;
+    saveScsPatientDetails['createdBy'] = this._loggedService.currentUserValue.user.id;
+
+    submissionObj['saveScsPatientDetails'] = saveScsPatientDetails;
+
+    console.log(submissionObj);
+    this._ClinicalDocumentService.SaveStableCoronary(submissionObj).subscribe(response => {
+      console.log(response);
+      if (response) {
+        Swal.fire('Congratulations !', 'Stable Coronary Syndrome Saved Successfully  !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+          }
+        });
+      } else {
+        Swal.fire('Error !', 'Stable Coronary Syndrome Not Updated', 'error');
+      }
+      this.isLoading = '';
+    }, error => {
+      Swal.fire('Data not saved !, Please check API error..', 'Error !')
+      // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
+    });
+
+  }
+  
+  OnSaveDetCad() {
+    this.isLoading = 'submit';
+    let submissionObj = {};
+    let saveIdcadPatientDetails = {};
+
+    saveIdcadPatientDetails['idcadPatientId'] = 0;
+    saveIdcadPatientDetails['patientId'] = this.RegNo;
+    saveIdcadPatientDetails['visitId'] = 0;
+    saveIdcadPatientDetails['symtomTypeId'] =0;//this.data.DropDownId;
+    saveIdcadPatientDetails['ct'] = this.CADdivFormGroup.get('CT').value;
+    saveIdcadPatientDetails['calciumScore'] = this.CADdivFormGroup.get('Calcium').value;
+    saveIdcadPatientDetails['idcadOther'] = this.CADdivFormGroup.get('Other').value;
+    saveIdcadPatientDetails['createdBy'] = this._loggedService.currentUserValue.user.id;
+
+    submissionObj['saveIdcadPatientDetails'] = saveIdcadPatientDetails;
+
+    console.log(submissionObj);
+    this._ClinicalDocumentService.SaveIdcadPatient(submissionObj).subscribe(response => {
+      console.log(response);
+      if (response) {
+        Swal.fire('Congratulations !', 'Idcad Patient Details Saved Successfully  !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+          }
+        });
+      } else {
+        Swal.fire('Error !', 'Idcad Patient Details Not Updated', 'error');
+      }
+      this.isLoading = '';
+    }, error => {
+      Swal.fire('Data not saved !, Please check API error..', 'Error !')
+      // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
+    });
+
   }
 }
 

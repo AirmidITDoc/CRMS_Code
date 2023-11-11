@@ -35,6 +35,7 @@ export class NewDocRegistrationComponent implements OnInit {
   WireTypeFormGroup:FormGroup;
   ImagingFormGroup:FormGroup;
   PhysiologyFormGroup:FormGroup;
+  ResultFormGroup:FormGroup;
   personalFormGroup: FormGroup;
 
   filteredOptions: any;
@@ -327,6 +328,7 @@ export class NewDocRegistrationComponent implements OnInit {
     this.WireTypeFormGroup =this.createWireTypeForm();
     this.ImagingFormGroup = this.createImagingForm();
     this.PhysiologyFormGroup=this.createPhysiologyForm();
+    this.ResultFormGroup = this.createResultForm();
     // this.getPrefixList();
     this.getvSymtomTypeList();
     this.getvRWMAList();
@@ -341,7 +343,7 @@ export class NewDocRegistrationComponent implements OnInit {
     }
     this._ClinicalDocumentService.getDropDownList(vadata).subscribe(data => {
       this.vSymtomType = data
-       console.log(this.vSymtomType);
+       //console.log(this.vSymtomType);
     })
   }
   getvRWMAList() {
@@ -466,11 +468,15 @@ export class NewDocRegistrationComponent implements OnInit {
         Swal.fire('Error !', 'Patient 2DEcho Detaile Not Updated', 'error');
       }
       this.isLoading = '';
+    }, error => {
+      Swal.fire(' Data not saved !, Please check API error..', 'Error !')
+      // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
     });
   }
   createSearchForm(){
     return this.formBuilder.group({
-      RegID: ['']
+      RegID: [''],
+      
     })
   }
   getSearchList() {
@@ -538,6 +544,9 @@ export class NewDocRegistrationComponent implements OnInit {
           Swal.fire('Error !', 'Patient past History Not Updated', 'error');
         }
         this.isLoading = '';
+      }, error => {
+        Swal.fire('Data not saved !, Please check API error..', 'Error !')
+        // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
       });
     }
 // Cardiac Risk Factore
@@ -611,6 +620,9 @@ export class NewDocRegistrationComponent implements OnInit {
           Swal.fire('Error !', 'Cardiac Risk Factor Not Updated', 'error');
         }
         this.isLoading = '';
+      }, error => {
+        Swal.fire('Data not saved !, Please check API error..', 'Error !')
+        // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
       });
 
     }
@@ -703,6 +715,9 @@ export class NewDocRegistrationComponent implements OnInit {
           Swal.fire('Error !', 'Lesion Details Not Updated', 'error');
         }
         this.isLoading = '';
+      }, error => {
+        Swal.fire('Data not saved !, Please check API error..', 'Error !')
+        // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
       });
       }
 
@@ -739,6 +754,9 @@ export class NewDocRegistrationComponent implements OnInit {
           Swal.fire('Error !', 'Procedure Not Updated', 'error');
         }
         this.isLoading = '';
+      }, error => {
+        Swal.fire('Data not saved !, Please check API error..', 'Error !')
+        // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
       });
 
     }
@@ -919,26 +937,95 @@ export class NewDocRegistrationComponent implements OnInit {
         Swal.fire('Error !', 'Access Type Not Updated', 'error');
       }
       this.isLoading = '';
+    }, error => {
+      Swal.fire('Data not saved !, Please check API error..', 'Error !')
+      // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
     });
     }
 
+    // Result Start
 
+    createResultForm(){
+      return this.formBuilder.group({
+        Result:['1'],
+        LabEvent:[],
+        Hypertension:'',
+        HyperOther:'',
+        MICS:'',
+        MicsOther:'',
+        Hrs24:'',
+        CKMBRaised:'',
+        LVfunction:'',
+        HrsOther:'',
+        Days30:''
+      });
+    }
+    onSubmitResult(){
 
+      this.isLoading = 'submit';
+      let submissionObj = {};
+      let SaveResultType= {};
 
+      SaveResultType['Result']  =  0;
+      SaveResultType['patientId']  = this.RegNo;
+      SaveResultType['visitId']  = 0;
+      SaveResultType['LabEvent']  = this.ResultFormGroup.get('LabEvent').value;
+      SaveResultType['Hypertension']  = this.ResultFormGroup.get('Hypertension').value;
+      SaveResultType['MICS']  = this.ResultFormGroup.get('MICS').value;
+      SaveResultType['MicsOther']  = this.ResultFormGroup.get('MicsOther').value;
+      SaveResultType['Hrs24']  = this.ResultFormGroup.get('Hrs24').value;
+      SaveResultType['CKMBRaised']  = this.ResultFormGroup.get('CKMBRaised').value;
+      SaveResultType['LVfunction']  = this.ResultFormGroup.get('LVfunction').value;
+      SaveResultType['HrsOther']  = this.ResultFormGroup.get('HrsOther').value;
+      SaveResultType['Days30']  = this.ResultFormGroup.get('Days30').value;
+      SaveResultType['createdBy']  =this._loggedService.currentUserValue.user.id;
+  
+      submissionObj['saveLesionDetails'] = SaveResultType;
+      
+      console.log(submissionObj);
+      this._ClinicalDocumentService.SaveLesionDetails(submissionObj).subscribe(response => {
+        console.log(response);
+        if (response) {
+          Swal.fire('Congratulations !', ' Result Saved Successfully  !', 'success').then((result) => {
+            if (result.isConfirmed) {
+              this._matDialog.closeAll();
+            }
+          });
+        } else {
+          Swal.fire('Error !', 'Result Not Updated', 'error');
+        }
+        this.isLoading = '';
+      }, error => {
+        Swal.fire('Data not saved !, Please check API error..', 'Error !')
+        // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
+      });
 
-
-
-
-
-
-
-
-
-
-
+    }
 
   createPesonalForm() {
     return this.formBuilder.group({
+      Imaging:'',
+      ImagingType:'',
+      LesionComposition:'',
+      MicroCatheterCrossed:'',
+      Speed:'',
+      Time:'',
+      Runs:'',
+      Successful:'',
+      Others:'',
+      MicroCatheter:'',
+      Size:'',
+      Speed1:'',
+      Time1:'',
+      Runs1:'',
+      Fluence:'',
+      Laser:'',
+      Medium:'',
+      Diameter:'',
+      Perforation:'',
+      RVAd:'',
+      PB:'',
+      LVAd:'',
       // RegId: '',
       // PrefixID: '',
       // FirstName: ['', [
@@ -1021,15 +1108,12 @@ export class NewDocRegistrationComponent implements OnInit {
     });
   }
 
- 
-  
   getappointment() {
     var m = {
       "PatientName": this.PatientName,
       "RegNo": this.RegNo,
       "MobileNo": this.Mobileno
     }
-
     const dialogRef = this._matDialog.open(DocPresentationComponent,
       {
         maxWidth: "60%",
@@ -1041,173 +1125,13 @@ export class NewDocRegistrationComponent implements OnInit {
       });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed - Insert Action', result);
-
     });
   }
 
-  // gethyamonodynamic() {
-  //   const dialogRef = this._matDialog.open(ProcedureHemodynamicsComponent,
-  //     {
-  //       maxWidth: "60%",
-  //       height: '700px',
-  //       width: '100%',
-  //       data: {
-  //         advanceObj:m,
-  //       }
-  //     });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed - Insert Action', result);
-
-  //   });
-  // }
-
-  getProcedure() {
-
-    var m = {
-      "PatientName": this.PatientName,
-      "RegNo": this.RegNo,
-      "MobileNo": this.Mobileno
-    }
-
-    const dialogRef = this._matDialog.open(ProcedureHemodynamicsComponent,
-      {
-        maxWidth: "90%",
-        height: '1000px',
-        width: '100%',
-        data: {
-          advanceObj: m,
-        }
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed - Insert Action', result);
-
-    });
-  }
-
-  // getresult() {
-  //   const dialogRef = this._matDialog.open(ResultComponent,
-  //     {
-  //       maxWidth: "60%",
-  //       height: '700px',
-  //       width: '100%',
-  //       data: {
-  //         advanceObj: this.PatientHeaderObj,
-  //       }
-  //     });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed - Insert Action', result);
-
-  //   });
-  // }
-
-  onChangePageList(Id) {
-    debugger
-    console.log(Id)
-
-    this.PatientHeaderObj['PatientName'] = this.PatientName;
-    this.PatientHeaderObj['RegNo'] = this.RegNo;
-    this.PatientHeaderObj['MobileNo'] = this.Mobileno;
-
-
-    if (Id.id == 1) {
-      const dialogRef = this._matDialog.open(DocPresentationComponent,
-        {
-          maxWidth: "90%",
-          height: '900px',
-          width: '100%',
-          data: {
-            advanceObj: this.PatientHeaderObj,
-          }
-        });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed - Insert Action', result);
-
-      });
-    } else if (Id.id == 2) {
-      const dialogRef = this._matDialog.open(ProcedureHemodynamicsComponent,
-        {
-          maxWidth: "90%",
-          height: '1000px',
-          width: '100%',
-          data: {
-            advanceObj: this.PatientHeaderObj,
-          }
-        });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed - Insert Action', result);
-
-      });
-    } else if (Id.id == 3) {
-      const dialogRef = this._matDialog.open(DempgraphicComponent,
-        {
-          maxWidth: "90%",
-          height: '700px',
-          width: '100%',
-          data: {
-            advanceObj: this.PatientHeaderObj,
-          }
-        });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed - Insert Action', result);
-
-      });
-    } else if (Id.id == 5) {
-
-      const dialogRef = this._matDialog.open(LesionPreprationComponent,
-        {
-          maxWidth: "60%",
-          height: '700px',
-          width: '100%',
-          data: {
-            advanceObj: this.PatientHeaderObj,
-          }
-        });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed - Insert Action', result);
-
-      });
-    } else if (Id.id == 6) {
-
-      const dialogRef = this._matDialog.open(DocPresentationComponent,
-        {
-          maxWidth: "60%",
-          height: '700px',
-          width: '100%',
-          data: {
-            advanceObj: this.PatientHeaderObj,
-          }
-        });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed - Insert Action', result);
-
-      });
-    }
-    else if (Id.id == 7) {
-
-      const dialogRef = this._matDialog.open(ResultComponent,
-        {
-          maxWidth: "60%",
-          height: '700px',
-          width: '100%',
-          data: {
-            advanceObj: this.PatientHeaderObj,
-          }
-        });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed - Insert Action', result);
-
-      });
-    }
-
-  }
   onChangeDocList(Id) {
-    debugger
-
     this.PatientHeaderObj['PatientName'] = this.PatientName;
     this.PatientHeaderObj['RegNo'] = this.RegNo;
     this.PatientHeaderObj['MobileNo'] = this.Mobileno;
-
-
     const dialogRef = this._matDialog.open(DocPresentationComponent,
       {
         maxWidth: "60%",
@@ -1223,145 +1147,263 @@ export class NewDocRegistrationComponent implements OnInit {
 
     });
   }
-
-  private _filterPrex(value: any): string[] {
-    if (value) {
-      const filterValue = value && value.PrefixName ? value.PrefixName.toLowerCase() : value.toLowerCase();
-      return this.optionsPrefix.filter(option => option.PrefixName.toLowerCase().includes(filterValue));
-    }
-
-  }
-  getOptionTextPrefix(option) {
-    return option.PrefixName;
-  }
-
-
-  getPrefixList() {
-    this._AppointmentService.getPrefixCombo().subscribe(data => {
-      this.PrefixList = data;
-      this.optionsPrefix = this.PrefixList.slice();
-      this.filteredOptionsPrefix = this.personalFormGroup.get('PrefixID').valueChanges.pipe(
-        startWith(''),
-        map(value => value ? this._filterPrex(value) : this.PrefixList.slice()),
-      );
-
-    });
-    this.onChangeGenderList(this.personalFormGroup.get('PrefixID').value);
-  }
-
-
-  onChangeGenderList(prefixObj) {
-    if (prefixObj) {
-      this._AppointmentService.getGenderCombo(prefixObj.PrefixID).subscribe(data => {
-        this.GenderList = data;
-        this.personalFormGroup.get('GenderId').setValue(this.GenderList[0]);
-
-        this.selectedGenderID = this.GenderList[0].GenderId;
-      });
-    }
-  }
-
-  onChangeDateofBirth(DateOfBirth) {
-    debugger
-    if (DateOfBirth) {
-      const todayDate = new Date();
-      const dob = new Date(DateOfBirth);
-      const timeDiff = Math.abs(Date.now() - dob.getTime());
-      this.registerObj.AgeYear = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
-      this.registerObj.AgeMonth = Math.abs(todayDate.getMonth() - dob.getMonth());
-      this.registerObj.AgeDay = Math.abs(todayDate.getDate() - dob.getDate());
-      this.registerObj.DateofBirth = DateOfBirth;
-      this.personalFormGroup.get('DateOfBirth').setValue(DateOfBirth);
-    }
-
-  }
-
-  onPresentation() {
-    const dialogRef = this._matDialog.open(NewDocumentComponent,
-      {
-        maxWidth: "80%",
-        height: '600px',
-        width: '100%',
-        data: {
-          "Divtype": "Acute Coronary Syndrome"
-        }
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed - Insert Action', result);
-
-    });
-  }
-
-
-  submitAdmissionForm() {
-    // debugger;
-
-    // this.isLoading = 'submit';
-    let submissionObj = {};
-    let regInsert = {};
-    let admissionNewInsert = {};
-    regInsert['RegId'] = 0;
-    regInsert['regDate'] = this.dateTimeObj.date //this.registerObj.RegDate;
-    regInsert['regTime'] = this.dateTimeObj.time;
-    regInsert['prefixId'] = this.personalFormGroup.get('PrefixID').value.PrefixID;
-    regInsert['firstName'] = this.registerObj.FirstName || '';
-    regInsert['middleName'] = this.registerObj.MiddleName || '';
-    regInsert['lastName'] = this.registerObj.LastName || '';
-    regInsert['address'] = this.registerObj.Address || '';
-    regInsert['city'] = this.personalFormGroup.get('CityId').value.CityName;
-    regInsert['PinNo'] = '';
-    regInsert['dateOfBirth'] = this.registerObj.DateofBirth;
-    regInsert['age'] = this.registerObj.AgeYear;//this.registerObj.Age;
-    regInsert['genderID'] = this.personalFormGroup.get('GenderId').value.GenderId;
-    regInsert['phoneNo'] = this.registerObj.PhoneNo || '';
-    regInsert['mobileNo'] = this.registerObj.MobileNo || '';
-    regInsert['addedBy'] = this._loggedService.currentUserValue.user.id;
-    regInsert['UpdatedBy'] = 0,// this.accountService.currentUserValue.user.id;
-      regInsert['ageYear'] = this.registerObj.AgeYear || '';
-    regInsert['ageMonth'] = this.registerObj.AgeMonth || '';
-    regInsert['ageDay'] = this.registerObj.AgeDay || '';
-    regInsert['countryId'] = this.personalFormGroup.get('CountryId').value.CountryId;
-    regInsert['stateId'] = this.personalFormGroup.get('StateId').value.StateId;
-    regInsert['cityId'] = this.personalFormGroup.get('CityId').value.CityId;
-    regInsert['maritalStatusId'] = this.personalFormGroup.get('MaritalStatusId').value ? this.personalFormGroup.get('MaritalStatusId').value.MaritalStatusId : 0;
-    regInsert['isCharity'] = false;
-    regInsert['religionId'] = this.personalFormGroup.get('ReligionId').value ? this.personalFormGroup.get('ReligionId').value.ReligionId : 0;
-    regInsert['areaId'] = this.personalFormGroup.get('AreaId').value ? this.personalFormGroup.get('AreaId').value.AreaId : 0;
-    regInsert['IsSeniorCitizen'] = 1;//this.personalFormGroup.get('IsSeniorCitizen').value ? this.personalFormGroup.get('ReligionId').value.ReligionId : 0;
-
-    // console.log(submissionObj);
-    this._AppointmentService.RegDocInsert(submissionObj).subscribe(response => {
-      console.log(response);
-      if (response) {
-        Swal.fire('Congratulations !', 'Admission save Successfully !', 'success').then((result) => {
-          if (result.isConfirmed) {
-            let m = response;
-            // this.getPrint(m);
-            // console.log( this.getPrint(m));
-            this._matDialog.closeAll();
-
-          }
-        });
-      } else {
-        Swal.fire('Error !', 'Admission not saved', 'error');
-      }
-      this.isLoading = '';
-    });
-  }
-
   onClose() {
-    // this.dialogRef.close();
+   
   }
-
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
     // console.log('dateTimeObj==', dateTimeObj);
     this.dateTimeObj = dateTimeObj;
   }
+    // getProcedure() {
+  //   var m = {
+  //     "PatientName": this.PatientName,
+  //     "RegNo": this.RegNo,
+  //     "MobileNo": this.Mobileno
+  //   }
+  //   const dialogRef = this._matDialog.open(ProcedureHemodynamicsComponent,
+  //     {
+  //       maxWidth: "90%",
+  //       height: '1000px',
+  //       width: '100%',
+  //       data: {
+  //         advanceObj: m,
+  //       }
+  //     });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed - Insert Action', result);
+
+  //   });
+  // }
+ 
+  // onChangePageList(Id) {
+  //   // debugger
+  //   console.log(Id)
+
+  //   this.PatientHeaderObj['PatientName'] = this.PatientName;
+  //   this.PatientHeaderObj['RegNo'] = this.RegNo;
+  //   this.PatientHeaderObj['MobileNo'] = this.Mobileno;
+
+
+  //   if (Id.id == 1) {
+  //     const dialogRef = this._matDialog.open(DocPresentationComponent,
+  //       {
+  //         maxWidth: "90%",
+  //         height: '900px',
+  //         width: '100%',
+  //         data: {
+  //           advanceObj: this.PatientHeaderObj,
+  //         }
+  //       });
+  //     dialogRef.afterClosed().subscribe(result => {
+  //       console.log('The dialog was closed - Insert Action', result);
+
+  //     });
+  //   } else if (Id.id == 2) {
+  //     const dialogRef = this._matDialog.open(ProcedureHemodynamicsComponent,
+  //       {
+  //         maxWidth: "90%",
+  //         height: '1000px',
+  //         width: '100%',
+  //         data: {
+  //           advanceObj: this.PatientHeaderObj,
+  //         }
+  //       });
+  //     dialogRef.afterClosed().subscribe(result => {
+  //       console.log('The dialog was closed - Insert Action', result);
+
+  //     });
+  //   } else if (Id.id == 3) {
+  //     const dialogRef = this._matDialog.open(DempgraphicComponent,
+  //       {
+  //         maxWidth: "90%",
+  //         height: '700px',
+  //         width: '100%',
+  //         data: {
+  //           advanceObj: this.PatientHeaderObj,
+  //         }
+  //       });
+  //     dialogRef.afterClosed().subscribe(result => {
+  //       console.log('The dialog was closed - Insert Action', result);
+
+  //     });
+  //   } else if (Id.id == 5) {
+
+  //     const dialogRef = this._matDialog.open(LesionPreprationComponent,
+  //       {
+  //         maxWidth: "60%",
+  //         height: '700px',
+  //         width: '100%',
+  //         data: {
+  //           advanceObj: this.PatientHeaderObj,
+  //         }
+  //       });
+  //     dialogRef.afterClosed().subscribe(result => {
+  //       console.log('The dialog was closed - Insert Action', result);
+
+  //     });
+  //   } else if (Id.id == 6) {
+
+  //     const dialogRef = this._matDialog.open(DocPresentationComponent,
+  //       {
+  //         maxWidth: "60%",
+  //         height: '700px',
+  //         width: '100%',
+  //         data: {
+  //           advanceObj: this.PatientHeaderObj,
+  //         }
+  //       });
+  //     dialogRef.afterClosed().subscribe(result => {
+  //       console.log('The dialog was closed - Insert Action', result);
+
+  //     });
+  //   }
+  //   else if (Id.id == 7) {
+
+  //     const dialogRef = this._matDialog.open(ResultComponent,
+  //       {
+  //         maxWidth: "60%",
+  //         height: '700px',
+  //         width: '100%',
+  //         data: {
+  //           advanceObj: this.PatientHeaderObj,
+  //         }
+  //       });
+  //     dialogRef.afterClosed().subscribe(result => {
+  //       console.log('The dialog was closed - Insert Action', result);
+
+  //     });
+  //   }
+
+  // }
+
+
+  // private _filterPrex(value: any): string[] {
+  //   if (value) {
+  //     const filterValue = value && value.PrefixName ? value.PrefixName.toLowerCase() : value.toLowerCase();
+  //     return this.optionsPrefix.filter(option => option.PrefixName.toLowerCase().includes(filterValue));
+  //   }
+
+  // }
+  // getOptionTextPrefix(option) {
+  //   return option.PrefixName;
+  // }
+
+
+  // getPrefixList() {
+  //   this._AppointmentService.getPrefixCombo().subscribe(data => {
+  //     this.PrefixList = data;
+  //     this.optionsPrefix = this.PrefixList.slice();
+  //     this.filteredOptionsPrefix = this.personalFormGroup.get('PrefixID').valueChanges.pipe(
+  //       startWith(''),
+  //       map(value => value ? this._filterPrex(value) : this.PrefixList.slice()),
+  //     );
+
+  //   });
+  //   this.onChangeGenderList(this.personalFormGroup.get('PrefixID').value);
+  // }
+
+
+  // onChangeGenderList(prefixObj) {
+  //   if (prefixObj) {
+  //     this._AppointmentService.getGenderCombo(prefixObj.PrefixID).subscribe(data => {
+  //       this.GenderList = data;
+  //       this.personalFormGroup.get('GenderId').setValue(this.GenderList[0]);
+
+  //       this.selectedGenderID = this.GenderList[0].GenderId;
+  //     });
+  //   }
+  // }
+
+  // onChangeDateofBirth(DateOfBirth) {
+  //   // debugger
+  //   if (DateOfBirth) {
+  //     const todayDate = new Date();
+  //     const dob = new Date(DateOfBirth);
+  //     const timeDiff = Math.abs(Date.now() - dob.getTime());
+  //     this.registerObj.AgeYear = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
+  //     this.registerObj.AgeMonth = Math.abs(todayDate.getMonth() - dob.getMonth());
+  //     this.registerObj.AgeDay = Math.abs(todayDate.getDate() - dob.getDate());
+  //     this.registerObj.DateofBirth = DateOfBirth;
+  //     this.personalFormGroup.get('DateOfBirth').setValue(DateOfBirth);
+  //   }
+
+  // }
+
+  // onPresentation() {
+  //   const dialogRef = this._matDialog.open(NewDocumentComponent,
+  //     {
+  //       maxWidth: "80%",
+  //       height: '600px',
+  //       width: '100%',
+  //       data: {
+  //         "Divtype": "Acute Coronary Syndrome"
+  //       }
+  //     });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed - Insert Action', result);
+
+  //   });
+  // }
+
+
+  // submitAdmissionForm() {
+  //   // debugger;
+
+  //   // this.isLoading = 'submit';
+  //   let submissionObj = {};
+  //   let regInsert = {};
+  //   let admissionNewInsert = {};
+  //   regInsert['RegId'] = 0;
+  //   regInsert['regDate'] = this.dateTimeObj.date //this.registerObj.RegDate;
+  //   regInsert['regTime'] = this.dateTimeObj.time;
+  //   regInsert['prefixId'] = this.personalFormGroup.get('PrefixID').value.PrefixID;
+  //   regInsert['firstName'] = this.registerObj.FirstName || '';
+  //   regInsert['middleName'] = this.registerObj.MiddleName || '';
+  //   regInsert['lastName'] = this.registerObj.LastName || '';
+  //   regInsert['address'] = this.registerObj.Address || '';
+  //   regInsert['city'] = this.personalFormGroup.get('CityId').value.CityName;
+  //   regInsert['PinNo'] = '';
+  //   regInsert['dateOfBirth'] = this.registerObj.DateofBirth;
+  //   regInsert['age'] = this.registerObj.AgeYear;//this.registerObj.Age;
+  //   regInsert['genderID'] = this.personalFormGroup.get('GenderId').value.GenderId;
+  //   regInsert['phoneNo'] = this.registerObj.PhoneNo || '';
+  //   regInsert['mobileNo'] = this.registerObj.MobileNo || '';
+  //   regInsert['addedBy'] = this._loggedService.currentUserValue.user.id;
+  //   regInsert['UpdatedBy'] = 0,// this.accountService.currentUserValue.user.id;
+  //     regInsert['ageYear'] = this.registerObj.AgeYear || '';
+  //   regInsert['ageMonth'] = this.registerObj.AgeMonth || '';
+  //   regInsert['ageDay'] = this.registerObj.AgeDay || '';
+  //   regInsert['countryId'] = this.personalFormGroup.get('CountryId').value.CountryId;
+  //   regInsert['stateId'] = this.personalFormGroup.get('StateId').value.StateId;
+  //   regInsert['cityId'] = this.personalFormGroup.get('CityId').value.CityId;
+  //   regInsert['maritalStatusId'] = this.personalFormGroup.get('MaritalStatusId').value ? this.personalFormGroup.get('MaritalStatusId').value.MaritalStatusId : 0;
+  //   regInsert['isCharity'] = false;
+  //   regInsert['religionId'] = this.personalFormGroup.get('ReligionId').value ? this.personalFormGroup.get('ReligionId').value.ReligionId : 0;
+  //   regInsert['areaId'] = this.personalFormGroup.get('AreaId').value ? this.personalFormGroup.get('AreaId').value.AreaId : 0;
+  //   regInsert['IsSeniorCitizen'] = 1;//this.personalFormGroup.get('IsSeniorCitizen').value ? this.personalFormGroup.get('ReligionId').value.ReligionId : 0;
+
+  //   // console.log(submissionObj);
+  //   this._AppointmentService.RegDocInsert(submissionObj).subscribe(response => {
+  //     console.log(response);
+  //     if (response) {
+  //       Swal.fire('Congratulations !', 'Admission save Successfully !', 'success').then((result) => {
+  //         if (result.isConfirmed) {
+  //           let m = response;
+  //           // this.getPrint(m);
+  //           // console.log( this.getPrint(m));
+  //           this._matDialog.closeAll();
+
+  //         }
+  //       });
+  //     } else {
+  //       Swal.fire('Error !', 'Admission not saved', 'error');
+  //     }
+  //     this.isLoading = '';
+  //   });
+  // }
 
 }
-
-
 
 export class D2EchoDet {
   LVEF: any;

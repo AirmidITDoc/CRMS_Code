@@ -31,4 +31,14 @@ export class ClinicalDocumentService {
     public SaveLesionDetails(employee) {
       return this._httpClient.post("Cardiology/SaveLesionDetails", employee);
     }
+    public SaveAcuteCorSyndrome(employee) {
+      return this._httpClient.post("Cardiology/SaveAcsPatientDetails", employee);
+    }
+    public SaveStableCoronary(employee) {
+      return this._httpClient.post("Cardiology/SaveScsPatientDetails", employee);
+    }
+    public SaveIdcadPatient(employee) {
+      return this._httpClient.post("Cardiology/SaveIdcadPatientDetails", employee);
+    }
+    
 }
