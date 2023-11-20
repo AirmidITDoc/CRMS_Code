@@ -51,6 +51,7 @@ export class NewDocRegistrationComponent implements OnInit {
   isRegIdSelected: boolean = false;
   RegNo: any;
   PatientId:any;
+  sIsLoading: string = '';
 
   isPrefixSelected: boolean = false;
   optionsPrefix: any[] = [];
@@ -413,7 +414,7 @@ export class NewDocRegistrationComponent implements OnInit {
       {
         LVEF: this.newAddForm.get('LVEF').value || 0,
         GLS: this.newAddForm.get('GLS').value || 0,
-        RWMA: this.newAddForm.get('RWMA').value.name || '',
+        RWMA: this.newAddForm.get('RWMA').value.DropDownValue || '',
         PApressure: this.newAddForm.get('PApressure').value.name || '',
         Valve: this.newAddForm.get('Valve').value.name || 0,
         Stenotic: this.newAddForm.get('Stenotic').value || 0,
@@ -473,6 +474,23 @@ export class NewDocRegistrationComponent implements OnInit {
       // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
     });
   }
+  
+get2DEchoDetails(){
+  this.sIsLoading = 'loading-data';
+  var m_data = {
+    "PatientId":this.registerObj.PatientId || 0
+  }
+  console.log(m_data);
+  this._ClinicalDocumentService.get2DEchoDetailesList(m_data).subscribe(data => {
+    this.dataSource.data = data as D2EchoDet[];
+    console.log(this.dataSource.data);
+    this.sIsLoading = '';
+  },
+    error => {
+      this.sIsLoading = '';
+    });
+}
+
   createSearchForm(){
     return this.formBuilder.group({
       RegID: [''],
@@ -486,7 +504,7 @@ export class NewDocRegistrationComponent implements OnInit {
     if (this.newSearchForm.get('RegID').value.length >= 1) {
       this._ClinicalDocumentService.getSearchPatientInformList(m_data).subscribe(resData => {
         this.filteredOptions = resData;
-        console.log(resData);
+        //console.log(resData);
         this.PatientListfilteredOptions = resData;
         if (this.filteredOptions.length == 0) {
           this.noOptionFound = true;
@@ -506,6 +524,7 @@ export class NewDocRegistrationComponent implements OnInit {
     console.log(obj);
     this.PatientName = this.registerObj.FirstName + ' ' + this.registerObj.MiddleName + ' ' + this.registerObj.LastName;
     this.RegNo= this.registerObj.PatientId;
+    this.get2DEchoDetails();
   }
   createSaveForm(){
     return this.formBuilder.group({
@@ -1007,25 +1026,92 @@ export class NewDocRegistrationComponent implements OnInit {
       Imaging:'',
       ImagingType:'',
       LesionComposition:'',
+      Calcium:'',
       MicroCatheterCrossed:'',
+      Size:'',
       Speed:'',
       Time:'',
       Runs:'',
       Successful:'',
       Others:'',
       MicroCatheter:'',
-      Size:'',
-      Speed1:'',
-      Time1:'',
-      Runs1:'',
+
+      OrbitalSize:'',
+      OrbitalSpeed:'',
+      OrbitalTime:'',
+      OrbitalRuns:'',
+      OrbitalSuccessful:'',
+      OrbitalMicroCatheter:'',
+      OrbitalOthers:'',
+
+      LaserSize:'',
       Fluence:'',
-      Laser:'',
+      LaserOnOff:'',
       Medium:'',
+      LaserSuccessful:'',
+      LaserMicroCatheter:'',
+      LaserOthers:'',
+
+      TornusSize:'',
+      TornusSuccessful:'',
+
+      Balloons:'',
+      Length:'',
       Diameter:'',
-      Perforation:'',
-      RVAd:'',
-      PB:'',
-      LVAd:'',
+      Pressure:'',
+      LastSuccessful:'',
+      Thrombo:'',
+      GuideExtension:'',
+      Complete:'',
+      MICSOthers:'',
+      Bradycardia:'',
+      EmergencyPacing:'',
+
+      ImagingOther:'',
+      NoLength:'',
+      NoSelect:'',
+      NoRVAd:'',
+      NoLVAd:'',
+      NoPB:'',
+      YesSelect:'',
+      YesRVAd:'',
+      YesLVAd:'',
+      YesPB:'',
+      SegmPatent:'',
+      SegmSelect:'',
+      SegmRVAd:'',
+      SegmLVAd:'',
+      SegmPB:'',
+      ImagingNo:'',
+
+      Stent:'',
+      StentName:'',
+      StentMinDaimeter:'',
+      StentMaxDaimeter:'',
+      TotalStentLength:'',
+      StentPressure:'',
+
+      Imagingother1:'',
+      No1Length:'',
+      No1Select:'',
+      No1RVAd:'',
+      No1LVAd:'',
+      No1PB:'',
+      Yes1Select:'',
+      Yes1RVAd:'',
+      Yes1LVAd:'',
+      Yes1PB:'',
+      Segm1Patent:'',
+      Segm1Select:'',
+      Segm1RVAd:'',
+      Segm1LVAd:'',
+      Segm1PB:'',
+      No1:''
+
+
+      
+
+     
       // RegId: '',
       // PrefixID: '',
       // FirstName: ['', [
@@ -1105,7 +1191,7 @@ export class NewDocRegistrationComponent implements OnInit {
 
       // Physiologytype: '',
       // Physiologyvalue: ''
-    });
+    })
   }
 
   getappointment() {

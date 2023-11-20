@@ -1970,9 +1970,9 @@
                       <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
                         <div>
                           <span class="presentation-section-label example-margin">Imaging Done:</span>
-                          <mat-form-field class="mr-sm-12 section-dropdown" formControlName="Imaging" fxFlex>
+                          <mat-form-field class="mr-sm-12 section-dropdown"  fxFlex>
                             <mat-label>Imaging Done</mat-label>
-                            <mat-select>
+                            <mat-select formControlName="Imaging">
                               <mat-option value="0">-- Select --</mat-option>
                               <mat-option value="1">Yes</mat-option>
                               <mat-option value="2">No</mat-option>
@@ -2005,10 +2005,10 @@
                             <label class="example-margin">Calcium:</label>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>Calcium</mat-label>
-                              <mat-select>
+                              <mat-select  formControlName="Calcium">
                                 <mat-option value="0">-- Select Calcium --</mat-option>
                                 <mat-option value="1">
-                                  < 180 Degree </mat-option>
+                                  180 Degree </mat-option>
                                     <mat-option value="2"> > 180 Degree </mat-option>
                               </mat-select>
                             </mat-form-field>
@@ -2020,10 +2020,9 @@
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
                         <section class="example-section section-header">
                           <label class=" label-rightpadding2">Micro Catheter Crossed: </label>
-                          <mat-form-field class="mr-sm-12 section-dropdown" formControlName="MicroCatheterCrossed"
-                            fxFlex>
+                          <mat-form-field class="mr-sm-12 section-dropdown"   fxFlex>
                             <mat-label>-- Select --</mat-label>
-                            <mat-select>
+                            <mat-select formControlName="MicroCatheterCrossed">
                               <mat-option value="1">Yes</mat-option>
                               <mat-option value="2">No</mat-option>
                             </mat-select>
@@ -2061,7 +2060,7 @@
                                           <label class="example-margin">Size:</label>
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select  formControlName="Size">
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">1.25</mat-option>
                                               <mat-option value="2">1.50</mat-option>
@@ -2115,10 +2114,9 @@
                                       <div>
                                         <section class="example-section">
                                           <label class="example-margin">Micro Catheter:</label>
-                                          <mat-form-field class="mr-sm-12 section-dropdown"
-                                            formControlName="MicroCatheter" fxFlex>
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="MicroCatheter" >
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">Finecross</mat-option>
                                               <mat-option value="2">Crusader</mat-option>
@@ -2162,14 +2160,13 @@
                                           <label class="example-margin">Size:</label>
                                           <mat-form-field class="label-rightpadding2">
                                             <mat-label>Size</mat-label>
-                                            <input matInput name="Size" formControlName="Size" id="Size">
+                                            <input matInput name="Size" formControlName="OrbitalSize" id="Size">
                                           </mat-form-field>
 
                                           <label class="example-margin">Speed:</label>
-                                          <mat-form-field class="mr-sm-12 section-dropdown" formControlName="Speed1"
-                                            fxFlex>
+                                          <mat-form-field class="mr-sm-12 section-dropdown"  fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="OrbitalSpeed">
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">80 K</mat-option>
                                               <mat-option value="2">120 K</mat-option>
@@ -2179,19 +2176,19 @@
                                           <label class="example-margin">Time:</label>
                                           <mat-form-field>
                                             <mat-label>In Minutes</mat-label>
-                                            <input matInput name="Time" formControlName="Time1" id="Time">
+                                            <input matInput name="Time" formControlName="OrbitalTime" id="Time">
                                           </mat-form-field>
 
                                           <label class="example-margin">Runs:</label>
                                           <mat-form-field>
                                             <mat-label>Runs</mat-label>
-                                            <input matInput name="Runs" formControlName="Runs1" id="Runs">
+                                            <input matInput name="Runs" formControlName="OrbitalRuns" id="Runs">
                                           </mat-form-field>
 
                                           <label class="example-margin">Successful:</label>
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="OrbitalSuccessful" >
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">Yes</mat-option>
                                               <mat-option value="2">No</mat-option>
@@ -2215,7 +2212,7 @@
                                           <label class="example-margin">Micro Catheter:</label>
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="OrbitalMicroCatheter">
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">Finecross</mat-option>
                                               <mat-option value="2">Crusader</mat-option>
@@ -2226,7 +2223,7 @@
 
                                           <mat-form-field>
                                             <mat-label>If Others, Please Specify</mat-label>
-                                            <input matInput name="Others" formControlName="Others" id="Others">
+                                            <input matInput name="Others" formControlName="OrbitalOthers" id="Others">
                                           </mat-form-field>
                                         </section>
                                       </div>
@@ -2259,7 +2256,7 @@
                                           <label class="example-margin">Size:</label>
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="LaserSize">
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">0.9</mat-option>
                                               <mat-option value="2">1.4</mat-option>
@@ -2276,10 +2273,9 @@
 
 
                                           <label class="example-margin">Laser ON/OFF Time:</label>
-                                          <mat-form-field class="mr-sm-12 section-dropdown" formControlName="Laser"
-                                            fxFlex>
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="LaserOnOff" >
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">10 / 5 sec</mat-option>
                                               <mat-option value="2">5 / 10 sec</mat-option>
@@ -2287,10 +2283,9 @@
                                           </mat-form-field>
 
                                           <label class="example-margin">Medium:</label>
-                                          <mat-form-field class="mr-sm-12 section-dropdown" formControlName="Medium"
-                                            fxFlex>
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="Medium" >
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">Saline</mat-option>
                                               <mat-option value="2">Contrast</mat-option>
@@ -2298,9 +2293,9 @@
                                           </mat-form-field>
 
                                           <label class="example-margin">Successful:</label>
-                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                          <mat-form-field class="mr-sm-12 section-dropdown"  fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="LaserSuccessful">
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">Yes</mat-option>
                                               <mat-option value="2">No</mat-option>
@@ -2322,9 +2317,9 @@
                                       <div>
                                         <section class="example-section">
                                           <label class="example-margin">Micro Catheter:</label>
-                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                          <mat-form-field class="mr-sm-12 section-dropdown"fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select   formControlName="LaserMicroCatheter" >
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">Finecross</mat-option>
                                               <mat-option value="2">Crusader</mat-option>
@@ -2335,7 +2330,7 @@
 
                                           <mat-form-field>
                                             <mat-label>If Others, Please Specify</mat-label>
-                                            <input matInput name="Others" formControlName="Others" id="Others">
+                                            <input matInput name="Others" formControlName="LaserOthers" id="Others">
                                           </mat-form-field>
                                         </section>
                                       </div>
@@ -2359,7 +2354,7 @@
                                     <label class="example-margin">Size:</label>
                                     <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                       <mat-label>-- Select --</mat-label>
-                                      <mat-select>
+                                      <mat-select formControlName="TornusSize" >
                                         <mat-option value="0"></mat-option>
                                         <mat-option value="1">2.1 F</mat-option>
                                         <mat-option value="2">2.2 F</mat-option>
@@ -2371,9 +2366,9 @@
                                     </mat-form-field>
 
                                     <label class="example-margin">Successful:</label>
-                                    <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                    <mat-form-field class="mr-sm-12 section-dropdown"  fxFlex>
                                       <mat-label>-- Select --</mat-label>
-                                      <mat-select>
+                                      <mat-select formControlName="TornusSuccessful">
                                         <mat-option value="0"></mat-option>
                                         <mat-option value="1">Yes</mat-option>
                                         <mat-option value="2">No</mat-option>
@@ -2395,9 +2390,9 @@
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="2%" class="section-row">
                         <div>
                           <span class="presentation-section-label example-margin">Select Balloon:</span>
-                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                          <mat-form-field class="mr-sm-12 section-dropdown"   fxFlex>
                             <mat-label>Balloons</mat-label>
-                            <mat-select>
+                            <mat-select formControlName="Balloons">
                               <mat-option value="1">Semi-Compliant</mat-option>
                               <mat-option value="2">Non-Compliant</mat-option>
                               <mat-option value="2">Wolverine</mat-option>
@@ -2409,9 +2404,9 @@
 
                         <div>
                           <span class="presentation-section-label">Length:</span>
-                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                          <mat-form-field class="mr-sm-12 section-dropdown"  fxFlex>
                             <mat-label>Length</mat-label>
-                            <mat-select>
+                            <mat-select formControlName="Length">
                               <mat-option value="1">6</mat-option>
                               <mat-option value="2">8</mat-option>
                               <mat-option value="2">10</mat-option>
@@ -2443,15 +2438,15 @@
                           <span class="presentation-section-label">Pressure:</span>
                           <mat-form-field>
                             <mat-label>In atm</mat-label>
-                            <input matInput name="Diameter" formControlName="Diameter" id="Diameter">
+                            <input matInput name="Pressure" formControlName="Pressure" id="Pressure">
                           </mat-form-field>
                         </div>
 
                         <div>
                           <span class="presentation-section-label">Successful:</span>
-                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                          <mat-form-field class="mr-sm-12 section-dropdown"  fxFlex>
                             <mat-label>Successful</mat-label>
-                            <mat-select>
+                            <mat-select formControlName="LastSuccessful">
                               <mat-option value="1"></mat-option>
                               <mat-option value="2">Yes</mat-option>
                               <mat-option value="2">No</mat-option>
@@ -2462,15 +2457,15 @@
 
                       <!-- Thrombo-Aspiration Catheter -->
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                        <section class="example-section section-header">
-                          <mat-checkbox>Thrombo-Aspiration Catheter</mat-checkbox>
+                        <section class="example-section section-header" >
+                          <mat-checkbox formControlName="Thrombo">Thrombo-Aspiration Catheter</mat-checkbox>
                         </section>
                       </div>
 
                       <!-- Guide Extension -->
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
                         <section class="example-section section-header">
-                          <mat-checkbox>Guide Extension</mat-checkbox>
+                          <mat-checkbox formControlName="GuideExtension">Guide Extension</mat-checkbox>
                         </section>
                       </div>
 
@@ -2482,9 +2477,9 @@
                         <div>
                           <section class="example-section">
                             <label class="example-margin">Complete: </label>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                            <mat-form-field class="mr-sm-12 section-dropdown"  fxFlex>
                               <mat-label>-- Select --</mat-label>
-                              <mat-select>
+                              <mat-select formControlName="Complete">
                                 <mat-option value="1"></mat-option>
                                 <mat-option value="2">Yes</mat-option>
                                 <mat-option value="2">No</mat-option>
@@ -2537,7 +2532,7 @@
                             <label class="example-margin">Others: </label>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>If Others, Please Specify</mat-label>
-                              <input name="If Others, Please Specify" matInput>
+                              <input name="If Others, Please Specify" formControlName="MICSOthers" matInput>
                               <mat-error>If Others, Please Specify</mat-error>
                             </mat-form-field>
                           </section>
@@ -2550,7 +2545,7 @@
                             <label class="example-margin">Bradycardia: </label>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>-- Select --</mat-label>
-                              <mat-select>
+                              <mat-select formControlName="Bradycardia">
                                 <mat-option value="1"></mat-option>
                                 <mat-option value="2">Yes</mat-option>
                                 <mat-option value="2">No</mat-option>
@@ -2560,7 +2555,7 @@
                             <label class="example-margin">Emergency Pacing: </label>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>-- Select --</mat-label>
-                              <mat-select>
+                              <mat-select formControlName="EmergencyPacing">
                                 <mat-option value="1"></mat-option>
                                 <mat-option value="2">Yes</mat-option>
                                 <mat-option value="2">No</mat-option>
@@ -2590,7 +2585,7 @@
                                   <mat-checkbox class="example-margin">Others</mat-checkbox>
                                   <mat-form-field class="mr-sm-12" fxFlex>
                                     <mat-label>If Others, Please Specify</mat-label>
-                                    <input name="If Others, Please Specify" matInput>
+                                    <input name="If Others, Please Specify" formControlName="ImagingOther" matInput>
                                     <mat-error>If Others, Please Specify</mat-error>
                                   </mat-form-field>
                                 </div>
@@ -2609,12 +2604,12 @@
                                           <label class="example-margin">Length:</label>
                                           <mat-form-field class="label-rightpadding2">
                                             <mat-label>Length</mat-label>
-                                            <input matInput name="Length" formControlName="Length" id="Length">
+                                            <input matInput name="Length" formControlName="NoLength" id="Length">
                                           </mat-form-field>
 
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="NoSelect">
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">Proximal</mat-option>
                                               <mat-option value="2">Distal</mat-option>
@@ -2623,19 +2618,19 @@
                                           <label class="example-margin">RV A/d:</label>
                                           <mat-form-field>
                                             <mat-label>RV A/d</mat-label>
-                                            <input matInput name="RV A/d" formControlName="RVAd" id="RV A/d">
+                                            <input matInput name="RV A/d" formControlName="NoRVAd" id="RV A/d">
                                           </mat-form-field>
 
                                           <label class="example-margin">LV A/d:</label>
                                           <mat-form-field>
                                             <mat-label>LV A/d</mat-label>
-                                            <input matInput name="LV A/d" formControlName="LVAd" id="LV A/d">
+                                            <input matInput name="LV A/d" formControlName="NoLVAd" id="LV A/d">
                                           </mat-form-field>
 
                                           <label class="example-margin">PB:</label>
                                           <mat-form-field>
                                             <mat-label>PB</mat-label>
-                                            <input matInput name="PB" formControlName="PB" id="PB">
+                                            <input matInput name="PB" formControlName="NoPB" id="PB">
                                           </mat-form-field>
                                         </section>
                                       </div>
@@ -2653,7 +2648,7 @@
                                         <section class="example-section">
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="YesSelect">
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">LZ MBp</mat-option>
                                               <mat-option value="2">LZ MBd</mat-option>
@@ -2663,19 +2658,19 @@
                                           <label class="example-margin">RV A/d:</label>
                                           <mat-form-field>
                                             <mat-label>RV A/d</mat-label>
-                                            <input matInput name="RV A/d" formControlName="RVAd" id="RV A/d">
+                                            <input matInput name="RV A/d" formControlName="YesRVAd" id="RV A/d">
                                           </mat-form-field>
 
                                           <label class="example-margin">LV A/d:</label>
                                           <mat-form-field>
                                             <mat-label>LV A/d</mat-label>
-                                            <input matInput name="LV A/d" formControlName="LVAd" id="LV A/d">
+                                            <input matInput name="LV A/d" formControlName="YesLVAd" id="LV A/d">
                                           </mat-form-field>
 
                                           <label class="example-margin">PB:</label>
                                           <mat-form-field>
                                             <mat-label>PB</mat-label>
-                                            <input matInput name="PB" formControlName="PB" id="PB">
+                                            <input matInput name="PB" formControlName="YesPB" id="PB">
                                           </mat-form-field>
                                         </section>
                                       </div>
@@ -2694,7 +2689,7 @@
                                           <label class="example-margin">Patent:</label>
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="SegmPatent">
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">Yes</mat-option>
                                               <mat-option value="2">No</mat-option>
@@ -2703,7 +2698,7 @@
 
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="SegmSelect">
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">Proximal Edge</mat-option>
                                               <mat-option value="2">Distal Edge</mat-option>
@@ -2713,19 +2708,19 @@
                                           <label class="example-margin">RV A/d:</label>
                                           <mat-form-field>
                                             <mat-label>RV A/d</mat-label>
-                                            <input matInput name="RV A/d" formControlName="RVAd" id="RV A/d">
+                                            <input matInput name="RV A/d" formControlName="SegmRVAd" id="RV A/d">
                                           </mat-form-field>
 
                                           <label class="example-margin">LV A/d:</label>
                                           <mat-form-field>
                                             <mat-label>LV A/d</mat-label>
-                                            <input matInput name="LV A/d" formControlName="LVAd" id="LV A/d">
+                                            <input matInput name="LV A/d" formControlName="SegmLVAd" id="LV A/d">
                                           </mat-form-field>
 
                                           <label class="example-margin">PB:</label>
                                           <mat-form-field>
                                             <mat-label>PB</mat-label>
-                                            <input matInput name="PB" formControlName="PB" id="PB">
+                                            <input matInput name="PB" formControlName="SegmPB" id="PB">
                                           </mat-form-field>
                                         </section>
                                       </div>
@@ -2743,7 +2738,7 @@
                               </mat-expansion-panel-header>
                               <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                 <mat-label>-- Select --</mat-label>
-                                <mat-select>
+                                <mat-select formControlName="ImagingNo">
                                   <mat-option value="0"></mat-option>
                                   <mat-option value="1">60 MHz HD IVUS</mat-option>
                                   <mat-option value="2">45 MHz Refinity</mat-option>
@@ -2766,7 +2761,7 @@
                             <label class="example-margin">Stent:</label>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>Stent</mat-label>
-                              <mat-select>
+                              <mat-select formControlName="Stent">
                                 <mat-option value="0">-- Select --</mat-option>
                                 <mat-option value="1">Yes</mat-option>
                                 <mat-option value="2">No</mat-option>
@@ -2779,7 +2774,7 @@
                             <label class="example-margin">Stent Name:</label>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>Stent</mat-label>
-                              <mat-select>
+                              <mat-select formControlName="StentName">
                                 <mat-option value="0">-- Select --</mat-option>
                                 <mat-option value="1">Synergy</mat-option>
                                 <mat-option value="2">Xience Alpine</mat-option>
@@ -2791,12 +2786,12 @@
                             <label class="example-margin">Diameter:</label>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Minimum Diameter In mm</mat-label>
-                              <input name="Minimum Diameter" matInput>
+                              <input name="Minimum Diameter" formControlName="StentMinDaimeter" matInput>
                               <mat-error>Minimum Diameter</mat-error>
                             </mat-form-field>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Maximum Diameter In mm</mat-label>
-                              <input name="Maximum Diameter" matInput>
+                              <input name="Maximum Diameter" formControlName="StentMaxDaimeter" matInput>
                               <mat-error>Maximum Diameter</mat-error>
                             </mat-form-field>
                           </section>
@@ -2808,14 +2803,14 @@
                             <label class="example-margin">Total Stent Length:</label>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>In mm</mat-label>
-                              <input name="Total Stent Length" matInput>
+                              <input name="Total Stent Length" formControlName="TotalStentLength" matInput>
                               <mat-error>Total Stent Length</mat-error>
                             </mat-form-field>
 
                             <label class="example-margin">Pressure:</label>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>In atm</mat-label>
-                              <input name="Pressure" matInput>
+                              <input name="Pressure" formControlName="StentPressure" matInput>
                               <mat-error>Pressure</mat-error>
                             </mat-form-field>
 
@@ -2846,7 +2841,7 @@
                                   <mat-checkbox class="example-margin">Others</mat-checkbox>
                                   <mat-form-field class="mr-sm-12" fxFlex>
                                     <mat-label>If Others, Please Specify</mat-label>
-                                    <input name="If Others, Please Specify" matInput>
+                                    <input name="If Others, Please Specify" formControlName="Imagingother1"  matInput>
                                     <mat-error>If Others, Please Specify</mat-error>
                                   </mat-form-field>
                                 </div>
@@ -2865,12 +2860,12 @@
                                           <label class="example-margin">Length:</label>
                                           <mat-form-field class="label-rightpadding2">
                                             <mat-label>Length</mat-label>
-                                            <input matInput name="Length" formControlName="Length" id="Length">
+                                            <input matInput name="Length" formControlName="No1Length" id="Length">
                                           </mat-form-field>
 
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="No1Select" >
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">Proximal</mat-option>
                                               <mat-option value="2">Distal</mat-option>
@@ -2879,19 +2874,19 @@
                                           <label class="example-margin">RV A/d:</label>
                                           <mat-form-field>
                                             <mat-label>RV A/d</mat-label>
-                                            <input matInput name="RV A/d" formControlName="RVAd" id="RV A/d">
+                                            <input matInput name="RV A/d" formControlName="No1RVAd" id="RV A/d">
                                           </mat-form-field>
 
                                           <label class="example-margin">LV A/d:</label>
                                           <mat-form-field>
                                             <mat-label>LV A/d</mat-label>
-                                            <input matInput name="LV A/d" formControlName="LVAd" id="LV A/d">
+                                            <input matInput name="LV A/d" formControlName="No1LVAd" id="LV A/d">
                                           </mat-form-field>
 
                                           <label class="example-margin">PB:</label>
                                           <mat-form-field>
                                             <mat-label>PB</mat-label>
-                                            <input matInput name="PB" formControlName="PB" id="PB">
+                                            <input matInput name="PB" formControlName="No1PB" id="PB">
                                           </mat-form-field>
                                         </section>
                                       </div>
@@ -2909,7 +2904,7 @@
                                         <section class="example-section">
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="Yes1Select">
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">LZ MBp</mat-option>
                                               <mat-option value="2">LZ MBd</mat-option>
@@ -2919,19 +2914,19 @@
                                           <label class="example-margin">RV A/d:</label>
                                           <mat-form-field>
                                             <mat-label>RV A/d</mat-label>
-                                            <input matInput name="RV A/d" formControlName="RVAd" id="RV A/d">
+                                            <input matInput name="RV A/d" formControlName="Yes1RVAd" id="RV A/d">
                                           </mat-form-field>
 
                                           <label class="example-margin">LV A/d:</label>
                                           <mat-form-field>
                                             <mat-label>LV A/d</mat-label>
-                                            <input matInput name="LV A/d" formControlName="LVAd" id="LV A/d">
+                                            <input matInput name="LV A/d" formControlName="Yes1LVAd" id="LV A/d">
                                           </mat-form-field>
 
                                           <label class="example-margin">PB:</label>
                                           <mat-form-field>
                                             <mat-label>PB</mat-label>
-                                            <input matInput name="PB" formControlName="PB" id="PB">
+                                            <input matInput name="PB" formControlName="Yes1PB" id="PB">
                                           </mat-form-field>
                                         </section>
                                       </div>
@@ -2950,7 +2945,7 @@
                                           <label class="example-margin">Patent:</label>
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="Segm1Patent">
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">Yes</mat-option>
                                               <mat-option value="2">No</mat-option>
@@ -2959,7 +2954,7 @@
 
                                           <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                                             <mat-label>-- Select --</mat-label>
-                                            <mat-select>
+                                            <mat-select formControlName="Segm1Select">
                                               <mat-option value="0"></mat-option>
                                               <mat-option value="1">Proximal Edge</mat-option>
                                               <mat-option value="2">Distal Edge</mat-option>
@@ -2969,19 +2964,19 @@
                                           <label class="example-margin">RV A/d:</label>
                                           <mat-form-field>
                                             <mat-label>RV A/d</mat-label>
-                                            <input matInput name="RV A/d" formControlName="RVAd" id="RV A/d">
+                                            <input matInput name="RV A/d" formControlName="Segm1RVAd" id="RV A/d">
                                           </mat-form-field>
 
                                           <label class="example-margin">LV A/d:</label>
                                           <mat-form-field>
                                             <mat-label>LV A/d</mat-label>
-                                            <input matInput name="LV A/d" formControlName="LVAd" id="LV A/d">
+                                            <input matInput name="LV A/d" formControlName="Segm1LVAd" id="LV A/d">
                                           </mat-form-field>
 
                                           <label class="example-margin">PB:</label>
                                           <mat-form-field>
                                             <mat-label>PB</mat-label>
-                                            <input matInput name="PB" formControlName="PB" id="PB">
+                                            <input matInput name="PB" formControlName="Segm1PB" id="PB">
                                           </mat-form-field>
                                         </section>
                                       </div>
@@ -2997,9 +2992,9 @@
                                   No
                                 </mat-panel-title>
                               </mat-expansion-panel-header>
-                              <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                              <mat-form-field class="mr-sm-12 section-dropdown" formControlName="No"  fxFlex>
                                 <mat-label>-- Select --</mat-label>
-                                <mat-select>
+                                <mat-select formControlName="No1">
                                   <mat-option value="0"></mat-option>
                                   <mat-option value="1">60 MHz HD IVUS</mat-option>
                                   <mat-option value="2">45 MHz Refinity</mat-option>

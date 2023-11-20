@@ -40,5 +40,8 @@ export class ClinicalDocumentService {
     public SaveIdcadPatient(employee) {
       return this._httpClient.post("Cardiology/SaveIdcadPatientDetails", employee);
     }
+    public get2DEchoDetailesList(Param){
+      return this._httpClient.post("Generic/GetByProc?procName=Rtrv_T_Patient2DEchoDetails",Param)
+    }
     
 }
