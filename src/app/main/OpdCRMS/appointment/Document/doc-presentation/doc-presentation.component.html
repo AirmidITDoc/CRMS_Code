@@ -1,13 +1,14 @@
 <div class="container" style="width: 100%;">
     <div style="width: 100%;">
         <!-- <div fxFlex> -->
+            
         <div fxLayout="row" fxLayoutAlign="start center" class="accent" style="width:100% ; height:37px;color: white;">
 
             <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
 
                 <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
                     style="width: 80%;font-size: 16px;padding: 10px;">
-                    presentation | RegNo: {{RegNo}} | PatientName: {{PatientName}}
+                    Symtoms
                 </span>
 
                 <span style="margin-right: 40px;color: rgb(245, 241, 241);font-weight: bold;">
@@ -16,12 +17,6 @@
                 </span>
 
                 <div fxLayout="row" fxLayoutAlign="start center" style="float: right; margin-right: 5px;  ">
-                    <!-- <diV style="margin-top:21px;">
-                        <span style="margin-right: 40px;color: rgb(245, 241, 241);font-weight: bold;">
-                            <app-common-date [screenFrom]="screenFromString"
-                                (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
-                        </span>
-                    </diV>&nbsp;&nbsp; -->
                     <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
                         close
                     </span>
@@ -44,172 +39,83 @@
 
                                 <form [formGroup]="subform">
                                     
-                                    <div style="padding: 7px;border-style: groove;" *ngIf="ActCorSyndromediv">
+                                    <div style="padding:7px;border-style: groove;" *ngIf="ActCorSyndromediv">
                                         <!-- *ngIf="ActCorSyndromediv" -->
-
-                                        <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px"
-                                            fxLayoutAlign="space-between"
-                                            style=" height: 35px;background-color:#4863A0">
-                                            <span
-                                                style="font-size:18px; font-weight: 500; color:white;padding:7px;">STEMI</span>
-
-                                        </div>
-
-                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
-                                            style="margin-bottom: 20px;">
-
-                                            <mat-form-field appearance="outline" [disable]="Stemidiv"
-                                                style="width: 400px;margin-left:50px;margin-top: 20px;">
-                                                <mat-label style="font-weight: bold;">Cp_Presentation
-                                                    duration</mat-label>
-                                                <input name="Cppresentation" formControlName="Cppresentation" placeholder="Cppresentation" matInput>
-                                            </mat-form-field>
-
-                                            <mat-form-field [disable]="Hemodynamicunstablediv" appearance="outline"
-                                                style="width: 400px;margin-left:50px;margin-top: 20px;">
-                                                <mat-label>Document Type</mat-label>
-                                                <mat-select [formControl]="HemodynamicStableStatus" multiple>
-                                                    <mat-option *ngFor="let topping of UnstabletypeList"
-                                                        [value]="topping">{{topping}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-
-                                            <span
-                                                style="font-weight:400;font-size: medium;margin-left:200px;margin-right: 20px;">Hemodynamics</span>
-                                            <mat-radio-group value="2" formControlName="Hemodynamic">
-                                                <span style="margin-right:20px;">Stable</span>
-                                                <mat-radio-button mat-fab value="true">Yes</mat-radio-button>
-                                                <mat-radio-button mat-fab value="false"
-                                                    style="margin-left: 50px;">Unstable</mat-radio-button>
+                                        <div class="section-row stemi-yn">
+                                            <span>STEMI:&nbsp;&nbsp;&nbsp;</span>
+                                            <mat-radio-group aria-label="Select an option" formControlName="stemi" (change)="onChangeStemiYN($event)">
+                                              <mat-radio-button value="STEMI">Yes</mat-radio-button>
+                                              <mat-radio-button value="NSTEMI">No</mat-radio-button>
                                             </mat-radio-group>
-
                                         </div>
 
-                                        <div fxLayout="column" fxLayout.gt-xs="row">
-                                            <mat-form-field appearance="outline"
-                                                style="width: 400px;margin-left: 50px;">
-                                                <mat-label style="font-weight: bold;">Stemi Type</mat-label>
-                                                <mat-select formControlName="StemiTypeId">
-                                                    <mat-option></mat-option>
-                                                    <mat-option *ngFor="let g of StemitypeList" [value]="g">
-                                                        {{g}}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-
-
-                                            <mat-form-field appearance="outline"
-                                                style="width: 400px;margin-left: 50px;">
-                                                <mat-label style="font-weight: bold;">Other
-                                                </mat-label>
-                                                <input name="Other" formControlName="SemiOther" [disabled]="Other"
-                                                    placeholder="Other" matInput>
-                                            </mat-form-field>
-                                        </div>
-
-                                        <hr>
-
-                                        <div style="padding: 7px;">
-
-                                            <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px"
-                                                fxLayoutAlign="space-between"
-                                                style=" height: 35px;background-color:#4863A0">
-                                                <span
-                                                    style="font-size:18px; font-weight: 500; color:white;padding:7px;">NSTEMI</span>
+                                        <div class="section-row" *ngIf="isSTEMI">
+                                            
+                                            <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" style="margin-bottom: 20px;">
+    
+                                                <mat-form-field appearance="outline" class="stemi-formcontrol-text">
+                                                    <mat-label>CP Presentation (In Minutes) </mat-label>
+                                                    <input name="Cppresentation" formControlName="Cppresentation" placeholder="In Minutes" matInput>
+                                                </mat-form-field>
+    
+                                                <mat-form-field appearance="outline" class="stemi-formcontrol-text">
+                                                    <mat-label>Stemi Type</mat-label>
+                                                    <mat-select formControlName="StemiTypeId">
+                                                        <mat-option></mat-option>
+                                                        <mat-option *ngFor="let g of StemitypeList" [value]="g">
+                                                            {{g}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <!-- <mat-form-field [disable]="Hemodynamicunstablediv" appearance="outline" class="stemi-formcontrol-text">
+                                                    <mat-label>Document Type</mat-label>
+                                                    <mat-select [formControl]="HemodynamicStableStatus" multiple>
+                                                        <mat-option *ngFor="let topping of UnstabletypeList"
+                                                            [value]="topping">{{topping}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field> -->
                                             </div>
+    
+                                            
+                                        </div>
+                                        
 
-                                            <div fxLayout="column" fxLayout.gt-xs="row"
-                                                style="margin-left:20px;margin-top: 20px;">
-                                                <mat-radio-group value="2" style="margin-top: 10px;" formControlName="EKGChanges">
-                                                    <span  style="font-weight:400;font-size: medium;margin-left:30px;margin-right: 20px;">
-                                                        EKG Change :</span>
+                                        <div *ngIf="isNSTEMI">
+
+                                            <div fxFlexFill fxLayout="row" class="section-row">
+   
+                                                <span class="stemi-formcontrol">Enzyme Raised:&nbsp;&nbsp;</span>
+                                                <mat-radio-group class="stemi-formcontrol" aria-label="Select an option" formControlName="Enzyme" (change)="onChangeEnzyme($event)">
+                                                    <mat-radio-button value="Raised">Yes</mat-radio-button>
+                                                    <mat-radio-button value="NotRaised">No</mat-radio-button>
+                                                </mat-radio-group>
+                                                
+                                            </div>
+    
+                                            <div fxFlexFill fxLayout="row" class="section-row" *ngIf="isRaised">
+                                                <span class="stemi-formcontrol">
+                                                    NSTEMI
+                                                </span>
+                                                <mat-radio-group class="stemi-formcontrol" value="NstemiEKGChanges" formControlName="EKGChanges">
+                                                    <span>
+                                                        EKG Change : </span>
                                                     <mat-radio-button mat-fab value="true">Yes</mat-radio-button>
                                                     <mat-radio-button mat-fab value="false">No</mat-radio-button>
                                                 </mat-radio-group>
+                                            </div>
 
-                                                <mat-radio-group value="2" style="margin-top: 10px;" formControlName="Enzyme">
-                                                    <span style="font-weight:400;font-size: medium;margin-left: 20px;">Enzyme
-                                                        Raised :</span>
-                                                    <mat-radio-button mat-fab value="true"
-                                                        style="margin-left: 20px;">Yes</mat-radio-button>
+                                            <div fxFlexFill fxLayout="row" fxLayoutGap="5%" class="section-row" *ngIf="isNotRaised">
+                                                <span class="stemi-formcontrol">
+                                                    Unstable Angina
+                                                </span>
+                                                <mat-radio-group class="stemi-formcontrol-left15" value="UnstableEKGChanges" formControlName="EKGChanges">
+                                                    <span>
+                                                        EKG Change : </span>
+                                                    <mat-radio-button mat-fab value="true">Yes</mat-radio-button>
                                                     <mat-radio-button mat-fab value="false">No</mat-radio-button>
                                                 </mat-radio-group>
-
-                                                <mat-form-field appearance="outline"
-                                                    style="width: 320px;margin-left: 10px;">
-                                                    <mat-label style="font-weight: bold;">Other
-                                                    </mat-label>
-                                                    <input name="Other" formControlName="Other1" [disabled]="Other"
-                                                        placeholder="Other" matInput>
-                                                </mat-form-field>
-
                                             </div>
                                         </div>
-
-                                        
-                                        <hr>
-
-                                        <mat-table class="table"  matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
-                                        style="height: 150px !important; overflow: auto;margin-top: 5px;">
-
-                                        <ng-container matColumnDef="InducibleTypeId">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                                                InducibleType
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.InducibleTypeId}}
-                                            </mat-cell>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="InducibleTypeStatus">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                                                InducibleTypeStatus
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.InducibleTypeStatus}}
-                                            </mat-cell>
-                                        </ng-container>
-                                        <ng-container matColumnDef="action" stickyEnd>
-                                            <mat-header-cell *matHeaderCellDef style="color: white;"> Action
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let row">
-
-                                                <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
-                                                    <mat-icon>delete_outline</mat-icon>
-                                                </button>
-
-                                            </mat-cell>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="loading">
-                                            <mat-footer-cell *matFooterCellDef colspan="6">
-                                                loading data...
-                                            </mat-footer-cell>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="noData">
-                                            <mat-footer-cell *matFooterCellDef colspan="6">
-
-                                                <span>No Data Found</span>
-                                            </mat-footer-cell>
-                                        </ng-container>
-
-                                        <mat-header-row class="accent"
-                                            *matHeaderRowDef="displayedColumns; sticky: true">
-                                        </mat-header-row>
-                                        <mat-row *matRowDef="let contact; columns: displayedColumns;"
-                                            [ngClass]="{'row-yellow': contact.ServiceName == 'CBC'}"
-                                            [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
-                                        <mat-footer-row *matFooterRowDef="['loading']"
-                                            [ngClass]="{'hide':dataSource!=null}">
-                                        </mat-footer-row>
-                                        <mat-footer-row *matFooterRowDef="['noData']"
-                                            [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
-                                        </mat-footer-row>
-                                      </mat-table>
 
 
                                       <div style="float: right;margin-top: 20px;">
@@ -237,9 +143,8 @@
                                         </div>
 
                                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                                            <mat-form-field [disabled]="Stablecorsyndiv" appearance="outline"
-                                                style="width: 400px;margin-left: 50px;margin-top: 10px;">
-                                                <mat-label>Stable/Progressive</mat-label>
+                                            <mat-form-field [disabled]="Stablecorsyndiv" class="stemi-formcontrol-text">
+                                                <mat-label>-- Select -- </mat-label>
                                                 <mat-select  formControlName="Condtionstatus">
                                                     <mat-option *ngFor="let name of AnginatypeList"
                                                         [value]="name">{{name}}</mat-option>
@@ -254,16 +159,14 @@
                                             fxLayoutAlign="space-between"
                                             style=" height: 35px;background-color:#4863A0">
                                             <span
-                                                style="font-size:18px; font-weight: 500; color:white;padding:7px;">Inducible
-                                                Ischemia</span>
+                                                style="font-size:18px; font-weight: 500; color:white;padding:7px;">Inducible Ischemia</span>
                                         </div>
 
 
-                                        <div fxLayout="column" fxLayout.gt-xs="row" style="margin-top: 10px; margin-bottom: 20px;">
+                                        <div fxLayout="column" fxLayout.gt-xs="row">
 
-                                            <mat-form-field class="section-dropdown"
-                                                style="width: 400px;margin-left: 50px;margin-top: 10px;">
-                                                <mat-label>-- Stable/Progressive--</mat-label>
+                                            <mat-form-field class="section-dropdown stemi-formcontrol-text">
+                                                <mat-label>-- Select --</mat-label>
                                                 <mat-select formControlName="InducibleTypeId" name="InducibleTypeId"
                                                     (selectionChange)="onChangeType($event.value)">
                                                     <mat-option></mat-option>
@@ -273,9 +176,8 @@
                                                 </mat-select>
                                             </mat-form-field>
 
-                                            <mat-form-field class="section-dropdown"
-                                                style="width: 400px;margin-left: 50px;margin-top: 10px;">
-                                                <mat-label>-- Positive / Negative--</mat-label>
+                                            <mat-form-field class="section-dropdown stemi-formcontrol-text">
+                                                <mat-label>-- Positive / Negative --</mat-label>
                                                 <mat-select formControlName="InducibleTypeStatus"
                                                     name="InducibleTypeStatus"
                                                     (selectionChange)="onChangeTypestatus($event.value)">
@@ -291,7 +193,7 @@
                                                 [matTooltipDisabled]="!subform.invalid" [matTooltipPosition]="'above'">
                                                 <button mat-raised-button fxLayoutAlign="center center"
                                                     (click)="onAddData()" [disabled]="subform.invalid"
-                                                    style="background-color: blue; color: white; width: 70px;margin-left: 20px; ">
+                                                    style="background-color: blue; color: white; width: 70px;margin-left: 20px; margin-top: 20px;">
                                                     <mat-icon> add </mat-icon> &nbsp;Add
                                                 </button>
 
@@ -305,7 +207,7 @@
 
                                         <ng-container matColumnDef="InducibleTypeId">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                                                InducibleType
+                                                Inducible Ischemia
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                                 {{contact.InducibleTypeId}}
@@ -314,7 +216,7 @@
 
                                         <ng-container matColumnDef="InducibleTypeStatus">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                                                InducibleTypeStatus
+                                                Postive / Negative
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                                 {{contact.InducibleTypeStatus}}
@@ -377,50 +279,44 @@
                                 <form [formGroup]="CADdivFormGroup">
                                     <div style="padding: 7px;border-style: groove;" *ngIf="CADdiv">
 
-                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-
-                                            <mat-radio-group value="2" style="margin-top: 10px;" formControlName="CT">
-                                                <span style="font-weight:400;font-size: medium;margin-left:90px;margin-right: 10px;">
-                                                    CT : </span>
-                                                <mat-radio-button mat-fab value="true" style="margin-right: 15px;">Yes</mat-radio-button>
-                                                <mat-radio-button mat-fab value="false">No</mat-radio-button>
+                                        <div fxFlexFill fxLayout="row" fxLayout.gt-xs="row">
+                                            <mat-radio-group value="2" style="margin-top: 10px;" formControlName="CT"  (change)="onChangeCT($event)">
+                                                <span class="stemi-formcontrol-text">CT : </span>
+                                                <mat-radio-button mat-fab value="Yes" style="margin-right: 15px;">Yes</mat-radio-button>
+                                                <mat-radio-button mat-fab value="No">No</mat-radio-button>
                                             </mat-radio-group>
+                                        </div>
 
+                                        <div fxLayout="row" *ngIf="isCTYes">
                                             <div>
-                                                <span
-                                                    style="margin-top: 10px; margin-right: 20px;margin-left: 200px;">Calcium Score
-                                                    :</span>
-                                                <mat-form-field style="width: 250px;" fxFlex>
+                                                <span class="stemi-formcontrol" style="margin-top: 7%;">Calcium Score: </span>
+                                                <mat-form-field fxFlex  class="stemi-formcontrol" style="width: 300px;" >
                                                     <mat-label>Calcium Score:</mat-label>
                                                     <input formControlName="Calcium" name="Calcium" matInput >
                                                 </mat-form-field>
                                             </div>
 
-                                        </div>
-
-                                        <div fxLayout="column" fxLayout.gt-xs="row">
                                             <div >
-                                            <span style="margin-top: 10px; margin-right: 20px;margin-left: 50px;">Severity :</span>
-                                                <mat-form-field style="width: 300px;" fxFlex>
-                                                    <mat-label>--Select Severity--</mat-label>
+                                                <span class="stemi-formcontrol" style="margin-top: 7%;">Severity :</span>
+                                                <mat-form-field class="stemi-formcontrol" style="width: 300px;" fxFlex>
+                                                    <mat-label>-- Select Severity --</mat-label>
                                                     <mat-select formControlName="Severity" name="Severity" >
                                                         <mat-option value="0">Critical</mat-option>
                                                         <mat-option value="1">Significant</mat-option>
                                                         <mat-option value="2">Not-Significant</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
-                                            </div>
+                                            </div>                                           
+                                        </div>
 
+                                        <div fxLayout="column" fxLayout.gt-xs="row" >
                                             <div>
-                                                <span style="margin-top: 10px; margin-right: 20px;margin-left: 50px;">Other
-                                                    :</span>
-                                                <mat-form-field style="width: 300px;" fxFlex>
+                                                <span class="stemi-formcontrol"  style="margin-top: 7%;">Other: </span>
+                                                <mat-form-field class="stemi-formcontrol" style="width: 300px;" fxFlex>
                                                     <mat-label>If Other, Please Specify</mat-label>
                                                     <input formControlName="Other" name="Other" matInput >
                                                 </mat-form-field>
                                             </div>
-
-                                           
                                         </div>
 
                                         <div style="float: right;margin-top: 20px;">

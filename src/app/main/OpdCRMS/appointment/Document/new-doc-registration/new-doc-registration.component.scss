@@ -315,379 +315,406 @@ app-new-doc-registration {
         padding-left: 5%;
     }
 
-}
+    .mat-header-row {
+        width: 100%;
+        max-width:1350px;
+        min-width:1350px; 
+        min-height: 35px;     
+    }
+    .mat-row {
+        width: 100%;
+        max-width:1350px;
+        min-width:1350px; 
+        min-height: 25px;            
+    }
+
+    .mat-column-LVEF {
+        width:170px;
+        max-width:170px;
+        min-width:170px;
+        text-align:left;
+        justify-content: left;
+    }
+
+    .mat-column-GLS {
+        width:100px;
+        max-width:100px;
+        min-width:100px;
+        text-align: right;
+    }
+    .mat-column-RWMA {
+        width:170px;
+        max-width:170px;
+        min-width:170px;
+        text-align:left;
+        justify-content: left;
+    }
+
+    .mat-column-PApressure {
+        width:170px;
+        max-width:170px;
+        min-width:170px;
+        text-align: right;
+    }
+
+    .mat-column-Valve {
+        width:170px;
+        max-width:170px;
+        min-width:170px;
+        text-align:left;
+        justify-content: left;
+    }
+
+    .mat-column-Stenotic {
+        width:200px;
+        max-width:200px;
+        min-width:200px;
+        text-align: right;
+    }
+    .mat-column-Regurgitation {
+        width:170px;
+        max-width:170px;
+        min-width:170px;
+        text-align:left;
+        justify-content: left;
+    }
+
+    .mat-column-MSAR {
+        width:100px;
+        max-width:100px;
+        min-width:100px;
+        text-align: right;
+    }
+    .mat-column-MSAS {
+        width:100px;
+        max-width:100px;
+        min-width:100px;
+        text-align:left;
+        justify-content: left;
+    }
 
 
-
-.mat-header-row {
-    width: 100%;
-    max-width:1350px;
-    min-width:1350px; 
-    min-height: 35px;     
-}
-.mat-row {
-    width: 100%;
-    max-width:1350px;
-    min-width:1350px; 
-    min-height: 25px;            
-}
-
-.mat-column-LVEF {
-    width:170px;
-    max-width:170px;
-    min-width:170px;
-    text-align:left;
-    justify-content: left;
-}
-
-.mat-column-GLS {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
-    text-align: right;
-}
-.mat-column-RWMA {
-    width:170px;
-    max-width:170px;
-    min-width:170px;
-    text-align:left;
-    justify-content: left;
-}
-
-.mat-column-PApressure {
-    width:170px;
-    max-width:170px;
-    min-width:170px;
-    text-align: right;
-}
-
-.mat-column-Valve {
-    width:170px;
-    max-width:170px;
-    min-width:170px;
-    text-align:left;
-    justify-content: left;
-}
-
-.mat-column-Stenotic {
-    width:200px;
-    max-width:200px;
-    min-width:200px;
-    text-align: right;
-}
-.mat-column-Regurgitation {
-    width:170px;
-    max-width:170px;
-    min-width:170px;
-    text-align:left;
-    justify-content: left;
-}
-
-.mat-column-MSAR {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
-    text-align: right;
-}
-.mat-column-MSAS {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
-    text-align:left;
-    justify-content: left;
-}
-
-
-.mat-column-action {
-    // color: white !important;
-    width:70px;
-    max-width:70px;
-    min-width:70px;
-   
-    text-align: right;
-    justify-content:right; 
+    .mat-column-action {
+        // color: white !important;
+        width:70px;
+        max-width:70px;
+        min-width:70px;
     
-}
+        text-align: right;
+        justify-content:right; 
+        
+    }
 
 
 
-.mat-header-row {
-    width: 100%;
-    max-width:1450px;
-    min-width:1450px; 
-    min-height: 35px;     
-}
-.mat-row {
-    width: 100%;
-    max-width:1450px;
-    min-width:1450px; 
-    min-height: 25px;            
-}
+    .mat-header-row {
+        width: 100%;
+        max-width:1450px;
+        min-width:1450px; 
+        min-height: 35px;     
+    }
+    .mat-row {
+        width: 100%;
+        max-width:1450px;
+        min-width:1450px; 
+        min-height: 25px;            
+    }
 
-.mat-column-AccessType {
-    width:200px;
-    max-width:200px;
-    min-width:200px;
-    text-align:left;
-    justify-content: left;
-}
+    .mat-column-AccessType {
+        width:200px;
+        max-width:200px;
+        min-width:200px;
+        text-align:left;
+        justify-content: left;
+    }
 
-.mat-column-Accessvalue1 {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
-    text-align: right;
-}
+    .mat-column-Accessvalue1 {
+        width:100px;
+        max-width:100px;
+        min-width:100px;
+        text-align: right;
+    }
 
-.mat-column-Accessvalue2 {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
-    text-align: right;
-}
+    .mat-column-Accessvalue2 {
+        width:100px;
+        max-width:100px;
+        min-width:100px;
+        text-align: right;
+    }
 
-.mat-column-Other1 {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
-    text-align: right;
-}
-.mat-column-IronDef {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
-    text-align: right;
-}
-.mat-column-USG {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
-    text-align: right;
-}
-.mat-column-Puncture {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
-    text-align: right;
-}
+    .mat-column-Other1 {
+        width:100px;
+        max-width:100px;
+        min-width:100px;
+        text-align: right;
+    }
+    .mat-column-IronDef {
+        width:100px;
+        max-width:100px;
+        min-width:100px;
+        text-align: right;
+    }
+    .mat-column-USG {
+        width:100px;
+        max-width:100px;
+        min-width:100px;
+        text-align: right;
+    }
+    .mat-column-Puncture {
+        width:100px;
+        max-width:100px;
+        min-width:100px;
+        text-align: right;
+    }
 
-.mat-column-Fluoro {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
-    text-align: right;
-}
-.mat-column-Device {
-    width:400px;
-    max-width:400px;
-    min-width:400px;
-    text-align: right;
-}
+    .mat-column-Fluoro {
+        width:100px;
+        max-width:100px;
+        min-width:100px;
+        text-align: right;
+    }
+    .mat-column-Device {
+        width:400px;
+        max-width:400px;
+        min-width:400px;
+        text-align: right;
+    }
 
 
-.mat-column-action {
-    // color: white !important;
-    width:70px;
-    max-width:70px;
-    min-width:70px;
-   
-    text-align: right;
-    justify-content:right; 
+    .mat-column-action {
+        // color: white !important;
+        width:70px;
+        max-width:70px;
+        min-width:70px;
     
-}
+        text-align: right;
+        justify-content:right; 
+        
+    }
 
-----
-
-
-.mat-header-row {
-    width: 100%;
-    max-width:1650px;
-    min-width:1650px; 
-    min-height: 35px;     
-    color: #ffffff !important;
-}
-.mat-row {
-    width: 100%;
-    max-width:1650px;
-    min-width:1650px; 
-    min-height: 25px;            
-}
-
-.mat-column-LocationValue {
-    width:180px;
-    max-width:180px;
-    min-width:180px;
-    text-align:left;
-    justify-content: left;
-}
-
-.mat-column-LesionType {
-    width:180px;
-    max-width:180px;
-    min-width:180px;
-    text-align: right;
-}
-
-.mat-column-SyntaxScoreValue {
-    width:70px;
-    max-width:70px;
-    min-width:70px;
-    text-align: right;
-}
-
-.mat-column-Severity {
-    width:200px;
-    max-width:200px;
-    min-width:200px;
-    text-align: left;
-}
-
-.mat-column-IndexLesionValue {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
-    text-align: right;
-}
-.mat-column-Critical {
-    width:70px;
-    max-width:70px;
-    min-width:70px;
-    text-align: right;
-}
-.mat-column-Significant {
-    width:70px;
-    max-width:70px;
-    min-width:70px;
-    text-align: right;
-}
-.mat-column-Intermediat {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
-    text-align: right;
-}
-
-.mat-column-NonSignificant {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
-    text-align: right;
-}
-.mat-column-CalcifiedValue {
-    width:200px;
-    max-width:200px;
-    min-width:100px;
-    text-align: left;
-}
-.mat-column-ProximalTortuosityValue {
-    width:200px;
-    max-width:200px;
-    min-width:200px;
-    text-align: right;
-}
-
-.mat-column-ImportantSideBranchValue {
-    width:180px;
-    max-width:180px;
-    min-width:180px;
-    text-align: right;
-}
+    ----
 
 
-.mat-column-action {
-    // color: white !important;
-    width:70px;
-    max-width:70px;
-    min-width:70px;
-   
-    text-align: right;
-    justify-content:right; 
+    .mat-header-row {
+        width: 100%;
+        max-width:1650px;
+        min-width:1650px; 
+        min-height: 35px;     
+        color: #ffffff !important;
+    }
+    .mat-row {
+        width: 100%;
+        max-width:1650px;
+        min-width:1650px; 
+        min-height: 25px;            
+    }
+
+    .mat-column-LocationValue {
+        width:180px;
+        max-width:180px;
+        min-width:180px;
+        text-align:left;
+        justify-content: left;
+    }
+
+    .mat-column-LesionType {
+        width:180px;
+        max-width:180px;
+        min-width:180px;
+        text-align: right;
+    }
+
+    .mat-column-SyntaxScoreValue {
+        width:70px;
+        max-width:70px;
+        min-width:70px;
+        text-align: right;
+    }
+
+    .mat-column-Severity {
+        width:200px;
+        max-width:200px;
+        min-width:200px;
+        text-align: left;
+    }
+
+    .mat-column-IndexLesionValue {
+        width:100px;
+        max-width:100px;
+        min-width:100px;
+        text-align: right;
+    }
+    .mat-column-Critical {
+        width:70px;
+        max-width:70px;
+        min-width:70px;
+        text-align: right;
+    }
+    .mat-column-Significant {
+        width:70px;
+        max-width:70px;
+        min-width:70px;
+        text-align: right;
+    }
+    .mat-column-Intermediat {
+        width:100px;
+        max-width:100px;
+        min-width:100px;
+        text-align: right;
+    }
+
+    .mat-column-NonSignificant {
+        width:100px;
+        max-width:100px;
+        min-width:100px;
+        text-align: right;
+    }
+    .mat-column-CalcifiedValue {
+        width:200px;
+        max-width:200px;
+        min-width:100px;
+        text-align: left;
+    }
+    .mat-column-ProximalTortuosityValue {
+        width:200px;
+        max-width:200px;
+        min-width:200px;
+        text-align: right;
+    }
+
+    .mat-column-ImportantSideBranchValue {
+        width:180px;
+        max-width:180px;
+        min-width:180px;
+        text-align: right;
+    }
+
+
+    .mat-column-action {
+        // color: white !important;
+        width:70px;
+        max-width:70px;
+        min-width:70px;
     
-}
----
+        text-align: right;
+        justify-content:right; 
+        
+    }
+    ---
 
 
-.mat-header-row {
-    width: 100%;
-    max-width:1450px;
-    min-width:1450px; 
-    min-height: 35px;     
-    color: #ffffff;
-}
-.mat-row {
-    width: 100%;
-    max-width:1450px;
-    min-width:1450px; 
-    min-height: 25px;            
-}
+    .mat-header-row {
+        width: 100%;
+        max-width:1450px;
+        min-width:1450px; 
+        min-height: 35px;     
+        color: #ffffff;
+    }
+    .mat-row {
+        width: 100%;
+        max-width:1450px;
+        min-width:1450px; 
+        min-height: 25px;            
+    }
 
-.mat-column-Wiretype {
-    width:400px;
-    max-width:400px;
-    min-width:400px;
-    text-align:left;
-    justify-content: left;
-}
+    .mat-column-Wiretype {
+        width:400px;
+        max-width:400px;
+        min-width:400px;
+        text-align:left;
+        justify-content: left;
+    }
 
-.mat-column-wireOther {
-    width:300px;
-    max-width:300px;
-    min-width:300px;
-    text-align: right;
-}
+    .mat-column-wireOther {
+        width:300px;
+        max-width:300px;
+        min-width:300px;
+        text-align: right;
+    }
 
-.mat-column-MicroCatheter {
-    width:400px;
-    max-width:400px;
-    min-width:400px;
-    text-align: right;
-}
+    .mat-column-MicroCatheter {
+        width:400px;
+        max-width:400px;
+        min-width:400px;
+        text-align: right;
+    }
 
-.mat-column-Wire1Other {
-    width:300px;
-    max-width:300px;
-    min-width:300px;
-    text-align: right;
-}
-
-
+    .mat-column-Wire1Other {
+        width:300px;
+        max-width:300px;
+        min-width:300px;
+        text-align: right;
+    }
 
 
-.mat-header-row {
-    width: 100%;
-    max-width:1450px;
-    min-width:1450px; 
-    min-height: 35px;     
-    color: #ffffff;
-}
-.mat-row {
-    width: 100%;
-    max-width:1450px;
-    min-width:1450px; 
-    min-height: 25px;            
-}
 
-.mat-column-IVUS {
-    width:400px;
-    max-width:400px;
-    min-width:400px;
-    text-align:left;
-    justify-content: left;
-}
 
-.mat-column-OCT {
-    width:300px;
-    max-width:300px;
-    min-width:300px;
-    text-align: right;
-}
+    .mat-header-row {
+        width: 100%;
+        max-width:1450px;
+        min-width:1450px; 
+        min-height: 35px;     
+        color: #ffffff;
+    }
+    .mat-row {
+        width: 100%;
+        max-width:1450px;
+        min-width:1450px; 
+        min-height: 25px;            
+    }
 
-.mat-column-Imgothere {
-    width:400px;
-    max-width:400px;
-    min-width:400px;
-    text-align: right;
-}
-.table{
-    width: 100%;
+    .mat-column-IVUS {
+        width:400px;
+        max-width:400px;
+        min-width:400px;
+        text-align:left;
+        justify-content: left;
+    }
+
+    .mat-column-OCT {
+        width:300px;
+        max-width:300px;
+        min-width:300px;
+        text-align: right;
+    }
+
+    .mat-column-Imgothere {
+        width:400px;
+        max-width:400px;
+        min-width:400px;
+        text-align: right;
+    }
+    .table{
+        width: 100%;
+    }
+
+    .valve-top-padding-2{
+        margin-top: 0.7%;
+    }
+
+    .valve-lefttop-padding{
+        margin-left: 1%;
+    }
+
+    .valve-controls{
+        padding-top: 1%;
+        width: 400px;
+        padding-left: 50px;
+    }
+
+    .valve-label{
+        padding-top: 2%;
+        padding-left: 50px;
+    }
+
+    .valve-firstlabel{
+        padding-top: 2%;
+    }
+
+    .ht-label{
+        padding-top: 1%;
+        padding-bottom: 1%;
+        //padding-left: 50px;
+    }
+
 }

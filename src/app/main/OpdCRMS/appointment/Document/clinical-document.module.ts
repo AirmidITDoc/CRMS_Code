@@ -38,6 +38,7 @@ import { NewDocRegistrationComponent } from './new-doc-registration/new-doc-regi
 import { ClinicalDocumentService } from './clinical-document.service';
 import { NewDocumentComponent } from './new-document/new-document.component';
 import { DocPresentationComponent } from './doc-presentation/doc-presentation.component';
+import { PatientAppointmentComponent } from './patient-appointment/patient-appointment.component';
 
 
 const routes: Routes = [
@@ -50,7 +51,8 @@ const routes: Routes = [
     declarations: [
       NewDocumentComponent,
       DocPresentationComponent,
-      NewDocRegistrationComponent
+      NewDocRegistrationComponent,
+      PatientAppointmentComponent
     ],
     imports: [
         RouterModule.forChild(routes),

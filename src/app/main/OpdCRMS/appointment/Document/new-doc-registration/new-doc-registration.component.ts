@@ -10,13 +10,10 @@ import { fuseAnimations } from '@fuse/animations';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import Swal from 'sweetalert2';
 import { DocPresentationComponent } from '../doc-presentation/doc-presentation.component';
-import { ResultComponent } from '../result/result.component';
-import { ProcedureHemodynamicsComponent } from '../procedure-hemodynamics/procedure-hemodynamics.component';
-import { DempgraphicComponent } from '../dempgraphic/dempgraphic.component';
 import { id } from '@swimlane/ngx-charts';
-import { LesionPreprationComponent } from '../lesion-prepration/lesion-prepration.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { ClinicalDocumentService } from '../clinical-document.service';
+import { PatientAppointmentComponent } from '../patient-appointment/patient-appointment.component';
 
 @Component({
   selector: 'app-new-doc-registration',
@@ -29,13 +26,13 @@ export class NewDocRegistrationComponent implements OnInit {
   newSearchForm: FormGroup;
   CardiacRiskFormGroup: FormGroup;
   newAddForm: FormGroup;
-  newSaveForm:FormGroup;
-  ProcedureForm:FormGroup;
-  AngioplastyFormGroup:FormGroup;
-  WireTypeFormGroup:FormGroup;
-  ImagingFormGroup:FormGroup;
-  PhysiologyFormGroup:FormGroup;
-  ResultFormGroup:FormGroup;
+  newSaveForm: FormGroup;
+  ProcedureForm: FormGroup;
+  AngioplastyFormGroup: FormGroup;
+  WireTypeFormGroup: FormGroup;
+  ImagingFormGroup: FormGroup;
+  PhysiologyFormGroup: FormGroup;
+  ResultFormGroup: FormGroup;
   personalFormGroup: FormGroup;
 
   filteredOptions: any;
@@ -50,7 +47,7 @@ export class NewDocRegistrationComponent implements OnInit {
   Mobileno: any = '';
   isRegIdSelected: boolean = false;
   RegNo: any;
-  PatientId:any;
+  PatientId: any;
   sIsLoading: string = '';
 
   isPrefixSelected: boolean = false;
@@ -59,7 +56,7 @@ export class NewDocRegistrationComponent implements OnInit {
   PrefixList: any = [];
   GenderList: any = [];
   selectedGenderID: any;
- 
+
   PatientHeaderObj = {};
 
   datalist: any = [];
@@ -80,7 +77,13 @@ export class NewDocRegistrationComponent implements OnInit {
   vLesionCalcifiedList: any = [];
   vInflammatoryDiseasesList: any = [];
 
+  //Hide Show Variables
 
+  isValveYes: boolean = false;
+  isValveStenotic: boolean = false;
+  isValveRegurgitation: boolean = false;
+  isHypertension: boolean = false;
+  isT2D: boolean = false;
 
   //   { id: 1, name: "Acute Coronary Syndrome" },
   //   { id: 2, name: "Stable Coronary Syndrome" },
@@ -320,15 +323,15 @@ export class NewDocRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.personalFormGroup = this.createPesonalForm();
-     this.newSearchForm = this.createSearchForm();
+    this.newSearchForm = this.createSearchForm();
     this.newAddForm = this.createAddForm();
-    this.newSaveForm= this.createSaveForm();
-    this.CardiacRiskFormGroup=this.createCardiacRiskGroup();
-    this.ProcedureForm= this.createProcedureForm();
+    this.newSaveForm = this.createSaveForm();
+    this.CardiacRiskFormGroup = this.createCardiacRiskGroup();
+    this.ProcedureForm = this.createProcedureForm();
     this.AngioplastyFormGroup = this.createAngioplastyForm();
-    this.WireTypeFormGroup =this.createWireTypeForm();
+    this.WireTypeFormGroup = this.createWireTypeForm();
     this.ImagingFormGroup = this.createImagingForm();
-    this.PhysiologyFormGroup=this.createPhysiologyForm();
+    this.PhysiologyFormGroup = this.createPhysiologyForm();
     this.ResultFormGroup = this.createResultForm();
     // this.getPrefixList();
     this.getvSymtomTypeList();
@@ -338,13 +341,80 @@ export class NewDocRegistrationComponent implements OnInit {
     this.getvLesionCalcifiedList();
     this.getvInflammatoryDiseasesList();
   }
+
+  // Hide Show Functions Starts
+  onChangeValveYN(event) {
+    if (event.value == 'Yes') {
+      this.isValveYes = true;
+    }
+    else if (event.value == 'No') {
+      this.isValveYes = false;
+      this.isValveStenotic = false;
+      this.isValveRegurgitation = false;
+    }
+    else {
+      this.isValveYes = false;
+      this.isValveStenotic = false;
+      this.isValveRegurgitation = false;
+    }
+  }
+
+  onChangeRadioButton(event, strtype: any) {
+    if (strtype == "Hypertension") {
+      if (event.value == 'Yes') {
+        this.isHypertension = true;
+      }
+      else if (event.value == 'No') {
+        this.isHypertension = false;
+      }
+      else {
+        this.isHypertension = false;
+      }
+    }
+
+    if (strtype == "T2D") {
+      if (event.value == 'Yes') {
+        this.isT2D = true;
+      }
+      else if (event.value == 'No') {
+        this.isT2D = false;
+      }
+      else {
+        this.isT2D = false;
+      }
+    }
+  }
+
+  onChangeValveSR(event) {
+    if (event.value == 'Stenotic') {
+      this.isValveStenotic = true;
+      this.isValveRegurgitation = false;
+    }
+    else if (event.value == 'Regurgitation') {
+      this.isValveStenotic = false;
+      this.isValveRegurgitation = true;
+    }
+    else {
+      this.isValveStenotic = false;
+      this.isValveRegurgitation = false;
+    }
+  }
+
+
+
+
+  // Hide Show Functions Ends
+
+
+
+
   getvSymtomTypeList() {
     var vadata = {
       'DropDownType': 'SymtomType'
     }
     this._ClinicalDocumentService.getDropDownList(vadata).subscribe(data => {
       this.vSymtomType = data
-       //console.log(this.vSymtomType);
+      //console.log(this.vSymtomType);
     })
   }
   getvRWMAList() {
@@ -380,14 +450,14 @@ export class NewDocRegistrationComponent implements OnInit {
     }
     this._ClinicalDocumentService.getDropDownList(vadata).subscribe(data => {
       this.vLesionCalcifiedList = data
-     // console.log(this.vLesionCalcifiedList);
+      // console.log(this.vLesionCalcifiedList);
     })
   }
   getvInflammatoryDiseasesList() {
     var vadata = {
-      'DropDownType': 'Inflammatory Diseases'
+      'DropDownType': 'InflammatoryDiseases'
     }
-   // console.log(vadata);
+    // console.log(vadata);
     this._ClinicalDocumentService.getDropDownList(vadata).subscribe(data => {
       this.vInflammatoryDiseasesList = data
       //console.log(this.vInflammatoryDiseasesList);
@@ -395,7 +465,7 @@ export class NewDocRegistrationComponent implements OnInit {
   }
   createAddForm() {
     return this.formBuilder.group({
-      Symtoms:'',
+      Symtoms: '',
       LVEF: [''],
       GLS: [''],
       RWMA: [''],
@@ -428,34 +498,34 @@ export class NewDocRegistrationComponent implements OnInit {
   }
   deleteTableRow(event, element) {
     // if (this.key == "Delete") {
-      let index = this.datalist.indexOf(element);
-      if (index >= 0) {
-        this.datalist.splice(index, 1);
-        this.dataSource.data = [];
-        this.dataSource.data = this.datalist;
-      }
-      Swal.fire('Success !', 'Patient2DEcho Row Deleted Successfully', 'success');
+    let index = this.datalist.indexOf(element);
+    if (index >= 0) {
+      this.datalist.splice(index, 1);
+      this.dataSource.data = [];
+      this.dataSource.data = this.datalist;
+    }
+    Swal.fire('Success !', 'Patient2DEcho Row Deleted Successfully', 'success');
   }
-  Save2DEchoDetailes(){
+  Save2DEchoDetailes() {
     this.isLoading = 'submit';
     let submissionObj = {};
-    let savePatient2DEchoDetail= {};
+    let savePatient2DEchoDetail = {};
 
-    savePatient2DEchoDetail['patient2DEchoId']  =  0;
-    savePatient2DEchoDetail['patientId']  = this.RegNo;
-    savePatient2DEchoDetail['visitId']  = 0;
-    savePatient2DEchoDetail['lvef']  = this.newAddForm.get('LVEF').value;
-    savePatient2DEchoDetail['globalGLS']  =this.newAddForm.get('GLS').value;
-    savePatient2DEchoDetail['rwma']  = 0;//this.newAddForm.get('RWMA').value;
-    savePatient2DEchoDetail['valve']  = this.newAddForm.get('Valve').value.name;
-    savePatient2DEchoDetail['stenotic']  =this.newAddForm.get('Stenotic').value;
-    savePatient2DEchoDetail['regurgitation']  = this.newAddForm.get('Regurgitation').value;
-    savePatient2DEchoDetail['mrar']  = this.newAddForm.get('MSAR').value;
-    savePatient2DEchoDetail['msas']  = this.newAddForm.get('MSAS').value;
-    savePatient2DEchoDetail['createdBy']  = this._loggedService.currentUserValue.user.id;
+    savePatient2DEchoDetail['patient2DEchoId'] = 0;
+    savePatient2DEchoDetail['patientId'] = this.RegNo;
+    savePatient2DEchoDetail['visitId'] = 0;
+    savePatient2DEchoDetail['lvef'] = this.newAddForm.get('LVEF').value;
+    savePatient2DEchoDetail['globalGLS'] = this.newAddForm.get('GLS').value;
+    savePatient2DEchoDetail['rwma'] = 0;//this.newAddForm.get('RWMA').value;
+    savePatient2DEchoDetail['valve'] = this.newAddForm.get('Valve').value.name;
+    savePatient2DEchoDetail['stenotic'] = this.newAddForm.get('Stenotic').value;
+    savePatient2DEchoDetail['regurgitation'] = this.newAddForm.get('Regurgitation').value;
+    savePatient2DEchoDetail['mrar'] = this.newAddForm.get('MSAR').value;
+    savePatient2DEchoDetail['msas'] = this.newAddForm.get('MSAS').value;
+    savePatient2DEchoDetail['createdBy'] = this._loggedService.currentUserValue.user.id;
 
     submissionObj['savePatient2DEchoDetails'] = savePatient2DEchoDetail;
-    
+
     console.log(submissionObj);
     this._ClinicalDocumentService.SavePatient2DEchoDet(submissionObj).subscribe(response => {
       console.log(response);
@@ -474,27 +544,27 @@ export class NewDocRegistrationComponent implements OnInit {
       // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
     });
   }
-  
-get2DEchoDetails(){
-  this.sIsLoading = 'loading-data';
-  var m_data = {
-    "PatientId":this.registerObj.PatientId || 0
-  }
-  console.log(m_data);
-  this._ClinicalDocumentService.get2DEchoDetailesList(m_data).subscribe(data => {
-    this.dataSource.data = data as D2EchoDet[];
-    console.log(this.dataSource.data);
-    this.sIsLoading = '';
-  },
-    error => {
-      this.sIsLoading = '';
-    });
-}
 
-  createSearchForm(){
+  get2DEchoDetails() {
+    this.sIsLoading = 'loading-data';
+    var m_data = {
+      "PatientId": this.registerObj.PatientId || 0
+    }
+    console.log(m_data);
+    this._ClinicalDocumentService.get2DEchoDetailesList(m_data).subscribe(data => {
+      this.dataSource.data = data as D2EchoDet[];
+      console.log(this.dataSource.data);
+      this.sIsLoading = '';
+    },
+      error => {
+        this.sIsLoading = '';
+      });
+  }
+
+  createSearchForm() {
     return this.formBuilder.group({
       RegID: [''],
-      
+
     })
   }
   getSearchList() {
@@ -523,275 +593,275 @@ get2DEchoDetails(){
     this.registerObj = obj;
     console.log(obj);
     this.PatientName = this.registerObj.FirstName + ' ' + this.registerObj.MiddleName + ' ' + this.registerObj.LastName;
-    this.RegNo= this.registerObj.PatientId;
+    this.RegNo = this.registerObj.PatientId;
     this.get2DEchoDetails();
   }
-  createSaveForm(){
+  createSaveForm() {
     return this.formBuilder.group({
-      PastCardiacProcedure:'',
-      VascularProcedure:'',
-      CABG:'',
-      Angioplasty:'',
-      PastNonCardiacProcedure:''
+      PastCardiacProcedure: '',
+      VascularProcedure: '',
+      CABG: '',
+      Angioplasty: '',
+      PastNonCardiacProcedure: ''
     })
-  } 
+  }
   onSubmit() {
     this.isLoading = 'submit';
-      let submissionObj = {};
-      let savePatientPastHistorys= {};
+    let submissionObj = {};
+    let savePatientPastHistorys = {};
 
-      savePatientPastHistorys['pastHistoryId']  =  0;
-      savePatientPastHistorys['patientId']  = this.RegNo;
-      savePatientPastHistorys['visitId']  = 0;
-      savePatientPastHistorys['angioplasty']  = this.newSaveForm.get('Angioplasty').value;
-      savePatientPastHistorys['cabg']  = this.newSaveForm.get('CABG').value;
-      savePatientPastHistorys['vascularProcedure']  = this.newSaveForm.get('VascularProcedure').value;
-      savePatientPastHistorys['createdBy']  =this._loggedService.currentUserValue.user.id;
+    savePatientPastHistorys['pastHistoryId'] = 0;
+    savePatientPastHistorys['patientId'] = this.RegNo;
+    savePatientPastHistorys['visitId'] = 0;
+    savePatientPastHistorys['angioplasty'] = this.newSaveForm.get('Angioplasty').value;
+    savePatientPastHistorys['cabg'] = this.newSaveForm.get('CABG').value;
+    savePatientPastHistorys['vascularProcedure'] = this.newSaveForm.get('VascularProcedure').value;
+    savePatientPastHistorys['createdBy'] = this._loggedService.currentUserValue.user.id;
 
-      submissionObj['savePatientPastHistory'] = savePatientPastHistorys;
-      
-      console.log(submissionObj);
-      this._ClinicalDocumentService.SavePatientPastHistory(submissionObj).subscribe(response => {
-        console.log(response);
-        if (response) {
-          Swal.fire('Congratulations !', 'Patient past History Saved Successfully  !', 'success').then((result) => {
-            if (result.isConfirmed) {
-              this._matDialog.closeAll();
-            }
-          });
-        } else {
-          Swal.fire('Error !', 'Patient past History Not Updated', 'error');
-        }
-        this.isLoading = '';
-      }, error => {
-        Swal.fire('Data not saved !, Please check API error..', 'Error !')
-        // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
-      });
-    }
-// Cardiac Risk Factore
-    createCardiacRiskGroup(){
-      return this.formBuilder.group({
-        OnMedication:'',
-        DrugDetails:'',
-        CKD:'',
-        DialysisDependent:'',
-        Smoking:'',
-        TobacoChewing:'',
-        Insuline:'',
-        Oral:'',
-        LDL:'',
-        TriGlyceride:'',
-        InflammatoryDiseases:'',
-        inflDiseasesOthers:'',
-        Hba1c:'',
-        Creatinine:'',
-        Hb:'',
-        eGFR:'',
-        IronDeficency:'',
-        VitB12Dificency:'',
-        cRP:'',
-        CKMB:''
-      })
-    }
-    onSubmitCardiac(){
-      this.isLoading = 'submit';
-      let submissionObj = {};
-      let saveCardiacRiskFactors= {};
+    submissionObj['savePatientPastHistory'] = savePatientPastHistorys;
 
-      saveCardiacRiskFactors['crfId']  =  0;
-      saveCardiacRiskFactors['patientId']  = this.RegNo;
-      saveCardiacRiskFactors['visitId']  = 0;
-      saveCardiacRiskFactors['hypertension']  = '';
-      saveCardiacRiskFactors['onMedication']  = this.CardiacRiskFormGroup.get('OnMedication').value;
-      saveCardiacRiskFactors['drugDetails']  = this.CardiacRiskFormGroup.get('DrugDetails').value;
-      saveCardiacRiskFactors['ckd']  = this.CardiacRiskFormGroup.get('CKD').value;
-      saveCardiacRiskFactors['dialysisDependent']  = this.CardiacRiskFormGroup.get('DialysisDependent').value;
-      saveCardiacRiskFactors['t2DInsuline']  = this.CardiacRiskFormGroup.get('Insuline').value;
-      saveCardiacRiskFactors['t2DOral']  = this.CardiacRiskFormGroup.get('Oral').value;
-      saveCardiacRiskFactors['smoking']  =  this.CardiacRiskFormGroup.get('Smoking').value;
-      saveCardiacRiskFactors['tobaccoChew']  =this.CardiacRiskFormGroup.get('TobacoChewing').value;
-      saveCardiacRiskFactors['dyLDL']  = this.CardiacRiskFormGroup.get('LDL').value;
-      saveCardiacRiskFactors['dyTriGlyceride']  = this.CardiacRiskFormGroup.get('TriGlyceride').value;
-      saveCardiacRiskFactors['inflDiseases']  = 0;// this.CardiacRiskFormGroup.get('InflammatoryDiseases').value;
-      saveCardiacRiskFactors['inflDiseasesOthers']  = this.CardiacRiskFormGroup.get('inflDiseasesOthers').value;
-      saveCardiacRiskFactors['ltHba1c']  =  this.CardiacRiskFormGroup.get('Hba1c').value;
-      saveCardiacRiskFactors['ltCreatinine']  = this.CardiacRiskFormGroup.get('Creatinine').value;
-      saveCardiacRiskFactors['ltHb']  =this.CardiacRiskFormGroup.get('Hb').value;
-      saveCardiacRiskFactors['lTeGFR']  = this.CardiacRiskFormGroup.get('eGFR').value;
-      saveCardiacRiskFactors['ltIronDeficency']  = this.CardiacRiskFormGroup.get('IronDeficency').value;
-      saveCardiacRiskFactors['ltVitB12Dif']  = this.CardiacRiskFormGroup.get('VitB12Dificency').value;
-      saveCardiacRiskFactors['lTcRP']  = this.CardiacRiskFormGroup.get('cRP').value;
-      saveCardiacRiskFactors['ltckmb']  = this.CardiacRiskFormGroup.get('CKMB').value;
-      saveCardiacRiskFactors['createdBy']  =this._loggedService.currentUserValue.user.id;
-
-      submissionObj['saveCardiacRiskFactor'] = saveCardiacRiskFactors;
-      
-      console.log(submissionObj);
-      this._ClinicalDocumentService.SaveCardiacRiskFactor(submissionObj).subscribe(response => {
-        console.log(response);
-        if (response) {
-          Swal.fire('Congratulations !', 'Cardiac Risk Factor Saved Successfully  !', 'success').then((result) => {
-            if (result.isConfirmed) {
-              this._matDialog.closeAll();
-            }
-          });
-        } else {
-          Swal.fire('Error !', 'Cardiac Risk Factor Not Updated', 'error');
-        }
-        this.isLoading = '';
-      }, error => {
-        Swal.fire('Data not saved !, Please check API error..', 'Error !')
-        // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
-      });
-
-    }
-
-    // Procedure Tab 
-    createProcedureForm(){
-      return this.formBuilder.group({
-        Systolic:'',
-        Diastolic:'',
-        MAP:'',
-        LVEDP:'',
-        PSystolic:'',
-        PDiastolic:'',
-        PMap:'',
-        PCWP:'',
-        LesionType:'',
-        Location:'',
-        SyntaxScore:'',
-        IndexLesion:'',
-        Severity:'',
-        Calcified:'',
-        Thrombus:'',
-        Proximal:'',
-        Branch:''
-      })
-    }
-    
-    onAddProceduredata() {
-      this.isLoading = 'save';
-      this.dataSource2.data = [];
-      this.proceduredatalist.push(
-        {
-          LesionType: this.ProcedureForm.get('LesionType').value.DropDownValue || '',
-          Location: this.ProcedureForm.get('Location').value || '',
-          SyntaxScore: this.ProcedureForm.get('SyntaxScore').value || 0,
-          IndexLesion: this.ProcedureForm.get('IndexLesion').value || '',
-          Severity: this.ProcedureForm.get('Severity').value.DropDownValue || '',
-          Calcified: this.ProcedureForm.get('Calcified').value.DropDownValue || '',
-          Thrombus: this.ProcedureForm.get('Thrombus').value || 'false',
-          Proximal: this.ProcedureForm.get('Proximal').value || 'false',
-          Branch: this.ProcedureForm.get('Branch').value || 'false',
+    console.log(submissionObj);
+    this._ClinicalDocumentService.SavePatientPastHistory(submissionObj).subscribe(response => {
+      console.log(response);
+      if (response) {
+        Swal.fire('Congratulations !', 'Patient past History Saved Successfully  !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+          }
         });
-      this.isLoading = '';
-      this.dataSource2.data = this.proceduredatalist;
-      this. SaveLesion();
-    }
-    deleteTableRowProcedure(event, element) {
-      // if (this.key == "Delete") {
-        let index = this.proceduredatalist.indexOf(element);
-        if (index >= 0) {
-          this.proceduredatalist.splice(index, 1);
-          this.dataSource2.data = [];
-          this.dataSource2.data = this.proceduredatalist;
-        }
-        Swal.fire('Success !', 'Lesion Row Deleted Successfully', 'success');
-    }
-      SaveLesion(){
-      this.isLoading = 'submit';
-      let submissionObj = {};
-      let saveLesionDetail= {};
-
-      saveLesionDetail['lesionId']  =  0;
-      saveLesionDetail['patientId']  = this.RegNo;
-      saveLesionDetail['visitId']  = 0;
-      saveLesionDetail['procedureId']  = 0;
-      saveLesionDetail['lesionType']  = this.ProcedureForm.get('LesionType').value.DropDownValue;
-      saveLesionDetail['location']  = this.ProcedureForm.get('Location').value;
-      saveLesionDetail['syntaxScore']  = this.ProcedureForm.get('SyntaxScore').value;
-      saveLesionDetail['indexLesion']  = this.ProcedureForm.get('IndexLesion').value;
-      saveLesionDetail['lesionSeverity']  = this.ProcedureForm.get('Severity').value.DropDownValue;
-      saveLesionDetail['lesionDevice']  = '';
-      saveLesionDetail['calcified']  = this.ProcedureForm.get('Calcified').value.DropDownValue;
-      saveLesionDetail['thrombus']  = this.ProcedureForm.get('Thrombus').value;
-      saveLesionDetail['proximalTortuosity']  = this.ProcedureForm.get('Proximal').value;
-      saveLesionDetail['impSideBranch']  = this.ProcedureForm.get('Branch').value;
-      saveLesionDetail['createdBy']  =this._loggedService.currentUserValue.user.id;
-
-      submissionObj['saveLesionDetails'] = saveLesionDetail;
-      
-      console.log(submissionObj);
-      this._ClinicalDocumentService.SaveLesionDetails(submissionObj).subscribe(response => {
-        console.log(response);
-        if (response) {
-          Swal.fire('Congratulations !', 'Lesion Details Saved Successfully  !', 'success').then((result) => {
-            if (result.isConfirmed) {
-              this._matDialog.closeAll();
-            }
-          });
-        } else {
-          Swal.fire('Error !', 'Lesion Details Not Updated', 'error');
-        }
-        this.isLoading = '';
-      }, error => {
-        Swal.fire('Data not saved !, Please check API error..', 'Error !')
-        // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
-      });
+      } else {
+        Swal.fire('Error !', 'Patient past History Not Updated', 'error');
       }
-
-    onSubmitProcedure(){
-      this.isLoading = 'submit';
-      let submissionObj = {};
-      let saveProcedureDetail= {};
-
-      saveProcedureDetail['procedureId']  =  0;
-      saveProcedureDetail['patientId']  = this.RegNo;
-      saveProcedureDetail['visitId']  = 0;
-      saveProcedureDetail['aortogramSystolic']  =  this.ProcedureForm.get('Systolic').value;
-      saveProcedureDetail['aortogramDiastolic']  = this.ProcedureForm.get('Diastolic').value;
-      saveProcedureDetail['aortogramMAP']  = this.ProcedureForm.get('MAP').value;
-      saveProcedureDetail['lvedp']  = this.ProcedureForm.get('LVEDP').value;
-      saveProcedureDetail['paSystolic']  = this.ProcedureForm.get('PSystolic').value;
-      saveProcedureDetail['paDiastolic']  = this.ProcedureForm.get('PDiastolic').value;
-      saveProcedureDetail['pamap']  = this.ProcedureForm.get('PMap').value;
-      saveProcedureDetail['papcwp']  = this.ProcedureForm.get('PCWP').value;
-      saveProcedureDetail['createdBy']  =this._loggedService.currentUserValue.user.id;
-
-      submissionObj['saveProcedureDetails'] = saveProcedureDetail;
-      
-      console.log(submissionObj);
-      this._ClinicalDocumentService.SaveProcedureDetails(submissionObj).subscribe(response => {
-        console.log(response);
-        if (response) {
-          Swal.fire('Congratulations !', 'Procedure Saved Successfully  !', 'success').then((result) => {
-            if (result.isConfirmed) {
-              this._matDialog.closeAll();
-            }
-          });
-        } else {
-          Swal.fire('Error !', 'Procedure Not Updated', 'error');
-        }
-        this.isLoading = '';
-      }, error => {
-        Swal.fire('Data not saved !, Please check API error..', 'Error !')
-        // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
-      });
-
-    }
-  
-  // Agnioplasty Tab 
-  createAngioplastyForm(){
+      this.isLoading = '';
+    }, error => {
+      Swal.fire('Data not saved !, Please check API error..', 'Error !')
+      // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
+    });
+  }
+  // Cardiac Risk Factore
+  createCardiacRiskGroup() {
     return this.formBuilder.group({
-      NumberofAccess:'',
-      AccessType:'',
-      Accessvalue1:'',
-      Accessvalue2:'',
-      AccessvalueOther:'',
-      USG:'',
-      Puncture:'',
-      Fluoro:'',
-      Device:''
+      OnMedication: '',
+      DrugDetails: '',
+      CKD: '',
+      DialysisDependent: '',
+      Smoking: '',
+      TobacoChewing: '',
+      Insuline: '',
+      Oral: '',
+      LDL: '',
+      TriGlyceride: '',
+      InflammatoryDiseases: '',
+      inflDiseasesOthers: '',
+      Hba1c: '',
+      Creatinine: '',
+      Hb: '',
+      eGFR: '',
+      IronDeficency: '',
+      VitB12Dificency: '',
+      cRP: '',
+      CKMB: ''
+    })
+  }
+  onSubmitCardiac() {
+    this.isLoading = 'submit';
+    let submissionObj = {};
+    let saveCardiacRiskFactors = {};
+
+    saveCardiacRiskFactors['crfId'] = 0;
+    saveCardiacRiskFactors['patientId'] = this.RegNo;
+    saveCardiacRiskFactors['visitId'] = 0;
+    saveCardiacRiskFactors['hypertension'] = '';
+    saveCardiacRiskFactors['onMedication'] = this.CardiacRiskFormGroup.get('OnMedication').value;
+    saveCardiacRiskFactors['drugDetails'] = this.CardiacRiskFormGroup.get('DrugDetails').value;
+    saveCardiacRiskFactors['ckd'] = this.CardiacRiskFormGroup.get('CKD').value;
+    saveCardiacRiskFactors['dialysisDependent'] = this.CardiacRiskFormGroup.get('DialysisDependent').value;
+    saveCardiacRiskFactors['t2DInsuline'] = this.CardiacRiskFormGroup.get('Insuline').value;
+    saveCardiacRiskFactors['t2DOral'] = this.CardiacRiskFormGroup.get('Oral').value;
+    saveCardiacRiskFactors['smoking'] = this.CardiacRiskFormGroup.get('Smoking').value;
+    saveCardiacRiskFactors['tobaccoChew'] = this.CardiacRiskFormGroup.get('TobacoChewing').value;
+    saveCardiacRiskFactors['dyLDL'] = this.CardiacRiskFormGroup.get('LDL').value;
+    saveCardiacRiskFactors['dyTriGlyceride'] = this.CardiacRiskFormGroup.get('TriGlyceride').value;
+    saveCardiacRiskFactors['inflDiseases'] = 0;// this.CardiacRiskFormGroup.get('InflammatoryDiseases').value;
+    saveCardiacRiskFactors['inflDiseasesOthers'] = this.CardiacRiskFormGroup.get('inflDiseasesOthers').value;
+    saveCardiacRiskFactors['ltHba1c'] = this.CardiacRiskFormGroup.get('Hba1c').value;
+    saveCardiacRiskFactors['ltCreatinine'] = this.CardiacRiskFormGroup.get('Creatinine').value;
+    saveCardiacRiskFactors['ltHb'] = this.CardiacRiskFormGroup.get('Hb').value;
+    saveCardiacRiskFactors['lTeGFR'] = this.CardiacRiskFormGroup.get('eGFR').value;
+    saveCardiacRiskFactors['ltIronDeficency'] = this.CardiacRiskFormGroup.get('IronDeficency').value;
+    saveCardiacRiskFactors['ltVitB12Dif'] = this.CardiacRiskFormGroup.get('VitB12Dificency').value;
+    saveCardiacRiskFactors['lTcRP'] = this.CardiacRiskFormGroup.get('cRP').value;
+    saveCardiacRiskFactors['ltckmb'] = this.CardiacRiskFormGroup.get('CKMB').value;
+    saveCardiacRiskFactors['createdBy'] = this._loggedService.currentUserValue.user.id;
+
+    submissionObj['saveCardiacRiskFactor'] = saveCardiacRiskFactors;
+
+    console.log(submissionObj);
+    this._ClinicalDocumentService.SaveCardiacRiskFactor(submissionObj).subscribe(response => {
+      console.log(response);
+      if (response) {
+        Swal.fire('Congratulations !', 'Cardiac Risk Factor Saved Successfully  !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+          }
+        });
+      } else {
+        Swal.fire('Error !', 'Cardiac Risk Factor Not Updated', 'error');
+      }
+      this.isLoading = '';
+    }, error => {
+      Swal.fire('Data not saved !, Please check API error..', 'Error !')
+      // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
+    });
+
+  }
+
+  // Procedure Tab 
+  createProcedureForm() {
+    return this.formBuilder.group({
+      Systolic: '',
+      Diastolic: '',
+      MAP: '',
+      LVEDP: '',
+      PSystolic: '',
+      PDiastolic: '',
+      PMap: '',
+      PCWP: '',
+      LesionType: '',
+      Location: '',
+      SyntaxScore: '',
+      IndexLesion: '',
+      Severity: '',
+      Calcified: '',
+      Thrombus: '',
+      Proximal: '',
+      Branch: ''
+    })
+  }
+
+  onAddProceduredata() {
+    this.isLoading = 'save';
+    this.dataSource2.data = [];
+    this.proceduredatalist.push(
+      {
+        LesionType: this.ProcedureForm.get('LesionType').value.DropDownValue || '',
+        Location: this.ProcedureForm.get('Location').value || '',
+        SyntaxScore: this.ProcedureForm.get('SyntaxScore').value || 0,
+        IndexLesion: this.ProcedureForm.get('IndexLesion').value || '',
+        Severity: this.ProcedureForm.get('Severity').value.DropDownValue || '',
+        Calcified: this.ProcedureForm.get('Calcified').value.DropDownValue || '',
+        Thrombus: this.ProcedureForm.get('Thrombus').value || 'false',
+        Proximal: this.ProcedureForm.get('Proximal').value || 'false',
+        Branch: this.ProcedureForm.get('Branch').value || 'false',
+      });
+    this.isLoading = '';
+    this.dataSource2.data = this.proceduredatalist;
+    this.SaveLesion();
+  }
+  deleteTableRowProcedure(event, element) {
+    // if (this.key == "Delete") {
+    let index = this.proceduredatalist.indexOf(element);
+    if (index >= 0) {
+      this.proceduredatalist.splice(index, 1);
+      this.dataSource2.data = [];
+      this.dataSource2.data = this.proceduredatalist;
+    }
+    Swal.fire('Success !', 'Lesion Row Deleted Successfully', 'success');
+  }
+  SaveLesion() {
+    this.isLoading = 'submit';
+    let submissionObj = {};
+    let saveLesionDetail = {};
+
+    saveLesionDetail['lesionId'] = 0;
+    saveLesionDetail['patientId'] = this.RegNo;
+    saveLesionDetail['visitId'] = 0;
+    saveLesionDetail['procedureId'] = 0;
+    saveLesionDetail['lesionType'] = this.ProcedureForm.get('LesionType').value.DropDownValue;
+    saveLesionDetail['location'] = this.ProcedureForm.get('Location').value;
+    saveLesionDetail['syntaxScore'] = this.ProcedureForm.get('SyntaxScore').value;
+    saveLesionDetail['indexLesion'] = this.ProcedureForm.get('IndexLesion').value;
+    saveLesionDetail['lesionSeverity'] = this.ProcedureForm.get('Severity').value.DropDownValue;
+    saveLesionDetail['lesionDevice'] = '';
+    saveLesionDetail['calcified'] = this.ProcedureForm.get('Calcified').value.DropDownValue;
+    saveLesionDetail['thrombus'] = this.ProcedureForm.get('Thrombus').value;
+    saveLesionDetail['proximalTortuosity'] = this.ProcedureForm.get('Proximal').value;
+    saveLesionDetail['impSideBranch'] = this.ProcedureForm.get('Branch').value;
+    saveLesionDetail['createdBy'] = this._loggedService.currentUserValue.user.id;
+
+    submissionObj['saveLesionDetails'] = saveLesionDetail;
+
+    console.log(submissionObj);
+    this._ClinicalDocumentService.SaveLesionDetails(submissionObj).subscribe(response => {
+      console.log(response);
+      if (response) {
+        Swal.fire('Congratulations !', 'Lesion Details Saved Successfully  !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+          }
+        });
+      } else {
+        Swal.fire('Error !', 'Lesion Details Not Updated', 'error');
+      }
+      this.isLoading = '';
+    }, error => {
+      Swal.fire('Data not saved !, Please check API error..', 'Error !')
+      // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
+    });
+  }
+
+  onSubmitProcedure() {
+    this.isLoading = 'submit';
+    let submissionObj = {};
+    let saveProcedureDetail = {};
+
+    saveProcedureDetail['procedureId'] = 0;
+    saveProcedureDetail['patientId'] = this.RegNo;
+    saveProcedureDetail['visitId'] = 0;
+    saveProcedureDetail['aortogramSystolic'] = this.ProcedureForm.get('Systolic').value;
+    saveProcedureDetail['aortogramDiastolic'] = this.ProcedureForm.get('Diastolic').value;
+    saveProcedureDetail['aortogramMAP'] = this.ProcedureForm.get('MAP').value;
+    saveProcedureDetail['lvedp'] = this.ProcedureForm.get('LVEDP').value;
+    saveProcedureDetail['paSystolic'] = this.ProcedureForm.get('PSystolic').value;
+    saveProcedureDetail['paDiastolic'] = this.ProcedureForm.get('PDiastolic').value;
+    saveProcedureDetail['pamap'] = this.ProcedureForm.get('PMap').value;
+    saveProcedureDetail['papcwp'] = this.ProcedureForm.get('PCWP').value;
+    saveProcedureDetail['createdBy'] = this._loggedService.currentUserValue.user.id;
+
+    submissionObj['saveProcedureDetails'] = saveProcedureDetail;
+
+    console.log(submissionObj);
+    this._ClinicalDocumentService.SaveProcedureDetails(submissionObj).subscribe(response => {
+      console.log(response);
+      if (response) {
+        Swal.fire('Congratulations !', 'Procedure Saved Successfully  !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+          }
+        });
+      } else {
+        Swal.fire('Error !', 'Procedure Not Updated', 'error');
+      }
+      this.isLoading = '';
+    }, error => {
+      Swal.fire('Data not saved !, Please check API error..', 'Error !')
+      // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
+    });
+
+  }
+
+  // Agnioplasty Tab 
+  createAngioplastyForm() {
+    return this.formBuilder.group({
+      NumberofAccess: '',
+      AccessType: '',
+      Accessvalue1: '',
+      Accessvalue2: '',
+      AccessvalueOther: '',
+      USG: '',
+      Puncture: '',
+      Fluoro: '',
+      Device: ''
     })
   }
   onAddAccesstypeData() {
@@ -815,7 +885,7 @@ get2DEchoDetails(){
         Accessvalue1: this.AngioplastyFormGroup.get('Accessvalue1').value.name || 0,
         Accessvalue2: this.AngioplastyFormGroup.get('Accessvalue2').value.name || '',
         Other1: this.AngioplastyFormGroup.get('AccessvalueOther').value || '',
-       // IronDef: this.AccessFormGroup.get('IronDef').value.name || '',
+        // IronDef: this.AccessFormGroup.get('IronDef').value.name || '',
         USG: this.AngioplastyFormGroup.get('USG').value.name || '',
         Puncture: this.AngioplastyFormGroup.get('Puncture').value.name || '',
         Fluoro: this.AngioplastyFormGroup.get('Fluoro').value.name || '',
@@ -826,20 +896,20 @@ get2DEchoDetails(){
   }
   deleteAccesstypeTableRow(event, element) {
     // if (this.key == "Delete") {
-      let index = this.Accessdatalist.indexOf(element);
-      if (index >= 0) {
-        this.Accessdatalist.splice(index, 1);
-        this.dataSource1.data = [];
-        this.dataSource1.data = this.Accessdatalist;
-      }
-      Swal.fire('Success !', 'AccessType Table Row Deleted Successfully', 'success');
+    let index = this.Accessdatalist.indexOf(element);
+    if (index >= 0) {
+      this.Accessdatalist.splice(index, 1);
+      this.dataSource1.data = [];
+      this.dataSource1.data = this.Accessdatalist;
+    }
+    Swal.fire('Success !', 'AccessType Table Row Deleted Successfully', 'success');
   }
-  createWireTypeForm(){
+  createWireTypeForm() {
     return this.formBuilder.group({
-      Wiretype:'',
-      wireOther:'',
-      MicroCatheter:'',
-      MicroWireOther:''
+      Wiretype: '',
+      wireOther: '',
+      MicroCatheter: '',
+      MicroWireOther: ''
     })
   }
   onAddWiretypeData() {
@@ -857,20 +927,20 @@ get2DEchoDetails(){
   }
   deleteWiretypeTableRow(event, element) {
     // if (this.key == "Delete") {
-      let index = this.wiredatalist.indexOf(element);
-      if (index >= 0) {
-        this.wiredatalist.splice(index, 1);
-        this.dataSourc3.data = [];
-        this.dataSourc3.data = this.wiredatalist;
-      }
-      Swal.fire('Success !', 'Wiretype Table Row Deleted Successfully', 'success');
+    let index = this.wiredatalist.indexOf(element);
+    if (index >= 0) {
+      this.wiredatalist.splice(index, 1);
+      this.dataSourc3.data = [];
+      this.dataSourc3.data = this.wiredatalist;
+    }
+    Swal.fire('Success !', 'Wiretype Table Row Deleted Successfully', 'success');
   }
-  
-  createImagingForm(){
+
+  createImagingForm() {
     return this.formBuilder.group({
-      IVUS:'',
-      OCT:'',
-      Imgothere:''
+      IVUS: '',
+      OCT: '',
+      Imgothere: ''
     })
   }
   onAddImagingData() {
@@ -887,21 +957,21 @@ get2DEchoDetails(){
   }
   deleteImagingTableRow(event, element) {
     // if (this.key == "Delete") {
-      let index = this.Imgimgdatalist.indexOf(element);
-      if (index >= 0) {
-        this.Imgimgdatalist.splice(index, 1);
-        this.dataSource4.data = [];
-        this.dataSource4.data = this.Imgimgdatalist;
-      }
-      Swal.fire('Success !', 'Imaging Table Row Deleted Successfully', 'success');
+    let index = this.Imgimgdatalist.indexOf(element);
+    if (index >= 0) {
+      this.Imgimgdatalist.splice(index, 1);
+      this.dataSource4.data = [];
+      this.dataSource4.data = this.Imgimgdatalist;
+    }
+    Swal.fire('Success !', 'Imaging Table Row Deleted Successfully', 'success');
   }
-  createPhysiologyForm(){
+  createPhysiologyForm() {
     return this.formBuilder.group({
-      Physiologytype:'',
-      Physiologyvalue:''
+      Physiologytype: '',
+      Physiologyvalue: ''
     })
   }
-  
+
   onAddPhysiologyData() {
     this.isLoading = 'save';
     this.dataSource5.data = [];
@@ -915,34 +985,34 @@ get2DEchoDetails(){
   }
   deletePhysiologyTableRow(event, element) {
     // if (this.key == "Delete") {
-      let index = this.Physiodatalist.indexOf(element);
-      if (index >= 0) {
-        this.Physiodatalist.splice(index, 1);
-        this.dataSource5.data = [];
-        this.dataSource5.data = this.Physiodatalist;
-      }
-      Swal.fire('Success !', 'Physiology Table Row Deleted Successfully', 'success');
+    let index = this.Physiodatalist.indexOf(element);
+    if (index >= 0) {
+      this.Physiodatalist.splice(index, 1);
+      this.dataSource5.data = [];
+      this.dataSource5.data = this.Physiodatalist;
+    }
+    Swal.fire('Success !', 'Physiology Table Row Deleted Successfully', 'success');
   }
 
-  SaveAccessType(){
+  SaveAccessType() {
     this.isLoading = 'submit';
     let submissionObj = {};
-    let SaveAccessType= {};
+    let SaveAccessType = {};
 
-    SaveAccessType['lesionId']  =  0;
-    SaveAccessType['patientId']  = this.RegNo;
-    SaveAccessType['visitId']  = 0;
-    SaveAccessType['procedureId']  = 0;
-    SaveAccessType['lesionType']  = this.ProcedureForm.get('LesionType').value.DropDownValue;
-    SaveAccessType['location']  = this.ProcedureForm.get('Location').value;
-    SaveAccessType['syntaxScore']  = this.ProcedureForm.get('SyntaxScore').value;
-    SaveAccessType['indexLesion']  = this.ProcedureForm.get('IndexLesion').value;
-    SaveAccessType['lesionSeverity']  = this.ProcedureForm.get('Severity').value.DropDownValue;
-    SaveAccessType['lesionDevice']  = '';
-    SaveAccessType['createdBy']  =this._loggedService.currentUserValue.user.id;
+    SaveAccessType['lesionId'] = 0;
+    SaveAccessType['patientId'] = this.RegNo;
+    SaveAccessType['visitId'] = 0;
+    SaveAccessType['procedureId'] = 0;
+    SaveAccessType['lesionType'] = this.ProcedureForm.get('LesionType').value.DropDownValue;
+    SaveAccessType['location'] = this.ProcedureForm.get('Location').value;
+    SaveAccessType['syntaxScore'] = this.ProcedureForm.get('SyntaxScore').value;
+    SaveAccessType['indexLesion'] = this.ProcedureForm.get('IndexLesion').value;
+    SaveAccessType['lesionSeverity'] = this.ProcedureForm.get('Severity').value.DropDownValue;
+    SaveAccessType['lesionDevice'] = '';
+    SaveAccessType['createdBy'] = this._loggedService.currentUserValue.user.id;
 
     submissionObj['saveLesionDetails'] = SaveAccessType;
-    
+
     console.log(submissionObj);
     this._ClinicalDocumentService.SaveLesionDetails(submissionObj).subscribe(response => {
       console.log(response);
@@ -960,158 +1030,158 @@ get2DEchoDetails(){
       Swal.fire('Data not saved !, Please check API error..', 'Error !')
       // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
     });
-    }
+  }
 
-    // Result Start
+  // Result Start
 
-    createResultForm(){
-      return this.formBuilder.group({
-        Result:['1'],
-        LabEvent:[],
-        Hypertension:'',
-        HyperOther:'',
-        MICS:'',
-        MicsOther:'',
-        Hrs24:'',
-        CKMBRaised:'',
-        LVfunction:'',
-        HrsOther:'',
-        Days30:''
-      });
-    }
-    onSubmitResult(){
+  createResultForm() {
+    return this.formBuilder.group({
+      Result: ['1'],
+      LabEvent: [],
+      Hypertension: '',
+      HyperOther: '',
+      MICS: '',
+      MicsOther: '',
+      Hrs24: '',
+      CKMBRaised: '',
+      LVfunction: '',
+      HrsOther: '',
+      Days30: ''
+    });
+  }
+  onSubmitResult() {
 
-      this.isLoading = 'submit';
-      let submissionObj = {};
-      let SaveResultType= {};
+    this.isLoading = 'submit';
+    let submissionObj = {};
+    let SaveResultType = {};
 
-      SaveResultType['Result']  =  0;
-      SaveResultType['patientId']  = this.RegNo;
-      SaveResultType['visitId']  = 0;
-      SaveResultType['LabEvent']  = this.ResultFormGroup.get('LabEvent').value;
-      SaveResultType['Hypertension']  = this.ResultFormGroup.get('Hypertension').value;
-      SaveResultType['MICS']  = this.ResultFormGroup.get('MICS').value;
-      SaveResultType['MicsOther']  = this.ResultFormGroup.get('MicsOther').value;
-      SaveResultType['Hrs24']  = this.ResultFormGroup.get('Hrs24').value;
-      SaveResultType['CKMBRaised']  = this.ResultFormGroup.get('CKMBRaised').value;
-      SaveResultType['LVfunction']  = this.ResultFormGroup.get('LVfunction').value;
-      SaveResultType['HrsOther']  = this.ResultFormGroup.get('HrsOther').value;
-      SaveResultType['Days30']  = this.ResultFormGroup.get('Days30').value;
-      SaveResultType['createdBy']  =this._loggedService.currentUserValue.user.id;
-  
-      submissionObj['saveLesionDetails'] = SaveResultType;
-      
-      console.log(submissionObj);
-      this._ClinicalDocumentService.SaveLesionDetails(submissionObj).subscribe(response => {
-        console.log(response);
-        if (response) {
-          Swal.fire('Congratulations !', ' Result Saved Successfully  !', 'success').then((result) => {
-            if (result.isConfirmed) {
-              this._matDialog.closeAll();
-            }
-          });
-        } else {
-          Swal.fire('Error !', 'Result Not Updated', 'error');
-        }
-        this.isLoading = '';
-      }, error => {
-        Swal.fire('Data not saved !, Please check API error..', 'Error !')
-        // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
-      });
+    SaveResultType['Result'] = 0;
+    SaveResultType['patientId'] = this.RegNo;
+    SaveResultType['visitId'] = 0;
+    SaveResultType['LabEvent'] = this.ResultFormGroup.get('LabEvent').value;
+    SaveResultType['Hypertension'] = this.ResultFormGroup.get('Hypertension').value;
+    SaveResultType['MICS'] = this.ResultFormGroup.get('MICS').value;
+    SaveResultType['MicsOther'] = this.ResultFormGroup.get('MicsOther').value;
+    SaveResultType['Hrs24'] = this.ResultFormGroup.get('Hrs24').value;
+    SaveResultType['CKMBRaised'] = this.ResultFormGroup.get('CKMBRaised').value;
+    SaveResultType['LVfunction'] = this.ResultFormGroup.get('LVfunction').value;
+    SaveResultType['HrsOther'] = this.ResultFormGroup.get('HrsOther').value;
+    SaveResultType['Days30'] = this.ResultFormGroup.get('Days30').value;
+    SaveResultType['createdBy'] = this._loggedService.currentUserValue.user.id;
 
-    }
+    submissionObj['saveLesionDetails'] = SaveResultType;
+
+    console.log(submissionObj);
+    this._ClinicalDocumentService.SaveLesionDetails(submissionObj).subscribe(response => {
+      console.log(response);
+      if (response) {
+        Swal.fire('Congratulations !', ' Result Saved Successfully  !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+          }
+        });
+      } else {
+        Swal.fire('Error !', 'Result Not Updated', 'error');
+      }
+      this.isLoading = '';
+    }, error => {
+      Swal.fire('Data not saved !, Please check API error..', 'Error !')
+      // this.snackBarService.showErrorSnackBar('Sales data not saved !, Please check API error..', 'Error !');
+    });
+
+  }
 
   createPesonalForm() {
     return this.formBuilder.group({
-      Imaging:'',
-      ImagingType:'',
-      LesionComposition:'',
-      Calcium:'',
-      MicroCatheterCrossed:'',
-      Size:'',
-      Speed:'',
-      Time:'',
-      Runs:'',
-      Successful:'',
-      Others:'',
-      MicroCatheter:'',
+      Imaging: '',
+      ImagingType: '',
+      LesionComposition: '',
+      Calcium: '',
+      MicroCatheterCrossed: '',
+      Size: '',
+      Speed: '',
+      Time: '',
+      Runs: '',
+      Successful: '',
+      Others: '',
+      MicroCatheter: '',
 
-      OrbitalSize:'',
-      OrbitalSpeed:'',
-      OrbitalTime:'',
-      OrbitalRuns:'',
-      OrbitalSuccessful:'',
-      OrbitalMicroCatheter:'',
-      OrbitalOthers:'',
+      OrbitalSize: '',
+      OrbitalSpeed: '',
+      OrbitalTime: '',
+      OrbitalRuns: '',
+      OrbitalSuccessful: '',
+      OrbitalMicroCatheter: '',
+      OrbitalOthers: '',
 
-      LaserSize:'',
-      Fluence:'',
-      LaserOnOff:'',
-      Medium:'',
-      LaserSuccessful:'',
-      LaserMicroCatheter:'',
-      LaserOthers:'',
+      LaserSize: '',
+      Fluence: '',
+      LaserOnOff: '',
+      Medium: '',
+      LaserSuccessful: '',
+      LaserMicroCatheter: '',
+      LaserOthers: '',
 
-      TornusSize:'',
-      TornusSuccessful:'',
+      TornusSize: '',
+      TornusSuccessful: '',
 
-      Balloons:'',
-      Length:'',
-      Diameter:'',
-      Pressure:'',
-      LastSuccessful:'',
-      Thrombo:'',
-      GuideExtension:'',
-      Complete:'',
-      MICSOthers:'',
-      Bradycardia:'',
-      EmergencyPacing:'',
+      Balloons: '',
+      Length: '',
+      Diameter: '',
+      Pressure: '',
+      LastSuccessful: '',
+      Thrombo: '',
+      GuideExtension: '',
+      Complete: '',
+      MICSOthers: '',
+      Bradycardia: '',
+      EmergencyPacing: '',
 
-      ImagingOther:'',
-      NoLength:'',
-      NoSelect:'',
-      NoRVAd:'',
-      NoLVAd:'',
-      NoPB:'',
-      YesSelect:'',
-      YesRVAd:'',
-      YesLVAd:'',
-      YesPB:'',
-      SegmPatent:'',
-      SegmSelect:'',
-      SegmRVAd:'',
-      SegmLVAd:'',
-      SegmPB:'',
-      ImagingNo:'',
+      ImagingOther: '',
+      NoLength: '',
+      NoSelect: '',
+      NoRVAd: '',
+      NoLVAd: '',
+      NoPB: '',
+      YesSelect: '',
+      YesRVAd: '',
+      YesLVAd: '',
+      YesPB: '',
+      SegmPatent: '',
+      SegmSelect: '',
+      SegmRVAd: '',
+      SegmLVAd: '',
+      SegmPB: '',
+      ImagingNo: '',
 
-      Stent:'',
-      StentName:'',
-      StentMinDaimeter:'',
-      StentMaxDaimeter:'',
-      TotalStentLength:'',
-      StentPressure:'',
+      Stent: '',
+      StentName: '',
+      StentMinDaimeter: '',
+      StentMaxDaimeter: '',
+      TotalStentLength: '',
+      StentPressure: '',
 
-      Imagingother1:'',
-      No1Length:'',
-      No1Select:'',
-      No1RVAd:'',
-      No1LVAd:'',
-      No1PB:'',
-      Yes1Select:'',
-      Yes1RVAd:'',
-      Yes1LVAd:'',
-      Yes1PB:'',
-      Segm1Patent:'',
-      Segm1Select:'',
-      Segm1RVAd:'',
-      Segm1LVAd:'',
-      Segm1PB:'',
-      No1:''
+      Imagingother1: '',
+      No1Length: '',
+      No1Select: '',
+      No1RVAd: '',
+      No1LVAd: '',
+      No1PB: '',
+      Yes1Select: '',
+      Yes1RVAd: '',
+      Yes1LVAd: '',
+      Yes1PB: '',
+      Segm1Patent: '',
+      Segm1Select: '',
+      Segm1RVAd: '',
+      Segm1LVAd: '',
+      Segm1PB: '',
+      No1: ''
 
 
-      
 
-     
+
+
       // RegId: '',
       // PrefixID: '',
       // FirstName: ['', [
@@ -1200,7 +1270,7 @@ get2DEchoDetails(){
       "RegNo": this.RegNo,
       "MobileNo": this.Mobileno
     }
-    const dialogRef = this._matDialog.open(DocPresentationComponent,
+    const dialogRef = this._matDialog.open(PatientAppointmentComponent,
       {
         maxWidth: "60%",
         height: '500px',
@@ -1215,33 +1285,39 @@ get2DEchoDetails(){
   }
 
   onChangeDocList(Id) {
+    console.log(Id);
     this.PatientHeaderObj['PatientName'] = this.PatientName;
     this.PatientHeaderObj['RegNo'] = this.RegNo;
     this.PatientHeaderObj['MobileNo'] = this.Mobileno;
-    const dialogRef = this._matDialog.open(DocPresentationComponent,
-      {
-        maxWidth: "60%",
-        height: '500px',
-        width: '100%',
-        data: {
-          "DoctypeId": Id.DropDownId,
-          advanceObj: this.PatientHeaderObj,
-        }
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed - Insert Action', result);
 
-    });
+    if (Id.DropDownValue != "Heart Failure") {
+      const dialogRef = this._matDialog.open(DocPresentationComponent,
+        {
+          maxWidth: "60%",
+          height: '500px',
+          width: '100%',
+          data: {
+            "DoctypeId": Id.DropDownId,
+            advanceObj: this.PatientHeaderObj,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+      });
+    }
+    else {
+
+    }
   }
   onClose() {
-   
+
   }
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
     // console.log('dateTimeObj==', dateTimeObj);
     this.dateTimeObj = dateTimeObj;
   }
-    // getProcedure() {
+  // getProcedure() {
   //   var m = {
   //     "PatientName": this.PatientName,
   //     "RegNo": this.RegNo,
@@ -1261,7 +1337,7 @@ get2DEchoDetails(){
 
   //   });
   // }
- 
+
   // onChangePageList(Id) {
   //   // debugger
   //   console.log(Id)
