@@ -16,29 +16,38 @@ import Swal from 'sweetalert2';
 })
 export class DocPresentationComponent implements OnInit {
 
+  isCompanySelected: boolean = false;
+  isNSTEMI: boolean = false;
+  isSTEMI: boolean = false;
+  isHemodynamics: boolean = false;
+  isRaised: boolean = false;
+  isNotRaised: boolean = false;
+  isCTYes: boolean = false;
 
   subform: FormGroup;
   CADdivFormGroup: FormGroup;
   // toppings  = new FormControl('');
   UnstabletypeList: string[] = ['Hypotension <90 mmHg', 'Hypoxia', 'Tachy', 'Brady', 'ROSC'];
   StemitypeList: string[] = ['Anterior', 'Posterior', 'Lateral', 'Inferior'];
-  AnginatypeList: string[] = ['Stable', 'Progressive'];
+  AnginatypeList: string[] = ['No', 'Stable', 'Progressive'];
   // PositivetypeList:string[]=['Positive','Negative'];
   ScoretypeList: string[] = ['Critical', 'Significant', ' Not-Significant'];
 
   // InducibletypeList:string[]=['TMT','MPI','MRI Perfusion','Nuclear Scan','DSE'];
 
   InducibletypeList = [
-    { id: 1, name: "TMT" },
-    { id: 2, name: "MPI" },
-    { id: 3, name: "MRI Perfusion" },
-    { id: 4, name: "Nuclear Scan" },
-    { id: 5, name: "DSE" }
+    { id: 1, name: "No" },
+    { id: 2, name: "TMT" },
+    { id: 3, name: "MPI" },
+    { id: 4, name: "MRI Perfusion" },
+    { id: 5, name: "Nuclear Scan" },
+    { id: 6, name: "DSE" }
   ];
 
   PositivetypeList = [
-    { id: 1, name: "Positive" },
-    { id: 2, name: "Negative" },
+    { id: 1, name: "-- Select --" },
+    { id: 2, name: "Positive" },
+    { id: 3, name: "Negative" },
 
   ];
   
@@ -119,6 +128,59 @@ export class DocPresentationComponent implements OnInit {
     }
   }
 
+  onChangeStemiYN(event){
+    if (event.value == 'STEMI') {
+      //alert(event.value);
+        this.isSTEMI =true;
+        this.isNSTEMI =false;
+    }
+    else if (event.value == 'NSTEMI') {
+      this.isNSTEMI =true;       
+      this.isSTEMI =false;
+    }
+    else{
+      this.isNSTEMI =false;
+      this.isSTEMI =false;
+    }      
+  }
+  
+  onChangeEnzyme(event){
+    if (event.value == 'Raised') {
+      //alert(event.value);
+        this.isRaised =true;
+        this.isNotRaised =false;
+    }
+    else if (event.value == 'NotRaised') {
+      this.isNotRaised =true;       
+      this.isRaised =false;
+    }
+    else{
+      this.isNotRaised =false;
+      this.isRaised =false;
+    }      
+  }
+
+
+  onChangeCT(event){
+    if (event.value == 'Yes') {
+        this.isCTYes =true;
+    }
+    else if (event.value == 'No') {
+      this.isCTYes =false;
+    }
+    else{
+      this.isCTYes =false;
+    }      
+  }
+
+  
+
+
+
+
+
+
+
 
   SubForm() {
     return this._formBuilder.group({
@@ -181,6 +243,7 @@ export class DocPresentationComponent implements OnInit {
       this.Stemidiv = true
     }
   }
+  
   onChangeHemodynamic($event) {
     debugger
     console.log($event.value);

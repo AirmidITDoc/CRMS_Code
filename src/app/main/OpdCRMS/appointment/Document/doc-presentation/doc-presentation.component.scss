@@ -1,42 +1,74 @@
+app-doc-presentation{
+    .mat-header-row {
+        width: 100%;
+        max-width:850px;
+        min-width:850px; 
+        min-height: 35px;     
+    }
+    .mat-row {
+        width: 100%;
+        max-width:850px;
+        min-width:850px; 
+        min-height: 25px;            
+    }
+    // PatientData
+    .mat-column-InducibleTypeId {
+        width:400px;
+        max-width:400px;
+        min-width:400px;
+        text-align:left;
+        justify-content: left;
+    }
 
-.mat-header-row {
-    width: 100%;
-    max-width:850px;
-    min-width:850px; 
-    min-height: 35px;     
-}
-.mat-row {
-    width: 100%;
-    max-width:850px;
-    min-width:850px; 
-    min-height: 25px;            
-}
-// PatientData
-.mat-column-InducibleTypeId {
-    width:400px;
-    max-width:400px;
-    min-width:400px;
-    text-align:left;
-    justify-content: left;
-}
+    .mat-column-InducibleTypeStatus {
+        width:300px;
+        max-width:300px;
+        min-width:300px;
+        text-align: right;
+    }
 
-.mat-column-InducibleTypeStatus {
-    width:300px;
-    max-width:300px;
-    min-width:300px;
-    text-align: right;
-}
-
-.mat-column-action {
-    // color: white !important;
-    width:70px;
-    max-width:70px;
-    min-width:70px;
-   
-    text-align: right;
-    justify-content:right; 
+    .mat-column-action {
+        // color: white !important;
+        width:70px;
+        max-width:70px;
+        min-width:70px;
     
-}
-.table{
-    width: 100%;
+        text-align: right;
+        justify-content:right; 
+        
+    }
+    .table{
+        width: 100%;
+    }
+
+    .stemi-headers{
+        height: 35px;
+        background-color:#4863A0;
+    }
+
+    .stemi-title{
+        font-size:18px; 
+        font-weight: 500; 
+        color:white;
+        padding:7px;
+    }
+
+    .stemi-yn{
+        padding-top: 2%;
+        padding-bottom: 2%;
+        word-spacing: 2%;
+    }
+
+    .stemi-formcontrol-text{
+        width: 400px;margin-left:50px;margin-top: 20px;
+    }
+
+    
+    .stemi-formcontrol{
+        margin-left:50px;margin-top: 20px;
+    }
+
+    .stemi-formcontrol-left15{
+        margin-left:15px;margin-top: 20px;
+    }
 }

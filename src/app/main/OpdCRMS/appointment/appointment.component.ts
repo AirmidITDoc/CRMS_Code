@@ -13,21 +13,11 @@ import { EditAppointmentComponent } from './edit-appointment/edit-appointment.co
 import { fuseAnimations } from '@fuse/animations';
 import { BillDetailComponent, SearchInforObj } from './bill-detail/bill-detail.component';
 import { AdvanceDataStored } from '../advance';
-// import { EditVisitDateComponent } from './edit-visit-date/edit-visit-date.component';
 import { NewVistDateComponent } from './new-vist-date/new-vist-date.component';
 import { PaymentDetailComponent } from './payment-detail/payment-detail.component';
 import { InvoiceBillMappingComponent } from './invoice-bill-mapping/invoice-bill-mapping.component';
 import { MatDrawer } from '@angular/material/sidenav';
 import { PatientScreenBillDetailComponent } from './patient-screen-bill-detail/patient-screen-bill-detail.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
-import { DempgraphicComponent } from './Document/dempgraphic/dempgraphic.component';
-import { PresentationComponent } from './Document/presentation/presentation.component';
-import { ProcedureHemodynamicsComponent } from './Document/procedure-hemodynamics/procedure-hemodynamics.component';
-import { CardiacFactorComponent } from './Document/cardiac-factor/cardiac-factor.component';
-import { LesionPreprationComponent } from './Document/lesion-prepration/lesion-prepration.component';
-import { NewDocRegistrationComponent } from './Document/new-doc-registration/new-doc-registration.component';
-import { NewDocumentComponent } from './Document/new-document/new-document.component';
-import { ResultComponent } from './Document/result/result.component';
 
 
 @Component({
@@ -258,36 +248,36 @@ export class AppointmentComponent implements OnInit {
       }
     }
     else if (m == "Upload Document") {
-        let xx = {
-          RegNo: contact.RegId,
-          RegId: contact.RegId,
-          AdmissionID: contact.VisitId,
-          PatientName: contact.PatientName,
-          Doctorname: contact.Doctorname,
-          AdmDateTime: contact.AdmDateTime,
-          AgeYear: contact.AgeYear,
-          ClassId: contact.ClassId,
-          ClassName: contact.ClassName,
-          TariffName: contact.TariffName,
-          TariffId: contact.TariffId,
-          VisitId: contact.VisitId,
-          VistDateTime: contact.VistDateTime
-        };
-        // this._AppointmentSreviceService.populateFormpersonal(xx);
-        this.advanceDataStored.storage = new SearchInforObj(xx);
-        const dialogRef = this._matDialog.open(ResultComponent,
-          {
-            maxWidth: "90%",
-            height: '1900px',
-            width: '100%',
-            data: {
-              registerObj: xx,
-            }
-          });
-        dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed - Insert Action', result);
-          this.getVisitList();
-        });
+        // let xx = {
+        //   RegNo: contact.RegId,
+        //   RegId: contact.RegId,
+        //   AdmissionID: contact.VisitId,
+        //   PatientName: contact.PatientName,
+        //   Doctorname: contact.Doctorname,
+        //   AdmDateTime: contact.AdmDateTime,
+        //   AgeYear: contact.AgeYear,
+        //   ClassId: contact.ClassId,
+        //   ClassName: contact.ClassName,
+        //   TariffName: contact.TariffName,
+        //   TariffId: contact.TariffId,
+        //   VisitId: contact.VisitId,
+        //   VistDateTime: contact.VistDateTime
+        // };
+        // // this._AppointmentSreviceService.populateFormpersonal(xx);
+        // this.advanceDataStored.storage = new SearchInforObj(xx);
+        // const dialogRef = this._matDialog.open(ResultComponent,
+        //   {
+        //     maxWidth: "90%",
+        //     height: '1900px',
+        //     width: '100%',
+        //     data: {
+        //       registerObj: xx,
+        //     }
+        //   });
+        // dialogRef.afterClosed().subscribe(result => {
+        //   console.log('The dialog was closed - Insert Action', result);
+        //   this.getVisitList();
+        // });
     
     }
   
