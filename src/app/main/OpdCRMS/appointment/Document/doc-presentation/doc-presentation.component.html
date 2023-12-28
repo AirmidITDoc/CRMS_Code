@@ -67,16 +67,27 @@
                                                         </mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
-                                                <!-- <mat-form-field [disable]="Hemodynamicunstablediv" appearance="outline" class="stemi-formcontrol-text">
-                                                    <mat-label>Document Type</mat-label>
-                                                    <mat-select [formControl]="HemodynamicStableStatus" multiple>
-                                                        <mat-option *ngFor="let topping of UnstabletypeList"
-                                                            [value]="topping">{{topping}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field> -->
                                             </div>
-    
-                                            
+
+                                            <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" style="margin-bottom: 20px;">
+                                                <div  class="stemi-formcontrol-text" style="padding-top: 1%;">
+                                                    <span>Hemodynamics:&nbsp;&nbsp;&nbsp;</span>
+                                                    <mat-radio-group aria-label="Select an option" formControlName="Hemodynamics" (change)="onChangeHemodynamicsYN($event)">
+                                                        <mat-radio-button value="Stable">Stable</mat-radio-button>
+                                                        <mat-radio-button value="Unstable">Unstable</mat-radio-button>
+                                                    </mat-radio-group>
+                                                </div>
+                                                
+                                                <div *ngIf="isHemodynamicsStable">
+                                                    <mat-form-field appearance="outline" class="stemi-formcontrol-text">
+                                                        <mat-label>Hemodynamics</mat-label>
+                                                        <mat-select [formControl]="HemodynamicStableStatus" multiple>
+                                                            <mat-option *ngFor="let topping of UnstabletypeList"
+                                                                [value]="topping">{{topping}}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
                                         </div>
                                         
 

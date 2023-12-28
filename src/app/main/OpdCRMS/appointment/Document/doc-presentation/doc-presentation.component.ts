@@ -23,6 +23,7 @@ export class DocPresentationComponent implements OnInit {
   isRaised: boolean = false;
   isNotRaised: boolean = false;
   isCTYes: boolean = false;
+  isHemodynamicsStable: boolean = false;
 
   subform: FormGroup;
   CADdivFormGroup: FormGroup;
@@ -158,6 +159,18 @@ export class DocPresentationComponent implements OnInit {
     }
     else{
       this.isCTYes =false;
+    }      
+  }
+
+  onChangeHemodynamicsYN(event){
+    if (event.value == 'Stable') {
+        this.isHemodynamicsStable =false;
+    }
+    else if (event.value == 'Unstable') {
+      this.isHemodynamicsStable =true;
+    }
+    else{
+      this.isHemodynamicsStable =false;
     }      
   }
 
