@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, RequiredValidator, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { fuseAnimations } from '@fuse/animations';
@@ -51,6 +51,8 @@ export class DocPresentationComponent implements OnInit {
     { id: 3, name: "Negative" },
 
   ];
+  
+
 
   countryList: any = [];
 
@@ -58,7 +60,9 @@ export class DocPresentationComponent implements OnInit {
   Stablecorsyndiv: boolean = false;
   Hemodynamicdiv: boolean = false;
   Hemodynamicunstablediv: boolean = false;
+  BookAppointment: boolean = true;
   CADdiv: boolean = false;
+  HeartFailure: boolean = true;
 
   datalist: any = [];
   isLoading: any;
@@ -75,6 +79,7 @@ export class DocPresentationComponent implements OnInit {
 
 
   type: any = 0;
+  Appoinment:any;
   screenFromString = 'admission-form';
   registerObj: any;
   ActCorSyndromediv: boolean = false;
@@ -94,10 +99,11 @@ export class DocPresentationComponent implements OnInit {
     this.subform = this.SubForm();
     this.CADdivFormGroup = this.createCADdivForm();
 
+
     // debugger
     this.registerObj = this.data;
     this.type = this.data.DoctypeId;
-
+    
     if (this.data) {
       this.regobj = this.data.advanceObj;
       this.PatientName = this.regobj.PatientName;
@@ -114,6 +120,12 @@ export class DocPresentationComponent implements OnInit {
     }
     if (this.type == 3) {
       this.CADdiv = true
+    }
+    if (this.Appoinment == 4) {
+      this.BookAppointment = true
+    }
+    if (this.type == 43) {
+      this.HeartFailure = true
     }
   }
 

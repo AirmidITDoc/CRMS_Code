@@ -36,16 +36,134 @@
                             fusePerfectScrollbar>
 
                             <div>
+                                <!-- <form [formGroup]="BookAppointmentFrom">
+                                <div style="padding: 7px;border-style: groove;" *ngIf="BookAppointment">
+                                    <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px"
+                                        fxLayoutAlign="space-between" style=" height: 35px;background-color:#4863A0; margin-bottom: 10px;">
+                                        <span style="font-size:18px; font-weight: 500; color:white;padding:7px;">Book
+                                            Appointment</span>
+
+                                    </div>
+                                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" style="margin-bottom: 20px; margin-top: 10px;">
+
+                                        <mat-form-field appearance="outline" fxFlex="16%">
+                                            <mat-label >Prefix</mat-label>
+                                            <input name="Prefix" formControlName="Prefix" matInput required>
+                                        </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                        <mat-form-field appearance="outline" fxFlex="26%">
+                                            <mat-label >FirstName </mat-label>
+                                            <input name="FirstName" formControlName="FirstName" placeholder="FirstName" type="text"
+                                                matInput required>
+                                        </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                        <mat-form-field appearance="outline" fxFlex="26%">
+                                            <mat-label  >MiddleName </mat-label>
+                                            <input name="MiddleName" formControlName="MiddleName" type="text"
+                                                placeholder="MiddleName" matInput required>
+                                        </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                        <mat-form-field appearance="outline" fxFlex="26%">
+                                            <mat-label >LastName </mat-label>
+                                            <input name="LastName" formControlName="LastName" placeholder="LastName" type="text"
+                                                matInput required>
+                                        </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    </div>
+                                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" style="margin-bottom: 20px;">
+                                        <mat-form-field appearance="outline" fxFlex>
+                                            <mat-label>Contact No.</mat-label>
+                                            <input name="ContactNo" formControlName="ContactNo" placeholder="Contact No" type="number"
+                                            maxlength="10"  matInput required>
+                                         <mat-error *ngIf="BookAppointmentFrom.invalid && BookAppointmentFrom.touched">
+                                            </mat-error>
+                                        </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                        <mat-form-field appearance="outline" fxFlex>
+                                            <mat-label>Age</mat-label>
+                                            <input name="Age" formControlName="Age" placeholder="Age" type="number" matInput required>
+                                        </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                        <mat-form-field appearance="outline"  fxFlex>
+                                                <mat-label>Gender</mat-label>
+                                                <mat-select formControlName="Gender" required>
+                                                    <mat-option></mat-option>
+                                                    <mat-option *ngFor="let g of GenderList" [value]="g">
+                                                        {{g.name}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" style="margin-bottom: 20px;">
+                                        <mat-form-field appearance="outline" fxFlex>
+                                            <mat-label>Email</mat-label>
+                                            <input name="Email" formControlName="Email" type="email" required
+                                                matInput>
+                                                <mat-error *ngIf="BookAppointmentFrom.invalid && BookAppointmentFrom.touched">
+                                                    required</mat-error>
+                                        </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                        <mat-form-field appearance="outline" fxFlex>
+                                            <mat-label>Reffered By Dr.</mat-label>
+                                            <input name="RefferedDR" formControlName="RefferedDR" placeholder="RefferedDR" matInput required>
+                                        </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+ 
+                                    </div>
+                                    
+                                    <div style="float: right;margin-top: 20px;"  matTooltip="Select All to enable this button!!">
+
+                                        <button class="next-btn" color="accent" style="border-radius: 16px;" 
+                                        [disabled]="BookAppointmentFrom.invalid">Save </button>
+                                        <button class="footer-btn" (click)="onClose()">Cancel</button>
+                                        &nbsp;
+                                    </div>
+ 
+
+                                </div>
+                                </form> -->
 
                                 <form [formGroup]="subform">
                                     
-                                    <div style="padding:7px;border-style: groove;" *ngIf="ActCorSyndromediv">
+                                    <div style="padding: 7px;border-style: groove;" *ngIf="ActCorSyndromediv">
                                         <!-- *ngIf="ActCorSyndromediv" -->
-                                        <div class="section-row stemi-yn">
-                                            <span>STEMI:&nbsp;&nbsp;&nbsp;</span>
-                                            <mat-radio-group aria-label="Select an option" formControlName="stemi" (change)="onChangeStemiYN($event)">
-                                              <mat-radio-button value="STEMI">Yes</mat-radio-button>
-                                              <mat-radio-button value="NSTEMI">No</mat-radio-button>
+
+                                        <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px"
+                                            fxLayoutAlign="space-between"
+                                            style=" height: 35px;background-color:#4863A0">
+                                            <span
+                                                style="font-size:18px; font-weight: 500; color:white;padding:7px;">STEMI</span>
+
+                                        </div>
+
+                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
+                                            style="margin-bottom: 20px;">
+
+                                            <mat-form-field appearance="outline" [disable]="Stemidiv"
+                                                style="width: 400px;margin-left:50px;margin-top: 20px;">
+                                                <mat-label style="font-weight: bold;">Cp_Presentation
+                                                    duration</mat-label>
+                                                <input name="Cppresentation" formControlName="Cppresentation" placeholder="Cppresentation" matInput>
+                                            </mat-form-field>
+
+                                            <mat-form-field [disable]="Hemodynamicunstablediv" appearance="outline"
+                                                style="width: 400px;margin-left:50px;margin-top: 20px;">
+                                                <mat-label>Document Type</mat-label>
+                                                <mat-select [formControl]="HemodynamicStableStatus" multiple>
+                                                    <mat-option *ngFor="let topping of UnstabletypeList"
+                                                        [value]="topping">{{topping}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+
+                                            <span
+                                                style="font-weight:400;font-size: medium;margin-left:200px;margin-right: 20px;">Hemodynamics</span>
+                                            <mat-radio-group value="2" formControlName="Hemodynamic">
+                                                <span style="margin-right:20px;">Stable</span>
+                                                <mat-radio-button mat-fab value="true">Yes</mat-radio-button>
+                                                <mat-radio-button mat-fab value="false"
+                                                    style="margin-left: 50px;">Unstable</mat-radio-button>
                                             </mat-radio-group>
                                         </div>
 
@@ -102,49 +220,107 @@
                                                 </mat-radio-group>
                                                 
                                             </div>
-    
-                                            <div fxFlexFill fxLayout="row" class="section-row" *ngIf="isRaised">
-                                                <span class="stemi-formcontrol">
-                                                    NSTEMI
-                                                </span>
-                                                <mat-radio-group class="stemi-formcontrol" value="NstemiEKGChanges" formControlName="EKGChanges">
-                                                    <span>
-                                                        EKG Change : </span>
+
+                                            <div fxLayout="column" fxLayout.gt-xs="row"
+                                                style="margin-left:20px;margin-top: 20px;">
+                                                <mat-radio-group value="2" style="margin-top: 10px;" formControlName="EKGChanges">
+                                                    <span  style="font-weight:400;font-size: medium;margin-left:30px;margin-right: 20px;">
+                                                        EKG Change :</span>
                                                     <mat-radio-button mat-fab value="true">Yes</mat-radio-button>
                                                     <mat-radio-button mat-fab value="false">No</mat-radio-button>
                                                 </mat-radio-group>
-                                            </div>
 
-                                            <div fxFlexFill fxLayout="row" fxLayoutGap="5%" class="section-row" *ngIf="isNotRaised">
-                                                <span class="stemi-formcontrol">
-                                                    Unstable Angina
-                                                </span>
-                                                <mat-radio-group class="stemi-formcontrol-left15" value="UnstableEKGChanges" formControlName="EKGChanges">
-                                                    <span>
-                                                        EKG Change : </span>
-                                                    <mat-radio-button mat-fab value="true">Yes</mat-radio-button>
+                                                <mat-radio-group value="2" style="margin-top: 10px;" formControlName="Enzyme">
+                                                    <span style="font-weight:400;font-size: medium;margin-left: 20px;">Enzyme
+                                                        Raised :</span>
+                                                    <mat-radio-button mat-fab value="true"
+                                                        style="margin-left: 20px;">Yes</mat-radio-button>
                                                     <mat-radio-button mat-fab value="false">No</mat-radio-button>
                                                 </mat-radio-group>
                                             </div>
                                         </div>
 
+                                        
+                                        <hr>
 
-                                      <div style="float: right;margin-top: 20px;">
+                                        <mat-table class="table"  matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
+                                        style="height: 150px !important; overflow: auto;margin-top: 5px;">
 
-                                        <button class="next-btn" color="accent" style="border-radius: 16px;">
-                                            <span style="display: flex;justify-content: center;">
-                                                 <span style="margin-left: 6px;" (click)="OnSaveAcute()">Save</span>
-                                            </span>
-                                        </button>
-                                        <button class="footer-btn" (click)="onClose()">Cancel</button>
-                                        &nbsp;
-                                    </div>
+                                        <ng-container matColumnDef="InducibleTypeId">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                                InducibleType
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                {{contact.InducibleTypeId}}
+                                            </mat-cell>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="InducibleTypeStatus">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                                InducibleTypeStatus
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                {{contact.InducibleTypeStatus}}
+                                            </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="action" stickyEnd>
+                                            <mat-header-cell *matHeaderCellDef style="color: white;"> Action
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let row">
+
+                                                <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
+                                                    <mat-icon>delete_outline</mat-icon>
+                                                </button>
+
+                                            </mat-cell>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="loading">
+                                            <mat-footer-cell *matFooterCellDef colspan="6">
+                                                loading data...
+                                            </mat-footer-cell>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="noData">
+                                            <mat-footer-cell *matFooterCellDef colspan="6">
+
+                                                <span>No Data Found</span>
+                                            </mat-footer-cell>
+                                        </ng-container>
+
+                                        <mat-header-row class="accent"
+                                            *matHeaderRowDef="displayedColumns; sticky: true">
+                                        </mat-header-row>
+                                        <mat-row *matRowDef="let contact; columns: displayedColumns;"
+                                            [ngClass]="{'row-yellow': contact.ServiceName == 'CBC'}"
+                                            [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+                                        <mat-footer-row *matFooterRowDef="['loading']"
+                                            [ngClass]="{'hide':dataSource!=null}">
+                                        </mat-footer-row>
+                                        <mat-footer-row *matFooterRowDef="['noData']"
+                                            [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
+                                        </mat-footer-row>
+                                      </mat-table>
+
+
+                                        <div style="float: right;margin-top: 20px;">
+
+                                            <button class="next-btn" color="accent" style="border-radius: 16px;">
+                                                <span style="display: flex;justify-content: center;">
+                                                    <span style="margin-left: 6px;" (click)="OnSaveAcute()">Save</span>
+                                                </span>
+                                            </button>
+                                            <button class="footer-btn" (click)="onClose()">Cancel</button>
+                                            &nbsp;
+                                        </div>
+
+                                        
 
                                     </div>
 
                                     <!-- Second  -->
 
-                                
+
                                     <div style="padding: 7px;border-style: groove;" *ngIf="Stablecorsyndiv">
                                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px"
                                             fxLayoutAlign="space-between"
@@ -154,8 +330,9 @@
                                         </div>
 
                                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                                            <mat-form-field [disabled]="Stablecorsyndiv" class="stemi-formcontrol-text">
-                                                <mat-label>-- Select -- </mat-label>
+                                            <mat-form-field [disabled]="Stablecorsyndiv" appearance="outline"
+                                                style="width: 400px;margin-left: 50px;margin-top: 10px;">
+                                                <mat-label>Stable/Progressive</mat-label>
                                                 <mat-select  formControlName="Condtionstatus">
                                                     <mat-option *ngFor="let name of AnginatypeList"
                                                         [value]="name">{{name}}</mat-option>
@@ -174,7 +351,7 @@
                                         </div>
 
 
-                                        <div fxLayout="column" fxLayout.gt-xs="row">
+                                        <div fxLayout="column" fxLayout.gt-xs="row" style="margin-top: 10px; margin-bottom: 20px;">
 
                                             <mat-form-field class="section-dropdown stemi-formcontrol-text">
                                                 <mat-label>-- Select --</mat-label>
@@ -213,12 +390,13 @@
 
                                         <hr>
 
-                                        <mat-table class="table"  matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
-                                        style="height: 150px !important; overflow: auto;margin-top: 5px;">
+                                        <mat-table class="table" matSort [dataSource]="dataSource"
+                                            [@animateStagger]="{value:'50'}"
+                                            style="height: 150px !important; overflow: auto;margin-top: 5px;">
 
                                         <ng-container matColumnDef="InducibleTypeId">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                                                Inducible Ischemia
+                                                InducibleType
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                                 {{contact.InducibleTypeId}}
@@ -227,7 +405,7 @@
 
                                         <ng-container matColumnDef="InducibleTypeStatus">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                                                Postive / Negative
+                                                InducibleTypeStatus
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                                 {{contact.InducibleTypeStatus}}
@@ -247,42 +425,42 @@
                                             </mat-cell>
                                           </ng-container>
 
-                                        <ng-container matColumnDef="loading">
-                                            <mat-footer-cell *matFooterCellDef colspan="6">
-                                                loading data...
-                                            </mat-footer-cell>
-                                        </ng-container>
+                                            <ng-container matColumnDef="loading">
+                                                <mat-footer-cell *matFooterCellDef colspan="6">
+                                                    loading data...
+                                                </mat-footer-cell>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="noData">
-                                            <mat-footer-cell *matFooterCellDef colspan="6">
+                                            <ng-container matColumnDef="noData">
+                                                <mat-footer-cell *matFooterCellDef colspan="6">
 
-                                                <span>No Data Found</span>
-                                            </mat-footer-cell>
-                                        </ng-container>
+                                                    <span>No Data Found</span>
+                                                </mat-footer-cell>
+                                            </ng-container>
 
-                                        <mat-header-row class="accent"
-                                            *matHeaderRowDef="displayedColumns; sticky: true">
-                                        </mat-header-row>
-                                        <mat-row *matRowDef="let contact; columns: displayedColumns;"
-                                            [ngClass]="{'row-yellow': contact.ServiceName == 'CBC'}"
-                                            [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
-                                        <mat-footer-row *matFooterRowDef="['loading']"
-                                            [ngClass]="{'hide':dataSource!=null}">
-                                        </mat-footer-row>
-                                        <mat-footer-row *matFooterRowDef="['noData']"
-                                            [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
-                                        </mat-footer-row>
-                                      </mat-table>
+                                            <mat-header-row class="accent"
+                                                *matHeaderRowDef="displayedColumns; sticky: true">
+                                            </mat-header-row>
+                                            <mat-row *matRowDef="let contact; columns: displayedColumns;"
+                                                [ngClass]="{'row-yellow': contact.ServiceName == 'CBC'}"
+                                                [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+                                            <mat-footer-row *matFooterRowDef="['loading']"
+                                                [ngClass]="{'hide':dataSource!=null}">
+                                            </mat-footer-row>
+                                            <mat-footer-row *matFooterRowDef="['noData']"
+                                                [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
+                                            </mat-footer-row>
+                                        </mat-table>
 
-                                      <div style="float: right;margin-top: 20px; margin-bottom: 8px;">
-                                        <button class="next-btn" color="accent" style="border-radius: 16px;">
-                                            <span style="display: flex;justify-content: center;">
-                                                <span style="margin-left: 6px;" (click)="OnSaveStable()">Save</span>
-                                            </span>
-                                        </button>
-                                        <button class="footer-btn" (click)="onClose()">Cancel</button>
-                                        &nbsp;
-                                    </div>
+                                        <div style="float: right;margin-top: 20px; margin-bottom: 8px;">
+                                            <button class="next-btn" color="accent" style="border-radius: 16px;">
+                                                <span style="display: flex;justify-content: center;">
+                                                    <span style="margin-left: 6px;" (click)="OnSaveStable()">Save</span>
+                                                </span>
+                                            </button>
+                                            <button class="footer-btn" (click)="onClose()">Cancel</button>
+                                            &nbsp;
+                                        </div>
 
                                     </div>
                                 </form>
@@ -290,27 +468,34 @@
                                 <form [formGroup]="CADdivFormGroup">
                                     <div style="padding: 7px;border-style: groove;" *ngIf="CADdiv">
 
-                                        <div fxFlexFill fxLayout="row" fxLayout.gt-xs="row">
-                                            <mat-radio-group value="2" style="margin-top: 10px;" formControlName="CT"  (change)="onChangeCT($event)">
-                                                <span class="stemi-formcontrol-text">CT : </span>
-                                                <mat-radio-button mat-fab value="Yes" style="margin-right: 15px;">Yes</mat-radio-button>
-                                                <mat-radio-button mat-fab value="No">No</mat-radio-button>
+                                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+
+                                            <mat-radio-group value="2" style="margin-top: 10px;" formControlName="CT">
+                                                <span style="font-weight:400;font-size: medium;margin-left:90px;margin-right: 10px;">
+                                                    CT : </span>
+                                                <mat-radio-button mat-fab value="true" style="margin-right: 15px;">Yes</mat-radio-button>
+                                                <mat-radio-button mat-fab value="false">No</mat-radio-button>
                                             </mat-radio-group>
                                         </div>
 
                                         <div fxLayout="row" *ngIf="isCTYes">
                                             <div>
-                                                <span class="stemi-formcontrol" style="margin-top: 7%;">Calcium Score: </span>
-                                                <mat-form-field fxFlex  class="stemi-formcontrol" style="width: 300px;" >
+                                                <span
+                                                    style="margin-top: 10px; margin-right: 20px;margin-left: 200px;">Calcium Score
+                                                    :</span>
+                                                <mat-form-field style="width: 250px;" fxFlex>
                                                     <mat-label>Calcium Score:</mat-label>
-                                                    <input formControlName="Calcium" name="Calcium" matInput >
+                                                    <input formControlName="Calcium" name="Calcium" matInput>
                                                 </mat-form-field>
                                             </div>
 
+                                        </div>
+
+                                        <div fxLayout="column" fxLayout.gt-xs="row">
                                             <div >
-                                                <span class="stemi-formcontrol" style="margin-top: 7%;">Severity :</span>
-                                                <mat-form-field class="stemi-formcontrol" style="width: 300px;" fxFlex>
-                                                    <mat-label>-- Select Severity --</mat-label>
+                                            <span style="margin-top: 10px; margin-right: 20px;margin-left: 50px;">Severity :</span>
+                                                <mat-form-field style="width: 300px;" fxFlex>
+                                                    <mat-label>--Select Severity--</mat-label>
                                                     <mat-select formControlName="Severity" name="Severity" >
                                                         <mat-option value="0">Critical</mat-option>
                                                         <mat-option value="1">Significant</mat-option>
@@ -322,12 +507,15 @@
 
                                         <div fxLayout="column" fxLayout.gt-xs="row" >
                                             <div>
-                                                <span class="stemi-formcontrol"  style="margin-top: 7%;">Other: </span>
-                                                <mat-form-field class="stemi-formcontrol" style="width: 300px;" fxFlex>
+                                                <span style="margin-top: 10px; margin-right: 20px;margin-left: 50px;">Other
+                                                    :</span>
+                                                <mat-form-field style="width: 300px;" fxFlex>
                                                     <mat-label>If Other, Please Specify</mat-label>
-                                                    <input formControlName="Other" name="Other" matInput >
+                                                    <input formControlName="Other" name="Other" matInput>
                                                 </mat-form-field>
                                             </div>
+
+                                           
                                         </div>
 
                                         <div style="float: right;margin-top: 20px;">
@@ -338,13 +526,14 @@
                                             </button>
                                             <button class="footer-btn" (click)="onClose()">Cancel</button>
                                             &nbsp;
-                                        </div> 
-                                        
+                                        </div>
+
                                     </div>
 
-                                    
+
 
                                 </form>
+                                
                                 <!-- <div style="float: right;margin-top: 20px;">
                                     <button class="next-btn" color="accent" style="border-radius: 16px;">
                                         <span style="display: flex;justify-content: center;">
@@ -355,6 +544,7 @@
                                     &nbsp;
                                 </div> -->
                             </div>
+
                         </div>
 
                     </div>

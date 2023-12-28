@@ -12,6 +12,7 @@ import { DocPresentationComponent } from '../doc-presentation/doc-presentation.c
 import { id } from '@swimlane/ngx-charts';
 import { MatTableDataSource } from '@angular/material/table';
 import { ClinicalDocumentService } from '../clinical-document.service';
+import { PatientAppointmentComponent } from '../patient-appointment/patient-appointment.component';
 
 @Component({
   selector: 'app-new-doc-registration',
@@ -1341,7 +1342,7 @@ export class NewDocRegistrationComponent implements OnInit {
       "RegNo": this.RegNo,
       "MobileNo": this.Mobileno
     }
-    const dialogRef = this._matDialog.open(DocPresentationComponent,
+    const dialogRef = this._matDialog.open(PatientAppointmentComponent,
       {
         maxWidth: "60%",
         height: '500px',
