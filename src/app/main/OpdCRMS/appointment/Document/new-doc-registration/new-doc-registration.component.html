@@ -399,7 +399,7 @@
                         </div>
                         <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
                           <div class="past-hist-section-label">
-                            <!-- <span class="past-hist-pad3">Past Cardiac Procedure:</span>&nbsp;&nbsp;&nbsp; -->
+                            <span class="past-hist-pad3"><b>Past Cardiac Procedure:</b></span>&nbsp;&nbsp;&nbsp;
                             <span class="past-hist-pad3">Angioplasty:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Angioplasty</mat-label>
@@ -425,16 +425,16 @@
                         </div>
 
                         <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
-                          <div>
+                          <!-- <div>
                             <span class="past-hist-pad3">Past Cardiac Procedure:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Past Cardiac Procedure</mat-label>
                               <input name="PastCardiacProcedure" formControlName="PastCardiacProcedure" matInput>
                             </mat-form-field>
-                          </div>
+                          </div> -->
 
                           <div>
-                            <span class="past-hist-pad3">Past Non-Cardiac Procedure:</span>
+                            <span class="past-hist-pad3"><b>Past Non-Cardiac Procedure:</b></span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Past Non-Cardiac Procedure</mat-label>
                               <input name="PastNonCardiacProcedure" formControlName="PastNonCardiacProcedure" matInput>
@@ -698,9 +698,9 @@
                           </div>
 
                           <div>
-                            <span class="presentation-section-label">Iron Deficency:</span>
+                            <span class="presentation-section-label">Iron deficiency:</span>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
-                              <mat-label>-- Select Iron Deficency --</mat-label>
+                              <mat-label>-- Select Iron deficiency --</mat-label>
                               <mat-select formControlName="IronDeficency" name="IronDeficency">
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="Yes">Yes</mat-option>
@@ -711,7 +711,7 @@
                           
 
                           <div>
-                            <span class="presentation-section-label">Hb:</span>
+                            <span class="presentation-section-label">Base Line BNP:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
                               <mat-label>Base Line BNP</mat-label>
                               <input formControlName="BNP" name="Base Line BNP" matInput>
@@ -1728,19 +1728,9 @@
                           <mat-radio-group aria-label="Select an option" formControlName="LPMicroCatheterCrossed"  (change)="onChangeRadioButton($event, 'MicroCatheterCrossed')">
                             <mat-radio-button value="Yes">Yes</mat-radio-button>
                             <mat-radio-button value="No">No</mat-radio-button>
+                            <mat-radio-button value="NA">NA</mat-radio-button>
                           </mat-radio-group> 
                         </div>
-                        
-                        <!-- <section class="example-section section-header">
-                          <label class=" label-rightpadding2">Micro Catheter Crossed: </label>
-                          <mat-form-field class="mr-sm-12 section-dropdown"   fxFlex>
-                            <mat-label>-- Select --</mat-label>
-                            <mat-select formControlName="MicroCatheterCrossed">
-                              <mat-option value="1">Yes</mat-option>
-                              <mat-option value="2">No</mat-option>
-                            </mat-select>
-                          </mat-form-field>
-                        </section> -->
                       </div>
 
                       <mat-divider></mat-divider>
@@ -1748,7 +1738,7 @@
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
                         <span class="section-header">Atherectomy</span>
                       </div>
-                      <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
+                      <div fxLayout="row" fxLayout.gt-xs="row" class="section-row"  style="padding-bottom: 1%;">
                         <div>
                           <mat-accordion>
                             <!-- ROTA -->
@@ -2096,12 +2086,13 @@
                         </div>
                       </div>
 
+                      <mat-divider></mat-divider>
 
                       <!-- Balloons -->
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutAlign="space-between">
                         <span class="section-header">Balloons</span>
                       </div>
-                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="2%" class="section-row">
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="2%" class="section-row" style="padding-bottom: 1%;">
                         <div>
                           <span class="presentation-section-label example-margin">Select Balloon:</span>
                           <mat-form-field class="mr-sm-12 section-dropdown"   fxFlex>
@@ -2168,6 +2159,8 @@
                           </mat-form-field>
                         </div>
                       </div>
+
+                      <mat-divider></mat-divider>
 
                       <!-- Thrombo-Aspiration Catheter -->
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
