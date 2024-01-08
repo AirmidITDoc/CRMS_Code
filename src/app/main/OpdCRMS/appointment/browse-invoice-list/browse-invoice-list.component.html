@@ -399,34 +399,111 @@
             <tr style="font-size:12px;">
                 <td
                     style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:5px 5px;">
-                    Sr No.</td>
+                    Study Visit</td>
                 <td
                     style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:10px 5px;">
-                    Service Name</td>
+                    Description</td>
                 <td
                     style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:10px 5px;">
-                    BillCount</td>
+                    Amount</td>
                 <td
                     style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:10px 5px;">
-                    Total Amount</td>
+                    No. Of Patient</td>
+                    <td
+                    style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:10px 5px;">
+                    Total</td>
+                <td
+                    style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:10px 5px;">
+                    Subject Screening No.</td>
+                <td
+                    style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:10px 5px;">
+                    Medical Registration No.</td>    
             </tr>
             <tr *ngFor="let item of reportPrintObjList; let indx = index;" style="font-size:10px;">
-                <td style="border: 1px solid black;vertical-align: top;  text-align: right;
-                padding: 10px;height: 20px;">{{indx + 1}}</td>
+                <td  style="border: 1px solid black;vertical-align: top;  text-align: right;
+                padding: 10px;height: 20px;">{{item?.StudyVisit}}</td>
                 <td style="border: 1px solid black;vertical-align: top; 
                 padding: 10px;height: 20px;">{{item?.ServiceName}}</td>
                 <td style="border: 1px solid black;vertical-align: top;text-align: right;
-                padding: 10px;height: 20px;">{{item?.BillCount}}</td>
+                padding: 10px;height: 20px;">{{item?.AdvanceAmount | currency:'INR'}}</td>
                 <td style="border: 1px solid black;vertical-align: top; text-align: right;
-                padding: 10px;height: 20px;">{{item?.TotalAmount | currency:'INR' }}</td>
+                padding: 10px;height: 20px;">{{item?.BillCount}}</td>
+                 <td style="border: 1px solid black;vertical-align: top; 
+                 padding: 10px;height: 20px;">{{item?.TotalAmount | currency:'INR'}}</td>
+                 <td style="border: 1px solid black;vertical-align: top;text-align: right;
+                 padding: 10px;height: 20px;">{{item?.Screening}}</td>
+                 <td style="border: 1px solid black;vertical-align: top; text-align: right;
+                 padding: 10px;height: 20px;">{{item?.Screening}}</td>
+            </tr>
+            <tr >
+                <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
+                padding: 8px;height: 20px;font-size: 14px;">Sub Total</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;">{{TotalNetAmt | currency:'INR' }}</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
+                  <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;"></td>
+            </tr>
+            <tr >
+                <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
+                padding: 8px;height: 20px;font-size: 14px;">Deduction Start Up Payment</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;">{{TotalNetAmt | currency:'INR' }}</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
+                  <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;"></td>
+            </tr>
+            <tr >
+                <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
+                padding: 8px;height: 20px;font-size: 14px;">Total</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;">{{TotalNetAmt | currency:'INR' }}</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
+                  <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;"></td>
+            </tr>
+            <tr >
+                <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
+                padding: 8px;height: 20px;font-size: 14px;">IGST (18%)</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;">{{TotalNetAmt | currency:'INR' }}</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
+                  <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;"></td>
+            </tr>
+            <tr >
+                <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
+                padding: 8px;height: 20px;font-size: 14px;">Payable Amount</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;">{{TotalNetAmt | currency:'INR' }}</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
+                  <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;"></td>
+            </tr>
+            <tr >
+                <td colspan="5" style="border: 1px solid black;vertical-align: top;  text-align: left;
+                padding: 8px;height: 20px;font-size: 10px;">Payable Amount In Words :-</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
+                  <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;"></td>
             </tr>
             <tr >
                 <td colspan="2" style="border: 1px solid black;vertical-align: top;  text-align: left;
-                padding: 8px;height: 20px;font-size: 10px;">  This is Computer generated invoice hence doesn’t require signature</td>
-                  <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
-                  padding: 10px;height: 20px;">GrandTotalAmount</td>
-                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
-                padding: 10px;height: 20px;">{{TotalNetAmt | currency:'INR' }}</td>
+                padding: 8px;height: 20px;font-size: 10px;">Payee Name (Institution)</td>
+                <td  colspan="5" style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
+            </tr>
+            <tr >
+                <td colspan="2" style="border: 1px solid black;vertical-align: top;  text-align: left;
+                padding: 8px;height: 20px;font-size: 10px;">Bank Name And Address</td>
+                <td  colspan="5" style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
             </tr>
         </tbody>
     </table>
