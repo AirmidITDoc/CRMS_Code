@@ -5,7 +5,6 @@ import { RegInsert } from '../../appointment.component';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { NewDocumentComponent } from '../new-document/new-document.component';
 import { fuseAnimations } from '@fuse/animations';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import Swal from 'sweetalert2';
@@ -76,6 +75,8 @@ export class NewDocRegistrationComponent implements OnInit {
   vLesionSeverityList: any = [];
   vLesionCalcifiedList: any = [];
   vInflammatoryDiseasesList: any = [];
+  vHeartFailureType: any = [];
+  vLesionSegment: any = [];
 
   //Hide Show Variables
 
@@ -84,6 +85,12 @@ export class NewDocRegistrationComponent implements OnInit {
   isValveRegurgitation: boolean = false;
   isHypertension: boolean = false;
   isT2D: boolean = false;
+  isHeartFailure: boolean = false;
+  isLesionBifurcationYes: boolean = false;
+  isLesionBifurcationNo: boolean = false;
+  isAccessTypeY: boolean = false;
+  isAccessTypeN: boolean = false;
+  isLPImagingDone: boolean = false;
 
   //   { id: 1, name: "Acute Coronary Syndrome" },
   //   { id: 2, name: "Stable Coronary Syndrome" },
@@ -340,6 +347,8 @@ export class NewDocRegistrationComponent implements OnInit {
     this.getvLesionSeverityList();
     this.getvLesionCalcifiedList();
     this.getvInflammatoryDiseasesList();
+    this.getvHeartFailureTypeList();
+    this.getvLesionSegmentList();
   }
 
   // Hide Show Functions Starts
@@ -383,6 +392,50 @@ export class NewDocRegistrationComponent implements OnInit {
         this.isT2D = false;
       }
     }
+
+    //Index Lesion and Hemodynamics - LesionSegment
+    if (strtype == "LesionSegment") {
+      if (event.value == 'Yes') {
+        this.isLesionBifurcationYes = true;
+        this.isLesionBifurcationNo = false;
+      }
+      else if (event.value == 'No') {
+        this.isLesionBifurcationYes = false;
+        this.isLesionBifurcationNo = true;
+      }
+      else {
+        this.isLesionBifurcationYes = false;
+        this.isLesionBifurcationNo = false;
+      }
+    }
+
+    // Angioplasty - AccessType
+    if (strtype == "AccessType") {
+      if (event.value == 'Arterial' || event.value == 'Venous') {
+        this.isAccessTypeY = true;
+        this.isAccessTypeN = false;
+      }
+      else {
+        this.isAccessTypeY = false;
+        this.isAccessTypeN = false;
+      }
+    }
+
+    // Lesion Preparation - LPImagingDone
+    if (strtype == "LPImagingDone") {
+      if (event.value == 'Yes') {
+        this.isLPImagingDone = true;
+      }
+      else if (event.value == 'No') {
+        this.isLPImagingDone = false;
+      }
+      else {
+        this.isLPImagingDone = false;
+      }
+    }
+
+    
+
   }
 
   onChangeValveSR(event) {
@@ -406,7 +459,15 @@ export class NewDocRegistrationComponent implements OnInit {
   // Hide Show Functions Ends
 
 
-
+  getvLesionSegmentList(){
+    var vadata = {
+      'DropDownType': 'LesionSegment'
+    }
+    this._ClinicalDocumentService.getDropDownList(vadata).subscribe(data => {
+      this.vLesionSegment = data
+      //console.log(this.vSymtomType);
+    })
+  }
 
   getvSymtomTypeList() {
     var vadata = {
@@ -463,6 +524,17 @@ export class NewDocRegistrationComponent implements OnInit {
       //console.log(this.vInflammatoryDiseasesList);
     })
   }
+
+  getvHeartFailureTypeList(){
+    var vadata = {
+      'DropDownType': 'HeartFailureType'
+    }
+    this._ClinicalDocumentService.getDropDownList(vadata).subscribe(data => {
+      this.vHeartFailureType = data
+    })
+  }
+
+
   createAddForm() {
     return this.formBuilder.group({
       Symtoms: '',
@@ -1285,7 +1357,7 @@ export class NewDocRegistrationComponent implements OnInit {
   }
 
   onChangeDocList(Id) {
-    console.log(Id);
+    this.isHeartFailure = false;
     this.PatientHeaderObj['PatientName'] = this.PatientName;
     this.PatientHeaderObj['RegNo'] = this.RegNo;
     this.PatientHeaderObj['MobileNo'] = this.Mobileno;
@@ -1306,6 +1378,7 @@ export class NewDocRegistrationComponent implements OnInit {
       });
     }
     else {
+      this.isHeartFailure = true;
 
     }
   }
