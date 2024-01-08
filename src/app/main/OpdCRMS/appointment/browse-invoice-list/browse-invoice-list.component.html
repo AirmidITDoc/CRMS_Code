@@ -360,5 +360,85 @@
 </div>
 
 
+<div hidden class="bill-template-wrapper" style="font-size: 30.25%;" #InvoiceBillTemplate>
 
-//
+     
+    <div style="text-align: center;">
+        <h3 style="text-transform: uppercase;font-weight: 500;margin: 0; background-color: lightgray;">
+            Browse Invoice Bill</h3>
+    </div><br>
+
+    <table>
+        <tr>
+            <td> <span style="font-weight: 500;margin-right: 70px;">Protocal No</span>
+                <span style="font-size:11px; ">{{reportPrintObjList[0]?.ProtocolNo}} </span>
+            </td>
+            <td><span style="font-weight: 500;margin-right:34px;margin-left: 300px;">Study Product </span>
+                <span style="font-size:11px;"> {{reportPrintObjList[0]?.ProtocolTitle}} </span>
+            </td>
+        </tr>
+
+        <tr>
+            <td><span style="font-weight: 500;margin-right: 38px;">Invioce Number</span>
+                <span style="font-size:11px;">{{reportPrintObjList[0]?.InvoiceNumber}}</span>
+            </td>
+            <td><span style="font-weight: 500;margin-right: 73px;margin-left: 300px;"></span>
+                <span style="font-size:11px;"> </span>
+            </td>
+        </tr>
+
+       
+    </table>
+    <hr>
+
+
+    
+    <table class="table" style="width: 100%;border-collapse: collapse;">
+        <tbody>
+
+            <tr style="font-size:12px;">
+                <td
+                    style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:5px 5px;">
+                    Sr No.</td>
+                <td
+                    style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:10px 5px;">
+                    Service Name</td>
+                <td
+                    style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:10px 5px;">
+                    BillCount</td>
+                <td
+                    style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:10px 5px;">
+                    Total Amount</td>
+            </tr>
+            <tr *ngFor="let item of reportPrintObjList; let indx = index;" style="font-size:10px;">
+                <td style="border: 1px solid black;vertical-align: top;  text-align: right;
+                padding: 10px;height: 20px;">{{indx + 1}}</td>
+                <td style="border: 1px solid black;vertical-align: top; 
+                padding: 10px;height: 20px;">{{item?.ServiceName}}</td>
+                <td style="border: 1px solid black;vertical-align: top;text-align: right;
+                padding: 10px;height: 20px;">{{item?.BillCount}}</td>
+                <td style="border: 1px solid black;vertical-align: top; text-align: right;
+                padding: 10px;height: 20px;">{{item?.TotalAmount | currency:'INR' }}</td>
+            </tr>
+            <tr >
+                <td colspan="2" style="border: 1px solid black;vertical-align: top;  text-align: left;
+                padding: 8px;height: 20px;font-size: 10px;">  This is Computer generated invoice hence doesn’t require signature</td>
+                  <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;">GrandTotalAmount</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;">{{TotalNetAmt | currency:'INR' }}</td>
+            </tr>
+        </tbody>
+    </table>
+<!-- 
+    <div style="font-size: 10px;">
+        
+        <span style="text-align: right;">
+            This is Computer generated invoice hence doesn’t require signature
+        </span>
+    </div> -->
+ 
+
+  
+
+</div> 
