@@ -722,7 +722,7 @@
                         <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
                           
                           <div>
-                            <span class="presentation-section-label">Vit B12 Dificency:</span>
+                            <span class="presentation-section-label">Vit B12 deficiency:</span>
                             <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
                               <mat-label>-- Select Vit B12 Dificency --</mat-label>
                               <mat-select formControlName="VitB12Dificency" name="VitB12Dificency">
@@ -1273,10 +1273,6 @@
                                   {{m.name}}
                                 </mat-option>
                               </mat-select>
-                              <mat-error class="error"
-                                *ngIf="AngioplastyFormGroup.get('Device').invalid && AngioplastyFormGroup.get('Device').touched">
-                                Device is required
-                              </mat-error>
                             </mat-form-field>
                           </div>
 
@@ -2393,24 +2389,11 @@
                                     <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
                                       <div>
                                         <section class="example-section">
-                                          <label class="example-margin">Patent:</label>
-                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
-                                            <mat-label>-- Select --</mat-label>
-                                            <mat-select formControlName="SegmPatent">
-                                              <mat-option value="0"></mat-option>
-                                              <mat-option value="1">Yes</mat-option>
-                                              <mat-option value="2">No</mat-option>
-                                            </mat-select>
-                                          </mat-form-field>
 
-                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
-                                            <mat-label>-- Select --</mat-label>
-                                            <mat-select formControlName="SegmSelect">
-                                              <mat-option value="0"></mat-option>
-                                              <mat-option value="1">Proximal Edge</mat-option>
-                                              <mat-option value="2">Distal Edge</mat-option>
-                                            </mat-select>
-                                          </mat-form-field>
+                                          <mat-radio-group aria-label="Select Edge" formControlName="LPMicroCatheterCrossed" >
+                                            <mat-radio-button value="Proximal">Proximal Edge</mat-radio-button>
+                                            <mat-radio-button value="Distal">Distal Edge</mat-radio-button>
+                                          </mat-radio-group> 
 
                                           <label class="example-margin">RV A/d:</label>
                                           <mat-form-field>
@@ -2429,6 +2412,17 @@
                                             <mat-label>PB</mat-label>
                                             <input matInput name="PB" formControlName="SegmPB" id="PB">
                                           </mat-form-field>
+
+                                          <label class="example-margin">Patent:</label>
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select formControlName="SegmPatent">
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="Yes">Yes</mat-option>
+                                              <mat-option value="No">No</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+
                                         </section>
                                       </div>
                                     </div>
@@ -2649,42 +2643,40 @@
                                     <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
                                       <div>
                                         <section class="example-section">
-                                          <label class="example-margin">Patent:</label>
-                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
-                                            <mat-label>-- Select --</mat-label>
-                                            <mat-select formControlName="Segm1Patent">
-                                              <mat-option value="0"></mat-option>
-                                              <mat-option value="1">Yes</mat-option>
-                                              <mat-option value="2">No</mat-option>
-                                            </mat-select>
-                                          </mat-form-field>
 
-                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
-                                            <mat-label>-- Select --</mat-label>
-                                            <mat-select formControlName="Segm1Select">
-                                              <mat-option value="0"></mat-option>
-                                              <mat-option value="1">Proximal Edge</mat-option>
-                                              <mat-option value="2">Distal Edge</mat-option>
-                                            </mat-select>
-                                          </mat-form-field>
+                                          <mat-radio-group aria-label="Select Edge" formControlName="LPMicroCatheterCrossed" >
+                                            <mat-radio-button value="Proximal">Proximal Edge</mat-radio-button>
+                                            <mat-radio-button value="Distal">Distal Edge</mat-radio-button>
+                                          </mat-radio-group> 
 
                                           <label class="example-margin">RV A/d:</label>
                                           <mat-form-field>
                                             <mat-label>RV A/d</mat-label>
-                                            <input matInput name="RV A/d" formControlName="Segm1RVAd" id="RV A/d">
+                                            <input matInput name="RV A/d" formControlName="SegmRVAd" id="RV A/d">
                                           </mat-form-field>
 
                                           <label class="example-margin">LV A/d:</label>
                                           <mat-form-field>
                                             <mat-label>LV A/d</mat-label>
-                                            <input matInput name="LV A/d" formControlName="Segm1LVAd" id="LV A/d">
+                                            <input matInput name="LV A/d" formControlName="SegmLVAd" id="LV A/d">
                                           </mat-form-field>
 
                                           <label class="example-margin">PB:</label>
                                           <mat-form-field>
                                             <mat-label>PB</mat-label>
-                                            <input matInput name="PB" formControlName="Segm1PB" id="PB">
+                                            <input matInput name="PB" formControlName="SegmPB" id="PB">
                                           </mat-form-field>
+
+                                          <label class="example-margin">Patent:</label>
+                                          <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                                            <mat-label>-- Select --</mat-label>
+                                            <mat-select formControlName="SegmPatent">
+                                              <mat-option value="0"></mat-option>
+                                              <mat-option value="Yes">Yes</mat-option>
+                                              <mat-option value="No">No</mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+
                                         </section>
                                       </div>
                                     </div>
