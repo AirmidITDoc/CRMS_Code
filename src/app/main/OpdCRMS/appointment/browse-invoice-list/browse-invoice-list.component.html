@@ -365,28 +365,38 @@
      
     <div style="text-align: center;">
         <h3 style="text-transform: uppercase;font-weight: 500;margin: 0; background-color: lightgray;">
-            Browse Invoice Bill</h3>
+            Invoice Bill</h3>
     </div><br>
-
+    <span>
+        To, <br>
+        CLIANTHA RESEARCH LIMITED<br>
+        Commerce House II, Pushpraj Tower, Near Judges Bungalows, <br>
+        Bodakdev, Ahmedabad -380054, India
+    </span>
+    &nbsp;&nbsp;
     <table>
         <tr>
-            <td> <span style="font-weight: 500;margin-right: 70px;">Protocal No</span>
+            <td> <span style="font-size:12px;margin-right: 70px;">Protocal No</span>
                 <span style="font-size:11px; ">{{reportPrintObjList[0]?.ProtocolNo}} </span>
             </td>
-            <td><span style="font-weight: 500;margin-right:34px;margin-left: 300px;">Study Product </span>
+        </tr>
+
+        <tr>
+            <td><span style="font-size:12px;margin-right:70px;">Study Product </span>
                 <span style="font-size:11px;"> {{reportPrintObjList[0]?.ProtocolTitle}} </span>
             </td>
         </tr>
-
         <tr>
-            <td><span style="font-weight: 500;margin-right: 38px;">Invioce Number</span>
+            <td><span style="font-size:12px;margin-right: 70px;">Invioce Number</span>
                 <span style="font-size:11px;">{{reportPrintObjList[0]?.InvoiceNumber}}</span>
-            </td>
-            <td><span style="font-weight: 500;margin-right: 73px;margin-left: 300px;"></span>
-                <span style="font-size:11px;"> </span>
             </td>
         </tr>
 
+        <tr>
+            <td><span style="font-size:12px;margin-right: 70px;">Subject</span>
+                <span style="font-size:11px;">Institution Payment for the Patient Visits performed from {{reportPrintObjList[0]?.InvoiceDate}}</span>
+            </td>
+        </tr>
        
     </table>
     <hr>
@@ -439,7 +449,7 @@
                 <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
                 padding: 8px;height: 20px;font-size: 14px;">Sub Total</td>
                 <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
-                  padding: 10px;height: 20px;">{{TotalNetAmt | currency:'INR' }}</td>
+                  padding: 10px;height: 20px;">{{TaxableAmount | currency:'INR' }}</td>
                 <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
                 padding: 10px;height: 20px;"></td>
                   <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
@@ -479,7 +489,7 @@
                 <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
                 padding: 8px;height: 20px;font-size: 14px;">Payable Amount</td>
                 <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
-                  padding: 10px;height: 20px;">{{TotalNetAmt | currency:'INR' }}</td>
+                  padding: 10px;height: 20px;">{{TotalAmount | currency:'INR' }}</td>
                 <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
                 padding: 10px;height: 20px;"></td>
                   <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
@@ -507,15 +517,4 @@
             </tr>
         </tbody>
     </table>
-<!-- 
-    <div style="font-size: 10px;">
-        
-        <span style="text-align: right;">
-            This is Computer generated invoice hence doesn’t require signature
-        </span>
-    </div> -->
- 
-
-  
-
 </div> 
