@@ -254,7 +254,7 @@ export class BrowseInvoiceListComponent implements OnInit {
       
         for (let i = 0; i < 10; i++) {
         this.reportPrintObj = data[0] as InvoiceBilll;
-        this.TotalNetAmt += data[i].TotalAmount
+        this.TotalNetAmt += data[i].Total;
 
         console.log(this.reportPrintObjList);
         setTimeout(() => {

@@ -421,21 +421,21 @@
             </tr>
             <tr *ngFor="let item of reportPrintObjList; let indx = index;" style="font-size:10px;">
                 <td  style="border: 1px solid black;vertical-align: top;  text-align: right;
-                padding: 10px;height: 20px;">{{item?.StudyVisit}}</td>
+                padding: 10px;height: 20px;">{{item?.VisitTitle}}</td>
                 <td style="border: 1px solid black;vertical-align: top; 
                 padding: 10px;height: 20px;">{{item?.ServiceName}}</td>
                 <td style="border: 1px solid black;vertical-align: top;text-align: right;
-                padding: 10px;height: 20px;">{{item?.AdvanceAmount | currency:'INR'}}</td>
+                padding: 10px;height: 20px;">{{item?.Amount | currency:'INR'}}</td>
                 <td style="border: 1px solid black;vertical-align: top; text-align: right;
-                padding: 10px;height: 20px;">{{item?.BillCount}}</td>
+                padding: 10px;height: 20px;">{{item?.TotalPatients}}</td>
                  <td style="border: 1px solid black;vertical-align: top; 
-                 padding: 10px;height: 20px;">{{item?.TotalAmount | currency:'INR'}}</td>
+                 padding: 10px;height: 20px;">{{item?.Total | currency:'INR'}}</td>
                  <td style="border: 1px solid black;vertical-align: top;text-align: right;
-                 padding: 10px;height: 20px;">{{item?.Screening}}</td>
+                 padding: 10px;height: 20px;">{{item?.BillNo}}</td>
                  <td style="border: 1px solid black;vertical-align: top; text-align: right;
-                 padding: 10px;height: 20px;">{{item?.Screening}}</td>
+                 padding: 10px;height: 20px;">{{item?.InvoiceNumber}}</td>
             </tr>
-            <tr >
+            <tr>
                 <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
                 padding: 8px;height: 20px;font-size: 14px;">Sub Total</td>
                 <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
@@ -449,7 +449,7 @@
                 <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
                 padding: 8px;height: 20px;font-size: 14px;">Deduction Start Up Payment</td>
                 <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
-                  padding: 10px;height: 20px;">{{TotalNetAmt | currency:'INR' }}</td>
+                  padding: 10px;height: 20px;">{{ '-' }}</td>
                 <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
                 padding: 10px;height: 20px;"></td>
                   <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
@@ -459,7 +459,7 @@
                 <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
                 padding: 8px;height: 20px;font-size: 14px;">Total</td>
                 <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
-                  padding: 10px;height: 20px;">{{TotalNetAmt | currency:'INR' }}</td>
+                  padding: 10px;height: 20px;">{{'-'}}</td>
                 <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
                 padding: 10px;height: 20px;"></td>
                   <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
@@ -469,7 +469,7 @@
                 <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
                 padding: 8px;height: 20px;font-size: 14px;">IGST (18%)</td>
                 <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
-                  padding: 10px;height: 20px;">{{TotalNetAmt | currency:'INR' }}</td>
+                  padding: 10px;height: 20px;">{{'-'}}</td>
                 <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
                 padding: 10px;height: 20px;"></td>
                   <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
