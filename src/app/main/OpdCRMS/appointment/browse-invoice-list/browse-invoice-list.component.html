@@ -123,11 +123,6 @@
 
                         <div fxlayout="row">
                             <div style="width: 100%; overflow: hidden;">
-                                <div matColumnDef="loading" [ngClass]="{'hide': !(sIsLoading == 'loading-data')}"
-                                    class="backgroundBlur">
-                                    <div class="spinner-border text-danger"></div>
-
-                                </div>
                                 <mat-table #table matSort class="table1" [dataSource]="dataSource"
                                     [@animateStagger]="{value:'50'}" style="overflow: auto;width: 100%;">
 
@@ -449,7 +444,7 @@
                 <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
                 padding: 8px;height: 20px;font-size: 14px;">Sub Total</td>
                 <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
-                  padding: 10px;height: 20px;">{{TaxableAmount | currency:'INR' }}</td>
+                  padding: 10px;height: 20px;">{{reportPrintObjList[0]?.TaxableAmount}}</td>
                 <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
                 padding: 10px;height: 20px;"></td>
                   <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
@@ -489,7 +484,7 @@
                 <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
                 padding: 8px;height: 20px;font-size: 14px;">Payable Amount</td>
                 <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
-                  padding: 10px;height: 20px;">{{TotalAmount | currency:'INR' }}</td>
+                  padding: 10px;height: 20px;">{{reportPrintObjList[0]?.TotalAmount}}</td>
                 <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
                 padding: 10px;height: 20px;"></td>
                   <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;

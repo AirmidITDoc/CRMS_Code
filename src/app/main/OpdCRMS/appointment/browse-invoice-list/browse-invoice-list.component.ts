@@ -149,8 +149,7 @@ export class BrowseInvoiceListComponent implements OnInit {
 
     setTimeout(() => {
       {
-        this.sIsLoading = 'loading-data';
-
+        this.sIsLoading = 'loading';
         this.getInvoiceBilllsList();
       }
 
@@ -184,19 +183,19 @@ export class BrowseInvoiceListComponent implements OnInit {
 
 
   getInvoiceBilllsList() {
-    this.sIsLoading = 'loading-data';
+    this.sIsLoading = 'loading';
     var D_data = {
       "StudyId": this._InvoiceBilllsService.myFilterform.get("StudyId").value.StudyId || 0,
       "FromDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
       "ToDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900'
     }
     setTimeout(() => {
-      this.sIsLoading = 'loading-data';
+      this.sIsLoading = 'loading';
       this._InvoiceBilllsService.getBrowseInvoiceBillsList(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as InvoiceBilll[];
         this.dataSource.sort = this.sort;
-                this.dataSource.paginator = this.paginator;
-        this.sIsLoading = '';
+        this.dataSource.paginator = this.paginator;
+        this.sIsLoading = this.dataSource.data.length == 0 ? 'no-data' : '';
         this.click = false;
       },
         error => {
