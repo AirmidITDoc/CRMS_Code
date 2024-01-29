@@ -109,19 +109,17 @@ export class CaseDetailComponent implements OnInit {
 
 
   getCaseList() {
-    this.sIsLoading = 'loading-data';
+    this.sIsLoading = 'loading';
     var Params = {
       "StudyId": this._CasedetailService.myFilterform.get("CaseId").value.StudyId || 0,
     }
     setTimeout(() => {
-      this.sIsLoading = 'loading-data';
+      this.sIsLoading = 'loading';
       this._CasedetailService.getStudyInformationList(Params).subscribe(Visit => {
         this.dataSource.data = Visit as CaseDetail[];
-        
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-        this.sIsLoading = '';
-        
+        this.sIsLoading = this.dataSource.data.length == 0 ? 'no-data' : '';
       },
         error => {
           this.sIsLoading = '';

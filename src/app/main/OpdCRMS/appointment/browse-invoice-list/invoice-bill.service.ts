@@ -48,4 +48,7 @@ export class InvoiceBillService {
   ApprovedInvoice(query){
     return this._httpClient.post("Generic/GetBySelectQuery?query="+query, {})
   }
+  public getPrintInvoice(param){
+    return this._httpClient.post("Generic/GetByProc?procName=rptInvoiceGeneration", param);
+  }
 }

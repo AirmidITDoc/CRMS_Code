@@ -95,34 +95,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
      if (this._ActRoute.url == '/opd/payment') {
       this.menuActions.push('Approval');
     }
-
-    debugger;
-    var D_data = {
-      "StudyId":this._BrowseOPDBillsService.myFilterform.get("StudyId").value || 0,
-      "F_Name": "%",
-      "L_Name": "%",
-      "From_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "To_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "Reg_No": 0,
-      "PBillNo": '%',
-    }
-    console.log(D_data);
-
-    setTimeout(() => {
-      this.sIsLoading = 'loading-data';
-      this._BrowseOPDBillsService.getBrowseBillsList(D_data).subscribe(Visit => {
-        this.dataSource.data = Visit as BrowseOPDBill[];
-        this.dataSource.sort = this.sort;
-        console.log(this.dataSource.data);
-        this.dataSource.paginator = this.paginator;
-        this.sIsLoading = '';
-        this.click = false;
-      },
-        error => {
-          this.sIsLoading = '';
-        });
-    }, 1000);
-
+    this.getBrowseOPDBillsList();
     this.onClear();
   }
 
@@ -147,8 +120,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
     setTimeout(() => {
       {
-        this.sIsLoading = 'loading-data';
-
+        this.sIsLoading = 'loading';
         this.getBrowseOPDBillsList();
       }
 
@@ -182,8 +154,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
 
   getBrowseOPDBillsList() {
-    this.sIsLoading = 'loading-data';
-
+    this.sIsLoading = 'loading';
     var D_data = {
       "StudyId":this._BrowseOPDBillsService.myFilterform.get("StudyId").value || 0,
       "F_Name": (this._BrowseOPDBillsService.myFilterform.get("FirstName").value).trim() + '%' || "%",
@@ -196,13 +167,13 @@ export class BrowseCreditPaymentComponent implements OnInit {
     // console.log(D_data);
 
     setTimeout(() => {
-      this.sIsLoading = 'loading-data';
+      this.sIsLoading = 'loading';
       this._BrowseOPDBillsService.getBrowseBillsList(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as BrowseOPDBill[];
         this.dataSource.sort = this.sort;
         console.log(this.dataSource.data);
         this.dataSource.paginator = this.paginator;
-        this.sIsLoading = '';
+        this.sIsLoading = this.dataSource.data.length == 0 ? 'no-data' : '';
         this.click = false;
       },
         error => {

@@ -123,11 +123,6 @@
 
                         <div fxlayout="row">
                             <div style="width: 100%; overflow: hidden;">
-                                <div matColumnDef="loading" [ngClass]="{'hide': !(sIsLoading == 'loading-data')}"
-                                    class="backgroundBlur">
-                                    <div class="spinner-border text-danger"></div>
-
-                                </div>
                                 <mat-table #table matSort class="table1" [dataSource]="dataSource"
                                     [@animateStagger]="{value:'50'}" style="overflow: auto;width: 100%;">
 
@@ -360,5 +355,161 @@
 </div>
 
 
+<div hidden class="bill-template-wrapper" style="font-size: 30.25%;" #InvoiceBillTemplate>
 
-//
+     
+    <div style="text-align: center;">
+        <h3 style="text-transform: uppercase;font-weight: 500;margin: 0; background-color: lightgray;">
+            Invoice Bill</h3>
+    </div><br>
+    <span>
+        To, <br>
+        CLIANTHA RESEARCH LIMITED<br>
+        Commerce House II, Pushpraj Tower, Near Judges Bungalows, <br>
+        Bodakdev, Ahmedabad -380054, India
+    </span>
+    &nbsp;&nbsp;
+    <table>
+        <tr>
+            <td> <span style="font-size:12px;margin-right: 70px;">Protocal No</span>
+                <span style="font-size:11px; ">{{reportPrintObjList[0]?.ProtocolNo}} </span>
+            </td>
+        </tr>
+
+        <tr>
+            <td><span style="font-size:12px;margin-right:70px;">Study Product </span>
+                <span style="font-size:11px;"> {{reportPrintObjList[0]?.ProtocolTitle}} </span>
+            </td>
+        </tr>
+        <tr>
+            <td><span style="font-size:12px;margin-right: 70px;">Invioce Number</span>
+                <span style="font-size:11px;">{{reportPrintObjList[0]?.InvoiceNumber}}</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td><span style="font-size:12px;margin-right: 70px;">Subject</span>
+                <span style="font-size:11px;">Institution Payment for the Patient Visits performed from {{reportPrintObjList[0]?.InvoiceDate}}</span>
+            </td>
+        </tr>
+       
+    </table>
+    <hr>
+
+
+    
+    <table class="table" style="width: 100%;border-collapse: collapse;">
+        <tbody>
+
+            <tr style="font-size:12px;">
+                <td
+                    style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:5px 5px;">
+                    Study Visit</td>
+                <td
+                    style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:10px 5px;">
+                    Description</td>
+                <td
+                    style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:10px 5px;">
+                    Amount</td>
+                <td
+                    style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:10px 5px;">
+                    No. Of Patient</td>
+                    <td
+                    style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:10px 5px;">
+                    Total</td>
+                <td
+                    style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:10px 5px;">
+                    Subject Screening No.</td>
+                <td
+                    style="border: 1px solid black;font-weight:bold;text-align:center;vertical-align: middle;padding:10px 5px;">
+                    Medical Registration No.</td>    
+            </tr>
+            <tr *ngFor="let item of reportPrintObjList; let indx = index;" style="font-size:10px;">
+                <td  style="border: 1px solid black;vertical-align: top;  text-align: right;
+                padding: 10px;height: 20px;">{{item?.VisitTitle}}</td>
+                <td style="border: 1px solid black;vertical-align: top; 
+                padding: 10px;height: 20px;">{{item?.ServiceName}}</td>
+                <td style="border: 1px solid black;vertical-align: top;text-align: right;
+                padding: 10px;height: 20px;">{{item?.Amount | currency:'INR'}}</td>
+                <td style="border: 1px solid black;vertical-align: top; text-align: right;
+                padding: 10px;height: 20px;">{{item?.TotalPatients}}</td>
+                 <td style="border: 1px solid black;vertical-align: top; 
+                 padding: 10px;height: 20px;">{{item?.Total | currency:'INR'}}</td>
+                 <td style="border: 1px solid black;vertical-align: top;text-align: right;
+                 padding: 10px;height: 20px;">{{item?.BillNo}}</td>
+                 <td style="border: 1px solid black;vertical-align: top; text-align: right;
+                 padding: 10px;height: 20px;">{{item?.InvoiceNumber}}</td>
+            </tr>
+            <tr>
+                <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
+                padding: 8px;height: 20px;font-size: 14px;">Sub Total</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;">{{reportPrintObjList[0]?.TaxableAmount}}</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
+                  <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;"></td>
+            </tr>
+            <tr >
+                <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
+                padding: 8px;height: 20px;font-size: 14px;">Deduction Start Up Payment</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;">{{ '-' }}</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
+                  <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;"></td>
+            </tr>
+            <tr >
+                <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
+                padding: 8px;height: 20px;font-size: 14px;">Total</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;">{{'-'}}</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
+                  <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;"></td>
+            </tr>
+            <tr >
+                <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
+                padding: 8px;height: 20px;font-size: 14px;">IGST (18%)</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;">{{'-'}}</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
+                  <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;"></td>
+            </tr>
+            <tr >
+                <td colspan="4" style="border: 1px solid black;vertical-align: top;  text-align: right;font-weight: bold;
+                padding: 8px;height: 20px;font-size: 14px;">Payable Amount</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;">{{reportPrintObjList[0]?.TotalAmount}}</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
+                  <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;"></td>
+            </tr>
+            <tr >
+                <td colspan="5" style="border: 1px solid black;vertical-align: top;  text-align: left;
+                padding: 8px;height: 20px;font-size: 10px;">Payable Amount In Words :-</td>
+                <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
+                  <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                  padding: 10px;height: 20px;"></td>
+            </tr>
+            <tr >
+                <td colspan="2" style="border: 1px solid black;vertical-align: top;  text-align: left;
+                padding: 8px;height: 20px;font-size: 10px;">Payee Name (Institution)</td>
+                <td  colspan="5" style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
+            </tr>
+            <tr >
+                <td colspan="2" style="border: 1px solid black;vertical-align: top;  text-align: left;
+                padding: 8px;height: 20px;font-size: 10px;">Bank Name And Address</td>
+                <td  colspan="5" style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
+                padding: 10px;height: 20px;"></td>
+            </tr>
+        </tbody>
+    </table>
+</div> 
