@@ -130,7 +130,6 @@ caseList:any=[];
     setTimeout(() => {
       {
         this.sIsLoading = 'loading-data';
-
         this.getBrowseOPDBillsList();
       }
 
@@ -173,13 +172,12 @@ caseList:any=[];
     }
     
     setTimeout(() => {
-      this.sIsLoading = 'loading-data';
+      this.sIsLoading = 'loading';
       this._BrowseOPDBillsService.getBrowseBillsList(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as BrowseOPDBill[];
         this.dataSource.sort = this.sort;
-        
         this.dataSource.paginator = this.paginator;
-        this.sIsLoading = '';
+        this.sIsLoading = this.dataSource.data.length == 0 ? 'no-data' : '';
         this.click = false;
       },
         error => {

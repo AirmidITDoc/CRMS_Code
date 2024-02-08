@@ -30,9 +30,13 @@ import { PatientScreenBillDetailComponent } from './patient-screen-bill-detail/p
 export class AppointmentComponent implements OnInit {
 
   msg: any;
-  sIsLoading: string = '';
-  isLoading = true;
+  // isLoadingStr: string = '';
+  // isLoading: String = '';
+  // isLoading = true;
+  sIsLoading: string = "";
+
   isRateLimitReached = false;
+
   hasSelectedContacts: boolean;
   currentDate = new Date();
   subscriptions: Subscription[] = [];
@@ -102,7 +106,6 @@ export class AppointmentComponent implements OnInit {
   }
 
   // VisitList 
-
   getVisitList() {
     this.sIsLoading = 'loading-data';
     var D_data = {
@@ -114,12 +117,12 @@ export class AppointmentComponent implements OnInit {
       "StudyId":this._AppointmentSreviceService.myFilterform.get("StudyId").value.StudyId  || 0,
     }
     setTimeout(() => {
-      this.sIsLoading = 'loading-data';
+      this.sIsLoading = 'loading';
       this._AppointmentSreviceService.getAppointmentList(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as VisitMaster[];
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-        this.sIsLoading = '';
+        this.sIsLoading = this.dataSource.data.length == 0 ? 'no-data' : '';
       },
         error => {
           this.sIsLoading = '';
@@ -169,7 +172,7 @@ export class AppointmentComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
   
     this.dataSource.data = changes.dataArray.currentValue as VisitMaster[];
-    this.isLoading = false;
+    // this.isLoading = false;
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
       }

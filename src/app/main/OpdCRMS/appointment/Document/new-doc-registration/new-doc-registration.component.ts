@@ -171,10 +171,11 @@ export class NewDocRegistrationComponent implements OnInit {
 
 
   DevicetypeList = [
-    { id: 1, name: "Mild" },
-    { id: 2, name: "Moderate" },
-    { id: 3, name: "Severe" },
-
+    { id: 1, name: "Pace Wire" },
+    { id: 2, name: "Impella" },
+    { id: 3, name: "IABP" },
+    { id: 4, name: "Guide Catheter" },
+    { id: 5, name: "Vanous Access" },
   ];
 
   // CalcifiedList = [
@@ -188,7 +189,7 @@ export class NewDocRegistrationComponent implements OnInit {
 
 
   WireList = [
-    { id: 1, name: "Runthrough NS%" },
+    { id: 1, name: "Runthrough NS" },
     { id: 2, name: "Pilot 50" },
     { id: 3, name: "Pilot 200" },
     { id: 4, name: "ULTIMATEbros 3" },
