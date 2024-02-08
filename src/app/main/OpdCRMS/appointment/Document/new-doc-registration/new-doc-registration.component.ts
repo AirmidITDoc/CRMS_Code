@@ -27,6 +27,7 @@ export class NewDocRegistrationComponent implements OnInit {
   newAddForm: FormGroup;
   newSaveForm: FormGroup;
   ProcedureForm: FormGroup;
+  AddLesionTypeFrom: FormGroup;
   AngioplastyFormGroup: FormGroup;
   WireTypeFormGroup: FormGroup;
   ImagingFormGroup: FormGroup;
@@ -260,9 +261,10 @@ export class NewDocRegistrationComponent implements OnInit {
     'PApressure',
     'Valve',
     'Stenotic',
-    'Regurgitation',
+    //'Regurgitation',
     'MSAR',
     'MSAS',
+    'MVA',
     'action'
   ];
 
@@ -283,14 +285,18 @@ export class NewDocRegistrationComponent implements OnInit {
   dataSource1 = new MatTableDataSource<AngioaccessType>();
   displayedColumns2 = [
     'LesionType',
-    'Location',
     'SyntaxScore',
     'IndexLesion',
     'Severity',
     'Calcified',
+    // "Location",
+    'StarSegment',
+    'SideSegment',
+    'EndSegment',
     'Thrombus',
     'Proximal',
     'Branch',
+    'AortoOstial',
     'action'
   ];
 
@@ -298,8 +304,8 @@ export class NewDocRegistrationComponent implements OnInit {
   displayedColumns3 = [
     'Wiretype',
     'wireOther',
-    'MicroCatheter',
-    'Wire1Other',
+    'WireCrossed',
+    // 'Wire1Other',
     'action'
   ];
 
@@ -335,6 +341,7 @@ export class NewDocRegistrationComponent implements OnInit {
     this.newSaveForm = this.createSaveForm();
     this.CardiacRiskFormGroup = this.createCardiacRiskGroup();
     this.ProcedureForm = this.createProcedureForm();
+    this.AddLesionTypeFrom = this.createAddLesionForm();
     this.AngioplastyFormGroup = this.createAngioplastyForm();
     this.WireTypeFormGroup = this.createWireTypeForm();
     this.ImagingFormGroup = this.createImagingForm();
@@ -375,7 +382,8 @@ export class NewDocRegistrationComponent implements OnInit {
       }
       else if (event.value == 'No') {
         this.isHypertension = false;
-      }
+        
+       }
       else {
         this.isHypertension = false;
       }
@@ -446,6 +454,8 @@ export class NewDocRegistrationComponent implements OnInit {
     else if (event.value == 'Regurgitation') {
       this.isValveStenotic = false;
       this.isValveRegurgitation = true;
+      this.newAddForm.get('xymean').setValue(0);
+      this.newAddForm.get('MVA').setValue(0);
     }
     else {
       this.isValveStenotic = false;
@@ -537,6 +547,7 @@ export class NewDocRegistrationComponent implements OnInit {
 
   createAddForm() {
     return this.formBuilder.group({
+
       Symtoms: '',
       LVEF: [''],
       GLS: [''],
@@ -545,8 +556,10 @@ export class NewDocRegistrationComponent implements OnInit {
       Valve: [''],
       Stenotic: [''],
       Regurgitation: [''],
-      MSAR: [''],
-      MSAS: ['']
+      ValveSR:[''],
+      Severity: [''],
+      xymean: [''],
+      MVA:['']
     })
   }
   onAddData() {
@@ -558,16 +571,18 @@ export class NewDocRegistrationComponent implements OnInit {
         GLS: this.newAddForm.get('GLS').value || 0,
         RWMA: this.newAddForm.get('RWMA').value.DropDownValue || '',
         PApressure: this.newAddForm.get('PApressure').value.name || '',
-        Valve: this.newAddForm.get('Valve').value.name || 0,
-        Stenotic: this.newAddForm.get('Stenotic').value || 0,
-        Regurgitation: this.newAddForm.get('Regurgitation').value || 0,
-        MSAR: this.newAddForm.get('MSAR').value || 0,
-        MSAS: this.newAddForm.get('MSAS').value || 0,
+        Valve: this.newAddForm.get('Valve').value.name || '',
+        value: this.newAddForm.get('ValveSR').value ||  0,
+        // Regurgitation: this.newAddForm.get('Regurgitation').value || 0,
+        Grade: this.newAddForm.get('Severity').value || 0,
+        xyMean: this.newAddForm.get('xymean').value || 0,
+        MVA: this.newAddForm.get('MVA').value || 0,
       });
     this.isLoading = '';
     this.dataSource.data = this.datalist;
-    this.Save2DEchoDetailes();
+    //this.Save2DEchoDetailes();
   }
+  
   deleteTableRow(event, element) {
     // if (this.key == "Delete") {
     let index = this.datalist.indexOf(element);
@@ -800,14 +815,37 @@ export class NewDocRegistrationComponent implements OnInit {
       PMap: '',
       PCWP: '',
       LesionType: '',
-      Location: '',
+      LesionSegment: '',
+      StartSeverity: '',
+      EndSeverity: '',
+      SideSeverity:'',
       SyntaxScore: '',
       IndexLesion: '',
       Severity: '',
       Calcified: '',
       Thrombus: '',
       Proximal: '',
-      Branch: ''
+      Branch: '',
+      AortoOstial: ''
+    })
+  }
+  createAddLesionForm(){
+    return this.formBuilder.group({
+      LesionType: '',
+      LesionSegment: '',
+      StartNoBifurcationSeverity: '',
+      EndNoBifurcationSeverity: '',
+      StartBifurcationSeverity:'',
+      SideBifurcationSeverity:'',
+      EndBifurcationSeverity:'',
+      SyntaxScore: '',
+      IndexLesion: '',
+      Severity: '',
+      Calcified: '',
+      Thrombus: '',
+      Proximal: '',
+      Branch: '',
+      AortoOstial: ''
     })
   }
 
@@ -817,18 +855,21 @@ export class NewDocRegistrationComponent implements OnInit {
     this.proceduredatalist.push(
       {
         LesionType: this.ProcedureForm.get('LesionType').value.DropDownValue || '',
-        Location: this.ProcedureForm.get('Location').value || '',
         SyntaxScore: this.ProcedureForm.get('SyntaxScore').value || 0,
-        IndexLesion: this.ProcedureForm.get('IndexLesion').value || '',
-        Severity: this.ProcedureForm.get('Severity').value.DropDownValue || '',
-        Calcified: this.ProcedureForm.get('Calcified').value.DropDownValue || '',
+        IndexLesion: this.ProcedureForm.get('IndexLesion').value || 0,
+        Severity: this.ProcedureForm.get('Severity').value.DropDownValue || 0,
+        Calcified: this.ProcedureForm.get('Calcified').value.DropDownValue || 0,
+        StarSegment: this.ProcedureForm.get('StartSeverity').value.DropDownValue || 0,
+        SideSegment: this.ProcedureForm.get('SideSeverity').value.DropDownValue || " ",
+        EndSegment: this.ProcedureForm.get('EndSeverity').value.DropDownValue || 0,
         Thrombus: this.ProcedureForm.get('Thrombus').value || 'false',
         Proximal: this.ProcedureForm.get('Proximal').value || 'false',
         Branch: this.ProcedureForm.get('Branch').value || 'false',
+        AortoOstial: this.ProcedureForm.get('AortoOstial').value || 'false',
       });
     this.isLoading = '';
     this.dataSource2.data = this.proceduredatalist;
-    this.SaveLesion();
+    // this.SaveLesion();
   }
   deleteTableRowProcedure(event, element) {
     // if (this.key == "Delete") {
@@ -839,6 +880,9 @@ export class NewDocRegistrationComponent implements OnInit {
       this.dataSource2.data = this.proceduredatalist;
     }
     Swal.fire('Success !', 'Lesion Row Deleted Successfully', 'success');
+  }
+  setdropdownnull(){
+    this.ProcedureForm.get('SideSeverity').setValue(0);
   }
   SaveLesion() {
     this.isLoading = 'submit';
@@ -939,22 +983,11 @@ export class NewDocRegistrationComponent implements OnInit {
   onAddAccesstypeData() {
     // debugger
     this.isLoading = 'save';
-    if (this.AngioplastyFormGroup.get('AccessType').value == 1) {
-      this.AccType = 'Arterial';
-    }
-    if (this.AngioplastyFormGroup.get('AccessType').value == 2) {
-      this.AccType = 'Venous';
-    }
-
-    if (this.AngioplastyFormGroup.get('AccessType').value == 3) {
-      this.AccType = 'Other';
-    }
-    this.isLoading = 'save';
     this.dataSource1.data = [];
     this.Accessdatalist.push(
       {
-        AccessType: this.AccType || '',
-        Accessvalue1: this.AngioplastyFormGroup.get('Accessvalue1').value.name || 0,
+        AccessType: this.AngioplastyFormGroup.get('AccessType').value || 0,
+        Accessvalue1: this.AngioplastyFormGroup.get('Accessvalue1').value.name || '',
         Accessvalue2: this.AngioplastyFormGroup.get('Accessvalue2').value.name || '',
         Other1: this.AngioplastyFormGroup.get('AccessvalueOther').value || '',
         // IronDef: this.AccessFormGroup.get('IronDef').value.name || '',
@@ -965,6 +998,10 @@ export class NewDocRegistrationComponent implements OnInit {
       });
     this.isLoading = '';
     this.dataSource1.data = this.Accessdatalist;
+  }
+  setDropdownnull(){
+    this.AngioplastyFormGroup.get('Accessvalue1').setValue(0);
+    this.AngioplastyFormGroup.get('Accessvalue2').setValue(0);
   }
   deleteAccesstypeTableRow(event, element) {
     // if (this.key == "Delete") {
@@ -979,9 +1016,8 @@ export class NewDocRegistrationComponent implements OnInit {
   createWireTypeForm() {
     return this.formBuilder.group({
       Wiretype: '',
-      wireOther: '',
-      MicroCatheter: '',
-      MicroWireOther: ''
+      wireOthers: '',
+      WireCrossed: '',
     })
   }
   onAddWiretypeData() {
@@ -990,9 +1026,8 @@ export class NewDocRegistrationComponent implements OnInit {
     this.wiredatalist.push(
       {
         Wiretype: this.WireTypeFormGroup.get('Wiretype').value.name || '',
-        wireOther: this.WireTypeFormGroup.get('wireOther').value || '',
-        MicroCatheter: this.WireTypeFormGroup.get('MicroCatheter').value.name || '',
-        Wire1Other: this.WireTypeFormGroup.get('MicroWireOther').value || '',
+        wireOther: this.WireTypeFormGroup.get('wireOthers').value || '',
+        WireCrossed: this.WireTypeFormGroup.get('WireCrossed').value || '',
       });
     this.isLoading = '';
     this.dataSourc3.data = this.wiredatalist;

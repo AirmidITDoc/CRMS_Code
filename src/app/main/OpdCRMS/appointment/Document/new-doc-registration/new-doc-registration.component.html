@@ -201,15 +201,16 @@
                             </mat-form-field>
                           </div>
                           <div class="valve-top-padding-2">
-                            <mat-radio-group aria-label="Select an option" formControlName="Valve" (change)="onChangeValveYN($event)">
+                            <mat-radio-group aria-label="Select an option" formControlName="ValveYesNo" (change)="onChangeValveYN($event)">
                               <mat-radio-button value="Yes">Yes</mat-radio-button>
                               <mat-radio-button value="No">No</mat-radio-button>
                             </mat-radio-group>
                           </div>
-                          <div class="valve-top-padding-2" *ngIf="isValveYes">
+                          <div class="valve-top-padding-2" *ngIf="isValveYes" >
                             <mat-radio-group aria-label="Select an option" formControlName="ValveSR" (change)="onChangeValveSR($event)">
-                              <mat-radio-button value="Stenotic">Stenotic</mat-radio-button>
-                              <mat-radio-button value="Regurgitation">Regurgitation</mat-radio-button>
+                              <mat-lable class="mr-12">Value S/R:</mat-lable>
+                              <mat-radio-button value="Stenotic"  >Stenotic</mat-radio-button>
+                              <mat-radio-button value="Regurgitation"  >Regurgitation</mat-radio-button>
                             </mat-radio-group>
                           </div>
                         </div>
@@ -234,7 +235,7 @@
 
                             <span class="valve-label">MVA / AVA (In cm<sup>2</sup>):</span>
                             <mat-form-field fxFlex class="valve-controls">
-                              <input name="xymean" matInput formControlName="xymean" placeholder="MVA / AVA" >                              
+                              <input name="MVA" matInput formControlName="MVA" placeholder="MVA / AVA" >                              
                             </mat-form-field>
                           </div>
 
@@ -311,37 +312,46 @@
 
                           <ng-container matColumnDef="Stenotic">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                              Stenotic
+                              Value S/R
                             </mat-header-cell>
                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                              {{contact.Stenotic}}
+                              {{contact.value}}
                             </mat-cell>
                           </ng-container>
 
-                          <ng-container matColumnDef="Regurgitation">
+                          <!-- <ng-container matColumnDef="Regurgitation">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
                               Regurgitation
                             </mat-header-cell>
                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                               {{contact.Regurgitation}}
                             </mat-cell>
-                          </ng-container>
+                          </ng-container> -->
 
                           <ng-container matColumnDef="MSAR">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                              MSAR
+                              Grade
                             </mat-header-cell>
                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                              {{contact.MSAR}}
+                              {{contact.Grade}}
                             </mat-cell>
                           </ng-container>
 
                           <ng-container matColumnDef="MSAS">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                              MSAS
+                              xyMean
                             </mat-header-cell>
                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                              {{contact.MSAS}}
+                              {{contact.xyMean}}
+                            </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="MVA">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                              MVA/AVA
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                              {{contact.MVA}}
                             </mat-cell>
                           </ng-container>
 
@@ -860,6 +870,7 @@
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
                           <span class="section-header">Lesion Description</span>
                         </div>
+                        
                         <div class="section-label valve-lefttop-padding">
                           <span>Lesion Type: &nbsp;&nbsp;</span>
                           <mat-form-field class="section-dropdown" style="width: 300px;">
@@ -875,7 +886,7 @@
                           <span style="padding-left: 5%;">Bifurcation: &nbsp;&nbsp;</span>
                           <mat-radio-group aria-label="Bifurcation" formControlName="LesionSegment" (change)="onChangeRadioButton($event,'LesionSegment')">
                             <mat-radio-button value="Yes">Yes</mat-radio-button>
-                            <mat-radio-button value="No">No</mat-radio-button>
+                            <mat-radio-button value="No" (click)="setdropdownnull()">No</mat-radio-button>
                           </mat-radio-group>
                         
                         </div>
@@ -887,7 +898,7 @@
                               <span class="section-label">Start Segment: </span>
                               <mat-form-field class="section-dropdown" style="width: 300px;">
                                 <mat-label>Start Segment</mat-label>
-                                <mat-select formControlName="Severity" name="Severity">
+                                <mat-select formControlName="StartSeverity" name="StartSeverity" required>
                                   <mat-option></mat-option>
                                   <mat-option *ngFor="let m of vLesionSegment" [value]="m">
                                     {{m.DropDownValue}}
@@ -898,9 +909,9 @@
 
                             <div>
                               <span class="section-label">End Segment: </span>
-                              <mat-form-field class="section-dropdown" style="width: 300px;">
+                              <mat-form-field class="section-dropdown" style="width: 300px;" required>
                                 <mat-label>End Segment</mat-label>
-                                <mat-select formControlName="Severity" name="Severity">
+                                <mat-select formControlName="EndSeverity" name="EndSeverity">
                                   <mat-option></mat-option>
                                   <mat-option *ngFor="let m of vLesionSegment" [value]="m">
                                     {{m.DropDownValue}}
@@ -918,7 +929,7 @@
                                 <span class="section-label">Start Segment: </span>
                                 <mat-form-field class="section-dropdown" style="width: 300px;">
                                   <mat-label>Start Segment</mat-label>
-                                  <mat-select formControlName="Severity" name="Severity">
+                                  <mat-select formControlName="StartSeverity" name="StartSeverity" required>
                                     <mat-option></mat-option>
                                     <mat-option *ngFor="let m of vLesionSegment" [value]="m">
                                       {{m.DropDownValue}}
@@ -931,8 +942,8 @@
                                 <span class="section-label">Side Branch: </span>
                                 <mat-form-field class="section-dropdown" style="width: 300px;">
                                   <mat-label>Side Branch</mat-label>
-                                  <mat-select formControlName="Severity" name="Severity">
-                                    <mat-option></mat-option>
+                                  <mat-select formControlName="SideSeverity" name="SideSeverity" >
+                                    <mat-option> select</mat-option>
                                     <mat-option *ngFor="let m of vLesionSegment" [value]="m">
                                       {{m.DropDownValue}}
                                     </mat-option>
@@ -944,7 +955,7 @@
                                 <span class="section-label">End Segment: </span>
                                 <mat-form-field class="section-dropdown" style="width: 300px;">
                                   <mat-label>End Segment</mat-label> 
-                                  <mat-select formControlName="Severity" name="Severity">
+                                  <mat-select formControlName="EndSeverity" name="EndSeverity" required>
                                     <mat-option></mat-option>
                                     <mat-option *ngFor="let m of vLesionSegment" [value]="m">
                                       {{m.DropDownValue}}
@@ -1006,7 +1017,7 @@
                                 name="Proximal">Proximal Tortuosity</mat-checkbox>
                               <mat-checkbox class="example-margin" value="3" formControlName="Branch"
                                 name="Branch">Important Side Branch</mat-checkbox>
-                              <mat-checkbox class="example-margin" value="3" formControlName="Branch"
+                              <mat-checkbox class="example-margin" value="3" formControlName="AortoOstial"
                                 name="Branch">Aorto Ostial</mat-checkbox>
                             </section>
                           </div>
@@ -1020,7 +1031,7 @@
 
                           </div>
                         </div>
-
+                      
                         <mat-table #table class="table" matSort [dataSource]="dataSource2"
                           [@animateStagger]="{value:'50'}"
                           style="height: 150px !important; overflow: auto;margin-top: 5px;width: 100%;">
@@ -1030,14 +1041,6 @@
                               Type</mat-header-cell>
                             <mat-cell *matCellDef="let contact">
                               {{contact.LesionType}}
-                            </mat-cell>
-                          </ng-container>
-
-                          <ng-container matColumnDef="Location">
-                            <mat-header-cell *matHeaderCellDef
-                              style="margin-right: 5px;color: aliceblue;">Location</mat-header-cell>
-                            <mat-cell *matCellDef="let contact">
-                              {{contact.Location}}
                             </mat-cell>
                           </ng-container>
 
@@ -1076,6 +1079,30 @@
                             </mat-cell>
                           </ng-container>
 
+                          <ng-container matColumnDef="StarSegment">
+                            <mat-header-cell *matHeaderCellDef
+                              style="margin-right: 5px;color: aliceblue;">StarSegment</mat-header-cell>
+                            <mat-cell *matCellDef="let contact">
+                              {{contact.StarSegment}}
+                            </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="SideSegment">
+                            <mat-header-cell *matHeaderCellDef
+                              style="margin-right: 5px;color: aliceblue;">SideSegment</mat-header-cell>
+                            <mat-cell *matCellDef="let contact">
+                              {{contact.SideSegment}}
+                            </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="EndSegment">
+                            <mat-header-cell *matHeaderCellDef
+                              style="margin-right: 5px;color: aliceblue;">EndSegment</mat-header-cell>
+                            <mat-cell *matCellDef="let contact">
+                              {{contact.EndSegment}}
+                            </mat-cell>
+                          </ng-container>
+
                           <ng-container matColumnDef="Thrombus">
                             <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: aliceblue;">
                               Thrombus
@@ -1096,10 +1123,19 @@
 
                           <ng-container matColumnDef="Branch">
                             <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: aliceblue;">
-                              Imp. Side Branch
+                              Imp.Side Branch
                             </mat-header-cell>
                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                               {{contact.Branch}}
+                            </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="AortoOstial">
+                            <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: aliceblue;">
+                              Aorto Ostial
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                              {{contact.AortoOstial}}
                             </mat-cell>
                           </ng-container>
 
@@ -1184,7 +1220,7 @@
                             <mat-radio-group aria-label="Select an option" formControlName="AccessType"  (change)="onChangeRadioButton($event, 'AccessType')">
                               <mat-radio-button value="Arterial">Arterial</mat-radio-button>
                               <mat-radio-button value="Venous">Venous</mat-radio-button>
-                              <mat-radio-button value="Other">Other</mat-radio-button>
+                              <mat-radio-button value="Other" (click)="setDropdownnull()">Other</mat-radio-button>
                             </mat-radio-group>                            
                           </div>
 
@@ -1322,7 +1358,7 @@
 
                           <ng-container matColumnDef="Other1">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                              Other1
+                              Other
                             </mat-header-cell>
                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                               {{contact.Other1}}
@@ -1479,23 +1515,16 @@
                             </mat-cell>
                           </ng-container>
 
-                          <ng-container matColumnDef="MicroCatheter">
+                          <ng-container matColumnDef="WireCrossed">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                              Micro Catheter
+                              Wire Crossed
                             </mat-header-cell>
                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                              {{contact.MicroCatheter}}
+                              {{contact.WireCrossed}}
                             </mat-cell>
                           </ng-container>
 
-                          <ng-container matColumnDef="Wire1Other">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
-                              MicroCatheter Other
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                              {{contact.Wire1Other}}
-                            </mat-cell>
-                          </ng-container>
+                          
 
                           <ng-container matColumnDef="action" stickyEnd>
                             <mat-header-cell *matHeaderCellDef style="color: white;"> Action
