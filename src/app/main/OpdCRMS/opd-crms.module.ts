@@ -14,8 +14,8 @@ const appRoutes: Routes = [
   },
   {
     path: "bill",
-    loadChildren: () => import("./appointment/appointment.module").then((m) => m.AppointmentModule),
-    // loadChildren: () => import("../committee-meeting/committe-meeting.module").then((m) => m.CommitteMeetingModule),
+    // loadChildren: () => import("./appointment/appointment.module").then((m) => m.AppointmentModule),
+    loadChildren: () => import("../committee-meeting/committe-meeting.module").then((m) => m.CommitteMeetingModule),
   },
   {
     path: "registration",
