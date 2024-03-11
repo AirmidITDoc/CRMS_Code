@@ -211,6 +211,40 @@
                                             </mat-cell>
                                         </ng-container>
 
+                                        <ng-container matColumnDef="ExtBillData" style="margin-right: 20px;">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                                fxShow.gt-md>
+                                                External Bills
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                <!-- <mat-form-field appearance="legacy">
+                                                    <mat-placeholder class="placeholder">ONLINE/OFFLINE"</mat-placeholder>
+                                                    <input matInput [(ngModel)]="contact.MeetingStatus">
+                                                </mat-form-field> -->
+                                                <mat-select placeholder="BillId" >
+                                                    <mat-option *ngFor="let Result of results" [value]="Result.BillId">
+                                                       Bill No {{ Result.PBillNo }} | Amount {{Result.Amount}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-cell>
+
+                                        </ng-container>
+
+                                        
+                                        <ng-container matColumnDef="action" stickyEnd>
+                                            <mat-header-cell *matHeaderCellDef style="color: white;"> Action
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let contact">
+                                                <button mat-icon-button (click)="deleteTableRow(contact)" color="warn">
+                                                    <mat-icon>delete_outline</mat-icon>
+                                                </button>
+                                                <button mat-icon-button (click)="EditRow(contact)" color="warn">
+                                                    <mat-icon>edit</mat-icon>
+                                                </button>
+                                            </mat-cell>
+                                        </ng-container>
+
+
                                         <ng-container matColumnDef="loading">
                                             <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
                                             </mat-header-cell>
@@ -258,6 +292,29 @@
                                         </mat-cell>
                                     </ng-container>
 
+                                 
+                                    <ng-container matColumnDef="ExtBillDetail">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>
+                                            External Bill Detail
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                            <!-- <mat-form-field appearance="legacy">
+                                                <mat-placeholder class="placeholder">ONLINE/OFFLINE"</mat-placeholder>
+                                                <input matInput [(ngModel)]="contact.MeetingStatus">
+                                            </mat-form-field> -->
+                                            <mat-select placeholder="ServiceId" (selectionChange)="getExtBilldetail(contact)">
+                                                <mat-option *ngFor="let Result of billdetailresults" [value]="Result.ServiceId">
+                                                   Service{{ Result.ServiceId }} | Amount {{Result.ServiceAmount}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-cell>
+
+                                    </ng-container>
+
+                                    
+                                   
+
                                     <ng-container matColumnDef="action" stickyEnd>
                                         <mat-header-cell *matHeaderCellDef style="color: white;">Action
                                         </mat-header-cell>
@@ -267,15 +324,15 @@
                                                 matTooltip="Generate Auto Bill">
                                                 <mat-icon style="color: blue;">account_balance</mat-icon>
                                             </button>
-                                            <button mat-icon-button (click)="getPrint(contact)" matTooltip="print">
-                                                <mat-icon>print</mat-icon>
+                                            <button mat-icon-button (click)="EditBilldetail(contact)" matTooltip="print">
+                                                <mat-icon>edit</mat-icon>
                                             </button>
 
 
                                         </mat-cell>
                                     </ng-container>
 
-
+<!-- 
                                     <ng-container matColumnDef="buttons" stickyEnd>
                                         <mat-header-cell *matHeaderCellDef
                                             class="table-actions">Action</mat-header-cell>
@@ -295,7 +352,7 @@
                                                 </mat-menu>
                                             </div>
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
 
 
@@ -340,6 +397,8 @@
                                             <input name="MrNo" formControlName="MrNo" matInput [(ngModel)]="MRNo"
                                                 (keyup)="getApiVisitList()" required>
                                         </mat-form-field>
+
+                                        
 
                                         <button (click)="getApiVisitList()" matTooltip="search"
                                             style="margin-left: 20px;">
@@ -469,13 +528,13 @@
                                                 no data found...
                                             </mat-footer-cell>
                                         </ng-container>
-
+                                        <!-- (click)="getApiBillList(contact)" -->
                                         <mat-header-row class="accent"
                                             *matHeaderRowDef="displayedColumns1; sticky: true">
                                         </mat-header-row>
                                         <mat-row *matRowDef="let contact; columns: displayedColumns1;" class="contact"
                                             [@animate]="{value:'*',params:{y:'100%'}}"
-                                            (click)="getApiBillList(contact)"></mat-row>
+                                          (click)="getExtVisitBillList(contact)" ></mat-row>
                                         <mat-footer-row *matFooterRowDef="['loading']"
                                             [ngClass]="{'hide': !(sIsLoading == 'loading-data')}">
                                         </mat-footer-row>
@@ -500,7 +559,7 @@
                                     <mat-table #table matSort [dataSource]="dataSource2"
                                         [@animateStagger]="{value:'50'}" class="table3" style="overflow: auto;">
 
-                                        <ng-container matColumnDef="date">
+                                        <!-- <ng-container matColumnDef="date">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>VisitDate
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
@@ -523,8 +582,33 @@
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                                 {{contact.TotalBillAmount}}
                                             </mat-cell>
+                                        </ng-container> -->
+
+
+                                        <ng-container matColumnDef="BillId">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>BillId
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                {{contact.BillId}}
+                                            </mat-cell>
                                         </ng-container>
 
+                                        <ng-container matColumnDef="PBillNo">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>BillNo
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                {{contact.PBillNo}}
+                                            </mat-cell>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="Amount">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                fxShow.gt-sm>TotalBillAmount
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                {{contact.Amount}}
+                                            </mat-cell>
+                                        </ng-container>
                                         <ng-container matColumnDef="loading">
                                             <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
                                             </mat-header-cell>
@@ -535,13 +619,13 @@
                                                 no data found...
                                             </mat-footer-cell>
                                         </ng-container>
-
+                                        <!-- getApiBilldetail(contact) -->
                                         <mat-header-row class="accent"
                                             *matHeaderRowDef="displayedColumns2; sticky: true">
                                         </mat-header-row>
                                         <mat-row *matRowDef="let contact; columns: displayedColumns2;" class="contact"
                                             [@animate]="{value:'*',params:{y:'100%'}}"
-                                            (click)="getApiBilldetail(contact)"></mat-row>
+                                            (click)="getExtBilldetail(contact)"></mat-row>
                                         <mat-footer-row *matFooterRowDef="['loading']"
                                             [ngClass]="{'hide': !(sIsLoading == 'loading-data')}">
                                         </mat-footer-row>
@@ -563,7 +647,7 @@
                                     <mat-table #table matSort [dataSource]="dataSource3"
                                         [@animateStagger]="{value:'50'}" class="table4" style="overflow: auto;">
 
-                                        <ng-container matColumnDef="Servicename">
+                                        <!-- <ng-container matColumnDef="Servicename">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Servicename
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
@@ -578,7 +662,28 @@
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                                 {{contact.TotalAmount}}
                                             </mat-cell>
+                                        </ng-container> -->
+
+
+                                        <ng-container matColumnDef="ServiceId">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Servicename
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                {{contact.ServiceId}}
+                                            </mat-cell>
                                         </ng-container>
+
+
+                                        <ng-container matColumnDef="ServiceAmount">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>ServiceAmount
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                                {{contact.ServiceAmount}}
+                                            </mat-cell>
+                                        </ng-container>
+
+                                           
+                                 
 
                                         <ng-container matColumnDef="loading">
                                             <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">

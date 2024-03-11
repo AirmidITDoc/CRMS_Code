@@ -72,4 +72,14 @@ export class GeturlService {
         }
       }));
   }
+
+
+  public getExtVisitBillData(employee){
+    return this._httpClient.post("Generic/GetByProc?procName=m_RtrvExtPatientBillInfo", employee)
+  }
+
+  public getExtBillDetData(employee){
+    return this._httpClient.post("Generic/GetByProc?procName=m_RtrvExtPatientBillDetInfo", employee)
+  }
+  
 }

@@ -404,4 +404,7 @@ public getstudywiseservicelist(employee){
 public RegDocInsert(employee){
   return this._httpClient.post("OutPatient/InvoiceBillMappinngSave", employee);
 }
+
+
+
 }

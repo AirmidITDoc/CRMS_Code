@@ -111,9 +111,9 @@
     }
 
     .mat-column-Servicename {
-      width: 600px;
-      max-width: 600px;
-      min-width: 600px;
+      width: 400px;
+      max-width: 400px;
+      min-width: 400px;
       text-align: left;
       white-space: nowrap; 
       overflow: hidden;
@@ -122,6 +122,15 @@
       // display: inline-block;
      justify-content:left; 
     }
+    .mat-column-ExtBillDetail {
+      width: 250px;
+      max-width: 250px;
+      min-width: 250px;
+      text-align: left;
+     
+       justify-content:left; 
+    }
+    
   }
 
   .mat-header-row {
