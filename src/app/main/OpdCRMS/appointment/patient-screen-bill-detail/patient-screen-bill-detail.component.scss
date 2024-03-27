@@ -72,24 +72,30 @@
     height:200px !important;
 
     .mat-column-date {
-      width: 150px;
-      max-width: 150px;
-      min-width: 150px;
+      width: 120px;
+      max-width: 120px;
+      min-width: 120px;
       text-align: left;
-     
-       justify-content:left; 
+     justify-content:left; 
     }
 
     .mat-column-BillNo {
-      width: 150px;
-      max-width: 150px;
-      min-width: 150px;
+      width: 80px;
+      max-width: 80px;
+      min-width: 80px;
+      text-align: left;
+     justify-content:left; 
+    }
+
+    .mat-column-NetPayableAmt {
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
       text-align: left;
      
        justify-content:left; 
     }
-
-    .mat-column-NetPayableAmt {
+    .mat-column-ExtBillData {
       width: 250px;
       max-width: 250px;
       min-width: 250px;
@@ -97,23 +103,47 @@
      
        justify-content:left; 
     }
+
+    .mat-column-indBillNo {
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
+      text-align: left;
+     justify-content:left; 
+     }
+     .mat-column-indBillAmount {
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
+      text-align: left;
+     justify-content:left; 
+     }
+     .mat-column-IndBillDate {
+      width: 150px;
+      max-width: 150px;
+      min-width: 150px;
+      text-align: left;
+     justify-content:left; 
+     }
+
+
   }
   .BillDettable{
     height:200px !important;
 
     .mat-column-VisitDate {
-      width: 150px;
-      max-width: 150px;
-      min-width: 150px;
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
       text-align: left;
      
        justify-content:left; 
     }
 
     .mat-column-Servicename {
-      width: 400px;
-      max-width: 400px;
-      min-width: 400px;
+      width: 300px;
+      max-width: 300px;
+      min-width: 300px;
       text-align: left;
       white-space: nowrap; 
       overflow: hidden;
@@ -122,6 +152,7 @@
       // display: inline-block;
      justify-content:left; 
     }
+    
     .mat-column-ExtBillDetail {
       width: 250px;
       max-width: 250px;
@@ -130,6 +161,52 @@
      
        justify-content:left; 
     }
+
+    .mat-column-TotalAmount {
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
+      text-align: left;
+     
+       justify-content:left; 
+    }
+    .mat-column-IndServiceId {
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
+      text-align: left;
+     
+       justify-content:left; 
+    }
+
+    .mat-column-IndServiceId {
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
+      text-align: left;
+     
+       justify-content:left; 
+    }
+
+    .mat-column-IndServiceName {
+      width: 250px;
+      max-width: 250px;
+      min-width: 250px;
+      text-align: left;
+     
+       justify-content:left; 
+    }
+
+    .mat-column-IndServiceAmount {
+      width: 150px;
+      max-width: 150px;
+      min-width: 150px;
+      text-align: left;
+     
+       justify-content:left; 
+    }
+
+
     
   }
 
@@ -392,8 +469,10 @@ height: 150px !important;
   text-align: left;
  justify-content:left; 
  }
+
+ 
+
 }
-  
   }
  
   

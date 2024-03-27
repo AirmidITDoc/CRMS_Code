@@ -18,20 +18,24 @@ import { NewVistDateComponent } from '../new-vist-date/new-vist-date.component';
 import { BillDetailComponent } from '../bill-detail/bill-detail.component';
 import { InvoiceBillMappingComponent } from '../invoice-bill-mapping/invoice-bill-mapping.component';
 import { AssignVisitInforComponent } from '../assign-visit-infor/assign-visit-infor.component';
+import { forEach } from 'lodash';
+import { BillingModule } from 'app/main/setup/billing/billing.module';
 interface billResult {
   BillId: any;
   PBillNo: string;
   Amount: any;
+  TotalAmount: any;
 }
 
 
 interface billdetailResult {
-  Amount:any;
-  BillId:any;
-  PBillNo:any;
+  Amount: any;
+  BillId: any;
+  PBillNo: any;
   ServiceId: any;
+  Servicename: any;
   ServiceAmount: string;
-  
+  TotalAmount: any;
 }
 
 @Component({
@@ -43,7 +47,7 @@ interface billdetailResult {
 })
 export class PatientScreenBillDetailComponent implements OnInit {
 
- 
+
 
   msg: any;
   sIsLoading: string = '';
@@ -69,6 +73,19 @@ export class PatientScreenBillDetailComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() dataArray: any;
+
+  vBillId: any;
+  vBillNo: any;
+  vExtBillNo: any;
+  vExtBillAmount: any;
+  vExtBillId: any;
+  vExtBillDate: any;
+
+  vExtServiceId: any;
+  vExtServiceAmount: any;
+  vExtServicename: any;
+  VserviceBillNo: any;
+  VserviceBillId: any;
 
   results: billResult[] = [
     // { BillId: 1, PBillNo: '1', Amount:0},
@@ -117,9 +134,9 @@ export class PatientScreenBillDetailComponent implements OnInit {
     // 'TotalBillAmount',
 
     'BillId',
-    'PBillNo',
-    'Amount',
-   
+    'BillNo',
+    'TotalBillAmount',
+
   ];
   dataSource2 = new MatTableDataSource<ApiMaster>();
 
@@ -129,10 +146,10 @@ export class PatientScreenBillDetailComponent implements OnInit {
     // 'Servicename',
     // 'TotalAmount',
 
-    
-    'ServiceId',
-    'ServiceAmount',
-   
+
+    'Servicename',
+    'TotalAmount',
+
   ];
   dataSource3 = new MatTableDataSource<ApiMaster>();
 
@@ -141,6 +158,9 @@ export class PatientScreenBillDetailComponent implements OnInit {
     'Servicename',
     'TotalAmount',
     'ExtBillDetail',
+    'IndServiceId',
+    'IndServiceName',
+    'IndServiceAmount',
     'action'
   ];
   dataSource4 = new MatTableDataSource<ApiMaster>();
@@ -151,6 +171,9 @@ export class PatientScreenBillDetailComponent implements OnInit {
     'BillNo',
     'NetPayableAmt',
     'ExtBillData',
+    'indBillNo',
+    'indBillAmount',
+    'IndBillDate',
     'action'
   ];
   dataSource5 = new MatTableDataSource<ApiMaster>();
@@ -174,7 +197,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
     // private advanceDataStored: AdvanceDataStored
   ) {
     this.getVistdetaillist();
-    this.getExtVisitBillList();
+    // this.getExtVisitBillList();
   }
 
   ngOnInit(): void {
@@ -227,6 +250,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
   getBilllist(contact) {
+
     this.sIsLoading = 'loading-data';
     var D_data = {
       "visitid": contact.VisitId
@@ -235,6 +259,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
       this.sIsLoading = 'loading-data';
       this._AppointmentService.getBillList(D_data).subscribe(Visit => {
         this.dataSource5.data = Visit as ApiMaster[];
+        console.log(this.dataSource5.data)
         this.sIsLoading = '';
       },
         error => {
@@ -244,16 +269,20 @@ export class PatientScreenBillDetailComponent implements OnInit {
   }
 
   getbilldetail(Param) {
+    this.vBillNo = Param.BillNo;
+    this.vBillId = Param.BillId;
+
+
     this.sIsLoading = 'loading-data';
     var D_data = {
-      "BillNo":32// Param.BillNo
+      "BillNo": Param.BillNo
     };
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._AppointmentService.getMainBillDetData(D_data).subscribe(Visit => {
         this.dataSource4.data = Visit as ApiMaster[];
 
-        console.log(this.dataSource4.data )
+        console.log(this.dataSource4.data)
         this.sIsLoading = '';
       },
         error => {
@@ -275,10 +304,6 @@ export class PatientScreenBillDetailComponent implements OnInit {
         });
     }, 1000);
   }
-
-
-  
-
 
 
   getApiBillList(contact) {
@@ -305,30 +330,36 @@ export class PatientScreenBillDetailComponent implements OnInit {
   // ];
 
 
-// New test
-  getExtVisitBillList() {
-    this.results=[]
-    this.dataSource2.data=[];
+  // New test
+  getExtVisitBillList(contact) {
+
+    this.results = []
+    this.dataSource2.data = [];
     var D_data = {
-      "VisitID": 1,// contact.VisitId
+      "VisitID": contact.VisitId
     };
     setTimeout(() => {
-      this._GeturlService.getExtVisitBillData(D_data).subscribe(Visit => {
+      this._GeturlService.getBillData(D_data).subscribe(Visit => {
         this.dataSource2.data = Visit as ApiMaster[];
-        let i=0
-       
-        if(this.dataSource2.data.length > 0){
-        this.dataSource2.data.forEach(element => {
-          debugger
-          this.results.push(element)
-        });
-      }
+        let i = 0
+
+        if (this.dataSource2.data.length > 0) {
+          this.dataSource2.data.forEach(element => {
+            console.log(this.dataSource2.data)
+            this.results.push(element)
+          });
+        }
         console.log(this.dataSource2.data)
         console.log(this.results)
       },
         error => {
         });
     }, 1000);
+  }
+
+  SetBillNo(contact) {
+
+    contact.ExtBillNo = contact;
   }
 
   getApiBilldetail(contact) {
@@ -348,23 +379,23 @@ export class PatientScreenBillDetailComponent implements OnInit {
     }, 1000);
   }
 
-// Newtest?
+  // Newtest?
   getExtBilldetail(contact) {
 
-    
-    this.billdetailresults=[]
+
+    this.billdetailresults = []
     this.sIsLoading = 'loading-data';
     var D_data = {
       "BillId": contact.BillId
     };
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
-      this._GeturlService.getExtBillDetData(D_data).subscribe(Visit => {
+      this._GeturlService.getBillDetData(D_data).subscribe(Visit => {
         this.dataSource3.data = Visit as ApiMaster[];
-         
-        if(this.dataSource3.data.length > 0){
+        console.log(this.dataSource3.data)
+        if (this.dataSource3.data.length > 0) {
           this.dataSource3.data.forEach(element => {
-            debugger
+
             this.billdetailresults.push(element)
           });
 
@@ -412,16 +443,121 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
   }
 
-  EditRow(row){
+
+
+
+  getExtBillValue(result) {
+    debugger
+    console.log(result)
+    this.vExtBillNo=result
+    this.dataSource2.data.forEach((element) => {
+      debugger
+      console.log(this.dataSource2.data)
+      if (element.BillId == result) {
+       this.vExtBillNo =element.BillNo;
+        this.vExtBillAmount = element.TotalBillAmount;
+        this.vExtBillId = element.BillId;
+        this.vExtBillDate = element.date
+      }
+    });
+    // this.getExtBilldetail(result);
+  }
+
+
+  EditRow(row) {
+    console.log(row)
+    let submissionObj = {};
+    let updateBillintegration = {};
+
+    updateBillintegration['billId'] = row.BillNo;
+    updateBillintegration['indBillId'] = this.vExtBillId;
+    updateBillintegration['indBillNo'] = this.vExtBillNo;
+    updateBillintegration['indBillDate'] = this.vExtBillDate;
+    updateBillintegration['indBillAmount'] = this.vExtBillAmount;
+
+    submissionObj['update_Bill_integration'] = updateBillintegration;
+
+    console.log(submissionObj)
+    this._AppointmentService.InvoiceBillUpdateIntegration(submissionObj).subscribe(response => {
+
+      if (response) {
+        Swal.fire('Congratulations !', 'Invoice Bill Mapping Successfully !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+
+          }
+
+        });
+      } else {
+        Swal.fire('Error !', 'Appoinment not saved', 'error');
+      }
+
+    });
 
   }
 
-  EditBilldetail(row){
 
+
+
+  getExtBillDetailValue(result) {
+    debugger
+    console.log(result)
+    this.vExtServicename=result
+    this.billdetailresults.forEach((element) => {
+      console.log(element)
+      if (element.Servicename== result) {
+        debugger
+        this.VserviceBillId = element.BillId;
+        this.vExtServiceId = element.ServiceId;
+          this.vExtServicename = element.Servicename;
+        this.vExtServiceAmount = element.TotalAmount;
+
+      }
+    });
+
+
+  }
+
+
+
+  EditBilldetail(row) {
+    console.log(row)
+
+    let submissionObj1= {};
+    let updateAddChargesintegration = {};
+    updateAddChargesintegration['chargesId'] = row.ChargesId,
+      updateAddChargesintegration['indBillId'] = this.VserviceBillId,
+      updateAddChargesintegration['indChargeId'] = this.vExtServiceId,
+      updateAddChargesintegration['indServiceId'] = this.vExtServiceId,
+      updateAddChargesintegration['indServiceName'] = this.vExtServicename;
+    updateAddChargesintegration['indServiceAmount'] = this.vExtServiceAmount;
+
+
+    submissionObj1['update_AddCharges_integration'] = updateAddChargesintegration;
+    // var Data = {
+    //   "update_AddCharges_integration": updateAddChargesintegration
+    // };
+
+    console.log(submissionObj1)
+    this._AppointmentService.InvoiceBillAddchargesInteration(submissionObj1).subscribe(response => {
+
+      if (response) {
+        Swal.fire('Congratulations !', 'Invoice Bill AddCharges Intergration Successfully !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            this._matDialog.closeAll();
+
+          }
+
+        });
+      } else {
+        Swal.fire('Error !', 'Appoinment not saved', 'error');
+      }
+
+    });
   }
 
   deleteTableRow(element) {
-    debugger;
+    ;
 
     let index = this.chargeslist.indexOf(element);
     if (index >= 0) {
@@ -770,14 +906,14 @@ export class ApiMaster {
   TotalAmount: any;
   currentDate = new Date();
   AgeYear: any;
-  NetPayableAmt:any;
+  NetPayableAmt: any;
+  ExtBillNo: any;
+  ExtBillData: any;
 
-
-  
-  PBillNo:any
-  Amount :any;
-  ServiceId:any;
-  ServiceAmount:any;
+  PBillNo: any
+  Amount: any;
+  ServiceId: any;
+  ServiceAmount: any;
   /**
    * Constructor
    *
@@ -809,6 +945,10 @@ export class ApiMaster {
       this.Amount = ApiMaster.Amount || 0
       this.ServiceId = ApiMaster.ServiceId || '';
       this.ServiceAmount = ApiMaster.ServiceAmount || 0
+      this.ExtBillNo = ApiMaster.ExtBillNo || '';
+      this.ExtBillData = ApiMaster.ExtBillData || 0
+
+
     }
   }
 

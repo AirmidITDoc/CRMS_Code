@@ -354,6 +354,18 @@ public InvoiceBillMappingUpdate(employee){
   return this._httpClient.post("OutPatient/InvoiceBillMappinngUpdate", employee);
 }
 
+
+
+public InvoiceBillUpdateIntegration(employee){
+  return this._httpClient.post("CRMSTran/Update_Bill_integration", employee);
+}
+
+public InvoiceBillAddchargesInteration(employee){
+  return this._httpClient.post("CRMSTran/update_AddCharges_integration", employee);
+}
+
+
+
 public UpdateInvoiceBill(employee){
   return this._httpClient.post("OutPatient/UpdateInvoiceRegno", employee);
 }
