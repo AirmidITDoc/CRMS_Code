@@ -135,8 +135,8 @@ export class AppointmentComponent implements OnInit {
     const dialogRef = this._matDialog.open(PatientScreenBillDetailComponent,
       {
         maxWidth: '110vw',
-        height: '920px',
-        width: '100%',
+        height: '90%',
+        width: '90%',
         data : {
           element : element,
           StudyId:this._AppointmentSreviceService.myFilterform.get("StudyId").value.StudyId ,

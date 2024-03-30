@@ -204,33 +204,12 @@
                                     </ng-container>
 
                                     <ng-container matColumnDef="NetPayableAmt">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>TotalBillAmount
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Bill Amount
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let m" fxShow.gt-sm>
                                             {{m.NetPayableAmt}}
                                         </mat-cell>
                                     </ng-container>
-
-                                    <ng-container matColumnDef="ExtBillData" style="margin-right: 20px;">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
-                                            External Bills
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                            <!-- <mat-form-field appearance="legacy">
-                                                    <mat-placeholder class="placeholder">ONLINE/OFFLINE"</mat-placeholder>
-                                                    <input matInput [(ngModel)]="contact.MeetingStatus">
-                                                </mat-form-field> -->
-                                            <mat-select placeholder="BillId"
-                                                (selectionChange)="getExtBillValue($event.value)">
-                                                <mat-option *ngFor="let Result of results" [value]="Result.BillId">
-                                                    Bill No {{ Result.BillNo }} | Amount {{Result.TotalBillAmount}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </mat-cell>
-
-                                    </ng-container>
-
-                                  
 
                                     <ng-container matColumnDef="indBillNo">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>ExBillNo
@@ -247,9 +226,6 @@
                                             {{m.indBillAmount}}
                                         </mat-cell>
                                     </ng-container>
-
-
-                                     
                                  
                                     <ng-container matColumnDef="IndBillDate">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>IndBillDate
@@ -257,6 +233,21 @@
                                         <mat-cell *matCellDef="let m" fxShow.gt-sm>
                                             {{m.IndBillDate| date:shortDate}}
                                         </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="ExtBillData" style="margin-right: 20px;">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
+                                            External Bills
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                            <mat-select placeholder="BillId"
+                                                (selectionChange)="getExtBillValue($event.value)">
+                                                <mat-option *ngFor="let Result of results" [value]="Result.BillId">
+                                                    Bill No {{ Result.BillNo }} | Amount {{Result.TotalBillAmount}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-cell>
+
                                     </ng-container>
 
                                     <ng-container matColumnDef="action" stickyEnd>
@@ -365,10 +356,10 @@
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
                                             <!-- disabled="Billbutton" -->
-                                            <button mat-icon-button (click)="getGeneratebill(contact)"
+                                            <!-- <button mat-icon-button (click)="getGeneratebill(contact)"
                                                 matTooltip="Generate Auto Bill">
                                                 <mat-icon style="color: blue;">account_balance</mat-icon>
-                                            </button>
+                                            </button> -->
                                             <button mat-icon-button (click)="EditBilldetail(contact)"
                                                 matTooltip="print">
                                                 <mat-icon>edit</mat-icon>

@@ -103,22 +103,16 @@ export class PatientScreenBillDetailComponent implements OnInit {
     'ProtocolNo',
     'SubjectName',
     'VisitTitle',
-    // 'BillAmount',
-    // 'BillId',
     'action',
     'buttons'
   ];
-
 
   dataSource = new MatTableDataSource<VisitMaster>();
 
   displayedColumns1 = [
     'Date',
-    // 'VisitId',
     'MRNo',
     'PatientName',
-    // 'MiddleName',
-    // 'LastName',
     'Address',
     'ContactNo',
     'DateofBirth',
@@ -129,24 +123,15 @@ export class PatientScreenBillDetailComponent implements OnInit {
   dataSource1 = new MatTableDataSource<ApiMaster>();
 
   displayedColumns2 = [
-    // 'date',
-    // 'BillNo',
-    // 'TotalBillAmount',
-
     'BillId',
     'BillNo',
     'TotalBillAmount',
-
   ];
   dataSource2 = new MatTableDataSource<ApiMaster>();
 
 
 
   displayedColumns3 = [
-    // 'Servicename',
-    // 'TotalAmount',
-
-
     'Servicename',
     'TotalAmount',
 
@@ -157,10 +142,10 @@ export class PatientScreenBillDetailComponent implements OnInit {
   displayedColumns4 = [
     'Servicename',
     'TotalAmount',
-    'ExtBillDetail',
     'IndServiceId',
     'IndServiceName',
     'IndServiceAmount',
+    'ExtBillDetail',
     'action'
   ];
   dataSource4 = new MatTableDataSource<ApiMaster>();
@@ -170,10 +155,10 @@ export class PatientScreenBillDetailComponent implements OnInit {
     'date',
     'BillNo',
     'NetPayableAmt',
-    'ExtBillData',
     'indBillNo',
     'indBillAmount',
     'IndBillDate',
+    'ExtBillData',
     'action'
   ];
   dataSource5 = new MatTableDataSource<ApiMaster>();
@@ -521,22 +506,16 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
   EditBilldetail(row) {
-    console.log(row)
-
     let submissionObj1= {};
     let updateAddChargesintegration = {};
     updateAddChargesintegration['chargesId'] = row.ChargesId,
-      updateAddChargesintegration['indBillId'] = this.VserviceBillId,
-      updateAddChargesintegration['indChargeId'] = this.vExtServiceId,
-      updateAddChargesintegration['indServiceId'] = this.vExtServiceId,
-      updateAddChargesintegration['indServiceName'] = this.vExtServicename;
+    updateAddChargesintegration['indBillId'] = this.VserviceBillId,
+    updateAddChargesintegration['indChargeId'] = this.vExtServiceId,
+    updateAddChargesintegration['indServiceId'] = this.vExtServiceId,
+    updateAddChargesintegration['indServiceName'] = this.vExtServicename;
     updateAddChargesintegration['indServiceAmount'] = this.vExtServiceAmount;
 
-
     submissionObj1['update_AddCharges_integration'] = updateAddChargesintegration;
-    // var Data = {
-    //   "update_AddCharges_integration": updateAddChargesintegration
-    // };
 
     console.log(submissionObj1)
     this._AppointmentService.InvoiceBillAddchargesInteration(submissionObj1).subscribe(response => {
