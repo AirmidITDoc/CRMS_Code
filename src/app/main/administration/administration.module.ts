@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CaseIdDetailComponent } from '../dashboard/case-id-detail/case-id-detail.component';
+import { NewCreateuserComponent } from './new-createuser/new-createuser.component';
+import { RolemasterComponent } from './rolemaster/rolemaster.component';
 
 
 
 const appRoutes: Routes = [
   {
       path: "createuser",
-      loadChildren: () => import("./create-user/create-user.module").then((m) => m.CreateUserModule),
+      loadChildren: () => import("./new-createuser/createuser.module").then((m) => m.CreateuserModule),
   },
   {
     path: "configuration",
@@ -22,7 +24,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [NewCreateuserComponent, RolemasterComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(appRoutes),
