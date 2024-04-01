@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -6,12 +6,15 @@ import { FuseConfirmDialogComponent } from '@fuse/components/confirm-dialog/conf
 import { RolemasterService } from './rolemaster.service';
 import { MatSort } from '@angular/material/sort';
 import { RolePermissionComponent } from './role-permission/role-permission.component';
+import { fuseAnimations } from '@fuse/animations';
 // import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-rolemaster',
   templateUrl: './rolemaster.component.html',
-  styleUrls: ['./rolemaster.component.scss']
+  styleUrls: ['./rolemaster.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class RolemasterComponent implements OnInit {
 

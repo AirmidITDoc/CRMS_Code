@@ -109,14 +109,14 @@
                     <mat-label>Birth date</mat-label>
                     <input name="DateOfBirth" matInput [matDatepicker]="picker" formControllName="DateOfBirth"
                       (dateChange)="onChangeDateofBirth($event.value)" [value]="registerObj.DateofBirth"
-                      [readonly]="true">
+                      [readonly]="true" required>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                    <!-- <mat-error
+                    <mat-error
                           *ngIf="personalFormGroup.get('DateOfBirth').invalid && personalFormGroup.get('DateOfBirth').touched">
                           <span *ngIf="personalFormGroup.get('DateOfBirth').hasError('required')">
                             Required field cannot be left blank </span>
-                        </mat-error> -->
+                        </mat-error>
                   </mat-form-field>
   
   
@@ -258,7 +258,7 @@
                         </mat-error> -->
                   </mat-form-field>
   
-                  <mat-form-field appearance="outline" fxFlex>
+                  <!-- <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Mobile Number</mat-label>
                     <input name="MobileNo" formControlName="MobileNo" placeholder="Mobile Number" matInput required
                       [(ngModel)]="registerObj.MobileNo" minlength="10" maxlength="10" required="required" type="number"
@@ -267,9 +267,19 @@
                       *ngIf="personalFormGroup.get('MobileNo').invalid && personalFormGroup.get('MobileNo').touched">10
                       digits Mobile number is
                       required</mat-error>
-                  </mat-form-field>
+                  </mat-form-field> -->
 
-  
+                  <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Mobile Number</mat-label>
+                    <input name="MobileNo" formControlName="MobileNo" placeholder="Mobile Number" matInput required
+                      [(ngModel)]="registerObj.MobileNo"
+                      oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1').slice(0, 10);"
+                      required="required" type="number" value="9876658688">
+                    <mat-error class="error"
+                      *ngIf="personalFormGroup.get('MobileNo').invalid && personalFormGroup.get('MobileNo').touched">10
+                      digits Mobile number is
+                      required</mat-error>
+                  </mat-form-field>
                
                 </div>
   

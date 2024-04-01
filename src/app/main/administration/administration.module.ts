@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CaseIdDetailComponent } from '../dashboard/case-id-detail/case-id-detail.component';
-import { NewCreateuserComponent } from './new-createuser/new-createuser.component';
-import { RolemasterComponent } from './rolemaster/rolemaster.component';
 
 
 
@@ -18,13 +16,13 @@ const appRoutes: Routes = [
   },
   {
     path: "roletemplatemaster",
-   loadChildren: () => import("./role-template/role-template.module").then((m) => m.RoleTemplateModule),
+   loadChildren: () => import("./rolemaster/rolemaster.module").then((m) => m.RolemasterModule),
   },
  
 ];
 
 @NgModule({
-  declarations: [NewCreateuserComponent, RolemasterComponent],
+  declarations: [],
   imports: [
     CommonModule,
     RouterModule.forChild(appRoutes),

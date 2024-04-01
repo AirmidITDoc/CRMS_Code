@@ -313,7 +313,7 @@ export class NewAppointmentComponent implements OnInit {
       ]],
       GenderId: '',
       Address: '',
-      DateOfBirth:[{ value: this.registerObj.DateofBirth }],
+      DateOfBirth:[ Validators.required,{ value: this.registerObj.DateofBirth }],
       AgeYear: ['', [
         Validators.required,
         Validators.pattern("^[0-9]*$")]],
@@ -325,10 +325,8 @@ export class NewAppointmentComponent implements OnInit {
         Validators.minLength(10),
         Validators.maxLength(10),
       ]],
-      MobileNo: ['', [Validators.required,
-        Validators.pattern("^((\\+91-?)|0)?[7-9]{1}[0-9]{9}$"),
-      Validators.minLength(10),
-      Validators.maxLength(10),]], 
+    
+      MobileNo: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       AadharCardNo: ['', [
         Validators.required,
         Validators.minLength(12),

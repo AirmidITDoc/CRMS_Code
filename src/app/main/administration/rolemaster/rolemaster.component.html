@@ -41,11 +41,17 @@
                                         </button>
                                     </mat-form-field>
                                     <div class="search">
-                                        <button class="btn btn-primary-outline btn-with-icon btn-xs"
+                                        <!-- <button class="btn btn-primary-outline btn-with-icon btn-xs"
                                             (click)="onSearch()" fxLayoutAlign="center center">
                                             <span class="btn-icon"><mat-icon>search</mat-icon></span>
                                             <span>Search</span>
+                                        </button> -->
+
+                                        <button (click)="onSearch()" matTooltip="search"
+                                            style="margin-left: 20px;">
+                                            <mat-icon class="searchiconbutton">search</mat-icon>
                                         </button>
+
                                     </div>
                                 </div>
                             </form>
@@ -126,7 +132,7 @@
                         </div>
                     </div>
 
-                    <div fxFlex.gt-sm="35%" fxFlex style="background-color: white">
+                    <div fxFlex.gt-sm="35%" fxFlex style="background-color: white" >
                         <div fxlayout="row">
                             <div class="dialog-content-wrapper">
                                 <div mat-dialog-content class="role-search-form">
@@ -149,7 +155,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div mat-dialog-actions class="" fxLayout="row" fxLayoutAlign="end center" clas="mt-12">
+                                <!-- <div mat-dialog-actions class="" fxLayout="row" fxLayoutAlign="end center" clas="mt-12">
                                     <div class="button-row-group">
                                         <button class="btn btn-primary" type="submit" (click)="onSubmit()"
                                             [disabled]="_RoleService.myform.invalid">
@@ -159,7 +165,21 @@
                                             Clear
                                         </button>
                                     </div>
-                                </div>
+                                </div> -->
+
+
+                                <div style="float: right;">
+
+                                    <button class="next-btn" color="accent" (click)="onSubmit()" style="border-radius: 16px;"  [disabled]="_RoleService.myform.invalid">
+                                      <span style="display: flex;justify-content: center;">
+                                        <!-- <mat-spinner *ngIf="isLoading=='submit'" [color]="white" [diameter]="20"></mat-spinner> -->
+                                        <span style="margin-left: 6px;">Save</span>
+                                      </span>
+                                    </button>
+                      
+                                    <button class="footer-btn" (click)="onClear()">Cancel</button>
+                                    &nbsp;
+                                  </div>
                             </div>
                         </div>
                     </div>

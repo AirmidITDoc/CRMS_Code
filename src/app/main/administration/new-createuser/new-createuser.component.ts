@@ -11,6 +11,7 @@ import { AdministrationService } from '../administration.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { RolemasterComponent } from '../rolemaster/rolemaster.component';
+import { NewUserdetailsComponent } from './new-userdetails/new-userdetails.component';
 
 @Component({
   selector: 'app-new-createuser',
@@ -157,18 +158,18 @@ export class NewCreateuserComponent implements OnInit {
   //   });
   // }
 
-  // addUserDetails() {
-  //   const dialogRef = this._matDialog.open(UserDetailComponent,
-  //     {
-  //       maxWidth: "85vw",
-  //       height: "auto",
-  //       width: '100%',
-  //     });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed - Insert Action', result);
-  //     // this.getAdmittedPatientList();
-  //   });
-  // }
+  addUserDetails() {
+    const dialogRef = this._matDialog.open(NewUserdetailsComponent,
+      {
+        maxWidth: "85vw",
+        height: "auto",
+        width: '100%',
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed - Insert Action', result);
+      // this.getAdmittedPatientList();
+    });
+  }
 
   onShow(event: MouseEvent) {
     this.click = !this.click;

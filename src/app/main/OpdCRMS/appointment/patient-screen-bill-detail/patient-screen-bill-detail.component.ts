@@ -25,6 +25,7 @@ interface billResult {
   PBillNo: string;
   Amount: any;
   TotalAmount: any;
+  Servicename: any;
 }
 
 
@@ -257,7 +258,6 @@ export class PatientScreenBillDetailComponent implements OnInit {
     this.vBillNo = Param.BillNo;
     this.vBillId = Param.BillId;
 
-
     this.sIsLoading = 'loading-data';
     var D_data = {
       "BillNo": Param.BillNo
@@ -266,7 +266,13 @@ export class PatientScreenBillDetailComponent implements OnInit {
       this.sIsLoading = 'loading-data';
       this._AppointmentService.getMainBillDetData(D_data).subscribe(Visit => {
         this.dataSource4.data = Visit as ApiMaster[];
+        // if (this.dataSource4.data.length > 0) {
+        //   this.dataSource4.data.forEach(element => {
 
+        //     this.billdetailresults.push(element)
+        //   });
+
+        // }
         console.log(this.dataSource4.data)
         this.sIsLoading = '';
       },
@@ -367,11 +373,11 @@ export class PatientScreenBillDetailComponent implements OnInit {
   // Newtest?
   getExtBilldetail(contact) {
 
-
+debugger
     this.billdetailresults = []
     this.sIsLoading = 'loading-data';
     var D_data = {
-      "BillId": contact.BillId
+      "BillId": contact
     };
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
@@ -445,7 +451,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
         this.vExtBillDate = element.date
       }
     });
-    // this.getExtBilldetail(result);
+    this.getExtBilldetail(result);
   }
 
 
