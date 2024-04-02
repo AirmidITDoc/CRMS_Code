@@ -11,13 +11,8 @@ import { AdministrationService } from '../administration.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AdvanceDataStored } from 'app/main/OpdCRMS/advance';
 import { NotificationServiceService } from 'app/core/notification-service.service';
-// import { PasswordChangeComponent } from '../password-change/password-change.component';
 import { MyprofileComponent } from '../myprofile/myprofile.component';
-import { UserDetailComponent } from '../user-detail/user-detail.component';
 import { fuseAnimations } from '@fuse/animations';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import { RoleTemplateComponent } from '../role-template/role-template.component';
-// import { ChangePasswordComponent } from '../change-password/change-password.component';
 
 @Component({
   selector: 'app-create-user',
@@ -122,32 +117,32 @@ export class CreateUserComponent implements OnInit {
     // });
   } 
 
-  ChangePassword(){
+  // ChangePassword(){
     
-    const dialogRef = this._matDialog.open(ChangePasswordComponent, 
-      {  maxWidth: "40vw",
-      maxHeight: "50vh", width: '100%', height: "100%"
-    });
+  //   const dialogRef = this._matDialog.open(ChangePasswordComponent, 
+  //     {  maxWidth: "40vw",
+  //     maxHeight: "50vh", width: '100%', height: "100%"
+  //   });
     
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed - Insert Action', result);
-      // this.getDoctorMasterList();
-    });
-  }
-  toggleSidebar(name): void {
-    this._fuseSidebarService.getSidebar(name).toggleOpen();
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed - Insert Action', result);
+  //     // this.getDoctorMasterList();
+  //   });
+  // }
+  // toggleSidebar(name): void {
+  //   this._fuseSidebarService.getSidebar(name).toggleOpen();
+  // }
 
-  RoleTemp() {
-    const dialogRef = this._matDialog.open(RoleTemplateComponent,
-      {
-        maxWidth: "80vw",
-        maxHeight: "300vh", width: '100%', height: "100%"
-      });
-    dialogRef.afterClosed().subscribe(result => {
+  // RoleTemp() {
+  //   const dialogRef = this._matDialog.open(RoleTemplateComponent,
+  //     {
+  //       maxWidth: "80vw",
+  //       maxHeight: "300vh", width: '100%', height: "100%"
+  //     });
+  //   dialogRef.afterClosed().subscribe(result => {
       
-    });
-  }
+  //   });
+  // }
 
 
 
@@ -252,20 +247,20 @@ export class CreateUserComponent implements OnInit {
   //   // });
   // }
 
-  addUserDetails() {
-    const dialogRef = this._matDialog.open(UserDetailComponent,
-      {
-        maxWidth: "75vw",
-        // maxHeight: "95vh", 
-        height: "60vh",
-        width: '100%',
-        // height: "100%"
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed - Insert Action', result);
-      // this.getAdmittedPatientList();
-    });
-  }
+  // addUserDetails() {
+  //   const dialogRef = this._matDialog.open(UserDetailComponent,
+  //     {
+  //       maxWidth: "75vw",
+  //       // maxHeight: "95vh", 
+  //       height: "60vh",
+  //       width: '100%',
+  //       // height: "100%"
+  //     });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed - Insert Action', result);
+  //     // this.getAdmittedPatientList();
+  //   });
+  // }
 
  
 

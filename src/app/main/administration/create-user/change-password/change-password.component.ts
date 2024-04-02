@@ -21,6 +21,8 @@ export class ChangePasswordComponent implements OnInit {
   lname: String;
   Uname: String;
   changePasswordFormGroup: FormGroup;
+
+  
   hide = true;
 
 

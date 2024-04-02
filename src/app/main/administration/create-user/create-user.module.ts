@@ -36,7 +36,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { CreateUserService } from './create-user.service';
 import { MyprofileComponent } from '../myprofile/myprofile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { UserDetailComponent } from '../user-detail/user-detail.component';
+// import { UserDetailComponent } from '../user-detail/user-detail.component';
 
 const routes: Routes = [
   {
@@ -48,7 +48,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [CreateUserComponent,
     MyprofileComponent,
-    UserDetailComponent,
+    // UserDetailComponent,
     ChangePasswordComponent],
   imports: [
     RouterModule.forChild(routes),

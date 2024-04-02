@@ -32,8 +32,6 @@ import { SharedModule } from 'app/main/shared/shared.module';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MyprofileComponent } from '../myprofile/myprofile.component';
-import { UserDetailComponent } from '../user-detail/user-detail.component';
 import { ConfigrationComponent } from './configration.component';
 import { NewConfigrationComponent } from './new-configration/new-configration.component';
 

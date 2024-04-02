@@ -132,7 +132,7 @@ export class CasedetailService {
   }
    //company Combobox List
    public getCompanyCombo() {
-    return this._httpClient.post("Generic/GetByProc?procName=Retrieve_CompanyDetailsForCombo", {})
+    return this._httpClient.post("Generic/GetByProc?procName=Retrieve_SponserInformationForCombo", {})
   }
 
   public getStudyInformationList(Params){
