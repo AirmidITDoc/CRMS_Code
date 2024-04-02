@@ -307,14 +307,10 @@
           </div>
 
           <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;">
-
-
             <div style="float: right;margin-top: 20px;">
-              <mat-slide-toggle name="IsCharity" (change)="onChangeIsactive($event)" checked formControlName="IsCharity"
+              <!-- <mat-slide-toggle name="IsCharity" (change)="onChangeIsactive($event)" checked formControlName="IsCharity"
                 style="padding-right: 10px;">
-                IsCharity</mat-slide-toggle>
-
-
+                IsCharity</mat-slide-toggle> -->
               <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()"
                 [disabled]="_registerService.personalFormGroup.invalid">Update</button>
 

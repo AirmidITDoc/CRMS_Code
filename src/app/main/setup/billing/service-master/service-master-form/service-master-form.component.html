@@ -140,7 +140,7 @@
     <div class="center p-24 pb-24" fusePerfectScrollbar>
         <!-- CONTENT -->
         <div class="content-card">
-            <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
+            <!-- <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
 
                 <div fxFlex.gt-sm="50%">
                     <div style="width: 70%;">
@@ -165,18 +165,6 @@
                                 </mat-cell>
                             </ng-container>
 
-                            <!-- <ng-container matColumnDef="ClassRate">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
-                                    ClassRate
-                                </mat-header-cell>
-                                <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                    <mat-form-field appearance="legacy">
-                                        <input matInput [(ngModel)]="contact.ClassRate">
-                                         {{contact.ClassRate}}
-                                    </mat-form-field> 
-                                </mat-cell>
-                            </ng-container> -->
-
                             <ng-container matColumnDef="ChangeClassRate">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
                                     ChangeClassRate
@@ -188,8 +176,6 @@
                                 </mat-cell>
 
                             </ng-container>
-
-
 
                             <ng-container matColumnDef="loading">
                                 <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
@@ -223,12 +209,6 @@
                 <div flex="30%">
                     <div fxFlexFill fxLayout="column" fxLayout.gt-xs="column">
                         &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                        <!-- <div class="example-div">
-                            <mat-checkbox class="example-margin" name="IsDocEditable" (change)="onChange($event)"
-                                formControlName="IsDocEditable" [(ngModel)]="registerObj.IsDocEditable" value='true'>
-                                Is Doc Editable For Service</mat-checkbox>
-                        </div> -->
-
                         <div class="example-div">
                             <mat-checkbox class="example-margin" name="IsDocEditable" formControlName="IsDocEditable"
                                 (change)="onEnableDoctorCheckboxChange($event)">
@@ -246,7 +226,6 @@
                                     <mat-option *ngFor="let element of filteredDoctor | async" [value]="element">
                                         {{element.DoctorName}}
                                     </mat-option>
-                                    <!-- <mat-hint>Plz Select Doctor Name</mat-hint> -->
 
                                 </mat-select>
                             </mat-form-field>
@@ -304,11 +283,6 @@
                                 [checked]='registerObj.IsPathology' style="margin-left: 20px;">
                                 IsPathology</mat-checkbox>
                         </div>
-                        <!-- &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                        <div class="example-div">
-                           
-                        </div> -->
-
                         <div class="example-div" style="padding-top: 15px;">
 
                             <mat-checkbox class="example-margin" name="IsActive" formControlName="IsActive" value='1'
@@ -321,11 +295,6 @@
                                     formControllName="EffectiveDate" [value]="Today">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
-                                <!-- <mat-error
-                                          *ngIf="personalFormGroup.get('DateOfBirth').invalid && personalFormGroup.get('DateOfBirth').touched">
-                                          <span *ngIf="personalFormGroup.get('DateOfBirth').hasError('required')">
-                                            Required field cannot be left blank </span>
-                                        </mat-error> -->
                             </mat-form-field>
                         </div>
 
@@ -335,7 +304,7 @@
 
 
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <!-- 

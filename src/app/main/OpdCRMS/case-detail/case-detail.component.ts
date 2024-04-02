@@ -84,17 +84,14 @@ export class CaseDetailComponent implements OnInit {
   ngOnInit(): void {
 
     if (this._ActRoute.url == '/opd/registration') {
-      this.menuActions.push('Update All Study Detail');
-      this.menuActions.push('Update Study Detail');
-      this.menuActions.push('Update Study Schdule');
-      this.menuActions.push('Study Services');
+      // this.menuActions.push('Update All Study Detail');
+      this.menuActions.push('Update Study Information');
+      this.menuActions.push('Add / Update Study Schedule');
+      this.menuActions.push('Add / Update Study Services');
       this.menuActions.push('Upload Document');
         }
-
-
     // this.getCaseList();
     this.getCasecombo();
-
   }
 
   getCasecombo() {
@@ -185,7 +182,7 @@ export class CaseDetailComponent implements OnInit {
         this.sIsLoading = '';
 
       }
-    }else if (m == "Update Study Detail") {
+    }else if (m == "Update Study Information") {
       var m_data = {
       StudyId:contact.StudyId,
       ProtocolNo:contact.ProtocolNo,
@@ -225,7 +222,7 @@ export class CaseDetailComponent implements OnInit {
         this.sIsLoading = '';
 
       }
-    }else if (m == "Update Study Schdule") {
+    }else if (m == "Add / Update Study Schedule") {
       var m_data = {
         StudyId:contact.StudyId,
       ProtocolNo:contact.ProtocolNo,
@@ -305,7 +302,7 @@ export class CaseDetailComponent implements OnInit {
         this.sIsLoading = '';
 
       }
-    }else if (m == "Study Services") {
+    }else if (m == "Add / Update Study Services") {
       var m_data = {
       StudyId:contact.StudyId,
       ProtocolNo:contact.ProtocolNo,

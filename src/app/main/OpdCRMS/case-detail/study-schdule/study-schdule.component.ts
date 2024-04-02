@@ -57,8 +57,8 @@ export class StudySchduleComponent implements OnInit {
 
   displayedColumns = [
     'VisitName',
-    'VisitDescription',
-    'Amount',
+    // 'VisitDescription',
+    // 'Amount',
     'VisitFrequency',
     'VisitStartsFrom',
     'action'
@@ -165,7 +165,7 @@ console.log(s)
       {
         VisitName: this.VisitName,
         VisitDescription: this.VisitName,
-        Amount: this.Amount,
+        Amount:  this.Amount || 0,
         VisitFrequency: this.b_VisitFrequency,
         VisitStartsFrom: this.b_VisitStartsFrom.Name,
         // ConstantId:this._CasedetailService.myStudyScheduleform.get('VisitStartsFrom').value.ConstantId

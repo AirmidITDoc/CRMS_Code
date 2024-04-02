@@ -65,7 +65,7 @@
                                                     
 
                       
-                                                    <mat-form-field appearance="outline" style="width:20%;">
+                                                    <!-- <mat-form-field appearance="outline" style="width:20%;">
                                                         <mat-label>Amount</mat-label>
                                                         <input name="Amount" formControlName="Amount"
                                                             placeholder="Amount" matInput required
@@ -73,7 +73,7 @@
                                                         <mat-error class="error"
                                                             *ngIf="_CasedetailService.studySchFormGroup.get('Amount').invalid && _CasedetailService.studySchFormGroup.get('Amount').touched">
                                                             Amount not 0</mat-error>
-                                                    </mat-form-field>
+                                                    </mat-form-field> -->
 
 
                                                     <div matTooltip="Select Member name to enable this button!!"
@@ -96,7 +96,7 @@
                         </div>
 
                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
-                            <div fxFlex.gt-sm="65%" fxFlex>
+                            <div fxFlex.gt-sm="70%" fxFlex>
                                 <div fxLayout="row" style="width: 100%;">
                                     <div fxFlex="100" fxFlex.gt-sm="100" fxLayout="row" fxLayout.gt-xs="column"
                                         style="width:100%; ;margin-left: 1px; margin-right: 5px; margin-top: 7px;margin-left: 7px;">
@@ -120,7 +120,7 @@
                                                         </mat-cell>
                                                     </ng-container>
 
-                                                    <ng-container matColumnDef="VisitDescription">
+                                                    <!-- <ng-container matColumnDef="VisitDescription">
                                                         <mat-header-cell *matHeaderCellDef mat-sort-header
                                                             fxShow.gt-sm>
                                                             Visit Description
@@ -128,7 +128,7 @@
                                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                                             {{contact.VisitDescription}}
                                                         </mat-cell>
-                                                    </ng-container>
+                                                    </ng-container> -->
 
                                                     <ng-container matColumnDef="VisitFrequency">
                                                         <mat-header-cell *matHeaderCellDef mat-sort-header
@@ -150,7 +150,7 @@
                                                         </mat-cell>
                                                     </ng-container>
 
-                                                    <ng-container matColumnDef="Amount">
+                                                    <!-- <ng-container matColumnDef="Amount">
                                                         <mat-header-cell *matHeaderCellDef mat-sort-header
                                                             fxShow.gt-sm>
                                                             Amount
@@ -158,7 +158,7 @@
                                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                                             {{contact.Amount}}
                                                         </mat-cell>
-                                                    </ng-container>
+                                                    </ng-container> -->
 
                                                     <ng-container matColumnDef="action" stickyEnd>
                                                         <mat-header-cell *matHeaderCellDef style="color: white;">
@@ -212,7 +212,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div fxFlex.gt-sm="35%" fxFlex style="background-color: white">
+                            <div fxFlex.gt-sm="30%" fxFlex style="background-color: white">
                                 <div fxlayout="row">
                                     <div class="dialog-content-wrapper">
                                         <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>

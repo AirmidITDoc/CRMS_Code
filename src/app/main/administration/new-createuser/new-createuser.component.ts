@@ -9,7 +9,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { AdvanceDataStored } from 'app/main/OpdCRMS/advance';
 import { AdministrationService } from '../administration.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
-import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { RolemasterComponent } from '../rolemaster/rolemaster.component';
 import { NewUserdetailsComponent } from './new-userdetails/new-userdetails.component';
 
@@ -84,18 +83,18 @@ export class NewCreateuserComponent implements OnInit {
     this._UserService.populateForm(m_data);
   }
 
-  ChangePassword() {
-    const dialogRef = this._matDialog.open(ChangepasswordComponent,
-      {
-        maxWidth: "40vw",
-        maxHeight: "50vh", width: '100%', height: "100%"
-      });
+  // ChangePassword() {
+  //   const dialogRef = this._matDialog.open(ChangepasswordComponent,
+  //     {
+  //       maxWidth: "40vw",
+  //       maxHeight: "50vh", width: '100%', height: "100%"
+  //     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed - Insert Action', result);
-      // this.getDoctorMasterList();
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed - Insert Action', result);
+  //     // this.getDoctorMasterList();
+  //   });
+  // }
   toggleSidebar(name): void {
     this._fuseSidebarService.getSidebar(name).toggleOpen();
   }

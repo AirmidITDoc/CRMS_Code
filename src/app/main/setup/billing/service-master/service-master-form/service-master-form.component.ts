@@ -402,11 +402,11 @@ export class ServiceMasterFormComponent implements OnInit {
 
       serviceMasterInsert['IsPackage'] = parseInt(this._serviceMasterService.myform.get("IsPackage").value) || 0;
       serviceMasterInsert['SubGroupId'] = 1;
-      serviceMasterInsert['DoctorId'] = this._serviceMasterService.myform.get("DoctorID").value.DoctorId || 0;
-      serviceMasterInsert['IsEmergency'] = Boolean(JSON.parse(this._serviceMasterService.myform.get("IsEmergency").value)) || 0;
-      serviceMasterInsert['EmgAmt'] = this._serviceMasterService.myform.get("EmgAmt").value || 0;
+      serviceMasterInsert['DoctorId'] = 0 ; // this._serviceMasterService.myform.get("DoctorID").value.DoctorId || 0;
+      serviceMasterInsert['IsEmergency'] = 0 ; //Boolean(JSON.parse(this._serviceMasterService.myform.get("IsEmergency").value)) || 0;
+      serviceMasterInsert['EmgAmt'] =  0; //this._serviceMasterService.myform.get("EmgAmt").value || 0;
 
-      serviceMasterInsert['EmgPer'] = this._serviceMasterService.myform.get("EmgPer").value || 0;
+      serviceMasterInsert['EmgPer'] = 0 ; //this._serviceMasterService.myform.get("EmgPer").value || 0;
       serviceMasterInsert['IsDocEditable'] = Boolean(JSON.parse(this._serviceMasterService.myform.get("IsDocEditable").value)) || 0;
       serviceMasterInsert['serviceId'] = 0;
 
@@ -422,8 +422,8 @@ export class ServiceMasterFormComponent implements OnInit {
         serviceDetailInsert['ServiceId'] = 0;
         serviceDetailInsert['TariffId'] = this._serviceMasterService.myform.get("TariffId").value.TariffId || 0;
         serviceDetailInsert['ClassId'] = element.ClassId || 0;
-        serviceDetailInsert['ClassRate'] = element.ClassRate || '';
-        serviceDetailInsert['EffectiveDate'] = this._serviceMasterService.myform.get("EffectiveDate").value.value || "01/01/1900";
+        serviceDetailInsert['ClassRate'] = element.ClassRate || 0;
+        serviceDetailInsert['EffectiveDate'] = this._serviceMasterService.myform.get("EffectiveDate").value || "01/01/1900";
 
         serviceDetailInsertarray.push(serviceDetailInsert);
         // console.log(InsertAdddetArr.length);
@@ -463,7 +463,7 @@ export class ServiceMasterFormComponent implements OnInit {
 
       serviceMasterUpdate['IsPackage'] = parseInt(this._serviceMasterService.myform.get("IsPackage").value) || 0;
       serviceMasterUpdate['SubGroupId'] = 1;
-      serviceMasterUpdate['DoctorId'] = this._serviceMasterService.myform.get("DoctorID").value.DoctorId || 0;
+      serviceMasterUpdate['DoctorId'] = 0 ; //this._serviceMasterService.myform.get("DoctorID").value.DoctorId || 0;
       serviceMasterUpdate['IsEmergency'] = Boolean(JSON.parse(this._serviceMasterService.myform.get("IsEmergency").value)) || 0;
       serviceMasterUpdate['EmgAmt'] = this._serviceMasterService.myform.get("EmgAmt").value || 0;
 
@@ -481,9 +481,9 @@ export class ServiceMasterFormComponent implements OnInit {
 
         serviceDetailInsert1['ServiceId'] = 0;
         serviceDetailInsert1['TariffId'] = this._serviceMasterService.myform.get("TariffId").value.TariffId || 0;
-        serviceDetailInsert1['ClassId'] = element.ClassId;
-        serviceDetailInsert1['ClassRate'] = element.ClassRate;
-        serviceDetailInsert1['EffectiveDate'] = this._serviceMasterService.myform.get("EffectiveDate").value.value || "01/01/1900";
+        serviceDetailInsert1['ClassId'] = element.ClassId || 0;
+        serviceDetailInsert1['ClassRate'] = element.ClassRate || 0;
+        serviceDetailInsert1['EffectiveDate'] = this._serviceMasterService.myform.get("EffectiveDate").value || "01/01/1900";
 
         serviceDetailInsert.push(serviceDetailInsert1);
         // console.log(InsertAdddetArr.length);

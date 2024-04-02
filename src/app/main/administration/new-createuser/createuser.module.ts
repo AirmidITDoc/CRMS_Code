@@ -36,9 +36,6 @@ import { UserDetailComponent } from '../user-detail/user-detail.component';
 import { MyprofileComponent } from '../myprofile/myprofile.component';
 import { NewUserdetailsComponent } from './new-userdetails/new-userdetails.component';
 import { NewCreateuserComponent } from './new-createuser.component';
-import { ChangepasswordComponent } from './changepassword/changepassword.component';
-
-
 
 const routes: Routes = [
   {
@@ -48,7 +45,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [NewCreateuserComponent, NewUserdetailsComponent,ChangepasswordComponent],
+  declarations: [NewCreateuserComponent, NewUserdetailsComponent],
   imports: [
     RouterModule.forChild(routes),
     MatButtonModule,
