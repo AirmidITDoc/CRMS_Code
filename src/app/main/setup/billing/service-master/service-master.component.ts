@@ -7,6 +7,7 @@ import { ServiceMasterService } from "./service-master.service";
 import { MatDialog } from "@angular/material/dialog";
 import { ServiceMasterFormComponent } from "./service-master-form/service-master-form.component";
 import Swal from "sweetalert2";
+import { log } from "console";
 
 @Component({
     selector: "app-service-master",
@@ -59,12 +60,14 @@ export class ServiceMasterComponent implements OnInit {
     getServiceMasterList() {
         var m={
             "ServiceName":this._serviceMasterService.myformSearch.get('ServiceNameSearch').value + '%' || '%',       
-            "TariffId":1
+            "TariffId": 1
         };
+        console.log(m);
         this._serviceMasterService.getServiceMasterList(m).subscribe(
             (Menu) => {
                 this.DSServiceMasterList.data = Menu as ServiceMaster[];
                 this.isLoading = false;
+                console.log(this.DSServiceMasterList.data);
                 this.DSServiceMasterList.sort = this.sort;
                 this.DSServiceMasterList.paginator = this.paginator;
             },

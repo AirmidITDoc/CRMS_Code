@@ -57,7 +57,7 @@ export class StudySchduleComponent implements OnInit {
 
   displayedColumns = [
     'VisitName',
-    // 'VisitDescription',
+    'VisitDescription',
     // 'Amount',
     'VisitFrequency',
     'VisitStartsFrom',

@@ -4,20 +4,20 @@ app-study-schdule {
     }
     .table1 {
         .mat-header-row {
-            max-width: 800px;
-            min-width: 800px;
+            max-width: 1000px;
+            min-width: 1000px;
             min-height: 30px;
         }
         .mat-row {
-            max-width: 800px;
-            min-width: 800px;
+            max-width: 1000px;
+            min-width: 1000px;
             min-height: 30px;
         }
 
         .mat-column-VisitName {
-            width: 500px;
-            max-width: 500px;
-            min-width: 500px;
+            width: 200px;
+            max-width: 200px;
+            min-width: 200px;
             text-align: left;
             white-space: nowrap;
             overflow: hidden;
@@ -33,9 +33,9 @@ app-study-schdule {
         }
 
         .mat-column-VisitDescription {
-            width: 200px;
-            max-width: 200px;
-            min-width: 200px;
+            width: 400px;
+            max-width: 400px;
+            min-width: 400px;
             text-align: left;
             white-space: nowrap;
             overflow: hidden;
