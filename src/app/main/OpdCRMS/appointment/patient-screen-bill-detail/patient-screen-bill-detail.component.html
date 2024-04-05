@@ -5,7 +5,7 @@
         <div style="width: 100%;">
             <!-- <div fxFlex> -->
             <div fxLayout="row" fxLayoutAlign="start center" class="accent"
-                style="width:100% ; height:37px;color: white;">
+                style="width:100% ; height:47px;color: white;border-radius: 3px;">
 
                 <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
                     <button mat-icon-button class="sidebar-toggle mr-12">
@@ -13,22 +13,20 @@
                     </button>
 
                     <span class="logo-text h2" [@animate]="{value:'*',params:{delay:'100ms',x:'-16px'}}"
-                        style="width: 80%;font-size: 16px;">
+                        style="width: 80%; font-size: 16px;">
                         Patient Bill Detail List || ( {{selectedAdvanceObj.RegId}} ) {{selectedAdvanceObj.PatientName}}
                         (
                         {{selectedAdvanceObj.AgeYear}}) Yrs | Dr. {{selectedAdvanceObj.Doctorname}} || RegNo.
                         {{selectedAdvanceObj.ExtRegNo}}</span>
 
-                    <div fxLayout="row" fxLayoutAlign="start center" style="float: right; margin-right: 5px;  ">
-
-
-
-                        <diV style="margin-top:21px;">
-                            <span style="margin-right: 40px;color: black;font-weight: bold;color: aliceblue;">
+                    <div fxLayout="row" fxLayoutAlign="start center" style="float: right; margin-right: 5px;">
+                        <div style="margin-top:31px;">
+                            <span style="margin-right: 40px;font-weight: bold;">
                                 <app-common-date [screenFrom]="screenFromString"
                                     (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
                             </span>
-                        </diV>&nbsp;&nbsp;
+
+                        </div>&nbsp;&nbsp;
                         <span class="material-icons" style="cursor: pointer;" (click)="onClose()">
                             close
                         </span>
@@ -36,20 +34,18 @@
                 </div>
             </div>
 
-            <mat-card-content style="width: 100%;margin-right: 5px;">
+            <mat-card-content style="width: 100%; margin-right: 5px;">
                 <div fxLayout="column">
-                    <div fxLayout="row" style="width: 100%; background-color: white;">
-
+                    <div fxLayout="row" style="width: 100%; background-color: white;border-radius: 2px;">
 
                         <div fxFlex="100" fxFlex.gt-sm="60" class="content py-16 pl-10 p-12" fxLayout="row"
                             fxLayout.gt-xs="column" fusePerfectScrollbar
-                            style=" width:100%; float: right;  border-radius:4px; background-color: white;
-                            border:rgba(0,0,0,0.12) 1px solid; float: right;  padding: 1em;margin-top: 10px;color: blue;">
-
+                            style="width:100%; float: right; border-radius:4px; background-color: white;overflow: none;
+                            border:rgba(0,0,0,0.12) 1px solid; float: right;  padding: 1em;margin-top: 10px;color: #125786;">
 
                             <div>
                                 <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
-                                    class="table1" style="overflow: auto;">
+                                    class="table1" style="overflow: hidden;">
 
                                     <ng-container matColumnDef="VisitDate">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>VisitDate
@@ -91,7 +87,6 @@
                                         </mat-cell>
                                     </ng-container>
 
-
                                     <!-- <ng-container matColumnDef="BillAmount">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>BillAmount
                                         </mat-header-cell>
@@ -115,25 +110,22 @@
                                         </mat-cell>
                                     </ng-container> -->
 
-                                    <ng-container matColumnDef="action" stickyEnd>
+                                    <ng-container matColumnDef="action">
                                         <mat-header-cell *matHeaderCellDef style="color: white;">Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
                                             <!-- disabled="Billbutton" -->
                                             <button mat-icon-button (click)="getGeneratebill(contact)"
                                                 matTooltip="Generate Auto Bill">
-                                                <mat-icon style="color: blue;">account_balance</mat-icon>
+                                                <mat-icon color="accent">account_balance</mat-icon>
                                             </button>
                                             <button mat-icon-button (click)="getPrint(contact)" matTooltip="print">
-                                                <mat-icon>print</mat-icon>
+                                                <mat-icon style="color:#125786;">print</mat-icon>
                                             </button>
-
-
                                         </mat-cell>
                                     </ng-container>
 
-
-                                    <ng-container matColumnDef="buttons" stickyEnd>
+                                    <ng-container matColumnDef="buttons">
                                         <mat-header-cell *matHeaderCellDef
                                             class="table-actions">Action</mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
@@ -153,9 +145,6 @@
                                             </div>
                                         </mat-cell>
                                     </ng-container>
-
-
-
 
                                     <ng-container matColumnDef="loading">
                                         <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
@@ -179,13 +168,13 @@
                                     <mat-footer-row *matFooterRowDef="['noData']"
                                         [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
                                 </mat-table>
-                                <mat-paginator [pageSizeOptions]="[7,14]" [pageSize]="6">
+                                <mat-paginator [pageSizeOptions]="[7,14]" [pageSize]="7">
                                 </mat-paginator>
                             </div>
 
                             <div>
                                 <mat-table #table matSort [dataSource]="dataSource5" [@animateStagger]="{value:'50'}"
-                                    class="Bill" style="overflow: auto;">
+                                    class="Bill" style="overflow: hidden;">
 
                                     <ng-container matColumnDef="date">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>VisitDate
@@ -226,7 +215,7 @@
                                             {{m.indBillAmount}}
                                         </mat-cell>
                                     </ng-container>
-                                 
+
                                     <ng-container matColumnDef="IndBillDate">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>IndBillDate
                                         </mat-header-cell>
@@ -250,8 +239,8 @@
 
                                     </ng-container>
 
-                                    <ng-container matColumnDef="action" stickyEnd>
-                                        <mat-header-cell *matHeaderCellDef style="color: white;"> Action
+                                    <ng-container matColumnDef="action">
+                                        <mat-header-cell *matHeaderCellDef style="color: white;">Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
                                             <!-- <button mat-icon-button (click)="deleteTableRow(contact)" color="warn">
@@ -285,8 +274,6 @@
                                     <mat-footer-row *matFooterRowDef="['noData']"
                                         [ngClass]="{'hide':!(dataSource5!=null && dataSource5.data.length==0)}"></mat-footer-row>
                                 </mat-table>
-                                <mat-paginator [pageSizeOptions]="[5, 10, 15,20]" [pageSize]="5">
-                                </mat-paginator>
                             </div>
                             <div>
                                 <mat-table #table matSort [dataSource]="dataSource4" [@animateStagger]="{value:'50'}"
@@ -315,8 +302,9 @@
                                             External Bill Detail
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                           
-                                            <mat-select placeholder="ServiceId" (selectionChange)="getExtBillDetailValue($event.value)">
+
+                                            <mat-select placeholder="ServiceId"
+                                                (selectionChange)="getExtBillDetailValue($event.value)">
                                                 <mat-option *ngFor="let Result of billdetailresults"
                                                     [value]="Result.Servicename">
                                                     Service{{ Result.Servicename }} | Amount {{Result.TotalAmount}}
@@ -326,7 +314,7 @@
 
                                     </ng-container>
 
-                                
+
                                     <ng-container matColumnDef="IndServiceId">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>ExtServiceId
                                         </mat-header-cell>
@@ -352,7 +340,8 @@
                                     </ng-container>
 
                                     <ng-container matColumnDef="action" stickyEnd>
-                                        <mat-header-cell *matHeaderCellDef style="color: white;">Action
+                                        <mat-header-cell *matHeaderCellDef
+                                            style="color: white;background-color:#125786;">Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
                                             <!-- disabled="Billbutton" -->
@@ -364,8 +353,6 @@
                                                 matTooltip="print">
                                                 <mat-icon>edit</mat-icon>
                                             </button>
-
-
                                         </mat-cell>
                                     </ng-container>
 
@@ -391,9 +378,6 @@
                                         </mat-cell>
                                     </ng-container> -->
 
-
-
-
                                     <ng-container matColumnDef="loading">
                                         <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
                                         </mat-header-cell>
@@ -415,8 +399,6 @@
                                     <mat-footer-row *matFooterRowDef="['noData']"
                                         [ngClass]="{'hide':!(dataSource4!=null && dataSource4.data.length==0)}"></mat-footer-row>
                                 </mat-table>
-                                <mat-paginator [pageSizeOptions]="[5, 10, 15,20]" [pageSize]="5">
-                                </mat-paginator>
                             </div>
                         </div>
                         <!-- /// -->
@@ -435,10 +417,8 @@
                                                 (keyup)="getApiVisitList()" required>
                                         </mat-form-field>
 
-
-
                                         <button (click)="getApiVisitList()" matTooltip="search"
-                                            style="margin-left: 20px;">
+                                            style="margin-left: 10px;border: #F5F5F5;">
                                             <mat-icon class="searchiconbutton">search</mat-icon>
                                         </button>
 
@@ -448,14 +428,16 @@
                                                         </button> -->
                                             <!-- [disabled]="personalFormGroup.invalid || VisitFormGroup.invalid" -->
                                             <button class="next-btn" color="accent" (click)="UpdateInvoice()"
-                                                style="border-radius: 16px;">
+                                                style="border-radius: 16px;width: 82px; height: 35px;font-size: 14px;padding-top: 8px;padding-left: 2px;">
                                                 <span style="display: flex;justify-content: center;">
                                                     <!-- <mat-spinner *ngIf="isLoading=='submit'" [color]="white" [diameter]="20"></mat-spinner> -->
                                                     <span style="margin-left: 6px;">Update</span>
                                                 </span>
                                             </button>
 
-                                            <button class="footer-btn" (click)="onClose()">Cancel</button>
+                                            <button class="footer-btn"
+                                                style="border-radius: 16px;width: 82px; height: 35px;font-size: 14px;padding-top: 8px;padding-left: 2px;"
+                                                (click)="onClose()">Cancel</button>
                                             &nbsp;
                                         </div>
 
@@ -463,11 +445,11 @@
                                 </form>
                             </div>
 
-
                             <div fxLayout="row" fxLayout.gt-xs="column" style=" width:100%; float: right;  border-radius:4px; background-color: white;overflow: auto;
-                            border:rgba(0,0,0,0.12) 1px solid;padding: 1em; margin-top: 1px;color: blue;">
+                              border:rgba(0,0,0,0.12) 1px solid;padding: 1em; margin-top: 1px;">
                                 <div>
-                                    <label style="font-size: large;font-family: serif;">Visit Detail </label>
+                                    <label style="font-size:17px;color: #125786;font-weight: 500;">Visit Detail</label>
+
                                     <mat-table #table matSort [dataSource]="dataSource1"
                                         [@animateStagger]="{value:'50'}" class="table2" style="overflow: auto;">
 
@@ -548,12 +530,8 @@
                                                     matTooltip="print">
                                                     <mat-icon>edit</mat-icon>
                                                 </button>
-
-
                                             </mat-cell>
                                         </ng-container>
-
-
 
                                         <ng-container matColumnDef="loading">
                                             <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
@@ -578,10 +556,6 @@
                                         <mat-footer-row *matFooterRowDef="['noData']"
                                             [ngClass]="{'hide':!(dataSource1!=null && dataSource1.data.length==0)}"></mat-footer-row>
                                     </mat-table>
-                                    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" [pageSize]="5">
-                                    </mat-paginator>
-
-
                                 </div>
 
                             </div>
@@ -592,7 +566,8 @@
 
                                 <div>
 
-                                    <label style="font-size: large;font-family: serif;">Bill Information </label>
+                                    <label style="font-size:17px;color: #125786;font-weight: 500;">Bill Information
+                                    </label>
                                     <mat-table #table matSort [dataSource]="dataSource2"
                                         [@animateStagger]="{value:'50'}" class="table3" style="overflow: auto;">
 
@@ -680,7 +655,8 @@
 
                                 <div>
 
-                                    <label style="font-size: large;font-family: serif;">Bill Detail Information </label>
+                                    <label style="font-size:17px;color: #125786; font-weight: 500;">Bill Detail
+                                        Information </label>
                                     <mat-table #table matSort [dataSource]="dataSource3"
                                         [@animateStagger]="{value:'50'}" class="table4" style="overflow: auto;">
 
@@ -720,9 +696,6 @@
                                             </mat-cell>
                                         </ng-container>
 
-
-
-
                                         <ng-container matColumnDef="loading">
                                             <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
                                             </mat-header-cell>
@@ -757,8 +730,6 @@
                 </div>
             </mat-card-content>
             <!-- Final bill calculation -->
-
-
         </div>
     </div>
 </div>

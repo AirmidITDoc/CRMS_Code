@@ -1,6 +1,7 @@
+
 .mat-dialog-content {
     display: block;
-    margin: 0px 0px;
+    margin: 0px 0px !important;
     // padding: 0px 5px;
     max-Height: 750px ;
     overflow: auto;
@@ -112,7 +113,6 @@
 .footer-btn:hover{
     background-color: rgb(247, 97, 97);
     color: white;
-   
 }
 
 .next-btn {
@@ -122,9 +122,8 @@
     padding: 10px;
     margin-right: 5px;
     border-radius: 16px;
-     border: 1px solid #039be5 ;
-      background-color: white;
- 
+    border: 1px solid #039be5 ;
+    background-color: white;
     cursor: pointer;
     border-radius: 20%;
 }
@@ -149,7 +148,6 @@
      border: 1px solid  #b7e6fd ;
     }
 
-
     .search-btn:hover{
      background-color:#039be5 ;
     color: white;
@@ -163,8 +161,6 @@ button:disabled {
    // border: 1px solid #CCCCCC;
    border: 1px solid  #b7e6fd ;
 }
-
-
 
 // .footer-btn {
 //    width: 80px;
