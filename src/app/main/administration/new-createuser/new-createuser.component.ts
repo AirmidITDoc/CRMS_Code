@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -11,11 +11,14 @@ import { AdministrationService } from '../administration.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { RolemasterComponent } from '../rolemaster/rolemaster.component';
 import { NewUserdetailsComponent } from './new-userdetails/new-userdetails.component';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-new-createuser',
   templateUrl: './new-createuser.component.html',
-  styleUrls: ['./new-createuser.component.scss']
+  styleUrls: ['./new-createuser.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class NewCreateuserComponent implements OnInit {
 
@@ -161,7 +164,7 @@ export class NewCreateuserComponent implements OnInit {
     const dialogRef = this._matDialog.open(NewUserdetailsComponent,
       {
         maxWidth: "85vw",
-        height: "auto",
+        height: "90vh",
         width: '100%',
       });
     dialogRef.afterClosed().subscribe(result => {

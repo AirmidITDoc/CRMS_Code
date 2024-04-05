@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AuthenticationService } from 'app/core/services/authentication.service';
@@ -6,12 +6,15 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { AdministrationService } from '../../administration.service';
 import { CreateuserService } from '../createuser.service';
+import { fuseAnimations } from '@fuse/animations';
 // import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-new-userdetails',
   templateUrl: './new-userdetails.component.html',
-  styleUrls: ['./new-userdetails.component.scss']
+  styleUrls: ['./new-userdetails.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class NewUserdetailsComponent implements OnInit {
 

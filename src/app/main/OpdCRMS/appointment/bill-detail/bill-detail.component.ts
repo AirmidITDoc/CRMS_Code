@@ -476,7 +476,12 @@ export class BillDetailComponent implements OnInit {
     InsertBillUpdateBillNoObj['CompanyId'] = 0;
     InsertBillUpdateBillNoObj['TariffId'] = this.selectedAdvanceObj.TariffId || 0;
     InsertBillUpdateBillNoObj['UnitId'] = this.selectedAdvanceObj.UnitId || 0;
-    InsertBillUpdateBillNoObj['InterimOrFinal'] = 0;
+    if(this.data.registerObj.BillStatus ==1){
+      InsertBillUpdateBillNoObj['InterimOrFinal'] = 0;
+    }else{
+      InsertBillUpdateBillNoObj['InterimOrFinal'] = 1;
+    }
+    
     InsertBillUpdateBillNoObj['CompanyRefNo'] = 0;
     InsertBillUpdateBillNoObj['ConcessionAuthorizationName'] = '';
     InsertBillUpdateBillNoObj['TaxPer'] = 0;

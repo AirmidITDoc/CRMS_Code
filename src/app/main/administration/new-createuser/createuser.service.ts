@@ -62,16 +62,16 @@ export class CreateuserService {
 //  }
 
  public getRoleCombobox() {
-   return this._httpClient.post("Generic/GetByProc?procName=ps_Retrieve_RoleTemplateForCombo", {})
+   return this._httpClient.post("Generic/GetByProc?procName=Retrieve_RoleMasterForCombo", {})
  }
 
  public getStoreCombo() {
-   return this._httpClient.post("Generic/GetByProc?procName=ps_Retrieve_StoreMasterForCombo", {})
+   return this._httpClient.post("Generic/GetByProc?procName=Retrieve_StoreNameForCombo", {})
  }
 
  
  public getDoctorMasterCombo() {
-   return this._httpClient.post("Generic/GetByProc?procName=ps_Cmb_DoctorMasterForCombo", {})
+   return this._httpClient.post("Generic/GetByProc?procName=Retrieve_DoctorMasterForCombo", {})
  }
 
   

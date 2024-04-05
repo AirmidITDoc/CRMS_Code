@@ -58,6 +58,7 @@ export class MyprofileComponent implements OnInit {
     // public _CreateUserService: CreateUserService,
     //  public datePipe: DatePipe,
     // @Inject(MAT_DIALOG_DATA) public data: any,
+    public matDialogRef: MatDialogRef<MyprofileComponent>,
      private dialogRef: MatDialogRef<MyprofileComponent>,
      public dialog: MatDialog,
     private accountService: AuthenticationService,

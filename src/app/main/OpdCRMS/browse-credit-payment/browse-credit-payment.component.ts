@@ -54,14 +54,14 @@ export class BrowseCreditPaymentComponent implements OnInit {
   isLoading = true;
 
   displayedColumns = [
-    // 'checkbox',
+    'InterExtBill',
     'BillDate',
     // 'BillNo',
     'StudyId',
     'ProtocolNo',
     'SubjectName',
-    'RegNo',
-    'PatientName',
+    // 'RegNo',
+    // 'PatientName',
     'TotalAmt',
     'DiscAmount',
     'NetPayableAmt',
@@ -108,7 +108,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
     this._BrowseOPDBillsService.getCaseIDCombo().subscribe(data => {
       this.caseList = data;
-      this.selectedcase = this.caseList[0].CaseId;
+      this.selectedcase = this.caseList[0].StudyId;
   
     });
   }
@@ -155,8 +155,9 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
   getBrowseOPDBillsList() {
     this.sIsLoading = 'loading';
+    
     var D_data = {
-      "StudyId":this._BrowseOPDBillsService.myFilterform.get("StudyId").value || 0,
+      "StudyId":this._BrowseOPDBillsService.myFilterform.get("StudyId").value.StudyId || 0,
       "F_Name": (this._BrowseOPDBillsService.myFilterform.get("FirstName").value).trim() + '%' || "%",
       "L_Name": (this._BrowseOPDBillsService.myFilterform.get("LastName").value).trim() + '%' || "%",
       "From_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
@@ -164,7 +165,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
       "Reg_No": this._BrowseOPDBillsService.myFilterform.get("RegNo").value || 0,
       "PBillNo": this._BrowseOPDBillsService.myFilterform.get("PBillNo").value || '%',
     }
-    // console.log(D_data);
+    console.log(D_data);
 
     setTimeout(() => {
       this.sIsLoading = 'loading';
