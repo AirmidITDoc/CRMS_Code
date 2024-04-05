@@ -447,8 +447,6 @@ export class BillDetailComponent implements OnInit {
   }
 
   onSaveOPBill() {
-    debugger
-
     let Billdetsarr = [];
     this.dataSource.data.forEach((element) => {
       let BillDetailsInsertObj = {};
@@ -471,7 +469,7 @@ export class BillDetailComponent implements OnInit {
     InsertBillUpdateBillNoObj['AddedBy'] = this.accountService.currentUserValue.user.id,
     InsertBillUpdateBillNoObj['TotalAdvanceAmount'] = 0,
     InsertBillUpdateBillNoObj['BillTime'] = this.dateTimeObj.time;
-    InsertBillUpdateBillNoObj['ConcessionReasonId'] = this.registeredForm.get('ConcessionId').value.ConcessionId || 0;
+    InsertBillUpdateBillNoObj['ConcessionReasonId'] = 0;
     InsertBillUpdateBillNoObj['IsSettled'] = 0;
     InsertBillUpdateBillNoObj['IsPrinted'] = 0;
     InsertBillUpdateBillNoObj['IsFree'] = 0;
@@ -495,33 +493,32 @@ export class BillDetailComponent implements OnInit {
 
       chargesDetailInsert['ChargesDate'] = this.datePipe.transform(this.currentDate, "MM-dd-yyyy"),
       chargesDetailInsert['opD_IPD_Type'] = 0,
-        chargesDetailInsert['opD_IPD_Id'] = this.data.registerObj.VisitId
+      chargesDetailInsert['opD_IPD_Id'] = this.data.registerObj.VisitId
       chargesDetailInsert['serviceId'] = element.ServiceId,
-        chargesDetailInsert['price'] = element.Price,
-        chargesDetailInsert['qty'] = element.Qty,
-        chargesDetailInsert['totalAmt'] = element.TotalAmt,
-        chargesDetailInsert['concessionPercentage'] = element.DiscPer || 0,
-        chargesDetailInsert['concessionAmount'] = element.DiscAmt || 0,
-        chargesDetailInsert['netAmount'] = element.NetAmount,
-        chargesDetailInsert['doctorId'] = element.DoctorId,// this.registeredForm.get('DoctorID').value.DoctorID;
-        chargesDetailInsert['docPercentage'] = 0,// this.registeredForm.get('DoctorId').value;
-        chargesDetailInsert['docAmt'] = 0,
-        chargesDetailInsert['hospitalAmt'] = element.NetAmount,
-        chargesDetailInsert['isGenerated'] = 0,
-        chargesDetailInsert['addedBy'] = this.accountService.currentUserValue.user.id,
-        chargesDetailInsert['isCancelled'] = 0,
-        chargesDetailInsert['isCancelledBy'] = 0,
-        chargesDetailInsert['isCancelledDate'] = "01/01/1900",
-        chargesDetailInsert['isPathology'] = 0,
-        chargesDetailInsert['isRadiology'] = 0,
-        chargesDetailInsert['isPackage'] = 0,
-        chargesDetailInsert['packageMainChargeID'] = 0,
-        chargesDetailInsert['isSelfOrCompanyService'] = false,
-        chargesDetailInsert['packageId'] = 0,
-        chargesDetailInsert['chargeTime'] = this.datePipe.transform(this.currentDate, "MM-dd-yyyy HH:mm:ss"),
-        chargesDetailInsert['classId'] = this.selectedAdvanceObj.ClassId,// this.registeredForm.get('ClassId').value;
-
-        chargesDetailInsert['BillNo'] = 0;
+      chargesDetailInsert['price'] = element.Price,
+      chargesDetailInsert['qty'] = element.Qty,
+      chargesDetailInsert['totalAmt'] = element.TotalAmt,
+      chargesDetailInsert['concessionPercentage'] = element.DiscPer || 0,
+      chargesDetailInsert['concessionAmount'] = element.DiscAmt || 0,
+      chargesDetailInsert['netAmount'] = element.NetAmount,
+      chargesDetailInsert['doctorId'] = element.DoctorId,// this.registeredForm.get('DoctorID').value.DoctorID;
+      chargesDetailInsert['docPercentage'] = 0,// this.registeredForm.get('DoctorId').value;
+      chargesDetailInsert['docAmt'] = 0,
+      chargesDetailInsert['hospitalAmt'] = element.NetAmount,
+      chargesDetailInsert['isGenerated'] = 0,
+      chargesDetailInsert['addedBy'] = this.accountService.currentUserValue.user.id,
+      chargesDetailInsert['isCancelled'] = 0,
+      chargesDetailInsert['isCancelledBy'] = 0,
+      chargesDetailInsert['isCancelledDate'] = "01/01/1900",
+      chargesDetailInsert['isPathology'] = 0,
+      chargesDetailInsert['isRadiology'] = 0,
+      chargesDetailInsert['isPackage'] = 0,
+      chargesDetailInsert['packageMainChargeID'] = 0,
+      chargesDetailInsert['isSelfOrCompanyService'] = false,
+      chargesDetailInsert['packageId'] = 0,
+      chargesDetailInsert['chargeTime'] = this.datePipe.transform(this.currentDate, "MM-dd-yyyy HH:mm:ss"),
+      chargesDetailInsert['classId'] = this.selectedAdvanceObj.ClassId,// this.registeredForm.get('ClassId').value;
+      chargesDetailInsert['BillNo'] = 0;
       chargesDetailInsert['ChargeID'] = element.ServiceId;
 
       InsertAdddetArr.push(chargesDetailInsert);
