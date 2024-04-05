@@ -1,7 +1,6 @@
 <div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
     <!-- HEADER -->
-    <mat-toolbar class="accent"
-        style="height:50px; justify-content: space-between;width: 100%;">
+    <mat-toolbar class="accent" style="height:50px; justify-content: space-between;width: 100%;">
         <!-- background-color:rgb(18, 87, 134) !important; -->
         <div fxLayout="row" fxLayoutAlign="start center">
             <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm (click)="toggleSidebar('app-main')"
@@ -16,8 +15,8 @@
                 Browse OP Bill
             </span>
         </div>
-       
-      
+
+
     </mat-toolbar>
     <!-- / HEADER -->
 
@@ -38,8 +37,7 @@
                 <div class="card">
 
                     <!-- SIDEBAR HEADER -->
-                    <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
-                        style="margin-top: 3%;">
+                    <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center" style="margin-top: 3%;">
                         <!-- USER -->
                         <!-- <img [src]="user.avatar" class="avatar mr-16" [alt]="user.name" /> -->
                         <span class="h5" style="color: aliceblue;font-size: 17px;">Search Facility</span>
@@ -63,7 +61,7 @@
                                         <mat-date-range-picker #picker></mat-date-range-picker>
                                     </mat-form-field>
 
-                                    
+
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>StudyId</mat-label>
                                         <mat-select formControlName="StudyId" name="StudyId">
@@ -74,7 +72,7 @@
                                         </mat-select>
                                     </mat-form-field>
 
-                                    
+
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Bill No</mat-label>
                                         <input name="PBillNo" formControlName="PBillNo" matInput keyup="onShow($event)">
@@ -87,12 +85,14 @@
 
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>First Name</mat-label>
-                                        <input name="FirstName" formControlName="FirstName" matInput keyup="onShow($event)">
+                                        <input name="FirstName" formControlName="FirstName" matInput
+                                            keyup="onShow($event)">
                                     </mat-form-field>
 
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Last Name</mat-label>
-                                        <input name="LastName" formControlName="LastName" matInput keyup="onShow($event)">
+                                        <input name="LastName" formControlName="LastName" matInput
+                                            keyup="onShow($event)">
                                     </mat-form-field>
 
 
@@ -145,16 +145,37 @@
                                         </mat-cell>
                                     </ng-container> -->
 
-
-                                    
-
                                     <ng-container matColumnDef="InterExtBill">
+                                        <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: white;">Final </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact">
+                                            <!-- {{contact.IsBillGenerated}}  -->
+                                            <mat-icon
+                                                style="font-size: 70px;width: 15px !important; height:10px !important;border-radius:100% ;"
+                                                *ngIf="contact.InterimOrFinal=='1'" matTooltip="External Bill"
+                                                style="background-color: #3ca9f7;">circle</mat-icon>
+                                        </mat-cell>
+                                    </ng-container>
+
+
+                                    <ng-container matColumnDef="Payment">
+                                        <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: white;">PayStatus</mat-header-cell>
+                                        <mat-cell *matCellDef="let contact">
+                                            <!-- {{contact.IsBillGenerated}}  -->
+                                            <mat-icon
+                                                style="font-size: 70px;width: 15px !important; height:15px !important;border-radius:100% ;"
+                                                *ngIf="contact.BalanceAmt > 0" matTooltip="Payment Balance"
+                                                style="background-color: #f55f5a;">circle</mat-icon>
+                                        </mat-cell>
+                                    </ng-container>
+
+
+                                    <!-- <ng-container matColumnDef="InterExtBill">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>InterExtBill
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.InterimOrFinal}}
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
 
                                     <ng-container matColumnDef="BillDate">
@@ -187,7 +208,7 @@
                                             {{contact.ProtocolNo}}
                                         </mat-cell>
                                     </ng-container>
-                                    
+
                                     <ng-container matColumnDef="SubjectName">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>SubjectName
                                         </mat-header-cell>
@@ -210,7 +231,7 @@
                                             {{contact.PatientName}}
                                         </mat-cell>
                                     </ng-container> -->
-                                   
+
 
                                     <ng-container matColumnDef="TotalAmt">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Total
@@ -276,13 +297,13 @@
                                     <mat-header-row class="accent" *matHeaderRowDef="displayedColumns; sticky: true">
                                     </mat-header-row>
                                     <mat-row *matRowDef="let contact; columns: displayedColumns;"
-                                    [ngClass]="contact.PatientType !== 'Self' ? 'self-row' : ''"
-                                    [@animate]="{value:'*',params:{y:'100%'}}">
-                                  </mat-row>
-                                  <mat-footer-row *matFooterRowDef="['loading']"
-                                    [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
-                                  <mat-footer-row *matFooterRowDef="['noData']"
-                                    [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
+                                        [ngClass]="contact.PatientType !== 'Self' ? 'self-row' : ''"
+                                        [@animate]="{value:'*',params:{y:'100%'}}">
+                                    </mat-row>
+                                    <mat-footer-row *matFooterRowDef="['loading']"
+                                        [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
+                                    <mat-footer-row *matFooterRowDef="['noData']"
+                                        [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
                                 </mat-table>
 
                                 <mat-paginator [pageSizeOptions]="[15,30, 45]" [pageSize]="15" showFirstLastButtons>

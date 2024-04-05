@@ -115,19 +115,50 @@
                                         </mat-cell>
                                     </ng-container> -->
 
+                                    <!-- <ng-container matColumnDef="Autobill">
+                                        <mat-header-cell *matHeaderCellDef fxShow.gt-sm
+                                            style="color: white;">AutoBill</mat-header-cell>
+                                        <mat-cell *matCellDef="let contact">
+                                            <mat-icon
+                                                style="font-size: 70px;width: 25px !important; height:25px !important;border-radius:100% ;"
+                                                *ngIf="contact.Isverify" matTooltip="Verified">circle</mat-icon>
+                                            <mat-icon
+                                                style="font-size: 70px;width: 25px !important; height:25px !important;border-radius:100% ;"
+                                                *ngIf="!contact.Isverify" matTooltip="Pending">circle</mat-icon>
+                                        </mat-cell>
+                                    </ng-container> -->
+
+
+                                    <!-- <ng-container matColumnDef="Autobill">
+                                        <mat-header-cell *matHeaderCellDef fxShow.gt-sm
+                                            style="color: white;">Autobill</mat-header-cell>
+                                        <mat-cell *matCellDef="let contact">
+                                            <mat-icon  *ngIf="contact.BillId==0" matTooltip="Generate Auto Bill"
+                                                (click)="getGeneratebill(contact)"
+                                                style="background-color: #3ca9f7;">account_balance</mat-icon>
+                                            <mat-icon *ngIf="contact.BillId !=0" matTooltip="Bill Generated"
+                                               style="background-color: #3ca9f7;">payment</mat-icon>
+                                        </mat-cell>
+
+                                    </ng-container> -->
+
+
                                     <ng-container matColumnDef="action" stickyEnd>
                                         <mat-header-cell *matHeaderCellDef style="color: white;">Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
                                             <!-- disabled="Billbutton" -->
                                             <button mat-icon-button (click)="getGeneratebill(contact)"
-                                                matTooltip="Generate Auto Bill">
+                                                *ngIf="contact.BillId ==0" matTooltip="Generate Auto Bill">
                                                 <mat-icon style="color: blue;">account_balance</mat-icon>
+                                            </button>
+
+                                            <button mat-icon-button *ngIf="contact.BillId !=0" matTooltip="Auto Bill Generated">
+                                                <mat-icon style="color: blue;">payment</mat-icon>
                                             </button>
                                             <button mat-icon-button (click)="getPrint(contact)" matTooltip="print">
                                                 <mat-icon>print</mat-icon>
                                             </button>
-
 
                                         </mat-cell>
                                     </ng-container>
@@ -228,7 +259,7 @@
                                             {{m.indBillAmount}}
                                         </mat-cell>
                                     </ng-container>
-                                 
+
                                     <ng-container matColumnDef="IndBillDate">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>IndBillDate
                                         </mat-header-cell>
@@ -317,8 +348,9 @@
                                             External Bill Detail
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                           
-                                            <mat-select placeholder="ServiceId" (selectionChange)="getExtBillDetailValue($event.value)">
+
+                                            <mat-select placeholder="ServiceId"
+                                                (selectionChange)="getExtBillDetailValue($event.value)">
                                                 <mat-option *ngFor="let Result of billdetailresults"
                                                     [value]="Result.Servicename">
                                                     Service{{ Result.Servicename }} | Amount {{Result.TotalAmount}}
@@ -328,7 +360,7 @@
 
                                     </ng-container>
 
-                                
+
                                     <ng-container matColumnDef="IndServiceId">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>ExtServiceId
                                         </mat-header-cell>
