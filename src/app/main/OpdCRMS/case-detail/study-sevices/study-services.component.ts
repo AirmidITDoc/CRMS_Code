@@ -45,7 +45,9 @@ export class StudyServicesComponent implements OnInit {
   ProtocolTitle="";
   VisitList: any = []
   ServiceList:any =[];
- 
+  vStudyServicesId:any=0;
+  vStudyId:any=0;
+  vServiceId:any=0;
   Study: boolean = false;
 
   
@@ -85,6 +87,7 @@ export class StudyServicesComponent implements OnInit {
 
     if (this.data) {
       this.registerObj = this.data.registerObj;
+      this.vStudyId=this.registerObj.StudyId
       this.Study = true;
     var m = {
       StudyId: this.registerObj.StudyId
@@ -228,7 +231,7 @@ export class StudyServicesComponent implements OnInit {
     this.dataSource1.data.forEach((element) => {
       let insertStudyService = {};
       insertStudyService['studyId'] = this.registerObj.StudyId;
-      insertStudyService['StudyVisitId'] = element.StudyVisitId;
+      insertStudyService['StudyVisitId'] = this.vStudyServicesId
       insertStudyService['ServiceId'] = element.ServiceId;
       insertStudyService['Amount'] = element.Amount;
       insertStudyService['isActive'] =1,//element.serviceId;
@@ -251,11 +254,43 @@ export class StudyServicesComponent implements OnInit {
       }
     });
   }
-  onUpdate(){
 
+  onUpdateService(){
+    
+    debugger
+
+      let UpdateStudyService = {};
+      UpdateStudyService['operation'] ='UPDATE_ID';
+      UpdateStudyService['studyServicesId'] =this.vServiceId;
+      UpdateStudyService['studyId'] = this.vStudyId;
+      UpdateStudyService['StudyVisitId'] = this._StudyServicesService.myStudyServiceform.get('VisitName').value.StudyVisitId;
+      UpdateStudyService['ServiceId'] =this._StudyServicesService.myStudyServiceform.get('ServiceName').value.ServiceId || 0;
+      UpdateStudyService['amount'] = parseFloat(this._StudyServicesService.myStudyServiceform.get('Amount').value) || 0;
+      UpdateStudyService['isActive'] =1,//element.serviceId;
+      UpdateStudyService['updatedBy'] = this.accountService.currentUserValue.user.id;
+      
+    // });
+
+    let submitData = {
+    
+      "updateStudyserviceId": UpdateStudyService
+    };
+    console.log(submitData)
+    this._StudyServicesService.StudyServiceUpdate(submitData).subscribe(response => {
+      if (response) {
+        Swal.fire('update StudyService  !', ' StudyService Updated Successfully !', 'success').then((result) => {
+          if (result) {
+            this._matDialog.closeAll();
+          }
+        });
+      } else {
+        Swal.fire('Error !', 'StudyService not saved', 'error');
+      }
+    });
   }
  
   onEdit(row){
+    console.log(row)
     var m_data = {
       StudyServicesId:row.StudyServicesId,
       StudyVisitId: row.StudyVisitId,
@@ -269,7 +304,9 @@ export class StudyServicesComponent implements OnInit {
 
     const toStudyService = this.ServiceList.find(c => c.ServiceId == row.ServiceId);
     this._StudyServicesService.myStudyServiceform.get('ServiceName').setValue(toStudyService);
-
+    this.vStudyServicesId=row.StudyServicesId
+    this.vServiceId= row.ServiceId
+    
   }
 
   deleteTableRow(element) {

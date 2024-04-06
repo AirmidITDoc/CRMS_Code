@@ -156,6 +156,22 @@ app-browse-credit-payment {
         text-align:left;
         justify-content: left;
     }
+    
+
+    .mat-column-InterExtBill {
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        text-align: center;
+    }
+
+    .mat-column-Payment {
+        width: 80px;
+        max-width: 80px;
+        min-width: 80px;
+        text-align: left;
+        justify-content: left;
+    }
     .mat-column-BillDate {
         width: 100px;
         max-width: 100px;

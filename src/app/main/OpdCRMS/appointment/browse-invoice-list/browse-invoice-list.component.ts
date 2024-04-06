@@ -190,7 +190,7 @@ PatientHeaderObj['BillId'] = contact.BillNo;
         height: '600px',
         width: '100%',
         data: {
-          vPatientHeaderObj: PatientHeaderObj,
+          advanceObj: PatientHeaderObj,
           FromName: "OP-Bill"
         }
       });

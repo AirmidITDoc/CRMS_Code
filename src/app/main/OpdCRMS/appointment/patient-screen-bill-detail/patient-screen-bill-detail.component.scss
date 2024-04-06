@@ -58,20 +58,47 @@
 app-patient-screen-bill-detail {
 
   .table1 {
-    height: 240px !important;
+    height: 281px !important;
+
+    .mat-header-row {
+      width: 100%;
+      max-width: 770px;
+      min-width: 770px;
+      min-height: 20px;
+      padding: 5px;
+      border-radius: 2px;
+      border-end-end-radius: 2px;
+    }
 
     .mat-column-VisitDate {
       width: 150px;
       max-width: 150px;
       min-width: 150px;
       text-align: left;
-
       justify-content: left;
     }
   }
 
   .Bill {
-    height: 200px !important;
+    height: 216px !important;
+
+    .mat-header-row {
+      width: 100%;
+      max-width: 770px;
+      min-width: 770px;
+      min-height: 20px;
+      padding: 5px;
+      border-radius: 2px;
+      border-end-end-radius: 2px;
+    }
+
+    .mat-column-InterimOrFinal {
+      width: 80px;
+      max-width: 80px;
+      min-width: 80px;
+      text-align: left;
+      justify-content: left;
+    }
 
     .mat-column-date {
       width: 120px;
@@ -82,9 +109,9 @@ app-patient-screen-bill-detail {
     }
 
     .mat-column-BillNo {
-      width: 80px;
-      max-width: 80px;
-      min-width: 80px;
+      width: 60px;
+      max-width: 60px;
+      min-width: 60px;
       text-align: left;
       justify-content: left;
     }
@@ -99,18 +126,18 @@ app-patient-screen-bill-detail {
     }
 
     .mat-column-ExtBillData {
-      width: 250px;
-      max-width: 250px;
-      min-width: 250px;
+      width: 120px;
+      max-width: 120px;
+      min-width: 120px;
       text-align: left;
 
       justify-content: left;
     }
 
     .mat-column-indBillNo {
-      width: 100px;
-      max-width: 100px;
-      min-width: 100px;
+      width: 80px;
+      max-width: 80px;
+      min-width: 80px;
       text-align: left;
       justify-content: left;
     }
@@ -124,46 +151,47 @@ app-patient-screen-bill-detail {
     }
 
     .mat-column-IndBillDate {
-      width: 150px;
-      max-width: 150px;
-      min-width: 150px;
+      width: 120px;
+      max-width: 120px;
+      min-width: 120px;
       text-align: left;
       justify-content: left;
     }
-
-
   }
 
   .BillDettable {
+
+    height: 250px !important;
+
     .mat-header-row {
       width: 100%;
-      max-width: 1210px;
-      min-width: 1210px;  
-      min-height: 20px;     
-    }
-    
-    .mat-row {
-      width: 100%;
-      max-width: 1210px;
-      min-width: 1210px;      
-      min-height: 20px;            
+      max-width: 1070px;
+      min-width: 1070px;
+      min-height: 20px;
+      padding: 5px;
+      border-radius: 2px;
+      border-end-end-radius: 2px;
     }
 
-    height: 200px !important;
+    .mat-row {
+      width: 100%;
+      max-width: 910px;
+      min-width: 910px;
+      min-height: 20px;
+    }
 
     .mat-column-VisitDate {
       width: 100px;
       max-width: 100px;
       min-width: 100px;
       text-align: left;
-
       justify-content: left;
     }
 
     .mat-column-Servicename {
-      width: 300px;
-      max-width: 300px;
-      min-width: 300px;
+      width: 220px;
+      max-width: 220px;
+      min-width: 220px;
       text-align: left;
       white-space: nowrap;
       overflow: hidden;
@@ -174,26 +202,26 @@ app-patient-screen-bill-detail {
     }
 
     .mat-column-ExtBillDetail {
-      width: 250px;
-      max-width: 250px;
-      min-width: 250px;
+      width: 180px;
+      max-width: 180px;
+      min-width: 180px;
       text-align: left;
       justify-content: left;
     }
 
     .mat-column-TotalAmount {
-      width: 100px;
-      max-width: 100px;
-      min-width: 100px;
+      width: 110px;
+      max-width: 110px;
+      min-width: 110px;
       text-align: left;
 
       justify-content: left;
     }
 
     .mat-column-IndServiceId {
-      width: 100px;
-      max-width: 100px;
-      min-width: 100px;
+      width: 150px;
+      max-width: 150px;
+      min-width: 150px;
       text-align: left;
 
       justify-content: left;
@@ -209,25 +237,21 @@ app-patient-screen-bill-detail {
     }
 
     .mat-column-IndServiceName {
-      width: 250px;
-      max-width: 250px;
-      min-width: 250px;
+      width: 200px;
+      max-width: 200px;
+      min-width: 200px;
       text-align: left;
 
       justify-content: left;
     }
 
     .mat-column-IndServiceAmount {
-      width: 150px;
-      max-width: 150px;
-      min-width: 150px;
+      width: 110px;
+      max-width: 110px;
+      min-width: 110px;
       text-align: left;
-
       justify-content: left;
     }
-
-
-
   }
 
   .mat-header-row {
@@ -235,6 +259,8 @@ app-patient-screen-bill-detail {
     max-width: 910px;
     min-width: 910px;
     min-height: 20px;
+    border-radius: 2px;
+    border-end-end-radius: 2px;
   }
 
   .mat-row {
@@ -251,15 +277,15 @@ app-patient-screen-bill-detail {
   }
 
   .mat-column-action {
-    width: 100px;
-    max-width: 100px;
-    min-width: 100px;
+    width: 130px;
+    max-width: 130px;
+    min-width: 130px;
   }
 
   .mat-column-ProtocolNo {
-    width: 110px;
-    max-width: 110px;
-    min-width: 110px;
+    width: 120px;
+    max-width: 120px;
+    min-width: 120px;
     text-align: center;
   }
 
@@ -272,17 +298,17 @@ app-patient-screen-bill-detail {
   }
 
   .mat-column-SubjectName {
-    width: 150px;
-    max-width: 150px;
-    min-width: 150px;
+    width: 100px;
+    max-width: 100px;
+    min-width: 100px;
     text-align: left;
     justify-content: left;
   }
 
   .mat-column-VisitTitle {
-    width: 200px;
-    max-width: 200px;
-    min-width: 200px;
+    width: 100px;
+    max-width: 100px;
+    min-width: 100px;
     text-align: left;
     justify-content: left;
   }
@@ -325,13 +351,15 @@ app-patient-screen-bill-detail {
   }
 
   .table2 {
-    height: 150px !important;
+    height: 170px !important;
 
     .mat-header-row {
       width: 100%;
-      max-width: 1500px;
-      min-width: 1500px;
+      max-width: 1060px;
+      min-width: 1060px;
       min-height: 20px;
+      padding: 5px;
+      border-radius: 2px;
     }
 
     .mat-row {
@@ -356,16 +384,16 @@ app-patient-screen-bill-detail {
 
 
     .mat-column-MRNo {
-      width: 120px;
-      max-width: 120px;
-      min-width: 120px;
+      width: 90px;
+      max-width: 90px;
+      min-width: 90px;
       text-align: center;
     }
 
     .mat-column-PatientName {
-      width: 250px;
-      max-width: 250px;
-      min-width: 250px;
+      width: 180px;
+      max-width: 180px;
+      min-width: 180px;
       justify-content: left;
       text-align: left;
       white-space: nowrap;
@@ -376,10 +404,9 @@ app-patient-screen-bill-detail {
     }
 
     .mat-column-Address {
-      width: 300px;
-      max-width: 300px;
-      min-width: 300px;
-
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
       text-align: left;
       white-space: nowrap;
       overflow: hidden;
@@ -425,13 +452,15 @@ app-patient-screen-bill-detail {
   }
 
   .table3 {
-    height: 170px !important;
+    height: 160px !important;
 
     .mat-header-row {
       width: 100%;
-      max-width: 400px;
-      min-width: 400px;
+      max-width: 500px;
+      min-width: 500px;
       min-height: 20px;
+      padding: 5px;
+      border-radius: 2px;
     }
 
     .mat-row {
@@ -442,15 +471,15 @@ app-patient-screen-bill-detail {
     }
 
     .mat-column-date {
-      width: 150px;
-      max-width: 150px;
-      min-width: 150px;
+      width: 130px;
+      max-width: 130px;
+      min-width: 130px;
     }
 
     .mat-column-BillNo {
-      width: 100px;
-      max-width: 100px;
-      min-width: 100px;
+      width: 120px;
+      max-width: 120px;
+      min-width: 120px;
       text-align: left;
       justify-content: left;
     }
@@ -466,14 +495,16 @@ app-patient-screen-bill-detail {
   }
 
   .table4 {
-    height: 170px !important;
+    height: 260px !important;
 
 
     .mat-header-row {
       width: 100%;
-      max-width: 350px;
-      min-width: 350px;
+      max-width: 500px;
+      min-width: 500px;
       min-height: 20px;
+      border-radius: 2px;
+      padding: 5px;
     }
 
     .mat-row {
@@ -484,9 +515,9 @@ app-patient-screen-bill-detail {
     }
 
     .mat-column-Servicename {
-      width: 200px;
-      max-width: 200px;
-      min-width: 200px;
+      width: 230px;
+      max-width: 230px;
+      min-width: 230px;
       text-align: left;
       white-space: nowrap;
       overflow: hidden;
@@ -503,12 +534,8 @@ app-patient-screen-bill-detail {
       text-align: left;
       justify-content: left;
     }
-
-
-
   }
 }
-
 
 .highlight {
   background: #42A948;
