@@ -142,7 +142,14 @@ app-browse-credit-payment {
         min-width: 1240px;
         display: flex;
     }
-    .mat-column-checkbox {
+    .mat-column-InterExtBill {
+        width:80px;
+        max-width:80px;
+        min-width:80px;
+        text-align:left;
+        justify-content: left;
+    }
+    .mat-column-Payment {
         width:80px;
         max-width:80px;
         min-width:80px;
@@ -180,29 +187,29 @@ app-browse-credit-payment {
         justify-content: left;
     }
 
-    .mat-column-RegNo {
-        width: 80px;
-        max-width: 80px;
-        min-width: 80px;
-        text-align: right;
-        justify-content: left;
-    }
+    // .mat-column-RegNo {
+    //     width: 80px;
+    //     max-width: 80px;
+    //     min-width: 80px;
+    //     text-align: right;
+    //     justify-content: left;
+    // }
 
-    .mat-column-PatientName {
+    // .mat-column-PatientName {
 
-        width: 300px;
-        max-width: 300px;
-        min-width: 300px;
-        text-align: left;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        overflow: hidden !important;
-        // display: inline-block;
-        // margin-top: 7px;
-        margin-right: 10px;
-        justify-content: left;
-    }
+    //     width: 300px;
+    //     max-width: 300px;
+    //     min-width: 300px;
+    //     text-align: left;
+    //     white-space: nowrap;
+    //     overflow: hidden;
+    //     text-overflow: ellipsis;
+    //     overflow: hidden !important;
+    //     // display: inline-block;
+    //     // margin-top: 7px;
+    //     margin-right: 10px;
+    //     justify-content: left;
+    // }
 
     .mat-column-TotalAmt {
         width: 110px;
@@ -216,37 +223,10 @@ app-browse-credit-payment {
 
     }
 
-   
-
-   
-    .mat-column-PatientName {
-
-        width: 300px;
-        max-width: 300px;
-        min-width: 300px;
-        text-align: left;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        overflow: hidden !important;
-        // display: inline-block;
-        // margin-top: 7px;
-        margin-right: 10px;
-        justify-content: left;
-    }
-
     .mat-column-ProtocolNo {
-        width: 110px;
-        max-width: 110px;
-        min-width: 110px;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .mat-column-ProtocolNo {
-        width: 150px;
-        max-width: 150px;
-        min-width: 150px;
+        width: 80px;
+        max-width: 80px;
+        min-width: 80px;
         justify-content: center;
         text-align: center;
     }

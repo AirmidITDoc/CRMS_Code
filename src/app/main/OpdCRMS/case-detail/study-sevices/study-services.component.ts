@@ -256,23 +256,16 @@ export class StudyServicesComponent implements OnInit {
   }
 
   onUpdateService(){
-    
-    debugger
-
       let UpdateStudyService = {};
       UpdateStudyService['operation'] ='UPDATE_ID';
-      UpdateStudyService['studyServicesId'] =this.vServiceId;
+      UpdateStudyService['studyServicesId'] =this.vStudyServicesId;
       UpdateStudyService['studyId'] = this.vStudyId;
       UpdateStudyService['StudyVisitId'] = this._StudyServicesService.myStudyServiceform.get('VisitName').value.StudyVisitId;
       UpdateStudyService['ServiceId'] =this._StudyServicesService.myStudyServiceform.get('ServiceName').value.ServiceId || 0;
       UpdateStudyService['amount'] = parseFloat(this._StudyServicesService.myStudyServiceform.get('Amount').value) || 0;
       UpdateStudyService['isActive'] =1,//element.serviceId;
       UpdateStudyService['updatedBy'] = this.accountService.currentUserValue.user.id;
-      
-    // });
-
     let submitData = {
-    
       "updateStudyserviceId": UpdateStudyService
     };
     console.log(submitData)

@@ -148,7 +148,6 @@
                                     <ng-container matColumnDef="InterExtBill">
                                         <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: white;">Final </mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
-                                            <!-- {{contact.IsBillGenerated}}  -->
                                             <mat-icon
                                                 style="font-size: 70px;width: 15px !important; height:10px !important;border-radius:100% ;"
                                                 *ngIf="contact.InterimOrFinal=='1'" matTooltip="External Bill"
@@ -160,8 +159,7 @@
                                     <ng-container matColumnDef="Payment">
                                         <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: white;">PayStatus</mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
-                                            <!-- {{contact.IsBillGenerated}}  -->
-                                            <!-- <mat-icon
+                                            <mat-icon
                                                 style="font-size: 70px;width: 15px !important; height:15px !important;border-radius:100% ;"
                                                 *ngIf="contact.BalanceAmt > 0" matTooltip="Payment Balance" (click)="NewBillpayment(contact)"
                                                 style="background-color: #f55f5a;">circle</mat-icon> -->
