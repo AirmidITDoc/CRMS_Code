@@ -13,6 +13,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { InvoiceBillMappingComponent } from '../invoice-bill-mapping/invoice-bill-mapping.component';
 import Swal from 'sweetalert2';
 import { AuthenticationService } from 'app/core/services/authentication.service';
+import { PaymentDetailComponent } from '../payment-detail/payment-detail.component';
 
 @Component({
   selector: 'app-browse-invoice-list',
@@ -57,11 +58,11 @@ export class BrowseInvoiceListComponent implements OnInit {
   displayedColumns = [
 
     // 'InvoiceId',
-    // 'InvoiceNumber',
+    'chkBalanceAmt',
     'CaseId',
     'ProtocolNo',
-    'ProtocolTitle',
-    'InvoiceDate',
+    // 'ProtocolTitle',
+    'InvoiceTime',
     'TaxableAmount',
     'CGST',
     'SGST',
@@ -69,6 +70,8 @@ export class BrowseInvoiceListComponent implements OnInit {
     'TotalAmount',
     'ApprovalStatus',
     'ApprovedBy',
+    'ApprovedDate',
+    'InvoiceStatus',
     'action'
   ];
 
@@ -170,6 +173,31 @@ export class BrowseInvoiceListComponent implements OnInit {
       }
     }
   }
+
+  NewBillpayment(contact) {
+
+    let PatientHeaderObj = {};
+
+  PatientHeaderObj['Date'] = this.datePipe.transform(contact.BillDate, 'MM/dd/yyyy') || '01/01/1900',
+  PatientHeaderObj['PatientName'] = contact.PatientName;
+PatientHeaderObj['OPD_IPD_Id'] = contact.vOPIPId;
+PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt;
+PatientHeaderObj['BillId'] = contact.BillNo;
+
+    const dialogRef = this._matDialog.open(PaymentDetailComponent,
+      {
+        maxWidth: "100vw",
+        height: '600px',
+        width: '100%',
+        data: {
+          vPatientHeaderObj: PatientHeaderObj,
+          FromName: "OP-Bill"
+        }
+      });
+
+   
+         
+    }
 
 
   onClear() {

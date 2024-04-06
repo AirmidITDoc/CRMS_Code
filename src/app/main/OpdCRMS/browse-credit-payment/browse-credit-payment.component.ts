@@ -55,6 +55,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
   displayedColumns = [
     'InterExtBill',
+    'Payment',
     'BillDate',
     // 'BillNo',
     'StudyId',

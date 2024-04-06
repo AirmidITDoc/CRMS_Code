@@ -68,8 +68,8 @@ export class InvoiceBillMappingComponent implements OnInit {
     'BillNo',
     // 'CaseId',
     // 'CaseTitle',
-    'PatientName',
-    'RegNo',
+    // 'PatientName',
+    // 'RegNo',
     // 'MobileNo',
     // 'AgeYear',
     'TotalBillAmt',
@@ -487,12 +487,18 @@ export class InvoiceBillMappingComponent implements OnInit {
     debugger;
 
 
-    if (this.CGST == null || this.CGST == 0) {
+    if(this.CGST == null){
+      this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
+      this.CGSTAmount=0
+      }
+
+    if (this.CGST == 0) {
       this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
     
       this.FinalTotalAmount = this.FinalTotalAmount - this.CGSTAmount;
       this.registeredForm.get('CGSTAmount').setValue(0);
       this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
+
 
       if (this.SGST != 0) {
 
@@ -526,7 +532,10 @@ export class InvoiceBillMappingComponent implements OnInit {
 
   calculateSGST() {
     debugger;
-
+    if(this.SGST == null){
+      this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
+      this.SGSTAmount=0
+      }
 
     if (this.SGST == null || this.SGST == 0) {
       this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
@@ -566,7 +575,10 @@ export class InvoiceBillMappingComponent implements OnInit {
   calculateIGST() {
     debugger;
 
-
+    if(this.IGST == null){
+      this.registeredForm.get('TotalAmount').setValue(this.FinalTotalAmount);
+      this.IGSTAmount=0
+      }
     if (this.IGST == null || this.IGST == 0) {
       this.FinalTotalAmount = parseInt(this.registeredForm.get('TotalAmount').value);
 

@@ -104,6 +104,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
     'ProtocolNo',
     'SubjectName',
     'VisitTitle',
+    // 'Autobill',
     'action',
     'buttons'
   ];
@@ -191,7 +192,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
     if (this._ActRoute.url == '/opd/appointment') {
 
-      this.menuActions.push('Add New Visit');
+      // this.menuActions.push('Add New Visit');
       this.menuActions.push('Edit Visit');
       this.menuActions.push('Assign Visit Information');
       this.menuActions.push('Bill');
@@ -218,6 +219,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
       "StudyId": this.data.StudyId,
       "RegId": this.data.element.RegId
     };
+
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._AppointmentService.getPatientScreeningBillingList(D_data).subscribe(Visit => {
@@ -234,7 +236,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
   }
 
-
+  chkAuptobill:boolean=true;
   getBilllist(contact) {
 
     this.sIsLoading = 'loading-data';

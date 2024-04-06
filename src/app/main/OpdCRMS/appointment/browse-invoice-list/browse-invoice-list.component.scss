@@ -130,7 +130,7 @@ app-browse-invoice-list{
     .mat-header-row {
         background-color: rgb(13, 67, 102) !important;
         max-width: 100%;
-        min-width: 1440px;
+        min-width: 1540px;
         min-height: 25px;
         width: 100%;
 
@@ -139,7 +139,7 @@ app-browse-invoice-list{
     .mat-row {
         max-width: 100%;
         min-height: 25px;
-        min-width: 1440px;
+        min-width: 1540px;
         display: flex;
     }
    
@@ -155,25 +155,23 @@ app-browse-invoice-list{
 
        
     .mat-column-ProtocolNo {
-        width: 250px;
-        max-width: 250px;
-        min-width: 250px;
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
      
         text-align: left;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         overflow: hidden !important;
-        // display: inline-block;
-        // margin-top: 7px;
-        margin-right: 10px;
+        
         justify-content: left;
     }
 
-    .mat-column-ProtocolTitle {
-        width: 300px;
-        max-width: 300px;
-        min-width: 300px;
+    .mat-column-InvoiceTime {
+        width: 120px;
+        max-width: 120px;
+        min-width: 120px;
         text-align: left;
         white-space: nowrap;
         overflow: hidden;
@@ -185,7 +183,7 @@ app-browse-invoice-list{
         justify-content: left;
     }
 
-    .mat-column-InvoiceDate {
+    .mat-column-chkBalanceAmt {
         width: 100px;
         max-width: 100px;
         min-width: 100px;
@@ -226,6 +224,15 @@ app-browse-invoice-list{
     }
 
     .mat-column-ApprovalStatus {
+        width: 110px;
+        max-width: 110px;
+        min-width: 110px;
+        text-align: right;
+        justify-content: center;
+       
+    }
+
+    .mat-column-ApprovedDate {
         width: 110px;
         max-width: 110px;
         min-width: 110px;
