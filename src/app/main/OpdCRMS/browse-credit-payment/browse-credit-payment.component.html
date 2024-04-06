@@ -159,14 +159,14 @@
                                     <ng-container matColumnDef="Payment">
                                         <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: white;">PayStatus</mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
-                                            <mat-icon
+                                            <!-- <mat-icon
                                                 style="font-size: 70px;width: 15px !important; height:15px !important;border-radius:100% ;"
                                                 *ngIf="contact.BalanceAmt > 0" matTooltip="Payment Balance" (click)="NewBillpayment(contact)"
                                                 style="background-color: #f55f5a;">circle</mat-icon> -->
 
                                                 <mat-icon *ngIf="contact.BalanceAmt !=0 " matTooltip=" Settlement "
                                                 (click)="NewBillpayment(contact)">payment
-                                            </mat-icon>
+                                                 </mat-icon>
                                         </mat-cell>
                                     </ng-container>
 
