@@ -126,7 +126,7 @@ export class RolemasterComponent implements OnInit {
     const dialogRef = this._matDialog.open(RolePermissionComponent,
       {
         maxWidth: "50vw",
-          height: 'auto',
+          height: '90vh',
           maxHeight:'90vh',
           width: '100%',
           data : {

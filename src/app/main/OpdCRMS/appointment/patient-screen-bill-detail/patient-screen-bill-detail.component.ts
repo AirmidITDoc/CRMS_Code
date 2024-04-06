@@ -781,7 +781,7 @@ debugger
         "RefDocId": contact.DoctorId,
         "RefDocName": contact.RefDocName,
         "RegNoWithPrefix": "GMH11587",
-        PatientName: this.selectedAdvanceObj.PatientName,
+        "PatientName": this.selectedAdvanceObj.PatientName,
         "AgeYear": this.selectedAdvanceObj.AgeYear
       }
       const dialogRef = this._matDialog.open(NewVistDateComponent,

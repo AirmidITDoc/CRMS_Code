@@ -6,7 +6,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatRippleModule } from '@angular/material/core';
@@ -34,8 +33,9 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CreateUserService } from './create-user.service';
-import { MyprofileComponent } from '../myprofile/myprofile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { MyprofileComponent } from '../myprofile/myprofile.component';
+import { MatIconModule } from '@angular/material/icon';
 // import { UserDetailComponent } from '../user-detail/user-detail.component';
 
 const routes: Routes = [

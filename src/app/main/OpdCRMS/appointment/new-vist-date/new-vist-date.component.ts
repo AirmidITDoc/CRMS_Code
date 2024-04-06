@@ -250,7 +250,7 @@ export class NewVistDateComponent implements OnInit {
   }
 
   OnChangeDoctorList(departmentObj) {
-       
+       debugger
     this._opappointmentService.getDoctorMasterCombo(departmentObj.Departmentid).subscribe(
       data => {
         this.DoctorList = data;
@@ -322,7 +322,7 @@ export class NewVistDateComponent implements OnInit {
       visitMasterAdd['RefDocId'] = this.registerObj.RefDocId;
       visitMasterAdd['TariffId'] = this.registerObj.TariffId;
       visitMasterAdd['CompanyId'] = 0;
-      visitMasterAdd['createdBy'] = this.accountService.currentUserValue.user.id;
+       visitMasterAdd['createdBy'] = this.accountService.currentUserValue.user.id;
       visitMasterAdd['updatedBy'] = this.accountService.currentUserValue.user.id;
       visitMasterAdd['ClassId'] = 1;
       visitMasterAdd['DepartmentId'] = this.VisitFormGroup.get('DoctorID').value.DepartmentId || 0;
@@ -332,8 +332,8 @@ export class NewVistDateComponent implements OnInit {
       visitMasterAdd['FollowupDate'] = "2023-06-22T09:52:54.616Z";
       visitMasterAdd['IsMark'] = 0,
      visitMasterAdd['Comments'] = "";
-    visitMasterAdd['Intime'] = '2023-06-22T09:52:54.616Z';
-    visitMasterAdd['outTime'] = '2023-06-22T09:52:54.616Z';
+     visitMasterAdd['Intime'] =  this.dateTimeObj.date;
+     visitMasterAdd['outTime'] =  this.dateTimeObj.time;
 
 
       submissionObj['visitMasterAdd'] = visitMasterAdd;
