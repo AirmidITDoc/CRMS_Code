@@ -242,7 +242,7 @@
                                                 <mat-form-field appearance="outline" style="width: 100px;">
                                                     <mat-label>CGST</mat-label>
                                                     <input matInput [(ngModel)]="CGST" name="CGST"
-                                                        formControlName="CGST" type="number" (keyup)="calculateCGST()">
+                                                        formControlName="CGST" type="number" (keyup)="calculateGST()">
                                                     <!-- <mat-error
                                                     *ngIf="registeredForm.get('discAmount').invalid && registeredForm.get('discAmount').touched">
                                                     Discount Amount Schod me Less than Tptal Amount TotalAmount is
@@ -260,7 +260,7 @@
                                                 <mat-form-field appearance="outline" style="width: 100px;">
                                                     <mat-label>SGST</mat-label>
                                                     <input matInput [(ngModel)]="SGST" name="SGST"
-                                                        formControlName="SGST" required (keyup)="calculateSGST()">
+                                                        formControlName="SGST" required (keyup)="calculateGST()">
                                                     <!-- <mat-error
                                                     *ngIf="registeredForm.get('netAmount').invalid && registeredForm.get('netAmount').touched">
                                                     NetAmount is required</mat-error> -->
@@ -277,7 +277,7 @@
                                                 <mat-form-field appearance="outline" style="width:100px;">
                                                     <mat-label>IGST</mat-label>
                                                     <input matInput [(ngModel)]="IGST" name="IGST"
-                                                        formControlName="IGST"  (keyup)="calculateIGST()">
+                                                        formControlName="IGST"  (keyup)="calculateGST()">
                                                     <!-- <mat-error
                                                     *ngIf="registeredForm.get('netAmount').invalid && registeredForm.get('netAmount').touched">
                                                     NetAmount is required</mat-error> -->

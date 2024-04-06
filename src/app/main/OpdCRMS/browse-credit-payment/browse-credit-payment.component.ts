@@ -280,7 +280,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
 
   NewBillpayment(contact) {
-debugger
+
     let PatientHeaderObj = {};
 
  PatientHeaderObj['Date'] = this.datePipe.transform(contact.BillDate, 'MM/dd/yyyy') || '01/01/1900',
