@@ -242,7 +242,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
     this.sIsLoading = 'loading-data';
     var D_data = {
-      "visitid":1// contact.VisitId
+      "visitid":contact.VisitId
     };
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
