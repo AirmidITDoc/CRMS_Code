@@ -242,7 +242,7 @@
                                                 <mat-form-field appearance="outline" style="width: 100px;">
                                                     <mat-label>CGST</mat-label>
                                                     <input matInput [(ngModel)]="CGST" name="CGST"
-                                                        formControlName="CGST" type="number" (keyup)="calculateCGST()">
+                                                        formControlName="CGST" type="number" (keyup)="calculateGST()">
                                                     <!-- <mat-error
                                                     *ngIf="registeredForm.get('discAmount').invalid && registeredForm.get('discAmount').touched">
                                                     Discount Amount Schod me Less than Tptal Amount TotalAmount is
@@ -250,45 +250,45 @@
                                                 </mat-form-field>
 
 
-                                                <!-- <mat-form-field appearance="outline" style="width: 100px;">
+                                                <mat-form-field appearance="outline" style="width: 100px;">
                                                     <mat-label>CGST Amount</mat-label>
                                                     <input matInput [(ngModel)]="CGSTAmount" name="CGSTAmount"
                                                         formControlName="CGSTAmount" type="number" readonly>
                                                   
-                                                </mat-form-field> -->
+                                                </mat-form-field>
 
                                                 <mat-form-field appearance="outline" style="width: 100px;">
                                                     <mat-label>SGST</mat-label>
                                                     <input matInput [(ngModel)]="SGST" name="SGST"
-                                                        formControlName="SGST" required (keyup)="calculateSGST()">
+                                                        formControlName="SGST" required (keyup)="calculateGST()">
                                                     <!-- <mat-error
                                                     *ngIf="registeredForm.get('netAmount').invalid && registeredForm.get('netAmount').touched">
                                                     NetAmount is required</mat-error> -->
                                                 </mat-form-field>
 
 
-                                                <!-- <mat-form-field appearance="outline" style="width: 100px;">
+                                                <mat-form-field appearance="outline" style="width: 100px;">
                                                     <mat-label>SGST Amount</mat-label>
                                                     <input matInput [(ngModel)]="SGSTAmount" name="SGSTAmount"
                                                         formControlName="SGSTAmount" type="number" readonly>
                                                  
-                                                </mat-form-field> -->
+                                                </mat-form-field>
 
                                                 <mat-form-field appearance="outline" style="width:100px;">
                                                     <mat-label>IGST</mat-label>
                                                     <input matInput [(ngModel)]="IGST" name="IGST"
-                                                        formControlName="IGST"  (keyup)="calculateIGST()">
+                                                        formControlName="IGST"  (keyup)="calculateGST()">
                                                     <!-- <mat-error
                                                     *ngIf="registeredForm.get('netAmount').invalid && registeredForm.get('netAmount').touched">
                                                     NetAmount is required</mat-error> -->
                                                 </mat-form-field>
 
-                                                <!-- <mat-form-field appearance="outline" style="width: 100px;">
+                                                <mat-form-field appearance="outline" style="width: 100px;">
                                                     <mat-label>IGST Amount</mat-label>
                                                     <input matInput [(ngModel)]="IGSTAmount" name="IGSTAmount"
                                                         formControlName="IGSTAmount" type="number" readonly>
                                                  
-                                                </mat-form-field> -->
+                                                </mat-form-field>
 
 
                                                 <mat-form-field appearance="outline" fxFlex>

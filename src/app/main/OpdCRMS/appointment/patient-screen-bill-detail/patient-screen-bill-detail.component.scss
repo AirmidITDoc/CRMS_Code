@@ -92,6 +92,14 @@ app-patient-screen-bill-detail {
       border-end-end-radius: 2px;
     }
 
+    .mat-column-InterimOrFinal {
+      width: 80px;
+      max-width: 80px;
+      min-width: 80px;
+      text-align: left;
+      justify-content: left;
+    }
+
     .mat-column-date {
       width: 120px;
       max-width: 120px;

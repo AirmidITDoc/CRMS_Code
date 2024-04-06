@@ -279,6 +279,30 @@ export class BrowseCreditPaymentComponent implements OnInit {
   }
 
 
+  NewBillpayment(contact) {
+
+    let PatientHeaderObj = {};
+
+ PatientHeaderObj['Date'] = this.datePipe.transform(contact.BillDate, 'MM/dd/yyyy') || '01/01/1900',
+PatientHeaderObj['PatientName'] = contact.PatientName;
+PatientHeaderObj['OPD_IPD_Id'] = contact.vOPIPId;
+PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt;
+PatientHeaderObj['BillId'] = contact.BillNo;
+
+    const dialogRef = this._matDialog.open(PaymentDetailComponent,
+      {
+        maxWidth: "100vw",
+        height: '600px',
+        width: '100%',
+        data: {
+          advanceObj: PatientHeaderObj,
+          FromName: "OP-Bill"
+        }
+      });
+
+   
+         
+    }
 
 
   getTemplate() {
