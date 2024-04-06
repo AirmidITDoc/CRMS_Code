@@ -84,7 +84,7 @@ export class StudyServicesService {
     return this._httpClient.post("CRMSTran/Save_InsertStudyService", employee)
   }
   public StudyServiceUpdate(employee){
-    return this._httpClient.post("CRMSTran/Update_UpdateStudyService", employee)
+    return this._httpClient.post("CRMSTran/Update_UpdateStudyServiceId", employee)
   }
 
   populateFormpersonal(employee) {

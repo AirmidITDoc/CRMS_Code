@@ -154,6 +154,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
   displayedColumns5 = [
+    'InterimOrFinal',
     'date',
     'BillNo',
     'NetPayableAmt',
@@ -241,7 +242,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
     this.sIsLoading = 'loading-data';
     var D_data = {
-      "visitid": contact.VisitId
+      "visitid":1// contact.VisitId
     };
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
