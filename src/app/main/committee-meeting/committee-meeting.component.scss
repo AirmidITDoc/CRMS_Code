@@ -52,16 +52,32 @@
   .active-icon {
     border-radius: 50%;
   }
+
+  .box{
+    box-shadow: 1px 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
+    background-color:#fff;
+    border-radius: 5px;
+    margin-left: 10px;
+    width:95%;
+  }
+  
+  .box1{
+    box-shadow: 1px 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
+    background-color:#fff;
+    border-radius: 5px;
+  }
   
   app-committee-meeting {
     .table1{
-        height:720px !important;
+        height:532px !important;
     }
   .mat-header-row {
     width: 100%;
-    max-width: 1550px;
-    min-width: 1550px;  
-    min-height: 20px;     
+    max-width: 1140px;
+    min-width: 1140px;  
+    min-height: 20px;
+    border-radius: 2px;     
+    padding: 2px;
   }
   
   .mat-row {
@@ -72,15 +88,15 @@
   }
 
   .mat-column-CommitteeMeetingId {
-    width: 100px; 
-    max-width:100px;
-    min-width: 100px;
+    width: 120px; 
+    max-width:120px;
+    min-width: 120px;
     text-align: center;
   }
   .mat-column-CommiteeMeetingName {
-    width: 450px;
-    max-width: 450px;
-    min-width:450px;
+    width: 250px;
+    max-width: 250px;
+    min-width: 250px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
@@ -92,15 +108,15 @@
      justify-content:left; 
   }
   .mat-column-CommitteeMeetingDate {
-    width:100px;
-    max-width:100px;
-    min-width:100px;
+    width:150px;
+    max-width:150px;
+    min-width:150px;
   }
 
   .mat-column-CommitteeMeetingLocation {
-    width: 500px;
-    max-width: 500px;
-    min-width: 500px;
+    width: 230px;
+    max-width: 230px;
+    min-width: 230px;
     text-align: left;
     white-space: nowrap; 
     overflow: hidden;
@@ -119,16 +135,16 @@
     min-width: 100px;
   }
   .mat-column-CommitteeMeetingAmount {
-    width:150px;
-    max-width:150px;
-    min-width:150px;
+    width:120px;
+    max-width:120px;
+    min-width:120px;
   }
   
   
   .mat-column-CreatedBy {
-    width: 90px;
-    max-width:90px;
-    min-width:90px;
+    width: 150px;
+    max-width:150px;
+    min-width:150px;
     text-align: center;
   }
   

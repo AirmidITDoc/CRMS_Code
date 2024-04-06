@@ -11,7 +11,7 @@ app-new-committee-meeting {
     width: 100%;
 
     .mat-table {
-        height: 400px !important;
+        height: 200px !important;
         width: 100%;
         background: transparent;
         box-shadow: none;
@@ -53,25 +53,27 @@ app-new-committee-meeting {
     }
 }
 app-new-committee-meeting {
-    .table {
+    .table1 {
         .mat-header-row {
-            // width: 100%;
-            max-width: 600px;
-            min-width: 600px;
-            min-height: 30px;
+            width: 100%;
+            max-width: 1077px;
+            min-width: 1077px;
+            min-height: 25px;
+            padding:5px;
+            border-radius: 2px;
         }
 
         .mat-row {
-            // width: 100%;
+             width: 100%;
             max-width: 600px;
             min-width: 600px;
             min-height: 30px;
         }
 
         .mat-column-MemberName {
-            width: 500px;
-            max-width: 500px;
-            min-width: 500px;
+            width: 400px;
+            max-width: 400px;
+            min-width: 400px;
             text-align: left;
             white-space: nowrap;
             overflow: hidden;
@@ -80,16 +82,16 @@ app-new-committee-meeting {
         }
 
         .mat-column-StudyAmount {
-            width: 100px;
-            max-width: 110px;
-            min-width: 10px;
+            width: 250px;
+            max-width: 250px;
+            min-width: 250px;
             text-align: right;
         }
 
         .mat-column-MeetingStatus {
-            width: 100px;
-            max-width: 110px;
-            min-width: 10px;
+            width: 250px;
+            max-width: 250px;
+            min-width: 250px;
             text-align: right;
         }
 

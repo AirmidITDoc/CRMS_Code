@@ -14,18 +14,19 @@
                 style="color: aliceblue;">
                 Committee Meeting
             </span>
-
-            <button mat-raised-button (click)="newMember()" style="margin-left:10%;width:180px;">Add
+            <span style="margin-left:700px;">
+            <button mat-raised-button (click)="newMember()" style="margin-left:10%;width:120px;">Add
                 Member
             </button>
             <button mat-raised-button (click)="newCommitteeMember()" 
-                style="margin-left:10px;width:200px;">CommitteeMembers
+                style="margin-left:10px;width:165px;">Committee Members
                 <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
             </button>
             <button mat-raised-button (click)="newcommitteemeeting()" 
-                style="margin-left:10px;width:200px;">Committee Meeting
+                style="margin-left:10px;width:165px;">Committee Meeting
                 <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
             </button>
+            </span>
         </div>
 
     </mat-toolbar>
@@ -37,11 +38,11 @@
     <div class="content">
         <!-- SIDEBAR -->
         <fuse-sidebar name="app-main" position="left" lockedOpen="gt-sm" style="width:30%; border-radius:4px;
-        margin-left:12px; background-color: white;height:100%;">
+             margin-left:12px; background-color: white;height:30%;margin-top:0.9em;">
             <div>
                 <!-- SIDEBAR HEADER -->
                 <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
-                    style="margin-top: 3%;">
+                    style="border-radius: 2px;">
                     <span class="h5" style="font-size: 17px;color: aliceblue;">Search Facility</span>
                     <!-- / USER -->
                 </div>
@@ -81,7 +82,7 @@
         <!-- CENTER -->
 
         <div class="center p-12 pb-56" fxFlexAlign="start center">
-            <div class="content-card" style="border-radius:4px; ">
+            <div class="content-card box1" style="border-radius:4px; ">
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="30px">
                     <div fxFlex.gt-sm="100%" fxFlex>
 

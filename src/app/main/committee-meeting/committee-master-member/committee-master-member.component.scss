@@ -60,11 +60,14 @@ app-committee-master-member{
 
 
     .table1{
+
 .mat-header-row {
-    // width: 100%;
-    max-width:900px;
-    min-width:900px; 
-    min-height: 30px;     
+    width: 100%;
+    max-width:1068px;
+    min-width:1068px; 
+    min-height: 25px;
+    padding:5px;
+    border-radius: 2px;     
 }
 .mat-row {
     // width: 100%;

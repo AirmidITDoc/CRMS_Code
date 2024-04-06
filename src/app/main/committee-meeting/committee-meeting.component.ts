@@ -107,7 +107,7 @@ newMember() {
     const dialogRef = this._matDialog.open(AddMemberComponent,
       {
         maxWidth: "80vw",
-        height: '440px',
+        height: '310px',
         width: '100%',
       });
     dialogRef.afterClosed().subscribe(result => {
