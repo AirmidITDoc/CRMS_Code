@@ -35,7 +35,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatNestedTreeNode, MatTree, MatTreeModule } from '@angular/material/tree'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RolemasterComponent } from './rolemaster.component';
-import { RolePermissionComponent } from './role-permission/role-permission.component';
+import { RolePermissionComponent } from '../role-permission/role-permission.component';
 import { RolemasterService } from './rolemaster.service';
 
 

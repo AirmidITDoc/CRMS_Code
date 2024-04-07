@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FuseConfirmDialogComponent } from '@fuse/components/confirm-dialog/confirm-dialog.component';
 import { RolemasterService } from './rolemaster.service';
 import { MatSort } from '@angular/material/sort';
-import { RolePermissionComponent } from './role-permission/role-permission.component';
+import { RolePermissionComponent } from '../role-permission/role-permission.component';
 import { fuseAnimations } from '@fuse/animations';
 // import { ToastrService } from 'ngx-toastr';
 

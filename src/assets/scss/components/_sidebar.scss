@@ -1,0 +1,52 @@
+$sidebar-gap: 12px;
+
+.fuse-search-sidebar {
+    margin: $sidebar-gap 0 0 $sidebar-gap;
+    border-radius: 4px;
+    font-family: inherit;
+    @include box-shadow-small();
+    .sidebar-content {
+        .sidebar-header {
+            padding: 12px;
+            .search-title {
+                font-size: 1.1rem;
+            }
+        }
+        .sidebar-body {
+            .sidebar-form {
+                form{
+                    padding: $sidebar-gap;
+                }
+            }
+        }
+        .mat-form-field {
+            .mat-form-field-wrapper {
+                padding-bottom: 10px;
+            }
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: flex-start;
+            gap: 12px;
+            .mat-icon {
+                margin: 0;
+                color: $primary-600;
+            }
+        }
+    }
+    .nav {
+        &.material2 {
+            form {
+                padding: $sidebar-gap;
+            }
+        }
+    }
+}
+fuse-sidebar{
+    .search-title{
+        @include font-size(16px);
+    }
+    .clearbutton{
+        margin-right: 10px;
+    }
+}

@@ -2,6 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CaseIdDetailComponent } from '../dashboard/case-id-detail/case-id-detail.component';
+import { RolePermissionComponent } from './role-permission/role-permission.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { CdkTreeModule } from '@angular/cdk/tree';
+import { CdkTableModule } from '@angular/cdk/table';
 
 
 
@@ -22,10 +31,12 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [RolePermissionComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(appRoutes),
+    MatIconModule,MatTableModule,MatPaginatorModule,MatSortModule,
+    MatCheckboxModule,MatButtonModule,CdkTreeModule,CdkTableModule
   ]
 })
 export class AdministrationModule { }
