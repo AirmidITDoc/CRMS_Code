@@ -18,6 +18,7 @@ import { StudySchduleComponent } from './study-schdule/study-schdule.component';
 import { UploadDocumentComponent } from '../appointment/upload-document/upload-document.component';
 import { FileUploadComponent } from '../appointment/file-upload/file-upload.component';
 import { StudyServicesComponent } from './study-sevices/study-services.component';
+import { StudyDistributionComponent } from './study-distribution/study-distribution.component';
 
 @Component({
   selector: 'app-case-detail',
@@ -89,6 +90,8 @@ export class CaseDetailComponent implements OnInit {
       this.menuActions.push('Add / Update Study Schedule');
       this.menuActions.push('Add / Update Study Services');
       this.menuActions.push('Upload Document');
+      this.menuActions.push('Study Distribution');
+     
         }
     // this.getCaseList();
     this.getCasecombo();
@@ -327,6 +330,45 @@ export class CaseDetailComponent implements OnInit {
         {
           maxWidth: "90%",
           height: '700px',
+          width: '100%',
+          data: {
+            registerObj: m_data,
+          }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed - Insert Action', result);
+        this.getCaseList();
+      });
+
+      error => {
+        this.sIsLoading = '';
+
+      }
+    }else if (m == "Study Distribution") {
+      var m_data = {
+      StudyId:contact.StudyId,
+      ProtocolNo:contact.ProtocolNo,
+      ProtocolTitle:contact.ProtocolTitle,
+      StudyProduct: contact.StudyProduct,
+      TotalSubjects:contact.TotalSubjects,
+      TotalVisits:contact.TotalVisits,
+      VisitFrequency:contact.VisitFrequency,
+      StudyStartDate: contact.StudyStartDate,
+      StudyEndDate:contact.StudyEndDate,
+      Sponser: contact.Sponser,
+      Investigator:contact.Investigator,
+      Institution: contact.Institution,
+      HospitalRepresentative: contact.HospitalRepresentative,
+      AgreementFileName: contact.AgreementFileName,
+      StudyPrefix:contact.StudyPrefix,
+      StudyNumber:contact.StudyNumber,
+      "operation":"UPDATE"
+      }
+      this._CasedetailService.populateFormpersonal(m_data);
+      const dialogRef = this._matDialog.open(StudyDistributionComponent,
+        {
+          maxWidth: "60%",
+          height: '500px',
           width: '100%',
           data: {
             registerObj: m_data,

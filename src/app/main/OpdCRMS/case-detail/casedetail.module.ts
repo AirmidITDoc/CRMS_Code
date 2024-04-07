@@ -40,6 +40,7 @@ import { EditCasedetailComponent } from './edit-casedetail/edit-casedetail.compo
 import { StudySchduleComponent } from './study-schdule/study-schdule.component';
 import { StudyDetailComponent } from './study-detail/study-detail.component';
 import { StudyServicesComponent } from './study-sevices/study-services.component';
+import { StudyDistributionComponent } from './study-distribution/study-distribution.component';
 
 const routes: Routes = [
     {
@@ -55,6 +56,7 @@ const routes: Routes = [
         StudySchduleComponent,
         StudyDetailComponent,
         StudyServicesComponent,
+        StudyDistributionComponent,
     ],
     imports: [
         RouterModule.forChild(routes),

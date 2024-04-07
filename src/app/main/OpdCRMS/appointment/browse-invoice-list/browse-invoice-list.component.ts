@@ -14,6 +14,7 @@ import { InvoiceBillMappingComponent } from '../invoice-bill-mapping/invoice-bil
 import Swal from 'sweetalert2';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import { PaymentDetailComponent } from '../payment-detail/payment-detail.component';
+import { StudywisedeptdetailComponent } from './studywisedeptdetail/studywisedeptdetail.component';
 
 @Component({
   selector: 'app-browse-invoice-list',
@@ -198,7 +199,15 @@ PatientHeaderObj['BillId'] = contact.BillNo;
    
          
     }
+getstudydeptdetail(){
 
+  const dialogRef=this._matDialog.open(StudywisedeptdetailComponent,
+    {
+      maxWidth: "95vw",
+      height: '700px',
+      width: '100%',
+    });
+}
 
   onClear() {
 
@@ -453,6 +462,14 @@ export class InvoiceBilll {
   ApprovedBy: any;
   ApprovedDate: any;
   InvoiceStatus: any;
+
+  
+  ServiceName: any;
+  FinalAmt: any;
+  // Patient Reimbursement: any;
+  // Principle Investigator (DOC): any;
+  // Principle Investigator (SMO): any;
+  
   /**
    * Constructor
    *
@@ -478,6 +495,8 @@ export class InvoiceBilll {
       this.ApprovedBy = InvoiceBilll.ApprovedBy || '';
       this.ApprovedDate = InvoiceBilll.ApprovedDate || '';
       this.InvoiceStatus = InvoiceBilll.InvoiceStatus || '';
+      this.ServiceName = InvoiceBilll.ServiceName || '';
+      this.FinalAmt = InvoiceBilll.FinalAmt || '';
 
     }
   }
