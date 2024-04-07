@@ -1,3 +1,106 @@
+// .mat-table {
+//   border-radius: 4px;
+//   overflow: auto;
+//   // font-family: inherit;
+//   min-height: 200px;
+//   .mat-header-row,
+//   .mat-row {
+//       min-height: auto;
+//       height: auto;
+//   }
+
+//   .mat-header-row {
+//       .mat-header-cell {
+//           // @include font-size(13px);
+//           font-size: 1rem;
+//           color: inherit;
+//           white-space: nowrap;
+//           overflow: hidden;
+//           text-overflow: ellipsis;
+//           // font-family: $font-primary;
+//           font-weight: normal;
+//           margin: 0;
+//           &:not(:first-of-type) {
+//               padding: 10px 10px;
+//           }
+//           .mat-sort-header-button,
+//           .mat-sort-header-arrow {
+//               color: inherit;
+//           }
+//       }
+//   }
+//   .mat-row {
+//       .mat-cell {
+//           // @include font-size(13px);
+//           word-break: break-word;
+//           line-height: 26px;
+//           // font-family: $font-primary;
+//           margin: 0;
+//           &:not(:first-of-type) {
+//               padding: 3px 10px;
+//           }
+//           .mat-icon-button {
+//               height: 25px;
+//               width: 25px;
+//               display: flex;
+//               justify-content: center;
+//               align-items: center;
+//               line-height: 25px;
+//               // .material-icons {
+//               //     @include font-size(16px);
+//               // }
+//           }
+//           // > span,
+//           // .text-overflow {
+//           //     @include line-clamp(1);
+//           // }
+//           // .text-overflow-2 {
+//           //     @include line-clamp(2);
+//           // }
+//       }
+//       &:hover {
+//           background: #d7d7d7;
+//       }
+//       &:active {
+//           background: #d7d7d7;
+//       }
+//       // &.self-row {
+//       //     background-color: $primary-50;
+//       // }
+//   }
+//   // .mat-footer-row {
+//   //     .mat-footer-cell {
+//   //         @include font-size(14px);
+//   //     }
+//   // }
+//   .mat-form-field {
+//       &.mat-form-field-appearance-legacy {
+//           .mat-form-field-wrapper {
+//               padding: 0;
+//               .mat-form-field-flex {
+//                   .mat-form-field-infix {
+//                       width: auto;
+//                       border: 0;
+//                   }
+//               }
+//               .mat-form-field-underline {
+//                   bottom: 0;
+//               }
+//           }
+//       }
+//   }
+//   .mat-checkbox {
+//       .mat-checkbox-ripple {
+//           height: 0;
+//           width: 0;
+//       }
+//   }
+// }
+// .table-wrapper {
+//   position: relative;
+// }
+
+
 .mat-form-field-wrapper {
   padding-bottom: 0.34375em;
 }
@@ -59,38 +162,53 @@ app-patient-screen-bill-detail {
 
   .table1 {
     height: 281px !important;
-
     .mat-header-row {
       width: 100%;
-      max-width: 770px;
-      min-width: 770px;
+      max-width: 1070px;
+      min-width: 1070px;
       min-height: 20px;
       padding: 5px;
       border-radius: 2px;
       border-end-end-radius: 2px;
     }
 
-    .mat-column-VisitDate {
-      width: 150px;
-      max-width: 150px;
-      min-width: 150px;
-      text-align: left;
-      justify-content: left;
+    .mat-row {
+      width: 100%;
+      max-width: 910px;
+      min-width: 910px;
+      min-height: 20px;
     }
+
   }
 
   .Bill {
     height: 216px !important;
-
     .mat-header-row {
       width: 100%;
-      max-width: 770px;
-      min-width: 770px;
+      max-width: 1070px;
+      min-width: 1070px;
       min-height: 20px;
       padding: 5px;
       border-radius: 2px;
       border-end-end-radius: 2px;
     }
+
+    .mat-row {
+      width: 100%;
+      max-width: 910px;
+      min-width: 910px;
+      min-height: 20px;
+    }
+
+    // .mat-header-row {
+    //   width: 100%;
+    //   max-width: 770px;
+    //   min-width: 770px;
+    //   min-height: 20px;
+    //   padding: 5px;
+    //   border-radius: 2px;
+    //   border-end-end-radius: 2px;
+    // }
 
     .mat-column-InterimOrFinal {
       width: 80px;
@@ -126,11 +244,10 @@ app-patient-screen-bill-detail {
     }
 
     .mat-column-ExtBillData {
-      width: 120px;
-      max-width: 120px;
-      min-width: 120px;
+      width: 250px;
+      max-width: 250px;
+      min-width: 250px;
       text-align: left;
-
       justify-content: left;
     }
 
@@ -202,9 +319,9 @@ app-patient-screen-bill-detail {
     }
 
     .mat-column-ExtBillDetail {
-      width: 180px;
-      max-width: 180px;
-      min-width: 180px;
+      width: 250px;
+      max-width: 250px;
+      min-width: 250px;
       text-align: left;
       justify-content: left;
     }
@@ -218,23 +335,22 @@ app-patient-screen-bill-detail {
       justify-content: left;
     }
 
-    .mat-column-IndServiceId {
-      width: 150px;
-      max-width: 150px;
-      min-width: 150px;
-      text-align: left;
+    // .mat-column-IndServiceId {
+    //   width: 150px;
+    //   max-width: 150px;
+    //   min-width: 150px;
+    //   text-align: left;
 
-      justify-content: left;
-    }
+    //   justify-content: left;
+    // }
 
-    .mat-column-IndServiceId {
-      width: 100px;
-      max-width: 100px;
-      min-width: 100px;
-      text-align: left;
-
-      justify-content: left;
-    }
+    // .mat-column-IndServiceId {
+    //   width: 100px;
+    //   max-width: 100px;
+    //   min-width: 100px;
+    //   text-align: left;
+    //   justify-content: left;
+    // }
 
     .mat-column-IndServiceName {
       width: 200px;

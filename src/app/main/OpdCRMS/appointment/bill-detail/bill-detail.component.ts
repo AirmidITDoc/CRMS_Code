@@ -546,7 +546,7 @@ export class BillDetailComponent implements OnInit {
           if (result.isConfirmed) {
             let m = response;
             this.getPrint(m);
-            this._matDialog.closeAll();
+            this.dialogRef.close();
           }
         });
       } else {

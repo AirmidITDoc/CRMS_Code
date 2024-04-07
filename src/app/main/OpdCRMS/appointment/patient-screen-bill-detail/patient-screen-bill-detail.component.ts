@@ -144,7 +144,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
   displayedColumns4 = [
     'Servicename',
     'TotalAmount',
-    'IndServiceId',
+    // 'IndServiceId',
     'IndServiceName',
     'IndServiceAmount',
     'ExtBillDetail',
@@ -475,10 +475,9 @@ debugger
     this._AppointmentService.InvoiceBillUpdateIntegration(submissionObj).subscribe(response => {
 
       if (response) {
-        Swal.fire('Congratulations !', 'Invoice Bill Mapping Successfully !', 'success').then((result) => {
+        Swal.fire('Save !', 'Bill Mapped Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {
-            this._matDialog.closeAll();
-
+            // this._matDialog.closeAll();
           }
 
         });
@@ -530,10 +529,9 @@ debugger
     this._AppointmentService.InvoiceBillAddchargesInteration(submissionObj1).subscribe(response => {
 
       if (response) {
-        Swal.fire('Congratulations !', 'Invoice Bill AddCharges Intergration Successfully !', 'success').then((result) => {
+        Swal.fire('Save !', 'Services Mapped Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {
-            this._matDialog.closeAll();
-
+            // this._matDialog.closeAll();
           }
 
         });
@@ -584,9 +582,8 @@ debugger
         });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed - Insert Action', result);
-        this._matDialog.closeAll();
+        this.getVistdetaillist();
       });
-
     }
 
   }
@@ -595,7 +592,7 @@ debugger
   UpdateInvoice() {
     let UpdateRegNo = {};
     UpdateRegNo['RegId'] = this.selectedAdvanceObj.RegId,
-      UpdateRegNo['ExtRegNo'] = this._AppointmentService.myFilterform.get('MrNo').value
+    UpdateRegNo['ExtRegNo'] = this._AppointmentService.myFilterform.get('MrNo').value
 
     let submitData = {
       "updateRegno": UpdateRegNo
@@ -603,10 +600,9 @@ debugger
     console.log(submitData);
     this._AppointmentService.UpdateInvoiceBill(submitData).subscribe(response => {
       if (response) {
-        Swal.fire('Updated Invoice Bill  !', 'Invoice Bill Updated Successfully !', 'success').then((result) => {
+        Swal.fire('Updated  !', 'RegNo Mapping Updated Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {
-
-            this._matDialog.closeAll();
+           this.getVistdetaillist();
           }
         });
       } else {
