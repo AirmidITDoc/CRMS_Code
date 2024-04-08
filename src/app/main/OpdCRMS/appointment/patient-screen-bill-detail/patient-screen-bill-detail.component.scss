@@ -174,9 +174,17 @@ app-patient-screen-bill-detail {
 
     .mat-row {
       width: 100%;
-      max-width: 910px;
-      min-width: 910px;
+      max-width: 1070px;
+      min-width: 1070px;
       min-height: 20px;
+    }
+
+    .mat-column-VisitDate {
+      width: 130px;
+      max-width: 130px;
+      min-width: 130px;
+      text-align: left;
+      justify-content: left;
     }
 
   }
@@ -195,8 +203,8 @@ app-patient-screen-bill-detail {
 
     .mat-row {
       width: 100%;
-      max-width: 910px;
-      min-width: 910px;
+      max-width: 1070px;
+      min-width: 1070px;
       min-height: 20px;
     }
 
@@ -292,8 +300,8 @@ app-patient-screen-bill-detail {
 
     .mat-row {
       width: 100%;
-      max-width: 910px;
-      min-width: 910px;
+      max-width: 1070px;
+      min-width: 1070px;
       min-height: 20px;
     }
 
@@ -480,8 +488,8 @@ app-patient-screen-bill-detail {
 
     .mat-row {
       width: 100%;
-      max-width: 1500px;
-      min-width: 1500px;
+      max-width: 1060px;
+      min-width: 1060px;
       min-height: 20px;
     }
 
@@ -581,8 +589,8 @@ app-patient-screen-bill-detail {
 
     .mat-row {
       width: 100%;
-      max-width: 400px;
-      min-width: 400px;
+      max-width: 500px;
+      min-width: 500px;
       min-height: 20px;
     }
 
@@ -625,8 +633,8 @@ app-patient-screen-bill-detail {
 
     .mat-row {
       width: 100%;
-      max-width: 350px;
-      min-width: 350px;
+      max-width: 500px;
+      min-width: 500px;
       min-height: 20px;
     }
 

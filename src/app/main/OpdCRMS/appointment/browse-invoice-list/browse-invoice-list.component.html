@@ -17,7 +17,7 @@
             </span>
         </div>
         <button mat-raised-button (click)="InvoiceGenerate()" fxLayoutAlign="center center"
-            style="margin-left:800px;">InvoiceGenerate
+            style="margin-left:800px;">Invoice Generate
             <!-- <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon> -->
         </button>
     </mat-toolbar>
@@ -37,11 +37,11 @@
             <!-- SIDEBAR CONTENT -->
             <div class="sidebar-content">
 
-                <div class="card">
+                <div class="card box">
 
                     <!-- SIDEBAR HEADER -->
                     <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
-                        style="margin-top: 3%;">
+                     style="margin-top: 0.1em; border-radius: 2px;margin-left: 1%;">
                         <!-- USER -->
                         <!-- <img [src]="user.avatar" class="avatar mr-16" [alt]="user.name" /> -->
                         <span class="h5" style="color: aliceblue;font-size: 17px;">Search Facility</span>
@@ -92,7 +92,7 @@
                                     </mat-form-field> -->
 
 
-                                    <div style="margin-top: 50px;">
+                                    <div style="margin-top: 20px;">
                                         <button mat-raised-button (click)="onClear()" class="clearbutton"
                                             matTooltip="close">
                                             <mat-icon class="cleariconbutton">close</mat-icon>
@@ -102,6 +102,7 @@
                                             <mat-icon class="searchiconbutton">search</mat-icon>
                                         </button>
                                     </div>
+                                    
                                 </div>
                             </form>
                         </div>
@@ -117,7 +118,7 @@
         <div class="center p-12 pb-56">
 
             <!-- CONTENT -->
-            <div class="content-card" style="border-radius:4px;width: 100%; ">
+            <div class="content-card box1" style="border-radius:4px;width: 100%; ">
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
                     <div fxFlex.gt-sm="100%" fxFlex>
 
