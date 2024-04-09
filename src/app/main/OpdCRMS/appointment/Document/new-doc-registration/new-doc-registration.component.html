@@ -7,7 +7,10 @@
       <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" style="color: aliceblue;">
         Registration Information
       </span>
-
+      <div style="margin-left: 980px;color: #fff;margin-top: 15px;">
+        <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
+        </app-common-date>
+      </div>
     </div>
 
   </mat-toolbar>
@@ -35,26 +38,24 @@
             <div fxlayout="row">
               <div style="width: 100%; overflow: hidden;">
 
-                <div style="float: right;">
-                  <app-common-date [screenFrom]="screenFromString" (dateTimeEventEmitter)="getDateTime($event)">
-                  </app-common-date>
-                </div>
+                <span style="float: right;">
+                  <button class="next-btn" style="width: max-content;margin-left: 200px;"
+                    (click)="getappointment()">Book Patient Appointment</button>
+                </span>
 
                 <!-- Personal Information -->
                 <div>
                   <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                    <span class="section-header">Personal Information</span>
+                    <span class="section-header" style="font-size:22px;color: #125786;font-weight: 800;">Personal Information</span>
                   </div>
                   <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="40px" class="section-row">
                     <div class="divTable">
                       <form [formGroup]="newSearchForm">
                         <div class="divRow">
                           <div class="divCell">
-                            <span>Search Existing Patient:</span>
-                          </div>
-                          <div class="divCell">
                             <span>
-                              <mat-form-field>
+                              <mat-form-field appearance="outline" style="width: 150%;">
+                                <mat-label>Search Existing Patient:</mat-label>
                                 <input type="text" class="section-dropdown" name="RegID" formControlName="RegID"
                                   placeholder="RegNo / First Name / Last Name / Mobile No" matInput
                                   [matAutocomplete]="auto" (input)="getSearchList()">
@@ -75,18 +76,14 @@
                                 </mat-error>
                               </mat-form-field>
                             </span>
-                          </div>
+                          </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                           <div class="divCell" style="width: 200px;">
                             <span>Registration No: {{RegNo}}</span>
-                          </div>
+                          </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                           <div class="divCell" style="width: 350px;">
                             <span>Patient Name: {{PatientName}}</span>
-                          </div>
-                          <div class="divCell">
-                            <span>
-                              <button class="next-btn" style="width: max-content;margin-left: 10px;"
-                                (click)="getappointment()">Book Patient Appointment</button>
-                            </span>
                           </div>
                         </div>
                       </form>
@@ -95,14 +92,13 @@
                   </div>
                 </div>
                 <mat-divider></mat-divider>
-                <mat-tab-group fitInkBarToContent class="group-padding">
+                <mat-tab-group fitInkBarToContent class="group-padding" mat-align-tabs="center">
                   <mat-tab label="Presentation">
                     <!-- PA Pressure -->
                     <form [formGroup]="newAddForm">
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="40px" class="section-row first-row-padding">
                         <div>
-                          <span class="presentation-section-label">Symtoms:</span>
-                          <mat-form-field class="section-dropdown">
+                          <mat-form-field class="section-dropdown" appearance="outline">
                             <mat-label>Symtoms</mat-label>
                             <mat-select name="Symtoms" formControlName="Symtoms"
                               (selectionChange)="onChangeDocList($event.value)">
@@ -134,16 +130,14 @@
 
                       <!-- 2D ECHO -->
                       <div>
-                        <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                          <span class="section-header">2D Echo</span>
-
+                        <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="2px" fxLayoutAlign="space-between">
+                          <span class="section-header" style="font-size:18px;color: #125786;font-weight: 800;">2D Echo</span>
                         </div>
 
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="flext-start" class="section-row">
-                          <div>
-                            <span class="presentation-section-label">LVEF:</span>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex="70%">
-                              <mat-label>-- Select LVEF --</mat-label>
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="flext-start" class="section-row">
+                         
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex appearance="outline">
+                              <mat-label>Select LVEF</mat-label>
                               <mat-select formControlName="LVEF">
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="35"> <35</mat-option>
@@ -151,18 +145,15 @@
                                 <mat-option value="50">>50</mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="presentation-section-label">Global GLS:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex="60%">
+                      
+                            <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
                               <mat-label>Global GLS</mat-label>
                               <input name="Global GLS" matInput formControlName="GLS">
                             </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="presentation-section-label">RWMA:</span>
-                            <mat-form-field class="section-dropdown" style="width: 240px;margin-left:10px;">
-                              <mat-label>-- RWMA--</mat-label>
+                      
+                          
+                            <mat-form-field class="section-dropdown"  fxFlex appearance="outline">
+                              <mat-label>RWMA</mat-label>
                               <mat-select formControlName="RWMA" name="RWMA">
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of vRWMAList" [value]="m">
@@ -170,11 +161,9 @@
                                 </mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="presentation-section-label">PA Pressure:</span>
-                            <mat-form-field class="section-dropdown" style="width: 240px;margin-left: 10px;">
-                              <mat-label>-- PA Pressure--</mat-label>
+                          
+                            <mat-form-field class="section-dropdown" fxFlex  appearance="outline">
+                              <mat-label> PA Pressure</mat-label>
                               <mat-select formControlName="PApressure" name="PApressure">
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of PApressureList" [value]="m">
@@ -182,16 +171,9 @@
                                 </mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
-                        </div>
-
-                        <!-- Valve -->
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="flext-start" class="section-row">
-                          <div>
-                            <span class="presentation-section-label">Valve:</span>
-
-                            <mat-form-field class="section-dropdown" fxFlex>
-                              <mat-label>-- Select Valve--</mat-label>
+                        
+                            <mat-form-field class="section-dropdown" fxFlex appearance="outline">
+                              <mat-label>Select Valve</mat-label>
                               <mat-select formControlName="Valve" name="Valve">
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of ValveList" [value]="m">
@@ -199,71 +181,70 @@
                                 </mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
+         
                           <div class="valve-top-padding-2">
                             <mat-radio-group aria-label="Select an option" formControlName="ValveYesNo" (change)="onChangeValveYN($event)">
                               <mat-radio-button value="Yes">Yes</mat-radio-button>
                               <mat-radio-button value="No">No</mat-radio-button>
                             </mat-radio-group>
                           </div>
-                          <div class="valve-top-padding-2" *ngIf="isValveYes" >
-                            <mat-radio-group aria-label="Select an option" formControlName="ValveSR" (change)="onChangeValveSR($event)">
-                              <mat-lable class="mr-12">Value S/R:</mat-lable>
-                              <mat-radio-button value="Stenotic"  >Stenotic</mat-radio-button>
-                              <mat-radio-button value="Regurgitation"  >Regurgitation</mat-radio-button>
-                            </mat-radio-group>
-                          </div>
-                        </div>
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="flext-start" class="section-row">                          
-                          <div *ngIf="isValveStenotic" fxLayoutGap="3%">
-                            <span class="valve-firstlabel">Grade:</span>
-                            <mat-form-field fxFlex class="valve-controls">
-                              <mat-label>-- Select --</mat-label>
-                              <mat-select formControlName="Severity" name="Severity" >
-                                  <mat-option value="1">Grade I</mat-option>
-                                  <mat-option value="2">Grade II</mat-option>
-                                  <mat-option value="3">Grade III</mat-option>
-                                  <mat-option value="4">Grade IV</mat-option>
-                              </mat-select>
-                            </mat-form-field>
-
-                            
-                            <span class="valve-label">x/y Mean (In mmHg):</span>
-                            <mat-form-field fxFlex class="valve-controls">
-                              <input name="xymean" matInput formControlName="xymean" placeholder="In mmHg" >                              
-                            </mat-form-field>
-
-                            <span class="valve-label">MVA / AVA (In cm<sup>2</sup>):</span>
-                            <mat-form-field fxFlex class="valve-controls">
-                              <input name="MVA" matInput formControlName="MVA" placeholder="MVA / AVA" >                              
-                            </mat-form-field>
-                          </div>
-
-                          <div *ngIf="isValveRegurgitation">
-                            <span class="presentation-section-label">Grade:</span>
-                            <mat-form-field class="stemi-formcontrol" style="width: 300px;" fxFlex>
-                              <mat-label>-- Select --</mat-label>
-                              <mat-select formControlName="Severity" name="Severity" >
-                                  <mat-option value="1">Grade I</mat-option>
-                                  <mat-option value="2">Grade II</mat-option>
-                                  <mat-option value="3">Grade III</mat-option>
-                                  <mat-option value="4">Grade IV</mat-option>
-                              </mat-select>
-                            </mat-form-field>
-                          </div>
-                          
                           <div matTooltip="Select All to enable this button!!" [matTooltipPosition]="'above'">
-                            <button mat-raised-button fxLayoutAlign="center center" style="background-color: blue; color: white; 
+                            <button mat-raised-button fxLayoutAlign="center center" style="background-color: #0093B8; color: white; 
                                   width: 70px;margin-left:5px;" (click)="onAddData()" [disabled]="newAddForm.invalid">
                               <mat-icon>add</mat-icon>&nbsp;Add
                             </button>
                           </div>
                         </div>
 
+                        <!-- Valve -->
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="1px" fxLayoutAlign="flext-start" class="section-row">
+                          <div class="valve-top-padding-2" *ngIf="isValveYes">
+                            <mat-radio-group aria-label="Select an option" formControlName="ValveSR" (change)="onChangeValveSR($event)">
+                              <mat-lable class="mr-12">Value S/R:</mat-lable>
+                              <mat-radio-button value="Stenotic"  >Stenotic</mat-radio-button>
+                              <mat-radio-button value="Regurgitation">Regurgitation</mat-radio-button>
+                            </mat-radio-group>
+                          </div>
+                        </div>
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="1px" fxLayoutAlign="flext-start" class="section-row">                          
+                          <div *ngIf="isValveStenotic">
+                            <span class="valve-firstlabel">Grade:</span>
+                            <mat-form-field fxFlex class="valve-controls" appearance="outline">
+                              <mat-label>Select Grade</mat-label>
+                              <mat-select formControlName="Severity" name="Severity" >
+                                  <mat-option value="1">Grade I</mat-option>
+                                  <mat-option value="2">Grade II</mat-option>
+                                  <mat-option value="3">Grade III</mat-option>
+                                  <mat-option value="4">Grade IV</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            
+                            <span class="valve-label">x/y Mean (In mmHg):</span>
+                            <mat-form-field fxFlex class="valve-controls" appearance="outline">
+                              <input name="xymean" matInput formControlName="xymean" placeholder="In mmHg" >                              
+                            </mat-form-field>
+                            <span class="valve-label">MVA / AVA (In cm<sup>2</sup>):</span>
+                            <mat-form-field fxFlex class="valve-controls" appearance="outline">
+                              <input name="MVA" matInput formControlName="MVA" placeholder="MVA / AVA" >                              
+                            </mat-form-field>
+                          </div>
 
+                          <div *ngIf="isValveRegurgitation">
+                            <span class="presentation-section-label">Grade:</span>
+                            <mat-form-field class="stemi-formcontrol" fxFlex appearance="outline">
+                              <mat-label>Select Grade</mat-label>
+                              <mat-select formControlName="Severity" name="Severity">
+                                  <mat-option value="1">Grade I</mat-option>
+                                  <mat-option value="2">Grade II</mat-option>
+                                  <mat-option value="3">Grade III</mat-option>
+                                  <mat-option value="4">Grade IV</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        </div><br>
                         <mat-table #table class="table" matSort [dataSource]="dataSource"
                           [@animateStagger]="{value:'50'}"
-                          style="height: 150px !important; overflow: auto;margin-top: 5px; width: 100%;">
+                          style="height: 170px !important; overflow: auto;margin-top: 5px; width: 100%;border-end-end-radius: 2px;border-end-start-radius: 2px;">
 
                           <ng-container matColumnDef="LVEF">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
@@ -404,30 +385,27 @@
                     <mat-divider></mat-divider>
                     <form [formGroup]="newSaveForm">
                       <div>
-                        <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                          <span class="section-header">Past History</span>
+                        <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="2px" fxLayoutAlign="space-between">
+                          <span class="section-header"  style="font-size:18px;color: #125786;font-weight: 800;">Past History</span>
                         </div>
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="1px" fxLayoutAlign="flext-start" class="section-row">
                           <div class="past-hist-section-label">
                             <span class="past-hist-pad3"><b>Past Cardiac Procedure:</b></span>&nbsp;&nbsp;&nbsp;
-                            <span class="past-hist-pad3">Angioplasty:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                            <mat-form-field class="mr-sm-12" fxFlex appearance="outline" style="margin-left: 22px;">
                               <mat-label>Angioplasty</mat-label>
                               <input name="Angioplasty" formControlName="Angioplasty" matInput>
                             </mat-form-field>
                           </div>
 
                           <div class="past-hist-section-label">
-                            <span class="past-hist-pad3">CABG:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                            <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
                               <mat-label>CABG</mat-label>
                               <input name="CABG" formControlName="CABG" matInput>
                             </mat-form-field>
                           </div>
 
                           <div class="past-hist-section-label">
-                            <span class="past-hist-pad3">Vascular Procedure:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                            <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
                               <mat-label>Vascular Procedure</mat-label>
                               <input name="VascularProcedure" formControlName="VascularProcedure" matInput>
                             </mat-form-field>
@@ -445,7 +423,7 @@
 
                           <div>
                             <span class="past-hist-pad3"><b>Past Non-Cardiac Procedure:</b></span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                            <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
                               <mat-label>Past Non-Cardiac Procedure</mat-label>
                               <input name="PastNonCardiacProcedure" formControlName="PastNonCardiacProcedure" matInput>
                             </mat-form-field>
@@ -456,9 +434,9 @@
 
                       <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;"
                         matTooltip="Select All to enable this button!!">
-                        <div style="margin-top: 20px;">
+                        <div style="margin-top:1px;">
                           <button class="next-btn" color="accent" style="border-radius: 16px;" (click)="onSubmit()"
-                            [disabled]="newSaveForm.invalid">Save</button>
+                            [disabled]="newSaveForm.invalid">Save</button>&nbsp;
                           <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
                         </div>
                       </div>
@@ -466,11 +444,7 @@
 
                   </mat-tab>
 
-
-
                   <!-- Second Tab Start -->
-
-
                   <mat-tab label="Cardiac Risk Factor">
                     <form [formGroup]="CardiacRiskFormGroup">
                       <div>
@@ -2888,7 +2862,6 @@
                       </div>
                     </form>
                   </mat-tab>
-
 
                   <!-- <button class="next-btn" style="width: max-content;margin-left: 10px;"
                   (click)="getProcedure()">Procedure</button> -->

@@ -32,13 +32,8 @@ app-new-doc-registration {
 
     .main-content {
         display: flex;
-
-
         // max-height:650px !important;
         max-height: 730px !important;
-
-
-
     }
 
     .profile-section {
@@ -111,8 +106,8 @@ app-new-doc-registration {
         font-size: 16px;
         font-weight: 700px;
         padding: 10px;
-        margin-right: 5px;
-        border-radius: 16px;
+        margin-right: 2px;
+        border-radius: 10px;
         border: 1px solid #039be5;
         background-color: white;
         // background-color: hsl(204, 92%, 38%);
@@ -123,9 +118,7 @@ app-new-doc-registration {
         background-color: #039be5;
         // border: 1px solid rgb(247, 97, 97);
         color: white;
-
     }
-
 
     .header-container {
         height: 40px;
@@ -162,7 +155,7 @@ app-new-doc-registration {
 
 
     .presentation-section-label {
-       padding-right: 10px;
+        padding-right: 10px;
         padding-top: 5%;
     }
 
@@ -315,23 +308,26 @@ app-new-doc-registration {
         padding-left: 5%;
     }
 
+    
+
     .mat-header-row {
         width: 100%;
-        max-width:1350px;
-        min-width:1350px; 
-        min-height: 35px;     
+        max-width:1200px;
+        min-width:1200px; 
+        min-height: 20px;
+        border-radius: 2px;     
     }
     .mat-row {
         width: 100%;
-        max-width:1350px;
-        min-width:1350px; 
+        max-width:1200px;
+        min-width:1200px; 
         min-height: 25px;            
     }
 
     .mat-column-LVEF {
-        width:170px;
-        max-width:170px;
-        min-width:170px;
+        width:150px;
+        max-width:150px;
+        min-width:150px;
         text-align:left;
         justify-content: left;
     }
@@ -343,9 +339,9 @@ app-new-doc-registration {
         text-align: right;
     }
     .mat-column-RWMA {
-        width:170px;
-        max-width:170px;
-        min-width:170px;
+        width:150px;
+        max-width:150px;
+        min-width:150px;
         text-align:left;
         justify-content: left;
     }
@@ -366,9 +362,9 @@ app-new-doc-registration {
     }
 
     .mat-column-Stenotic {
-        width:200px;
-        max-width:200px;
-        min-width:200px;
+        width:150px;
+        max-width:150px;
+        min-width:150px;
         text-align: right;
     }
     .mat-column-Regurgitation {
@@ -409,14 +405,14 @@ app-new-doc-registration {
 
     .mat-header-row {
         width: 100%;
-        max-width:1450px;
-        min-width:1450px; 
+        max-width:1200px;
+        min-width:1200px; 
         min-height: 35px;     
     }
     .mat-row {
         width: 100%;
-        max-width:1450px;
-        min-width:1450px; 
+        max-width:1200px;
+        min-width:1200px; 
         min-height: 25px;            
     }
 
@@ -491,8 +487,6 @@ app-new-doc-registration {
         justify-content:right; 
         
     }
-
-    ----
 
 
     .mat-header-row {
@@ -677,11 +671,9 @@ app-new-doc-registration {
     }
 
 
-
-
     .mat-header-row {
         width: 100%;
-        max-width:1450px;
+        max-width:10px;
         min-width:1450px; 
         min-height: 35px;     
         color: #ffffff;
@@ -749,8 +741,8 @@ app-new-doc-registration {
 
     .valve-controls{
         padding-top: 1%;
-        width: 400px;
-        padding-left: 50px;
+        width: 350px;
+        padding-left: 10px;
     }
 
     .valve-label{

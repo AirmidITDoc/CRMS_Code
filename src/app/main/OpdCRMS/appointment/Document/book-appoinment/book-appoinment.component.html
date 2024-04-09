@@ -1,7 +1,7 @@
 <div class="container" style="width: 100%;">
     <div style="width: 100%;">
         <!-- <div fxFlex> -->
-        <div fxLayout="row" fxLayoutAlign="start center" class="accent" style="width:100% ; height:50px;color: white;">
+        <div fxLayout="row" fxLayoutAlign="start center" class="accent" style="width:100% ; height:50px;color: white;border-radius: 3px;">
 
             <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
 
@@ -10,12 +10,12 @@
                     Book Appointment
                 </span>
 
-                <span style="margin-right: 40px;color: rgb(245, 241, 241);font-weight: bold;">
+                <span style="margin-right: 20px;color: rgb(245, 241, 241);font-weight: bold;margin-top: 1%;">
                     <app-common-date [screenFrom]="screenFromString"
                         (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
                 </span>
 
-                <span class="material-icons" style="cursor: pointer;float: right; margin-right: 5px;  "
+                <span class="material-icons" style="cursor: pointer;float: right; margin-right: 2px;  "
                     (click)="onClose()">
                     close
                 </span>
@@ -25,8 +25,8 @@
         <div fxLayout="column" style="width: 100%;">
 
             <form [formGroup]="BookAppointmentFrom">
-                <div style="padding: 7px;border-style: groove;">
-                    
+               
+                    <br>
                     <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
                         style="margin-bottom: 20px; margin-top: 10px;">
 
@@ -95,7 +95,6 @@
                     </div>
 
                     <div style="float: right;margin-top: 20px;" matTooltip="Select All to enable this button!!">
-
                         <button class="next-btn" color="accent" style="border-radius: 16px;"
                             [disabled]="BookAppointmentFrom.invalid">Save </button>
                         <button class="footer-btn" (click)="onClose()">Cancel</button>
@@ -103,7 +102,7 @@
                     </div>
 
 
-                </div>
+    
             </form>
         </div>
 

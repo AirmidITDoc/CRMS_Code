@@ -12,8 +12,9 @@ app-browse-payment-receipt{
 
   
     .table1{
-        height: 710px !important;
+        height: 83vh !important;
     }
+    
     display: flex;
     flex: 1 1 auto;
     width: 100%;
@@ -67,10 +68,12 @@ app-browse-payment-receipt{
     border-radius: 50%;
 }
 .mat-header-row {
-    width: 1950px;
+    width:100%;
     max-width: 1950px;
     min-width: 1950px;  
-    // min-height: 30px;     
+    min-height: 20px;   
+    padding: 2px;
+    border-radius: 2px;  
 }
 
 .mat-row {
@@ -199,9 +202,9 @@ app-browse-payment-receipt{
 
 
 .mat-column-buttons {
-    width:170px;
-    max-width: 170px;
-    min-width: 170px;
+    width:150px;
+    max-width: 150px;
+    min-width: 150px;
     text-align: center;
     justify-content:center;
 }
