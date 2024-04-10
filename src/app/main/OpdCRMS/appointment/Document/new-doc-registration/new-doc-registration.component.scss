@@ -170,14 +170,14 @@ app-new-doc-registration {
     }
 
     .section-dropdown {
-        width: 200px;
+        width: 458px;
+        margin-left: 5px;
     }
-   
-
 
     .section-row {
         padding-right: 10px;
         padding-left: 20px;
+        width: 1350px;
     }
 
     .divTable {
@@ -286,7 +286,7 @@ app-new-doc-registration {
     }
 
     .example-margin {
-        margin: 0 20px;
+        margin: 0 9px;
     }
 
     .example-section {
@@ -407,41 +407,41 @@ app-new-doc-registration {
         width: 100%;
         max-width:1200px;
         min-width:1200px; 
-        min-height: 35px;     
+        min-height: 20px;     
     }
     .mat-row {
         width: 100%;
         max-width:1200px;
         min-width:1200px; 
-        min-height: 25px;            
+        min-height: 20px;            
     }
 
     .mat-column-AccessType {
-        width:150px;
-        max-width:150px;
-        min-width:150px;
+        width:200px;
+        max-width:200px;
+        min-width:200px;
         text-align:left;
         justify-content: left;
     }
 
     .mat-column-Accessvalue1 {
-        width:100px;
-        max-width:100px;
-        min-width:100px;
+        width:200px;
+        max-width:200px;
+        min-width:200px;
         text-align: right;
     }
 
     .mat-column-Accessvalue2 {
-        width:100px;
-        max-width:100px;
-        min-width:100px;
+        width:200px;
+        max-width:200px;
+        min-width:200px;
         text-align: right;
     }
 
     .mat-column-Other1 {
-        width:100px;
-        max-width:100px;
-        min-width:100px;
+        width:200px;
+        max-width:200px;
+        min-width:200px;
         text-align: right;
     }
     .mat-column-IronDef {
@@ -504,9 +504,9 @@ app-new-doc-registration {
     }
 
     .mat-column-LesionType {
-        width:130px;
-        max-width:130px;
-        min-width:130px;
+        width:100px;
+        max-width:100px;
+        min-width:100px;
         text-align: left;
         text-align: left;
         justify-content: left;
@@ -517,7 +517,7 @@ app-new-doc-registration {
         display: inline-flex;
         display: inline;
         margin-right: 20px;
-        margin-top: 15px;
+        margin-top: 10px;
     }
 
     .mat-column-SyntaxScoreValue {
@@ -528,9 +528,9 @@ app-new-doc-registration {
     }
 
     .mat-column-Severity {
-        width:110px;
-        max-width:110px;
-        min-width:110px;
+        width:60px;
+        max-width:60px;
+        min-width:60px;
         text-align: left;
         text-align: left;
         justify-content: left;
@@ -541,9 +541,15 @@ app-new-doc-registration {
         display: inline-flex;
         display: inline;
         margin-right: 20px;
-        margin-top: 15px;
+        margin-top: 10px;
     }
 
+    .mat-column-Proximal{
+        width:130px;
+        max-width:130px;
+        min-width:130px;
+        text-align: right;
+    }
     .mat-column-IndexLesionValue {
         width:90px;
         max-width:90px;
@@ -554,6 +560,12 @@ app-new-doc-registration {
         width:70px;
         max-width:70px;
         min-width:70px;
+        text-align: right;
+    }
+    .mat-column-Thrombus {
+        width:80px;
+        max-width:80px;
+        min-width:80px;
         text-align: right;
     }
     .mat-column-Significant {
@@ -595,21 +607,21 @@ app-new-doc-registration {
         text-align: right;
     }
     .mat-column-StarSegment {
-        width:110px;
-        max-width:110px;
-        min-width:110px;
+        width:100px;
+        max-width:100px;
+        min-width:100px;
         text-align: right;
     }
     .mat-column-SideSegment {
-        width:110px;
-        max-width:110px;
-        min-width:110px;
+        width:100px;
+        max-width:100px;
+        min-width:100px;
         text-align: right;
     }
     .mat-column-EndSegment {
-        width:110px;
-        max-width:110px;
-        min-width:110px;
+        width:100px;
+        max-width:100px;
+        min-width:100px;
         text-align: right;
     }
 

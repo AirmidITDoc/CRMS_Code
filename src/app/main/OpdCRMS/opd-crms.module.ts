@@ -46,7 +46,6 @@ const appRoutes: Routes = [
   loadChildren: () =>import("./bill-settlement/bill-settlement.module").then((m) => m.BillSettlementModule),
 },
 
-
 {
   path: "Clinical Document",
   loadChildren: () => import("../OpdCRMS/appointment/Document/clinical-document.module").then((m) => m.ClinicalDocumentModule),

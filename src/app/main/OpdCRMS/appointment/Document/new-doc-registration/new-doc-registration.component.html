@@ -190,7 +190,7 @@
                           </div>
                           <div matTooltip="Select All to enable this button!!" [matTooltipPosition]="'above'">
                             <button mat-raised-button fxLayoutAlign="center center" style="background-color: #0093B8; color: white; 
-                                  width: 70px;margin-left:5px;" (click)="onAddData()" [disabled]="newAddForm.invalid">
+                                  width: 70px;margin-left:5px;margin-top: 6px;" (click)="onAddData()" [disabled]="newAddForm.invalid">
                               <mat-icon>add</mat-icon>&nbsp;Add
                             </button>
                           </div>
@@ -242,7 +242,7 @@
                             </mat-form-field>
                           </div>
                         </div><br>
-                        <mat-table #table class="table" matSort [dataSource]="dataSource"
+                        <mat-table #table class="table box1" matSort [dataSource]="dataSource"
                           [@animateStagger]="{value:'50'}"
                           style="height: 170px !important; overflow: auto;margin-top: 5px; width: 100%;border-end-end-radius: 2px;border-end-start-radius: 2px;">
 
@@ -385,26 +385,26 @@
                     <mat-divider></mat-divider>
                     <form [formGroup]="newSaveForm">
                       <div>
-                        <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="2px" fxLayoutAlign="space-between">
+                        <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="1px" fxLayoutAlign="space-between">
                           <span class="section-header"  style="font-size:18px;color: #125786;font-weight: 800;">Past History</span>
                         </div>
                         <div fxFlexFill fxLayout="row" fxLayoutGap="1px" fxLayoutAlign="flext-start" class="section-row">
-                          <div class="past-hist-section-label">
-                            <span class="past-hist-pad3"><b>Past Cardiac Procedure:</b></span>&nbsp;&nbsp;&nbsp;
+                          <div class="past-hist-section-label" style="width:53%;">&nbsp;
+                            <span class="past-hist-pad3" style="width:30%;"><b>Past Cardiac Procedure:</b></span>
                             <mat-form-field class="mr-sm-12" fxFlex appearance="outline" style="margin-left: 22px;">
                               <mat-label>Angioplasty</mat-label>
                               <input name="Angioplasty" formControlName="Angioplasty" matInput>
                             </mat-form-field>
                           </div>
 
-                          <div class="past-hist-section-label">
+                          <div class="past-hist-section-label" style="width:32%;">
                             <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
                               <mat-label>CABG</mat-label>
                               <input name="CABG" formControlName="CABG" matInput>
                             </mat-form-field>
                           </div>
 
-                          <div class="past-hist-section-label">
+                          <div class="past-hist-section-label" style="width:32%;">
                             <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
                               <mat-label>Vascular Procedure</mat-label>
                               <input name="VascularProcedure" formControlName="VascularProcedure" matInput>
@@ -412,7 +412,7 @@
                           </div>
                         </div>
 
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="1px" fxLayoutAlign="flext-start" class="section-row">
                           <!-- <div>
                             <span class="past-hist-pad3">Past Cardiac Procedure:</span>
                             <mat-form-field class="mr-sm-12" fxFlex>
@@ -421,9 +421,9 @@
                             </mat-form-field>
                           </div> -->
 
-                          <div>
+                          <div style="width:44%;">
                             <span class="past-hist-pad3"><b>Past Non-Cardiac Procedure:</b></span>
-                            <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
+                            <mat-form-field class="mr-sm-12" fxFlex appearance="outline" >
                               <mat-label>Past Non-Cardiac Procedure</mat-label>
                               <input name="PastNonCardiacProcedure" formControlName="PastNonCardiacProcedure" matInput>
                             </mat-form-field>
@@ -449,21 +449,20 @@
                     <form [formGroup]="CardiacRiskFormGroup">
                       <div>
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                          <span class="section-header">Hypertension</span>
+                          <span class="section-header" style="font-size:18px;color: #125786;font-weight: 800;">Hypertension</span>
                         </div>
 
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
-                          <div class="ht-label">
-                            <span>Hypertension:&nbsp;&nbsp;</span>
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="2px" fxLayoutAlign="flext-start" class="section-row">
+                          <div class="ht-label" style="width:22%">
+                            <span>Hypertension:&nbsp;&nbsp;&nbsp;&nbsp;</span>
                             <mat-radio-group fxFlex aria-label="Select an option" formControlName="Hypertension" (change)="onChangeRadioButton($event, 'Hypertension')">
                               <mat-radio-button value="Yes">Yes</mat-radio-button>
                               <mat-radio-button value="No">No</mat-radio-button>
                             </mat-radio-group>
-                          </div>
-                          <div *ngIf = "isHypertension">
-                            <span class="ht-label" style="margin-top: 2%;">On Medication:&nbsp;&nbsp;&nbsp;</span>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
-                              <mat-label>-- Select --</mat-label>
+                          </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <div *ngIf = "isHypertension" style="width:38%">
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex appearance="outline">
+                              <mat-label>Select On Medication:</mat-label>
                               <mat-select formControlName="OnMedication" name="OnMedication" required>
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="Yes">Yes</mat-option>
@@ -475,8 +474,8 @@
                               </mat-error>
                             </mat-form-field>
                           </div>
-                          <div *ngIf = "isHypertension">
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                          <div *ngIf = "isHypertension" style="width:38%">
+                            <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
                               <mat-label>(If Yes) Specify Drug Details</mat-label>
                               <input name="DrugDetails" formControlName="DrugDetails" matInput>
                               <mat-error>(If Yes) Specify Drug Details</mat-error>
@@ -484,14 +483,13 @@
                           </div>
                         </div>
                         <mat-divider></mat-divider>
-                        <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="1%" fxLayoutAlign="space-between">
-                          <span class="section-header">CKD</span>
+                        <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="1px" fxLayoutAlign="space-between">
+                          <span class="section-header" style="font-size:18px;color: #125786;font-weight: 800;">CKD</span>
                         </div>
 
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
-                          <div>
-                            <span class="presentation-section-label">CKD:</span>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="2px" fxLayoutAlign="flext-start" class="section-row">
+                         
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex appearance="outline">
                               <mat-label>CKD</mat-label>
                               <mat-select formControlName="CKD" name="CKD">
                                 <mat-option value="0"></mat-option>
@@ -499,11 +497,8 @@
                                 <mat-option value="No">No</mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
-
-                          <div>
-                            <span class="presentation-section-label">Dialysis Dependent:</span>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                         
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex appearance="outline">
                               <mat-label>Dialysis Dependent</mat-label>
                               <mat-select formControlName="DialysisDependent" name="DialysisDependent">
                                 <mat-option value="0"></mat-option>
@@ -511,11 +506,8 @@
                                 <mat-option value="No">No</mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
-
-                          <div>
-                            <span class="presentation-section-label">Tobacco Use:</span>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                          
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex appearance="outline">
                               <mat-label>Tobacco Use</mat-label>
                               <mat-select formControlName="TobacoChewing" name="TobacoChewing">
                                 <mat-option value="No">No</mat-option>
@@ -523,15 +515,12 @@
                                 <mat-option value="Chewing">Chewing</mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
-
-                          <div>
-                            <span class="presentation-section-label">eGFR:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                        
+                            <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
                               <mat-label>eGFR</mat-label>
                               <input formControlName="eGFR" name="eGFR" matInput>
                             </mat-form-field>
-                          </div>
+                       
 
                         </div>
                       </div>
@@ -539,21 +528,20 @@
                       <mat-divider></mat-divider>
                       <div>
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                          <span class="section-header">Type II Diabetes</span>
+                          <span class="section-header" style="font-size:18px;color: #125786;font-weight: 800;">Type II Diabetes</span>
                         </div>
 
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
-                          <div class="ht-label">
-                            <span>Diabetes:&nbsp;&nbsp;</span>
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="2px" fxLayoutAlign="flext-start" class="section-row">
+                          <div class="ht-label" style="width:25%">
+                            <span>Diabetes:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                             <mat-radio-group fxFlex aria-label="Select an option" formControlName="t2d" (change)="onChangeRadioButton($event, 'T2D')">
                               <mat-radio-button value="Yes">Yes</mat-radio-button>
                               <mat-radio-button value="No">No</mat-radio-button>
                             </mat-radio-group>
                           </div>
-                          <div *ngIf = "isT2D">
-                            <span class="presentation-section-label">Insuline:</span>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
-                              <mat-label>-- Select Insuline --</mat-label>
+                          <div *ngIf = "isT2D" style="width: 19%;">
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex appearance="outline">
+                              <mat-label>Select Insuline</mat-label>
                               <mat-select formControlName="Insuline" name="Insuline">
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="Yes">Yes</mat-option>
@@ -562,9 +550,8 @@
                             </mat-form-field>
                           </div>
 
-                          <div *ngIf = "isT2D">
-                            <span class="presentation-section-label">Oral:</span>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                          <div *ngIf = "isT2D" style="width: 19%;">
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex appearance="outline">
                               <mat-label>Oral</mat-label>
                               <mat-select formControlName="Oral" name="Oral">
                                 <mat-option value="0"></mat-option>
@@ -574,9 +561,8 @@
                             </mat-form-field>
                           </div>
 
-                          <div *ngIf = "isT2D">
-                            <span class="presentation-section-label">Controlled: </span>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                          <div *ngIf = "isT2D" style="width: 19%;">
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex appearance="outline">
                               <mat-label>Controlled</mat-label>
                               <mat-select formControlName="Insuline" name="Insuline">
                                 <mat-option value="0"></mat-option>
@@ -586,12 +572,10 @@
                             </mat-form-field>
                           </div>
 
-                          <div>
-                            <span class="presentation-section-label">Hba1c:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                          <div style="width: 19%;">
+                            <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
                               <mat-label>Hba1c</mat-label>
                               <input formControlName="Hba1c" name="Hba1c" matInput required>
-                              
                             </mat-form-field>
                           </div>
 
@@ -600,46 +584,40 @@
                       <mat-divider></mat-divider>
                       <div>
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                          <span class="section-header">Dyslipidemia</span>
+                          <span class="section-header" style="font-size:18px;color: #125786;font-weight: 800;">Dyslipidemia</span>
                         </div>
 
                         <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
-                          <div>
-                            <span class="presentation-section-label">LDL:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                       
+                            <mat-form-field class="mr-sm-12" fxFlex  appearance="outline">
                               <mat-label>LDL</mat-label>
                               <input formControlName="LDL" name="LDL" matInput>                              
                             </mat-form-field>
-                          </div>
-
-                          <div>
-                            <span class="presentation-section-label">Tri Glyceride:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                         
+ 
+                            <mat-form-field class="mr-sm-12" fxFlex  appearance="outline">
                               <mat-label>Tri Glyceride</mat-label>
                               <input formControlName="TriGlyceride" name="TriGlyceride" matInput>
                             </mat-form-field>
-                          </div>
+                      
 
-                          <div>
-                            <span class="presentation-section-label">non HDL:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+
+                            <mat-form-field class="mr-sm-12" fxFlex  appearance="outline">
                               <mat-label>non HDL</mat-label>
                               <input formControlName="nonHDL" name="nonHDL" matInput>
-                              
                             </mat-form-field>
-                          </div>
+           
                         </div>
                       </div>
                       <mat-divider></mat-divider>
                       <div>
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                          <span class="section-header">Inflammatory Diseases</span>
+                          <span class="section-header"  style="font-size:18px;color: #125786;font-weight: 800;">Inflammatory Diseases</span>
                         </div>
 
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
-                          <div>
-                            <span class="presentation-section-label">Inflammatory Diseases:</span>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="1px" fxLayoutAlign="flext-start" class="section-row">
+                          <!-- <div style="width:33%"> -->
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex appearance="outline">
                               <mat-label>Inflammatory Diseases</mat-label>
                               <mat-select formControlName="InflammatoryDiseases" name="InflammatoryDiseases">
                                 <mat-option></mat-option>
@@ -648,93 +626,80 @@
                                 </mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
-                          <div>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                          <!-- </div>&nbsp;
+                          <div style="width:33%"> -->
+                            <mat-form-field class="mr-sm-12" fxFlex  appearance="outline">
                               <mat-label>(If Others) Please Specify</mat-label>
                               <input name="inflDiseasesOthers" formControlName="inflDiseasesOthers" matInput>
                             </mat-form-field>
-                          </div>
+                          <!-- </div> -->
                         </div>
                       </div>
                       <mat-divider></mat-divider>
 
                       <div>
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                          <span class="section-header">Lab Test</span>
+                          <span class="section-header"  style="font-size:18px;color: #125786;font-weight: 800;">Lab Test</span>
                         </div>
 
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="1px" fxLayoutAlign="flext-start" class="section-row">
                           
-                          <div>
-                            <span class="presentation-section-label">Creatinine:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                         
+                            <mat-form-field class="mr-sm-12" fxFlex  appearance="outline">
                               <mat-label>Creatinine</mat-label>
                               <input formControlName="Creatinine" name="Creatinine" matInput>
                             </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="presentation-section-label">Hb:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                     
+                          
+                            <mat-form-field class="mr-sm-12" fxFlex  appearance="outline">
                               <mat-label>Hb</mat-label>
                               <input formControlName="Hb" name="Hb" matInput>
                             </mat-form-field>
-                          </div>
-
-                          <div>
-                            <span class="presentation-section-label">Iron deficiency:</span>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
-                              <mat-label>-- Select Iron deficiency --</mat-label>
+                        
+                            
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex  appearance="outline"> 
+                              <mat-label>Select Iron deficiency</mat-label>
                               <mat-select formControlName="IronDeficency" name="IronDeficency">
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="Yes">Yes</mat-option>
                                 <mat-option value="No">No</mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
                           
-
-                          <div>
-                            <span class="presentation-section-label">Base Line BNP:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                         
+                            <mat-form-field class="mr-sm-12" fxFlex  appearance="outline">
                               <mat-label>Base Line BNP</mat-label>
                               <input formControlName="BNP" name="Base Line BNP" matInput>
                             </mat-form-field>
                           </div>
-                        </div>
+                   
 
                         <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
                           
-                          <div>
-                            <span class="presentation-section-label">Vit B12 deficiency:</span>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
-                              <mat-label>-- Select Vit B12 deficiency --</mat-label>
+                        
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex  appearance="outline">
+                              <mat-label> Select Vit B12 deficiency </mat-label>
                               <mat-select formControlName="VitB12Dificency" name="VitB12Dificency">
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="35">Yes</mat-option>
                                 <mat-option value="35-50">No</mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="presentation-section-label">cRP:</span>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
-                              <mat-label>-- Select Vit cRP --</mat-label>
+                          
+                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex  appearance="outline">
+                              <mat-label>Select Vit cRP</mat-label>
                               <mat-select formControlName="cRP" name="cRP">
                                 <mat-option value="0"></mat-option>
                                 <mat-option value="35">Raised</mat-option>
                                 <mat-option value="35-50">No</mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
-
-                          <div>
-                            <span class="presentation-section-label">CKMB:</span>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                        
+                            <mat-form-field class="mr-sm-12" fxFlex  appearance="outline">
                               <mat-label>CKMB</mat-label>
                               <input formControlName="CKMB" name="CKMB" matInput>
                             </mat-form-field>
-                          </div>
+                          
                         </div>
                       </div>
 
@@ -757,56 +722,48 @@
                   <mat-tab label="Index Lesion and Hemodynamics">
                     <form [formGroup]="ProcedureForm">
                       <div>
-                        <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                          <span class="section-header">Aorta Pressures</span>
+                        <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="2px" fxLayoutAlign="space-between">
+                          <span class="section-header"  style="font-size:18px;color: #125786;font-weight: 800;">Aorta Pressures</span>
                         </div>
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
-                          <div>
-                            <span class="section-label">Systolic:</span>
-                            <mat-form-field>
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="flext-start" class="section-row">
+                            <mat-form-field  appearance="outline" fxFlex>
                               <mat-label>Systolic </mat-label>
                               <input name="Systolic" formControlName="Systolic" placeholder="Systolic Number (In mmHg)"
                                 matInput>
                             </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="section-label">Diastolic:</span>
-                            <mat-form-field>
+
+                            <mat-form-field  appearance="outline" fxFlex>
                               <mat-label>Diastolic</mat-label>
                               <input name="Diastolic" formControlName="Diastolic"
                                 placeholder="Diastolic Number (In mmHg)" matInput>
                             </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="section-label">MAP:</span>
-                            <mat-form-field>
+                          
+                        
+                            <mat-form-field  appearance="outline" fxFlex>
                               <mat-label>MAP</mat-label>
                               <input name="MAP" formControlName="MAP" placeholder="MAP Number (In mmHg)" matInput>
                             </mat-form-field>
-                          </div>
                         </div>
 
                         <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                          <span class="section-header">LVEDP</span>
+                          <span class="section-header"  style="font-size:18px;color: #125786;font-weight: 800;">LVEDP</span>
                         </div>
 
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
-                          <div>
-                            <span class="section-label">LVEDP:</span>
-                            <mat-form-field>
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="flext-start" class="section-row">
+                         
+                            <mat-form-field appearance="outline" style="width:33%;">
                               <mat-label>LVEDP</mat-label>
                               <input name="LVEDP" formControlName="LVEDP" placeholder="LVEDP" matInput>
                             </mat-form-field>
-                          </div>
                         </div>
+                      
 
                         <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                          <span class="section-header">Pulmonary Artery (PA) Pressure</span>
+                          <span class="section-header"  style="font-size:18px;color: #125786;font-weight: 800;">Pulmonary Artery (PA) Pressure</span>
                         </div>
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
-                          <div>
-                            <span class="section-label">Systolic:</span>
-                            <mat-form-field>
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="flext-start" class="section-row">
+                         
+                            <mat-form-field appearance="outline" fxFlex>
                               <mat-label>Systolic</mat-label>
                               <input name="PSystolic" formControlName="PSystolic"
                                 placeholder="PSystolic Number (In mmHg)" matInput required>
@@ -815,39 +772,34 @@
                                 PSystolic is required
                               </mat-error>
                             </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="section-label">Diastolic:</span>
-                            <mat-form-field>
+                         
+                            <mat-form-field  appearance="outline" fxFlex>
                               <mat-label>Diastolic</mat-label>
                               <input name="PDiastolic" formControlName="PDiastolic"
                                 placeholder="PDiastolic Number (In mmHg)" matInput>
                             </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="section-label">MAP Pressure:</span>
-                            <mat-form-field>
+                       
+                          
+                            <mat-form-field  appearance="outline" fxFlex>
                               <mat-label>MAP Pressure</mat-label>
                               <input name="PMap" formControlName="PMap" placeholder="PMap Number (In mmHg)" matInput>
                             </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="section-label">PCWP:</span>
-                            <mat-form-field>
+                         
+                          
+                            <mat-form-field  appearance="outline" fxFlex>
                               <mat-label>PCWP</mat-label>
                               <input name="PCWP" formControlName="PCWP" placeholder="PCWP Number (In mmHg)" matInput>
                             </mat-form-field>
-                          </div>
+                          
                         </div>
-                        <mat-divider></mat-divider>
 
+                        <mat-divider></mat-divider>
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                          <span class="section-header">Lesion Description</span>
+                          <span class="section-header"  style="font-size:18px;color: #125786;font-weight: 800;">Lesion Description</span>
                         </div>
                         
                         <div class="section-label valve-lefttop-padding">
-                          <span>Lesion Type: &nbsp;&nbsp;</span>
-                          <mat-form-field class="section-dropdown" style="width: 300px;">
+                          <mat-form-field class="section-dropdown" style="width:33%;margin-left: 5px;"  appearance="outline" >
                             <mat-label>Lesion Type</mat-label>
                             <mat-select formControlName="LesionType" name="LesionType">
                               <mat-option></mat-option>
@@ -857,20 +809,18 @@
                             </mat-select>
                           </mat-form-field>
 
-                          <span style="padding-left: 5%;">Bifurcation: &nbsp;&nbsp;</span>
+                          <span style="padding-left: 1%;margin-top: 7px;">&nbsp;&nbsp;Bifurcation: &nbsp;&nbsp;&nbsp;&nbsp;</span>
                           <mat-radio-group aria-label="Bifurcation" formControlName="LesionSegment" (change)="onChangeRadioButton($event,'LesionSegment')">
-                            <mat-radio-button value="Yes">Yes</mat-radio-button>
+                            <mat-radio-button value="Yes">Yes</mat-radio-button>&nbsp;&nbsp;
                             <mat-radio-button value="No" (click)="setdropdownnull()">No</mat-radio-button>
                           </mat-radio-group>
                         
                         </div>
 
                         <!-- <No Bifurcation> -->
-                          <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row" *ngIf="isLesionBifurcationNo">                            
-                            
-                            <div>
-                              <span class="section-label">Start Segment: </span>
-                              <mat-form-field class="section-dropdown" style="width: 300px;">
+                          <div fxFlexFill fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="flext-start" class="section-row" *ngIf="isLesionBifurcationNo" >                            
+                                                        
+                              <mat-form-field class="section-dropdown" appearance="outline" fxFlex>
                                 <mat-label>Start Segment</mat-label>
                                 <mat-select formControlName="StartSeverity" name="StartSeverity" required>
                                   <mat-option></mat-option>
@@ -879,11 +829,8 @@
                                   </mat-option>
                                 </mat-select>
                               </mat-form-field>
-                            </div>
-
-                            <div>
-                              <span class="section-label">End Segment: </span>
-                              <mat-form-field class="section-dropdown" style="width: 300px;" required>
+                            
+                              <mat-form-field class="section-dropdown" appearance="outline" fxFlex required>
                                 <mat-label>End Segment</mat-label>
                                 <mat-select formControlName="EndSeverity" name="EndSeverity">
                                   <mat-option></mat-option>
@@ -892,16 +839,14 @@
                                   </mat-option>
                                 </mat-select>
                               </mat-form-field>
-                            </div>
+                           
                           </div>
                         
-                          
                           <!-- <Bifurcation> -->
-                            <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row" *ngIf="isLesionBifurcationYes">                            
+                            <div fxFlexFill fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="flext-start" class="section-row" *ngIf="isLesionBifurcationYes">                            
                             
-                              <div>
-                                <span class="section-label">Start Segment: </span>
-                                <mat-form-field class="section-dropdown" style="width: 300px;">
+                             
+                                <mat-form-field class="section-dropdown" appearance="outline" fxFlex>
                                   <mat-label>Start Segment</mat-label>
                                   <mat-select formControlName="StartSeverity" name="StartSeverity" required>
                                     <mat-option></mat-option>
@@ -910,11 +855,8 @@
                                     </mat-option>
                                   </mat-select>
                                 </mat-form-field>
-                              </div>
-
-                              <div>
-                                <span class="section-label">Side Branch: </span>
-                                <mat-form-field class="section-dropdown" style="width: 300px;">
+                           
+                                <mat-form-field class="section-dropdown" appearance="outline" fxFlex>
                                   <mat-label>Side Branch</mat-label>
                                   <mat-select formControlName="SideSeverity" name="SideSeverity" >
                                     <mat-option> select</mat-option>
@@ -923,11 +865,9 @@
                                     </mat-option>
                                   </mat-select>
                                 </mat-form-field>
-                              </div>
-  
-                              <div>
-                                <span class="section-label">End Segment: </span>
-                                <mat-form-field class="section-dropdown" style="width: 300px;">
+                              
+                               
+                                <mat-form-field class="section-dropdown" appearance="outline" fxFlex>
                                   <mat-label>End Segment</mat-label> 
                                   <mat-select formControlName="EndSeverity" name="EndSeverity" required>
                                     <mat-option></mat-option>
@@ -936,29 +876,24 @@
                                     </mat-option>
                                   </mat-select>
                                 </mat-form-field>
-                              </div>
+                  
                             </div>
                           
                         
                         
-                          <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
-                          <div>
-                            <span class="section-label">Syntax Score: </span>
-                            <mat-form-field>
+                          <div fxFlexFill fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="flext-start" class="section-row">
+
+                            <mat-form-field  appearance="outline" fxFlex>
                               <mat-label>Syntax Score</mat-label>
                               <input matInput name="Syntax Score" formControlName="SyntaxScore">
                             </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="section-label">Index Lesion: </span>
-                            <mat-form-field>
+                        
+                            <mat-form-field  appearance="outline" fxFlex>
                               <mat-label>Index Lesion</mat-label>
                               <input matInput name="Index Lesion" formControlName="IndexLesion">
                             </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="section-label">Severity: </span>
-                            <mat-form-field class="section-dropdown" style="width: 300px;">
+                         
+                            <mat-form-field class="section-dropdown"  appearance="outline" fxFlex>
                               <mat-label>Severity</mat-label>
                               <mat-select formControlName="Severity" name="Severity">
                                 <mat-option></mat-option>
@@ -967,14 +902,13 @@
                                 </mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
+                        
                         </div>
 
                         <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="flext-start">                          
                           <div class="valve-lefttop-padding">
                             <section class="example-section">
-                              <span class="section-label">Calcified: </span>
-                              <mat-form-field class="section-dropdown" fxFlex>
+                              <mat-form-field class="section-dropdown" appearance="outline" fxFlex>
                                 <mat-label>Calcified</mat-label>
                                 <mat-select formControlName="Calcified" name="Calcified">
                                   <mat-option></mat-option>
@@ -984,21 +918,20 @@
                                 </mat-select>
                               </mat-form-field>
 
-
                               <mat-checkbox class="example-margin" value="3" formControlName="Thrombus"
-                                name="Thrombus">Thrombus</mat-checkbox>
+                                name="Thrombus">Thrombus</mat-checkbox>&nbsp;&nbsp;&nbsp;
                               <mat-checkbox class="example-margin" value="3" formControlName="Proximal"
-                                name="Proximal">Proximal Tortuosity</mat-checkbox>
+                                name="Proximal">Proximal Tortuosity</mat-checkbox>&nbsp;&nbsp;&nbsp;
                               <mat-checkbox class="example-margin" value="3" formControlName="Branch"
-                                name="Branch">Important Side Branch</mat-checkbox>
+                                name="Branch">Important Side Branch</mat-checkbox>&nbsp;&nbsp;&nbsp;
                               <mat-checkbox class="example-margin" value="3" formControlName="AortoOstial"
                                 name="Branch">Aorto Ostial</mat-checkbox>
                             </section>
                           </div>
 
                           <div matTooltip="Select All name to enable this button!!" [matTooltipPosition]="'above'">
-                            <button mat-raised-button fxLayoutAlign="center center" style="background-color: blue; color: white; text-align: center;
-                            width: 90px; " (click)="onAddProceduredata()"
+                            <button mat-raised-button fxLayoutAlign="center center" style="background-color: #0093B8; color: white; text-align: center;
+                             width: 70px;margin-top: 10px;margin-left: 80px;" (click)="onAddProceduredata()"
                               [disabled]="ProcedureForm.invalid">
                               <mat-icon> add </mat-icon> Add
                             </button>
@@ -1006,9 +939,9 @@
                           </div>
                         </div>
                       
-                        <mat-table #table class="table" matSort [dataSource]="dataSource2"
+                        <mat-table #table class="table box1" matSort [dataSource]="dataSource2"
                           [@animateStagger]="{value:'50'}"
-                          style="height: 150px !important; overflow: auto;margin-top: 5px;width: 100%;">
+                          style="height: 200px !important; overflow: auto; margin-top: 5px;width: 100%;">
 
                           <ng-container matColumnDef="LesionType">
                             <mat-header-cell *matHeaderCellDef style="margin-right: 5px;color: aliceblue;">Lesion
@@ -1118,7 +1051,6 @@
                             </mat-header-cell>
                             <mat-cell *matCellDef="let contact">
                               <ng-container class="actions">
-
                                 <span class="material-icons" style="cursor: pointer;color: #5b5858;"
                                   (click)="deleteTableRowProcedure($event ,contact)">
                                   delete
@@ -1175,9 +1107,9 @@
                       <div>
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" class="section-row first-row-padding">
                           <div>
-                            <span class="presentation-section-label">Total Number of Access Required:</span>
-                            <mat-form-field class="section-dropdown">
-                              <mat-label>Number of Access</mat-label>
+                            <!-- <span class="presentation-section-label">Total Number of Access Required:</span> -->
+                            <mat-form-field class="section-dropdown" appearance="outline" fxFlex>
+                              <mat-label>Total Number of Access Required</mat-label>
                               <input name="NumberofAccess" formControlName="NumberofAccess" matInput>
                             </mat-form-field>
                           </div>
@@ -1185,13 +1117,13 @@
 
                         <mat-divider></mat-divider>
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                          <span class="section-header">Access Description</span>
+                          <span class="section-header" style="font-size:18px;color: #125786;font-weight: 800;">Access Description</span>
                         </div>
 
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="flext-start" class="section-row">
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="2px" fxLayoutAlign="flext-start" class="section-row">
                           <div style="padding-top: 1%;">
                             <span class="presentation-section-label">Access Type:</span>
-                            <mat-radio-group aria-label="Select an option" formControlName="AccessType"  (change)="onChangeRadioButton($event, 'AccessType')">
+                            <mat-radio-group aria-label="Select an option" formControlName="AccessType" (change)="onChangeRadioButton($event, 'AccessType')">
                               <mat-radio-button value="Arterial">Arterial</mat-radio-button>
                               <mat-radio-button value="Venous">Venous</mat-radio-button>
                               <mat-radio-button value="Other" (click)="setDropdownnull()">Other</mat-radio-button>
@@ -1199,8 +1131,8 @@
                           </div>
 
                           <div  *ngIf="isAccessTypeY">
-                            <mat-form-field style="width: 200px;margin-left:10px;">
-                              <mat-label>-- Select Access--</mat-label>
+                            <mat-form-field style="width: 339px;margin-left:10px;" appearance="outline" fxFlex>
+                              <mat-label>Select Access</mat-label>
                               <mat-select formControlName="Accessvalue1" name="Accessvalue1">
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of Accessvalue1List" [value]="m">
@@ -1211,8 +1143,8 @@
                           </div> 
 
                           <div *ngIf="isAccessTypeY">
-                            <mat-form-field class="section-dropdown" style="width:200px;margin-left:10px;">
-                              <mat-label>-- Select R/L--</mat-label>
+                            <mat-form-field class="section-dropdown" appearance="outline" fxFlex style="width:339px;margin-left:5px;">
+                              <mat-label> Select R/L</mat-label>
                               <mat-select formControlName="Accessvalue2" name="Accessvalue2">
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of Accessvalue2List" [value]="m">
@@ -1223,7 +1155,7 @@
                           </div>
 
                           <div>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                            <mat-form-field class="mr-sm-12" appearance="outline" fxFlex style="width:339px;margin-left:5px;">
                               <mat-label>If Others, Please Specify</mat-label>
                               <input name="If Others, Please Specify" matInput formControlName="AccessvalueOther">
                               <mat-error class="error"
@@ -1234,11 +1166,10 @@
                           </div>
                         </div>
 
-                        <div fxFlexFill fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="flext-start" class="section-row" style="padding-top: 2%;">
-                          <div>
-                            <span class="presentation-section-label">USG Guidance:</span>
-                            <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
-                              <mat-label>-- USG Guidance--</mat-label>
+                        <div fxFlexFill fxLayout="row" fxLayoutGap="2px" fxLayoutAlign="flext-start" class="section-row" style="padding-top: 1%;">
+
+                            <mat-form-field class="section-dropdown" appearance="outline" fxFlex>
+                              <mat-label>USG Guidance</mat-label>
                               <mat-select formControlName="USG" name="USG">
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of USGList" [value]="m">
@@ -1246,11 +1177,9 @@
                                 </mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
-                          <div>
-                            <span class="presentation-section-label">Micro Puncture:</span>
-                            <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
-                              <mat-label>-- Select Micro Puncture--</mat-label>
+                        
+                            <mat-form-field class="section-dropdown" appearance="outline" fxFlex>
+                              <mat-label>Select Micro Puncture</mat-label>
                               <mat-select formControlName="Puncture" name="Puncture">
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of PunctureList" [value]="m">
@@ -1258,12 +1187,9 @@
                                 </mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
-
-                          <div>
-                            <span class="presentation-section-label">Fluoro:</span>
-                            <mat-form-field class="section-dropdown" style="width:200px;margin-left:10px;">
-                              <mat-label>-- Select Fluoro--</mat-label>
+                        
+                            <mat-form-field class="section-dropdown" appearance="outline" fxFlex>
+                              <mat-label>Select Fluoro</mat-label>
                               <mat-select formControlName="Fluoro" name="Fluoro">
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of FluoroList" [value]="m">
@@ -1271,12 +1197,9 @@
                                 </mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
-
-                          <div>
-                            <span class="presentation-section-label">Device Used in Access Site:</span>
-                            <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
-                              <mat-label>-- Select Device--</mat-label>
+                         
+                            <mat-form-field class="section-dropdown"  appearance="outline" fxFlex>
+                              <mat-label>Select Device Used in Access Site</mat-label>
                               <mat-select formControlName="Device" name="Device">
                                 <mat-option></mat-option>
                                 <mat-option *ngFor="let m of DevicetypeList" [value]="m">
@@ -1284,20 +1207,19 @@
                                 </mat-option>
                               </mat-select>
                             </mat-form-field>
-                          </div>
-
+                         
                           <div matTooltip="Select All to enable this button!!" [matTooltipPosition]="'above'">
-                            <button mat-raised-button fxLayoutAlign="center center" style="background-color: blue; 
-                            color: white; margin-left: 20px;" (click)="onAddAccesstypeData()"
+                            <button mat-raised-button fxLayoutAlign="center center" style="background-color: #0093B8; 
+                            color: white; margin-left: 20px;margin-top: 2px;width: 70px;" (click)="onAddAccesstypeData()"
                               [disabled]="AngioplastyFormGroup.invalid">
                               <mat-icon> add </mat-icon> &nbsp;Add
                             </button>
                           </div>
                         </div>
 
-                        <mat-table #table class="table" matSort [dataSource]="dataSource1"
+                        <mat-table #table class="table box1" matSort [dataSource]="dataSource1"
                           [@animateStagger]="{value:'50'}"
-                          style="height: 150px !important; overflow: auto;margin-top: 5px; width: 100%;">
+                          style="height: 180px !important; overflow: hidden;margin-top: 5px; width: 100%;overflow-y: auto;">
 
                           <ng-container matColumnDef="AccessType">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
@@ -1420,14 +1342,13 @@
                         <mat-divider></mat-divider>
 
                         <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                          <span class="section-header">Wire Description</span>
+                          <span class="section-header" style="font-size:18px;color: #125786;font-weight: 800;">Wire Description</span>
                         </div>
                         <form [formGroup]="WireTypeFormGroup">
-                          <div fxFlexFill fxLayoutGap="5%" fxLayoutAlign="flext-start">
+                          <div fxFlexFill fxLayoutGap="2px" fxLayoutAlign="flext-start">
                             <div>
-                              <span class="presentation-section-label">Wire: </span>
-                              <mat-form-field style="width: 300px;">
-                                <mat-label>-- Select Wire--</mat-label>
+                              <mat-form-field style="width: 500px;margin-left: 28px;" appearance="outline" fxFlex>
+                                <mat-label>Select Wire</mat-label>
                                 <mat-select formControlName="Wiretype" name="Wiretype">
                                   <mat-option></mat-option>
                                   <mat-option *ngFor="let m of WireList" [value]="m">
@@ -1437,14 +1358,14 @@
                               </mat-form-field>
                             </div>
                             
-                            <div>
-                              <mat-form-field class="mr-sm-12" fxFlex>
+                            <div style="width: 500px;margin-left: 28px;">
+                              <mat-form-field class="mr-sm-12" appearance="outline" fxFlex>
                                 <mat-label>(If Other Wire) Please Specify</mat-label>
                                 <input name="wireOthers" formControlName="wireOthers" matInput>
                               </mat-form-field>
                             </div>
 
-                            <div style="padding-left:20px;padding-top: 1%;">
+                            <div style="padding-left:10px;padding-top: 1%;">
                               <span class="presentation-section-label">Wire Crossed:</span>
                               <mat-radio-group aria-label="Select an option" formControlName="WireCrossed"  (change)="onChangeRadioButton($event, 'WireCrossed')">
                                 <mat-radio-button value="Yes">Yes</mat-radio-button>
@@ -1454,8 +1375,8 @@
 
                             
                             <div matTooltip="Select All to enable this button!!" [matTooltipPosition]="'above'">
-                              <button mat-raised-button fxLayoutAlign="center center" style="background-color: blue; color: white;
-                             width: 70px;margin-left: 20px; " (click)="onAddWiretypeData()"
+                              <button mat-raised-button fxLayoutAlign="center center" style="background-color: #0093B8; color: white;
+                             width: 70px;margin-left: 78px; " (click)="onAddWiretypeData()"
                                 [disabled]="WireTypeFormGroup.invalid">
                                 <mat-icon> add </mat-icon> &nbsp;Add
                               </button>
@@ -1463,9 +1384,9 @@
 
                           </div>
                         </form>
-                        <mat-table #table class="table" matSort [dataSource]="dataSourc3"
+                        <mat-table #table class="table box1" matSort [dataSource]="dataSourc3"
                           [@animateStagger]="{value:'50'}"
-                          style="height: 150px !important; overflow: auto;margin-top: 5px; width: 100%;">
+                          style="height: 180px !important; overflow: hidden;margin-top: 5px; width: 100%;overflow-y: auto;">
 
                           <ng-container matColumnDef="Wiretype">
                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
@@ -1536,19 +1457,16 @@
 
                         
                         <mat-divider></mat-divider>
-                        <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                          <span class="section-header">Physiology</span>
+                        <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="2px" fxLayoutAlign="space-between">
+                          <span class="section-header"  style="font-size:18px;color: #125786;font-weight: 800;">Physiology</span>
                         </div>
                         <form [formGroup]="PhysiologyFormGroup">
-                          <div fxFlexFill fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="flext-start"
+                          <div fxFlexFill fxLayout="row" fxLayoutGap="2px" fxLayoutAlign="flext-start"
                             class="section-row">
 
                             <div>
-                              <span class="presentation-section-label">Physiology:</span>
-
-
-                              <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
-                                <mat-label>-- Select Physiology--</mat-label>
+                              <mat-form-field class="section-dropdown" style="width: 500px;" appearance="outline" fxFlex>
+                                <mat-label>Select Physiology</mat-label>
                                 <mat-select formControlName="Physiologytype" name="Physiologytype">
                                   <mat-option></mat-option>
                                   <mat-option *ngFor="let m of PhysiologytypeList" [value]="m">
@@ -1559,8 +1477,8 @@
                             </div>
                             <div>
 
-                              <mat-form-field class="section-dropdown" style="width: 300px;margin-left:10px;">
-                                <mat-label>-- Select Value--</mat-label>
+                              <mat-form-field class="section-dropdown" style="width: 500px;;" appearance="outline" fxFlex>
+                                <mat-label>Select Value</mat-label>
                                 <mat-select formControlName="Physiologyvalue" name="Physiologyvalue">
                                   <mat-option></mat-option>
                                   <mat-option *ngFor="let m of PhysiologyvalueList" [value]="m">
@@ -1571,8 +1489,8 @@
                             </div>
 
                             <div matTooltip="Select All to enable this button!!" [matTooltipPosition]="'above'">
-                              <button mat-raised-button fxLayoutAlign="center center" style="background-color: blue; width: 70px;
-                            color: white;margin-left: 20px;" (click)="onAddPhysiologyData()"
+                              <button mat-raised-button fxLayoutAlign="center center" style="background-color: #0093B8; width: 70px;
+                              color: white;margin-left: 300px;margin-top: 5px;" (click)="onAddPhysiologyData()"
                                 [disabled]="PhysiologyFormGroup.invalid">
                                 <mat-icon> add </mat-icon> &nbsp;Add
                               </button>
@@ -1583,9 +1501,9 @@
 
                       </div>
 
-                      <mat-table #table class="table" matSort [dataSource]="dataSource5"
+                      <mat-table #table class="table box1" matSort [dataSource]="dataSource5"
                         [@animateStagger]="{value:'50'}"
-                        style="height: 150px !important; overflow: auto;margin-top: 5px;width: 100%;">
+                        style="height: 180px !important; overflow: hidden;margin-top: 5px;width: 100%;overflow-y: auto;">
 
 
                         <ng-container matColumnDef="Physiologytype">
@@ -1655,9 +1573,6 @@
                     </form>
                   </mat-tab>
 
-
-
-
                   <!-- 5th Tab Start -->
                   <!-- Lesion Preperation Tab -->
 
@@ -1666,7 +1581,7 @@
                   <mat-tab label="Lesion Preperation">
                     <form [formGroup]="personalFormGroup">
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                        <span class="section-header">Imaging</span>
+                        <span class="section-header" style="font-size:18px;color: #125786;font-weight: 800;">Imaging</span>
                       </div>
                       <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
                         <div class="example-section">
@@ -1718,7 +1633,7 @@
                       <!-- Micro Catheter Crossed -->
                       <div>
                         <section class="section-header">
-                          <span class="label-rightpadding2">Micro Catheter </span>
+                          <span class="label-rightpadding2" style="font-size:18px;color: #125786;font-weight: 800;">Micro Catheter </span>
                         </section>
                       </div>
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
@@ -1735,9 +1650,9 @@
                       <mat-divider></mat-divider>
                       <!-- Atherectomy -->
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                        <span class="section-header">Atherectomy</span>
+                        <span class="section-header" style="font-size:18px;color: #125786;font-weight: 800;">Atherectomy</span>
                       </div>
-                      <div fxLayout="row" fxLayout.gt-xs="row" class="section-row"  style="padding-bottom: 1%;">
+                      <div fxLayout="row" fxLayout.gt-xs="row" class="section-row" style="padding-bottom: 1%;">
                         <div>
                           <mat-accordion>
                             <!-- ROTA -->
@@ -2089,13 +2004,13 @@
 
                       <!-- Balloons -->
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutAlign="space-between">
-                        <span class="section-header">Balloons</span>
+                        <span class="section-header" style="font-size:18px;color: #125786;font-weight: 800;">Balloons</span>
                       </div>
-                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="2%" class="section-row" style="padding-bottom: 1%;">
-                        <div>
-                          <span class="presentation-section-label example-margin">Select Balloon:</span>
-                          <mat-form-field class="mr-sm-12 section-dropdown"   fxFlex>
-                            <mat-label>Balloons</mat-label>
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" class="section-row" style="padding-bottom: 1%;">
+                       
+                 
+                          <mat-form-field  appearance="outline" fxFlex>
+                            <mat-label>Select Balloons</mat-label>
                             <mat-select formControlName="Balloons">
                               <mat-option value="1">Semi-Compliant</mat-option>
                               <mat-option value="2">Non-Compliant</mat-option>
@@ -2104,11 +2019,8 @@
                               <mat-option value="2">Scoring</mat-option>
                             </mat-select>
                           </mat-form-field>
-                        </div>
-
-                        <div>
-                          <span class="presentation-section-label">Length:</span>
-                          <mat-form-field class="mr-sm-12 section-dropdown"  fxFlex>
+                     
+                          <mat-form-field  appearance="outline" fxFlex>
                             <mat-label>Length</mat-label>
                             <mat-select formControlName="Length">
                               <mat-option value="1">6</mat-option>
@@ -2128,27 +2040,18 @@
                               <mat-option value="2">38</mat-option>
                             </mat-select>
                           </mat-form-field>
-                        </div>
-
-                        <div>
-                          <span class="presentation-section-label">Diameter:</span>
-                          <mat-form-field>
-                            <mat-label>In mm</mat-label>
+                       
+                          <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Diameter (In mm)</mat-label>
                             <input matInput name="Diameter" formControlName="Diameter" id="Diameter">
                           </mat-form-field>
-                        </div>
-
-                        <div>
-                          <span class="presentation-section-label">Pressure:</span>
-                          <mat-form-field>
-                            <mat-label>In atm</mat-label>
+                       
+                          <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Pressure (In atm)</mat-label>
                             <input matInput name="Pressure" formControlName="Pressure" id="Pressure">
                           </mat-form-field>
-                        </div>
-
-                        <div>
-                          <span class="presentation-section-label">Successful:</span>
-                          <mat-form-field class="mr-sm-12 section-dropdown"  fxFlex>
+                   
+                          <mat-form-field  appearance="outline" fxFlex>
                             <mat-label>Successful</mat-label>
                             <mat-select formControlName="LastSuccessful">
                               <mat-option value="1"></mat-option>
@@ -2156,34 +2059,35 @@
                               <mat-option value="2">No</mat-option>
                             </mat-select>
                           </mat-form-field>
-                        </div>
+                       
                       </div>
 
                       <mat-divider></mat-divider>
 
                       <!-- Thrombo-Aspiration Catheter -->
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                        <section class="example-section section-header" >
+                        <section class="example-section section-header" style="font-size:18px;color: #125786;font-weight: 800;">
                           <mat-checkbox formControlName="Thrombo">Thrombo-Aspiration Catheter</mat-checkbox>
                         </section>
                       </div>
 
                       <!-- Guide Extension -->
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                        <section class="example-section section-header">
+                        <section class="example-section section-header" style="font-size:18px;color: #125786;font-weight: 800;">
                           <mat-checkbox formControlName="GuideExtension">Guide Extension</mat-checkbox>
                         </section>
                       </div>
 
                       <!-- Procedure Events -->
-                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                        <span class="section-header">Procedure Events</span>
+                      <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="1px" fxLayoutAlign="space-between">
+                        <span class="section-header" style="font-size:18px;color: #125786;font-weight: 800;">Procedure Events</span>
                       </div>
-                      <div fxLayout="row" fxLayoutGap="3%" class="section-row">
+                      <div fxLayout="row" fxLayoutGap="1px" class="section-row">
                         <div>
-                          <section class="example-section">
-                            <label class="example-margin">Complete: </label>
-                            <mat-form-field class="mr-sm-12 section-dropdown"  fxFlex>
+                          <section class="example-section">&nbsp;&nbsp;
+                            <div style="width: 298px;">
+                            <label class="example-margin" style="padding-top: 10px;">Complete:</label>
+                            <mat-form-field class="mr-sm-12 section-dropdown" appearance="outline" fxFlex>
                               <mat-label>-- Select --</mat-label>
                               <mat-select formControlName="Complete">
                                 <mat-option value="1"></mat-option>
@@ -2191,6 +2095,7 @@
                                 <mat-option value="2">No</mat-option>
                               </mat-select>
                             </mat-form-field>
+                          </div>
                             <mat-checkbox class="example-margin">Chest Pain Persistant</mat-checkbox>
                             <mat-checkbox class="example-margin">EKG Changes</mat-checkbox>
                             <mat-checkbox class="example-margin">Tachycardia</mat-checkbox>
@@ -2201,14 +2106,14 @@
                           </section>
                         </div>
                       </div>
-                      <div fxLayout="row" fxLayoutGap="3%" class="section-row">
+                      <div fxLayout="row" fxLayoutGap="4px" class="section-row">
                         <div>
                           <section class="example-section">
-                            <label class="example-margin">Perforation: </label>
-                            <mat-form-field>
+                            <label class="example-margin">Perforation:</label>
+                            <mat-form-field appearance="outline" fxFlex>
                               <mat-label>In Grade</mat-label>
                               <input matInput name="Perforation" formControlName="Perforation" id="Perforation">
-                            </mat-form-field>
+                            </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
                             <mat-checkbox class="example-margin">Branch Closure</mat-checkbox>
                             <mat-checkbox class="example-margin">Pulmonary Edema</mat-checkbox>
                             <mat-checkbox class="example-margin">CPR</mat-checkbox>
@@ -2236,7 +2141,7 @@
                             <mat-checkbox class="example-margin">IABP</mat-checkbox>
                             <mat-checkbox class="example-margin">Impella</mat-checkbox>
                             <label class="example-margin">Others: </label>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                            <mat-form-field class="mr-sm-12"  appearance="outline" fxFlex>
                               <mat-label>If Others, Please Specify</mat-label>
                               <input name="If Others, Please Specify" formControlName="MICSOthers" matInput>
                               <mat-error>If Others, Please Specify</mat-error>
@@ -2245,11 +2150,11 @@
                         </div>
                       </div>
 
-                      <div fxLayout="row" fxLayoutGap="3%" class="section-row">
-                        <div>
+                      <div fxLayout="row" fxLayoutGap="2px" class="section-row">
+                        
                           <section class="example-section">
                             <label class="example-margin">Bradycardia: </label>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                            <mat-form-field class="mr-sm-12 section-dropdown"  appearance="outline" fxFlex>
                               <mat-label>-- Select --</mat-label>
                               <mat-select formControlName="Bradycardia">
                                 <mat-option value="1"></mat-option>
@@ -2257,9 +2162,9 @@
                                 <mat-option value="2">No</mat-option>
                               </mat-select>
                             </mat-form-field>
-
+                     
                             <label class="example-margin">Emergency Pacing: </label>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                            <mat-form-field class="mr-sm-12 section-dropdown"  appearance="outline" fxFlex>
                               <mat-label>-- Select --</mat-label>
                               <mat-select formControlName="EmergencyPacing">
                                 <mat-option value="1"></mat-option>
@@ -2268,12 +2173,12 @@
                               </mat-select>
                             </mat-form-field>
                           </section>
-                        </div>
+                        
                       </div>
 
                       <!-- Imaging -->
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                        <span class="section-header">Imaging</span>
+                        <span class="section-header" style="font-size:18px;color: #125786;font-weight: 800;">Imaging</span>
                       </div>
                       <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
                         <div>
@@ -2457,13 +2362,13 @@
 
                       <!-- Stent -->
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                        <span class="section-header">Stent</span>
+                        <span class="section-header" style="font-size:18px;color: #125786;font-weight: 800;">Stent</span>
                       </div>
                       <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
-                        <div>
+                        <div style="width: 310px;">
                           <section class="example-section">
                             <label class="example-margin">Stent:</label>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                            <mat-form-field class="mr-sm-12 section-dropdown" appearance="outline" fxFlex>
                               <mat-label>Stent</mat-label>
                               <mat-select formControlName="Stent">
                                 <mat-option value="0">-- Select --</mat-option>
@@ -2476,7 +2381,7 @@
                         <div>
                           <section class="example-section">
                             <label class="example-margin">Stent Name:</label>
-                            <mat-form-field class="mr-sm-12 section-dropdown" fxFlex>
+                            <mat-form-field class="mr-sm-12 section-dropdown" appearance="outline" fxFlex>
                               <mat-label>Stent</mat-label>
                               <mat-select formControlName="StentName">
                                 <mat-option value="0">-- Select --</mat-option>
@@ -2486,14 +2391,14 @@
                                 <mat-option value="2">Onyx</mat-option>
                               </mat-select>
                             </mat-form-field>
-
+                    
                             <label class="example-margin">Diameter:</label>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                            <mat-form-field class="mr-sm-12" appearance="outline" fxFlex>
                               <mat-label>Minimum Diameter In mm</mat-label>
                               <input name="Minimum Diameter" formControlName="StentMinDaimeter" matInput>
                               <mat-error>Minimum Diameter</mat-error>
                             </mat-form-field>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                            <mat-form-field class="mr-sm-12" appearance="outline" fxFlex>
                               <mat-label>Maximum Diameter In mm</mat-label>
                               <input name="Maximum Diameter" formControlName="StentMaxDaimeter" matInput>
                               <mat-error>Maximum Diameter</mat-error>
@@ -2502,17 +2407,17 @@
                         </div>
                       </div>
                       <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
-                        <div>
+                        <div  style="width: 300px;">
                           <section class="example-section">
                             <label class="example-margin">Total Stent Length:</label>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                            <mat-form-field class="mr-sm-12" appearance="outline" fxFlex>
                               <mat-label>In mm</mat-label>
                               <input name="Total Stent Length" formControlName="TotalStentLength" matInput>
                               <mat-error>Total Stent Length</mat-error>
                             </mat-form-field>
 
                             <label class="example-margin">Pressure:</label>
-                            <mat-form-field class="mr-sm-12" fxFlex>
+                            <mat-form-field class="mr-sm-12" appearance="outline" fxFlex>
                               <mat-label>In atm</mat-label>
                               <input name="Pressure" formControlName="StentPressure" matInput>
                               <mat-error>Pressure</mat-error>
@@ -2527,7 +2432,7 @@
 
                       <!-- Imaging -->
                       <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px" fxLayoutAlign="space-between">
-                        <span class="section-header">Imaging</span>
+                        <span class="section-header" style="font-size:18px;color: #125786;font-weight: 800;">Imaging</span>
                       </div>
                       <div fxLayout="row" fxLayout.gt-xs="row" class="section-row">
                         <div>
