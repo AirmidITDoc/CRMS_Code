@@ -1,0 +1,55 @@
+.logo-icon{
+    color:#fff;
+}
+
+app-rolemaster {
+
+    .table {
+      height: 280px !important;
+      
+      .mat-header-row {
+        width: 100%;
+        max-width: 1070px;
+        min-width: 1070px;
+        min-height: 20px;
+        padding: 5px;
+        border-radius: 2px;
+        border-end-end-radius: 2px;
+      }
+  
+      .mat-row {
+        width: 100%;
+        max-width: 1070px;
+        min-width: 1070px;
+        min-height: 20px;
+        padding: 5px;
+        border-radius: 2px;
+      }
+  
+      .mat-column-RoleId {
+        width: 300px;
+        max-width: 300px;
+        min-width: 300px;
+        text-align: left;
+        justify-content: left;
+      }
+  
+      .mat-column-RoleName {
+        width: 300px;
+        max-width: 300px;
+        min-width: 300px;
+        text-align: left;
+        justify-content: left;
+      }
+      .mat-column-action {
+        width: 130px;
+        max-width: 130px;
+        min-width: 130px;
+        text-align: left;
+        justify-content: left;
+      }
+    }
+  
+   
+  }
+  

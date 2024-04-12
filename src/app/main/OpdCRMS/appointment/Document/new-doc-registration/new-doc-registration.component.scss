@@ -173,6 +173,14 @@ app-new-doc-registration {
         width: 458px;
         margin-left: 5px;
     }
+    .section-dropdown1 {
+        width: 300px;
+        margin-left: 5px;
+    }
+    .section-dropdown2 {
+        width: 220px;
+        margin-left: 5px;
+    }
 
     .section-row {
         padding-right: 10px;
@@ -294,6 +302,14 @@ app-new-doc-registration {
         align-content: center;
         align-items: center;
         height: 60px;
+    }
+
+    .example-section1 {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        height: 60px;
+        width: 70%;
     }
 
     .label-paddingtop5{

@@ -2,7 +2,7 @@
     <!-- HEADER -->
     <mat-toolbar class="top-header accent" style="justify-content: space-between;width: 100%;" fusePerfectScrollbar>
         <div class="top-header-info gap-8" fxLayout="row" fxLayoutAlign="start center">
-            <button mat-icon-button class="sidebar-toggle">
+            <button mat-icon-button class="sidebar-toggle" style="color:white">
                 <mat-icon>menu</mat-icon>
             </button>
             <button mat-icon-button class="user-icon">
@@ -11,7 +11,8 @@
                 </mat-icon>
             </button>
             <div class="top-header-title">
-                <span class="logo-text" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
+                style="color: aliceblue;">
                     Create User
                 </span>
             </div>
@@ -25,7 +26,7 @@
             </button>
         </div>
     </mat-toolbar>
-
+<br>
 
     <!-- / HEADER -->
 
@@ -38,32 +39,32 @@
 
         <!-- SIDEBAR -->
         <fuse-sidebar class="fuse-search-sidebar sidebar" name="app-main" position="left" lockedOpen="gt-sm"
-            style=" background-color: white;">
+            style=" background-color: white;margin-top: 2px;">
 
             <!-- SIDEBAR CONTENT -->
-            <div class="content">
+            
                 <div class="sidebar-content">
 
-                    <div class="card" style="height: 100%;">
+                    <div class="card box" style="height: 100%;">
 
                         <!-- SIDEBAR HEADER -->
-                        <div class="sidebar-header accent header" fxLayout="row" fxLayoutAlign="start center">
+                        <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"  style="margin-top: 1%; border-radius: 2px;">
                             <!-- USER -->
                             <!-- <img [src]="user.avatar" class="avatar mr-16" [alt]="user.name" /> -->
-                            <span class="search-title">Search Facility</span>
+                            <span class="h5" style="color: aliceblue;font-size: 17px;">Search Facility</span>
                             <!-- / USER -->
                         </div>
                         <!-- / SIDEBAR HEADER -->
 
                         <!-- SIDEBAR CONTENT -->
-
+                        <div class="content py-16 pl-10 p-12" fusePerfectScrollbar>
                         <div class="nav material2">
-                            <form [formGroup]="_UserService.myformSearch">
+                            <form [formGroup]="_UserService.myformSearch"  style="padding: 6px 6px 5px 5px;" fusePerfectScrollbar>
                                 <div fxLayout="column" fxLayoutAlign="start none">
-                                    <mat-form-field appearance="outline" fxFlex>
+                                    <mat-form-field appearance="outline" fxFlex >
                                         <mat-label>User Name</mat-label>
                                         <input name="UserName" formControlName="UserName" matInput>
-                                    </mat-form-field>
+                                    </mat-form-field><br>
 
                                     <div class="action-buttons">
                                         <button mat-raised-button (click)="onClear()" class="clearbutton">
@@ -76,11 +77,11 @@
                                 </div>
                             </form>
                         </div>
-
+                        </div>
                     </div>
                 </div>
                 <!-- / SIDEBAR CONTENT -->
-            </div>
+   
             <!-- / SIDEBAR CONTENT -->
 
         </fuse-sidebar>
@@ -88,7 +89,7 @@
 
         <!-- CENTER -->
         <div class="center p-12 pb-56" fxFlexAlign="start center">
-            <div class="content-card" style="border-radius:4px; ">
+            <div class="content-card box1" style="border-radius:4px;">
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
                     <div fxFlex.gt-sm="100%" fxFlex>
                         <div fxlayout="row">
@@ -99,7 +100,8 @@
                                         <div class="spinner-border text-danger"></div>
                                     </div>
                                 </div>
-                                <mat-table #table matSort [dataSource]="dataSource1" [@animateStagger]="{value:'50'}">
+                                <mat-table #table matSort [dataSource]="dataSource1" [@animateStagger]="{value:'50'}" class="table"
+                                style="overflow: hidden;overflow-y: auto;">
 
                                     <ng-container matColumnDef="UserName">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm> User
@@ -307,7 +309,7 @@
                                     </ng-container> -->
 
                                     <ng-container matColumnDef="action" stickyEnd>
-                                        <mat-header-cell *matHeaderCellDef fxShow.gt-md> Action </mat-header-cell>
+                                        <mat-header-cell *matHeaderCellDef fxShow.gt-md style="color:white"> Action </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
                                             <button mat-icon-button>
                                                 <mat-icon>edit</mat-icon>
@@ -319,7 +321,6 @@
                                         <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
                                         </mat-header-cell>
                                     </ng-container>
-
 
                                     <ng-container matColumnDef="noData">
                                         <mat-footer-cell *matFooterCellDef colspan="6">
