@@ -75,8 +75,8 @@ export class StudywisedeptdetailComponent implements OnInit {
   getStudytdeptdetail(){
     // this.sIsLoading = 'loading';
     var D_data = {
-      "StudyId ":1,// this._InvoiceBilllsService.myFilterform.get("StudyId").value.StudyId || 0,
-      "InvoiceId":1//this._InvoiceBilllsService.myFilterform.get("InvoiceId").value.StudyId || 0,
+      "StudyId ":this._InvoiceBilllsService.myFilterform.get("StudyId").value.StudyId || 0,
+      "InvoiceId":this._InvoiceBilllsService.myFilterform.get("InvoiceId").value.StudyId || 0,
     }
     setTimeout(() => {
       // this.sIsLoading = 'loading';

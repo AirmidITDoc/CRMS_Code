@@ -209,7 +209,7 @@ export class StudyDistributionComponent implements OnInit {
         }
       }
       console.log(m_data);
-      this._CasedetailService.StudyInfoInsert(m_data).subscribe(response => {
+      this._CasedetailService.StudyDistributionInsert(m_data).subscribe(response => {
         if (response) {
           Swal.fire('New StudyDistribution Save !', ' StudyDistribution Save Successfully !', 'success').then((result) => {
             if (result.isConfirmed) {
@@ -258,7 +258,7 @@ export class StudyDistributionComponent implements OnInit {
     // }
   }
   onClose(){
-    
+    this.dialogRef.close();
   }
   onClear(){
 

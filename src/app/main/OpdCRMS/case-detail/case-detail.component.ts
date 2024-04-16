@@ -90,7 +90,7 @@ export class CaseDetailComponent implements OnInit {
       this.menuActions.push('Add / Update Study Schedule');
       this.menuActions.push('Add / Update Study Services');
       this.menuActions.push('Upload Document');
-      this.menuActions.push('Study Distribution');
+      this.menuActions.push('Doctor Contribution');
      
         }
     // this.getCaseList();
@@ -344,7 +344,7 @@ export class CaseDetailComponent implements OnInit {
         this.sIsLoading = '';
 
       }
-    }else if (m == "Study Distribution") {
+    }else if (m == "Doctor Contribution") {
       var m_data = {
       StudyId:contact.StudyId,
       ProtocolNo:contact.ProtocolNo,
