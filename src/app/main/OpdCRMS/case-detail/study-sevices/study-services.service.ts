@@ -81,7 +81,7 @@ export class StudyServicesService {
   }
 
   public StudyServiceInsert(employee){
-    return this._httpClient.post("CRMSTran/Save_InsertStudyService", employee)
+    return this._httpClient.post("CRMSTran/Update_UpdateStudyService", employee)
   }
   public StudyServiceUpdate(employee){
     return this._httpClient.post("CRMSTran/Update_UpdateStudyServiceId", employee)

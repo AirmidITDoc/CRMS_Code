@@ -245,7 +245,7 @@ export class StudyServicesComponent implements OnInit {
     this.dataSource1.data.forEach((element) => {
       let insertStudyService = {};
       insertStudyService['studyId'] = this.registerObj.StudyId;
-      insertStudyService['StudyVisitId'] = this.vStudyServicesId
+      insertStudyService['StudyVisitId'] = element.StudyVisitId;
       insertStudyService['ServiceId'] = element.ServiceId;
       insertStudyService['Amount'] = element.Amount;
       insertStudyService['isActive'] =1,//element.serviceId;
@@ -350,7 +350,7 @@ export class StudyServicesComponent implements OnInit {
     };
 
     console.log(submitData);
-    this._StudyServicesService.StudyServiceUpdate(submitData).subscribe(response => {
+    this._StudyServicesService.StudyServiceInsert(submitData).subscribe(response => {
       if (response) {
         Swal.fire('StudyService Save !', ' StudyService Save Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {
