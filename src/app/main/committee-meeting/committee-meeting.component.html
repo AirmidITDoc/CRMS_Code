@@ -94,7 +94,7 @@
                                 </div>
                                 <!-- sppinner -->
                                 <mat-table #table matSort [dataSource]="dscommitteeMeetingList"
-                                    [@animateStagger]="{value:'50'}" class="table1">
+                                    [@animateStagger]="{value:'50'}" class="table1" style="overflow: hidden;width: 100%;overflow-y: auto;">
 
                                     <ng-container matColumnDef="CommitteeMeetingId">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header
@@ -159,7 +159,6 @@
                                                     title="Edit Menu">launch</mat-icon></button>
                                                     <button mat-icon-button (click)="getPrint(row)"><mat-icon
                                                         title="Edit Menu">print</mat-icon></button>
-    
                                         </mat-cell>
                                     </ng-container>
 

@@ -123,18 +123,19 @@ app-invoice-bill-mapping {
 app-invoice-bill-mapping{
 
     .table1 {
-        height: 400px !important;
+        height: 315px !important;
         // border-color: #808080;
         // border-style: groove;
     }
 
     .mat-header-row {
         background-color: rgb(13, 67, 102) !important;
-        max-width: 1200px;
-        min-width:  1200px;
+        width: 100%;
+        max-width: 1110px;
+        min-width:  1110px;
         min-height: 20px;
-        width: 1100px;
-
+        border-radius: 2px;
+        padding: 3px;
     }
 
     .mat-row {
@@ -143,6 +144,7 @@ app-invoice-bill-mapping{
         min-width: 1200px;
         display: flex;
     }
+
     .mat-column-checkbox {
         width:80px;
         max-width:80px;
@@ -150,6 +152,7 @@ app-invoice-bill-mapping{
         text-align:left;
         justify-content: left;
     }
+
     .mat-column-BillNo {
         width: 150px;
         max-width: 150px;
@@ -189,10 +192,8 @@ app-invoice-bill-mapping{
         text-align: right;
         //justify-content:right;
         justify-content: right;
-
-
-
     }
+
     .mat-icon-button {
         padding: 2px 2px 2px 2px;
         min-width: 0;
@@ -200,9 +201,6 @@ app-invoice-bill-mapping{
         height: 20px;
         flex-shrink: 0;
         line-height: 20px;
-
-
-
         // border-radius: 50%;
     }
 

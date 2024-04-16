@@ -124,7 +124,7 @@ app-browse-credit-payment {
 app-browse-credit-payment {
 
     .table1 {
-        height: 710px !important;
+        height: 83vh !important;
     }
 
     .mat-header-row {
@@ -133,7 +133,8 @@ app-browse-credit-payment {
         min-width: 1240px;
         min-height: 20px;
         width: 100%;
-
+        padding: 5px;
+        border-radius: 2px;
     }
 
     .mat-row {
@@ -142,21 +143,23 @@ app-browse-credit-payment {
         min-width: 1240px;
         display: flex;
     }
+
     .mat-column-InterExtBill {
-        width:80px;
-        max-width:80px;
-        min-width:80px;
-        text-align:left;
+        width: 70px;
+        max-width: 70px;
+        min-width: 70px;
+        text-align: left;
         justify-content: left;
     }
+
     .mat-column-Payment {
-        width:80px;
-        max-width:80px;
-        min-width:80px;
-        text-align:left;
+        width: 80px;
+        max-width: 80px;
+        min-width: 80px;
+        text-align: left;
         justify-content: left;
     }
-    
+
 
     .mat-column-InterExtBill {
         width: 100px;
@@ -172,6 +175,7 @@ app-browse-credit-payment {
         text-align: left;
         justify-content: left;
     }
+
     .mat-column-BillDate {
         width: 100px;
         max-width: 100px;
@@ -218,15 +222,20 @@ app-browse-credit-payment {
         text-align: center;
         //justify-content:right;
         justify-content: center;
-
-
-
     }
 
-    .mat-column-ProtocolNo {
+    .mat-column-StudyId {
         width: 80px;
         max-width: 80px;
         min-width: 80px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .mat-column-ProtocolNo {
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
         justify-content: center;
         text-align: center;
     }
@@ -283,9 +292,9 @@ app-browse-credit-payment {
     }
 
     .mat-column-action {
-        width: 200px;
-        max-width: 200px;
-        min-width: 200px;
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
         // color: white;
         text-align: center;
         justify-content: center;
@@ -298,58 +307,7 @@ app-browse-credit-payment {
         height: 20px;
         flex-shrink: 0;
         line-height: 20px;
-
-
-
         // border-radius: 50%;
-    }
-
-    .clearbutton {
-        padding-right: 5px;
-        padding-left: 5px;
-        float: right;
-        color: blue;
-        width: 27%;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        margin: 5px;
-        font-size: 17px;
-        border: 1px solid #808080;
-        height: 40px;
-
-    }
-
-
-    .cleariconbutton {
-        font-size: 40px;
-        text-align: center;
-        margin-bottom: 35px;
-        margin-right: 13px;
-
-        color: blue;
-    }
-
-    .searchButton {
-        padding-right: 5px;
-        padding-left: 5px;
-        float: right;
-        color: blue;
-        width: 27%;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        margin: 5px;
-        font-size: 17px;
-        border: 1px solid #808080;
-        height: 40px;
-    }
-
-    .searchiconbutton {
-        font-size: 40px;
-        text-align: center;
-        margin-bottom: 35px;
-        margin-right: 10px;
-        color: blue;
-
     }
 
     .red-color {

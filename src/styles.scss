@@ -351,7 +351,7 @@ body { margin: 0; font-family: Roboto !important;zoom: 0.90; zoom: 90%; }
 }
 
 .footer-btn {
-    width: 70px;
+    width: 80px;
     font-size: 16px;
     font-weight: 700px;
     padding: 10px;
@@ -424,5 +424,19 @@ body { margin: 0; font-family: Roboto !important;zoom: 0.90; zoom: 90%; }
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #125786; 
+  }
+  
+  .box{
+    box-shadow: 1px 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
+    background-color:#fff;
+    border-radius: 5px;
+    margin-left: 10px;
+    width:95%;
+  }
+  
+  .box1{
+    box-shadow: 1px 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
+    background-color:#fff;
+    border-radius: 5px;
   }
   
