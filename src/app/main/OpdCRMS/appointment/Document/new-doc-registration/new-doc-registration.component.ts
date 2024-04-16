@@ -1381,7 +1381,7 @@ export class NewDocRegistrationComponent implements OnInit {
     const dialogRef = this._matDialog.open(BookAppoinmentComponent,
       {
         maxWidth: "60%",
-        height: '500px',
+        height: '330px',
         width: '100%',
         data: {
           advanceObj: m,

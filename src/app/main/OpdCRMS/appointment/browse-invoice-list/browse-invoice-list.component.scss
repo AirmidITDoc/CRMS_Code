@@ -124,16 +124,17 @@ app-browse-invoice-list{
 app-browse-invoice-list{
 
     .table1 {
-        height: 710px !important;
+        height: 83vh !important;
     }
 
     .mat-header-row {
         background-color: rgb(13, 67, 102) !important;
         max-width: 100%;
         min-width: 1540px;
-        min-height: 25px;
+        min-height: 20px;
         width: 100%;
-
+        padding:5px;
+        border-radius: 2px;
     }
 
     .mat-row {
@@ -183,12 +184,20 @@ app-browse-invoice-list{
         justify-content: left;
     }
 
+    .mat-column-InvoiceStatus {
+        width: 120px;
+        max-width: 120px;
+        min-width: 120px;
+        justify-content: left;
+        text-align: left;
+    }
+
     .mat-column-chkBalanceAmt {
         width: 100px;
         max-width: 100px;
         min-width: 100px;
-        justify-content: center;
-        text-align: center;
+        justify-content: left;
+        text-align: left;
     }
 
     .mat-column-TaxableAmount {
@@ -258,9 +267,9 @@ app-browse-invoice-list{
        
     }
     .mat-column-action {
-        width: 300px;
-        max-width: 300px;
-        min-width: 300px;
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
         // color: white;
         text-align: center;
         justify-content: center;
@@ -279,53 +288,6 @@ app-browse-invoice-list{
         // border-radius: 50%;
     }
 
-    .clearbutton {
-        padding-right: 5px;
-        padding-left: 5px;
-        float: right;
-        color: blue;
-        width: 27%;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        margin: 5px;
-        font-size: 17px;
-        border: 1px solid #808080;
-        height: 40px;
-
-    }
-
-
-    .cleariconbutton {
-        font-size: 40px;
-        text-align: center;
-        margin-bottom: 35px;
-        margin-right: 13px;
-
-        color: blue;
-    }
-
-    .searchButton {
-        padding-right: 5px;
-        padding-left: 5px;
-        float: right;
-        color: blue;
-        width: 27%;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        margin: 5px;
-        font-size: 17px;
-        border: 1px solid #808080;
-        height: 40px;
-    }
-
-    .searchiconbutton {
-        font-size: 40px;
-        text-align: center;
-        margin-bottom: 35px;
-        margin-right: 10px;
-        color: blue;
-
-    }
 
     .red-color {
         color: red;

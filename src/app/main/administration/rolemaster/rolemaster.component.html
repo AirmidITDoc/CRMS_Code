@@ -3,18 +3,21 @@
         fxLayoutAlign.gt-xs="space-between center">
         <!-- APP TITLE -->
         <div fxLayout="row" fxLayoutAlign="start center">
-            <div class="top-header-info gap-8 logo" fxLayout="row" fxLayoutAlign="start center">
+            <div class="top-header-info gap-8 logo" fxLayout="row" fxLayoutAlign="start center">&nbsp;
                 <mat-icon class="logo-icon" [@animate]="{
                         value: '*',
                         params: { delay: '50ms', scale: '0.2' }
                     }">account_box
-                </mat-icon>
+                </mat-icon>&nbsp;
                 <div class="top-header-title">
                     <span class="logo-text" [@animate]="{
                             value: '*',
                             params: { delay: '100ms', x: '-25px' }
                         }">
-                        Role Master
+                     <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
+                        style="color: aliceblue;">
+                        Patient Screenings
+                    </span>
                     </span>
                 </div>
             </div>
@@ -32,7 +35,7 @@
                         <div fxlayout="row" class="rm-search-form">
                             <form [formGroup]="_RoleService.myformSearch">
                                 <div class="dialog-content-wrapper">
-                                    <mat-form-field class="mr-sm-12" fxFlex>
+                                    <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
                                         <input matInput placeholder="Search --> Role Name" autocomplete="off"
                                             name="RoleNameSearch" formControlName="RoleNameSearch" />
                                         <button mat-button matSuffix mat-icon-button aria-label="Clear"
@@ -48,7 +51,7 @@
                                         </button> -->
 
                                         <button (click)="onSearch()" matTooltip="search"
-                                            style="margin-left: 20px;">
+                                            style="border: #F5F5F5;padding-top: 12px;margin-right: 20px;">
                                             <mat-icon class="searchiconbutton">search</mat-icon>
                                         </button>
 
@@ -56,10 +59,10 @@
                                 </div>
                             </form>
                         </div>
-                        <div fxlayout="row" class="rm-table mt-16">
+                        <div fxlayout="row" class="rm-table mt-16 box">
                             <div style="width: 100%">
-                                <mat-table #table matSort [dataSource]="dsRoleMasterList"
-                                    [@animateStagger]="{ value: '50' }" style="overflow: auto">
+                                <mat-table #table matSort [dataSource]="dsRoleMasterList" class="table"
+                                    [@animateStagger]="{ value: '50' }" style="overflow: hidden;overflow-y: auto;">
                                     <ng-container matColumnDef="RoleId">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Code
                                         </mat-header-cell>
@@ -166,7 +169,7 @@
                                         </button>
                                     </div>
                                 </div> -->
-
+                                <br>
 
                                 <div style="float: right;">
 

@@ -1,365 +1,332 @@
 @import "src/@fuse/scss/fuse";
-app-bill-settlement{
-:host {
-    display: flex;
-    flex-direction: column;
-    flex: 1 0 auto;
-    height: 100%;
-    width: 100%;
-    
-    .mat-form-field {
-        margin-right: 12px;
-      } 
 
-    .sidebar-content {
+app-bill-settlement {
+    :host {
         display: flex;
         flex-direction: column;
-        padding: 0;
-        background-color: white;    
-            
-        @include media-breakpoint(gt-sm) {
-            //prasad
-            // padding: 24px 4px 24px 24px;
-            padding: 12px 0 12px 12px;
+        flex: 1 0 auto;
+        height: 100%;
+        width: 100%;
+
+        .mat-form-field {
+            margin-right: 12px;
         }
 
-        .card {
+        .sidebar-content {
             display: flex;
             flex-direction: column;
-            flex: 0 1 auto;
             padding: 0;
-            border-radius: 8px;
+            background-color: white;
 
             @include media-breakpoint(gt-sm) {
-                @include mat-elevation(1);
+                //prasad
+                // padding: 24px 4px 24px 24px;
+                padding: 12px 0 12px 12px;
             }
 
-            > .header {
+            .card {
+                display: flex;
+                flex-direction: column;
                 flex: 0 1 auto;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+                padding: 0;
+                border-radius: 8px;
+
+                @include media-breakpoint(gt-sm) {
+                    @include mat-elevation(1);
+                }
+
+                >.header {
+                    flex: 0 1 auto;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+                }
+
+                >.content {
+                    flex: 0 1 auto;
+                }
+
+                .example-chip-list {
+                    width: 100%;
+                    font-size: small;
+                    display: inline
+                }
+
+                // .mat-form-field-wrapper {
+                //     padding-bottom: 0.34375em;
+                // }
             }
-
-            > .content {
-                flex: 0 1 auto;
-            }
-
-            .example-chip-list {
-                width: 100%;
-                font-size: small;
-                display:inline
-               }
-
-            // .mat-form-field-wrapper {
-            //     padding-bottom: 0.34375em;
-            // }
         }
+
     }
 
-}
 
+    .mat-form-field-wrapper {
+        padding-bottom: 0.34375em;
+    }
 
-.mat-form-field-wrapper {
-    padding-bottom: 0.34375em;
-}
-
-:host {
-    display: flex;
-    flex: 1 1 auto;
-    width: 100%;
-    
-    .mat-table {
-        //height: 400px !important;
-      // height: 100%;
+    :host {
+        display: flex;
+        flex: 1 1 auto;
         width: 100%;
-        background: transparent;
-        box-shadow: none;
 
-        .mat-column-checkbox {
-            flex: 0 1 64px;
-            padding-left: 18px;
-        }
+        .mat-table {
+            //height: 400px !important;
+            // height: 100%;
+            width: 100%;
+            background: transparent;
+            box-shadow: none;
 
-        .mat-column-avatar {
-            flex: 0 1 64px;
-        }
+            .mat-column-checkbox {
+                flex: 0 1 64px;
+                padding-left: 18px;
+            }
 
-        .mat-column-buttons {
-            flex: 0 1 80px;
-        }
+            .mat-column-avatar {
+                flex: 0 1 64px;
+            }
 
-        .mat-row {
-            position: relative;
-            cursor: pointer;
-           
-            .mat-cell {
-                
+            .mat-column-buttons {
+                flex: 0 1 80px;
+            }
 
-               min-width:0px;
-                white-space: nowrap; 
-                overflow: hidden;
-                text-overflow: ellipsis; 
-                overflow: hidden !important;
-                display: inline-block;
-               
-                
-                &.mat-column-detail-button {
-                    flex: 0 1 auto;
+            .mat-row {
+                position: relative;
+                cursor: pointer;
 
-                    @include media-breakpoint('gt-md') {
-                        display: none;
+                .mat-cell {
+
+
+                    min-width: 0px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    overflow: hidden !important;
+                    display: inline-block;
+
+
+                    &.mat-column-detail-button {
+                        flex: 0 1 auto;
+
+                        @include media-breakpoint('gt-md') {
+                            display: none;
+                        }
                     }
                 }
             }
         }
     }
-}
-.active-icon {
-    border-radius: 50%;
-}
 
-}
-app-bill-settlement{
-
-    .table1{
-        height: 710px !important;
+    .active-icon {
+        border-radius: 50%;
     }
-.mat-header-row {
-    background-color:rgb(18, 87, 134) !important;
-   max-width: 100%; 
-     min-width: 1240px; 
-     min-height: 25px;  
-     width: 100%; 
-    
-}
-
-.mat-row {
-    max-width: 100%;
-    min-height: 25px;  
-    min-width: 1240px; 
-    display: flex;      
-}
-
-.mat-column-BillDate {
-    width:100px;
-    max-width: 100px;
-    min-width: 100px;
-    text-align: center;
-}
-.mat-column-BillNo {
-     width:70px;
-     max-width:70px;
-     min-width:70px;
-    text-align: right;
-    justify-content:left; 
-}
-
-.mat-column-RegNo {
-    width:70px;
-    max-width:70px;
-    min-width:70px;
-   text-align: right;
-   justify-content:left; 
-}
-.mat-column-PatientName {
-   
-    width: 280px;
-    max-width:280px;
-    min-width:280px;
-    text-align: left;
-    white-space: nowrap; 
-    overflow: hidden;
-    text-overflow: ellipsis; 
-    overflow: hidden !important;
-    // display: inline-block;
-    // margin-top: 7px;
-    margin-right: 10px;   
-    justify-content:left; 
-}
-
-.mat-column-TotalAmt {
-    width: 100px;
-    max-width: 100px;
-    min-width: 100px;
-    text-align: right;
-    //justify-content:right;
-     justify-content:center;
-  
-   
-    
-}
-
-.mat-column-chkBalanceAmt {
-    width: 110px;
-    max-width: 110px;
-    min-width: 110px;
-    text-align: right;
-    //justify-content:right;
-     justify-content:center;
-  
-   
-    
-}
-
-.mat-column-NEFTPayAmount{
-    width: 100px;
-    max-width:100px;
-    min-width:100px;
-    justify-content:right;
-    text-align: center;
-}
-.mat-column-PayTMAmount{
-    width: 100px;
-    max-width:100px;
-    min-width:100px;
-    justify-content:right;
-    text-align: center;
-}
-.mat-column-ConcessionAmt {
-    width: 100px;
-    max-width: 100px;
-    min-width: 100px;
-    text-align:right;
-    justify-content:center;
-}
-.mat-column-NetPayableAmt{
-    width: 100px;
-    max-width: 100px;
-    min-width: 100px;
-    text-align: right;
-    justify-content:center;
-}
-.mat-column-PaidAmount{
-    width: 100px;
-    max-width: 100px;
-    min-width: 100px;
-    text-align: right;
-    justify-content:center;
-    // justify-content:flex-start;
-}
-.mat-column-BalanceAmt{
-    width: 100px;
-    max-width: 100px;
-    min-width: 100px;
-    text-align: right;
-    justify-content:center;
-    margin-right: 15px;
-    // justify-content:flex-start;
-}
-.mat-column-action{
-    width: 170px;
-    max-width: 170px;
-    min-width: 170px;
-   // color: white;
-    text-align: center;
-     justify-content:center;
-}
-
-.mat-icon-button {
-    padding: 2px 2px 2px 2px;
-    min-width: 0;
-    width: 30px;
-    height: 20px;
-    flex-shrink: 0;
-    line-height: 20px;
-
-
-
-    // border-radius: 50%;
-}
-
-.clearbutton{
-    padding-right: 5px;
-    padding-left: 5px;
-    float:right;
-    color: blue;
-    width: 27%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin: 5px;  
-    font-size:17px;  
-    border:1px solid #808080; 
-    height: 40px;
 
 }
 
+app-bill-settlement {
 
-.cleariconbutton{
-    font-size: 40px; 
-    text-align: center;
-    margin-bottom: 35px;
-    margin-right: 13px;
-   
-    color:blue;
+    .table1 {
+      height: 83vh !important;
+    }
+
+    .mat-header-row {
+        background-color: rgb(18, 87, 134) !important;
+        width: 100%;
+        max-width: 1700px;
+        min-width: 1700px;
+        min-height: 20px;
+        border-radius: 2px;
+        padding: 5px;
+    }
+
+    .mat-row {
+        max-width: 100%;
+        min-height: 25px;
+        min-width: 1700px;
+        display: flex;
+    }
+
+    .mat-column-BillDate {
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        text-align: center;
+    }
+
+    .mat-column-BillNo {
+        width: 70px;
+        max-width: 70px;
+        min-width: 70px;
+        text-align: right;
+        justify-content: left;
+    }
+
+    .mat-column-RegNo {
+        width: 70px;
+        max-width: 70px;
+        min-width: 70px;
+        text-align: right;
+        justify-content: left;
+    }
+
+    .mat-column-PatientName {
+
+        width: 280px;
+        max-width: 280px;
+        min-width: 280px;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow: hidden !important;
+        // display: inline-block;
+        // margin-top: 7px;
+        margin-right: 10px;
+        justify-content: left;
+    }
+
+    .mat-column-TotalAmt {
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        text-align: right;
+        //justify-content:right;
+        justify-content: center;
+
+
+
+    }
+
+    .mat-column-chkBalanceAmt {
+        width: 110px;
+        max-width: 110px;
+        min-width: 110px;
+        text-align: right;
+        //justify-content:right;
+        justify-content: center;
+
+
+
+    }
+
+    .mat-column-NEFTPayAmount {
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        justify-content: right;
+        text-align: center;
+    }
+
+    .mat-column-PayTMAmount {
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        justify-content: right;
+        text-align: center;
+    }
+
+    .mat-column-ConcessionAmt {
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        text-align: right;
+        justify-content: center;
+    }
+
+    .mat-column-NetPayableAmt {
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        text-align: right;
+        justify-content: center;
+    }
+
+    .mat-column-PaidAmount {
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        text-align: right;
+        justify-content: center;
+        // justify-content:flex-start;
+    }
+
+    .mat-column-BalanceAmt {
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        text-align: right;
+        justify-content: center;
+        margin-right: 15px;
+        // justify-content:flex-start;
+    }
+
+    .mat-column-action {
+        width: 170px;
+        max-width: 170px;
+        min-width: 170px;
+        // color: white;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .mat-icon-button {
+        padding: 2px 2px 2px 2px;
+        min-width: 0;
+        width: 30px;
+        height: 20px;
+        flex-shrink: 0;
+        line-height: 20px;
+
+
+
+        // border-radius: 50%;
+    }
+
+    .red-color {
+        color: red;
+    }
+
+    .green-color {
+        color: green;
+    }
+
+
 }
 
-.searchButton{
-    padding-right: 5px;
-    padding-left: 5px; 
-    float:right; 
-     color: blue;
-    width: 27%; 
-    margin-top: 20px; 
-    margin-bottom: 20px;
-     margin: 5px;   
-     font-size:17px;  
-      border:1px solid #808080;  
-       height: 40px; 
-}
-
-.searchiconbutton{
-    font-size: 40px; 
-    text-align: center;
-    margin-bottom: 35px;
-    margin-right: 10px;
-    color:blue;
-   
-}
-.red-color {
-    color:red;
-}
-
-.green-color {
-    color:green;
-}
-   
-
-}
 .mat-menu-item {
     line-height: 20px;
     height: 20px;
     padding: 0px 5px;
     text-align: center;
-    justify-content:center;
+    justify-content: center;
 }
 
-.table-actions{
+.table-actions {
     color: white !important;
-    width:100px;
+    width: 100px;
     max-width: 100px;
     min-width: 100px;
     text-align: right;
-    justify-content:right; 
+    justify-content: right;
     // background:#039be5 !important; 
 }
 
-.mat-header-cell{
-  // background-color:#039be5 !important ;
+.mat-header-cell {
+    // background-color:#039be5 !important ;
     width: 100%;
     height: 100%;
-   
- 
-} 
+
+
+}
 
 
 
 @media screen and (max-width: 50%) {
     .mat-table {
-     border: 0;
-       vertical-align: middle;
-      
-     }
-  
-  }
+        border: 0;
+        vertical-align: middle;
+
+    }
+
+}
 
 .active-icon {
     border-radius: 50%;
@@ -378,27 +345,28 @@ app-bill-settlement{
 }
 
 
-.navbar{
+.navbar {
     justify-content: space-between;
 }
-.icon{
+
+.icon {
     padding-right: 1rem;
 }
 
-.left-icon{
-    color:white;
+.left-icon {
+    color: white;
 }
 
-.heading{
-   font-family: Roboto, "Helvetica Neue", sans-serif !important;;
+.heading {
+    font-family: Roboto, "Helvetica Neue", sans-serif !important;
+    ;
     font-weight: normal;
     font-size: 14px;
 }
 
-h1, .h1 {
+h1,
+.h1 {
     font-size: 20px;
     font-weight: bold;
     color: white;
 }
-
-

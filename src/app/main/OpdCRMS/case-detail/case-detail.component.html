@@ -17,7 +17,7 @@
             </span>
         </div>
         <button mat-raised-button (click)="newCaseDetail()" fxLayoutAlign="center center"
-        style="margin-left:800px;">New StudyDetail
+        style="margin-left:800px;">New Study Detail
         <!-- <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon> -->
     </button>
     </mat-toolbar>
@@ -37,11 +37,11 @@
             <!-- SIDEBAR CONTENT -->
             <div class="sidebar-content">
 
-                <div class="card">
+                <div class="card box">
 
                     <!-- SIDEBAR HEADER -->
                     <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
-                        style="margin-top: 3%;">
+                        style="border-radius: 2px;width: 100%;">
                         <!-- USER background-color: rgb(13, 67, 102) !important;-->
                         <!-- <img [src]="user.avatar" class="avatar mr-16" [alt]="user.name" /> -->
                         <span class="h5" style="color: aliceblue;font-size: 17px;">Search Facility</span>
@@ -102,7 +102,7 @@
         <div class="center p-12 pb-56">
 
             <!-- CONTENT -->
-            <div class="content-card" style="border-radius:4px;width: 100%; ">
+            <div class="content-card box1" style="border-radius:4px;width: 100%; ">
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
                     <div fxFlex.gt-sm="100%" fxFlex>
 
@@ -114,7 +114,7 @@
 
                                 </div> -->
                                 <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
-                                    class="table1" style="overflow: auto;">
+                                    class="table1" style="overflow: auto;overflow-y: auto;">
 
                                     <ng-container matColumnDef="ProtocolNo">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Protocol No.

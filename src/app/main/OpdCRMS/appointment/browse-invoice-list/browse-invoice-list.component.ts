@@ -247,7 +247,7 @@ getstudydeptdetail(){
     const dialogRef = this._matDialog.open(InvoiceBillMappingComponent,
       {
         maxWidth: "75%",
-        height: '800px',
+        height: '690px',
         width: '100%',
         data: {
           registerObj: this.dataSource

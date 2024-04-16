@@ -1,6 +1,6 @@
 <div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
     <!-- HEADER -->
-    <mat-toolbar class="accent" style="height:50px; justify-content: space-between;width: 100%;">
+    <mat-toolbar class="accent" style="height:55px; justify-content: space-between;width: 100%;">
         <!-- background-color:rgb(18, 87, 134) !important; -->
         <div fxLayout="row" fxLayoutAlign="start center">
             <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm (click)="toggleSidebar('app-main')"
@@ -15,7 +15,6 @@
                 Browse OP Bill
             </span>
         </div>
-
 
     </mat-toolbar>
     <!-- / HEADER -->
@@ -34,10 +33,10 @@
             <!-- SIDEBAR CONTENT -->
             <div class="sidebar-content">
 
-                <div class="card">
+                <div class="card box">
 
                     <!-- SIDEBAR HEADER -->
-                    <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center" style="margin-top: 3%;">
+                    <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center" style="margin-top: 1%;border-radius: 2px;">
                         <!-- USER -->
                         <!-- <img [src]="user.avatar" class="avatar mr-16" [alt]="user.name" /> -->
                         <span class="h5" style="color: aliceblue;font-size: 17px;">Search Facility</span>
@@ -123,14 +122,14 @@
         <div class="center p-12 pb-56">
 
             <!-- CONTENT -->
-            <div class="content-card" style="border-radius:4px;width: 100%; ">
+            <div class="content-card box1" style="border-radius:4px;width: 100%; ">
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
                     <div fxFlex.gt-sm="100%" fxFlex>
 
                         <div fxlayout="row">
                             <div style="width: 100%; overflow: hidden;">
                                 <mat-table #table matSort class="table1" [dataSource]="dataSource"
-                                    [@animateStagger]="{value:'50'}" style="overflow: auto;width: 100%;">
+                                    [@animateStagger]="{value:'50'}" style="overflow: hidden;width: 100%;overflow-y: auto;">
 
                                     <!-- <ng-container matColumnDef="checkbox" sticky>
                                         <mat-header-cell *matHeaderCellDef mat-sort-header>

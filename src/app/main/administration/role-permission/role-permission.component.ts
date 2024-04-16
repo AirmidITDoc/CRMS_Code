@@ -5,7 +5,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { fuseAnimations } from '@fuse/animations';
-import { RolemasterService } from '../rolemaster.service';
+import { RolemasterService } from '../rolemaster/rolemaster.service';
+
 export class FileNode {
   children?: FileNode[];
   title: string;

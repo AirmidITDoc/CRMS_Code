@@ -1,9 +1,9 @@
 <div fxlayout="row" fxFlex.gt-sm="100%" fxFlex class="page-layout simple right-sidebar" style="height:100% !important;">
     <div class="center" fusePerfectScrollbar style="overflow: auto;">
 
-        <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar matDialogTitle class="mat-accent m-0" style="border-radius: 2px;">
             <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
-                style="background-color:rgb(18, 87, 134) !important;">
+                style="background-color:rgb(18, 87, 134) !important;border-radius: 2px;">
                 <h3>{{_CasedetailService.personalFormGroup.controls.StudyId.value?"Modify Study Master" :"New
                     Study Master"}}</h3>
                 <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
@@ -16,7 +16,7 @@
             <mat-card>
                 <mat-tab label="Charges List" style="margin-left: 7px;">
                     <ng-template mat-tab-label
-                        style="color: black; font-size: 17px bold; height: 100px;font-weight: bolder; ">
+                        style="color: #000; font-size: 17px bold; height: 100px;font-weight: bolder; ">
                         <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon>&nbsp; -->
                         Study Creation
                     </ng-template>
@@ -35,13 +35,13 @@
                                 </div>
 
                                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-                                    <mat-form-field appearance="outline" style="width: 25%;font-weight: bolder;">
+                                    <mat-form-field appearance="outline" style="width: 33%;font-weight: bolder;">
                                         <mat-label>Protocol Number</mat-label>
                                         <input name="ProtocolNo" formControlName="ProtocolNo"
                                             placeholder="Protocol Number" matInput required>
                                     </mat-form-field>
 
-                                    <mat-form-field appearance="outline" style="width:65%;font-weight: bolder;">
+                                    <mat-form-field appearance="outline" style="width:68%;font-weight: bolder;">
                                         <mat-label>Study Product</mat-label>
                                         <input name="ProtocolTitle" formControlName="ProtocolTitle"
                                             placeholder="ProtocolTitle" matInput
@@ -160,11 +160,11 @@
                                         <!-- <input name="VisitStartsFrom" formControlName="VisitStartsFrom"
                                             placeholder="VisitStartsFrom" matInput required> -->
 
-                                            <mat-select placeholder="OFFLINE" formControlName="VisitStartsFrom" required>
-                                                <mat-option *ngFor="let Result of results" [value]="Result.value">
-                                                    {{ Result.viewValue }}
-                                                </mat-option>
-                                            </mat-select>
+                                        <mat-select placeholder="OFFLINE" formControlName="VisitStartsFrom" required>
+                                            <mat-option *ngFor="let Result of results" [value]="Result.value">
+                                                {{ Result.viewValue }}
+                                            </mat-option>
+                                        </mat-select>
 
                                     </mat-form-field>
 
@@ -173,12 +173,20 @@
                                 <div class="footer-navigation-container" fxLayout.gt-xs="row" style="float: right;">
 
                                     <div style="float: right;margin-top: 20px;">
-                                        <button class="next-btn" color="accent" style="border-radius: 16px;"
+                                        <button class="next-btn" color="accent"
+                                            style="border-radius: 16px;width: 82px; height: 35px;font-size: 14px;padding-top: 8px;padding-left: 2px;"
                                             (click)="onSubmit()"
-                                            [disabled]="_CasedetailService.personalFormGroup.invalid">Save</button>
+                                            [disabled]="_CasedetailService.personalFormGroup.invalid">
+                                            <span style="display: flex;justify-content: center;">
+                                                <span style="margin-left: 6px;">Save</span>
+                                            </span>
+                                        </button>
                                         <!-- <button class="next-btn" id="btncancel" (click)="UploadDoc()">Uplaod
                                             File</button> -->
-                                        <button class="footer-btn" id="btncancel" (click)="onClose()">Cancel</button>
+                                        <button class="footer-btn"
+                                            style="border-radius: 16px;width: 82px; height: 35px;font-size: 14px;padding-top: 8px;padding-left: 2px;"
+                                            (click)="onClose()">Cancel</button>
+                                        &nbsp;
                                     </div>
                                 </div>
                             </form>

@@ -35,8 +35,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatNestedTreeNode, MatTree, MatTreeModule } from '@angular/material/tree'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RolemasterComponent } from './rolemaster.component';
-import { RolePermissionComponent } from './role-permission/role-permission.component';
+import { RolePermissionComponent } from '../role-permission/role-permission.component';
 import { RolemasterService } from './rolemaster.service';
+import { CdkTreeModule } from '@angular/cdk/tree';
+import { CdkTableModule } from '@angular/cdk/table';
 
 
 
@@ -49,8 +51,7 @@ const routes: Routes = [
 @NgModule({
     declarations: [
       RolemasterComponent,
-      RolePermissionComponent
-      
+      // RolePermissionComponent
     ],
     imports: [
         RouterModule.forChild(routes),
@@ -98,7 +99,9 @@ const routes: Routes = [
         MatChipsModule,
         MatExpansionModule,
         MatListModule,
-        MatTreeModule
+        MatTreeModule,
+        CdkTreeModule,
+        CdkTableModule
         
     ],
     providers: [
