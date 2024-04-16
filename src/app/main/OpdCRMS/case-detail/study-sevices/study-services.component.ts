@@ -121,6 +121,20 @@ export class StudyServicesComponent implements OnInit {
   }
 
   
+  getScheduleList() {
+    var m = {
+      StudyId: this.registerObj.StudyId
+    };
+    this._StudyServicesService.getStudyservicebyStuIdList(m).subscribe(Visit => {
+      this.dataSource1.data = Visit as StudyServicesDetail[];
+      this.dataSource1.sort = this.sort;
+      this.chargeslist1 = this.dataSource1.data;
+      this.chargeslist = this.dataSource1.data;
+      this.dataSource1.paginator = this.paginator;
+    },
+      error => {
+      });
+  }
   // Visitname filter code  
   private filteredVisit() {
 
@@ -273,7 +287,8 @@ export class StudyServicesComponent implements OnInit {
       if (response) {
         Swal.fire('update StudyService  !', ' StudyService Updated Successfully !', 'success').then((result) => {
           if (result) {
-            this._matDialog.closeAll();
+            this.getScheduleList();
+            //this._matDialog.closeAll();
           }
         });
       } else {
