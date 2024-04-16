@@ -118,7 +118,15 @@ export class CasedetailService {
   public getCaseDetailPrint(employee){
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CasedetailId",employee);
   }
-
+  public StudyDistributionInsert(employee)
+  {    
+    return this._httpClient.post("CRMSTran/Insert_SSDoctorPecentage",employee);
+  }
+  
+  public StudyDistributionUpdate(employee)
+  {    
+    return this._httpClient.post("CRMSTran/update_SSDoctorPecentage",employee);
+  }
   populateFormpersonal(employee) {
     this.personalFormGroup.patchValue(employee);
   }
@@ -191,5 +199,9 @@ export class CasedetailService {
   public getVisitStartsFrom(Params)
   {
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_Constants",Params);
+  }
+
+  public getDoctorTypeList(Params){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_DoctorTypeMasteList_by_Name",Params);
   }
 }

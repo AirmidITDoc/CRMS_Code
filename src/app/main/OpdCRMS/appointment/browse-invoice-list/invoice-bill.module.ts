@@ -36,6 +36,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatNestedTreeNode, MatTree, MatTreeModule } from '@angular/material/tree';
 import { InvoiceBillService } from './invoice-bill.service';
 import { BrowseInvoiceListComponent } from './browse-invoice-list.component';
+import { StudywisedeptdetailComponent } from './studywisedeptdetail/studywisedeptdetail.component';
 
 
 const routes: Routes = [
@@ -46,7 +47,8 @@ const routes: Routes = [
 ];
 @NgModule({
     declarations: [
-      BrowseInvoiceListComponent
+      BrowseInvoiceListComponent,
+      StudywisedeptdetailComponent
        
       
     ],

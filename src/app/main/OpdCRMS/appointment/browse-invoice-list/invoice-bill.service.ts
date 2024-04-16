@@ -27,7 +27,7 @@ export class InvoiceBillService {
       start: [(new Date()).toISOString()],
       end: [(new Date()).toISOString()],
       StudyId: '', 
-     
+      InvoiceId:''
     });
   }
 
@@ -51,4 +51,10 @@ export class InvoiceBillService {
   public getPrintInvoice(param){
     return this._httpClient.post("Generic/GetByProc?procName=rptInvoiceGeneration", param);
   }
+
+  public getBrowsestudydeptdetailList(param){
+    
+    return this._httpClient.post("Generic/GetByProc?procName=rptStudyWiseDetStatementReport", param)
+  }
+  
 }
