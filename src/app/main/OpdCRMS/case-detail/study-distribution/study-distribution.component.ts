@@ -257,7 +257,9 @@ export class StudyDistributionComponent implements OnInit {
 
     // }
   }
-
+  onClose(){
+    
+  }
   onClear(){
 
   }

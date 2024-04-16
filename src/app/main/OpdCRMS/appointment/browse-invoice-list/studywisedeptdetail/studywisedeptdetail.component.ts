@@ -20,8 +20,12 @@ import { fuseAnimations } from '@fuse/animations';
   animations: fuseAnimations
 })
 export class StudywisedeptdetailComponent implements OnInit {
-
+  click: boolean = false;
   caseList:any=[];
+  hasSelectedContacts: boolean;
+
+
+  
   displayedColumns = [
 
     'InvoiceNumber',
@@ -92,12 +96,23 @@ export class StudywisedeptdetailComponent implements OnInit {
   }
 
   onShow(event: MouseEvent) {
-  this.getStudytdeptdetail();
-
+   
+  this.click = !this.click;
+  setTimeout(() => {
+    {
+      this.sIsLoading = 'loading-data';
+      this.getStudytdeptdetail();
+    }
+  }, 1000);
+  
+  this.click = true;
+  
   }
   getPrint(row){
 
   }
+
+  onClear(){}
 }
 
 
