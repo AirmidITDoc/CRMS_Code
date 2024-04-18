@@ -179,7 +179,7 @@ export class StudyDistributionComponent implements OnInit {
 
   DoctorComboList() {
     var mdata = {
-      DoctorType: "%"
+      ConstanyType: "DocType"
     };
     this._CasedetailService.getDoctorTypeList(mdata).subscribe(data => {
       this.DoctypeList = data;
@@ -199,7 +199,7 @@ export class StudyDistributionComponent implements OnInit {
           "studyId":  this.distributionForm.get('studyId').value.StudyId || 0,
           "serviceId": this.distributionForm.get('serviceId').value.ServiceId || 0,
           "percentage": this.distributionForm.get('percentage').value || 0,
-          "docType": this.distributionForm.get('docType').value.DoctorType || "",
+          "docType": this.distributionForm.get('docType').value.Name || "",
           "isActive":  1,//this.distributionForm.get('TotalSubjects').value || 0,
           "createdBy":  this.accountService.currentUserValue.user.id,
           "createdOn":  this.datePipe.transform(this.currentDate, "MM-dd-yyyy"),

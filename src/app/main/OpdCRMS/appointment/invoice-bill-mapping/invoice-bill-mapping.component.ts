@@ -64,17 +64,13 @@ export class InvoiceBillMappingComponent implements OnInit {
   chargeslist: any = [];
   screenFromString = 'OP-billing';
   displayedColumns = [
-    // 'checkbox',
     'BillNo',
-    // 'CaseId',
-    // 'CaseTitle',
-    // 'PatientName',
-    // 'RegNo',
-    // 'MobileNo',
-    // 'AgeYear',
+    'BillDate',
+    'RegNo',
+    'VisitTitle',
+    'SubjectName',
     'TotalBillAmt',
     'action',
-
   ];
 
 
