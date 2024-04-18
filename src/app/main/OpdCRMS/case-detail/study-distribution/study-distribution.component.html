@@ -72,7 +72,7 @@
                                         [noEntriesFoundLabel]="'No matching found'"></ngx-mat-select-search>
                                 </mat-option>
                                 <mat-option *ngFor="let element of filteredDocument| async" [value]="element">
-                                    {{element.DoctorType}}
+                                    {{element.Name}}
                                 </mat-option>
                             </mat-select>
 

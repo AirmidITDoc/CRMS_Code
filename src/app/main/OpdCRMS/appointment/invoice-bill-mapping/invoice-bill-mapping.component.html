@@ -84,49 +84,49 @@
                                         </mat-cell>
                                     </ng-container> -->
 
-                                            <ng-container matColumnDef="BillNo" style="margin-left: 10px;">
+                                        <ng-container matColumnDef="BillNo" style="margin-left: 10px;">
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>BillNo
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                                     {{contact.BillNo}}
                                                 </mat-cell>
-                                            </ng-container>
+                                        </ng-container>
 
-                                            <!-- <ng-container matColumnDef="CaseId">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Case
-                                                Id</mat-header-cell>
+                                        <ng-container matColumnDef="BillDate">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>BillDate</mat-header-cell>
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                                {{contact.CaseId}}
+                                                {{contact.BillDate}}
                                             </mat-cell>
                                         </ng-container> -->
 
 
-                                            <!-- <ng-container matColumnDef="CaseTitle">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Case Title
+                                        <ng-container matColumnDef="RegNo">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                                fxShow.gt-md>Reg
+                                                No
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                                {{contact.RegNo}}
+                                            </mat-cell>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="VisitTitle">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>VisitTitle
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let contact" fxShow.gt-sm style="margin-top: 1px;">
-                                                {{contact.CaseTitle}}
+                                                {{contact.VisitTitle}}
                                             </mat-cell>
-                                        </ng-container> -->
+                                        </ng-container>
 
-                                            <ng-container matColumnDef="PatientName">
+                                            <ng-container matColumnDef="SubjectName">
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                                    fxShow.gt-md>Patient Name
+                                                    fxShow.gt-md>SubjectName
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                                    {{contact.PatientName }}
+                                                    {{contact.SubjectName }}
                                                 </mat-cell>
                                             </ng-container>
 
-                                            <ng-container matColumnDef="RegNo">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                                    fxShow.gt-md>Reg
-                                                    No
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                                    {{contact.RegNo}}
-                                                </mat-cell>
-                                            </ng-container>
 
                                             <!-- <ng-container matColumnDef="MobileNo">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
@@ -157,9 +157,9 @@
 
 
                                             <ng-container matColumnDef="action" stickyEnd>
-                                                <mat-header-cell *matHeaderCellDef style="color: white;margin-left: 780px;"> Action
+                                                <mat-header-cell *matHeaderCellDef> Action
                                                 </mat-header-cell>
-                                                <mat-cell *matCellDef="let row" style="margin-left: 870px;">
+                                                <mat-cell *matCellDef="let row">
                                                     <!-- <button mat-icon-button (click)="onEdit(row)"><mat-icon
                                                         title="Edit Menu">launch</mat-icon></button> -->
                                                     <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
