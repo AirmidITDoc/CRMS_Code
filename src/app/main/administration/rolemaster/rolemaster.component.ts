@@ -150,6 +150,10 @@ export class RolemasterComponent implements OnInit {
       FuseConfirmDialogComponent,
       {
         disableClose: false,
+          maxWidth: "22vw",
+          height: '30vh',
+          maxHeight:'90vh',
+          width: '22%',
       }
     );
     this.confirmDialogRef.componentInstance.confirmMessage =

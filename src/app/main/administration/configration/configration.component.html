@@ -7,9 +7,8 @@
     <mat-toolbar style="background-color: #039be5 !important; height:50px; justify-content: space-between;width: 100%;background-color: rgb(13, 67, 102)">
         
 
-        <div fxLayout="row"  fxLayoutAlign="start center"  >
-          
-    
+        <div fxLayout="row"  fxLayoutAlign="start center">
+
             <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm (click)="toggleSidebar('app-main')" style="color: white;">
                 <mat-icon>menu</mat-icon>
             </button>
@@ -39,25 +38,25 @@
         <!-- CENTER -->
         <div class="center p-12 pb-56" fxFlexAlign="start center">
 
-            <div class="content-card" style="border-radius:4px; ">
-                
-    
+            <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
+            style="background-color:white; margin-left:5px; width:100%;overflow:auto; width: fit-content;"
+            sticky>
+            <h2 style="font-weight: bold; font-size: 14px; margin: 0 0 0px;">&nbsp;Configration
+              
+            </h2>
+          </div>
+            <div class="content-card box1" style="border-radius:4px; ">
+                   
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
                     <div fxFlex.gt-sm="100%" fxFlex>
                        
                         <div fxlayout="row">
                             <div style="width: 100%;">
                                 <div matColumnDef="loading" [ngClass]="{'hide': !(sIsLoading == 'loading-data')}" class="backgroundBlur" >
-                                    <div class="spinner-border text-danger" ></div> 
-                               
+                                    <div class="spinner-border text-danger"></div> 
                                </div>
-                               <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
-                               style="background-color:white; margin-left:5px; width:100%;overflow:auto; width: fit-content;"
-                               sticky>
-                               <h2 style="font-weight: bold; font-size: 14px; margin: 0 0 0px;">Configration
-                                 
-                               </h2>
-                             </div>
+
+                             
                                <mat-table #table matSort [dataSource]="dataSource"  [@animateStagger]="{value:'50'}"
                                 style="overflow:auto;width: 100%;" class="table1">
   
@@ -234,7 +233,14 @@
            </div> 
     
            &nbsp;&nbsp;
-           <div class="content-card" style="border-radius:4px; ">
+           <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
+           style="background-color:white; margin-left:5px; width:100%;overflow:auto; width: fit-content;"
+           sticky>
+           <h2 style="font-weight: bold; font-size: 14px; margin: 0 0 0px;">&nbsp;Scheduler
+             
+           </h2>
+         </div>
+           <div class="content-card box1" style="border-radius:4px; ">
                 
     
             <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
@@ -248,15 +254,9 @@
                             <div class="spinner-border text-danger" ></div> 
                        
                        </div>
-                       <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
-                       style="background-color:white; margin-left:5px; width:100%;overflow:auto; width: fit-content;"
-                       sticky>
-                       <h2 style="font-weight: bold; font-size: 14px; margin: 0 0 0px;">Scheduler
-                         
-                       </h2>
-                     </div>
+                      
                        <mat-table #table matSort [dataSource]="dataSource1"  class="table2" [@animateStagger]="{value:'50'}"
-                        style="overflow:auto;width: 100%;">
+                        style="overflow:hidden;width: 100%;overflow-y: auto;">
 
                        
                         <ng-container matColumnDef="ScheduleExecuteType">

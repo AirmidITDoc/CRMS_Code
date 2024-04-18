@@ -1,15 +1,22 @@
-app-patienttype-master {
+app-patient-type-master {
+
+    .table{
+        height: 75vh !important;
+    }
+
     .mat-header-row {
-        width: 80px;
-        max-width: 850px;
-        min-width: 850px;
+        width: 950px;
+        max-width: 950px;
+        min-width: 950px;
         font-weight: bold;
+        border-radius: 2px;
+        padding:3px;
     }
 
     .mat-row {
-        width: 800px;
-        max-width: 800px;
-        min-width: 800px;
+        width: 950px;
+        max-width: 950px;
+        min-width: 950px;
     }
 
     .mat-column-PatientTypeId {
@@ -19,15 +26,15 @@ app-patienttype-master {
     }
 
     .mat-column-PatientType {
-        width: 450px;
-        max-width: 450px;
-        min-width: 450px;
+        width: 200px;
+        max-width: 200px;
+        min-width: 200px;
     }
 
     .mat-column-AddedByName {
-        width: 100px;
-        max-width: 100px;
-        min-width: 100px;
+        width: 450px;
+        max-width: 450px;
+        min-width: 450px;
     }
 
     .mat-column-IsDeleted {

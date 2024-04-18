@@ -26,7 +26,7 @@
 
                 
   <mat-toolbar
-  style="background-color: rgb(13, 67, 102) !important; height:50px; justify-content: space-between;width: 100%;">
+  style="background-color: rgb(13, 67, 102) !important; height:43px; justify-content: space-between;width: 100%;border-radius: 2px;">
   <div fxLayout="row" fxLayoutAlign="start center">
 
     <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
@@ -37,7 +37,7 @@
     </span>
   </div>
 </mat-toolbar>
-            </div>
+            </div><br>
             <div class="modal-body">
                 <div class="content" *ngIf="true">
                     <div class="center px-12" fxFlexAlign="start center">
@@ -57,7 +57,7 @@
                                                     FirstName is required
                                                 </mat-error>
                                             </mat-form-field>
-                                        </div>
+                                        </div>&nbsp;&nbsp;
                                         <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
                                             <mat-form-field appearance="outline" fxFlex>
                                                 <mat-label>Last Name</mat-label>
@@ -85,7 +85,7 @@
                                                     LoginName is required
                                                 </mat-error>
                                             </mat-form-field>
-                                        </div>
+                                        </div>&nbsp;&nbsp;
                                         <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
                                             <mat-form-field appearance="outline" fxFlex>
                                                 <mat-label>Password</mat-label>
@@ -114,7 +114,7 @@
                                                     MailId is required
                                                 </mat-error>
                                             </mat-form-field>
-                                        </div>
+                                        </div>&nbsp;&nbsp;
                                         <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
                                             <mat-form-field appearance="outline" fxFlex>
                                                 <mat-label>RoleName</mat-label>
@@ -161,7 +161,7 @@
                                                     </mat-option>
                                                 </mat-autocomplete>
                                             </mat-form-field>
-                                        </div>
+                                        </div>&nbsp;&nbsp;
                                         <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
                                             <mat-form-field appearance="outline" fxFlex>
                                                 <mat-label>Web Role Name</mat-label>
@@ -213,7 +213,7 @@
                                             <div fxLayoutAlign="start center" class="gap-16">
                                                 <mat-checkbox formControlName="IsDoctor"
                                                     (change)="chkdoctor($event)">IsDoctor
-                                                </mat-checkbox>
+                                                </mat-checkbox>&nbsp;&nbsp;&nbsp;
                                                 <mat-checkbox formControlName="IsActive"
                                                     [(ngModel)]="registerObj.IsActive">Active
                                                 </mat-checkbox>

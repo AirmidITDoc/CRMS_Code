@@ -8,7 +8,8 @@
     display: flex;
     flex: 1 1 auto;
     width: 100%;
-    
+
+
     .mat-table {
        // height: 100px !important;
         width: 100%;
@@ -123,25 +124,24 @@ app-configration{
     max-width: 3700px;
     min-width: 3700px; 
     min-height: 25px;  
-    
+    border-radius: 2px;
 }
 
 .table1{
-    height:250px !important;
+    height:200px !important;
 }
 
 .table2{
-    height: 250px !important;
+    height: 180px !important;
 }
-
 
 .mat-row {
     width:100%;
     max-width: 3700px;
     min-width: 3700px;  
-    min-height: 25px;             
+    min-height: 25px;       
+    border-radius: 2px;      
 }
-
 
 .mat-column-MandatoryFirstName {
     width: 100px;
@@ -149,6 +149,7 @@ app-configration{
     min-width:100px;
     text-align: left;
     justify-content:left;
+    margin-bottom: 1px;
 }
 
 .mat-column-MandatoryMiddleName {
@@ -462,9 +463,9 @@ app-configration{
     
     
     .mat-column-ScheduleExecuteType {
-        width: 180px;
-        max-width:180px;
-        min-width:180px;
+        width: 250px;
+        max-width:250px;
+        min-width:250px;
         text-align: left;
         justify-content:left;
     }
@@ -485,9 +486,9 @@ app-configration{
     }
     
     .mat-column-WeekDayName {
-        width: 150px;
-        max-width:150px;
-        min-width:150px;
+        width: 200px;
+        max-width:200px;
+        min-width:200px;
         text-align: left;
         justify-content:left;
         white-space: nowrap; 

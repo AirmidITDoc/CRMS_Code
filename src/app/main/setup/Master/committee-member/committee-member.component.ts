@@ -126,8 +126,8 @@ export class CommitteeMemberComponent implements OnInit {
   newCommitteeMember() {
     const dialogRef = this._matDialog.open(NewCommitteeMemberComponent,
       {
-        maxWidth: "50vw",
-        height: '720px',
+        maxWidth: "65vw",
+        height: '570px',
         width: '100%',
         
       });

@@ -1,10 +1,18 @@
 app-member-master{
+
+    .table{
+      height: 83vh !important;
+    }
+
     .mat-header-row {
         width: 1520px;
         max-width: 1520px;
         min-width: 1520px;
         font-weight: bold;
+        padding: 2px;
+        border-radius: 2px;
     }
+
     .mat-row {
         width: 1520px;
         max-width: 1520px;

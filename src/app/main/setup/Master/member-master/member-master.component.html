@@ -14,7 +14,7 @@
              Member Master Information List
             </span>
             <button mat-raised-button (click)="onAdd()" 
-                style="margin-left:1100px;width:200px;">New Members
+                style="margin-left:960px;width:150px;">New Members
                 <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
             </button>
          
@@ -28,18 +28,21 @@
     <!-- CONTENT -->
     <div class="content">
         <!-- SIDEBAR -->
-        <fuse-sidebar name="app-main" position="left" lockedOpen="gt-sm" style="width:30%; border-radius:4px;
-        margin-left:12px; background-color: white;height:100%;">
-            <div>
+        <fuse-sidebar name="app-main"  class="sidebar" position="left" lockedOpen="gt-sm" style="background-color: white;
+           margin-top: 12px;">
+           
+             <div class="sidebar-content">
+               <div class="card box">
                 <!-- SIDEBAR HEADER -->
                 <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
-                    style="margin-top: 3%;background-color: rgb(18, 87, 134) !important;">
+                    style="background-color: rgb(18, 87, 134) !important;border-radius:2px;">
                     <span class="h5" style="font-size: 17px;color: aliceblue;">Search Facility</span>
                     <!-- / USER -->
                 </div>
+
                 <!-- / SIDEBAR HEADER -->
                 <!-- SIDEBAR CONTENT -->
-                <div>
+                
                     <div class="nav material2">
                         <form [formGroup]="_MemberMasterService.myFilterform" style="padding: 6px 6px 5px 5px;"
                             fusePerfectScrollbar>
@@ -51,7 +54,6 @@
                                     <!-- <span class="error" *ngIf="f.CommitteeId.invalid && f.CommitteeId.touched">CommitteeId is
                                         required Enter</span> -->
                                 </mat-form-field>
-
                                 
                                 <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>LastName</mat-label>
@@ -73,16 +75,17 @@
                             </div>
 
                         </form>
+                    </div><br>
+             
                     </div>
                 </div>
-            </div>
         </fuse-sidebar>
         <!-- / SIDEBAR -->
         <!-- CENTER -->
         <!-- CENTER -->
 
         <div class="center p-12 pb-56" fxFlexAlign="start center">
-            <div class="content-card" style="border-radius:4px; ">
+            <div class="content-card box1" style="border-radius:4px; ">
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="30px">
                     <div fxFlex.gt-sm="100%" fxFlex>
 
@@ -93,11 +96,9 @@
                                     <div class="spinner-border text-danger"></div>
                                 </div>
                                 <!-- sppinner -->
-                                
-                                
 
                                 <mat-table #table matSort [dataSource]="MemberList"
-                                [@animateStagger]="{value:'50'}" style="overflow:auto;height: 600px !important;" >
+                                [@animateStagger]="{value:'50'}" style="overflow:auto;" class="table">
 
                                 <ng-container matColumnDef="MemberId">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Code

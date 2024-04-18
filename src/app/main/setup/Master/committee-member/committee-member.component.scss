@@ -55,19 +55,22 @@
   
   app-committee-member {
     .table1{
-        height:590px !important;
+        height:83vh !important;
     }
+
   .mat-header-row {
     width: 100%;
-    max-width: 1750px;
-    min-width: 1750px;  
+    max-width: 1900px;
+    min-width: 1900px;  
     min-height: 20px;     
+    border-radius: 2px;
+    padding: 2px;
   }
   
   .mat-row {
     width: 100%;
-    max-width: 1750px;
-    min-width: 1750px;      
+    max-width: 1900px;
+    min-width: 1900px;      
     min-height: 20px;            
   }
  

@@ -21,7 +21,7 @@
             <button mat-raised-button (click)="addUserDetails()" fxLayoutAlign="center center" class="btn btn-with-icon py-4">
                 <span class="btn-icon">
                     <mat-icon color="warn">how_to_reg</mat-icon>
-                </span>
+                </span>&nbsp;
                 <span>New</span>
             </button>
         </div>
@@ -35,7 +35,7 @@
     <!-- / SELECTED BAR -->
 
     <!-- CONTENT -->
-    <div class="content ">
+    <div class="content">
 
         <!-- SIDEBAR -->
         <fuse-sidebar class="fuse-search-sidebar sidebar" name="app-main" position="left" lockedOpen="gt-sm"
@@ -48,7 +48,7 @@
                     <div class="card box" style="height: 100%;">
 
                         <!-- SIDEBAR HEADER -->
-                        <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"  style="margin-top: 1%; border-radius: 2px;">
+                        <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"  style="margin-top: 4%; border-radius: 2px;">
                             <!-- USER -->
                             <!-- <img [src]="user.avatar" class="avatar mr-16" [alt]="user.name" /> -->
                             <span class="h5" style="color: aliceblue;font-size: 17px;">Search Facility</span>
@@ -101,7 +101,7 @@
                                     </div>
                                 </div>
                                 <mat-table #table matSort [dataSource]="dataSource1" [@animateStagger]="{value:'50'}" class="table"
-                                style="overflow: hidden;overflow-y: auto;">
+                                style="overflow: auto;overflow-y: auto;">
 
                                     <ng-container matColumnDef="UserName">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm> User
