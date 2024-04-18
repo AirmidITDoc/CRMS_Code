@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { InvoiceBillService } from '../invoice-bill.service';
 import { Router } from '@angular/router';
 import { AdvanceDataStored } from 'app/main/OpdCRMS/advance';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { AuthenticationService } from 'app/core/services/authentication.service';
 import { DatePipe } from '@angular/common';
 import { InvoiceBilll } from '../browse-invoice-list.component';
@@ -45,20 +45,30 @@ export class StudywisedeptdetailComponent implements OnInit {
   dataSource=new MatTableDataSource<InvoiceBilll>();
   sIsLoading: string = '';
   showSpinner = false;
-
+  PatientHeaderObj:any;
+  vInvoiceId:any;
+  vStudyId:any;
 
   constructor(private _fuseSidebarService: FuseSidebarService,
     public _InvoiceBilllsService: InvoiceBillService,
     private accountService: AuthenticationService,
     public datePipe: DatePipe,
     private _ActRoute: Router,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public _matDialog: MatDialog,
     private advanceDataStored: AdvanceDataStored,) { }
-
+ 
   ngOnInit(): void {
     this.getCasecombo();
+  
+    if (this.data) {
+      debugger
+      this.PatientHeaderObj = this.data.registerObj;
+      console.log(this.PatientHeaderObj);
+      this.vStudyId= this.PatientHeaderObj.CaseId;
+      this.vInvoiceId = this.PatientHeaderObj.InvoiceId;
+    }
     this.getStudytdeptdetail();
-
   }
   
 
@@ -73,10 +83,10 @@ export class StudywisedeptdetailComponent implements OnInit {
   }
 
   getStudytdeptdetail(){
-    // this.sIsLoading = 'loading';
+   debugger
     var D_data = {
-      "StudyId ":this._InvoiceBilllsService.myFilterform.get("StudyId").value.StudyId || 0,
-      "InvoiceId":this._InvoiceBilllsService.myFilterform.get("InvoiceId").value.StudyId || 0,
+      "StudyId ":this.vStudyId || 0,
+      "InvoiceId":this.vInvoiceId || 0,
     }
     setTimeout(() => {
       // this.sIsLoading = 'loading';

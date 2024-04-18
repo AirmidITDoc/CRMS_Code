@@ -204,4 +204,8 @@ export class CasedetailService {
   public getDoctorTypeList(Params){
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_Constants",Params);
   }
+  public getBrowsestudydistributiondetail(Params){
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_SS_DoctorPercenatge",Params);
+  }
+  
 }

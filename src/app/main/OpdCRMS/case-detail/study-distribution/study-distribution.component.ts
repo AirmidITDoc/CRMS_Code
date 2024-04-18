@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { CasedetailService } from '../casedetail.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'app/core/services/authentication.service';
@@ -10,11 +10,15 @@ import Swal from 'sweetalert2';
 import { ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CaseDetail } from '../edit-casedetail/edit-casedetail.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-study-distribution',
   templateUrl: './study-distribution.component.html',
-  styleUrls: ['./study-distribution.component.scss']
+  styleUrls: ['./study-distribution.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class StudyDistributionComponent implements OnInit {
   distributionForm: FormGroup;
@@ -24,6 +28,12 @@ export class StudyDistributionComponent implements OnInit {
   currentDate=new Date()
   registerObj = new CaseDetail({});
   Study: boolean = false;
+
+  vDocSahreId:any=0  
+vStudyId:any;
+vServiceId:any;
+vdoctype:any;
+vPercetage:any;
 
   public studyFilterCtrl: FormControl = new FormControl();
   public filteredStudy: ReplaySubject<any> = new ReplaySubject<any>(1);
@@ -37,7 +47,7 @@ export class StudyDistributionComponent implements OnInit {
 
 
   private _onDestroy = new Subject<void>();
-
+  dataSource = new MatTableDataSource<StudyDistribution>();
 
   constructor(public _CasedetailService: CasedetailService,
     private formBuilder: FormBuilder,
@@ -48,6 +58,15 @@ export class StudyDistributionComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public datePipe: DatePipe,
     private router: Router,) { }
+
+    displayedColumns1 = [
+      'StudyId',
+      'ServiceId',
+      'Percentage',
+      'DocType',
+      'IsActive',
+      'action',
+    ];
 
   ngOnInit(): void {
     this.distributionForm = this.createstudydistributionForm();
@@ -61,7 +80,9 @@ export class StudyDistributionComponent implements OnInit {
 
     this.getServiceList();
     this.getStudylist();
-    this.DoctorComboList();
+    this.DoctypeComboList();
+
+    this.getStudytdistributiondetail();
 
     this.studyFilterCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
@@ -159,32 +180,98 @@ export class StudyDistributionComponent implements OnInit {
 
   }
 
+  // getServiceList() {
+  //   this._CasedetailService.getServviceNameList().subscribe(data => {
+  //     this.ServiceList = data;
+
+  //     this.filteredServicename.next(this.ServiceList.slice());
+  //     // this.distributionForm.get("serviceId").setValue(this.ServiceList[0]);
+  //   });
+  // }
+
+  
   getServiceList() {
+debugger
     this._CasedetailService.getServviceNameList().subscribe(data => {
       this.ServiceList = data;
-
       this.filteredServicename.next(this.ServiceList.slice());
-      // this.distributionForm.get("serviceId").setValue(this.ServiceList[0]);
+      if (this.vDocSahreId !==0) {
+        const ddValue = this.ServiceList.find(c => c.ServiceId == this.vServiceId);
+        this.distributionForm.get('serviceId').setValue(ddValue);
+      }
+      
     });
   }
+
+  // getStudylist() {
+  //   this._CasedetailService.getCaseIDCombo().subscribe(data => {
+  //     this.StudyList = data;
+
+  //     this.filteredStudy.next(this.StudyList.slice());
+  //     // this.distributionForm.get("studyId").setValue(this.StudyList[0]);
+  //   });
+  // }
+
+
+  
   getStudylist() {
+
     this._CasedetailService.getCaseIDCombo().subscribe(data => {
       this.StudyList = data;
-
       this.filteredStudy.next(this.StudyList.slice());
-      // this.distributionForm.get("studyId").setValue(this.StudyList[0]);
+      if (this.vDocSahreId !==0) {
+        const ddValue = this.StudyList.find(c => c.StudyId == this.vStudyId);
+        this.distributionForm.get('studyId').setValue(ddValue);
+      }
+      
     });
   }
 
 
-  DoctorComboList() {
+  getStudytdistributiondetail(){
+    debugger
+     var D_data = {
+       "StudyId ": 0,//this.vStudyId || 0,
+      }
+     setTimeout(() => {
+       // this.sIsLoading = 'loading';
+       this._CasedetailService.getBrowsestudydistributiondetail(D_data).subscribe(Visit => {
+         this.dataSource.data = Visit as StudyDistribution[];
+         console.log(this.dataSource.data )
+        
+       },
+         error => {
+          //  this.sIsLoading = '';
+         });
+     }, 1000);
+     // this.onClear();
+   }
+
+  //  DoctypeComboList() {
+  //   var mdata = {
+  //     ConstanyType: "DocType"
+  //   };
+  //   this._CasedetailService.getDoctorTypeList(mdata).subscribe(data => {
+  //     this.DoctypeList = data;
+  //     this.filteredDocument.next(this.DoctypeList.slice());
+
+  //   });
+  // }
+
+
+    
+  DoctypeComboList() {
     var mdata = {
       ConstanyType: "DocType"
     };
     this._CasedetailService.getDoctorTypeList(mdata).subscribe(data => {
       this.DoctypeList = data;
       this.filteredDocument.next(this.DoctypeList.slice());
-
+      // if (this.vDocSahreId !==0) {
+      //   const ddValue = this.DoctypeList.find(c => c.Name == this.vdoctype);
+      //   this.distributionForm.get('docType').setValue(ddValue);
+      // }
+      
     });
   }
 
@@ -192,7 +279,7 @@ export class StudyDistributionComponent implements OnInit {
 
     // this.isLoading = 'submit';
 
-    // if (!this.distributionForm.get('StudyId').value) {
+    if (this.vDocSahreId==0) {
 
       var m_data = {
         "insertDoctorPercentage": {
@@ -222,45 +309,81 @@ export class StudyDistributionComponent implements OnInit {
           Swal.fire('Error !', 'StudyDetail not saved', 'error');
         }
       });
-    // }
-    // else {
+    }
+    else if (this.vDocSahreId !==0){
 
-    //   var m_data1 = {
-    //     "updateDoctorPercentage": {
-    //       "studyId":  this.distributionForm.get('studyId').value.StudyId || 0,
-    //       "serviceId": this.distributionForm.get('serviceId').value.ServiceId || 0,
-    //       "percentage": this.distributionForm.get('percentage').value || 0,
-    //       "docType": this.distributionForm.get('docType').value.DoctorType || "",
-    //       "isActive":  1,//this.distributionForm.get('TotalSubjects').value || 0,
-    //       "updatedBy":  this.accountService.currentUserValue.user.id,
-    //       "updatedOn":  this.datePipe.transform(this.currentDate, "MM-dd-yyyy"),
+      var m_data1 = {
+        "updateDoctorPercentage": {
+          "studyId":  this.distributionForm.get('studyId').value.StudyId || 0,
+          "serviceId": this.distributionForm.get('serviceId').value.ServiceId || 0,
+          "percentage": this.distributionForm.get('percentage').value || 0,
+          "docType":this.distributionForm.get('docType').value.Name || "",
+          "isActive":  1,//this.distributionForm.get('TotalSubjects').value || 0,
+          "updatedBy":  this.accountService.currentUserValue.user.id,
+          "updatedOn":  this.datePipe.transform(this.currentDate, "MM-dd-yyyy"),
 
-    //     }
-    //   };
-    //   console.log(m_data1);
-    //   this._CasedetailService.StudyInfoUpdate(m_data1).subscribe(response => {
-    //     if (response) {
-    //       Swal.fire('Congratulations !', 'StudyDistribution Updated Successfully !', 'success').then((result) => {
-    //         if (result.isConfirmed) {
-    //           let m = response;
+        }
+      };
+      console.log(m_data1);
+      this._CasedetailService.StudyDistributionUpdate(m_data1).subscribe(response => {
+        if (response) {
+          Swal.fire('Congratulations !', 'StudyDistribution Updated Successfully !', 'success').then((result) => {
+            if (result.isConfirmed) {
+              let m = response;
 
-    //           this._matDialog.closeAll();
+              this._matDialog.closeAll();
 
-    //         }
-    //       });
-    //     } else {
-    //       Swal.fire('Error !', 'StudyDistribution not saved', 'error');
-    //     }
-    //     // this.isLoading = '';
-    //   });
+            }
+          });
+        } else {
+          Swal.fire('Error !', 'StudyDistribution not saved', 'error');
+        }
+        // this.isLoading = '';
+      });
 
 
-    // }
+    }
+  }
+
+
+
+  EditRow(row){
+    console.log(row)
+    this.vDocSahreId=row.DocShrId;
+    this.vStudyId=row.StudyId;
+    this.vServiceId=row.ServiceId;
+    this.vdoctype=row.DocType;
+    this.vPercetage=row.Percentage;
+
+    this.getServiceList();
+    this.getStudylist();
+    this.DoctypeComboList();
+
   }
   onClose(){
     this.dialogRef.close();
   }
   onClear(){
 
+  }
+}
+
+
+export class StudyDistribution {
+  StudyId: number;
+  ServiceId: number;
+  DocShrId: any;
+  DocType: any;
+  Percetage: number;
+ 
+  
+
+  constructor(StudyDistribution) {
+    this.StudyId = StudyDistribution.StudyId || '';
+    this.ServiceId = StudyDistribution.ServiceId || '';
+    this.DocShrId = StudyDistribution.DocShrId || '';
+    this.DocType = StudyDistribution.DocType || '';
+    this.Percetage = StudyDistribution.Percetage || '';
+ 
   }
 }
