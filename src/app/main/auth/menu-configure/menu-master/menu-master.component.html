@@ -3,10 +3,11 @@
         <span>Sub Menu Master List</span>
     </mat-card>
 </div> -->
+
 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
-    <div fxFlex.gt-sm="65%" fxFlex >
+    <div fxFlex.gt-sm="65%" fxFlex  class="content-card box1">
         <div style="width: 100%;">
-            <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}" style="overflow:auto">
+            <mat-table #table matSort [dataSource]="dataSource" class="table" [@animateStagger]="{value:'50'}" style="overflow:hidden;overflow-y: auto;">
                 <ng-container matColumnDef="menu_master_id">
                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Code </mat-header-cell>
                     <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> {{element.menu_master_id}} </mat-cell>
@@ -38,7 +39,7 @@
                 </ng-container>
             
                 <ng-container matColumnDef="action" stickyEnd>
-                    <mat-header-cell *matHeaderCellDef class="table-actions"> Action </mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef class="table-actions" style="color: white;"> Action </mat-header-cell>
                     <mat-cell *matCellDef="let row">
                         <button mat-icon-button (click)="onEditMenu(row)">
                             <mat-icon title="Edit Menu">launch</mat-icon>
@@ -63,6 +64,7 @@
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="12" showFirstLastButtons></mat-paginator>
         </div>
     </div>
+
     <div fxFlex.gt-sm="35%" fxFlex style="background-color: white;">
         <div class="dialog-content-wrapper">
             <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>

@@ -1,15 +1,22 @@
 app-area-master {
+
+    .table{
+        height: 75vh !important;
+    }
+
     .mat-header-row {
-        width: 850px;
-        max-width: 850px;
-        min-width: 850px;
+        width: 950px;
+        max-width: 950px;
+        min-width: 950px;
         font-weight: bold;
+        border-radius: 2px;
+        padding: 3px;
     }
 
     .mat-row {
-        width: 850px;
-        max-width: 850px;
-        min-width: 850px;
+        width: 950px;
+        max-width: 950px;
+        min-width: 950px;
     }
 
     .mat-column-AreaId {
@@ -19,9 +26,9 @@ app-area-master {
     }
 
     .mat-column-AreaName {
-        width: 600px;
-        max-width: 600px;
-        min-width: 600px;
+        width: 700px;
+        max-width: 700px;
+        min-width: 700px;
     }
 
     .mat-column-CityName {

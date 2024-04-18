@@ -1,17 +1,27 @@
 .p-sm-24 {
     padding: 10px !important;
 }
+
+app-religion-master{
+
+
+    .table{
+        height: 75vh !important;
+    }
+
 .mat-header-row {
-    width: 850px;
-    max-width: 850px;
-    min-width: 850px;
+    width: 950px;
+    max-width: 950px;
+    min-width: 950px;
     font-weight: bold;
+    border-radius: 2px;
+    padding: 3px;
 }
 
 .mat-row {
-    width: 850px;
-    max-width: 850px;
-    min-width: 850px;
+    width: 950px;
+    max-width: 950px;
+    min-width: 950px;
 }
 
 .mat-column-ReligionId {
@@ -27,9 +37,9 @@
 }
 
 .mat-column-AddedByName {
-    width: 200px;
-    max-width: 200px;
-    min-width: 200px;
+    width: 350px;
+    max-width: 350px;
+    min-width: 350px;
 }
 
 .mat-column-IsDeleted {
@@ -56,4 +66,5 @@
     flex-shrink: 0;
     line-height: 20px;
     border-radius: 50%;
+}
 }

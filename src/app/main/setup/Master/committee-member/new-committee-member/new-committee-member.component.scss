@@ -3,7 +3,6 @@
     padding-bottom: 0.34375em;
 }
 
-
 app-new-committee-member{
     display: flex;
     flex: 1 1 auto;
@@ -61,15 +60,17 @@ app-new-committee-member{
 
     .table1{
 .mat-header-row {
-    // width: 100%;
-    max-width:730px;
-    min-width:730px; 
-    min-height: 30px;     
+    width: 100%;
+    max-width:870px;
+    min-width:870px; 
+    min-height: 35px;  
+    border-radius: 2px;   
+    padding: 2px;
 }
 .mat-row {
-    // width: 100%;
-    max-width:730px;
-    min-width:730px; 
+    width: 100%;
+    max-width:870px;
+    min-width:870px; 
     min-height: 30px;            
 }
 // PatientData

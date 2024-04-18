@@ -3,9 +3,9 @@
     <div class="container" style="width: 100%;">
         <div style="width: 100%;">
             <!-- <div fxFlex> -->
-                <mat-toolbar matDialogTitle class="mat-accent m-0">
+                <mat-toolbar matDialogTitle class="mat-accent m-0" style="border-radius: 2px;">
                     <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
-                        style="background-color:rgb(18, 87, 134) !important;">
+                        style="background-color:rgb(18, 87, 134) !important;border-radius: 2px;">
                         <h3>{{_CommitteeMemberService.personalFormGroup.controls.CommitteeId.value?"Modify Committee Member":"New
                             Committee Member"}}</h3>
                         <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog" style="float: right;">
@@ -23,7 +23,7 @@
                                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
                                     <input type="hidden" name="CommitteeId" formControlName="CommitteeId">
                                     
-                                    <mat-form-field appearance="outline" style="width: 40%;">
+                                    <mat-form-field appearance="outline" style="width: 73%;">
                                         <mat-label>Committee Name</mat-label>
                                         <input name="CommitteeName" formControlName="CommitteeName"
                                             placeholder="Committee Name" matInput required  [(ngModel)]="CommiteeName">
@@ -55,7 +55,7 @@
 
                                             <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
 
-                                                <mat-form-field appearance="outline" style="width: 40%;" flex>
+                                                <mat-form-field appearance="outline" style="width: 71%;" flex>
                                                     <mat-label>Member</mat-label>
                                                     <mat-select formControlName="MemberId" placeholder="Bank"
                                                         #singleSelect required
@@ -81,15 +81,15 @@
 
                     <div fxLayout="column">
                         <div fxFlex="100" fxFlex.gt-sm="100" fxLayout="row" fxLayout.gt-xs="column">
-                            <div>
+                            <div class="content-card box1">
                                 <div class="col-md-12">
-                                    <div  style="height: 450px !important;  overflow: auto !important;">
+                                    <div  style=" overflow: auto !important;">
                                         <mat-table #table matSort [dataSource]="dataSource"
                                             [@animateStagger]="{value:'50'}"
-                                            style="height: 380px !important;overflow: auto;" class="table1">
+                                            style="height: 250px !important;overflow: auto;" class="table1">
 
                                             <ng-container matColumnDef="MemberName">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm style="margin-top: 5px;">
                                                     Member Name
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let contact" fxShow.gt-sm>
@@ -98,7 +98,7 @@
                                             </ng-container>
 
                                             <ng-container matColumnDef="action" stickyEnd>
-                                                <mat-header-cell *matHeaderCellDef style="color: white;"> Action
+                                                <mat-header-cell *matHeaderCellDef style="color: white;margin-top: 5px;"> Action
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let row">
                                                     <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
@@ -137,7 +137,7 @@
                                         <div class="net-amt">
                                             <span class="net-amt-label" style="margin-left:150px;color: rgb(91, 153, 214);">Total Member</span>&nbsp;<span
                                                 class="net-amt-value" style="color: rgb(9, 50, 85);">{{dataSource.data.length}}</span>
-                                        </div>
+                                        </div><br>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
                 </div>
             </mat-card-content>
         </div>
-        <div style="margin-left:550px;">
+        <div style="margin-left:700px;">
             <button class="next-btn" color="accent" (click)="onSubmit()" style="border-radius: 16px;"> Save</button>
             <button class="footer-btn" (click)="onClose()">Cancel</button>
         </div>

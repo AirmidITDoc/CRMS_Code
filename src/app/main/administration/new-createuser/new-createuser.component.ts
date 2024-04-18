@@ -164,7 +164,7 @@ export class NewCreateuserComponent implements OnInit {
     const dialogRef = this._matDialog.open(NewUserdetailsComponent,
       {
         maxWidth: "85vw",
-        height: "90vh",
+        height: "95vh",
         width: '100%',
       });
     dialogRef.afterClosed().subscribe(result => {

@@ -20,8 +20,8 @@ export class ReligionMasterComponent implements OnInit {
   displayedColumns: string[] = [
       "ReligionId",
       "ReligionName",
-      "IsDeleted",
       "AddedByName",
+      "IsDeleted",
       "action",
   ];
 

@@ -18,7 +18,7 @@
                 Member
             </button> -->
             <button mat-raised-button (click)="newCommitteeMember()" 
-                style="margin-left:1100px;width:200px;">CommitteeMembers
+                style="margin-left:900px;width:180px;">CommitteeMembers
                 <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
             </button>
             <!-- <button mat-raised-button (click)="newcommitteemeeting()" 
@@ -35,18 +35,20 @@
     <!-- CONTENT -->
     <div class="content">
         <!-- SIDEBAR -->
-        <fuse-sidebar name="app-main" position="left" lockedOpen="gt-sm" style="width:30%; border-radius:4px;
-        margin-left:12px; background-color: white;height:100%;">
-            <div>
+        <fuse-sidebar name="app-main"  class="sidebar" position="left" lockedOpen="gt-sm" style="background-color: white;
+           margin-top: 5px;">
+          
+          <div class="sidebar-content">
+            <div class="card box">
                 <!-- SIDEBAR HEADER -->
                 <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
-                    style="margin-top: 3%;background-color: rgb(18, 87, 134) !important;">
+                    style="margin-top: 3%;background-color: rgb(18, 87, 134) !important;border-radius: 2px;">
                     <span class="h5" style="font-size: 17px;color: aliceblue;">Search Facility</span>
                     <!-- / USER -->
                 </div>
                 <!-- / SIDEBAR HEADER -->
                 <!-- SIDEBAR CONTENT -->
-                <div>
+                
                     <div class="nav material2">
                         <form [formGroup]="_CasedetailService.myFilterform" style="padding: 6px 6px 5px 5px;"
                             fusePerfectScrollbar>
@@ -72,16 +74,17 @@
                             </div>
 
                         </form>
-                    </div>
-                </div>
-            </div>
+                    </div><br>
+             </div>
+             </div>
+            
         </fuse-sidebar>
         <!-- / SIDEBAR -->
         <!-- CENTER -->
         <!-- CENTER -->
 
         <div class="center p-12 pb-56" fxFlexAlign="start center">
-            <div class="content-card" style="border-radius:4px; ">
+            <div class="content-card box1" style="border-radius:4px; ">
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="30px">
                     <div fxFlex.gt-sm="100%" fxFlex>
 
@@ -93,7 +96,7 @@
                                 </div>
                                 <!-- sppinner -->
                                 <mat-table #table matSort [dataSource]="dataSource"
-                                    [@animateStagger]="{value:'50'}" class="table1">
+                                    [@animateStagger]="{value:'50'}" class="table1" style="overflow: auto;">
 
                                     <ng-container matColumnDef="CommitteeId">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header
@@ -188,7 +191,7 @@
                                     </ng-container>
 
                                     <ng-container matColumnDef="action" stickyEnd>
-                                        <mat-header-cell *matHeaderCellDef style="color: rgb(36, 33, 33);"> Action
+                                        <mat-header-cell *matHeaderCellDef style="color:white;"> Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
                                             <button mat-icon-button (click)="onEdit(row)"  style="color: rgb(11, 12, 13);"><mat-icon

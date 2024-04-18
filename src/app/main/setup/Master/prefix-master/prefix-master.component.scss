@@ -1,15 +1,22 @@
 app-prefix-master {
+
+    .table{
+     height: 75vh !important;
+    }
+
     .mat-header-row {
-        width: 850px;
-        max-width: 850px;
-        min-width: 850px;
+        width: 940px;
+        max-width: 940px;
+        min-width: 940px;
         font-weight: bold;
+        padding: 3px;
+        border-radius: 2px;
     }
 
     .mat-row {
-        width: 850px;
-        max-width: 850px;
-        min-width: 850px;
+        width: 940px;
+        max-width: 940px;
+        min-width: 940px;
     }
 
     .mat-column-PrefixID {
@@ -25,9 +32,9 @@ app-prefix-master {
     }
 
     .mat-column-GenderName {
-        width: 250px;
-        max-width: 250px;
-        min-width: 250px;
+        width: 320px;
+        max-width: 320px;
+        min-width: 320px;
     }
 
     .mat-column-IsDeleted {
@@ -36,6 +43,7 @@ app-prefix-master {
         min-width: 100px;
         text-align: center;
         justify-content: center;
+        
     }
 
     .mat-column-action {
@@ -43,8 +51,9 @@ app-prefix-master {
         width: 110px;
         max-width: 110px;
         min-width: 110px;
-        text-align: right;
-        justify-content: right;
+        text-align: left;
+        justify-content: left;
+        margin-left: 5px;
     }
     .mat-icon-button {
         padding: 0;

@@ -1,14 +1,24 @@
+
+app-country-master{
+
+
+    .table{
+      height: 75vh !important;
+    }
+
 .mat-header-row {
-    width: 850px;
-    max-width: 850px;
-    min-width: 850px;
+    width: 950px;
+    max-width: 950px;
+    min-width: 950px;
     font-weight: bold;
+    border-radius: 2px;
+    padding: 3px;
 }
 
 .mat-row {
-    width: 850px;
-    max-width: 850px;
-    min-width: 850px;
+    width: 950px;
+    max-width: 950px;
+    min-width: 950px;
 }
 
 .mat-column-CountryId {
@@ -18,15 +28,15 @@
 }
 
 .mat-column-CountryName {
-    width: 450px;
-    max-width: 450px;
-    min-width: 450px;
+    width: 200px;
+    max-width: 200px;
+    min-width: 200px;
 }
 
 .mat-column-AddedBy {
-    width: 100px;
-    max-width: 100px;
-    min-width: 100px;
+    width:450px;
+    max-width: 450px;
+    min-width:450px;
 }
 
 .mat-column-IsDeleted {
@@ -42,8 +52,8 @@
     width: 110px;
     max-width: 110px;
     min-width: 70110pxpx;
-    text-align: right;
-    justify-content: right;
+    text-align: left;
+    justify-content: left;
 }
 .mat-icon-button {
     padding: 0;
@@ -53,4 +63,5 @@
     flex-shrink: 0;
     line-height: 20px;
     border-radius: 50%;
+}
 }

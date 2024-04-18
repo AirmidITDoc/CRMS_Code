@@ -1,15 +1,22 @@
 app-maritalstatus-master {
+
+    .table{
+        height:75vh !important;
+    }
+
     .mat-header-row {
-        width: 80px;
-        max-width: 850px;
-        min-width: 850px;
+        width: 950px;
+        max-width: 950px;
+        min-width: 950px;
         font-weight: bold;
+        border-radius: 2px;
+        padding: 3px;
     }
 
     .mat-row {
-        width: 850px;
-        max-width: 850px;
-        min-width: 850px;
+        width: 950px;
+        max-width: 950px;
+        min-width: 950px;
     }
 
     .mat-column-MaritalStatusId {
@@ -19,9 +26,9 @@ app-maritalstatus-master {
     }
 
     .mat-column-MaritalStatusName {
-        width: 300px;
-        max-width: 300px;
-        min-width: 300px;
+        width: 200px;
+        max-width: 200px;
+        min-width: 200px;
     }
 
     .mat-column-IsDeleted {
