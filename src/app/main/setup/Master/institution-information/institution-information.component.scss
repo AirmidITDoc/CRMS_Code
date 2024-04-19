@@ -1,18 +1,23 @@
 app-institution-information{
     // height: 600px !important;
-    .mat-header-row {
-        width: 1900px;
-        max-width: 1900px;
-        min-width: 1900px;
-        font-weight: bold;
-    }
-    .mat-row {
-        width: 1900px;
-        max-width: 1900px;
-        min-width: 1900px;
+    .table{
+        height: 83vh !important;
     }
 
-  
+    .mat-header-row {
+        width: 2000px;
+        max-width: 2000px;
+        min-width: 2000px;
+        font-weight: bold;
+        border-radius: 2px;
+        padding: 5px;
+    }
+    .mat-row {
+        width: 2000px;
+        max-width: 2000px;
+        min-width: 2000px;
+    }
+
     .mat-column-InstitutionId {
         width: 100px;
         max-width: 100px;
@@ -115,7 +120,7 @@ app-institution-information{
         max-width: 100px;
         min-width: 100px;
         text-align: left;
-        justify-content: right;
+        justify-content: left;
     }
     .mat-icon-button {
         padding: 0;

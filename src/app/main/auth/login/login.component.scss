@@ -10,6 +10,8 @@ login {
         //     no-repeat;
         background-size: cover;
 
+       
+
         #login-intro {
             padding: 128px;
 
@@ -23,26 +25,38 @@ login {
             }
 
             .title {
-                font-size: 42px;
+                font-size: 50px;
                 font-weight: 300;
                 line-height: 1;
                 color: black;
+                justify-content: center;
+                text-align: center;
             }
 
             .description {
                 padding-top: 16px;
                 font-size: 14px;
                 max-width: 600px;
-                 color: black;
+                color: black;
             }
         }
-
+        
         #login-form-wrapper {
-            width: 400px;
-            min-width: 400px;
-            max-width: 400px;
+            width: 100%;
+            min-width: 500px;
+            max-width: 500px;
+            height: 100%;
+            min-height: 450px;
+            max-height: 450px;
             overflow: auto;
+            margin: auto;
+            display: flex;
+            border-radius: 10px;
             -webkit-overflow-scrolling: touch;
+
+            .mat-form-field-outline:not( .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick){
+                color: #125786;                
+              }
 
             @include mat-elevation(16);
 
@@ -59,8 +73,8 @@ login {
             }
 
             #login-form {
-                padding: 128px 48px 48px 48px;
-
+                padding: 20px 48px 48px 48px;
+                
                 @include media-breakpoint("xs") {
                     text-align: center;
                     padding: 24px;
@@ -73,6 +87,9 @@ login {
 
                 .title {
                     font-size: 21px;
+                }
+                .title1 {
+                    font-size: 22px;
                 }
 
                 .description {
@@ -111,10 +128,12 @@ login {
                     }
 
                     .submit-button {
-                        width: 100%;
+                        width: 35%;
                         margin: 16px auto;
                         display: block;
-
+                        border-radius: 50px;
+                        background-color: #0093B8;
+                        color: white;
                         @include media-breakpoint("xs") {
                             width: 80%;
                         }

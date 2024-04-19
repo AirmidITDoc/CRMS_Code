@@ -13,7 +13,7 @@
                 style="color: aliceblue;">
                 Sponser Information List
             </span>
-            <button mat-raised-button (click)="onAdd()" style="margin-left:1100px;width:200px;">Sponser
+            <button mat-raised-button (click)="onAdd()" style="margin-left:1040px;width:140px;">Sponser
                 <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
             </button>
         </div>
@@ -26,18 +26,20 @@
     <!-- CONTENT -->
     <div class="content">
         <!-- SIDEBAR -->
-        <fuse-sidebar name="app-main" position="left" lockedOpen="gt-sm" style="width:30%; border-radius:4px;
-        margin-left:12px; background-color: white;height:100%;">
-            <div>
-                <!-- SIDEBAR HEADER -->
-                <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
-                    style="margin-top: 3%;background-color: rgb(18, 87, 134) !important;">
-                    <span class="h5" style="font-size: 17px;color: aliceblue;">Search Facility</span>
-                    <!-- / USER -->
-                </div>
-                <!-- / SIDEBAR HEADER -->
-                <!-- SIDEBAR CONTENT -->
-                <div>
+        <fuse-sidebar name="app-main" class="sidebar" position="left" lockedOpen="gt-sm" style="background-color: white;
+           margin-top: 5px;">
+
+            <div class="sidebar-content">
+                <div class="card box">
+                    <!-- SIDEBAR HEADER -->
+                    <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
+                        style="margin-top: 3%;background-color: rgb(18, 87, 134) !important;border-radius: 2px;">
+                        <span class="h5" style="font-size: 17px;color: aliceblue;">Search Facility</span>
+                        <!-- / USER -->
+                    </div>
+                    <!-- / SIDEBAR HEADER -->
+                    <!-- SIDEBAR CONTENT -->
+
                     <div class="nav material2">
                         <form [formGroup]="_sponserService.myFilterform" style="padding: 6px 6px 5px 5px;"
                             fusePerfectScrollbar>
@@ -45,7 +47,8 @@
 
                                 <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>SponserName</mat-label>
-                                    <input name="SponserName" formControlName="SponserName" matInput (keyup)="getServiceMasterList()">
+                                    <input name="SponserName" formControlName="SponserName" matInput
+                                        (keyup)="getServiceMasterList()">
                                     <!-- <span class="error" *ngIf="f.SponserName.invalid && f.SponserName.touched">SponserName is
                                         required Enter</span> -->
                                 </mat-form-field>
@@ -63,7 +66,7 @@
                             </div>
 
                         </form>
-                    </div>
+                    </div><br>
                 </div>
             </div>
         </fuse-sidebar>
@@ -72,7 +75,7 @@
         <!-- CENTER -->
 
         <div class="center p-12 pb-56" fxFlexAlign="start center">
-            <div class="content-card" style="border-radius:4px; ">
+            <div class="content-card box1" style="border-radius:4px; ">
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="30px">
                     <div fxFlex.gt-sm="100%" fxFlex>
 
@@ -84,119 +87,124 @@
                                 </div>
                                 <!-- sppinner -->
                                 <mat-table #table matSort [dataSource]="DSSponserInformationList"
-                                [@animateStagger]="{value:'50'}" style="overflow:auto;height: 600px !important;">
+                                    [@animateStagger]="{value:'50'}" style="overflow:auto;" class="table">
 
-                                <ng-container matColumnDef="SponserId">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Code
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> {{element.SponserId}}
-                                    </mat-cell>
-                                </ng-container>
+                                    <ng-container matColumnDef="SponserId">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Code
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> {{element.SponserId}}
+                                        </mat-cell>
+                                    </ng-container>
 
-                                <ng-container matColumnDef="SponserName">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Sponser Name </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.SponserName}}
-                                    </mat-cell>
-                                </ng-container>
+                                    <ng-container matColumnDef="SponserName">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> Sponser Name
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.SponserName}}
+                                        </mat-cell>
+                                    </ng-container>
 
-                                <ng-container matColumnDef="Address">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Address
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> {{element.Address}}
-                                    </mat-cell>
-                                </ng-container>
+                                    <ng-container matColumnDef="Address">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Address
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> {{element.Address}}
+                                        </mat-cell>
+                                    </ng-container>
 
-                                <ng-container matColumnDef="ContactNo">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header> ContactNo </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.ContactNo}}
-                                    </mat-cell>
-                                </ng-container>
+                                    <ng-container matColumnDef="ContactNo">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> ContactNo </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.ContactNo}}
+                                        </mat-cell>
+                                    </ng-container>
 
-                                <ng-container matColumnDef="PinCode">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>PinCode</mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.PinCode}} </mat-cell>
-                                </ng-container>
+                                    <ng-container matColumnDef="PinCode">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header>PinCode</mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.PinCode}}
+                                        </mat-cell>
+                                    </ng-container>
 
-                                <ng-container matColumnDef="State">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>State
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> {{element.State}}
-                                    </mat-cell>
-                                </ng-container>
-                                <ng-container matColumnDef="StateCode">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header> StateCode </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.StateCode}} </mat-cell>
-                                </ng-container>
-                                <ng-container matColumnDef="GSTIN">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header> GSTIN </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.GSTIN}} </mat-cell>
-                                </ng-container>
+                                    <ng-container matColumnDef="State">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>State
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> {{element.State}}
+                                        </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="StateCode">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> StateCode </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.StateCode}}
+                                        </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="GSTIN">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> GSTIN </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.GSTIN}} </mat-cell>
+                                    </ng-container>
 
-                                <ng-container matColumnDef="SAC">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>SAC </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.SAC}}
-                                    </mat-cell>
-                                </ng-container>
+                                    <ng-container matColumnDef="SAC">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header>SAC </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.SAC}}
+                                        </mat-cell>
+                                    </ng-container>
 
-                                <ng-container matColumnDef="PAN">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>PAN </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.PAN}}
-                                    </mat-cell>
-                                </ng-container>
+                                    <ng-container matColumnDef="PAN">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header>PAN </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.PAN}}
+                                        </mat-cell>
+                                    </ng-container>
 
-                                <ng-container matColumnDef="PlaceOfSupply">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>PlaceOfSupply </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.PlaceOfSupply}}
-                                    </mat-cell>
-                                </ng-container>
+                                    <ng-container matColumnDef="PlaceOfSupply">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header>PlaceOfSupply
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.PlaceOfSupply}}
+                                        </mat-cell>
+                                    </ng-container>
 
-                                <ng-container matColumnDef="EmailId">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>EmailId </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.EmailId}}
-                                    </mat-cell>
-                                </ng-container>
+                                    <ng-container matColumnDef="EmailId">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header>EmailId </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.EmailId}}
+                                        </mat-cell>
+                                    </ng-container>
 
-                                <ng-container matColumnDef="IsActive">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm> IsActive
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
-                                        <mat-icon *ngIf="!element.IsActive"
-                                            class="active-icon green-600 s-16">check_circle</mat-icon>
-                                        <mat-icon *ngIf="element.IsActive"
-                                            class="active-icon red-500 s-16">close</mat-icon>
-                                    </mat-cell>
-                                </ng-container>
+                                    <ng-container matColumnDef="IsActive">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm> IsActive
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                            <mat-icon *ngIf="!element.IsActive" style="color: white;border-radius: 10px;"
+                                                class="active-icon green-600 s-20">check_circle</mat-icon>
+                                            <mat-icon *ngIf="element.IsActive" style="color: white;border-radius: 10px;"
+                                                class="active-icon red-500 s-20">close</mat-icon>
+                                        </mat-cell>
+                                    </ng-container>
 
 
-                                <ng-container matColumnDef="action" stickyEnd>
-                                    <mat-header-cell *matHeaderCellDef class="table-actions" >
-                                        Action </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" >
-                                        <button mat-icon-button (click)="onEdit(element)" style="color: rgb(11, 12, 13);"><mat-icon
-                                                title="Edit Menu">launch</mat-icon></button>
-                                        <button mat-icon-button (click)="deleteTableRow(element)"
-                                            color="warn"><mat-icon>delete_outline</mat-icon></button>
-                                    </mat-cell>
-                                </ng-container>
+                                    <ng-container matColumnDef="action" stickyEnd>
+                                        <mat-header-cell *matHeaderCellDef class="table-actions">
+                                            Action </mat-header-cell>
+                                        <mat-cell *matCellDef="let element">
+                                            <button mat-icon-button (click)="onEdit(element)"
+                                            style="color:#125786;"><mat-icon
+                                                    title="Edit Menu">launch</mat-icon></button>
+                                            <button mat-icon-button (click)="deleteTableRow(element)"
+                                                color="warn"><mat-icon>delete_outline</mat-icon></button>
+                                        </mat-cell>
+                                    </ng-container>
 
-                                <ng-container matColumnDef="loading">
-                                    <mat-footer-cell *matFooterCellDef colspan="6">
-                                        loading data...
-                                    </mat-footer-cell>
-                                </ng-container>
+                                    <ng-container matColumnDef="loading">
+                                        <mat-footer-cell *matFooterCellDef colspan="6">
+                                            loading data...
+                                        </mat-footer-cell>
+                                    </ng-container>
 
-                                <ng-container matColumnDef="noData">
-                                    <mat-footer-cell *matFooterCellDef colspan="6">
-                                        no data found...
-                                    </mat-footer-cell>
-                                </ng-container>
+                                    <ng-container matColumnDef="noData">
+                                        <mat-footer-cell *matFooterCellDef colspan="6">
+                                            no data found...
+                                        </mat-footer-cell>
+                                    </ng-container>
 
-                                <mat-header-row class="accent"
-                                    *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-                                <mat-row *matRowDef="let element; columns: displayedColumns;" class="element"
-                                    [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+                                    <mat-header-row class="accent"
+                                        *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                                    <mat-row *matRowDef="let element; columns: displayedColumns;" class="element"
+                                        [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
 
-                            </mat-table>
+                                </mat-table>
                                 <mat-paginator [pageSizeOptions]="[20, 25, 50, 100]" [pageSize]="20"
                                     showFirstLastButtons>
                                 </mat-paginator>

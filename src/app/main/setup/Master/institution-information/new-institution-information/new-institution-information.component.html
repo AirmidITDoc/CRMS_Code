@@ -1,8 +1,8 @@
 <div fxlayout="row" fxFlex.gt-sm="100%" fxFlex class="page-layout simple right-sidebar">
-    <div class="center" fusePerfectScrollbar style="overflow: auto;">
+    <div class="center" fusePerfectScrollbar style="overflow: auto;border-radius: 2px;">
         <mat-toolbar matDialogTitle class="mat-accent m-0">
             <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
-                style="background-color:rgb(18, 87, 134) !important;">
+                style="background-color:rgb(18, 87, 134) !important;border-radius: 2px;">
                 <h3>{{_institutionService.personalFormGroup.controls.InstitutionId.value?"Modify Institution Master":"New
                     Institution Master"}}</h3>
                 <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog" style="float: right;">
@@ -102,8 +102,6 @@
                                 <input name="PAN" formControlName="PAN" placeholder="PAN" matInput required
                                     required="required" type="number">
                             </mat-form-field>
-
-
                         </div>
 
                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
@@ -119,10 +117,9 @@
                                 <input name="EmailId" formControlName="EmailId" placeholder="EmailId" matInput>
                             </mat-form-field>
 
-                        </div>
+                        </div><br>
 
                         <div style="float: right;">
-
                             <button class="next-btn" color="accent" (click)="onSubmit()" style="border-radius: 16px;">
                                 <span style="display: flex;justify-content: center;">
                                     <!-- <mat-spinner *ngIf="isLoading=='submit'" [color]="white" [diameter]="20"></mat-spinner> -->

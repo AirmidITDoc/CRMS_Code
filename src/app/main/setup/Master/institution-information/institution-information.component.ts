@@ -55,7 +55,7 @@ export class InstitutionInformationComponent implements OnInit {
   onAdd(){
     const dialogRef = this._matDialog.open(NewInstitutionInformationComponent, {
       maxWidth: "80vw",
-      maxHeight: "55vh",
+      maxHeight: "65vh",
       width: "100%",
       height: "100%",
   });

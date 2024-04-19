@@ -1,17 +1,23 @@
 app-sponser-information {
+    .table{
+        height:83vh !important;
+    }
+
     .mat-header-row {
-        width: 1900px;
-        max-width: 1900px;
-        min-width: 1900px;
+        width: 1750px;
+        max-width: 1750px;
+        min-width: 1750px;
         font-weight: bold;
+        border-radius: 2px;
+        padding: 5px;
+
     }
 
     .mat-row {
-        width: 1900px;
-        max-width: 1900px;
-        min-width: 1900px;
+        width: 1750px;
+        max-width: 1750px;
+        min-width: 1750px;
     }
-
 
     .mat-column-SponserId {
         width: 70px;
@@ -20,22 +26,21 @@ app-sponser-information {
     }
 
     .mat-column-SponserName {
-        width:300px;
-        max-width: 300px;
-        min-width: 300px;
+        width:250px;
+        max-width: 250px;
+        min-width: 250px;
         text-align: left;
         white-space: nowrap; 
         overflow: hidden;
         text-overflow: ellipsis; 
          overflow: hidden !important;
-       
          justify-content:left;
     }
 
     .mat-column-Address {
-        width: 290px;
-        max-width: 290px;
-        min-width: 290px;
+        width: 180px;
+        max-width: 180px;
+        min-width: 180px;
         text-align: left;
         white-space: nowrap; 
         overflow: hidden;
@@ -46,9 +51,9 @@ app-sponser-information {
     }
 
     .mat-column-ContactNo {
-        width: 90px;
-        max-width: 90px;
-        min-width: 90px;
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
     }
 
     .mat-column-PinCode {
@@ -120,9 +125,9 @@ app-sponser-information {
 
     .mat-column-action {
         color: white !important;
-        width: 90px;
-        max-width: 90px;
-        min-width: 90px;
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
         text-align: right;
         justify-content: right;
     }
