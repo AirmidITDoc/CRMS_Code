@@ -62,6 +62,8 @@ vPercetage:any;
     displayedColumns1 = [
       'StudyId',
       'ServiceId',
+      'ProtocolNo',
+      'ServiceName',
       'Percentage',
       'DocType',
       'IsActive',
@@ -74,7 +76,6 @@ vPercetage:any;
 
     if (this.data) {
       this.registerObj = this.data.registerObj;
-
       this.Study = true;
     }
 
@@ -229,9 +230,8 @@ debugger
 
 
   getStudytdistributiondetail(){
-    debugger
      var D_data = {
-       "StudyId ": 0,//this.vStudyId || 0,
+       "StudyId ": this.registerObj.StudyId || 0,
       }
      setTimeout(() => {
        // this.sIsLoading = 'loading';
@@ -247,19 +247,6 @@ debugger
      // this.onClear();
    }
 
-  //  DoctypeComboList() {
-  //   var mdata = {
-  //     ConstanyType: "DocType"
-  //   };
-  //   this._CasedetailService.getDoctorTypeList(mdata).subscribe(data => {
-  //     this.DoctypeList = data;
-  //     this.filteredDocument.next(this.DoctypeList.slice());
-
-  //   });
-  // }
-
-
-    
   DoctypeComboList() {
     var mdata = {
       ConstanyType: "DocType"
@@ -300,10 +287,8 @@ debugger
         if (response) {
           Swal.fire('New StudyDistribution Save !', ' StudyDistribution Save Successfully !', 'success').then((result) => {
             if (result.isConfirmed) {
-              this._matDialog.closeAll();
-
+              this.getStudytdistributiondetail();
             }
-
           });
         } else {
           Swal.fire('Error !', 'StudyDetail not saved', 'error');
@@ -330,9 +315,7 @@ debugger
           Swal.fire('Congratulations !', 'StudyDistribution Updated Successfully !', 'success').then((result) => {
             if (result.isConfirmed) {
               let m = response;
-
-              this._matDialog.closeAll();
-
+              this.getStudytdistributiondetail();
             }
           });
         } else {
@@ -340,8 +323,6 @@ debugger
         }
         // this.isLoading = '';
       });
-
-
     }
   }
 
@@ -354,7 +335,6 @@ debugger
     this.vServiceId=row.ServiceId;
     this.vdoctype=row.DocType;
     this.vPercetage=row.Percentage;
-
     this.getServiceList();
     this.getStudylist();
     this.DoctypeComboList();

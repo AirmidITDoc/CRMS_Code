@@ -48,8 +48,6 @@
                                         </mat-cell>
                                     </ng-container>
 
-
-
                                  <ng-container matColumnDef="InvoiceNumber">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>InvoiceId
                                         </mat-header-cell>
@@ -73,49 +71,14 @@
                                             {{contact.TaxableAmount}}
                                         </mat-cell>
                                     </ng-container>
-                                    <ng-container matColumnDef="TotalAmount">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>TotalAmount
+                                    <ng-container matColumnDef="ServiceName">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>ServiceName
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                            {{contact.TotalAmount}}
-                                        </mat-cell>
-                                    </ng-container>
-
-
-                                    <ng-container matColumnDef="ServiceName">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>ServiceName
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.ServiceName}}
                                         </mat-cell>
                                     </ng-container>
-                                   
-                                    <!-- <ng-container matColumnDef="Patient Reimbursement">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Patient Reimbursement
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.Patient Reimbursement}}
-                                        </mat-cell>
-                                    </ng-container>
 
-                                    <ng-container matColumnDef="Principle Investigator (DOC)">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Principle Investigator (DOC)
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.Principle Investigator (DOC)}}
-                                        </mat-cell>
-                                    </ng-container>
-                                    <ng-container matColumnDef="Principle Investigator (SMO)">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Principle Investigator (SMO)
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.Principle Investigator (SMO)}}
-                                        </mat-cell>
-                                    </ng-container> -->
                                     <ng-container matColumnDef="FinalAmt">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
                                             FinalAmt
@@ -124,6 +87,49 @@
                                             {{contact.FinalAmt}}
                                         </mat-cell>
                                     </ng-container>
+                                   
+                                    <ng-container matColumnDef="Percentage">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
+                                            Percentage
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.Percentage}}
+                                        </mat-cell>
+                                    </ng-container>
+                                    <!-- <ng-container matColumnDef="Principle_Investigator_DOC">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>Principle_Investigator_DOC
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.Principle_Investigator_DOC}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Principle_Investigator_SMO">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>Principle_Investigator_SMO
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.Principle_Investigator_SMO}}
+                                        </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Patient_Reimbursement">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>Patient_Reimbursement
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.Patient_Reimbursement}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Institutional_Over_Head">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>Institutional_Over_Head
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
+                                            {{contact.Institutional_Over_Head}}
+                                        </mat-cell>
+                                    </ng-container> -->
 
 
                                     <ng-container matColumnDef="action" stickyEnd>

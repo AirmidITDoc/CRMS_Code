@@ -27,17 +27,17 @@ export class StudywisedeptdetailComponent implements OnInit {
 
   
   displayedColumns = [
-
     'InvoiceNumber',
     'InvoiceDate',
     'TaxableAmount',
-    'TotalAmount',
+    // 'TotalAmount',
     'ServiceName',
-    // 'Patient Reimbursement',
-    // 'Principle Investigator (DOC)',
-    // 'Principle Investigator (SMO)',
+    // 'Principle_Investigator_DOC',
+    // 'Principle_Investigator_SMO',
+    // 'Patient_Reimbursement',
+    // 'Institutional_Over_Head',
     'FinalAmt',
-   
+    'Percentage',
     'action'
   ];
   @ViewChild(MatSort) sort: MatSort;
