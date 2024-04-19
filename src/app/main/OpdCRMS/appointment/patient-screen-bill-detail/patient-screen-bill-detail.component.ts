@@ -482,14 +482,42 @@ debugger
 
         });
       } else {
-        Swal.fire('Error !', 'Appoinment not saved', 'error');
+        Swal.fire('Error !', 'Bill Mapped not saved', 'error');
       }
 
     });
 
   }
 
+  CancleBillMapping(row){
+    console.log(row)
+    let submissionObj = {};
+    let updateBillintegration = {};
 
+    updateBillintegration['billId'] = row.BillNo;
+    updateBillintegration['indBillId'] = 0;
+    updateBillintegration['indBillNo'] = 0;
+    updateBillintegration['indBillDate'] = this.currentDate;
+    updateBillintegration['indBillAmount'] = 0;
+
+    submissionObj['update_Bill_integration'] = updateBillintegration;
+
+    console.log(submissionObj)
+    this._AppointmentService.InvoiceBillUpdateIntegration(submissionObj).subscribe(response => {
+
+      if (response) {
+        Swal.fire('Save !', 'Bill Mapped cancelled Successfully !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            // this._matDialog.closeAll();
+          }
+
+        });
+      } else {
+        Swal.fire('Error !', 'Bill Mapped cancelled not saved', 'error');
+      }
+
+    });
+  }
 
 
   getExtBillDetailValue(result) {
@@ -536,7 +564,36 @@ debugger
 
         });
       } else {
-        Swal.fire('Error !', 'Appoinment not saved', 'error');
+        Swal.fire('Error !', 'Services Mapped not saved', 'error');
+      }
+
+    });
+  }
+
+  CancleBilldetail(row) {
+    let submissionObj1= {};
+    let updateAddChargesintegration = {};
+    updateAddChargesintegration['chargesId'] = row.ChargesId,
+    updateAddChargesintegration['indBillId'] = 0,
+    updateAddChargesintegration['indChargeId'] = 0,
+    updateAddChargesintegration['indServiceId'] = 0,
+    updateAddChargesintegration['indServiceName'] = '';
+    updateAddChargesintegration['indServiceAmount'] = 0;
+
+    submissionObj1['update_AddCharges_integration'] = updateAddChargesintegration;
+
+    console.log(submissionObj1)
+    this._AppointmentService.InvoiceBillAddchargesInteration(submissionObj1).subscribe(response => {
+
+      if (response) {
+        Swal.fire('Save !', 'Services Mapped cancelled Successfully !', 'success').then((result) => {
+          if (result.isConfirmed) {
+            // this._matDialog.closeAll();
+          }
+
+        });
+      } else {
+        Swal.fire('Error !', 'Services Mapped not saved', 'error');
       }
 
     });

@@ -244,6 +244,9 @@
                                             <button mat-icon-button (click)="EditRow(m)" color="warn">
                                                 <mat-icon>edit</mat-icon>
                                             </button>
+                                             <button mat-icon-button (click)="CancleBillMapping(contact)" color="warn">
+                                                    <mat-icon>cancle</mat-icon>
+                                                </button>
                                         </mat-cell>
                                     </ng-container>
 
@@ -348,6 +351,11 @@
                                                 matTooltip="print">
                                                 <mat-icon>edit</mat-icon>
                                             </button>
+
+                                            <button mat-icon-button (click)="CancleBilldetail(contact)"
+                                            matTooltip="Cancle Mapping">
+                                            <mat-icon>cancle</mat-icon>
+                                        </button>
                                         </mat-cell>
                                     </ng-container>
 

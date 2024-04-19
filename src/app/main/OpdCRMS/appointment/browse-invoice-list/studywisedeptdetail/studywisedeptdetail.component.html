@@ -21,78 +21,7 @@
     <!-- CONTENT -->
     <div class="content">
 
-        <!-- SIDEBAR -->
-        <fuse-sidebar class="sidebar" name="app-main" position="left" lockedOpen="gt-sm" style="background-color: white;
-        height:100%; margin-top: 10px;">
-
-            <!-- SIDEBAR CONTENT -->
-            <div class="sidebar-content">
-
-                <div class="card">
-
-                    <!-- SIDEBAR HEADER -->
-                    <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
-                        style="margin-top: 3%;">
-                        <!-- USER -->
-                        <!-- <img [src]="user.avatar" class="avatar mr-16" [alt]="user.name" /> -->
-                        <span class="h5" style="color: aliceblue;font-size: 17px;">Search Facility</span>
-                        <!-- / USER -->
-                    </div>
-                    <!-- / SIDEBAR HEADER -->
-                    <!-- SIDEBAR CONTENT -->
-                    <div class="content py-16 pl-10 p-12" fusePerfectScrollbar>
-                        <div class="nav material2">
-                            <form [formGroup]="_InvoiceBilllsService.myFilterform">
-                                <div fxLayout="column" fxLayoutAlign="start none">
-
-                                    <mat-form-field appearance="outline">
-                                        <mat-label>Enter a date range</mat-label>
-                                        <mat-date-range-input [rangePicker]="picker">
-                                            <input matStartDate formControlName="start" placeholder="Start date">
-                                            <input matEndDate formControlName="end" placeholder="End date"
-                                                (dateChange)="onShow($event)">
-                                        </mat-date-range-input>
-                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-date-range-picker #picker></mat-date-range-picker>
-                                    </mat-form-field>
-
-
-                                    <mat-form-field appearance="outline" fxFlex>
-                                        <mat-label>StudyId</mat-label>
-                                        <mat-select formControlName="StudyId" name="StudyId" (selectChange)="onShow($event)">
-                                            <mat-option></mat-option>
-                                            <mat-option *ngFor="let m of caseList" [value]="m" >
-                                                {{m.StudyId}} || {{m.ProtocolNo}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-
-                                     <mat-form-field appearance="outline" fxFlex>
-                                        <mat-label>Invoice No</mat-label>
-                                        <input name="InvoiceId" formControlName="InvoiceId" matInput>
-                                    </mat-form-field>
-
-                                    <div style="margin-top: 50px;">
-                                        <button mat-raised-button (click)="onClear()" class="clearbutton"
-                                            matTooltip="close">
-                                            <mat-icon class="cleariconbutton">close</mat-icon>
-                                        </button>
-                                        <!-- [disabled]="click" -->
-                                        <button mat-raised-button class="searchButton" (click)="onShow($event)"
-                                             matTooltip="search">
-                                            <mat-icon class="searchiconbutton">search</mat-icon>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- / SIDEBAR CONTENT -->
-
-        </fuse-sidebar>
-        <!-- / SIDEBAR -->
+        
 
         <!-- CENTER -->
         <div class="center p-12 pb-56">

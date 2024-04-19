@@ -367,8 +367,8 @@ export class CaseDetailComponent implements OnInit {
       this._CasedetailService.populateFormpersonal(m_data);
       const dialogRef = this._matDialog.open(StudyDistributionComponent,
         {
-          maxWidth: "60%",
-          height: '500px',
+          maxWidth: "80%",
+          height: '700px',
           width: '100%',
           data: {
             registerObj: m_data,

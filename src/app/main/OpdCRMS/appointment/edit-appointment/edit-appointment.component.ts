@@ -301,7 +301,7 @@ export class EditAppointmentComponent implements OnInit {
 
 
   getPrefixList() {
-debugger
+
     this._registerService.getPrefixCombo().subscribe(data => {
       this.PrefixList = data;
       this.filteredPrefix.next(this.PrefixList.slice());

@@ -199,13 +199,17 @@ PatientHeaderObj['BillId'] = contact.BillNo;
    
          
     }
-getstudydeptdetail(){
+getstudydeptdetail(contact){
 
   const dialogRef=this._matDialog.open(StudywisedeptdetailComponent,
     {
       maxWidth: "95vw",
       height: '700px',
       width: '100%',
+      data: {
+        registerObj: contact
+        
+      }
     });
 }
 
