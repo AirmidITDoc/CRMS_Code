@@ -580,8 +580,8 @@ app-patient-screen-bill-detail {
 
     .mat-header-row {
       width: 100%;
-      max-width: 500px;
-      min-width: 500px;
+      max-width: 800px;
+      min-width: 800px;
       min-height: 20px;
       padding: 5px;
       border-radius: 2px;
@@ -589,8 +589,8 @@ app-patient-screen-bill-detail {
 
     .mat-row {
       width: 100%;
-      max-width: 500px;
-      min-width: 500px;
+      max-width: 800px;
+      min-width: 800px;
       min-height: 20px;
     }
 
@@ -598,6 +598,14 @@ app-patient-screen-bill-detail {
       width: 130px;
       max-width: 130px;
       min-width: 130px;
+    }
+
+    .mat-column-BillId {
+      width: 200px;
+      max-width: 200px;
+      min-width: 200px;
+      text-align: left;
+      justify-content: left;
     }
 
     .mat-column-BillNo {
@@ -621,11 +629,10 @@ app-patient-screen-bill-detail {
   .table4 {
     height: 260px !important;
 
-
     .mat-header-row {
       width: 100%;
-      max-width: 500px;
-      min-width: 500px;
+      max-width: 800px;
+      min-width: 800px;
       min-height: 20px;
       border-radius: 2px;
       padding: 5px;

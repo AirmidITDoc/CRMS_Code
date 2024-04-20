@@ -1,20 +1,23 @@
 @import "src/@fuse/scss/fuse";
 
 login {
+
     #login {
         width: 100%;
         overflow: hidden;
         
-        background: white;
-        // background: url("/assets/images/backgrounds/dark-material-bg.jpg")
-        //     no-repeat;
+        // background:white;
+        background: url("/assets/images/doctor-stethoscope-hand-hospital-background-gown-94227568.webp")
+            no-repeat;
         background-size: cover;
-
-       
+        
 
         #login-intro {
-            padding: 128px;
-
+            padding: 25px;
+            background-color: #D4E6F1;
+            // background: url("/assets/images/doctor-with-purple-stethoscope-hd-medical-i8eodw1rhfq6r353.jpg")
+            // no-repeat;
+           
             @include media-breakpoint("sm") {
                 padding: 128px 64px;
             }
@@ -25,12 +28,13 @@ login {
             }
 
             .title {
-                font-size: 50px;
+                font-size: 30px;
                 font-weight: 300;
                 line-height: 1;
                 color: black;
                 justify-content: center;
                 text-align: center;
+                margin-top: 40px;
             }
 
             .description {
@@ -43,20 +47,20 @@ login {
         
         #login-form-wrapper {
             width: 100%;
-            min-width: 500px;
-            max-width: 500px;
+            min-width: 1000px;
+            max-width: 1000px;
             height: 100%;
-            min-height: 450px;
-            max-height: 450px;
+            min-height: 420px;
+            max-height: 420px;
             overflow: auto;
             margin: auto;
             display: flex;
-            border-radius: 10px;
+            border-radius: 10px 100px / 120px;
             -webkit-overflow-scrolling: touch;
-
+           
             .mat-form-field-outline:not( .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick){
                 color: #125786;                
-              }
+            }
 
             @include mat-elevation(16);
 
@@ -73,7 +77,7 @@ login {
             }
 
             #login-form {
-                padding: 20px 48px 48px 48px;
+                padding: 100px 48px 48px 48px;
                 
                 @include media-breakpoint("xs") {
                     text-align: center;
@@ -219,3 +223,4 @@ login {
         }
     }
 }
+

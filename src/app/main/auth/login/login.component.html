@@ -1,6 +1,5 @@
-
-
 <div id="login" class="inner-scroll" fxLayout="row" fxLayoutAlign="start">
+
     <!-- <div id="login-intro" fxFlex fxHide fxShow.gt-xs>
         <div  [@animate]="{ value: '*', params: { scale: '0.2' } }">
             <img src="assets/images/logos/Airmid_NewLogo.jpeg" style="width: 10%;" />
@@ -20,32 +19,36 @@
 
     <div id="login-form-wrapper" fusePerfectScrollbar
         [@animate]="{ value: '*', params: { delay: '300ms', x: '100%' } }">
+
+        <div id="login-intro" fxFlex fxHide fxShow.gt-xs>
+            <div  [@animate]="{ value: '*', params: { scale: '0.2' } }">
+                <img src="assets/images/logos/Airmid_NewLogo.jpeg" style="width: 20%;border-radius: 50px;"/>
+            </div>
+    
+            <div
+                class="title" style="width: 500px;"
+                [@animate]="{ value: '*', params: { delay: '50ms', y: '25px' } }" >
+            Welcome to the AirMid Technologies
+            </div>
+    
+            <div class="description" [@animate]="{ value: '*', params: { delay: '100ms', y: '25px' } }">
+              &nbsp;&nbsp;&nbsp; We care healthcare ....
+            </div>
+        </div>
+
         <div id="login-form">
             <div class="logo" fxHide.gt-xs>
                 <!-- <img src="assets/images/logos/CRMS.jpeg" /> -->
             </div>
-            <div class="title1" style="font-family: system-ui;text-align: center;justify-content: center;color: #0093B8;">
-                <img src="assets/images/logos/Airmid_NewLogo.jpeg" style="width: 20%;"/><br><br><b>LOGIN TO YOUR ACCOUNT</b></div>
             
-            <!-- <div class="title" style="font-weight: bolder;font-family: sans-serif;font-size: 20px;">CRMS</div> -->
-           <br><br>
-
-            <div
-            class="title" style="color: #125786;"
-            [@animate]="{ value: '*', params: { delay: '50ms', y: '25px' } }"
-        >
-        Welcome to the AirMid Technologies
-        </div>
-
-        <div class="description"  [@animate]="{ value: '*', params: { delay: '100ms', y: '25px' } }">
-           We care healthcare ....
-        </div>
+            <div class="title1" style="font-family: system-ui;text-align: center;justify-content: center;color: #0093B8;">
+            <b>LOGIN TO YOUR ACCOUNT</b></div>
 
             <form name="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" style="width: 100%;">
                     <mat-label>Username</mat-label>
-                    <input matInput formControlName="username"/>
-                    <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                    <input matInput formControlName="username" placeholder="Username" />
+                    <mat-icon matSuffix class="secondary-text" style="color: #125786;" >mail</mat-icon>
                     <mat-error *ngIf="loginForm.get('username').hasError('required')">
                         Username is required
                     </mat-error>
@@ -59,14 +62,14 @@
                     </mat-error> -->
                 </mat-form-field>
 
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" style="width: 100%;">
                     <mat-label>Password</mat-label>
-                    <input matInput type="password" formControlName="password" />
-                    <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                    <input matInput type="password" formControlName="password" placeholder="Password"/>
+                    <mat-icon matSuffix class="secondary-text" style="color: #125786;">vpn_key</mat-icon>
                     <mat-error>
                         Password is required
                     </mat-error>
-                </mat-form-field>
+                </mat-form-field><br><br>
 
                 <!-- <div
                     class="remember-forgot-password"

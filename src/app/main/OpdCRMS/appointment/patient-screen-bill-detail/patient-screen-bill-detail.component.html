@@ -155,7 +155,7 @@
 
                             <div>
                                 <mat-table #table matSort [dataSource]="dataSource5" [@animateStagger]="{value:'50'}"
-                                    class="Bill" style="overflow: hidden;overflow-y: auto;">
+                                    class="Bill" style="overflow: auto;overflow-y: auto;">
 
 
                                     <!-- external  -->
@@ -234,7 +234,7 @@
 
                                     </ng-container>
 
-                                    <ng-container matColumnDef="action">
+                                    <ng-container matColumnDef="action" stickyEnd>
                                         <mat-header-cell *matHeaderCellDef style="color: white;">Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let m">
@@ -572,7 +572,7 @@
                                     <label style="font-size:17px;color: #125786;font-weight: 500;">Bill Information
                                     </label>
                                     <mat-table #table matSort [dataSource]="dataSource2"
-                                        [@animateStagger]="{value:'50'}" class="table3" style="overflow: auto;overflow-y: auto;">
+                                        [@animateStagger]="{value:'50'}" class="table3" style="overflow: hidden;overflow-y: auto;">
 
                                         <!-- <ng-container matColumnDef="date">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>VisitDate
@@ -661,7 +661,7 @@
                                     <label style="font-size:17px;color: #125786; font-weight: 500;">Bill Detail
                                         Information </label>
                                     <mat-table #table matSort [dataSource]="dataSource3"
-                                        [@animateStagger]="{value:'50'}" class="table4" style="overflow: auto;overflow-y: auto;">
+                                        [@animateStagger]="{value:'50'}" class="table4" style="overflow: hidden;overflow-y: auto;">
 
                                         <!-- <ng-container matColumnDef="Servicename">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Servicename
@@ -670,7 +670,6 @@
                                                 {{contact.Servicename}}
                                             </mat-cell>
                                         </ng-container>
-
 
                                         <ng-container matColumnDef="TotalAmount">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>TotalAmount
