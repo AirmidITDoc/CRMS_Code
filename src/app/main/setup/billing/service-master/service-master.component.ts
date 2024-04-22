@@ -139,7 +139,7 @@ export class ServiceMasterComponent implements OnInit {
     onAdd() {
         const dialogRef = this._matDialog.open(ServiceMasterFormComponent, {
             maxWidth: "80vw",
-            maxHeight: "95vh",
+            maxHeight: "65vh",
             width: "100%",
             height: "100%",
         });

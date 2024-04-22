@@ -1,15 +1,21 @@
 app-tariff-master {
+    .table{
+        height: 75vh !important;
+    }
+
     .mat-header-row {
-        width: 900px;
-        max-width: 900px;
-        min-width: 900px;
+        width: 100%;
+        max-width: 11000px;
+        min-width: 11000px;
         font-weight: bold;
+        padding: 3px;
+        border-radius: 2px;
     }
 
     .mat-row {
-        width: 900px;
-        max-width: 900px;
-        min-width: 900px;
+        width: 100%;
+        max-width: 11000px;
+        min-width: 11000px;
     }
 
     .mat-column-TariffId {
@@ -25,26 +31,26 @@ app-tariff-master {
     }
 
     .mat-column-AddedByName {
-        width: 100px;
-        max-width: 100px;
-        min-width: 100px;
+        width: 200px;
+        max-width: 200px;
+        min-width: 200px;
     }
 
     .mat-column-IsDeleted {
-        width: 70px;
-        max-width: 70px;
+        width: 100px;
+        max-width: 100px;
         min-width: 100px;
         text-align: center;
         justify-content: center;
     }
 
     .mat-column-action {
-        //color: white !important;
-        width: 140px;
-        max-width: 140px;
-        min-width: 70px;
-        text-align: right;
-        justify-content: right;
+        color: white !important;
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        text-align: left;
+        justify-content: left;
     }
     .mat-icon-button {
         padding: 0;

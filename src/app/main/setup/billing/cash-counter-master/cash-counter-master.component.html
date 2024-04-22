@@ -38,7 +38,7 @@
                     ">
                             <form [formGroup]="_cashcounterService.myformSearch">
                                 <div class="dialog-content-wrapper">
-                                    <mat-form-field class="mr-sm-12" fxFlex>
+                                    <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
                                         <input matInput placeholder="Search --> Cash Counter Name" autocomplete="off"
                                             name="CashCounterNameSearch" formControlName="CashCounterNameSearch" (keyup)="getCashcounterMasterList()"/>
                                         <button mat-button matSuffix mat-icon-button aria-label="Clear"
@@ -54,8 +54,8 @@
                                         <mat-radio-button mat-fab value="1">IsDeactive</mat-radio-button>
                                     </mat-radio-group>
 
-                                    <button mat-raised-button (click)="getCashcounterMasterList()" fxLayoutAlign="center center">
-                                        <mat-icon>search</mat-icon>
+                                    <button mat-raised-button (click)="getCashcounterMasterList()" fxLayoutAlign="center center" style="margin-top: 5px;background-color: #D4E6F1;">
+                                        <mat-icon style="color: #125786;">search</mat-icon>
                                         Search
                                     </button>
                                 </div>
@@ -64,8 +64,9 @@
 
                         <div fxlayout="row">
                             <div style="width: 100%;">
+                                <div style="width: 100%;" class="content-card box1"> 
                                 <mat-table #table matSort [dataSource]="DSCashCounterMasterList"
-                                    [@animateStagger]="{value:'50'}" style="overflow:auto">
+                                    [@animateStagger]="{value:'50'}" style="overflow:hidden;overflow-y: auto;" class="table">
                                     <ng-container matColumnDef="CashCounterId">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Code
                                         </mat-header-cell>
@@ -95,10 +96,10 @@
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm> IsActive
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
-                                            <mat-icon *ngIf="!element.IsActive"
-                                                class="active-icon green-600 s-16">check_circle</mat-icon>
-                                            <mat-icon *ngIf="element.IsActive"
-                                                class="active-icon red-500 s-16">close</mat-icon>
+                                            <mat-icon *ngIf="!element.IsActive" style="color: white;border-radius: 10px;"
+                                                class="active-icon green-600 s-20">check_circle</mat-icon>
+                                            <mat-icon *ngIf="element.IsActive" style="color: white;border-radius: 10px;"
+                                                class="active-icon red-500 s-20">close</mat-icon>
                                         </mat-cell>
                                     </ng-container>
 
@@ -112,7 +113,7 @@
                                         <mat-header-cell *matHeaderCellDef class="table-actions"> Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
-                                            <button mat-icon-button (click)="onEdit(row)" style="color: rgb(29, 32, 34);"><mat-icon
+                                            <button mat-icon-button (click)="onEdit(row)"><mat-icon
                                                     title="Edit Menu">launch</mat-icon></button>
                                             <button mat-icon-button (click)="onDeactive(row.BankId)"
                                                 color="warn"><mat-icon>delete_outline</mat-icon></button>
@@ -144,8 +145,9 @@
                                 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"
                                     showFirstLastButtons></mat-paginator>
                             </div>
+                            </div>
+                            </div>
                         </div>
-                    </div>
 
                     <div fxFlex.gt-sm="35%" fxFlex style="background-color: white;">
                         <div class="dialog-content-wrapper">

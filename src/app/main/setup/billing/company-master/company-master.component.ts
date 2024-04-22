@@ -131,7 +131,7 @@ console.log(m_data);
     onAdd() {
         const dialogRef = this._matDialog.open(CompanyMasterListComponent, {
             maxWidth: "80vw",
-            maxHeight: "60vh",
+            maxHeight: "62vh",
             width: "100%",
             height: "100%",
         });

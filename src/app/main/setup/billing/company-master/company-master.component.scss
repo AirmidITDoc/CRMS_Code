@@ -1,14 +1,19 @@
 app-company-master {
+    .table{
+    height: 74vh !important;
+    }
     .mat-header-row {
-        width: 1700px;
-        max-width: 1700px;
-        min-width: 1700px;
+        width: 150%;
+        max-width: 1900px;
+        min-width: 1900px;
         font-weight: bold;
+        border-radius: 2px;
+        padding: 3px;
     }
     .mat-row {
-        width: 1700px;
-        max-width: 1700px;
-        min-width: 1700px;
+        width: 100%;
+        max-width: 1900px;
+        min-width: 1900px;
     }
 
     .mat-column-CompanyId {

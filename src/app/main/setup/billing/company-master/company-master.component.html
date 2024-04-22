@@ -32,17 +32,14 @@
             <div class="content-card">
 
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
-                    <div fxFlex.gt-sm="93%" fxFlex>
+                    <div fxFlex.gt-sm="100%" fxFlex>
 
-                        <div fxlayout="row" style="
-                        background-color: white;
-                        padding: 5px 10px 5px 10px;
-                    ">
+                        <div fxlayout="row" style="background-color: white; padding: 5px 10px 5px 10px; ">
                             <form [formGroup]="_companyService.myformSearch">
                                 <div class="dialog-content-wrapper">
-                                    <mat-form-field class="mr-sm-12" fxFlex>
-                                        <input matInput placeholder="Search --> Company Name" autocomplete="off"
-                                            name="CompanyNameSearch" formControlName="CompanyNameSearch" (keyup)="getCompanyMaster()" />
+                                    <mat-form-field class="mr-sm-12" fxFlex="70" appearance="outline">
+                                        <input matInput placeholder="Search --> Company Name" autocomplete="off" 
+                                            name="CompanyNameSearch" formControlName="CompanyNameSearch" (keyup)="getCompanyMaster()"/>
                                         <button mat-button matSuffix mat-icon-button aria-label="Clear"
                                             (click)="onSearchClear()">
                                             <mat-icon>close</mat-icon>
@@ -56,19 +53,22 @@
                                         <mat-radio-button mat-fab value="1">IsDeactive</mat-radio-button>
                                     </mat-radio-group>
 
-                                    <button mat-raised-button (click)="getCompanyMaster()" fxLayoutAlign="center center">
-                                        <mat-icon>search</mat-icon>
+                                    <button mat-raised-button (click)="getCompanyMaster()" fxLayoutAlign="center center" style="margin-top: 5px;background-color: #D4E6F1;">
+                                        <mat-icon style="color: #125786;">search</mat-icon>
                                         Search
+                                    </button>&nbsp;&nbsp;&nbsp;
+
+                                    <button mat-raised-button color="pine" (click)="onAdd()"  style="margin-top: 5px;background-color: #D4E6F1;">Add
+                                        <mat-icon style="color: #125786;">add_to_photos</mat-icon>
                                     </button>
                                 </div>
                             </form>
                         </div>
                         <div fxlayout="row">
                             <div style="width: 100%;">
-
-
+                                <div style="width: 100%;" class="content-card box1">
                                 <mat-table #table matSort [dataSource]="datasource"
-                                [@animateStagger]="{value:'50'}" style="overflow:auto">
+                                [@animateStagger]="{value:'50'}" style="overflow:auto;overflow-y:auto;" class="table">
 
                                 <ng-container matColumnDef="CompanyId">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Code
@@ -136,14 +136,11 @@
                                     </mat-cell>
                                 </ng-container>
 
-                                
-                                                  
-
 
                                 <ng-container matColumnDef="action" stickyEnd>
                                     <mat-header-cell *matHeaderCellDef class="table-actions"> Action </mat-header-cell>
                                     <mat-cell *matCellDef="let row">
-                                        <button mat-icon-button (click)="onEdit(row)" style="color: black;"><mat-icon
+                                        <button mat-icon-button (click)="onEdit(row)" style="color: #125786;"><mat-icon
                                                 title="Edit Menu">launch</mat-icon></button>
                                         <button mat-icon-button (click)="deleteTableRow(row)"
                                             color="warn"><mat-icon>delete_outline</mat-icon></button>
@@ -182,15 +179,15 @@
                                     showFirstLastButtons></mat-paginator>
                             </div>
                         </div>
+                        </div>
 
                     </div>
 
-                    <div fxFlex.gt-sm="20%" fxFlex style="background-color: white;">
-                        <button mat-raised-button color="pine" (click)="onAdd()">Add
-                            <mat-icon>add_to_photos</mat-icon>
+                    <!-- <div fxFlex.gt-sm="20%" fxFlex style="background-color: white;">
+                        <button mat-raised-button color="pine" (click)="onAdd()"  style="margin-top: 10px;background-color: #D4E6F1;">Add
+                            <mat-icon style="color: #125786;">add_to_photos</mat-icon>
                         </button>
-
-                    </div>
+                    </div> -->
 
                 </div>
             </div>

@@ -8,11 +8,11 @@
             <div class="logo" fxLayout="row" fxLayoutAlign="start center" style="color: aliceblue;">
                 <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">account_box
                 </mat-icon>
-                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                <span class="logo-text h1"  [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     Service Master
                 </span>
 
-                <button mat-raised-button (click)="onAdd()" fxLayoutAlign="center center" style="margin-left: 1600px;">
+                <button mat-raised-button (click)="onAdd()" fxLayoutAlign="center center" style="margin-left: 1190px;">
                     <mat-icon color="Primary" title=" Appointment Form ">how_to_reg</mat-icon>
                 </button>
             </div>
@@ -35,7 +35,6 @@
             <!-- CONTENT -->
             <div class="content-card">
 
-
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
                     <div fxFlex.gt-sm="99%" fxFlex>
                         <div fxlayout="row" style="
@@ -43,7 +42,7 @@
                         padding: 5px 10px 5px 10px;">
                             <form [formGroup]="_serviceMasterService.myformSearch">
                                 <div class="dialog-content-wrapper">
-                                    <mat-form-field class="mr-sm-12" fxFlex>
+                                    <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
                                         <input matInput placeholder="Search --> Service Name" autocomplete="off"
                                             name="ServiceNameSearch" formControlName="ServiceNameSearch"
                                             (keyup)="getServiceMasterList()" />
@@ -58,11 +57,11 @@
                                         <mat-radio-button value="2">All</mat-radio-button>
                                         <mat-radio-button mat-fab value="0">IsActive</mat-radio-button>
                                         <mat-radio-button mat-fab value="1">IsDeactive</mat-radio-button>
-                                    </mat-radio-group>
+                                    </mat-radio-group>&nbsp;&nbsp;
 
                                     <button mat-raised-button (click)="getServiceMasterList()"
-                                        fxLayoutAlign="center center">
-                                        <mat-icon>search</mat-icon>
+                                        fxLayoutAlign="center center" style="margin-top: 5px;background-color: #D4E6F1;">
+                                        <mat-icon  style="color: #125786;">search</mat-icon>
                                         Search
                                     </button>
                                 </div>
@@ -70,8 +69,9 @@
                         </div>
 
                         <div style="width: 100%;">
+                            <div style="width: 100%;" class="content-card box1">
                             <mat-table #table matSort [dataSource]="DSServiceMasterList"
-                                [@animateStagger]="{value:'50'}" style="overflow:auto;width: 99%;" class="table1">
+                                [@animateStagger]="{value:'50'}" style="overflow:hidden;overflow-y: auto;" class="table1">
 
                                 <ng-container matColumnDef="ServiceId">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Code
@@ -172,7 +172,7 @@
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let contact">
                                         <mat-icon
-                                            style="font-size: 70px;width: 25px !important; height:25px !important;border-radius:100% ;"
+                                            style="font-size: 70px;width: 18px !important; height:18px !important;border-radius:100% ;"
                                             *ngIf="contact.IsActive=='1'|| contact.IsActive=='2' " matTooltip="Active"
                                             class=" red-600 s-16">circle</mat-icon>
                                         <mat-icon
@@ -189,7 +189,7 @@
                                     <mat-header-cell *matHeaderCellDef class="table-actions" style="color: aliceblue;">
                                         Action </mat-header-cell>
                                     <mat-cell *matCellDef="let row">
-                                        <button mat-icon-button (click)="onEdit(row)" style="color: black;"><mat-icon
+                                        <button mat-icon-button (click)="onEdit(row)"style="color: #125786;"><mat-icon
                                                 title="Edit Menu">launch</mat-icon></button>
                                         <button mat-icon-button (click)="deleteTableRow(row)"
                                             color="warn"><mat-icon>delete_outline</mat-icon></button>
@@ -225,10 +225,11 @@
                                 </mat-progress-spinner>
                             </mat-card>
 
-
-                        </div>
-                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="16"
+                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="16"
                             showFirstLastButtons></mat-paginator>
+                        </div>
+                       
+                    </div>
                     </div>
                     <!-- <div fxFlex.gt-sm="20%" fxFlex style="background-color: white;">
                         <button mat-raised-button color="pine" (click)="onAdd()">Add

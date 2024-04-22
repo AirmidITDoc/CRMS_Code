@@ -1,15 +1,21 @@
 app-sub-group-master {
+    .table{
+        height: 75vh !important;
+    }
+
     .mat-header-row {
-        width: 900px;
-        max-width: 900px;
-        min-width: 900px;
+        width: 100%;
+        max-width: 11000px;
+        min-width: 11000px;
         font-weight: bold;
+        padding: 3px;
+        border-radius: 2px;
     }
 
     .mat-row {
-        width: 900px;
-        max-width: 900px;
-        min-width: 900px;
+        width: 100%;
+        max-width: 11000px;
+        min-width: 11000px;
     }
 
     .mat-column-SubGroupId {

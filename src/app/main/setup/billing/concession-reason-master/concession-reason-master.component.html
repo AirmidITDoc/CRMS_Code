@@ -38,7 +38,7 @@
                     ">
                             <form [formGroup]="_consessionreasonService.myformSearch">
                                 <div class="dialog-content-wrapper">
-                                    <mat-form-field class="mr-sm-12" fxFlex>
+                                    <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
                                         <input matInput placeholder="Search --> Concession Reason" autocomplete="off"
                                             name="ConcessionReasonNameSearch"
                                             formControlName="ConcessionReasonNameSearch" (keyup)="getConcessionreasonMasterList()" />
@@ -55,8 +55,8 @@
                                         <mat-radio-button mat-fab value="1">IsDeactive</mat-radio-button>
                                     </mat-radio-group>
 
-                                    <button mat-raised-button (click)="getConcessionreasonMasterList()" fxLayoutAlign="center center">
-                                        <mat-icon>search</mat-icon>
+                                    <button mat-raised-button (click)="getConcessionreasonMasterList()" fxLayoutAlign="center center" style="margin-top: 5px;background-color: #D4E6F1;">
+                                        <mat-icon style="color: #125786;">search</mat-icon>
                                         Search
                                     </button>
                                 </div>
@@ -65,8 +65,9 @@
 
                         <div fxlayout="row">
                             <div style="width: 100%;">
+                                <div style="width: 100%;" class="content-card box1">
                                 <mat-table #table matSort [dataSource]="DSConcessionReasonMasterList"
-                                    [@animateStagger]="{value:'50'}" style="overflow:auto">
+                                    [@animateStagger]="{value:'50'}"  style="overflow:hidden;overflow-y:auto;" class="table">
                                     <ng-container matColumnDef="ConcessionId">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Code
                                         </mat-header-cell>
@@ -87,10 +88,10 @@
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm> IsActive
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
-                                            <mat-icon *ngIf="!element.IsDeleted"
-                                                class="active-icon green-600 s-16">check_circle</mat-icon>
-                                            <mat-icon *ngIf="element.IsDeleted"
-                                                class="active-icon red-500 s-16">close</mat-icon>
+                                            <mat-icon *ngIf="!element.IsDeleted" style="color: white;border-radius: 10px;"
+                                                class="active-icon green-600 s-20">check_circle</mat-icon>
+                                            <mat-icon *ngIf="element.IsDeleted" style="color: white;border-radius: 10px;"
+                                                class="active-icon red-500 s-20">close</mat-icon>
                                         </mat-cell>
                                     </ng-container>
 
@@ -104,7 +105,7 @@
                                         <mat-header-cell *matHeaderCellDef class="table-actions"> Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
-                                            <button mat-icon-button (click)="onEdit(row)" style="color: black;"><mat-icon
+                                            <button mat-icon-button (click)="onEdit(row)" style="color: #125786;"><mat-icon
                                                     title="Edit Menu">launch</mat-icon></button>
                                             <button mat-icon-button (click)="onDeactive(row.ConcessionId)"
                                                 color="warn"><mat-icon>delete_outline</mat-icon></button>
@@ -135,6 +136,7 @@
 
                                 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"
                                     showFirstLastButtons></mat-paginator>
+                            </div>
                             </div>
                         </div>
                     </div>

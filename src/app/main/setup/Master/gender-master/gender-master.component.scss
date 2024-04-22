@@ -9,9 +9,9 @@ app-gender-master {
     }
     
     .mat-header-row {
-        width: 930px;
-        max-width: 930px;
-        min-width: 930px;
+        width: 100%;
+        max-width: 11000px;
+        min-width: 11000px;
         font-weight: bold;
         padding: 3px;
         border-radius: 2px;
@@ -19,9 +19,9 @@ app-gender-master {
     }
 
     .mat-row {
-        width: 930px;
-        max-width: 930px;
-        min-width: 930px;
+        width: 100%;
+        max-width: 11000px;
+        min-width: 11000px;
     }
 
     .mat-column-GenderId {

@@ -1,29 +1,31 @@
 app-service-master {
     .table1{
-        height: 700px !important;
+        height: 73vh !important;
     }
     .mat-header-row {
-        width: 1800px;
+        width: 100%;
         max-width: 1800px;
         min-width: 1800px;
         font-weight: bold;
+        padding: 3px;
+        border-radius: 2px;
     }
     .mat-row {
-        width: 1800px;
+        width: 100%;
         max-width: 1800px;
         min-width: 1800px;
     }
 
     .mat-column-ServiceId {
-        width: 100px;
-        max-width: 100px;
-        min-width: 100px;
+        width: 80px;
+        max-width: 80px;
+        min-width: 80px;
     }
 
     .mat-column-ServiceName {
-        width: 650px;
-        max-width: 650px;
-        min-width: 650px;
+        width: 430px;
+        max-width: 430px;
+        min-width: 430px;
         text-align: left;
         white-space: nowrap; 
         overflow: hidden;
@@ -91,9 +93,9 @@ app-service-master {
     }
 
     .mat-column-AddedByName {
-        width: 100px;
-        max-width: 100px;
-        min-width: 100px;
+        width: 330px;
+        max-width: 330px;
+        min-width: 330px;
     }
 
     .mat-column-IsActive {
