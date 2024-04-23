@@ -1,15 +1,21 @@
 app-department-master {
+    .table{
+        height: 75vh !important;
+    }
+
     .mat-header-row {
-        width: 800px;
-        max-width: 800px;
-        min-width: 800px;
+        width: 100%;
+        max-width: 11000px;
+        min-width: 11000px;
         font-weight: bold;
+        padding: 3px;
+        border-radius: 2px;
     }
 
     .mat-row {
-        width: 800px;
-        max-width: 800px;
-        min-width: 800px;
+        width: 100%;
+        max-width: 11000px;
+        min-width: 11000px;
     }
 
     .mat-column-DepartmentId {
@@ -25,9 +31,9 @@ app-department-master {
     }
 
     .mat-column-AddedByName {
-        width: 100px;
-        max-width: 100px;
-        min-width: 100px;
+        width: 210px;
+        max-width: 210px;
+        min-width: 210px;
     }
 
     .mat-column-IsDeleted {
@@ -43,8 +49,8 @@ app-department-master {
         width: 110px;
         max-width: 110px;
         min-width: 110px;
-        text-align: right;
-        justify-content: right;
+        text-align: left;
+        justify-content: left;
     }
     .mat-icon-button {
         padding: 0;

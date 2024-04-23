@@ -9,23 +9,27 @@
     min-height: 35px;
 }
 
-.mat-toolbar-row, .mat-toolbar-single-row {
+.mat-toolbar-row,
+.mat-toolbar-single-row {
     height: 45px;
 }
 
 .toolbar-bottom {
     height: auto;
 }
+
 .contact-form-dialog {
 
-  
+
     .mat-dialog-container {
 
         .mat-toolbar {
             flex: 1 0 auto;
             min-height: initial;
         }
-        .mat-toolbar-row, .mat-toolbar-single-row {
+
+        .mat-toolbar-row,
+        .mat-toolbar-single-row {
             height: 40px;
         }
 
@@ -43,16 +47,18 @@
     ul {
         list-style-type: none;
         padding-inline-start: 0;
+
         li {
             margin-bottom: 0.5em;
         }
-      }
+    }
 }
 
-.button-row button{
+.button-row button {
     margin: 5px;
 }
-.mat-radio-group{
+
+.mat-radio-group {
     margin: 7px;
     margin-bottom: 10px;
 }
@@ -62,6 +68,7 @@
     font-size: 12px;
     padding: 2px;
 }
+
 .mat-radio-label-content {
     padding-left: 5px;
 }
@@ -70,61 +77,62 @@
 ::ng-deep .NgxEditor {
     height: 350px !important;
     overflow: scroll !important;
-  }
+}
 
 .editor {
- width: 100%;
+    width: 100%;
 }
-.mat-label
-{
+
+.mat-label {
     font-weight: bold;
 }
 
 
-app-new-doctor{
+app-new-doctor {
 
-    .table2{
+    .table2 {
         // height: 600px !important;
-  
-.mat-header-row {
-    background-color:rgb(18, 87, 134) !important;
-      max-width: 520px; 
-     min-width: 520px; 
-     min-height: 20px;  
-     width: 100%; 
-    
-}
 
-.mat-row {
-    max-width:520px; 
-    min-height: 20px;  
-    min-width: 520px; 
-    display: flex;      
-}
+        .mat-header-row {
+            background-color: rgb(18, 87, 134) !important;
+            max-width: 1075px;
+            min-width: 1075px;
+            min-height: 20px;
+            width: 100%;
+            padding: 3px;
+            border-radius: 2px;
+        }
 
-.mat-column-DeptId {
-    width:90px;
-    max-width: 90px;
-    min-width: 90px;
-    text-align: center;
-}
-.mat-column-DeptName {
-     width:320px;
-     max-width:320px;
-     min-width:320px;
-    text-align: left;
-    justify-content:left; 
-}
+        .mat-row {
+            max-width: 1075px;
+            min-width: 1075px;
+            min-height: 20px;
+            display: flex;
+        }
 
-.mat-column-action {
-    // color: white !important;
-    width:80px;
-    max-width: 80px;
-    min-width: 80px;
-    text-align: left;
-    justify-content: last baseline;
+        .mat-column-DeptId {
+            width: 90px;
+            max-width: 90px;
+            min-width: 90px;
+            text-align: center;
+        }
 
-}
-}
+        .mat-column-DeptName {
+            width: 890px;
+            max-width: 890px;
+            min-width: 890px;
+            text-align: left;
+            justify-content: left;
+        }
+
+        .mat-column-action {
+            // color: white !important;
+            width: 80px;
+            max-width: 80px;
+            min-width: 80px;
+            text-align: left;
+            justify-content: last baseline;
+        }
+    }
 
 }

@@ -1,7 +1,7 @@
 <div class="dialog-content-wrapper">
-  <mat-toolbar matDialogTitle class="mat-accent m-0">
+  <mat-toolbar matDialogTitle class="mat-accent m-0" style="border-radius: 2px;">
     <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
-      style="background-color: rgb(18, 87, 134) !important;">
+      style="background-color: rgb(18, 87, 134) !important;border-radius: 2px;">
       <h3>{{_doctorService.myform.controls.DoctorId.value?"Modify Doctor Master":"New
         Doctor Master"}}</h3>
       <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
@@ -18,8 +18,7 @@
 
   <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" >
 
-
-    <mat-form-field appearance="outline" fxFlex>
+    <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
       <mat-label>Prefix</mat-label>
       <mat-select formControlName="PrefixID" placeholder="Bank" #singleSelect
         (selectionChange)="onChangeGenderList($event.value)" required>
@@ -31,7 +30,6 @@
           {{element.PrefixName}}
         </mat-option>
       </mat-select>
-
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
@@ -55,7 +53,7 @@
         Alphabets</span>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" fxFlex>
+    <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
       <mat-label>Gender</mat-label>
       <mat-select formControlName="GenderId" required>
         <mat-option></mat-option>
@@ -89,13 +87,12 @@
   <div>
   
 
-    <mat-form-field appearance="outline" fxFlex>
+    <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
       <mat-label>Birth date</mat-label>
       <input name="DateofBirth" matInput [matDatepicker]="picker" formControllName="DateofBirth"
         (dateChange)="onChangeDateofBirth($event.value)" [value]="registerObj.DateofBirth">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
@@ -103,7 +100,6 @@
         [ngClass]="{ 'is-invalid': submitted && f.AgeYear.errors }" placeholder="Enter AgeYear" [(ngModel)]="b_AgeYear">
       <span class="error" *ngIf="f.AgeYear.invalid && f.AgeYear.touched">AgeYear required Enter only 4 Number</span>
     </mat-form-field>
-    &nbsp;&nbsp;&nbsp;
 
     <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
       <input name="AgeMonth" formControlName="AgeMonth" matInput
@@ -111,7 +107,6 @@
       <span class="error" *ngIf="f.AgeMonth.invalid && f.AgeMonth.touched">AgeMonth required Enter only 1-12
         Number</span>
     </mat-form-field>
-    &nbsp;&nbsp;&nbsp;
 
     <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
       <input name="AgeDay" formControlName="AgeDay" matInput [ngClass]="{ 'is-invalid': submitted && f.AgeDay.errors }"
@@ -162,7 +157,7 @@
     </mat-form-field>
 
 
-    <mat-form-field appearance="outline" fxFlex>
+    <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
       <mat-label>Reg date</mat-label>
       <input name="RegDate" matInput [matDatepicker]="picker1" formControllName="RegDate"
         [value]="registerObj.RegDate">
@@ -176,7 +171,7 @@
     </mat-form-field>
 
   
-    <mat-form-field appearance="outline" fxFlex>
+    <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
       <mat-label>MahReg date</mat-label>
       <input name="MahRegDate" matInput [matDatepicker]="picker2" formControllName="MahRegDate"
         [value]="registerObj.MahRegDate">
@@ -196,7 +191,7 @@
     </mat-form-field>
 
 
-    <mat-form-field appearance="outline" fxFlex>
+    <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
       <mat-label>DoctorType</mat-label>
       <mat-select formControlName="DoctorTypeId" placeholder="Bank" #singleSelect>
         <mat-option>
@@ -212,8 +207,8 @@
 
   </div>
 
-  <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-    <div class="child-1" fxFlex="30%">
+  <div fxFlexFill fxLayout="column"  fxLayout.gt-xs="row">
+    <div class="child-1" fxFlex="50%">
       <!-- <mat-form-field appearance="outline" fxFlex>
               <mat-select placeholder="DepartmentName" #txt  formControlName="DepartmentId" multiple>
                <mat-option *ngFor="let M of DepartmentcmbList" [value]="M.DepartmentId">
@@ -222,7 +217,7 @@
               </mat-select>
                </mat-form-field> -->
 
-      <mat-form-field appearance="outline" fxFlex>
+      <mat-form-field appearance="outline" class="mr-sm-12" fxFlex >
         <mat-label>Department</mat-label>
         <mat-select formControlName="Departmentid" placeholder="Bank" #singleSelect required
           (selectionChange)="SaveEnter($event.value)">
@@ -241,16 +236,16 @@
     <button mat-raised-button color="warn" (click)="onClear()">Clear</button> -->
 
     </div>
-    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;
    
-    <div>
+    <div style="margin-top: 10px;">
       <!-- <section class="example-section">
               <mat-checkbox class="example-margin" name="IsConsultant" formControlName="IsConsultant" value='true'>IsConsultant</mat-checkbox>
               </section> -->
       <!-- <section class="example-section"> -->
         <mat-slide-toggle class="example-margin" name="IsConsultant" formControlName="IsConsultant" style="margin-right: 10px;">
           IsConsultant
-        </mat-slide-toggle>
+        </mat-slide-toggle>&nbsp;&nbsp;
       <!-- </section> -->
     <!-- </div> -->
 
@@ -258,7 +253,7 @@
       <!-- <section class="example-section"> -->
         <mat-slide-toggle class="example-margin" name="IsRefDoc" formControlName="IsRefDoc" style="margin-right: 10px;">
           IsRefDoctor
-        </mat-slide-toggle>
+        </mat-slide-toggle>&nbsp;&nbsp;
       <!-- </section> -->
       <mat-checkbox aria-label="Is Active" formControlName="isActive" (checked)=true
       style="font-weight: bold;">
@@ -270,8 +265,9 @@
 
   <hr>
   
-
-  <mat-table #table matSort [dataSource]="dataSource" class="table2" [@animateStagger]="{value:'50'}" style="height: 100px !important;overflow: auto;width:500px">
+<div  style="width: 100%;"  class="content-card box1">
+  <mat-table #table matSort [dataSource]="dataSource" class="table2" [@animateStagger]="{value:'50'}" 
+        style="height: 100px !important;overflow: auto;">
 
     <ng-container matColumnDef="DeptId">
       <mat-header-cell *matHeaderCellDef mat-sort-header style="margin-right: 5px;">Dept Id</mat-header-cell>
@@ -325,6 +321,7 @@
       [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
     </mat-footer-row>
   </mat-table>
+</div>
 </form>
 </div>
 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">

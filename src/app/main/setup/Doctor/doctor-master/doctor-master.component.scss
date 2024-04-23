@@ -4,19 +4,21 @@
 
 app-doctor-master {
     .table1{
-    height: 700px !important;
-    }
-    .mat-header-row {
-        width: 3300px;
-        max-width: 3300px;
-        min-width: 3300px;
-        font-weight: bold;
-    }
-    .mat-row {
-        width: 3300px;
-        max-width: 3300px;
-        min-width: 3300px;
-    }
+        height: 74vh !important;
+        }
+        .mat-header-row {
+            width: 100%;
+            max-width: 3300px;
+            min-width: 3300px;
+            font-weight: bold;
+            border-radius: 2px;
+            padding: 3px;
+        }
+        .mat-row {
+            width: 100%;
+            max-width: 3300px;
+            min-width: 3300px;
+        }
 
     .mat-column-DoctorId {
         width: 70px;
@@ -155,7 +157,7 @@ app-doctor-master {
     }
 
     .mat-column-action {
-        // color: white !important;
+        color: white !important;
         width: 100px;
         max-width: 100px;
         min-width: 100px;

@@ -2,18 +2,24 @@
     padding: 10px !important;
 }
 
-app-doctortype-master {
+app-doctor-type-master {
+    .table{
+        height: 70vh !important;
+    }
+
     .mat-header-row {
-        width: 800px;
-        max-width: 800px;
-        min-width: 800px;
+        width: 100%;
+        max-width: 11000px;
+        min-width: 11000px;
         font-weight: bold;
+        padding: 3px;
+        border-radius: 2px;
     }
 
     .mat-row {
-        width: 800px;
-        max-width: 800px;
-        min-width: 800px;
+        width: 100%;
+        max-width: 11000px;
+        min-width: 11000px;
     }
 
     .mat-column-Id {
@@ -23,9 +29,9 @@ app-doctortype-master {
     }
 
     .mat-column-DoctorType {
-        width: 450px;
-        max-width: 450px;
-        min-width: 450px;
+        width: 900px;
+        max-width: 900px;
+        min-width: 900px;
     }
 
     .mat-column-IsDeleted {
@@ -37,7 +43,7 @@ app-doctortype-master {
     }
 
     .mat-column-action {
-        // color: white !important;
+        color: white !important;
         width: 70px;
         max-width: 70px;
         min-width: 70px;

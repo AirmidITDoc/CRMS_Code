@@ -38,9 +38,9 @@
                     ">
                             <form [formGroup]="_doctortypeService.myformSearch">
                                 <div class="dialog-content-wrapper">
-                                    <mat-form-field class="mr-sm-12" fxFlex>
+                                    <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
                                         <input matInput placeholder="Search --> DoctorType" autocomplete="off"
-                                            name="DoctorTypeSearch" formControlName="DoctorTypeSearch" (keyup)="onSearch()" />
+                                            name="DoctorTypeSearch" formControlName="DoctorTypeSearch" (keyup)="onSearch()"/>
                                         <button mat-button matSuffix mat-icon-button aria-label="Clear"
                                             (click)="onSearchClear()">
                                             <mat-icon>close</mat-icon>
@@ -54,20 +54,19 @@
                                         <mat-radio-button mat-fab value="1">IsDeactive</mat-radio-button>
                                     </mat-radio-group>
 
-                                    <button mat-raised-button (click)="onSearch()" fxLayoutAlign="center center">
-                                        <mat-icon>search</mat-icon>
+                                    <button mat-raised-button (click)="onSearch()" fxLayoutAlign="center center" style="margin-top: 5px;background-color: #D4E6F1;">
+                                        <mat-icon style="color: #125786;">search</mat-icon>
                                         Search
                                     </button>
                                 </div>
                             </form>
                         </div>
 
-
                         <div fxlayout="row">
                             <div style="width: 100%;">
-
+                                <div style="width: 100%;" class="content-card box1">
                                 <mat-table #table matSort [dataSource]="DSDoctorTypeMasterList"
-                                    [@animateStagger]="{value:'50'}" style="overflow:auto">
+                                    [@animateStagger]="{value:'50'}"  style="overflow:hidden;overflow-y:auto;" class="table">
                                     <ng-container matColumnDef="Id">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Code
                                         </mat-header-cell>
@@ -98,7 +97,7 @@
                                         <mat-header-cell *matHeaderCellDef class="table-actions"> Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
-                                            <button mat-icon-button (click)="onEdit(row)"><mat-icon
+                                            <button mat-icon-button (click)="onEdit(row)" style="color: #125786;"><mat-icon
                                                     title="Edit Menu">launch</mat-icon></button>
                                             <button mat-icon-button (click)="onDeactive(row.Id)"
                                                 color="warn"><mat-icon>delete_outline</mat-icon></button>
@@ -127,8 +126,6 @@
                                         [ngClass]="{'hide':!(DSDoctorTypeMasterList!=null && DSDoctorTypeMasterList.data.length==0)}"></mat-footer-row>
                                 </mat-table>
 
-
-
                                 <mat-card *ngIf="isLoading"
                                     style="display: flex; justify-content: center; align-items: center; background: white;">
                                     <mat-progress-spinner color="primary" mode="indeterminate">
@@ -138,6 +135,7 @@
 
                                 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"
                                     showFirstLastButtons></mat-paginator>
+                            </div>
                             </div>
                         </div>
                     </div>
