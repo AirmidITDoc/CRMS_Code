@@ -26,12 +26,12 @@
                     Dashoard
                 </div>
             </button> -->
-<!-- Dashboard ------------- -->
+     <!-- Dashboard ------------- -->
             <button mat-button [matMenuTriggerFor]="dashboardMenu" class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <!-- <span class="username mr-12" fxHide fxShow.gt-sm>Dashboard</span> -->
-                    <mat-icon class="mr-6" title="Dashboard">dashboard</mat-icon>
-                    <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+                    <mat-icon style="color: #125786;" class="mr-6" title="Dashboard">dashboard</mat-icon>
+                    <mat-icon style="color: #125786;" class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
                 </div>
             </button>
 
@@ -70,10 +70,10 @@
                         class="avatar mr-0 mr-sm-16"
                         src="assets/images/avatars/Velazquez.jpg"
                     /> -->
-                    <mat-icon class="mr-12">account_circle</mat-icon>
+                    <mat-icon style="color: #125786;" class="mr-12">account_circle</mat-icon>
                     <span class="username mr-12" fxHide fxShow.gt-sm>{{ user && user.user && user.user.firstName }}
                         {{ user && user.user && user.user.lastName }}</span>
-                    <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+                    <mat-icon style="color: #125786;" class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
                 </div>
             </button>
 
@@ -143,7 +143,7 @@
 
             <button mat-icon-button class="quick-panel-toggle-button" (click)="toggleSidebarOpen('quickPanel')"
                 aria-label="Toggle quick panel">
-                <mat-icon class="secondary-text">format_list_bulleted</mat-icon>
+                <mat-icon style="color: #125786;" class="secondary-text">format_list_bulleted</mat-icon>
             </button>
 
             <div class="toolbar-separator" *ngIf="!hiddenNavbar && rightNavbar" fxHide fxShow.gt-xs></div>

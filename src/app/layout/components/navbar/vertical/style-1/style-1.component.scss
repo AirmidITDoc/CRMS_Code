@@ -56,6 +56,44 @@ fuse-sidebar {
                         .navbar-content {
                             padding-top: 0;
 
+                            aside a:hover {
+                                color: #3f5efb;
+                                background: #fff;
+                                outline: none;
+                                position: relative;
+                                background-color: #fff;
+                                border-top-left-radius: 20px;
+                                border-bottom-left-radius: 20px;
+                              }
+                              
+                              aside a i {
+                                margin-right: 5px;
+                              }
+                              
+                              aside a:hover::after {
+                                content: "";
+                                position: absolute;
+                                background-color: transparent;
+                                bottom: 100%;
+                                right: 0;
+                                height: 35px;
+                                width: 35px;
+                                border-bottom-right-radius: 18px;
+                                box-shadow: 0 20px 0 0 #fff;
+                              }
+                              
+                              aside a:hover::before {
+                                content: "";
+                                position: absolute;
+                                background-color: transparent;
+                                top: 38px;
+                                right: 0;
+                                height: 35px;
+                                width: 35px;
+                                border-top-right-radius: 18px;
+                                box-shadow: 0 -20px 0 0 #fff;
+                              }
+
                             // Material 2 specific style
                             .material2 {
                                 .nav-item {
@@ -103,10 +141,11 @@ navbar {
             flex: 1 0 auto;
             align-items: center;
             justify-content: space-between;
-            min-height: 64px;
-            max-height: 64px;
-            height: 64px;
+            min-height: 46px;
+            max-height: 46px;
+            height: 46px;
             padding: 12px 12px 12px 20px;
+            border-radius: 5px;
 
             @include media-breakpoint("xs") {
                 min-height: 56px;
@@ -144,6 +183,9 @@ navbar {
             flex: 1 1 auto;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            border-top-right-radius: 80px 80px;
+            color: #fff;
+          
 
             background: linear-gradient(
                     rgba(0, 0, 0, 0) 30%,

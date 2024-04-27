@@ -26,12 +26,12 @@
             </div>
     
             <div
-                class="title" style="width: 500px;"
+                class="title" style="width: 500px;color: #fff;"
                 [@animate]="{ value: '*', params: { delay: '50ms', y: '25px' } }" >
             Welcome to the AirMid Technologies
             </div>
     
-            <div class="description" [@animate]="{ value: '*', params: { delay: '100ms', y: '25px' } }">
+            <div class="description"  style="color: #fff;font-size: 14px;" [@animate]="{ value: '*', params: { delay: '100ms', y: '25px' } }">
               &nbsp;&nbsp;&nbsp; We care healthcare ....
             </div>
         </div>
@@ -41,7 +41,7 @@
                 <!-- <img src="assets/images/logos/CRMS.jpeg" /> -->
             </div>
             
-            <div class="title1" style="font-family: system-ui;text-align: center;justify-content: center;color: #0093B8;">
+            <div class="title1" style="font-family: system-ui;text-align: center;justify-content: center;color: #125786;">
             <b>LOGIN TO YOUR ACCOUNT</b></div>
 
             <form name="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
@@ -89,7 +89,7 @@
                     </a>
                 </div> -->
 
-                <button mat-raised-button color="accent" class="submit-button" aria-label="LOGIN"
+                <button mat-raised-button style="background-image: linear-gradient(30deg , #0048bd, #44a7fd);" class="submit-button" aria-label="LOGIN"
                     [disabled]="loginForm.invalid">
                     LOGIN
                 </button>

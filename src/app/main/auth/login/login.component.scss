@@ -14,7 +14,7 @@ login {
 
         #login-intro {
             padding: 25px;
-            background-color: #D4E6F1;
+            background-image: linear-gradient(to right, #44a7fd,#0048bd);
             // background: url("/assets/images/doctor-with-purple-stethoscope-hd-medical-i8eodw1rhfq6r353.jpg")
             // no-repeat;
            
@@ -59,7 +59,7 @@ login {
             -webkit-overflow-scrolling: touch;
            
             .mat-form-field-outline:not( .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick){
-                color: #125786;                
+                color: #125786;            
             }
 
             @include mat-elevation(16);

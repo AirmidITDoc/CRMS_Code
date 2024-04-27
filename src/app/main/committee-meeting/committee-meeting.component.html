@@ -14,19 +14,20 @@
                 style="color: aliceblue;">
                 Committee Meeting
             </span>
-            <span style="margin-left:700px;">
-            <button mat-raised-button (click)="newMember()" style="margin-left:10%;width:120px;">Add
+        </div>
+
+        <div class="headerbutton">
+            <button mat-raised-button (click)="newMember()" class="btn btn-gradient btn-glow" style="border-radius: 50px; color: #ffffff;">Add
                 Member
-            </button>
-            <button mat-raised-button (click)="newCommitteeMember()" 
-                style="margin-left:10px;width:165px;">Committee Members
+            </button>&nbsp;
+            <button mat-raised-button (click)="newCommitteeMember()"  class="btn btn-gradient btn-glow"
+                style="border-radius: 50px;color: #ffffff;">Committee Members
+              <mat-icon color="Primary" title="Case Form">how_to_reg</mat-icon>
+            </button>&nbsp;
+            <button mat-raised-button (click)="newcommitteemeeting()" class="btn btn-gradient btn-glow"
+                style="border-radius: 50px;color: #ffffff;">Committee Meeting
                 <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
-            </button>
-            <button mat-raised-button (click)="newcommitteemeeting()" 
-                style="margin-left:10px;width:165px;">Committee Meeting
-                <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
-            </button>
-            </span>
+            </button>&nbsp;
         </div>
 
     </mat-toolbar>
@@ -37,9 +38,11 @@
     <!-- CONTENT -->
     <div class="content">
         <!-- SIDEBAR -->
-        <fuse-sidebar name="app-main" position="left" lockedOpen="gt-sm" style="width:30%; border-radius:4px;
-             margin-left:12px; background-color: white;height:30%;margin-top:0.9em;">
-            <div>
+        <fuse-sidebar  class="sidebar" name="app-main" position="left" lockedOpen="gt-sm" style="width:30%; border-radius:4px;
+             background-color: white;height:30%;margin-top:0.9em;">
+             
+        <div class="sidebar-content">
+            <div class="card box">
                 <!-- SIDEBAR HEADER -->
                 <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
                     style="border-radius: 2px;">
@@ -70,11 +73,13 @@
                                         <mat-icon class="searchiconbutton">search</mat-icon>
                                     </button>
                                 </div>
+                                <br>
                             </div>
 
                         </form>
                     </div>
                 </div>
+            </div>
             </div>
         </fuse-sidebar>
         <!-- / SIDEBAR -->
@@ -94,7 +99,7 @@
                                 </div>
                                 <!-- sppinner -->
                                 <mat-table #table matSort [dataSource]="dscommitteeMeetingList"
-                                    [@animateStagger]="{value:'50'}" class="table1" style="overflow: hidden;width: 100%;overflow-y: auto;">
+                                    [@animateStagger]="{value:'50'}"  style="overflow: hidden;width: 100%;overflow-y: auto;">
 
                                     <ng-container matColumnDef="CommitteeMeetingId">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header

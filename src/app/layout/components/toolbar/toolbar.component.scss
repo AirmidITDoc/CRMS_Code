@@ -12,8 +12,9 @@ toolbar {
 
     .mat-toolbar {
         position: relative;
-        background: inherit !important;
+        background: white !important;
         color: inherit !important;
+        border-bottom-left-radius: 20px;
     }
 
     .logo {

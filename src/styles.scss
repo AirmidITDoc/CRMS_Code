@@ -4,10 +4,12 @@
 // Import app.theme.scss
 @import "app/app.theme";
 // @import '~font-awesome/css/font-awesome.min.css';
-
+ 
 .mat-form-field-outline:not( .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick){
-    color: #BDC3C7;
-  }
+  color: #A9C2D3;            
+  
+}
+
 
 //added by prasad
 .mat-cell, .mat-footer-cell {
@@ -585,3 +587,69 @@ body { margin: 0; font-family: Roboto !important;zoom: 0.90; zoom: 90%; }
     border-radius: 5px;
   }
   
+  // Button in header 
+
+  .headerbutton{
+    justify-content: flex-end; 
+    margin-right: 2%;
+  }
+
+  .btn {
+    font-family: system-ui;
+    font-size: 14px;
+    padding: 12px 32px;
+    margin: 1rem;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+  }
+  
+  .btn:hover {
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary {
+    background-color: rgb(var(--primary-color));
+    border: 1px solid rgb(var(--primary-color));
+    color: rgb(var(--text-color));
+  }
+  
+  /* https://thegraph.com/en/ */
+  .btn-semi-transparent {
+    background-color: rgba(var(--primary-color), 0.15);
+    border: 1px solid rgba(var(--primary-color), 0.25);
+    color: rgba(var(--text-color), 0.8);
+  }
+  
+  .btn-semi-transparent:hover {
+    background-color: rgba(var(--primary-color), 0.35);
+    border: 1px solid rgba(var(--primary-color), 0.5);
+    color: rgba(var(--text-color), 0.9);
+  }
+  
+  .btn-glow:hover {
+    box-shadow: rgba(var(--primary-color), 0.5) 0px 0px 20px 0px;
+  }
+  
+  /* https://sushi.com/ */
+  .btn-gradient {
+    background-image: linear-gradient(to right, #0048bd, #44a7fd);
+    border: 0;
+    color: rgba(var(--text-color));
+  }
+  
+  /* https://sushi.com/ */
+  .btn-gradient-border {
+    color: rgba(var(--text-color));
+    border: 2px double transparent;
+    background-image: linear-gradient(rgb(13, 14, 33), rgb(13, 14, 33)), radial-gradient(circle at left top, #0048bd, #44a7fd);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+  .mat-toolbar-row, .mat-toolbar-single-row {
+    border-top-left-radius: 20px;
+}
+
+.header{
+  border-top-left-radius: 20px;
+}

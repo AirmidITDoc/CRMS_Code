@@ -17,17 +17,16 @@
                      *ngFor="let shortcutItem of shortcutItems">
 
                     <a mat-icon-button matTooltip="{{shortcutItem.title}}" [routerLink]="shortcutItem.url">
-                        <mat-icon class="secondary-text" *ngIf="shortcutItem.icon">{{shortcutItem.icon}}</mat-icon>
+                        <mat-icon style="color: #125786;" class="secondary-text" *ngIf="shortcutItem.icon">{{shortcutItem.icon}}</mat-icon>
                         <span *ngIf="!shortcutItem.icon" class="h2 secondary-text text-bold">
                             {{shortcutItem.title.substr(0, 1).toUpperCase()}}
                         </span>
                     </a>
-
                 </div>
 
                 <button mat-icon-button [matMenuTriggerFor]="addMenu" matTooltip="Click to add/remove shortcut"
                         (menuOpened)="onMenuOpen()">
-                    <mat-icon class="amber-600-fg">star</mat-icon>
+                    <mat-icon  class="amber-600-fg">star</mat-icon>
                 </button>
 
             </div>
