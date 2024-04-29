@@ -250,7 +250,7 @@ getstudydeptdetail(contact){
   InvoiceGenerate(){
     const dialogRef = this._matDialog.open(InvoiceBillMappingComponent,
       {
-        maxWidth: "75%",
+        maxWidth: "95%",
         height: '690px',
         width: '100%',
         data: {

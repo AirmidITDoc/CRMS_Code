@@ -396,8 +396,13 @@ public getBillGeneration(employee){
 
 //Bill detail
 public getVisitdetailsList(employee){
-  return this._httpClient.post("Generic/GetByProc?procName=crms_visitdetails", employee)
+  return this._httpClient.post("Generic/GetByProc?procName=", employee)
 }
+public getVisitTitleList(){
+  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_VisitTitle", {})
+}
+
+
 
 public getBillList(employee){
   return this._httpClient.post("Generic/GetByProc?procName=Rtrv_bill", employee)

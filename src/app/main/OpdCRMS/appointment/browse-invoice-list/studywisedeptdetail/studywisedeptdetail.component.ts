@@ -53,6 +53,7 @@ export class StudywisedeptdetailComponent implements OnInit {
     public _InvoiceBilllsService: InvoiceBillService,
     private accountService: AuthenticationService,
     public datePipe: DatePipe,
+    // private reportDownloadService: ExcelDownloadService,
     private _ActRoute: Router,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public _matDialog: MatDialog,
@@ -81,6 +82,16 @@ export class StudywisedeptdetailComponent implements OnInit {
     });
 
   }
+
+  
+  exportStusywisedeptdetailReportExcel() {
+    this.sIsLoading == 'loading-data'
+    let exportHeaders = ['StoreName', 'ItemName', 'ReceivedQty', 'IssueQty', 'BalanceQty'];
+    // this.reportDownloadService.getExportJsonData(this.dataSource.data, exportHeaders, 'CurrentStock');
+    this.dataSource.data=[];
+    this.sIsLoading = '';
+  }
+
 
   getStudytdeptdetail(){
    debugger

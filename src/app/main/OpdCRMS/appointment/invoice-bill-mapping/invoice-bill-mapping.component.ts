@@ -49,6 +49,7 @@ export class InvoiceBillMappingComponent implements OnInit {
   TotalAmount = 0;
   FinalTotalAmount = 0;
   caseList: any = [];
+  visisttitlelist: any = [];
   StudyId: any;
   interimArray: any = [];
   totalTotalBillAmt: any;
@@ -62,8 +63,19 @@ export class InvoiceBillMappingComponent implements OnInit {
   Tabamt = 0;
   // reportPrintObjList: BrowseOPDBill[] = [];
   chargeslist: any = [];
+    chargeslist1: any = [];
+
   screenFromString = 'OP-billing';
   displayedColumns = [
+    'BillNo',
+    'BillDate',
+    'RegNo',
+    'VisitTitle',
+    'SubjectName',
+    'TotalBillAmt',
+    'action',
+  ];
+  displayedColumns1 = [
     'BillNo',
     'BillDate',
     'RegNo',
@@ -75,10 +87,9 @@ export class InvoiceBillMappingComponent implements OnInit {
 
 
 
-
   dataSource = new MatTableDataSource<CaseDetail>();
-  dataSource1 = new MatTableDataSource<CaseDetail>();
-
+  dataSourceSelected = new MatTableDataSource<CaseDetail>();
+  
   myControl = new FormControl();
   filteredOptions: any;
   billingServiceList = [];
@@ -135,8 +146,9 @@ export class InvoiceBillMappingComponent implements OnInit {
     }
 
     this.getCaseList();
+    
     this.getCasecombo();
-
+    this.getVisistList();
   }
 
 
@@ -145,6 +157,7 @@ export class InvoiceBillMappingComponent implements OnInit {
     this.registeredForm = this.formBuilder.group({
       InvoiceId: [''],
       CaseId: [''],
+      VisitId:[''],
       InvoiceDate: [''],
       InvoiceTime: [''],
       TaxableAmount: [''],
@@ -189,7 +202,27 @@ export class InvoiceBillMappingComponent implements OnInit {
     }
 
   }
+  onAdd(row){
+    // this.dataSourceSelected.data.push(row);
+    this.chargeslist1.push(row);
+    console.log(this.chargeslist1)
 
+       
+    // this.chargeslist.push(
+    //   {
+    //     // ItemID: row.ItemID,
+    //     ItemName: row.ItemName,
+    //     Price: row.price || 0,
+    //     Qty:0,
+    //     Amount : 0
+    //   });
+    // this.sIsLoading = '';
+   //  console.log(this.chargeslist);
+    this.dataSourceSelected.data = this.chargeslist1;
+    console.log( this.dataSourceSelected.data)
+  }
+
+  
 
 
 
@@ -282,13 +315,20 @@ export class InvoiceBillMappingComponent implements OnInit {
 
   }
 
+  getVisistList(){
+    this._opappointmentService.getVisitTitleList().subscribe(data => {
+      this.visisttitlelist = data;
+    
+    });
+  }
 
 
   getCaseList() {
     this.registeredForm.reset;
     this.sIsLoading = 'loading-data';
     var D_data = {
-      "StudyId": this.registeredForm.get('CaseId').value.StudyId || 0
+      "StudyId": this.registeredForm.get('CaseId').value.StudyId || 0,
+      "VisitTitle": this.registeredForm.get('VisitId').value.VisitTitle|| '%'
     }
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
@@ -320,8 +360,8 @@ export class InvoiceBillMappingComponent implements OnInit {
     insertInvoiceDetail['IGST'] = this.registeredForm.get('IGST').value || 0;
     insertInvoiceDetail['TotalAmount'] = this.registeredForm.get('TotalAmount').value || 0;
     insertInvoiceDetail['ApprovalStatus'] = 0,// this.registeredForm.get('ApprovalStatus').value || 0;
-      insertInvoiceDetail['ApprovedBy'] = "",//this.registeredForm.get('ApprovedBy').value || '';
-      insertInvoiceDetail['ApprovedDate'] = this.dateTimeObj.date;// this.dateTimeObj.date;//this.registerObj.ApprovedDate;
+    insertInvoiceDetail['ApprovedBy'] = "",//this.registeredForm.get('ApprovedBy').value || '';
+    insertInvoiceDetail['ApprovedDate'] = this.dateTimeObj.date;// this.dateTimeObj.date;//this.registerObj.ApprovedDate;
     insertInvoiceDetail['InvoiceStatus'] = "Final";//this.registeredForm.get('InvoiceStatus').value || '';
     insertInvoiceDetail['CashCounterId'] = 0;// this.registeredForm.get('CashCounterId').value || 0;
     insertInvoiceDetail['createdBy'] = this.accountService.currentUserValue.user.id;
@@ -329,7 +369,7 @@ export class InvoiceBillMappingComponent implements OnInit {
 
     let insertInvoiceBillDetailarray = [];
 
-    this.dataSource.data.forEach((element) => {
+    this.dataSourceSelected.data.forEach((element) => {
       let InvoiceBillDetail = {};
       InvoiceBillDetail['InvoiceId'] = 0,
       InvoiceBillDetail['BillNo'] = element.BillNo || 0;
@@ -341,7 +381,7 @@ export class InvoiceBillMappingComponent implements OnInit {
 
     let UpdateInvoiceBillarray = [];
 
-    this.dataSource.data.forEach((element) => {
+    this.dataSourceSelected.data.forEach((element) => {
       let UpdateInvoiceBill = {};
       UpdateInvoiceBill['BillNo'] = element.BillNo;
       UpdateInvoiceBill['IsInvoiceGenerated'] = 1;
@@ -523,7 +563,16 @@ export class InvoiceBillMappingComponent implements OnInit {
     Swal.fire('Success !', 'ChargeList Row Deleted Successfully', 'success');
   }
 
+  deleteTableRow1(element) {
 
+    let index = this.chargeslist1.indexOf(element);
+    if (index >= 0) {
+      this.chargeslist1.splice(index, 1);
+      this.dataSourceSelected.data = [];
+      this.dataSourceSelected.data = this.chargeslist1;
+    }
+    Swal.fire('Success !', 'Selected Row Deleted Successfully', 'success');
+  }
   convertToWord(e) {
 
     // return converter.toWords(e);

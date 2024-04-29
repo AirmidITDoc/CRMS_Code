@@ -1,16 +1,18 @@
 <div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
     <!-- HEADER -->
-    <mat-toolbar class="accent"
-        style="height:50px; justify-content: space-between;width: 100%">
+    <mat-toolbar class="accent" style="height:50px; justify-content: space-between;width: 100%">
         <!-- ;background-color:rgb(18, 87, 134) !important; -->
         <div fxLayout="row" fxLayoutAlign="start center">
-         
+
             <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
                 style="color: aliceblue;">
-               Study Wise Department Detail
+                Study Wise Department Detail
             </span>
         </div>
-      
+        <button (click)="exportStusywisedeptdetailReportExcel()" [disabled]="! (dataSource.data.length > 0)"
+            style="background-color: white;color: white;width: 45px;margin-left: 40%;">
+            <img width="32" height="10px" src="assets/images/logos/xls.png">
+        </button>&nbsp;
     </mat-toolbar>
     <!-- / HEADER -->
 
@@ -21,7 +23,7 @@
     <!-- CONTENT -->
     <div class="content">
 
-        
+
 
         <!-- CENTER -->
         <div class="center p-12 pb-56">
@@ -48,7 +50,7 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                 <ng-container matColumnDef="InvoiceNumber">
+                                    <ng-container matColumnDef="InvoiceNumber">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>InvoiceId
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
@@ -87,7 +89,7 @@
                                             {{contact.FinalAmt}}
                                         </mat-cell>
                                     </ng-container>
-                                   
+
                                     <ng-container matColumnDef="Percentage">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
                                             Percentage
