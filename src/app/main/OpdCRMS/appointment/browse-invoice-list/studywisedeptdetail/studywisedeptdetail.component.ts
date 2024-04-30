@@ -38,7 +38,7 @@ export class StudywisedeptdetailComponent implements OnInit {
     // 'Institutional_Over_Head',
     'FinalAmt',
     'Percentage',
-    'action'
+    // 'action'
   ];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
