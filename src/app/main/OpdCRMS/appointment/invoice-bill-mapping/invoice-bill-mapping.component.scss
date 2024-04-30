@@ -62,26 +62,26 @@ app-invoice-bill-mapping{
 
     .table1 {
         height: 300px !important;
-        // border-color: #808080;
-        // border-style: groove;
     }
+        .mat-header-row {
+          width: 100%;
+          max-width: 1070px;
+          min-width: 1070px;
+          min-height: 20px;
+          padding: 5px;
+          border-radius: 2px;
+          border-end-end-radius: 2px;
+          border-top-left-radius: 2px;
+          
+        }
+    
+        .mat-row {
+          width: 100%;
+          max-width: 1070px;
+          min-width: 1070px;
+          min-height: 25px;
+        }
 
-    .mat-header-row {
-        background-color: rgb(13, 67, 102) !important;
-        width: 100%;
-        max-width: 1110px;
-        min-width:  1110px;
-        min-height: 20px;
-        border-radius: 2px;
-        padding: 3px;
-    }
-
-    .mat-row {
-        max-width: 1200px;
-        min-height: 25px;
-        min-width: 1200px;
-        display: flex;
-    }
 
     // .mat-column-checkbox {
     //     width:80px;
@@ -92,22 +92,30 @@ app-invoice-bill-mapping{
     // }
 
     .mat-column-BillNo {
-        width: 150px;
-        max-width: 150px;
-        min-width: 150px;
-        text-align: right;
+        width: 80px;
+        max-width: 80px;
+        min-width: 80px;
+        text-align: left;
         justify-content: left;
     }
 
     .mat-column-BillDate {
-        width: 150px;
-        max-width: 150px;
-        min-width: 150px;
+        width: 180px;
+        max-width: 180px;
+        min-width: 180px;
         text-align: right;
         justify-content: left;
     }
 
     .mat-column-RegNo {
+        width: 80px;
+        max-width: 80px;
+        min-width: 80px;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .mat-column-VisitTitle {
         width: 100px;
         max-width: 100px;
         min-width: 100px;
@@ -115,19 +123,11 @@ app-invoice-bill-mapping{
         justify-content: left;
     }
 
-    .mat-column-VisitTitle {
-        width: 150px;
-        max-width: 150px;
-        min-width: 150px;
-        text-align: right;
-        justify-content: left;
-    }
-
 
     .mat-column-SubjectName {
-        width: 150px;
-        max-width: 150px;
-        min-width: 150px;
+        width: 130px;
+        max-width: 130px;
+        min-width: 130px;
         text-align: right;
         justify-content: left;
     }
@@ -149,9 +149,9 @@ app-invoice-bill-mapping{
     // }
 
     .mat-column-TotalAmt {
-        width: 150px;
-        max-width: 150px;
-        min-width: 150px;
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
         text-align: right;
         //justify-content:right;
         justify-content: right;
