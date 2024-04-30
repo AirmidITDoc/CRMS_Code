@@ -34,7 +34,7 @@
                                         <form [formGroup]="registeredForm"  #f="ngForm" #aForm>
 
                                             <div  fxLayout="row" fxLayoutAlign="space-between"
-                                                fxLayoutGap="5px" style="margin-top: 20px;margin-left: 20px;">
+                                                fxLayoutGap="5px" style="margin-top: 20px;">
 
                                                 <mat-form-field appearance="outline" style="width: 20%;">
                                                     <mat-label>CaseId</mat-label>
@@ -47,7 +47,7 @@
                                                     </mat-select>
                                                 </mat-form-field>
 
-                                                <mat-form-field appearance="outline" style="width: 20%;margin-bottom: 20px;">
+                                                <mat-form-field appearance="outline" style="width: 20%;">
                                                     <mat-label>VisitId</mat-label>
                                                     <mat-select formControlName="VisitId" name="VisitTitle"
                                                         (selectionChange)="getCaseList()">
@@ -73,7 +73,7 @@
 
                             <div>
                             <div fxFlex="40" fxFlex.gt-sm="100" fxLayout="row" fxLayout.gt-xs="column"
-                                style="width:95%; ;margin-left: 1px;margin-top: 7px;margin-left: 7px;">
+                                style="width:50%; ;margin-left: 1px;margin-top: 7px;margin-left: 7px;">
 
                                 <div>
                                     <div class="col-md-12">
@@ -81,7 +81,7 @@
 
                                         <mat-table #table matSort [dataSource]="dataSource"
                                             [@animateStagger]="{value:'50'}" class="table1"
-                                            style="overflow: hidden;width: 100%;overflow-y: auto;">
+                                            style="overflow: hidden;width: 50%;overflow-y: auto;">
 
                                           
                                     <!-- <ng-container matColumnDef="InterimOrFinal">
@@ -96,7 +96,7 @@
                                         </mat-cell>
                                     </ng-container> -->
 
-                                        <ng-container matColumnDef="BillNo" style="margin-left: 10px;">
+                                        <ng-container matColumnDef="BillNo" >
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>BillNo
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let contact" fxShow.gt-sm>
@@ -174,9 +174,9 @@
                                                 <mat-cell *matCellDef="let row">
                                                     <button mat-icon-button (click)="onAdd(row)"><mat-icon
                                                         title="Edit Menu">add</mat-icon></button>
-                                                    <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
+                                                    <!-- <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
                                                         <mat-icon>delete_outline</mat-icon>
-                                                    </button>
+                                                    </button> -->
                                                 </mat-cell>
                                             </ng-container>
 
@@ -220,7 +220,7 @@
                              </div>
                              <div>
                                 <div fxFlex="40" fxFlex.gt-sm="100" fxLayout="row" fxLayout.gt-xs="column"
-                                    style="width:95%; ;margin-left: 1px;margin-top: 7px;margin-left: 7px;">
+                                    style="width:50%; ;margin-left: 1px;margin-top: 7px;margin-left: 7px;">
     
                                     <div>
                                         <div class="col-md-12">
@@ -228,7 +228,7 @@
     
                                             <mat-table #table matSort [dataSource]="dataSourceSelected"
                                                 [@animateStagger]="{value:'50'}" class="table1"
-                                                style="overflow: hidden;width: 100%;overflow-y: auto;">
+                                                style="overflow: hidden;width: 50%;overflow-y: auto;">
     
                                               
                                         <!-- <ng-container matColumnDef="InterimOrFinal">
@@ -243,7 +243,7 @@
                                             </mat-cell>
                                         </ng-container> -->
     
-                                            <ng-container matColumnDef="BillNo" style="margin-left: 10px;">
+                                            <ng-container matColumnDef="BillNo">
                                                     <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>BillNo
                                                     </mat-header-cell>
                                                     <mat-cell *matCellDef="let contact" fxShow.gt-sm>
