@@ -38,7 +38,7 @@ export class StudywisedeptdetailComponent implements OnInit {
     // 'Institutional_Over_Head',
     'FinalAmt',
     'Percentage',
-    'action'
+    // 'action'
   ];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -83,13 +83,13 @@ export class StudywisedeptdetailComponent implements OnInit {
 
   }
 
-  
+
   exportStusywisedeptdetailReportExcel() {
-    this.sIsLoading == 'loading-data'
-    let exportHeaders = ['StoreName', 'ItemName', 'ReceivedQty', 'IssueQty', 'BalanceQty'];
-    // this.reportDownloadService.getExportJsonData(this.dataSource.data, exportHeaders, 'CurrentStock');
-    this.dataSource.data=[];
-    this.sIsLoading = '';
+    // this.sIsLoading == 'loading-data'
+    // let exportHeaders = ['InvoiceNumber', 'InvoiceDate', 'TaxableAmount', 'ServiceName', 'FinalAmt','Percentage'];
+    // this.reportDownloadService.getExportJsonData(this.dataSource.data, exportHeaders, 'StudyDeptWise');
+    // this.dataSource.data=[];
+    // this.sIsLoading = '';
   }
 
 
