@@ -16,10 +16,14 @@
                 Browse Invoice Bill
             </span>
         </div>
+
+        <div class="headerbutton">
         <button mat-raised-button (click)="InvoiceGenerate()" fxLayoutAlign="center center"
-            style="margin-left:800px;">Invoice Generate
+            style="border-radius: 50px;" class="btn">Invoice Generate
             <!-- <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon> -->
         </button>
+        </div>
+
     </mat-toolbar>
     <!-- / HEADER -->
 
@@ -52,7 +56,7 @@
                     <div class="content py-16 pl-10 p-12" fusePerfectScrollbar>
                         <div class="nav material2">
                             <form [formGroup]="_InvoiceBilllsService.myFilterform">
-                                <div fxLayout="column" fxLayoutAlign="start none">
+                                <div fxLayout="column"  fxLayoutAlign="start none">
 
                                     <mat-form-field appearance="outline">
                                         <mat-label>Enter a date range</mat-label>
@@ -515,13 +519,13 @@
                   <td style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
                   padding: 10px;height: 20px;"></td>
             </tr>
-            <tr >
+            <tr>
                 <td colspan="2" style="border: 1px solid black;vertical-align: top;  text-align: left;
                 padding: 8px;height: 20px;font-size: 10px;">Payee Name (Institution)</td>
                 <td  colspan="5" style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;
                 padding: 10px;height: 20px;"></td>
             </tr>
-            <tr >
+            <tr>
                 <td colspan="2" style="border: 1px solid black;vertical-align: top;  text-align: left;
                 padding: 8px;height: 20px;font-size: 10px;">Bank Name And Address</td>
                 <td  colspan="5" style="border: 1px solid black;vertical-align: top; font-weight:bold;text-align:center;font-size:15px;

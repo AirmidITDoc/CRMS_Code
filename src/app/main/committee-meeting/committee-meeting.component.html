@@ -17,15 +17,15 @@
         </div>
 
         <div class="headerbutton">
-            <button mat-raised-button (click)="newMember()" class="btn btn-gradient btn-glow" style="border-radius: 50px; color: #ffffff;">Add
+            <button mat-raised-button (click)="newMember()" class="btn" style="border-radius: 50px;">Add
                 Member
             </button>&nbsp;
-            <button mat-raised-button (click)="newCommitteeMember()"  class="btn btn-gradient btn-glow"
-                style="border-radius: 50px;color: #ffffff;">Committee Members
+            <button mat-raised-button (click)="newCommitteeMember()"  class="btn"
+                style="border-radius: 50px;">Committee Members
               <mat-icon color="Primary" title="Case Form">how_to_reg</mat-icon>
             </button>&nbsp;
-            <button mat-raised-button (click)="newcommitteemeeting()" class="btn btn-gradient btn-glow"
-                style="border-radius: 50px;color: #ffffff;">Committee Meeting
+            <button mat-raised-button (click)="newcommitteemeeting()" class="btn"
+                style="border-radius: 50px;">Committee Meeting
                 <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon>
             </button>&nbsp;
         </div>
@@ -99,7 +99,7 @@
                                 </div>
                                 <!-- sppinner -->
                                 <mat-table #table matSort [dataSource]="dscommitteeMeetingList"
-                                    [@animateStagger]="{value:'50'}"  style="overflow: hidden;width: 100%;overflow-y: auto;">
+                                    [@animateStagger]="{value:'50'}"  class="table1" style="overflow: hidden;width: 100%;overflow-y: auto;">
 
                                     <ng-container matColumnDef="CommitteeMeetingId">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header
@@ -155,7 +155,6 @@
                                         </mat-cell>
                                     </ng-container>
 
-
                                     <ng-container matColumnDef="action" stickyEnd>
                                         <mat-header-cell *matHeaderCellDef style="color: white;"> Action
                                         </mat-header-cell>
@@ -166,7 +165,6 @@
                                                         title="Edit Menu">print</mat-icon></button>
                                         </mat-cell>
                                     </ng-container>
-
 
                                     <ng-container matColumnDef="loading">
                                         <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
@@ -206,3 +204,5 @@
 </div>
 
 //
+
+

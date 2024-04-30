@@ -31,12 +31,11 @@
                 <!-- WIDGET 2 -->
                 <!-- <div fxLayout="row" class="cards-grid"> -->
 
-
-                    <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
-                        fxFlex="100"   fxFlex.gt-xs="50" fxFlex.gt-md="20" *ngFor="let element of dashbardCardData" (click)="newCaseDetail(element)">
+                    <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" 
+                        fxFlex="100"  fxFlex.gt-xs="50" fxFlex.gt-md="20" *ngFor="let element of dashbardCardData" (click)="newCaseDetail(element)">
 
                         <!-- Front -->
-                        <div class="fuse-widget-front">
+                        <div class="fuse-widget-front box1">
                             <div class="pl-16 pr-8 py-16 h-52" fxLayout="row" fxLayoutAlign="space-between center">
                                 <!-- <div class="h3">{{widgets.widget2.title}}</div> -->
                                 <div class="h3">{{element.Title}}</div>

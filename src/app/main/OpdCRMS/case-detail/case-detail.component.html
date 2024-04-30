@@ -11,15 +11,18 @@
             <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
                 style="color: white;">account_box
             </mat-icon> -->
-            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
+            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" 
                 style="color: aliceblue;">
                 Study Information
             </span>
         </div>
-        <button mat-raised-button (click)="newCaseDetail()" fxLayoutAlign="center center"
-        style="margin-left:800px;">New Study Detail
+
+        <div class="headerbutton">
+        <button mat-raised-button (click)="newCaseDetail()"  fxLayoutAlign="center center"
+         style="border-radius: 50px;" class="btn">New Study Detail
         <!-- <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon> -->
-    </button>
+        </button>
+        </div>
     </mat-toolbar>
     <!-- / HEADER -->
 
