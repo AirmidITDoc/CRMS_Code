@@ -2,12 +2,12 @@ import { Component, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angula
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { RoleTemplateService } from '../role-template-master/role-template.service';
 import { ToastrService } from 'ngx-toastr';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { fuseAnimations } from "@fuse/animations";
 import { FlatTreeControl, NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { RolemasterService } from '../rolemaster/rolemaster.service';
 
 export class FileNode {
     children?: FileNode[];
@@ -81,13 +81,14 @@ export class RolePermissionComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
-    constructor(public _RoleService: RoleTemplateService,
+    constructor(public _RoleService: RolemasterService,
         public toastr: ToastrService, public _matDialog: MatDialog,
         @Inject(MAT_DIALOG_DATA) public data: any,
         public dialogRef: MatDialogRef<RolePermissionComponent>,
     ) {
         this._RoleService.getPermissionList(this.data.RoleId).subscribe((Menu) => {
             this.dataSource.data = Menu as FileNode[];
+            console.log( this.dataSource.data);
         });
     }
 

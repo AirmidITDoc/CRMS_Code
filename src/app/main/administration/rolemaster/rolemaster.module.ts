@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -51,58 +51,29 @@ const routes: Routes = [
 @NgModule({
     declarations: [
       RolemasterComponent,
-      // RolePermissionComponent
+      RolePermissionComponent
     ],
     imports: [
         RouterModule.forChild(routes),
         MatButtonModule,
         MatCheckboxModule,
-        MatDatepickerModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
         MatMenuModule,
-        MatRippleModule,
         MatTableModule,
         MatToolbarModule,
         MatPaginatorModule,
         MatSortModule,
         MatSelectModule,
         MatRadioModule,
-        MatTabsModule,
-        MatCardModule,
-        MatDividerModule,  
-        MatProgressSpinnerModule,
-        FuseSharedModule,
-        FuseConfirmDialogModule,
-        FuseSidebarModule,
-        MatDialogModule,
-        MatListModule,
         MatSnackBarModule,
-        MatSlideToggleModule ,
-        MatDividerModule,
-        MatDialogModule,
         FuseSharedModule,
-        FuseConfirmDialogModule,
         FuseSidebarModule,
-        ReactiveFormsModule,
-        MatSnackBarModule,
-        MatStepperModule,
-        MatAutocompleteModule,
-        MatProgressSpinnerModule,
-        SharedModule,
-        NgxMatSelectSearchModule,
-        MatCardModule,
-        MatListModule,
-        MatChipsModule,
-        MatTooltipModule,
-        MatChipsModule,
-        MatExpansionModule,
-        MatListModule,
-        MatTreeModule,
-        CdkTreeModule,
-        CdkTableModule
         
+    ],
+    schemas: [
+      CUSTOM_ELEMENTS_SCHEMA
     ],
     providers: [
       RolemasterService,

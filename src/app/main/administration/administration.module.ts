@@ -11,7 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { CdkTableModule } from '@angular/cdk/table';
-
+import { SharedModule } from '../shared/shared.module';
 
 
 const appRoutes: Routes = [
@@ -31,12 +31,13 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [RolePermissionComponent],
+  declarations: [],
   imports: [
     CommonModule,
     RouterModule.forChild(appRoutes),
     MatIconModule,MatTableModule,MatPaginatorModule,MatSortModule,
-    MatCheckboxModule,MatButtonModule,CdkTreeModule,CdkTableModule
+    MatCheckboxModule,MatButtonModule,CdkTreeModule,CdkTableModule,
+    SharedModule
   ]
 })
 export class AdministrationModule { }
