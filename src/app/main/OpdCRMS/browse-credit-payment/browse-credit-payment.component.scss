@@ -1,130 +1,9 @@
 @import "src/@fuse/scss/fuse";
 
 app-browse-credit-payment {
-    :host {
-        display: flex;
-        flex-direction: column;
-        flex: 1 0 auto;
-        height: 100%;
-        width: 100%;
-
-        .mat-form-field {
-            margin-right: 12px;
-        }
-
-        .sidebar-content {
-            display: flex;
-            flex-direction: column;
-            padding: 0;
-            background-color: white;
-
-            @include media-breakpoint(gt-sm) {
-                //prasad
-                // padding: 24px 4px 24px 24px;
-                padding: 12px 0 12px 12px;
-            }
-
-            .card {
-                display: flex;
-                flex-direction: column;
-                flex: 0 1 auto;
-                padding: 0;
-                border-radius: 8px;
-
-                @include media-breakpoint(gt-sm) {
-                    @include mat-elevation(1);
-                }
-
-                >.header {
-                    flex: 0 1 auto;
-                    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-                }
-
-                >.content {
-                    flex: 0 1 auto;
-                }
-
-                .example-chip-list {
-                    width: 100%;
-                    font-size: small;
-                    display: inline
-                }
-
-                // .mat-form-field-wrapper {
-                //     padding-bottom: 0.34375em;
-                // }
-            }
-        }
-
-    }
-
-
-    .mat-form-field-wrapper {
-        padding-bottom: 0.34375em;
-    }
-
-    :host {
-        display: flex;
-        flex: 1 1 auto;
-        width: 100%;
-
-        .mat-table {
-            //height: 400px !important;
-            // height: 100%;
-            width: 100%;
-            background: transparent;
-            box-shadow: none;
-
-            .mat-column-checkbox {
-                flex: 0 1 64px;
-                padding-left: 18px;
-            }
-
-            .mat-column-avatar {
-                flex: 0 1 64px;
-            }
-
-            .mat-column-buttons {
-                flex: 0 1 80px;
-            }
-
-            .mat-row {
-                position: relative;
-                cursor: pointer;
-
-                .mat-cell {
-
-
-                    min-width: 0px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    overflow: hidden !important;
-                    display: inline-block;
-
-
-                    &.mat-column-detail-button {
-                        flex: 0 1 auto;
-
-                        @include media-breakpoint('gt-md') {
-                            display: none;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .active-icon {
-        border-radius: 50%;
-    }
-
-}
-
-app-browse-credit-payment {
 
     .table1 {
-        height: 83vh !important;
+        height: 42vh !important;
     }
 
     .mat-header-row {
@@ -169,9 +48,9 @@ app-browse-credit-payment {
     }
 
     .mat-column-Payment {
-        width: 80px;
-        max-width: 80px;
-        min-width: 80px;
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
         text-align: left;
         justify-content: left;
     }
@@ -184,36 +63,12 @@ app-browse-credit-payment {
     }
 
     .mat-column-BillNo {
-        width: 80px;
-        max-width: 80px;
-        min-width: 80px;
+        width: 100px;
+        max-width: 100px;
+        min-width: 100px;
         text-align: left;
         justify-content: left;
     }
-
-    // .mat-column-RegNo {
-    //     width: 80px;
-    //     max-width: 80px;
-    //     min-width: 80px;
-    //     text-align: right;
-    //     justify-content: left;
-    // }
-
-    // .mat-column-PatientName {
-
-    //     width: 300px;
-    //     max-width: 300px;
-    //     min-width: 300px;
-    //     text-align: left;
-    //     white-space: nowrap;
-    //     overflow: hidden;
-    //     text-overflow: ellipsis;
-    //     overflow: hidden !important;
-    //     // display: inline-block;
-    //     // margin-top: 7px;
-    //     margin-right: 10px;
-    //     justify-content: left;
-    // }
 
     .mat-column-TotalAmt {
         width: 110px;
@@ -233,9 +88,9 @@ app-browse-credit-payment {
     }
 
     .mat-column-ProtocolNo {
-        width: 100px;
-        max-width: 100px;
-        min-width: 100px;
+        width: 250px;
+        max-width: 250px;
+        min-width: 250px;
         justify-content: center;
         text-align: center;
     }
@@ -257,9 +112,9 @@ app-browse-credit-payment {
     }
 
     .mat-column-DiscAmount {
-        width: 100px;
-        max-width: 100px;
-        min-width: 100px;
+        width: 150px;
+        max-width: 150px;
+        min-width: 150px;
         text-align: center;
         justify-content: center;
     }
@@ -273,18 +128,18 @@ app-browse-credit-payment {
     }
 
     .mat-column-PaidAmount {
-        width: 120px;
-        max-width: 120px;
-        min-width: 120px;
+        width: 150px;
+        max-width: 150px;
+        min-width: 150px;
         text-align: center;
         justify-content: center;
         // justify-content:flex-start;
     }
 
     .mat-column-BalanceAmt {
-        width: 110px;
-        max-width: 110px;
-        min-width: 110px;
+        width: 150px;
+        max-width: 150px;
+        min-width: 150px;
         text-align: center;
         justify-content: center;
         margin-right: 15px;

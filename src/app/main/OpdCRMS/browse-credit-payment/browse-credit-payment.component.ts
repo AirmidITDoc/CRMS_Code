@@ -33,6 +33,8 @@ export class BrowseCreditPaymentComponent implements OnInit {
   sIsLoading: string = '';
   dataArray = {};
   dataSource = new MatTableDataSource<BrowseOPDBill>();
+  dsBillDet = new MatTableDataSource<BillDetails>();
+
   reportPrintObj: BrowseOPDBill;
   subscriptionArr: Subscription[] = [];
   printTemplate: any;
@@ -41,9 +43,9 @@ export class BrowseCreditPaymentComponent implements OnInit {
   interimArray: any = [];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
-  caseList:any=[];
-  selectedcase:any;
+
+  caseList: any = [];
+  selectedcase: any;
   selectedAdvanceObj: BrowseOPDBill;
   numberInWords!: string;
   // lang: SUPPORTED_LANGUAGE = 'en';
@@ -57,21 +59,24 @@ export class BrowseCreditPaymentComponent implements OnInit {
     'InterExtBill',
     'Payment',
     'BillDate',
-    // 'BillNo',
-    'StudyId',
+    'BillNo',
     'ProtocolNo',
     'SubjectName',
-    // 'RegNo',
-    // 'PatientName',
     'TotalAmt',
     'DiscAmount',
     'NetPayableAmt',
-    // 'PaidAmount',
-    // 'BalanceAmt',
-    // 'chkBalanceAmt',
     'action'
   ];
-
+  displayedColumnsBillDetails = [
+    'ServiceName',
+    'Price',
+    'Qty',
+    'TotalAmt',
+    'indBillNo',
+    'IndServiceName',
+    'IndServiceAmount',
+    'action'
+  ];
 
   showSpinner = false;
   tablehide = false;
@@ -93,7 +98,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
   ngOnInit(): void {
 
     this.getCasecombo();
-     if (this._ActRoute.url == '/opd/payment') {
+    if (this._ActRoute.url == '/opd/payment') {
       this.menuActions.push('Approval');
     }
     this.getBrowseOPDBillsList();
@@ -110,7 +115,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
     this._BrowseOPDBillsService.getCaseIDCombo().subscribe(data => {
       this.caseList = data;
       this.selectedcase = this.caseList[0].StudyId;
-  
+
     });
   }
 
@@ -131,7 +136,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
   }
 
-   
+
   tableElementChecked(event, element) {
     if (event.checked) {
       this.interimArray.push(element);
@@ -156,9 +161,8 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
   getBrowseOPDBillsList() {
     this.sIsLoading = 'loading';
-    
     var D_data = {
-      "StudyId":this._BrowseOPDBillsService.myFilterform.get("StudyId").value.StudyId || 0,
+      "StudyId": this._BrowseOPDBillsService.myFilterform.get("StudyId").value.StudyId || 0,
       "F_Name": (this._BrowseOPDBillsService.myFilterform.get("FirstName").value).trim() + '%' || "%",
       "L_Name": (this._BrowseOPDBillsService.myFilterform.get("LastName").value).trim() + '%' || "%",
       "From_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
@@ -166,14 +170,11 @@ export class BrowseCreditPaymentComponent implements OnInit {
       "Reg_No": this._BrowseOPDBillsService.myFilterform.get("RegNo").value || 0,
       "PBillNo": this._BrowseOPDBillsService.myFilterform.get("PBillNo").value || '%',
     }
-    console.log(D_data);
-
     setTimeout(() => {
       this.sIsLoading = 'loading';
       this._BrowseOPDBillsService.getBrowseBillsList(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as BrowseOPDBill[];
         this.dataSource.sort = this.sort;
-        console.log(this.dataSource.data);
         this.dataSource.paginator = this.paginator;
         this.sIsLoading = this.dataSource.data.length == 0 ? 'no-data' : '';
         this.click = false;
@@ -186,89 +187,26 @@ export class BrowseCreditPaymentComponent implements OnInit {
     this.onClear();
   }
 
+  getBillDet(Param) {
+    this.sIsLoading = 'loading';
+    var D_data = {
+      "BillNo": Param.BillNo
+    }
+    setTimeout(() => {
+      this.sIsLoading = 'loading';
+      this._BrowseOPDBillsService.getBillDet(D_data).subscribe(Visit => {
+        this.dsBillDet.data = Visit as BillDetails[];
+        this.sIsLoading = this.dsBillDet.data.length == 0 ? 'no-data' : '';
+        this.click = false;
+      },
+        error => {
+          this.sIsLoading = '';
+        });
+    }, 1000);
 
-
-  onExport(exprtType) {
-    // let columnList=[];
-    // if(this.dataSource.data.length == 0){
-    //   // this.toastr.error("No Data Found");
-    //   Swal.fire('Error !', 'No Data Found', 'error');
-    // }
-    // else{
-    //   var excelData = [];
-    //   var a=1;
-    //   for(var i=0;i<this.dataSource.data.length;i++){
-    //     let singleEntry = {
-    //       // "Sr No":a+i,
-    //       "Bill Date" :this.dataSource.data[i]["BillDate"],
-    //       "PBill No" :this.dataSource.data[i]["PBillNo"] ? this.dataSource.data[i]["PBillNo"]:"N/A",
-    //       "RegNo " :this.dataSource.data[i]["RegNo"] ? this.dataSource.data[i]["RegNo"] :"N/A",
-    //       "Patient Name" :this.dataSource.data[i]["PatientName"] ? this.dataSource.data[i]["PatientName"] : "N/A",
-    //       "Total Amt" :this.dataSource.data[i]["TotalAmt"] ? this.dataSource.data[i]["TotalAmt"]:"N/A",
-    //       "Concession Amt" :this.dataSource.data[i]["ConcessionAmt"] ? this.dataSource.data[i]["ConcessionAmt"]:"N/A",
-    //       "NetPayable Amt" :this.dataSource.data[i]["NetPayableAmt"] ? this.dataSource.data[i]["NetPayableAmt"]:"N/A",
-    //       "PaidAmount" :this.dataSource.data[i]["PaidAmount"] ? this.dataSource.data[i]["PaidAmount"]:"N/A",
-    //       "BalanceAmt" :this.dataSource.data[i]["BalanceAmt"]?this.dataSource.data[i]["BalanceAmt"]:"N/A",
-    //       "chkBalanceAmt" :this.dataSource.data[i]["chkBalanceAmt"]?this.dataSource.data[i]["chkBalanceAmt"]:"N/A"
-    //     };
-    //     excelData.push(singleEntry);
-    //   }
-    //   var fileName = "OutDoor-Bill-List " + new Date() +".xlsx";
-    //   if(exprtType =="Excel"){
-    //     const ws: XLSX.WorkSheet=XLSX.utils.json_to_sheet(excelData);
-    //     var wscols = [];
-    //     if(excelData.length > 0){ 
-    //       var columnsIn = excelData[0]; 
-    //       console.log(columnsIn);
-    //       for(var key in columnsIn){
-    //         let headerLength = {wch:(key.length+1)};
-    //         let columnLength = headerLength;
-    //         try{
-    //           columnLength = {wch: Math.max(...excelData.map(o => o[key].length), 0)+1}; 
-    //         }
-    //         catch{
-    //           columnLength = headerLength;
-    //         }
-    //         if(headerLength["wch"] <= columnLength["wch"]){
-    //           wscols.push(columnLength)
-    //         }
-    //         else{
-    //           wscols.push(headerLength)
-    //         }
-    //       } 
-    //     }
-    //     ws['!cols'] = wscols;
-    //     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    //     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    //     XLSX.writeFile(wb, fileName);
-    //   }else{
-    //     let doc = new jsPDF('p','pt', 'a4');
-    //     doc.page = 0;
-    //     var col=[];
-    //     for (var k in excelData[0]) col.push(k);
-    //       console.log(col.length)
-    //     var rows = [];
-    //     excelData.forEach(obj => {
-    //       console.log(obj)
-    //       let arr = [];
-    //       col.forEach(col => {
-    //         arr.push(obj[col]);
-    //       });
-    //       rows.push(arr);
-    //     });
-
-    //     doc.autoTable(col, rows,{
-    //       margin:{left:5,right:5,top:5},
-    //       theme:"grid",
-    //       styles: {
-    //         fontSize: 3
-    //       }});
-    //     doc.setFontSize(3);
-    //     // doc.save("Indoor-Patient-List.pdf");
-    //     window.open(URL.createObjectURL(doc.output("blob")))
-    //   }
-    // }
+    this.onClear();
   }
+
 
   ngOnChanges(changes: SimpleChanges) {
     // changes.prop contains the old and the new value...
@@ -280,14 +218,12 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
 
   NewBillpayment(contact) {
-
     let PatientHeaderObj = {};
-
- PatientHeaderObj['Date'] = this.datePipe.transform(contact.BillDate, 'MM/dd/yyyy') || '01/01/1900',
-PatientHeaderObj['PatientName'] = contact.PatientName;
-PatientHeaderObj['OPD_IPD_Id'] = contact.vOPIPId;
-PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt;
-PatientHeaderObj['BillId'] = contact.BillNo;
+    PatientHeaderObj['Date'] = this.datePipe.transform(contact.BillDate, 'MM/dd/yyyy') || '01/01/1900',
+    PatientHeaderObj['PatientName'] = contact.PatientName;
+    PatientHeaderObj['OPD_IPD_Id'] = contact.vOPIPId;
+    PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt;
+    PatientHeaderObj['BillId'] = contact.BillNo;
 
     const dialogRef = this._matDialog.open(PaymentDetailComponent,
       {
@@ -300,9 +236,9 @@ PatientHeaderObj['BillId'] = contact.BillNo;
         }
       });
 
-   
-         
-    }
+
+
+  }
 
 
   getTemplate() {
@@ -310,7 +246,7 @@ PatientHeaderObj['BillId'] = contact.BillNo;
     this._BrowseOPDBillsService.getTemplate(query).subscribe((resData: any) => {
 
       this.printTemplate = resData[0].TempDesign;
-      let keysArray = ['HospitalName', 'HospitalAddress', 'Phone','EmailId', 'PhoneNo', 'RegNo', 'BillNo', 'AgeYear', 'AgeDay', 'AgeMonth', 'PBillNo', 'PatientName', 'BillDate', 'VisitDate', 'ConsultantDocName', 'DepartmentName', 'ServiceName', 'ChargesDoctorName', 'Price', 'Qty', 'ChargesTotalAmount', 'TotalBillAmount', 'NetPayableAmt', 'NetAmount', 'ConcessionAmt', 'PaidAmount', 'BalanceAmt', 'AddedByName','Address','MobileNo']; // resData[0].TempKeys;
+      let keysArray = ['HospitalName', 'HospitalAddress', 'Phone', 'EmailId', 'PhoneNo', 'RegNo', 'BillNo', 'AgeYear', 'AgeDay', 'AgeMonth', 'PBillNo', 'PatientName', 'BillDate', 'VisitDate', 'ConsultantDocName', 'DepartmentName', 'ServiceName', 'ChargesDoctorName', 'Price', 'Qty', 'ChargesTotalAmount', 'TotalBillAmount', 'NetPayableAmt', 'NetAmount', 'ConcessionAmt', 'PaidAmount', 'BalanceAmt', 'AddedByName', 'Address', 'MobileNo']; // resData[0].TempKeys;
 
       for (let i = 0; i < keysArray.length; i++) {
         let reString = "{{" + keysArray[i] + "}}";
@@ -329,7 +265,7 @@ PatientHeaderObj['BillId'] = contact.BillNo;
         else
           docname = '';
 
-          // <hr style="border-color:white" >
+        // <hr style="border-color:white" >
         var strabc = ` <div style="display:flex;margin:8px 0">
         <div style="display:flex;width:60px;margin-left:20px;">
             <div>`+ i + `</div> <!-- <div>BLOOD UREA</div> -->
@@ -501,28 +437,8 @@ PatientHeaderObj['BillId'] = contact.BillNo;
     });
   }
 
-  InvoiceGenerate(){
- 
-
-    const dialogRef = this._matDialog.open(InvoiceBillMappingComponent,
-      {
-        maxWidth: "75%",
-        height: '700px',
-        width: '100%',
-        data: {
-          registerObj: this.dataSource
-        }
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed - Insert Action', result);
-      // this.getVisitList();
-    });
-  }
-
-  getRecord(contact, m): void {
-    debugger;
+   getRecord(contact, m): void {
     console.log(contact);
-
     // this.VisitID = contact.VisitId;
     let AgeDay, AgeMonth, AgeYear, Age
     if (contact.Age != null || contact.AgeDay != null || contact.AgeMonth != null || contact.AgeYear != null) {
@@ -531,12 +447,8 @@ PatientHeaderObj['BillId'] = contact.BillNo;
       AgeMonth = contact.AgeMonth.trim();
       AgeYear = contact.AgeYear.trim();
     }
-       
-    }
- 
-    // /   this._ActRoute.navigate(['opd/appointment/op_bill'], {queryParams:{id:this.selectedID}})
-
   }
+}
 
 
 
@@ -577,7 +489,7 @@ export class BrowseOPDBill {
   HospitalName: string;
   HospitalAddress: string;
   Phone: number;
-  EmailId:any;
+  EmailId: any;
   ChargesDoctorName: string;
   TotalBillAmount: number;
   ConsultantDocName: string;
@@ -589,14 +501,14 @@ export class BrowseOPDBill {
   VisitDate: Date;
   BalanceAmt: number;
   AddedByName: string;
-Department:any;
-Address:any;
-MobileNo:any;
-StudyId:number;
-ProtocolNo:any;
-SubjectName:any;
+  Department: any;
+  Address: any;
+  MobileNo: any;
+  StudyId: number;
+  ProtocolNo: any;
+  SubjectName: any;
 
- 
+
   /**
    * Constructor
    *
@@ -642,12 +554,50 @@ SubjectName:any;
 
       this.Address = BrowseOPDBill.Address || '';
       this.Department = BrowseOPDBill.Department || '';
-      this.MobileNo=BrowseOPDBill.MobileNo || '';
+      this.MobileNo = BrowseOPDBill.MobileNo || '';
 
       this.StudyId = BrowseOPDBill.StudyId || 0;
       this.ProtocolNo = BrowseOPDBill.ProtocolNo || '';
-      this.SubjectName=BrowseOPDBill.SubjectName || '';
+      this.SubjectName = BrowseOPDBill.SubjectName || '';
     }
   }
 
 }
+export class BillDetails {
+  BillNo: Number;
+  PBillNo: any;
+  ServiceName:string;
+  Price:any;
+  Qty: string;
+  TotalAmt: string;
+  IndBillId: string;
+  IndChargeId: string;
+  IndServiceId: number;
+  IndServiceName: number;
+  IndServiceAmount: any;
+  ChargesId: any;
+
+  /**
+   * Constructor
+   *
+   * @param BillDetails
+   */
+  constructor(BillDetails) {
+    {
+      this.BillNo = BillDetails.BillNo || '';
+      this.PBillNo = BillDetails.PBillNo || '';
+      this.ServiceName = BillDetails.ServiceName || '';
+      this.Price = BillDetails.Price || '';
+      this.Qty = BillDetails.Qty || '';
+      this.TotalAmt = BillDetails.TotalAmt || '';
+      this.IndBillId = BillDetails.IndBillId || '';
+      this.IndChargeId = BillDetails.IndChargeId || '';
+      this.IndServiceId = BillDetails.IndServiceId || '';
+      this.IndServiceName = BillDetails.IndServiceName || '';
+      this.IndServiceAmount = BillDetails.IndServiceAmount || '';
+      this.ChargesId = BillDetails.ChargesId || '';
+    }
+  }
+
+}
+
