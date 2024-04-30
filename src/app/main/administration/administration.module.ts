@@ -16,8 +16,8 @@ import { CdkTableModule } from '@angular/cdk/table';
 
 const appRoutes: Routes = [
   {
-      path: "createuser",
-      loadChildren: () => import("./new-createuser/createuser.module").then((m) => m.CreateuserModule),
+    path: "createuser",
+    loadChildren: () => import("./new-createuser/createuser.module").then((m) => m.CreateuserModule),
   },
   {
     path: "configuration",
