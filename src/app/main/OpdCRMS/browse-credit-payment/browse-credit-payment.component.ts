@@ -218,6 +218,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
 
   NewBillpayment(contact) {
+    console.log(contact)
     let PatientHeaderObj = {};
     PatientHeaderObj['Date'] = this.datePipe.transform(contact.BillDate, 'MM/dd/yyyy') || '01/01/1900',
     PatientHeaderObj['PatientName'] = contact.PatientName;
@@ -225,6 +226,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
     PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt;
     PatientHeaderObj['BillId'] = contact.BillNo;
 
+  
     const dialogRef = this._matDialog.open(PaymentDetailComponent,
       {
         maxWidth: "100vw",
