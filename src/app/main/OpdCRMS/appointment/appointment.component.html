@@ -1,4 +1,4 @@
-<div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+<div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll"  dynamicTableHeight fusePerfectScrollbar>
     <!-- HEADER -->
     <mat-toolbar class="accent"
         style="height:50px; justify-content: space-between;width: 100%;">
@@ -143,13 +143,13 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="VisitTitle">
+                                    <!-- <ng-container matColumnDef="VisitTitle">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header
                                             fxShow.gt-sm>VisitTitle</mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                             {{contact.VisitTitle}}
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
                                     <ng-container matColumnDef="SubjectName">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header
@@ -167,21 +167,21 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="PatientName">
+                                    <!-- <ng-container matColumnDef="PatientName">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>PatientName
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                             {{contact.PatientName}}
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
-                                    <ng-container matColumnDef="OPDNo">
+                                    <!-- <ng-container matColumnDef="OPDNo">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>OPDNo
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.OPDNo}}
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
                                     <ng-container matColumnDef="Doctorname">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Doctor
@@ -193,7 +193,7 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="RefDocName">
+                                    <!-- <ng-container matColumnDef="RefDocName">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Ref Doc
                                             Name
                                         </mat-header-cell>
@@ -210,7 +210,7 @@
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.PatientType}}
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
                                     <ng-container matColumnDef="buttons" stickyEnd>
                                         <mat-header-cell *matHeaderCellDef

@@ -4,14 +4,19 @@
 // Import app.theme.scss
 @import "app/app.theme";
 // @import '~font-awesome/css/font-awesome.min.css';
- 
+
+// @import "app/main/shared/custom/buttons.scss";
+// @import "app/main/shared/custom/table.scss";
+// @import '~font-awesome/css/font-awesome.min.css';
+@import "./assets/scss/airmid"; // Airmid layout css
+
 .mat-form-field-outline:not( .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick){
   color: #A9C2D3;            
   
 }
 
 
-//added by prasad
+//added by prasadng 
 .mat-cell, .mat-footer-cell {
     font-size: 14px !important;
 } 
