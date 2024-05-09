@@ -55,16 +55,16 @@ export class AppointmentComponent implements OnInit {
 
   displayedColumns = [
     'ProtocolNo',
-    'VisitTitle',
+    // 'VisitTitle',
     'SubjectName',
     'RegNoWithPrefix',
-    'PatientName',
+    // 'PatientName',
     // 'DVisitDate',
     // 'VisitTime',
-    'OPDNo',
+    // 'OPDNo',
     'Doctorname',
-    'RefDocName',
-    'PatientType',
+    // 'RefDocName',
+    // 'PatientType',
     // 'HospitalName',
     'buttons',
 

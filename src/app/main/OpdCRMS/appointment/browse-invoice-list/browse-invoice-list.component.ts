@@ -176,14 +176,16 @@ export class BrowseInvoiceListComponent implements OnInit {
   }
 
   NewBillpayment(contact) {
-
+console.log(contact)
     let PatientHeaderObj = {};
 
-  PatientHeaderObj['Date'] = this.datePipe.transform(contact.BillDate, 'MM/dd/yyyy') || '01/01/1900',
-  PatientHeaderObj['PatientName'] = contact.PatientName;
+  PatientHeaderObj['Date'] = this.datePipe.transform(contact.InvoiceDate, 'MM/dd/yyyy') || '01/01/1900',
+  PatientHeaderObj['ProtocolTitle'] = contact.ProtocolTitle;
 PatientHeaderObj['OPD_IPD_Id'] = contact.vOPIPId;
-PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt;
-PatientHeaderObj['BillId'] = contact.BillNo;
+PatientHeaderObj['NetPayAmount'] = contact.TotalAmount;
+PatientHeaderObj['BillId'] = contact.InvoiceId;
+console.log(PatientHeaderObj)
+
 
     const dialogRef = this._matDialog.open(PaymentDetailComponent,
       {

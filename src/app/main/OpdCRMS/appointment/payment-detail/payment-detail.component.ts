@@ -103,11 +103,16 @@ export class PaymentDetailComponent implements OnInit {
 debugger;
    
     if (this.advanceData.FromName == "OP-Bill") {
+      // this.netPayAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
+      // this.neftAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
+      // this.paidAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
+      // this.billNo = parseInt(this.advanceData.advanceObj.BillId);
+
       this.netPayAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
       this.neftAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
       this.paidAmt = parseInt(this.advanceData.advanceObj.NetPayAmount);
       this.billNo = parseInt(this.advanceData.advanceObj.BillId);
-
+      this.PatientName = this.advanceData.advanceObj.ProtocolTitle;
     }
    
     else {
@@ -689,7 +694,7 @@ debugger;
     if(this.balanceAmt==0){
     let Paymentobj = {};
          // Paymentobj['PaymentId'] = 0;
-      Paymentobj['BillNo'] = this.data.advanceObj.BillNo;
+      Paymentobj['BillNo'] =this.billNo;
       Paymentobj['ReceiptNo'] = 'Rec1';
       Paymentobj['PaymentDate'] = this.dateTimeObj.date;
       Paymentobj['PaymentTime'] = this.dateTimeObj.time;
