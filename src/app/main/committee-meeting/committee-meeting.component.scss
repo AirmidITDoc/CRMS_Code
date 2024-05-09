@@ -53,38 +53,23 @@
     border-radius: 50%;
   }
 
-  .box{
-    box-shadow: 1px 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
-    background-color:#fff;
-    border-radius: 5px;
-    margin-left: 10px;
-    width:95%;
-  }
-  
-  .box1{
-    box-shadow: 1px 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
-    background-color:#fff;
-    border-radius: 5px;
-  }
-  
   app-committee-meeting {
     .table1{
      height: 83vh !important;
     }
   .mat-header-row {
     width: 100%;
-    max-width: 1700px;
-    min-width: 1700px;  
     min-height: 20px;
-    border-radius: 2px;     
     padding: 2px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
   
   .mat-row {
     width: 100%;
     max-width: 1700px;
     min-width: 1700px;      
-    min-height: 20px;            
+    min-height: 20px;           
   }
 
   .mat-column-CommitteeMeetingId {

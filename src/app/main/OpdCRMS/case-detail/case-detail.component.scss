@@ -52,19 +52,21 @@
   .active-icon {
     border-radius: 50%;
   }
-  
+
   app-case-detail {
   
     .table1{
       height: 83vh !important;
+
     }
 
   .mat-header-row {
     width: 100%;
-    max-width: 1900px;
-    min-width: 1900px;  
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     min-height: 20px;   
-    border-radius: 2px;
+    max-width: 1900px;
+    min-width: 1900px; 
     padding: 5px;  
   }
   
@@ -81,7 +83,6 @@
     min-width: 60px;
   }
 
-  
   .mat-column-ProtocolNo {
     width: 140px; 
     max-width:140px;

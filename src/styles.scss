@@ -582,9 +582,9 @@ body { margin: 0; font-family: Roboto !important;zoom: 0.90; zoom: 90%; }
   }
   
   .box1{
-    box-shadow: 1px 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
-    background-color:#fff;
-    border-radius: 5px;
+    box-shadow: 6px 0 4px -4px #B2BABB, -6px 0 4px -4px #B2BABB; 
+   -moz-box-shadow: 6px 0 4px -4px #B2BABB, -6px 0 4px -4px #B2BABB; 
+   -webkit-box-shadow: 6px 0 4px -4px #B2BABB, -6px 0 4px -4px #B2BABB;
   }
   
   // // Button in header 
@@ -661,3 +661,12 @@ body { margin: 0; font-family: Roboto !important;zoom: 0.90; zoom: 90%; }
   .header{
     border-top-left-radius: 20px;
   }
+
+   .mat-paginator {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      color: white;
+      text-align: center;
+    }
