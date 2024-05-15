@@ -423,9 +423,14 @@
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
                                             <button mat-icon-button class="material-icons"
-                                                (click)="getRecord(contact,'Payment')" matTooltip="Payment">
+                                                (click)="ServicePaymentupdate(contact)" matTooltip="Payment">
                                                 <mat-icon>payment</mat-icon>
                                             </button>
+<!-- 
+                                            <button mat-icon-button class="material-icons"
+                                            (click)="getRecord(contact,'Payment')" matTooltip="Payment">
+                                            <mat-icon>payment</mat-icon>
+                                        </button> -->
                                         </mat-cell>
                                     </ng-container>
 
@@ -465,5 +470,3 @@
 </div>
 
 
-
-//

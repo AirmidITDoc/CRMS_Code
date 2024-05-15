@@ -53,4 +53,9 @@ export class CreditPaymentService {
     return this._httpClient.post("Generic/GetByProc?procName=Rtrv_StudyInformationCombo", {});
   }
 
+  
+  public PatientServicePaymentupdate(employee){
+    return this._httpClient.post("OutPatient/PatientservicePaymentUpdate", employee);
+  }
+  
 }

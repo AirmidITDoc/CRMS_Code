@@ -21,6 +21,7 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import * as converter from 'number-to-words';
 import { MatSelect } from '@angular/material/select';
+import { debug } from 'console';
 
 
 @Component({
@@ -184,7 +185,7 @@ export class BillDetailComponent implements OnInit {
     {
       this.selectedAdvanceObj = this.data.registerObj;
     }
-    this.getServiceListCombobox();
+    // this.getServiceListCombobox();
     this.getAdmittedDoctorCombo();
     this.getBillingClassCombo();
     this.getConcessionReasonList();
@@ -327,8 +328,9 @@ export class BillDetailComponent implements OnInit {
   }
 
   getServiceListCombobox() {
+    debugger
     var m_data = {
-      SrvcName: `${this.registeredForm.get('SrvcName').value}%`,
+      SrvcName: `${this.ServiceForm.get('SrvcName').value}%`,
       TariffId: this.selectedAdvanceObj.StudyId,
       ClassId: 1,//this.selectedAdvanceObj.ClassId
     };
@@ -349,6 +351,7 @@ export class BillDetailComponent implements OnInit {
   }
 
   getSelectedObj(obj) {
+    
     this.SrvcName = obj.ServiceName;
     this.b_price = obj.Price;
     this.b_totalAmount = obj.Price;
@@ -495,7 +498,8 @@ export class BillDetailComponent implements OnInit {
 
     this.dataSource.data.forEach((element) => {
       let chargesDetailInsert = {};
-
+debugger
+console.log(element)
       chargesDetailInsert['ChargesDate'] = this.datePipe.transform(this.currentDate, "MM-dd-yyyy"),
       chargesDetailInsert['opD_IPD_Type'] = 0,
       chargesDetailInsert['opD_IPD_Id'] = this.data.registerObj.VisitId

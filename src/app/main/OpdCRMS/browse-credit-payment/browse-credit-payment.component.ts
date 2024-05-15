@@ -16,6 +16,8 @@ import { ViewBillPaymentComponent } from './view-bill-payment/view-bill-payment.
 import { InvoiceBillMappingComponent } from '../appointment/invoice-bill-mapping/invoice-bill-mapping.component';
 
 import * as converter from 'number-to-words';
+import { ServicePaymentupdateComponent } from './service-paymentupdate/service-paymentupdate.component';
+import { ConcessionReasonMasterModule } from 'app/main/setup/billing/concession-reason-master/concession-reason-master.module';
 
 @Component({
   selector: 'app-browse-credit-payment',
@@ -190,12 +192,13 @@ export class BrowseCreditPaymentComponent implements OnInit {
   getBillDet(Param) {
     this.sIsLoading = 'loading';
     var D_data = {
-      "BillNo": Param.BillNo
+      "BillNo":Param.BillNo
     }
     setTimeout(() => {
       this.sIsLoading = 'loading';
       this._BrowseOPDBillsService.getBillDet(D_data).subscribe(Visit => {
         this.dsBillDet.data = Visit as BillDetails[];
+        console.log( this.dsBillDet.data)
         this.sIsLoading = this.dsBillDet.data.length == 0 ? 'no-data' : '';
         this.click = false;
       },
@@ -439,6 +442,23 @@ export class BrowseCreditPaymentComponent implements OnInit {
     });
   }
 
+  ServicePaymentupdate(contact){
+    console.log(contact)
+    this.advanceDataStored.storage = new BrowseOPDBill(contact);
+    const dialogRef = this._matDialog.open(ServicePaymentupdateComponent,
+      {
+        maxWidth: "70vw",
+        maxHeight: "50vh", width: '100%', height: "100%",
+        data:{
+          registerObj:contact
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed - Insert Action', result);
+    });
+  }
+
+
    getRecord(contact, m): void {
     console.log(contact);
     // this.VisitID = contact.VisitId;
@@ -450,6 +470,10 @@ export class BrowseCreditPaymentComponent implements OnInit {
       AgeYear = contact.AgeYear.trim();
     }
   }
+
+
+
+
 }
 
 
@@ -578,7 +602,8 @@ export class BillDetails {
   IndServiceName: number;
   IndServiceAmount: any;
   ChargesId: any;
-
+  UTINo:any;
+  Comments:any;
   /**
    * Constructor
    *
@@ -598,6 +623,9 @@ export class BillDetails {
       this.IndServiceName = BillDetails.IndServiceName || '';
       this.IndServiceAmount = BillDetails.IndServiceAmount || '';
       this.ChargesId = BillDetails.ChargesId || '';
+      this.UTINo = BillDetails.UTINo || '';
+      this.Comments = BillDetails.Comments || '';
+      
     }
   }
 
