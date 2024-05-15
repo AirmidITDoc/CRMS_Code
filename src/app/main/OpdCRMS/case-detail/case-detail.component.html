@@ -117,7 +117,7 @@
 
                                 </div> -->
                                 <mat-table #table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}"
-                                    class="table1" style="overflow: auto;overflow-y: auto;">
+                                    class="table1">
 
                                     <ng-container matColumnDef="ProtocolNo">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Protocol No.
@@ -125,6 +125,9 @@
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm style="margin-top: 1px;">
                                             {{contact.ProtocolNo}}
                                         </mat-cell>
+          
+          
+          
                                     </ng-container>
 
                                     <ng-container matColumnDef="ProtocolTitle">
@@ -289,8 +292,8 @@
                                   <mat-footer-row *matFooterRowDef="['noData']"
                                     [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
                                 </mat-table>
-
-                                <mat-paginator [pageSizeOptions]="[15,30, 45]" [pageSize]="15" showFirstLastButtons>
+                                 <hr>
+                                <mat-paginator [pageSizeOptions]="[15,30, 45]" [pageSize]="15" showFirstLastButtons class="box3">
                                 </mat-paginator>
                             </div>
                         </div>
@@ -306,7 +309,6 @@
     <!-- / CONTENT-->
 
 </div>
-
 
 
 //
