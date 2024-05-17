@@ -77,6 +77,9 @@ export class BrowseCreditPaymentComponent implements OnInit {
     'indBillNo',
     'IndServiceName',
     'IndServiceAmount',
+    'PaymentDate',
+    'UTINo',
+    'comments',
     'action'
   ];
 
@@ -447,8 +450,8 @@ export class BrowseCreditPaymentComponent implements OnInit {
     this.advanceDataStored.storage = new BrowseOPDBill(contact);
     const dialogRef = this._matDialog.open(ServicePaymentupdateComponent,
       {
-        maxWidth: "70vw",
-        maxHeight: "50vh", width: '100%', height: "100%",
+        maxWidth: "60vw",
+        maxHeight: "30vh", width: '100%', height: "100%",
         data:{
           registerObj:contact
         }

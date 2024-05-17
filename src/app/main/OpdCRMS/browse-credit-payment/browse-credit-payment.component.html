@@ -36,7 +36,8 @@
                 <div class="card box">
 
                     <!-- SIDEBAR HEADER -->
-                    <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center" style="margin-top: 1%;border-radius: 2px;">
+                    <div class="accent header p-12" fxLayout="row" fxLayoutAlign="start center"
+                        style="margin-top: 1%;border-radius: 2px;">
                         <!-- USER -->
                         <!-- <img [src]="user.avatar" class="avatar mr-16" [alt]="user.name" /> -->
                         <span class="h5" style="color: aliceblue;font-size: 17px;">Search Facility</span>
@@ -129,7 +130,8 @@
                         <div fxlayout="row">
                             <div style="width: 100%; overflow: hidden;">
                                 <mat-table #table matSort class="table1" [dataSource]="dataSource"
-                                    [@animateStagger]="{value:'50'}" style="overflow: hidden;width: 100%;overflow-y: auto;">
+                                    [@animateStagger]="{value:'50'}"
+                                    style="overflow: hidden;width: 100%;overflow-y: auto;">
 
                                     <!-- <ng-container matColumnDef="checkbox" sticky>
                                         <mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -145,7 +147,8 @@
                                     </ng-container> -->
 
                                     <ng-container matColumnDef="InterExtBill">
-                                        <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: white;">Final </mat-header-cell>
+                                        <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: white;">Final
+                                        </mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
                                             <mat-icon
                                                 style="font-size: 70px;width: 15px !important; height:10px !important;border-radius:100% ;"
@@ -156,16 +159,17 @@
 
 
                                     <ng-container matColumnDef="Payment">
-                                        <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: white;">PayStatus</mat-header-cell>
+                                        <mat-header-cell *matHeaderCellDef fxShow.gt-sm
+                                            style="color: white;">PayStatus</mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
                                             <!-- <mat-icon
                                                 style="font-size: 70px;width: 15px !important; height:15px !important;border-radius:100% ;"
                                                 *ngIf="contact.BalanceAmt > 0" matTooltip="Payment Balance" (click)="NewBillpayment(contact)"
                                                 style="background-color: #f55f5a;">circle</mat-icon> -->
 
-                                                <mat-icon *ngIf="contact.BalanceAmt !=0 " matTooltip=" Settlement "
+                                            <mat-icon *ngIf="contact.BalanceAmt !=0 " matTooltip=" Settlement "
                                                 (click)="NewBillpayment(contact)">payment
-                                                 </mat-icon>
+                                            </mat-icon>
                                         </mat-cell>
                                     </ng-container>
 
@@ -299,8 +303,7 @@
                                     </mat-header-row>
                                     <mat-row *matRowDef="let contact; columns: displayedColumns;"
                                         [ngClass]="contact.PatientType !== 'Self' ? 'self-row' : ''"
-                                        (click)="getBillDet(contact)"
-                                        [@animate]="{value:'*',params:{y:'100%'}}">
+                                        (click)="getBillDet(contact)" [@animate]="{value:'*',params:{y:'100%'}}">
                                     </mat-row>
                                     <mat-footer-row *matFooterRowDef="['loading']"
                                         [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
@@ -315,10 +318,12 @@
                         <div fxlayout="row">
                             <div style="width: 100%; overflow: hidden;">
                                 <mat-table #table matSort class="table1" [dataSource]="dsBillDet"
-                                    [@animateStagger]="{value:'50'}" style="overflow: hidden;width: 100%;overflow-y: auto;">
+                                    [@animateStagger]="{value:'50'}"
+                                    style="overflow: hidden;width: 100%;overflow-y: auto;">
 
                                     <ng-container matColumnDef="ServiceName">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>ServiceName
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
+                                            fxShow.gt-md>ServiceName
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
                                             {{contact.ServiceName}}
@@ -348,7 +353,7 @@
                                             {{contact.TotalAmt}}
                                         </mat-cell>
                                     </ng-container>
-                                    
+
                                     <ng-container matColumnDef="indBillNo">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>indBillNo
                                         </mat-header-cell>
@@ -373,21 +378,27 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <!-- <ng-container matColumnDef="RegNo">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Reg No
+                                    <ng-container matColumnDef="PaymentDate">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>PaymentDate
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                            {{contact.RegNo}}
+                                            {{contact.PaymentDate  | date:'shortDate'}}
                                         </mat-cell>
                                     </ng-container>
-                                    <ng-container matColumnDef="PatientName">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Patient Name
+                                    <ng-container matColumnDef="UTINo">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>UTINo
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                            {{contact.PatientName}}
+                                            {{contact.UTINo}}
                                         </mat-cell>
-                                    </ng-container> -->
-
+                                    </ng-container>
+                                    <ng-container matColumnDef="comments">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>comments
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                            {{contact.comments}}
+                                        </mat-cell>
+                                    </ng-container>
 
                                     <!-- <ng-container matColumnDef="TotalAmt">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Total
@@ -423,10 +434,14 @@
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
                                             <button mat-icon-button class="material-icons"
+                                                matTooltip="Bill Mapping">
+                                                <mat-icon>360</mat-icon>
+                                            </button>
+                                            <button mat-icon-button class="material-icons"
                                                 (click)="ServicePaymentupdate(contact)" matTooltip="Payment">
                                                 <mat-icon>payment</mat-icon>
                                             </button>
-<!-- 
+                                            <!-- 
                                             <button mat-icon-button class="material-icons"
                                             (click)="getRecord(contact,'Payment')" matTooltip="Payment">
                                             <mat-icon>payment</mat-icon>
@@ -444,7 +459,8 @@
                                         </mat-header-cell>
                                     </ng-container>
 
-                                    <mat-header-row class="accent" *matHeaderRowDef="displayedColumnsBillDetails; sticky: true">
+                                    <mat-header-row class="accent"
+                                        *matHeaderRowDef="displayedColumnsBillDetails; sticky: true">
                                     </mat-header-row>
                                     <mat-row *matRowDef="let contact; columns: displayedColumnsBillDetails;"
                                         [@animate]="{value:'*',params:{y:'100%'}}">
@@ -468,5 +484,3 @@
     <!-- / CONTENT-->
 
 </div>
-
-

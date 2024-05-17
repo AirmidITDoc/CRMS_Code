@@ -16,15 +16,6 @@
                 <div style="padding: 7px;">
                     <form [formGroup]="serviceFormGroup">
                         <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-
-                            <!-- <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>ChargesId</mat-label>
-                                <input name="ChargesId" formControlName="ChargesId" placeholder="ChargesId" matInput [(ngModel)]="vChargesId"
-                                    required type="text">
-                               
-                            </mat-form-field> -->
-
-                        
                               <mat-form-field appearance="outline">
                                 <input matInput [matDatepicker]="validFromPicker" formControllName="PaymentDate">
                                 <mat-datepicker-toggle matSuffix [for]="validFromPicker"></mat-datepicker-toggle>
@@ -37,22 +28,22 @@
                                     type="text" required>
                                
                             </mat-form-field>
-
-                        </div>
-                        <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
-
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Comments</mat-label>
                                 <input name="Comments" formControlName="Comments" placeholder="Comments" matInput  [(ngModel)]="vComments">
                             </mat-form-field>
 
-                          
-                        </div>
 
-                       
+                        </div>
+                        <!-- <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>Comments</mat-label>
+                                <input name="Comments" formControlName="Comments" placeholder="Comments" matInput  [(ngModel)]="vComments">
+                            </mat-form-field>
+                        </div> -->
 
                         <div style="float: right;margin-top: 20px;">
-                          
                             <button class="next-btn" color="accent" (click)="onSubmit()" [disabled]="serviceFormGroup.invalid"
                               style="border-radius: 16px;width: 82px; height: 35px;font-size: 14px;padding-top: 8px;padding-left: 2px;">
                               <span style="display: flex;justify-content: center;">
@@ -72,4 +63,4 @@
     </div>
 </div>
 
-<div id="snackbar">{{snackmessage}}</div>
+<!-- <div id="snackbar">{{snackmessage}}</div> -->

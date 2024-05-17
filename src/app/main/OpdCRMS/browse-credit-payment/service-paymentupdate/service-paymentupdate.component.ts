@@ -22,15 +22,15 @@ export class ServicePaymentupdateComponent implements OnInit {
   submitted = false;
   now = Date.now();
   isLoading: any;
-  vChargesId:any=0;
-  
-  vUTINo:any=0
-  vComments:any=''
-  vPaymentDate=new Date().toISOString();
-  screenFromString = 'admission-form';
-  registerObj:BillDetails;
+  vChargesId: any = 0;
 
-  
+  vUTINo: any = 0
+  vComments: any = ''
+  vPaymentDate = new Date().toISOString();
+  screenFromString = 'admission-form';
+  registerObj: BillDetails;
+
+
   constructor(public _CreditPaymentService: CreditPaymentService,
     private formBuilder: FormBuilder,
     private accountService: AuthenticationService,
@@ -48,57 +48,45 @@ export class ServicePaymentupdateComponent implements OnInit {
     this.serviceFormGroup = this.createServiceForm();
     if (this.data) {
       this.registerObj = this.data.registerObj;
-
-      if(this.registerObj.UTINo !=null)
-      this.vUTINo= this.registerObj 
-      
-      if(this.registerObj.ChargesId !=null)
-      this.vChargesId= this.registerObj.ChargesId;
-      if(this.registerObj.Comments !=null)
-      this.vComments=this.registerObj.Comments 
-
-    //  this.PaymentDate=this.registerObj.Comments 
+      if (this.registerObj.UTINo != null)
+        this.vUTINo = this.registerObj
+      if (this.registerObj.ChargesId != null)
+        this.vChargesId = this.registerObj.ChargesId;
+      if (this.registerObj.Comments != null)
+        this.vComments = this.registerObj.Comments
     }
-
- 
   }
-
 
   closeDialog() {
-    
-     this.dialogRef.close();
+    this.dialogRef.close();
     this.serviceFormGroup.reset();
   }
-  
+
   createServiceForm() {
     return this.formBuilder.group({
-      ChargesId:[''],
-      PaymentDate:[(new Date()).toISOString()],
-      UTINo:[''],
-      Comments:['']	
+      ChargesId: [''],
+      PaymentDate: [(new Date()).toISOString()],
+      UTINo: [''],
+      Comments: ['']
 
     });
   }
 
-
-
   dateTimeObj: any;
   getDateTime(dateTimeObj) {
-    
     this.dateTimeObj = dateTimeObj;
   }
 
   onSubmit() {
 
     this.isLoading = 'submit';
-debugger
+    debugger
     var m_data = {
       "patientServicepayupdate": {
-        "chargesId": this.serviceFormGroup.get('ChargesId').value || 0,
+        "chargesId": this.vChargesId || 0,
         "utiNo": this.serviceFormGroup.get('UTINo').value || '',
-        "paymentDate":  this.serviceFormGroup.get('PaymentDate').value || this.vPaymentDate,
+        "paymentDate": this.serviceFormGroup.get('PaymentDate').value || this.vPaymentDate,
         "comments": this.serviceFormGroup.get('Comments').value || '',
-       
       }
     }
     console.log(m_data);
@@ -107,9 +95,7 @@ debugger
         Swal.fire('Patient Service Payment Updated !', 'Update Successfully !', 'success').then((result) => {
           if (result.isConfirmed) {
             this._matDialog.closeAll();
-
           }
-
         });
       } else {
         Swal.fire('Error !', 'Patient Service Payment not saved', 'error');
@@ -129,9 +115,9 @@ debugger
 
 
 export class MemberDetail {
-  MemberId:any;
-  FirstName:any;
-  MiddleName:any;
+  MemberId: any;
+  FirstName: any;
+  MiddleName: any;
   LastName: any;
   Member_Address: any;
   CityId: any;
@@ -141,7 +127,7 @@ export class MemberDetail {
   StudyAmount: any;
 
 
-  
+
   /**
    * Constructor
    *
@@ -160,7 +146,7 @@ export class MemberDetail {
       this.MobileNo = MemberDetail.MobileNo || '';
       this.EmailId = MemberDetail.EmailId || '';
       this.StudyAmount = MemberDetail.StudyAmount || '';
-   
+
     }
   }
 
