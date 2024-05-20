@@ -1,20 +1,15 @@
 <div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
-    <!-- HEADER -->
-    <mat-toolbar class="accent" style="height:50px; justify-content: space-between;width: 100%">
-        <!-- ;background-color:rgb(18, 87, 134) !important; -->
-        <div fxLayout="row" fxLayoutAlign="start center">
-
-            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
-                style="color: aliceblue;">
-                Study Wise Department Detail
+    <mat-toolbar class="accent" style="height:40px; justify-content: space-between;width: 100%;">
+        <div fxLayout="row" fxLayoutALign="start center">
+            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" style="color: white;">
+                Study Distribution Information 
+                <!-- : {{vTitle}} -->
             </span>
         </div>
-        <button (click)="exportStusywisedeptdetailReportExcel()" [disabled]="! (dataSource.data.length > 0)"
-            style="background-color: white;color: white;width: 45px;margin-left: 40%;">
-            <img width="32" height="10px" src="assets/images/logos/xls.png">
-        </button>&nbsp;
+        <button mat-icon-button (click)="onClose()" tabIndex="-1" aria-label="Close dialog">
+            <mat-icon>close</mat-icon>
+        </button>
     </mat-toolbar>
-    <!-- / HEADER -->
 
     <!-- SELECTED BAR -->
     <app-main class="accent-600" *ngIf="hasSelectedContacts" [@slideInTop]></app-main>
@@ -34,23 +29,38 @@
                     <div fxFlex.gt-sm="100%" fxFlex>
 
                         <div fxlayout="row">
+                            <div class="info-badge-top pb-2 border-bottom">
+                                <!-- "pill" class is used for rounded border -->
+                                <div fxLayout="row" fxLayoutAlign="space-around" class="gap-8">
+                                    <div style="color: blue;" fxLayout="row" fxLayoutAlign="start center" class="gap-4">
+                                        <span class="blue-600-fg"> Invoice Number :
+                                            {{this.dataSource.data[0].InvoiceNumber}} </span>
+                                    </div>
+                                    <div style="color: blue;" fxLayout="row" fxLayoutAlign="start center" class="gap-4">
+                                        <span class="blue-600-fg"> invoice Date :
+                                            {{this.dataSource.data[0].InvoiceDate | date:'shortDate'}} </span>
+                                    </div>
+                                    <div style="color: green" fxLayout="row" fxLayoutAlign="start center" class="gap-4">
+                                        <span class="green-600-fg"> Invoice Amount :
+                                            {{this.dataSource.data[0].TaxableAmount}}</span>
+                                    </div>
+                                </div>
+                            </div>
                             <div style="width: 100%; overflow: hidden;">
                                 <mat-table #table matSort class="table1" [dataSource]="dataSource"
                                     [@animateStagger]="{value:'50'}" style="overflow: auto;width: 100%;">
 
                                     <ng-container matColumnDef="chkBalanceAmt">
                                         <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: white;">Credit
-
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
-
                                             <mat-icon *ngIf="contact.TotalAmount !=0 " matTooltip=" Settlement "
                                                 (click)="NewBillpayment(contact)">payment
                                             </mat-icon>
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="InvoiceNumber">
+                                    <!-- <ng-container matColumnDef="InvoiceNumber">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>InvoiceId
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
@@ -64,20 +74,38 @@
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                             {{contact.InvoiceDate | date:'shortDate'}}
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
 
-                                    <ng-container matColumnDef="TaxableAmount">
+                                    <!-- <ng-container matColumnDef="TaxableAmount">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>TaxableAmount
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
                                             {{contact.TaxableAmount}}
                                         </mat-cell>
-                                    </ng-container>
+                                    </ng-container> -->
                                     <ng-container matColumnDef="ServiceName">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>ServiceName
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm class="w-230 border-right">ServiceName
                                         </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm class="w-230 border-right">
                                             {{contact.ServiceName}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="TotalAmount">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
+                                            TotalAmount
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md class="border-right">
+                                            {{contact.ServiceTotalAmount | currency:"INR":"symbol"}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="HospCharges">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
+                                            HospCharges
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md class="border-right">
+                                            {{contact.HospCharges | currency:"INR":"symbol"}}
                                         </mat-cell>
                                     </ng-container>
 
@@ -85,8 +113,8 @@
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>
                                             FinalAmt
                                         </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.FinalAmt}}
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md class="border-right">
+                                            {{contact.FinalAmt | currency:"INR":"symbol"}}
                                         </mat-cell>
                                     </ng-container>
 
@@ -95,56 +123,9 @@
                                             Percentage
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.Percentage}}
+                                            {{contact.Percentage}}%
                                         </mat-cell>
                                     </ng-container>
-                                    <!-- <ng-container matColumnDef="Principle_Investigator_DOC">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Principle_Investigator_DOC
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.Principle_Investigator_DOC}}
-                                        </mat-cell>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="Principle_Investigator_SMO">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Principle_Investigator_SMO
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.Principle_Investigator_SMO}}
-                                        </mat-cell>
-                                    </ng-container>
-                                    <ng-container matColumnDef="Patient_Reimbursement">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Patient_Reimbursement
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.Patient_Reimbursement}}
-                                        </mat-cell>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="Institutional_Over_Head">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md>Institutional_Over_Head
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.Institutional_Over_Head}}
-                                        </mat-cell>
-                                    </ng-container> -->
-
-
-                                    <!-- <ng-container matColumnDef="action" stickyEnd>
-                                        <mat-header-cell *matHeaderCellDef style="color: white;">Action
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact">
-
-                                            <button mat-icon-button (click)="getPrint(contact)" matTooltip="print">
-                                                <mat-icon>print</mat-icon>
-                                            </button>
-
-                                        </mat-cell>
-                                    </ng-container> -->
 
                                     <ng-container matColumnDef="noData">
                                         <mat-footer-cell *matFooterCellDef colspan="6">
@@ -175,6 +156,48 @@
                     </div>
                 </div>
             </div>
+
+            <!-- <div class="sidebar-footer">
+                <div class="bill-summary px-12">
+                    <div class="bill-summary-title py-8 border-bottom">
+                        <span class="h3 font-weight-600">Bill Summary </span>
+                    </div>
+                    <div class="bil-summary-list px-4 mt-8">
+                        <ul class="gap-4 list-basic" fxLayout="column">
+                            <li>
+                                <div class="list-item">
+                                    <span class="list-item-key">Invoice Amount :</span>
+                                    <span class="list-item-value">{{this.dataSource.data[0].TaxableAmount}} </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="list-item">
+                                    <span class="list-item-key">GST Amount :</span>
+                                    <span class="list-item-value">{{this.dataSource.data[0].TotalAmount}}</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="list-item">
+                                    <span class="list-item-key">Total Amount :</span>
+                                    <span class="list-item-value">{{this.dataSource.data[0].TotalAmount}}</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="list-item">
+                                    <span class="list-item-key">Payment Remain :</span>
+                                    <span class="list-item-value"> 0</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="list-item">
+                                    <span class="list-item-key">Pharmacy Amount :</span>
+                                    <span class="list-item-value"> 0</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div> -->
             <!-- / CONTENT -->
 
         </div>

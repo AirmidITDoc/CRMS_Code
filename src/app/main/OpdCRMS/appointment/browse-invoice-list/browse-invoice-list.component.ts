@@ -60,7 +60,7 @@ export class BrowseInvoiceListComponent implements OnInit {
 
     // 'InvoiceId',
     'chkBalanceAmt',
-    'CaseId',
+    // 'CaseId',
     'ProtocolNo',
     // 'ProtocolTitle',
     'InvoiceTime',
@@ -97,38 +97,13 @@ export class BrowseInvoiceListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCasecombo();
-
     if (this._ActRoute.url == '/opd/payment') {
       this.menuActions.push('Approval');
-
     }
-
-    
-    var D_data = {
-      
-      "FromDate":this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '2023-07-28 00:00:00.000',
-      "ToDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '2023-07-28 00:00:00.000',
-      "StudyId": this._InvoiceBilllsService.myFilterform.get("StudyId").value.StudyId || 0
-    }
-    console.log(D_data)
-    setTimeout(() => {
-      this.sIsLoading = 'loading-data';
-      this._InvoiceBilllsService.getBrowseInvoiceBillsList(D_data).subscribe(Visit => {
-        this.dataSource.data = Visit as InvoiceBilll[];
-        this.dataSource.sort = this.sort;
-                this.dataSource.paginator = this.paginator;
-        this.sIsLoading = '';
-        this.click = false;
-      },
-        error => {
-          this.sIsLoading = '';
-        });
-    }, 1000);
-
-    this.onClear();
+    this.getInvoiceBilllsList();
   }
 
-  
+
 
 
   getCasecombo() {
@@ -176,17 +151,13 @@ export class BrowseInvoiceListComponent implements OnInit {
   }
 
   NewBillpayment(contact) {
-console.log(contact)
     let PatientHeaderObj = {};
-
-  PatientHeaderObj['Date'] = this.datePipe.transform(contact.InvoiceDate, 'MM/dd/yyyy') || '01/01/1900',
-  PatientHeaderObj['ProtocolTitle'] = contact.ProtocolTitle;
-PatientHeaderObj['OPD_IPD_Id'] = contact.vOPIPId;
-PatientHeaderObj['NetPayAmount'] = contact.TotalAmount;
-PatientHeaderObj['BillId'] = contact.InvoiceId;
-console.log(PatientHeaderObj)
-
-
+    PatientHeaderObj['Date'] = this.datePipe.transform(contact.InvoiceDate, 'MM/dd/yyyy') || '01/01/1900',
+    PatientHeaderObj['ProtocolTitle'] = contact.ProtocolTitle;
+    PatientHeaderObj['OPD_IPD_Id'] = contact.vOPIPId;
+    PatientHeaderObj['NetPayAmount'] = contact.TotalAmount;
+    PatientHeaderObj['BillId'] = contact.InvoiceId;
+    console.log(PatientHeaderObj)
     const dialogRef = this._matDialog.open(PaymentDetailComponent,
       {
         maxWidth: "100vw",
@@ -197,29 +168,20 @@ console.log(PatientHeaderObj)
           FromName: "OP-Bill"
         }
       });
-
-   
-         
-    }
-getstudydeptdetail(contact){
-
-  const dialogRef=this._matDialog.open(StudywisedeptdetailComponent,
-    {
-      maxWidth: "95vw",
-      height: '700px',
-      width: '100%',
-      data: {
-        registerObj: contact
-        
-      }
-    });
-}
+  }
+  getstudydeptdetail(contact) {
+    const dialogRef = this._matDialog.open(StudywisedeptdetailComponent,
+      {
+        maxWidth: "95vw",
+        height: '700px',
+        width: '100%',
+        data: {
+          registerObj: contact
+        }
+      });
+  }
 
   onClear() {
-
-    // this._InvoiceBilllsService.myFilterform.get('FirstName').reset('');
-    // this._InvoiceBilllsService.myFilterform.get('LastName').reset('');
-    // this._InvoiceBilllsService.myFilterform.get('RegNo').reset('');
     this._InvoiceBilllsService.myFilterform.get('StudyId').reset('');
   }
 
@@ -229,8 +191,6 @@ getstudydeptdetail(contact){
     this.sIsLoading = 'loading';
     var D_data = {
       "StudyId": this._InvoiceBilllsService.myFilterform.get("StudyId").value.StudyId || 0,
-      "FromDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "ToDate": this.datePipe.transform(this._InvoiceBilllsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900'
     }
     setTimeout(() => {
       this.sIsLoading = 'loading';
@@ -245,11 +205,10 @@ getstudydeptdetail(contact){
           this.sIsLoading = '';
         });
     }, 1000);
-    this.onClear();
   }
 
 
-  InvoiceGenerate(){
+  InvoiceGenerate() {
     const dialogRef = this._matDialog.open(InvoiceBillMappingComponent,
       {
         maxWidth: "85%",
@@ -261,47 +220,35 @@ getstudydeptdetail(contact){
       });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed - Insert Action', result);
-      // this.getVisitList();
+      this.getInvoiceBilllsList();
     });
   }
-
-
 
   transform2(value: string) {
     var datePipe = new DatePipe("en-US");
     value = datePipe.transform((new Date), 'dd/MM/yyyy h:mm a');
     return value;
   }
- 
 
   convertToWord(e) {
     // this.numberInWords= converter.toWords(this.mynumber);
     // return converter.toWords(e);
   }
   // GET DATA FROM DATABASE 
-  TotalNetAmt:any=0;
- 
+  TotalNetAmt: any = 0;
+
   getPrint(el) {
     var D_data = {
-          "InvoiceId": el.InvoiceId,
-          "StudyId": el.CaseId
-        }
-      console.log(D_data)
-      this._InvoiceBilllsService.getPrintInvoice(D_data).subscribe(data => {
+      "InvoiceId": el.InvoiceId,
+      "StudyId": el.CaseId
+    }
+    console.log(D_data)
+    this._InvoiceBilllsService.getPrintInvoice(D_data).subscribe(data => {
       this.reportPrintObjList = data as InvoiceBilll[];
       setTimeout(() => {
         this.print3();
       }, 1000);
-      })
-
-    //     for (let i = 0; i < 10; i++) {
-    //     this.reportPrintObj = data[0] as InvoiceBilll;
-    //     this.TotalNetAmt += data[i].Total;
-
-    //     console.log(this.reportPrintObjList);
-      
-    //   }
-    // })
+    })
   }
 
   print3() {
@@ -342,7 +289,7 @@ getstudydeptdetail(contact){
   }
 
   getViewbill(contact) {
-    
+
     let xx = {
 
       RegNo: contact.RegId,
@@ -394,43 +341,34 @@ getstudydeptdetail(contact){
 
 
   getRecord(contact): void {
-    debugger
     if (contact.ApprovalStatus == 0) {
       Swal.fire({
         title: 'Do you want to Approve the Invoice ',
-        // showDenyButton: true,
         showCancelButton: true,
         confirmButtonText: 'OK',
 
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
-let Appby= this.accountService.currentUserValue.user.id;
+        let Appby = this.accountService.currentUserValue.user.id;
 
-var datePipe = new DatePipe("en-US");
-let date = datePipe.transform((new Date), "yyyy-MM-dd");
+        var datePipe = new DatePipe("en-US");
+        let date = datePipe.transform((new Date), "yyyy-MM-dd");
 
-     
         if (result.isConfirmed) {
           let Query = "Update T_InvoiceDetails set ApprovalStatus = 'OK',ApprovedBy= " + Appby + " ,ApprovedDate = " + date + " where InvoiceId=" + contact.InvoiceId + " ";
           console.log(Query)
           this._InvoiceBilllsService.ApprovedInvoice(Query).subscribe(data => {
-                
-                Swal.fire("Invoice is Approved Successfully")
-                this.InvoiceBilllsList();
+          Swal.fire("Invoice is Approved Successfully")
+          this.InvoiceBilllsList();
           });
         }
 
       })
 
-    }else{
+    } else {
       Swal.fire("Invoice is Already Approved Successfully")
     }
-
-
   }
-
-  // /   this._ActRoute.navigate(['opd/appointment/op_bill'], {queryParams:{id:this.selectedID}})
-
 }
 
 
@@ -455,8 +393,8 @@ export class InvoiceBilll {
   BillNo: any;
   InvoiceNumber: any;
   CaseId: any;
-  ProtocolNo:any;
-  ProtocolTitle:any;
+  ProtocolNo: any;
+  ProtocolTitle: any;
   InvoiceDate: any;
   InvoiceTime: any;
   TaxableAmount: any;
@@ -469,13 +407,13 @@ export class InvoiceBilll {
   ApprovedDate: any;
   InvoiceStatus: any;
 
-  
+
   ServiceName: any;
   FinalAmt: any;
   // Patient Reimbursement: any;
   // Principle Investigator (DOC): any;
   // Principle Investigator (SMO): any;
-  
+
   /**
    * Constructor
    *
@@ -489,7 +427,7 @@ export class InvoiceBilll {
       this.CaseId = InvoiceBilll.CaseId || '';
       this.ProtocolNo = InvoiceBilll.ProtocolNo || '';
       this.ProtocolTitle = InvoiceBilll.ProtocolTitle || '';
-    
+
       this.InvoiceDate = InvoiceBilll.InvoiceDate || '';
       this.InvoiceTime = InvoiceBilll.InvoiceTime || '';
       this.TaxableAmount = InvoiceBilll.TaxableAmount || '';

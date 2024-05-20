@@ -1,8 +1,3 @@
-
-
-import { PathologyDashboardComponent } from './pathology-dashboard/pathology-dashboard.component';
-import { RadiologyDashboardComponent } from './radiology-dashboard/radiology-dashboard.component';
-import { CashlessDashboardComponent } from './cashless-dashboard/cashless-dashboard.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -47,13 +42,15 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTreeModule } from '@angular/material/tree';
+import { StudyDashboardComponent } from './study-dashboard/study-dashboard.component';
 
 
 
 @NgModule({
   declarations: [
     DailyDashboardComponent,
-    CaseIdDetailComponent
+    CaseIdDetailComponent,
+    StudyDashboardComponent
   ],
   imports: [
     CommonModule,
@@ -77,7 +74,7 @@ import { MatTreeModule } from '@angular/material/tree';
     MatPaginatorModule,
     MatButtonModule,
     MatCheckboxModule,
-       MatInputModule,
+    MatInputModule,
    
     MatRippleModule,
     MatToolbarModule,

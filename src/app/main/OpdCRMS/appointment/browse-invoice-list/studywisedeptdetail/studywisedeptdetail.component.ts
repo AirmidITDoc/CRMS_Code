@@ -21,33 +21,26 @@ import { fuseAnimations } from '@fuse/animations';
 })
 export class StudywisedeptdetailComponent implements OnInit {
   click: boolean = false;
-  caseList:any=[];
+  caseList: any = [];
   hasSelectedContacts: boolean;
-
-
-  
   displayedColumns = [
-    'InvoiceNumber',
-    'InvoiceDate',
-    'TaxableAmount',
-    // 'TotalAmount',
+    // 'InvoiceNumber',
+    // 'InvoiceDate',
+    // 'TaxableAmount',
     'ServiceName',
-    // 'Principle_Investigator_DOC',
-    // 'Principle_Investigator_SMO',
-    // 'Patient_Reimbursement',
-    // 'Institutional_Over_Head',
+    'TotalAmount',
+    'HospCharges',
     'FinalAmt',
     'Percentage',
-    // 'action'
   ];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  dataSource=new MatTableDataSource<InvoiceBilll>();
+  dataSource = new MatTableDataSource<InvoiceBilll>();
   sIsLoading: string = '';
   showSpinner = false;
-  PatientHeaderObj:any;
-  vInvoiceId:any;
-  vStudyId:any;
+  PatientHeaderObj: any;
+  vInvoiceId: any;
+  vStudyId: any;
 
   constructor(private _fuseSidebarService: FuseSidebarService,
     public _InvoiceBilllsService: InvoiceBillService,
@@ -58,31 +51,23 @@ export class StudywisedeptdetailComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public _matDialog: MatDialog,
     private advanceDataStored: AdvanceDataStored,) { }
- 
+
   ngOnInit(): void {
     this.getCasecombo();
-  
     if (this.data) {
-      debugger
       this.PatientHeaderObj = this.data.registerObj;
-      console.log(this.PatientHeaderObj);
-      this.vStudyId= this.PatientHeaderObj.CaseId;
+      this.vStudyId = this.PatientHeaderObj.StudyId;
       this.vInvoiceId = this.PatientHeaderObj.InvoiceId;
+      console.log(this.PatientHeaderObj);
     }
     this.getStudytdeptdetail();
   }
-  
 
   getCasecombo() {
-
     this._InvoiceBilllsService.getCaseIDCombo().subscribe(data => {
       this.caseList = data;
-      // this.selectedcase = this.caseList[0].CaseId;
-
     });
-
   }
-
 
   exportStusywisedeptdetailReportExcel() {
     // this.sIsLoading == 'loading-data'
@@ -93,47 +78,49 @@ export class StudywisedeptdetailComponent implements OnInit {
   }
 
 
-  getStudytdeptdetail(){
-   debugger
+  getStudytdeptdetail() {
     var D_data = {
-      "StudyId ":this.vStudyId || 0,
-      "InvoiceId":this.vInvoiceId || 0,
+      "StudyId ": this.vStudyId || 0,
+      "InvoiceId": this.vInvoiceId || 0,
     }
     setTimeout(() => {
       // this.sIsLoading = 'loading';
       this._InvoiceBilllsService.getBrowsestudydeptdetailList(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as InvoiceBilll[];
-        console.log(this.dataSource.data )
+        console.log(this.dataSource.data)
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         // this.sIsLoading = this.dataSource.data.length == 0 ? 'no-data' : '';
-        
+
       },
         error => {
           this.sIsLoading = '';
         });
     }, 1000);
-    // this.onClear();
+  }
+
+  onClose() {
+    this._matDialog.closeAll();
   }
 
   onShow(event: MouseEvent) {
-   
-  this.click = !this.click;
-  setTimeout(() => {
-    {
-      this.sIsLoading = 'loading-data';
-      this.getStudytdeptdetail();
-    }
-  }, 1000);
-  
-  this.click = true;
-  
+
+    this.click = !this.click;
+    setTimeout(() => {
+      {
+        this.sIsLoading = 'loading-data';
+        this.getStudytdeptdetail();
+      }
+    }, 1000);
+
+    this.click = true;
+
   }
-  getPrint(row){
+  getPrint(row) {
 
   }
 
-  onClear(){}
+  onClear() { }
 }
 
 

@@ -1,4 +1,6 @@
+$layout-gap: 12px;
 .page-layout {
+    width: 100%;
     .center {
         .header {
             .welcome-message {
@@ -22,6 +24,10 @@
         justify-content: space-between;
         align-items: center;
         padding: 8px 16px;
+        @include themed() {
+            background-color: t($ngt-primary);
+            color: t($ngt-primary-text);
+        }
         .top-header-info {
             display: flex;
             justify-content: start;
@@ -30,13 +36,16 @@
             .top-header-title {
                 @include font-size(17px);
             }
-            .common-date-container{
+            .common-date-container {
                 display: flex;
                 align-items: center;
                 gap: 8px;
             }
         }
-        .date-time-container {
+        .top-header-right {
+        }
+        .date-time-container,
+        .comman-date-container {
             .mat-form-field {
                 .mat-form-field-wrapper {
                     margin: 0;
@@ -69,25 +78,26 @@
             @include font-size(17px);
         }
     }
-    .patient-info-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .patient-col {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            @include font-size(14px);
-            .patient-col-key {
-                font-weight: 700;
-            }
-            .patient-col-value {
-            }
+    .layout-body {
+        &.with-sidebar {
+            display: grid;
+            grid-template-columns: auto 1fr;
+        }
+        .layout-body-container {
+            padding: $layout-gap;
         }
     }
-    &.grid-container{
-     display: grid;   
-     grid-template-rows: 45px auto;
-     height: 100%;
+    .layout-footer {
+        padding: 0 $layout-gap $layout-gap $layout-gap;
+        .layout-footer-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+    }
+    &.grid-container {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        height: 100%;
     }
 }

@@ -9,23 +9,23 @@ export class DashboardService {
   constructor(public _httpClient:HttpClient,
     private _formBuilder: FormBuilder) { }
 
-  public getDailyDashboardSummary()
-  {
-    return this._httpClient.post("Generic/GetByProc?procName=rptDailyDashboardSummary",{})
+  public getDailyDashboardSummary() {
+    return this._httpClient.post("Generic/GetByProc?procName=rptDailyDashboardSummary", {})
   }
 
-  // public getOPDashChart(params)
-  // {
-  //   return this._httpClient.post("Generic/GetByProc?procName=rptOP_DepartmentChart_Range", params)
-  // }
+  public getDash_StudyInvoiceInformation(params) {
+    return this._httpClient.post("Generic/GetByProc?procName=rtrv_Dash_StudyInvoiceInformation", params)
+  }
 
-  // public getIPDashChart(params)
-  // {
-  //   return this._httpClient.post("Generic/GetByProc?procName=rptIP_DepartmentChart_Range", params)
-  // }
-
+  public getDash_StudySubjectCount(params) {
+    return this._httpClient.post("Generic/GetByProc?procName=rtrv_Dash_StudySubjectCount", params)
+  }
   
-public getCaseIDCombo(D_data){
-  return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CaseWisePatientSummary", D_data);
-}
+  public getDash_PatientVisitInfo(params) {
+    return this._httpClient.post("Generic/GetByProc?procName=rtrv_Dash_PatientVisitInfo", params)
+  }
+
+  public getCaseIDCombo(D_data) {
+    return this._httpClient.post("Generic/GetByProc?procName=Rtrv_CaseWisePatientSummary", D_data);
+  }
 }

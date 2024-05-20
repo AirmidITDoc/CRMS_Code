@@ -62,8 +62,8 @@ export class DailyDashboardComponent implements OnInit {
     console.log(element);
     const dialogRef = this._matDialog.open(CaseIdDetailComponent,
       {
-        maxWidth: "65vw",
-        height: '600px',
+        maxWidth: "90vw",
+        height: '80%',
         width: '100%',
         data : {
           element : element,
