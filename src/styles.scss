@@ -592,6 +592,13 @@ body { margin: 0; font-family: Roboto !important;zoom: 0.90; zoom: 90%; }
    -webkit-box-shadow: 6px 0 4px -4px #B2BABB, -6px 0 4px -4px #B2BABB;
   }
   
+
+  .boxdashboard{
+    box-shadow:  0 0 5px  #B2BABB,  0 0 5px  #B2BABB; 
+   -moz-box-shadow:  0 0 5px  #B2BABB,  0 0 5px #B2BABB; 
+   -webkit-box-shadow:  0 0 5px  #B2BABB,  0 0 5px  #B2BABB;
+  }
+
   // // Button in header 
 
   // .headerbutton{
