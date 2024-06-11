@@ -35,6 +35,7 @@
                         fxFlex="100"  fxFlex.gt-xs="50" fxFlex.gt-md="20" *ngFor="let element of dashbardCardData" (click)="newCaseDetail(element)">
 
                         <!-- Front -->
+                         <div class="dash">
                         <div class="fuse-widget-front boxdashboard">
                             <div class="pl-16 pr-8 py-16 h-52" fxLayout="row" fxLayoutAlign="space-between center">
                                 <!-- <div class="h3">{{widgets.widget2.title}}</div> -->
@@ -49,17 +50,17 @@
                                 <div
                                     [ngClass]="element.Title == 'IPD' ? 'orange-fg red-fg title-class line-height-50' : 'blue-grey-fg red-fg title-class line-height-50'">
                                     <!-- {{widgets.widget2.data.count}} -->
-                                    {{element.count}}
+                                  <span class="count"> {{element.count}}</span> 
                                 </div>
                                 <div class="h3 secondary-text font-weight-500">
                                     <!-- {{widgets.widget2.data.label}} -->
-                                    {{element.label}}
+                                   <span class="days">{{element.label}} </span> 
                                 </div>
                             </div>
 
-                            <div class="py-8 mh-16 border-top" fxLayout="row wrap" fxLayoutAlign="start center">
+                            <div class="py-8 mh-16 " fxLayout="row wrap" fxLayoutAlign="start center">
 
-                                <div class="py-8 border-right" fxLayout="column" fxLayoutAlign="start center"
+                                <div class="py-8 " fxLayout="column" fxLayoutAlign="start center"
                                     fxFlex="100" fxFlex.gt-sm="50">
                                     <span class="h4 secondary-text text-truncate">
                                         <!-- {{element.SelfLbl}} -->
@@ -79,6 +80,7 @@
                                     </span>
                                 </div>
                             </div>
+                        </div>
                         </div>
                         <!-- / Front -->
 
