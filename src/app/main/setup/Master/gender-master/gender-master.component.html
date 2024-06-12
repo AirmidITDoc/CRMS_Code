@@ -24,10 +24,56 @@
     <div class="content">
 
         <!-- CENTER -->
-        <div class="center p-24 pb-56" fusePerfectScrollbar>
+        <div class="center p-10 pb-56" fusePerfectScrollbar>
             <!-- CONTENT -->
-            <div class="content-card">
-                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
+            <div class="content-card"><br>
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="1px">
+                    <div fxFlex.gt-sm="35%" fxFlex style="background-color: white;">
+                        <div fxlayout="row">
+                            <div class="content-card box">
+                        <div class="dialog-content-wrapper">
+                            <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+                                <form [formGroup]="_GenderService.myform">
+                                    <div class="accent header p-8" fxLayout="row" fxLayoutAlign="start center"
+                                    style="border-radius: 2px;">&nbsp;
+                                    <h3 class="h5"
+                                        style="font-size: 17px;color: aliceblue;margin-bottom: 2px;">{{_GenderService.myform.controls.GenderId.value?"Modify Gender Master":"New
+                                        Gender Master"}}
+                                    </h3>
+                                    </div>
+                                    <br>
+
+                                    <input type="hidden" name="GenderId" formControlName="GenderId">
+
+                                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                        <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
+                                            <mat-label>Gender Name</mat-label>
+                                            <input name="GenderName" formControlName="GenderName" matInput required>
+                                            <mat-error>Please enter Gender Name </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
+                                        <mat-radio-group name="IsDeleted" formControlName="IsDeleted" value='false'>
+                                            <mat-radio-button value='false' class="mr-sm-12" fxFlex>IsActive
+                                            </mat-radio-button>
+                                            <mat-radio-button value='true' class="mr-sm-12" fxFlex>IsDeactive
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </form>
+                            </div>
+                            <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+                                <div class="button-row">
+                                    <button mat-raised-button  color="primary" type="submit" (click)="onSubmit()"
+                                        [disabled]="_GenderService.myform.invalid">Save</button>
+                                    <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+
                     <div fxFlex.gt-sm="65%" fxFlex>
 
                         <div fxlayout="row" style="background-color: white;padding: 5px 10px 5px 10px;">
@@ -118,42 +164,7 @@
                             </div>
                         </div>
                     </div>
-                    <div fxFlex.gt-sm="35%" fxFlex style="background-color: white;">
-                        <div class="dialog-content-wrapper">
-                            <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
-                                <form [formGroup]="_GenderService.myform">
-                                    <h3>{{_GenderService.myform.controls.GenderId.value?"Modify Gender Master":"New
-                                        Gender Master"}}
-                                    </h3>
-
-                                    <input type="hidden" name="GenderId" formControlName="GenderId">
-
-                                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                                        <mat-form-field appearance="outline" class="mr-sm-12" fxFlex>
-                                            <mat-label>Gender Name</mat-label>
-                                            <input name="GenderName" formControlName="GenderName" matInput required>
-                                            <mat-error>Please enter Gender Name </mat-error>
-                                        </mat-form-field>
-                                    </div>
-                                    <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row">
-                                        <mat-radio-group name="IsDeleted" formControlName="IsDeleted" value='false'>
-                                            <mat-radio-button value='false' class="mr-sm-12" fxFlex>IsActive
-                                            </mat-radio-button>
-                                            <mat-radio-button value='true' class="mr-sm-12" fxFlex>IsDeactive
-                                            </mat-radio-button>
-                                        </mat-radio-group>
-                                    </div>
-                                </form>
-                            </div>
-                            <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-                                <div class="button-row">
-                                    <button mat-raised-button  color="primary" type="submit" (click)="onSubmit()"
-                                        [disabled]="_GenderService.myform.invalid">Save</button>
-                                    <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             <!-- / CONTENT -->
