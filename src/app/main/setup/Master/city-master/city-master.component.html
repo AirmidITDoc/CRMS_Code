@@ -98,9 +98,7 @@
                     <div fxFlex.gt-sm="65%" fxFlex>
 
                         <div fxlayout="row" style="
-                                background-color: white;
-                                padding: 5px 10px 5px 10px;
-                            ">
+                                background-color: white;">
                             <form [formGroup]="_cityService.myformSearch">
                                 <div class="dialog-content-wrapper">
                                     <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
@@ -119,10 +117,11 @@
                                         <mat-radio-button mat-fab value="1">IsDeactive</mat-radio-button>
                                     </mat-radio-group>
 
-                                    <button mat-raised-button (click)="onSearch()" fxLayoutAlign="center center" style="margin-top: 5px;background-color: #D4E6F1;">
+                                    <button mat-raised-button (click)="onSearch()" fxLayoutAlign="center center" style="margin-top: 5px;
+                                    border-radius: 50px;font-family: sans-serif;background-color: #D4E6F1;">
                                         <mat-icon  style="color: #125786;">search</mat-icon>
                                         Search
-                                    </button>
+                                    </button>&nbsp;&nbsp;
                                 </div>
                             </form>
                         </div>

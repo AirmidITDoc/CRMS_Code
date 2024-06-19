@@ -12,7 +12,7 @@
                     Service Master
                 </span>
 
-                <button mat-raised-button (click)="onAdd()" fxLayoutAlign="center center" style="margin-left: 1190px;">
+                <button mat-raised-button (click)="onAdd()" fxLayoutAlign="center center" style="margin-left: 1166px;">
                     <mat-icon color="Primary" title=" Appointment Form ">how_to_reg</mat-icon>
                 </button>
             </div>
@@ -39,7 +39,7 @@
                     <div fxFlex.gt-sm="99%" fxFlex>
                         <div fxlayout="row" style="
                         background-color: white;
-                        padding: 5px 10px 5px 10px;">
+                    ">
                             <form [formGroup]="_serviceMasterService.myformSearch">
                                 <div class="dialog-content-wrapper">
                                     <mat-form-field class="mr-sm-12" fxFlex appearance="outline">
@@ -60,10 +60,11 @@
                                     </mat-radio-group>&nbsp;&nbsp;
 
                                     <button mat-raised-button (click)="getServiceMasterList()"
-                                        fxLayoutAlign="center center" style="margin-top: 5px;background-color: #D4E6F1;">
+                                        fxLayoutAlign="center center" style="margin-top: 5px;
+                                        background-color: #D4E6F1;border-radius: 50px;font-family: sans-serif;">
                                         <mat-icon  style="color: #125786;">search</mat-icon>
                                         Search
-                                    </button>
+                                    </button>&nbsp;&nbsp;
                                 </div>
                             </form>
                         </div>

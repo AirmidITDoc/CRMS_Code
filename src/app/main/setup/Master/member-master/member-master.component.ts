@@ -64,7 +64,7 @@ export class MemberMasterComponent implements OnInit {
   onAdd() {
     const dialogRef = this._matDialog.open(NewMemberMasterComponent, {
       maxWidth: "70vw",
-      maxHeight: "50vh",
+      maxHeight: "53vh",
       width: "100%",
       height: "100%",
     });

@@ -12,7 +12,7 @@
                     Doctor Master
                 </span>
 
-                <button mat-raised-button (click)="onAdd()" fxLayoutAlign="center center" style="margin-left: 1200px;">
+                <button mat-raised-button (click)="onAdd()" fxLayoutAlign="center center" style="margin-left: 1176px;">
                     <mat-icon color="Primary" title="Doctor Form ">how_to_reg</mat-icon>
                 </button>
             </div>
@@ -39,8 +39,7 @@
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
                     <div fxFlex.gt-sm="99%" fxFlex>
                         <div fxlayout="row" style="
-                        background-color: white;
-                        padding: 5px 10px 5px 10px;">
+                        background-color: white;">
                             <form [formGroup]="_doctorService.myformSearch">
                                 <div class="dialog-content-wrapper">
 
@@ -63,9 +62,10 @@
                                     </mat-radio-group>
 
                                     <button mat-raised-button style="background-color: #FBF8EF;" (click)="onSearch()"
-                                        style="margin-top: 5px;background-color: #D4E6F1;">Search
+                                        style="margin-top: 5px;background-color: #D4E6F1;border-radius: 50px;
+                                        font-family: sans-serif;">Search
                                         <mat-icon style="color: #125786;">search</mat-icon>
-                                    </button>
+                                    </button>&nbsp;&nbsp;
 
                                 </div>
                             </form>

@@ -56,7 +56,7 @@ DSSponserInformationList = new MatTableDataSource<SponserInformation>();
   onAdd(){
     const dialogRef = this._matDialog.open(NewsponserinformationComponent, {
       maxWidth: "80vw",
-      maxHeight: "65vh",
+      maxHeight: "73vh",
       width: "100%",
       height: "100%",
   });

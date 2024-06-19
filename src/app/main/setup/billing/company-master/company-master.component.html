@@ -34,7 +34,7 @@
                 <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
                     <div fxFlex.gt-sm="100%" fxFlex>
 
-                        <div fxlayout="row" style="background-color: white; padding: 5px 10px 5px 10px; ">
+                        <div fxlayout="row" style="background-color: white;">
                             <form [formGroup]="_companyService.myformSearch">
                                 <div class="dialog-content-wrapper">
                                     <mat-form-field class="mr-sm-12" fxFlex="70" appearance="outline">
@@ -53,14 +53,16 @@
                                         <mat-radio-button mat-fab value="1">IsDeactive</mat-radio-button>
                                     </mat-radio-group>
 
-                                    <button mat-raised-button (click)="getCompanyMaster()" fxLayoutAlign="center center" style="margin-top: 5px;background-color: #D4E6F1;">
+                                    <button mat-raised-button (click)="getCompanyMaster()" fxLayoutAlign="center center"
+                                     style="margin-top: 5px;background-color: #D4E6F1;border-radius: 50px;font-family: sans-serif;">
                                         <mat-icon style="color: #125786;">search</mat-icon>
                                         Search
-                                    </button>&nbsp;&nbsp;&nbsp;
+                                    </button>&nbsp;
 
-                                    <button mat-raised-button color="pine" (click)="onAdd()"  style="margin-top: 5px;background-color: #D4E6F1;">Add
+                                    <button mat-raised-button color="pine" (click)="onAdd()"  
+                                    style="margin-top: 5px;background-color: #D4E6F1;border-radius: 50px;font-family: sans-serif;">Add
                                         <mat-icon style="color: #125786;">add_to_photos</mat-icon>
-                                    </button>
+                                    </button>&nbsp;
                                 </div>
                             </form>
                         </div>
