@@ -126,13 +126,15 @@
                                         fxLayoutAlign="center center"
                                         style="background-color: #D4E6F1;margin-top: 5px;border-radius: 50px;font-family: sans-serif;">
                                         <mat-icon style="color: #125786;">search</mat-icon>
+    
+    
                                         Search
                                     </button>&nbsp;&nbsp;
                                 </div>
                             </form>
                         </div>
 
-                        <div fxlayout="row">
+                        <div fxlayout="row"  class="boxright">
                             <div style="width: 100%;" class="content-card box1">
                                 <mat-table #table matSort [dataSource]="DSAreaMasterList"
                                     [@animateStagger]="{value:'50'}" style="overflow:hidden;overflow-y: auto;"

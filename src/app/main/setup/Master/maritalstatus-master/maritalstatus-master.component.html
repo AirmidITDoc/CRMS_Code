@@ -118,6 +118,7 @@
                             </form>
                         </div>
 
+                        <div class="row" class="boxright">
                         <div style="width: 100%;" class="content-card box1">
                             <mat-table #table matSort [dataSource]="DSMaritalStatusMasterList"
                                 [@animateStagger]="{value:'50'}" style="overflow:hidden;overflow-y: auto;"
@@ -189,6 +190,7 @@
                             </mat-table>
                             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"
                                 showFirstLastButtons></mat-paginator>
+                        </div>
                         </div>
 
                     </div>

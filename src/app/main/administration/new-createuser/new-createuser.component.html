@@ -17,16 +17,14 @@
                 </span>
             </div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="end" class="left-icon">
-            <button mat-raised-button (click)="addUserDetails()" fxLayoutAlign="center center" class="btn btn-with-icon py-4">
+       
+            <button mat-raised-button (click)="addUserDetails()" fxLayoutAlign="center center"  style="margin-right: 32px;">
                 <span class="btn-icon">
                     <mat-icon color="warn">how_to_reg</mat-icon>
                 </span>&nbsp;
                 <span>New</span>
             </button>
-        </div>
     </mat-toolbar>
-<br>
 
     <!-- / HEADER -->
 
@@ -38,8 +36,8 @@
     <div class="content">
 
         <!-- SIDEBAR -->
-        <fuse-sidebar class="fuse-search-sidebar sidebar" name="app-main" position="left" lockedOpen="gt-sm"
-            style=" background-color: white;margin-top: 2px;">
+        <fuse-sidebar class="fuse-search-sidebar sidebar" name="app-main" position="left" lockedOpen="gt-sm" 
+            style="background-color: white;margin-top: 2px;margin-left: 3px;">
 
             <!-- SIDEBAR CONTENT -->
             
@@ -66,7 +64,7 @@
                                         <input name="UserName" formControlName="UserName" matInput>
                                     </mat-form-field><br>
 
-                                    <div class="action-buttons">
+                                    <div>
                                         <button mat-raised-button (click)="onClear()" class="clearbutton">
                                             <mat-icon class="cleariconbutton">close</mat-icon></button>
                                         <button mat-raised-button class="searchButton" (click)="onShow($event)"
@@ -74,6 +72,7 @@
                                             <mat-icon class="searchiconbutton">search</mat-icon>
                                         </button>
                                     </div>
+                                    
                                 </div>
                             </form>
                         </div>
@@ -90,7 +89,7 @@
         <!-- CENTER -->
         <div class="center p-12 pb-56" fxFlexAlign="start center">
             <div class="content-card box1" style="border-radius:4px;">
-                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="10px">
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="1px">
                     <div fxFlex.gt-sm="100%" fxFlex>
                         <div fxlayout="row">
                             <div style="width: 100%;">
@@ -157,8 +156,8 @@
                                             IsActive
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            <mat-icon *ngIf="contact.IsActive"
-                                                class="active-icon green-600 s-16">check_circle</mat-icon>
+                                            <mat-icon *ngIf="contact.IsActive" style="color: white;border-radius: 10px;"
+                                                class="active-icon green-600 s-20">check_circle</mat-icon>
                                             <mat-icon *ngIf="!contact.IsActive"
                                                 class="active-icon red-500 s-16">close</mat-icon>
                                         </mat-cell>
