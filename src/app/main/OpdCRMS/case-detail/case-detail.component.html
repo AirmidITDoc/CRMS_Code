@@ -1,7 +1,6 @@
 <div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
     <!-- HEADER -->
-    <mat-toolbar class="accent"
-        style="height:50px; justify-content: space-between;width: 100%;">
+    <mat-toolbar class="accent" style="height:50px; justify-content: space-between;width: 100%;">
         <div fxLayout="row" fxLayoutAlign="start center">
             <!-- background-color:rgb(18, 87, 134) !important; -->
             <!-- <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm (click)="toggleSidebar('app-main')"
@@ -11,17 +10,17 @@
             <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
                 style="color: white;">account_box
             </mat-icon> -->
-            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" 
+            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
                 style="color: aliceblue;">
                 Study Information
             </span>
         </div>
 
         <div class="headerbutton">
-        <button mat-raised-button (click)="newCaseDetail()"  fxLayoutAlign="center center"
-         style="border-radius: 50px;" class="btn">New Study Detail
-        <!-- <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon> -->
-        </button>
+            <button mat-raised-button (click)="newCaseDetail()" fxLayoutAlign="center center"
+                style="border-radius: 50px;" class="btn">New Study Detail
+                <!-- <mat-icon color="Primary" title=" Case Form ">how_to_reg</mat-icon> -->
+            </button>
         </div>
     </mat-toolbar>
     <!-- / HEADER -->
@@ -55,43 +54,43 @@
                     <div class="content py-16 pl-10 p-12" fusePerfectScrollbar>
                         <div class="nav material2">
                             <form [formGroup]="_CasedetailService.myFilterform" style="padding: 6px 6px 5px 5px;"
-                            fusePerfectScrollbar>
-                            <div fxLayout="column" fxLayoutAlign="start none">
-                                <mat-form-field appearance="outline" fxFlex>
-                                    <mat-label>Protocol Number</mat-label>
-                                    <mat-select formControlName="CaseId" name="CaseId"
-                                        (selectionChange)="getCaseList()" (datachange)="getCaseList()">
-                                        <mat-option></mat-option>
-                                        <mat-option *ngFor="let m of caseList" [value]="m">
-                                            {{m.StudyId}} || {{m.ProtocolNo}}
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                                
-                                <!-- <mat-form-field appearance="outline" fxFlex (keyup)="getCaseList()">
+                                fusePerfectScrollbar>
+                                <div fxLayout="column" fxLayoutAlign="start none">
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Protocol Number</mat-label>
+                                        <mat-select formControlName="CaseId" name="CaseId"
+                                            (selectionChange)="getCaseList()" (datachange)="getCaseList()">
+                                            <mat-option></mat-option>
+                                            <mat-option *ngFor="let m of caseList" [value]="m">
+                                                {{m.StudyId}} || {{m.ProtocolNo}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <!-- <mat-form-field appearance="outline" fxFlex (keyup)="getCaseList()">
                                     <mat-label>Protocol Number</mat-label>
                                     <input name="CaseId" formControlName="CaseId" matInput>
                                 </mat-form-field> -->
 
 
-                                <mat-form-field appearance="outline" fxFlex (keyup)="getCaseList()">
-                                    <mat-label>Protocol Name</mat-label>
-                                    <input name="CaseName" formControlName="CaseName" matInput>
-                                </mat-form-field>
+                                    <mat-form-field appearance="outline" fxFlex (keyup)="getCaseList()">
+                                        <mat-label>Protocol Name</mat-label>
+                                        <input name="CaseName" formControlName="CaseName" matInput>
+                                    </mat-form-field>
 
-                                <div style="margin-top: 10px;">
-                                    <button mat-raised-button (click)="onClear()" class="clearbutton"
-                                        matTooltip="close">
-                                        <mat-icon class="cleariconbutton">close</mat-icon>
-                                    </button>&nbsp;
-                                    <button mat-raised-button class="searchButton" (click)="getCaseList()"
-                                        matTooltip="search">
-                                        <mat-icon class="searchiconbutton">search</mat-icon>
-                                    </button>
+                                    <div style="margin-top: 10px;">
+                                        <button mat-raised-button (click)="onClear()" class="clearbutton"
+                                            matTooltip="close">
+                                            <mat-icon class="cleariconbutton">close</mat-icon>
+                                        </button>&nbsp;
+                                        <button mat-raised-button class="searchButton" (click)="getCaseList()"
+                                            matTooltip="search">
+                                            <mat-icon class="searchiconbutton">search</mat-icon>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
 
-                        </form>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -125,9 +124,6 @@
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm style="margin-top: 1px;">
                                             {{contact.ProtocolNo}}
                                         </mat-cell>
-          
-          
-          
                                     </ng-container>
 
                                     <ng-container matColumnDef="ProtocolTitle">
@@ -243,8 +239,6 @@
                                         </mat-cell>
                                     </ng-container>
 
-
-
                                     <ng-container matColumnDef="buttons" stickyEnd>
                                         <mat-header-cell *matHeaderCellDef
                                             class="table-actions">Action</mat-header-cell>
@@ -266,7 +260,6 @@
                                         </mat-cell>
                                     </ng-container>
 
-
                                     <ng-container matColumnDef="loading">
                                         <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
                                         </mat-header-cell>
@@ -274,26 +267,27 @@
 
                                     <ng-container matColumnDef="noData">
                                         <mat-footer-cell *matFooterCellDef colspan="6">
-                                          <mat-spinner style="float:left;" *ngIf="sIsLoading=='loading'" [diameter]='30'>
-                                          </mat-spinner>
-                                          <span *ngIf="sIsLoading=='no-data'">No data found...</span>
+                                            <mat-spinner style="float:left;" *ngIf="sIsLoading=='loading'"
+                                                [diameter]='30'>
+                                            </mat-spinner>
+                                            <span *ngIf="sIsLoading=='no-data'">No data found...</span>
                                         </mat-footer-cell>
-                                      </ng-container>
-
+                                    </ng-container>
 
                                     <mat-header-row class="accent" *matHeaderRowDef="displayedColumns; sticky: true">
                                     </mat-header-row>
                                     <mat-row *matRowDef="let contact; columns: displayedColumns;"
-                                    [ngClass]="contact.PatientType !== 'Self' ? 'self-row' : ''"
-                                    [@animate]="{value:'*',params:{y:'100%'}}">
-                                  </mat-row>
-                                  <mat-footer-row *matFooterRowDef="['loading']"
-                                    [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
-                                  <mat-footer-row *matFooterRowDef="['noData']"
-                                    [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
+                                        [ngClass]="contact.PatientType !== 'Self' ? 'self-row' : ''"
+                                        [@animate]="{value:'*',params:{y:'100%'}}">
+                                    </mat-row>
+                                    <mat-footer-row *matFooterRowDef="['loading']"
+                                        [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
+                                    <mat-footer-row *matFooterRowDef="['noData']"
+                                        [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
                                 </mat-table>
-                                 <hr>
-                                <mat-paginator [pageSizeOptions]="[15,30, 45]" [pageSize]="15" showFirstLastButtons class="box3">
+
+                                <mat-paginator [pageSizeOptions]="[15,30, 45]" [pageSize]="15" showFirstLastButtons
+                                    class="box3">
                                 </mat-paginator>
                             </div>
                         </div>
