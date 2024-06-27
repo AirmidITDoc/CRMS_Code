@@ -54,6 +54,7 @@ export class AppointmentComponent implements OnInit {
   @Input() dataArray: any;
 
   displayedColumns = [
+    
     'ProtocolNo',
     // 'VisitTitle',
     'SubjectName',
@@ -182,6 +183,7 @@ export class AppointmentComponent implements OnInit {
 
   }
 
+ 
 
   getRecord(contact, m): void {
    
@@ -558,6 +560,7 @@ export class VisitMaster {
   BillId:any;
   PBillNo:any;
   ExtRegNo:any;
+  IsActive:any;
   /**
    * Constructor
    *
@@ -598,6 +601,7 @@ export class VisitMaster {
       this.BillId = VisitMaster.BillId || '';
       this.PBillNo=VisitMaster.PBillNo|| '';
       this.ExtRegNo =VisitMaster.ExtRegNo || 0;
+      this.IsActive=VisitMaster.IsActive || 1
     }
     }
   

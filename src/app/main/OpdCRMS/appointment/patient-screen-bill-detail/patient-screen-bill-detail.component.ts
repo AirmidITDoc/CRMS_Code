@@ -104,7 +104,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
     'ProtocolNo',
     'SubjectName',
     'VisitTitle',
-    // 'Autobill',
+    'IsActive',
     'action',
     'buttons'
   ];
@@ -142,6 +142,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
 
 
   displayedColumns4 = [
+   
     'Servicename',
     'TotalAmount',
     // 'IndServiceId',
@@ -149,6 +150,7 @@ export class PatientScreenBillDetailComponent implements OnInit {
     'IndServiceAmount',
     'ExtBillDetail',
     'action'
+    
   ];
   dataSource4 = new MatTableDataSource<ApiMaster>();
 
@@ -285,6 +287,17 @@ export class PatientScreenBillDetailComponent implements OnInit {
     }, 1000);
   }
 
+  excludeserviceArray: any = [];
+  tableElementChecked(event, element) {
+    if (!event.checked) {
+      this.excludeserviceArray.push(element);
+    } else if (this.excludeserviceArray.length > 0) {
+      let index = this.excludeserviceArray.indexOf(element);
+      if (index !== -1) {
+        this.excludeserviceArray.splice(index, 1);
+      }
+    }
+  }
 
   getApiVisitList() {
     var D_data = {
@@ -918,6 +931,21 @@ debugger
 
 
   }
+
+  getStopScreen(element){
+    debugger
+    let Query = "Update T_VisitDetails set IsActive=0 where  VisitId=" + element.VisitId + " and " +  "RegId=" + element.RegId ;
+    this._AppointmentService.getStopscreening(Query).subscribe(data => {
+      let Status=data[0];
+      if(Status){
+        Swal.fire("Stop Screen Successfully  ...")
+       }else{
+         Swal.fire("API error")
+         return;
+       }
+    });
+  }
+  
 
   onClose() {
     this._matDialog.closeAll();

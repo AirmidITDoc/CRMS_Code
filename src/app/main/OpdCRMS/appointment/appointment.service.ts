@@ -424,4 +424,7 @@ public RegDocInsert(employee){
 
 
 
+public getStopscreening(data){
+  return this._httpClient.post("Generic/GetBySelectQuery?query="+data, {})
+}
 }

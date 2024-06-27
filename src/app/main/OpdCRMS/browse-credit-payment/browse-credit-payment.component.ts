@@ -18,6 +18,8 @@ import { InvoiceBillMappingComponent } from '../appointment/invoice-bill-mapping
 import * as converter from 'number-to-words';
 import { ServicePaymentupdateComponent } from './service-paymentupdate/service-paymentupdate.component';
 import { ConcessionReasonMasterModule } from 'app/main/setup/billing/concession-reason-master/concession-reason-master.module';
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-browse-credit-payment',
@@ -80,6 +82,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
     'PaymentDate',
     'UTINo',
     'comments',
+    'IsIncludeOrExclude',
     'action'
   ];
 
@@ -95,6 +98,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
     public datePipe: DatePipe,
     private _ActRoute: Router,
     public _matDialog: MatDialog,
+    // public toastr: ToastrService,
     private advanceDataStored: AdvanceDataStored,
     // private ngxNumToWordsService: NgxNumToWordsService,
 
@@ -474,7 +478,23 @@ export class BrowseCreditPaymentComponent implements OnInit {
     }
   }
 
-
+  
+  SetExcludeflag(element){
+    debugger
+    
+    let Query = "Update AddCharges set IsIncludeOrExclude=1  where  ChargesId=" + element.ChargesId;
+    console.log(Query)
+    this._BrowseOPDBillsService.getSetexcludeservice(Query).subscribe(data => {
+      let Status = data[0];
+      if(Status){
+       Swal.fire("Service Exclued From List")
+      }else{
+        Swal.fire("Service Not Exclued From List")
+        return;
+      }
+    });
+  }
+  
 
 
 }
@@ -607,6 +627,7 @@ export class BillDetails {
   ChargesId: any;
   UTINo:any;
   Comments:any;
+  IsIncludeOrExclude:any;
   /**
    * Constructor
    *
@@ -628,7 +649,7 @@ export class BillDetails {
       this.ChargesId = BillDetails.ChargesId || '';
       this.UTINo = BillDetails.UTINo || '';
       this.Comments = BillDetails.Comments || '';
-      
+      this.IsIncludeOrExclude=BillDetails.IsIncludeOrExclude || 0
     }
   }
 
