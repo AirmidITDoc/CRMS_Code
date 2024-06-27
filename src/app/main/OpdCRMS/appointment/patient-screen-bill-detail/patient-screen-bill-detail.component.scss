@@ -290,8 +290,8 @@ app-patient-screen-bill-detail {
 
     .mat-header-row {
       width: 100%;
-      max-width: 1070px;
-      min-width: 1070px;
+      max-width: 1200px;
+      min-width: 1200px;
       min-height: 20px;
       padding: 5px;
       border-radius: 2px;
@@ -445,6 +445,14 @@ app-patient-screen-bill-detail {
 
     justify-content: left;
   }
+  .mat-column-IsActive {
+    width: 100px;
+    max-width: 100px;
+    min-width: 100px;
+    text-align: left;
+    justify-content: left;
+  }
+  
 
   .mat-column-VisitTime {
     width: 100px;

@@ -12,7 +12,7 @@
             </mat-icon>
             <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
                 style="color: aliceblue;">
-                Browse OP Bill
+                Browse Bill
             </span>
         </div>
 
@@ -322,8 +322,8 @@
                                     style="overflow: hidden;width: 100%;overflow-y: auto;">
 
                                     <ng-container matColumnDef="ServiceName">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide
-                                            fxShow.gt-md class="w-180" >ServiceName
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md
+                                            class="w-180">ServiceName
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md class="w-180">
                                             {{contact.ServiceName}}
@@ -382,7 +382,7 @@
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>PaymentDate
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" fxShow.gt-sm>
-                                            {{contact.PaymentDate  | date:'shortDate'}}
+                                            {{contact.PaymentDate | date:'shortDate'}}
                                         </mat-cell>
                                     </ng-container>
                                     <ng-container matColumnDef="UTINo">
@@ -400,16 +400,27 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <!-- <ng-container matColumnDef="TotalAmt">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Total
-                                            Amount
+
+                                    <ng-container matColumnDef="IsIncludeOrExclude" sticky>
+                                        <mat-header-cell *matHeaderCellDef fxShow.gt-sm class="w-80"
+                                            style="color: white;">IsInclude/Exclude
                                         </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            {{contact.TotalAmt | currency:"INR":"symbol"}}
+                                        <mat-cell *matCellDef="let contact" class="w-80">
+
+                                            <button mat-icon-button
+                                                *ngIf="contact.IsIncludeOrExclude==false"
+                                                matTooltip="Included" (click)="SetExcludeflag(contact)">
+                                                <mat-icon>check_circle</mat-icon>
+                                            </button>
+                                           
+                                            <span class="material-icons" style="cursor: pointer;color: #d92626;"  *ngIf="contact.IsIncludeOrExclude !=false"
+                                            matTooltip="Excluded">
+                                                <mat-icon>pause_circle_filled</mat-icon>
+                                        </span>
                                         </mat-cell>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="DiscAmount">
+                                    <!--  <ng-container matColumnDef="DiscAmount">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Disc
                                             Amount
                                         </mat-header-cell>
@@ -433,8 +444,7 @@
                                         <mat-header-cell *matHeaderCellDef style="color: white;">Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
-                                            <button mat-icon-button class="material-icons"
-                                                matTooltip="Bill Mapping">
+                                            <button mat-icon-button class="material-icons" matTooltip="Bill Mapping">
                                                 <mat-icon>360</mat-icon>
                                             </button>
                                             <button mat-icon-button class="material-icons"
