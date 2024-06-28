@@ -444,10 +444,10 @@
                                         <mat-header-cell *matHeaderCellDef style="color: white;">Action
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact">
-                                            <button mat-icon-button class="material-icons" matTooltip="Bill Mapping">
+                                            <button mat-icon-button class="material-icons" matTooltip="Bill Mapping"  *ngIf="contact.IsIncludeOrExclude==false">
                                                 <mat-icon>360</mat-icon>
                                             </button>
-                                            <button mat-icon-button class="material-icons"
+                                            <button mat-icon-button class="material-icons"  *ngIf="contact.IsIncludeOrExclude==false"
                                                 (click)="ServicePaymentupdate(contact)" matTooltip="Payment">
                                                 <mat-icon>payment</mat-icon>
                                             </button>

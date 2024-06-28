@@ -422,9 +422,8 @@ public RegDocInsert(employee){
   return this._httpClient.post("OutPatient/InvoiceBillMappinngSave", employee);
 }
 
-
-
-public getStopscreening(data){
-  return this._httpClient.post("Generic/GetBySelectQuery?query="+data, {})
-}
+  public getStopscreening(data){
+    return this._httpClient.post("OutPatient/StopScreeningUpdate", data)
+  }
+  
 }

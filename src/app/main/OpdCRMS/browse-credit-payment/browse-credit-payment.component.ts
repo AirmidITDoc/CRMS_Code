@@ -481,11 +481,20 @@ export class BrowseCreditPaymentComponent implements OnInit {
   
   SetExcludeflag(element){
     debugger
-    
-    let Query = "Update AddCharges set IsIncludeOrExclude=1  where  ChargesId=" + element.ChargesId;
-    console.log(Query)
-    this._BrowseOPDBillsService.getSetexcludeservice(Query).subscribe(data => {
-      let Status = data[0];
+    console.log(element)
+   
+        
+    let ServiceexcludeObj = {};
+    ServiceexcludeObj['ChargesId'] = element.ChargesId,
+    ServiceexcludeObj['BillNo'] =element.BillNo
+  
+    let submitData = {
+      "update_ServiceExclude": ServiceexcludeObj,
+
+    };
+console.log(submitData)
+    this._BrowseOPDBillsService.getSetexcludeservice(submitData).subscribe(data => {
+      let Status = data;
       if(Status){
        Swal.fire("Service Exclued From List")
       }else{
