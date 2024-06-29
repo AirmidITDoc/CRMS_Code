@@ -88,19 +88,43 @@
                                     </ng-container>
 
 
-                                    <ng-container matColumnDef="IsActive" sticky>
+                                    <!-- <ng-container matColumnDef="IsActive" sticky>
                                         <mat-header-cell *matHeaderCellDef fxShow.gt-sm class="w-80"
                                             style="color: red;">Status
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" class="w-80">
-                                            <mat-icon *ngIf="contact.IsActive==1;" matTooltip="IsActive"
-                                                (click)="getStopScreen(contact)">verified_user
-                                            </mat-icon>
+                                                                                     
+                                            <button mat-icon-button matTooltip="IsActive">
+                                                <mat-icon *ngIf="contact.IsActive ==1 " matTooltip="IsActive"
+                                                    (click)="getStopScreen(contact)">verified_user</mat-icon>
+                                            </button>
+                                            <button mat-icon-button matTooltip="NotActive">
                                             <mat-icon *ngIf="contact.IsActive==0" matTooltip="NotActive">monetization_on
                                             </mat-icon>
-                                          
+                                            </button>
+                                        </mat-cell>
+                                    </ng-container> -->
+
+                                    <ng-container matColumnDef="IsActive" sticky>
+                                        <mat-header-cell *matHeaderCellDef fxShow.gt-sm class="w-80"
+                                            style="color: white;">IsActive
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" class="w-80">
+
+                                            <button mat-icon-button
+                                                *ngIf="contact.IsActive==1"
+                                                matTooltip="IsActive" (click)="getStopScreen(contact)">
+                                                <mat-icon>verified_user</mat-icon>
+                                            </button>
+                                           
+                                            <span class="material-icons" style="cursor: pointer;color: #d92626;"  *ngIf="contact.IsActive ==0"
+                                            matTooltip="NotActive">
+                                                <mat-icon>monetization_on</mat-icon>
+                                        </span>
                                         </mat-cell>
                                     </ng-container>
+
+
                                     <ng-container matColumnDef="action" stickyEnd>
                                         <mat-header-cell *matHeaderCellDef style="color: white;">Action
                                         </mat-header-cell>
@@ -111,7 +135,7 @@
                                                 <mat-icon style="color: #0093B8;">account_balance</mat-icon>
                                             </button>
 
-                                            <button mat-icon-button *ngIf="contact.BillId !=0"
+                                            <button mat-icon-button *ngIf="contact.BillId !=0 && contact.IsActive==1" 
                                                 matTooltip="Auto Bill Generated">
                                                 <mat-icon style="color: #0093B8;">payment</mat-icon>
                                             </button>
@@ -127,12 +151,12 @@
                                         <mat-cell *matCellDef="let contact">
                                             <div fxFlex="row" fxLayoutAlign="center center">
                                                 <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
-                                                    (click)="$event.stopPropagation();">
+                                                    (click)="$event.stopPropagation();"  *ngIf="contact.IsActive==1">
                                                     <mat-icon class="secondary-text">more_vert</mat-icon>
                                                 </button>
                                                 <mat-menu #moreMenu="matMenu">
                                                     <ng-container *ngFor="let m of menuActions, let n of menuActions">
-                                                        <button mat-menu-item aria-label="remove"
+                                                        <button mat-menu-item aria-label="remove"  *ngIf="contact.IsActive==1"
                                                             (click)="getRecord(contact,m)">
                                                             <span>{{m}}</span>
                                                         </button>

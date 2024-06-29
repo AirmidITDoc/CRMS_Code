@@ -934,11 +934,22 @@ debugger
 
   getStopScreen(element){
     debugger
-    let Query = "Update T_VisitDetails set IsActive=0 where  VisitId=" + element.VisitId + " and " +  "RegId=" + element.RegId ;
-    this._AppointmentService.getStopscreening(Query).subscribe(data => {
-      let Status=data[0];
+    // let Query = "Update T_VisitDetails set IsActive=0 where  VisitId=" + element.VisitId + " and " +  "RegId=" + element.RegId ;
+    console.log(element)
+   
+    let StopscreeningObj = {};
+    StopscreeningObj['VisitId'] = element.VisitId,
+    StopscreeningObj['RegId'] =element.RegId
+  
+    let submitData = {
+      "updateStopScreening": StopscreeningObj,
+
+    };
+    console.log(submitData)
+    this._AppointmentService.getStopscreening(submitData).subscribe(data => {
+      let Status=data;
       if(Status){
-        Swal.fire("Stop Screen Successfully  ...")
+        Swal.fire("Stop Screening Successfully  ...")
        }else{
          Swal.fire("API error")
          return;

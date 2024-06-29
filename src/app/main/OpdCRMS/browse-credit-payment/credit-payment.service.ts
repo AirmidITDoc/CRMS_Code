@@ -58,7 +58,7 @@ export class CreditPaymentService {
     return this._httpClient.post("OutPatient/PatientservicePaymentUpdate", employee);
   }
   public getSetexcludeservice(data){
-    return this._httpClient.post("Generic/GetBySelectQuery?query="+data, {})
+    return this._httpClient.post("CRMSTran/update_ServiceExclude", data)
   }
   
 }
