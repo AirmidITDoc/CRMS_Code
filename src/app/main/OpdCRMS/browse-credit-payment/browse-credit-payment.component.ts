@@ -72,6 +72,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
     'action'
   ];
   displayedColumnsBillDetails = [
+    'IsIncludeOrExclude',
     'ServiceName',
     'Price',
     'Qty',
@@ -82,7 +83,6 @@ export class BrowseCreditPaymentComponent implements OnInit {
     'PaymentDate',
     'UTINo',
     'comments',
-    'IsIncludeOrExclude',
     'action'
   ];
 

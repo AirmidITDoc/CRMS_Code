@@ -330,15 +330,16 @@ export class InvoiceBillMappingComponent implements OnInit {
       "StudyId": this.registeredForm.get('CaseId').value.StudyId || 0,
       "VisitTitle": this.registeredForm.get('VisitId').value.VisitTitle|| '%'
     }
+    console.log(D_data);
     setTimeout(() => {
       this.sIsLoading = 'loading-data';
       this._opappointmentService.getCaseIDList(D_data).subscribe(Visit => {
         this.dataSource.data = Visit as CaseDetail[];
+        console.log(this.dataSource.data);
         this.chargeslist = this.dataSource.data
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.sIsLoading = '';
-
       },
         error => {
           this.sIsLoading = '';

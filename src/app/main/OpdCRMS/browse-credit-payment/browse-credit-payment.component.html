@@ -1,4 +1,4 @@
-<div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+<div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll" dynamicTableHeight fusePerfectScrollbar>
     <!-- HEADER -->
     <mat-toolbar class="accent" style="height:55px; justify-content: space-between;width: 100%;">
         <!-- background-color:rgb(18, 87, 134) !important; -->
@@ -323,9 +323,9 @@
 
                                     <ng-container matColumnDef="ServiceName">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md
-                                            class="w-180">ServiceName
+                                            class="w-200">ServiceName
                                         </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md class="w-180">
+                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md class="w-200">
                                             {{contact.ServiceName}}
                                         </mat-cell>
                                     </ng-container>
@@ -469,10 +469,10 @@
                                         </mat-header-cell>
                                     </ng-container>
 
-                                    <mat-header-row class="accent"
+                                    <mat-header-row class="accent min-width-1600" 
                                         *matHeaderRowDef="displayedColumnsBillDetails; sticky: true">
                                     </mat-header-row>
-                                    <mat-row *matRowDef="let contact; columns: displayedColumnsBillDetails;"
+                                    <mat-row *matRowDef="let contact; columns: displayedColumnsBillDetails;" class="min-width-1600"
                                         [@animate]="{value:'*',params:{y:'100%'}}">
                                     </mat-row>
                                     <mat-footer-row *matFooterRowDef="['loading']"
