@@ -78,20 +78,20 @@
                                         <input name="PBillNo" formControlName="PBillNo" matInput keyup="onShow($event)">
                                     </mat-form-field>
 
-                                    <mat-form-field appearance="outline" fxFlex>
+                                    <!-- <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Reg No</mat-label>
                                         <input name="RegNo" formControlName="RegNo" matInput keyup="onShow($event)">
-                                    </mat-form-field>
+                                    </mat-form-field> -->
 
                                     <mat-form-field appearance="outline" fxFlex>
-                                        <mat-label>First Name</mat-label>
-                                        <input name="FirstName" formControlName="FirstName" matInput
+                                        <mat-label>Subject Name</mat-label>
+                                        <input name="SubjectName" formControlName="SubjectName" matInput
                                             keyup="onShow($event)">
                                     </mat-form-field>
 
                                     <mat-form-field appearance="outline" fxFlex>
-                                        <mat-label>Last Name</mat-label>
-                                        <input name="LastName" formControlName="LastName" matInput
+                                        <mat-label>VisitTitle</mat-label>
+                                        <input name="VisitTitle" formControlName="VisitTitle" matInput
                                             keyup="onShow($event)">
                                     </mat-form-field>
 
@@ -213,6 +213,15 @@
                                             {{contact.ProtocolNo}}
                                         </mat-cell>
                                     </ng-container>
+
+                                    <ng-container matColumnDef="VisitTitle">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>VisistTitle
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                            {{contact.VisitTitle}}
+                                        </mat-cell>
+                                    </ng-container>
+                                    
 
                                     <ng-container matColumnDef="SubjectName">
                                         <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>SubjectName
@@ -407,14 +416,13 @@
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let contact" class="w-80">
 
-                                            <button mat-icon-button
-                                                *ngIf="contact.IsIncludeOrExclude==false"
-                                                matTooltip="Included" (click)="SetExcludeflag(contact)">
+                                            <button mat-icon-button *ngIf="contact.IsIncludeOrExclude==false"
+                                                matTooltip="Excluded" (click)="SetExcludeflag(contact,$event)">
                                                 <mat-icon>check_circle</mat-icon>
                                             </button>
                                            
                                             <span class="material-icons" style="cursor: pointer;color: #d92626;"  *ngIf="contact.IsIncludeOrExclude !=false"
-                                            matTooltip="Excluded">
+                                            matTooltip="Included" (click)="SetExcludeflag(contact)">
                                                 <mat-icon>pause_circle_filled</mat-icon>
                                         </span>
                                         </mat-cell>

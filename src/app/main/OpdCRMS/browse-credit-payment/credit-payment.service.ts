@@ -21,16 +21,16 @@ export class CreditPaymentService {
     return this._formBuilder.group({
       StudyId:'',
       
-      FirstName: ['', [
+      SubjectName: ['', [
          Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
       ]],
-      LastName:['', [
+      VisitTitle:['', [
         Validators.pattern("^[A-Za-z]*[a-zA-Z]*$"),
      ]],
       start: [(new Date()).toISOString()],
       end: [(new Date()).toISOString()],
       PBillNo: '', 
-      RegNo: '',
+      // RegNo: '',
     });
   }
 

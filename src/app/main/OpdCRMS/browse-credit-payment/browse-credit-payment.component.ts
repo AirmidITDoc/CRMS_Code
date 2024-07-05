@@ -65,6 +65,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
     'BillDate',
     'BillNo',
     'ProtocolNo',
+    'VisitTitle',
     'SubjectName',
     'TotalAmt',
     'DiscAmount',
@@ -160,9 +161,9 @@ export class BrowseCreditPaymentComponent implements OnInit {
 
   onClear() {
 
-    this._BrowseOPDBillsService.myFilterform.get('FirstName').reset('');
-    this._BrowseOPDBillsService.myFilterform.get('LastName').reset('');
-    this._BrowseOPDBillsService.myFilterform.get('RegNo').reset('');
+    this._BrowseOPDBillsService.myFilterform.get('SubjectName').reset('');
+    this._BrowseOPDBillsService.myFilterform.get('VisitTitle').reset('');
+    // this._BrowseOPDBillsService.myFilterform.get('RegNo').reset('');
     this._BrowseOPDBillsService.myFilterform.get('PBillNo').reset('');
   }
 
@@ -172,13 +173,13 @@ export class BrowseCreditPaymentComponent implements OnInit {
     this.sIsLoading = 'loading';
     var D_data = {
       "StudyId": this._BrowseOPDBillsService.myFilterform.get("StudyId").value.StudyId || 0,
-      "F_Name": (this._BrowseOPDBillsService.myFilterform.get("FirstName").value).trim() + '%' || "%",
-      "L_Name": (this._BrowseOPDBillsService.myFilterform.get("LastName").value).trim() + '%' || "%",
+      "SubjectName ": this._BrowseOPDBillsService.myFilterform.get("SubjectName").value || "%",
       "From_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("start").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
       "To_Dt": this.datePipe.transform(this._BrowseOPDBillsService.myFilterform.get("end").value, "yyyy-MM-dd 00:00:00.000") || '01/01/1900',
-      "Reg_No": this._BrowseOPDBillsService.myFilterform.get("RegNo").value || 0,
+      "VisitTitle": this._BrowseOPDBillsService.myFilterform.get("VisitTitle").value || '%',
       "PBillNo": this._BrowseOPDBillsService.myFilterform.get("PBillNo").value || '%',
     }
+    console.log(D_data)
     setTimeout(() => {
       this.sIsLoading = 'loading';
       this._BrowseOPDBillsService.getBrowseBillsList(D_data).subscribe(Visit => {
@@ -199,13 +200,13 @@ export class BrowseCreditPaymentComponent implements OnInit {
   getBillDet(Param) {
     this.sIsLoading = 'loading';
     var D_data = {
-      "BillNo":Param.BillNo
+      "BillNo": Param.BillNo
     }
     setTimeout(() => {
       this.sIsLoading = 'loading';
       this._BrowseOPDBillsService.getBillDet(D_data).subscribe(Visit => {
         this.dsBillDet.data = Visit as BillDetails[];
-        console.log( this.dsBillDet.data)
+        console.log(this.dsBillDet.data)
         this.sIsLoading = this.dsBillDet.data.length == 0 ? 'no-data' : '';
         this.click = false;
       },
@@ -231,12 +232,12 @@ export class BrowseCreditPaymentComponent implements OnInit {
     console.log(contact)
     let PatientHeaderObj = {};
     PatientHeaderObj['Date'] = this.datePipe.transform(contact.BillDate, 'MM/dd/yyyy') || '01/01/1900',
-    PatientHeaderObj['PatientName'] = contact.PatientName;
+      PatientHeaderObj['PatientName'] = contact.PatientName;
     PatientHeaderObj['OPD_IPD_Id'] = contact.vOPIPId;
     PatientHeaderObj['NetPayAmount'] = contact.NetPayableAmt;
     PatientHeaderObj['BillId'] = contact.BillNo;
 
-  
+
     const dialogRef = this._matDialog.open(PaymentDetailComponent,
       {
         maxWidth: "100vw",
@@ -449,15 +450,15 @@ export class BrowseCreditPaymentComponent implements OnInit {
     });
   }
 
-  ServicePaymentupdate(contact){
+  ServicePaymentupdate(contact) {
     console.log(contact)
     this.advanceDataStored.storage = new BrowseOPDBill(contact);
     const dialogRef = this._matDialog.open(ServicePaymentupdateComponent,
       {
         maxWidth: "60vw",
         maxHeight: "30vh", width: '100%', height: "100%",
-        data:{
-          registerObj:contact
+        data: {
+          registerObj: contact
         }
       });
     dialogRef.afterClosed().subscribe(result => {
@@ -466,7 +467,7 @@ export class BrowseCreditPaymentComponent implements OnInit {
   }
 
 
-   getRecord(contact, m): void {
+  getRecord(contact, m): void {
     console.log(contact);
     // this.VisitID = contact.VisitId;
     let AgeDay, AgeMonth, AgeYear, Age
@@ -478,34 +479,49 @@ export class BrowseCreditPaymentComponent implements OnInit {
     }
   }
 
-  
-  SetExcludeflag(element){
+  Excludeflag: any = 0;
+  SetExcludeflag(element) {
     debugger
     console.log(element)
+    let Activeflag;
+    if (element.IsIncludeOrExclude)
+      Activeflag = 0;
+    else
+      Activeflag = 1;
    
-        
-    let ServiceexcludeObj = {};
-    ServiceexcludeObj['ChargesId'] = element.ChargesId,
-    ServiceexcludeObj['BillNo'] =element.BillNo
-  
-    let submitData = {
-      "update_ServiceExclude": ServiceexcludeObj,
 
-    };
-console.log(submitData)
-    this._BrowseOPDBillsService.getSetexcludeservice(submitData).subscribe(data => {
-      let Status = data;
-      if(Status){
-       Swal.fire("Service Exclued From List")
-      }else{
-        Swal.fire("Service Not Exclued From List")
-        return;
+    Swal.fire({
+      title: ' Do you Want to Change Serive Status',
+
+      showCancelButton: true,
+      confirmButtonText: 'OK',
+
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        let ServiceexcludeObj = {};
+        ServiceexcludeObj['ChargesId'] = element.ChargesId,
+          ServiceexcludeObj['BillNo'] = element.BillNo
+        ServiceexcludeObj['IsActive'] = Activeflag
+        let submitData = {
+          "update_ServiceExclude": ServiceexcludeObj,
+
+        };
+        console.log(submitData)
+        this._BrowseOPDBillsService.getSetexcludeservice(submitData).subscribe(data => {
+          let Status = data;
+          if (Status) {
+            Swal.fire("Service Status Updated List")
+          } else {
+            Swal.fire("Service  Status Not Updated List")
+            return;
+          }
+        });
       }
     });
+    this.getBrowseOPDBillsList();
   }
-  
-
-
+ 
 }
 
 
@@ -565,7 +581,7 @@ export class BrowseOPDBill {
   StudyId: number;
   ProtocolNo: any;
   SubjectName: any;
-
+  VisitTitle: any;
 
   /**
    * Constructor
@@ -617,6 +633,7 @@ export class BrowseOPDBill {
       this.StudyId = BrowseOPDBill.StudyId || 0;
       this.ProtocolNo = BrowseOPDBill.ProtocolNo || '';
       this.SubjectName = BrowseOPDBill.SubjectName || '';
+      this.VisitTitle = BrowseOPDBill.VisitTitle || ''
     }
   }
 
@@ -624,8 +641,8 @@ export class BrowseOPDBill {
 export class BillDetails {
   BillNo: Number;
   PBillNo: any;
-  ServiceName:string;
-  Price:any;
+  ServiceName: string;
+  Price: any;
   Qty: string;
   TotalAmt: string;
   IndBillId: string;
@@ -634,9 +651,9 @@ export class BillDetails {
   IndServiceName: number;
   IndServiceAmount: any;
   ChargesId: any;
-  UTINo:any;
-  Comments:any;
-  IsIncludeOrExclude:any;
+  UTINo: any;
+  Comments: any;
+  IsIncludeOrExclude: any;
   /**
    * Constructor
    *
@@ -658,7 +675,7 @@ export class BillDetails {
       this.ChargesId = BillDetails.ChargesId || '';
       this.UTINo = BillDetails.UTINo || '';
       this.Comments = BillDetails.Comments || '';
-      this.IsIncludeOrExclude=BillDetails.IsIncludeOrExclude || 0
+      this.IsIncludeOrExclude = BillDetails.IsIncludeOrExclude || 0
     }
   }
 
