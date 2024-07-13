@@ -595,17 +595,7 @@ body { margin: 0; font-family: Roboto !important;zoom: 0.90; zoom: 90%; }
 
   .boxdashboard{
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5); 
-    border-top-right-radius: 50px;
-    border-bottom-left-radius: 50px;
-  }
-
-  .dash{
-    // background-color: #fffff;
-// background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
-
-    // background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
-    border-top-right-radius: 50px;
-    border-bottom-left-radius: 50px;
+    border-radius: 10px;
   }
 
   // // Button in header 
