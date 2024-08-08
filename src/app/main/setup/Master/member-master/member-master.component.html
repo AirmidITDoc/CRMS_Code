@@ -98,7 +98,7 @@
                                 <!-- sppinner -->
 
                                 <mat-table #table matSort [dataSource]="MemberList"
-                                [@animateStagger]="{value:'50'}" style="overflow:auto;" class="table">
+                                [@animateStagger]="{value:'50'}" style="overflow:auto;" class="table1">
 
                                 <ng-container matColumnDef="MemberId">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Code
@@ -207,10 +207,11 @@
                                     [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
 
                             </mat-table>
-
+                            <div class="footer">
                                 <mat-paginator [pageSizeOptions]="[20, 25, 50, 100]" [pageSize]="20"
                                     showFirstLastButtons>
                                 </mat-paginator>
+                                </div>
                             </div>
                         </div>
                     </div>

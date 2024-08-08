@@ -278,9 +278,11 @@
                                     [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
                                 </mat-table>
 
+                                <div class="footer">
                                 <mat-paginator [pageSizeOptions]="[25,50, 75, 100]" [pageSize]="25"
                                     showFirstLastButtons>
                                 </mat-paginator>
+                                </div>
                             </div>
                         </div>
                     </div>

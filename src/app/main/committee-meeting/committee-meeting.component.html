@@ -187,9 +187,11 @@
                                     <mat-footer-row *matFooterRowDef="['noData']"
                                         [ngClass]="{'hide':!(dscommitteeMeetingList!=null && dscommitteeMeetingList.data.length==0)}"></mat-footer-row>
                                 </mat-table>
+                                <div class="footer">
                                 <mat-paginator [pageSizeOptions]="[20, 25, 50, 100]" [pageSize]="16"
-                                    showFirstLastButtons>
+                                 showFirstLastButtons>
                                 </mat-paginator>
+                                </div>
                             </div>
                         </div>
                     </div>

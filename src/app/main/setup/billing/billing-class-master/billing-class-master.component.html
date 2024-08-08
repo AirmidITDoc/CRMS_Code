@@ -174,8 +174,10 @@
                                         [ngClass]="{'hide':!(DSBillingClassMasterList!=null && DSBillingClassMasterList.data.length==0)}"></mat-footer-row>
                                 </mat-table>
 
+                                <div class="footer">
                                 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"
                                     showFirstLastButtons></mat-paginator>
+                                    </div>
                             </div>
                             </div>
                         </div>

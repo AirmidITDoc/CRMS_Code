@@ -672,16 +672,22 @@ body { margin: 0; font-family: Roboto !important;zoom: 0.90; zoom: 90%; }
   .header{
     border-top-left-radius: 20px;
   }
-
-  //  .mat-paginator {
-  //     position: fixed;
-  //     left: 0;
-  //     bottom: 0;
-  //     width: 100%;
-  //     color: white;
-  //     text-align: center;
-  //   }
-
     .boxright{
       margin-right: 10px;
+    }
+
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+    }
+
+    .table1{
+      height: 89vh !important;
+     }
+
+   .table{
+     height: 85vh !important;
     }
