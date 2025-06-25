@@ -1,0 +1,425 @@
+<div class="page-layout modal-wrapper grid-container">
+    <!-- HEADER -->
+    <div class="modal-header accent">
+        <div class="modal-header-content">
+            <div class="modal-header-title">
+                <span [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"> IP Advance </span>
+            </div>
+            <div class="modal-header-right">
+                <div class="comman-date-container">
+                    <div class="comman-date">
+                        <app-common-date [screenFrom]="screenFromString"
+                            (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
+                    </div>
+                    <div class="close-icon">
+                        <button mat-icon-button tabIndex="-1" (click)="onClose()" aria-label="Close dialog">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="modal-body content" fusePerfectScrollbar>
+        <!-- CENTER -->
+        <div class="center">
+            <!-- CONTENT -->
+            <div class="content-card">
+                <div fxLayout="column" class="gap-8 pb-3 border-bottom">
+                    <!-- style="width: 100%;" -->
+                    <div fxlayout="row">
+                        <!-- <form [formGroup]="_IpSearchListService.myShowDischargeSummaryForm" fusePerfectScrollbar style="width: 100%;"> -->
+                        <!-- ================================ LABEL HEADER  -->
+                        <div fxFlex.gt-sm="100%" fxFlex class="patient-info-container">
+                            <div class="patient-info-container">
+                                <div class="patient-info-box">
+                                    <mat-card fxFlex.gt-sm="74%" fxFlex style="padding: 6px;">
+                                        <div class="patient-info-sales my-8">
+                                            <div class="patient-info-title border-bottom pb-2">
+                                                <span class="h1">Patient Information</span>
+                                            </div>
+                                            <div class="Ipd-patient-info" fxFlexFill fxLayout="row"
+                                                fxLayoutAlign="space-between center" class="patient-info">
+                                                <div class="patient-sub">
+                                                    <div class="patient-info-row patient-info-1-111 pt-8" fxLayout="row"
+                                                        fxLayoutAlign="space-between">
+                                                        <div fxLayout="column" fxLayoutGap="10px">
+                                                            <div class="patient-col">
+                                                                <span class="patient-col-key">UHID No
+                                                                </span>
+                                                                <span>:</span>
+                                                                <span
+                                                                    class="patient-col-value">{{selectedAdvanceObj.RegNo}}</span>
+                                                            </div>
+                                                            <div class="patient-col">
+                                                                <span class="patient-col-key">Patient Name
+                                                                </span>
+                                                                <span>:</span>
+                                                                <span
+                                                                    class="patient-col-value">{{selectedAdvanceObj.PatientName}}</span>
+                                                            </div>
+                                                            <div class="patient-col">
+                                                                <span class="patient-col-key">Doctor Name</span>
+                                                                <span>:</span>
+                                                                <span
+                                                                    class="patient-col-value">{{selectedAdvanceObj.Doctorname}}</span>
+                                                            </div>
+                                                            <div class="patient-col">
+                                                                <span class="patient-col-key">Department</span>
+                                                                <span>:</span>
+                                                                <span
+                                                                    class="patient-col-value">{{selectedAdvanceObj.DepartmentName}}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div fxLayout="column" fxLayoutGap="10px">
+
+                                                            <div class="patient-col">
+                                                                <span class="patient-col-key">DOA | Time</span>
+                                                                <span>:</span>
+                                                                <span
+                                                                    class="patient-col-value">{{selectedAdvanceObj.AdmDateTime}}</span>
+                                                            </div>
+                                                            <div class="patient-col">
+                                                                <span class="patient-col-key">IPD No</span>
+                                                                <span>:</span>
+                                                                <span
+                                                                    class="patient-col-value">{{selectedAdvanceObj.IPDNo}}</span>
+                                                            </div>
+                                                            <div class="patient-col">
+                                                                <span class="patient-col-key">Age | Sex
+                                                                </span>
+                                                                <span>:</span>
+                                                                <span
+                                                                    class="patient-col-value">{{selectedAdvanceObj.AgeYear}}Y|{{selectedAdvanceObj.AgeMonth}}M|{{selectedAdvanceObj.AgeDay}}
+                                                                    D | {{selectedAdvanceObj.GenderName}}</span>
+                                                            </div>
+                                                            <div class="patient-col">
+                                                                <span class="patient-col-key">Ref-Doctor Name
+                                                                </span>
+                                                                <span>:</span>
+                                                                <span
+                                                                    class="patient-col-value">{{selectedAdvanceObj.RefDocName}}</span>
+                                                            </div>
+
+                                                        </div>
+                                                        <div fxLayout="column" fxLayoutGap="10px">
+                                                            <div class="patient-col">
+                                                                <span class="patient-col-key">Ward | Bed Name
+                                                                </span>
+                                                                <span>:</span>
+                                                                <span
+                                                                    class="patient-col-value">{{selectedAdvanceObj.RoomName}}
+                                                                    | {{selectedAdvanceObj.BedName}}</span>
+                                                            </div>
+                                                            <div class="patient-col">
+                                                                <span class="patient-col-key">Patient Type
+                                                                </span>
+                                                                <span>:</span>
+                                                                <span
+                                                                    class="patient-col-value">{{selectedAdvanceObj.PatientType}}</span>
+                                                            </div>
+                                                            <div class="patient-col">
+                                                                <span class="patient-col-key">Tarrif Name
+                                                                </span>
+                                                                <span>:</span>
+                                                                <span
+                                                                    class="patient-col-value">{{selectedAdvanceObj.TariffName}}</span>
+                                                            </div>
+                                                            <div class="patient-col">
+                                                                <span class="patient-col-key">Company Name</span>
+                                                                <span>:</span>
+                                                                <span class="patient-col-value"
+                                                                    style="color: orange;">{{selectedAdvanceObj.CompanyName}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-card>
+                                    <mat-card fxFlex.gt-sm="26%" fxFlex style="padding: 6px;">
+                                        <div class="bill-summary px-12">
+                                            <div class="bill-summary-title py-8 border-bottom">
+                                                <span class="h3 font-weight-600">Advance Summary </span>
+                                            </div>
+                                            <div class="bil-summary-list px-4 mt-8">
+                                                <ul class="gap-4 list-basic" fxLayout="column">
+                                                    <li>
+                                                        <div class="list-item">
+                                                            <span class="list-item-key">Advance Amount :</span>
+                                                            <span class="list-item-value">
+                                                                {{getAdvancetotal(dataSource.data)|
+                                                                currency:'INR'}}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="list-item">
+                                                            <span class="list-item-key">Advance Used Amount :</span>
+                                                            <span class="list-item-value">
+                                                                {{getAdvanceusedtotal(dataSource.data)|
+                                                                currency:'INR'}}
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="list-item">
+                                                            <span class="list-item-key">Balance Amount :</span>
+                                                            <span class="list-item-value">
+                                                                {{getAdvBalance(dataSource.data)|
+                                                                currency:'INR'}}</span>
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="list-item">
+                                                            <span class="list-item-key">Refund Amount :</span>
+                                                            <span class="list-item-value">
+                                                                {{getAdvancerefund(dataSource.data)|
+                                                                currency:'INR'}}</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </mat-card>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- </form> -->
+                        <!-- ================================ LABEL HEADER  -->
+                    </div>
+
+                    <div fxFlex.gt-sm="100%" fxFlex>
+
+
+                        <mat-table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}" class="h-250">
+
+                            <ng-container matColumnDef="Date">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Date
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> {{element.Date | date}}
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="AdvanceNo">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                                    Advance No </mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    <span> {{element.AdvanceNo}}</span>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="AdvanceAmount">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                                    Advance Amt </mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    <span> {{element.AdvanceAmount | currency:'INR'}}</span>
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="UsedAmount">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                                    Used Amt </mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    <span> {{element.UsedAmount | currency:'INR'}}</span>
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="BalanceAmount">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                                    Balance Amt </mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    <span> {{element.BalanceAmount | currency:'INR'}}</span>
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="RefundAmount">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                                    Refund Amt </mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    <span> {{element.RefundAmount | currency:'INR'}}</span>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="CashPay">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Cash Pay
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    <span> {{element.CashPayAmount | currency:'INR'}}</span>
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="ChequePay">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Cheque
+                                    Pay
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    <span> {{element.ChequePayAmount | currency:'INR'}}</span>
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="CardPay">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Card Pay
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    <span> {{element.CardPayAmount | currency:'INR'}}</span>
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="NeftPay">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Neft Pay
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    <span> {{element.NEFTPayAmount | currency:'INR'}}</span>
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="PayTMPay">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>PayTM Pay
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    <span> {{element.PayTMAmount | currency:'INR'}}</span>
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="UserName">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>User Name
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    <span> {{element.UserName}}</span>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="buttons" stickyEnd>
+                                <mat-header-cell *matHeaderCellDef class="table-actions" style="color: white;">
+                                    Action
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let contact">
+                                    <span style="color: #827a7a;" class="material-icons"
+                                        (click)="viewgetAdvanceReceiptReportPdf(contact,false)"
+                                        matTooltip="Advance Print">
+                                        print
+                                    </span>
+
+                                    <button mat-icon-button matTooltip="Send Advance Receipt On WhatsApp" class="p-4"
+                                        (click)="getWhatsappsAdvance(contact.AdvanceNo,Contact.MobileNo)">
+                                        <img width="100" height="20px" src="assets/images/logos/WhatsApp.png">
+                                    </button>
+
+
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="loading">
+                                <mat-footer-cell *matFooterCellDef colspan="6">
+                                    no data found...
+                                </mat-footer-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="noData">
+                                <mat-footer-cell *matFooterCellDef colspan="6">
+                                    <mat-spinner style="float:left;" *ngIf="isLoadingStr=='loading'" [diameter]='30'>
+                                    </mat-spinner>
+                                    <span *ngIf="isLoadingStr=='no-data'">No data found...</span>
+                                </mat-footer-cell>
+                            </ng-container>
+
+
+                            <mat-header-row class="accent min-width-1400"
+                                *matHeaderRowDef="displayedColumns; sticky: true">
+                            </mat-header-row>
+                            <mat-row *matRowDef="let contact; columns: displayedColumns;" class="contact min-width-1400"
+                                [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+                            <mat-footer-row *matFooterRowDef="['loading']"
+                                [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
+                            <mat-footer-row *matFooterRowDef="['noData']"
+                                [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
+                        </mat-table>
+
+                        <mat-paginator [pageSizeOptions]="[ 10, 25, 100]" [pageSize]="10" showFirstLastButtons>
+                        </mat-paginator>
+                    </div>
+                </div>
+
+                <mat-card>
+                    <div fxlayout="row" style="margin-top: 10px;">
+
+                        <div class="dialog-content-wrapper">
+                            <!-- ================================ LABEL HEADER  -->
+
+                            <form [formGroup]="AdvFormGroup" class="mat-error-fix">
+                                <div class="bill-amts" fxFlexFill fxLayout="column" fxLayout.gt-xs="row"
+                                    fxLayoutAlign="space-between start">
+                                    <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="4px">
+                                        <mat-form-field appearance="outline" style="width:200px ;">
+                                            <mat-label>Advance Amount</mat-label>
+                                            <input matInput [(ngModel)]="advanceAmount" formControlName="advanceAmt"
+                                                name="advanceAmt" required (keypress)="keyPressCharater($event)">
+                                            <mat-error class="error"
+                                                *ngIf="AdvFormGroup.get('advanceAmt').hasError('required') && AdvFormGroup.get('advanceAmt').touched">
+                                                Advance Amount is required</mat-error>
+                                            <mat-error class="error"
+                                                *ngIf="AdvFormGroup.get('advanceAmt').hasError('pattern') && AdvFormGroup.get('advanceAmt').touched">
+                                                Please enter valid Amount</mat-error>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" style="width: 400px;">
+                                            <mat-label>Reason Of Advacne</mat-label>
+                                            <input matInput formControlName="comment" name="comment" maxlength="200">
+                                            <mat-error class="error"
+                                                *ngIf="AdvFormGroup.get('comment').invalid && AdvFormGroup.get('comment').touched">
+                                                Advance Amount is required</mat-error>
+                                        </mat-form-field>
+                                        <!-- <mat-checkbox aria-label="Cash Payment" formControlName="cashpay" (checked)=true
+                                             class="font-weight-600 text-primary">
+                                           Cash Payment
+                                        </mat-checkbox> -->
+                                        <!-- <button class="btn btn-danger-outline" (click)="onClose()" style="margin-left: 400px;">Close</button>
+                                          <button class="btn btn-primary" (click)="onSave()"
+                                              [disabled]="AdvFormGroup.invalid">Save</button> -->
+
+                                         <mat-form-field appearance="outline" style="width: 220px;">
+                                        <mat-label>Cash Counter</mat-label>
+                                        <input matAutocompletePosition="below" type="text" placeholder="Select Cash Counter"
+                                             matInput formControlName="CashCounterID"
+                                            [matAutocomplete]="autoSearchCashCounter" #CashCounterName>
+                                        <span matSuffix style="display: flex;">
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="AdvFormGroup.get('CashCounterID').setValue(''); isCashCounterSelected = false;">close</mat-icon>
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="AdvFormGroup.get('CashCounterID').setValue(''); isCashCounterSelected = false;">search</mat-icon>
+                                        </span>
+                                        <mat-autocomplete #autoSearchCashCounter="matAutocomplete"
+                                            [displayWith]="getOptionTextCashCounter">
+                                            <mat-option *ngFor="let option of filteredOptionsCashCounter| async"
+                                                [value]="option">
+                                                {{option.CashCounterName}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                      </mat-form-field>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="modal-footer">
+                                <div class="footer-navigation-container">
+                                    <div class="modal-footer-buttons">
+                                        <button class="btn btn-primary" (click)="getStatementPrint()">Statement</button>
+                                        <button class="btn btn-danger-outline" (click)="onClose()">Close</button>
+                                        <button class="btn btn-primary" (click)="onSave()"
+                                            [disabled]="AdvFormGroup.invalid">Save</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- ================================ LABEL HEADER  -->
+                        </div>
+
+                    </div>
+                </mat-card>
+            </div>
+
+            <!-- / CONTENT -->
+        </div>
+        <!-- / CENTER -->
+    </div>
+    <!-- / CONTENT-->
+
+</div>
+
+<!-- <div class="patient-col gap-3" fxFlex="10%" fxFlex.gt-sm="15%"> -->

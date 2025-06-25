@@ -1,0 +1,447 @@
+<div class="page-layout modal-wrapper grid-container">
+    <!-- HEADER -->
+    <div class="modal-header accent">
+        <div class="modal-header-content">
+            <div class="modal-header-title">
+                <span [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"> Admission Update</span>
+            </div>
+            <div class="modal-header-right">
+                <div class="comman-date-container">
+                    <div class="comman-date">
+                        <app-common-date [screenFrom]="screenFromString"
+                            (dateTimeEventEmitter)="getDateTime($event)"></app-common-date>
+                    </div>
+                    <div class="close-icon">
+                        <button mat-icon-button tabIndex="-1" (click)="Close()" aria-label="Close dialog">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="modal-body content" fusePerfectScrollbar>
+        <!-- CENTER -->
+        <div class="center">
+            <!-- CONTENT -->
+            <div class="content-card">
+                <div fxLayout="column" class="gap-8 pb-3 border-bottom">
+                    <!-- style="width: 100%;" -->
+                    <div fxlayout="row" style="padding: 0 10px;">
+                        <mat-card>
+                            <div fxFlex.gt-sm="100%" fxFlex class="patient-info-container">
+                                <div class="patient-info-container">
+                                    <div class="patient-info-box">
+                                        <div class="patient-info-title border-bottom pb-2">
+                                            <span class="h1">Patient Information</span>
+                                        </div>
+                                        <div class="patient-info-box my-8">
+                                            <div class="patient-info-row row-gap-4" fxLayout="row wrap">
+
+                                                <div class="patient-col gap-1" fxFlex="30%">
+                                                    <span class="patient-col-key ">UHID </span>
+                                                    <span>:</span>
+                                                    <span class="patient-col-value">{{selectedAdvanceObj.RegNo}}</span>
+                                                </div>
+                                                <div class="patient-col gap-1" fxFlex="30%">
+                                                    <span class="patient-col-key">DOA /Time</span>
+                                                    <span>:</span>
+                                                    <span
+                                                        class="patient-col-value">{{selectedAdvanceObj.AdmDateTime}}</span>
+                                                </div>
+                                                <div class="patient-col gap-1" fxFlex="30%">
+                                                    <span class="patient-col-key">IPDNo</span>
+                                                    <span>:</span>
+                                                    <span class="patient-col-value">{{selectedAdvanceObj.IPDNo}}</span>
+                                                </div>
+                                                <div class="patient-col gap-1" fxFlex="30%">
+                                                    <span class="patient-col-key">Patient Name</span>
+                                                    <span>:</span>
+                                                    <span
+                                                        class="patient-col-value">{{selectedAdvanceObj.PatientName}}</span>
+                                                </div>
+                                                <div class="patient-col gap-1" fxFlex="30%">
+                                                    <span class="patient-col-key ">Age /Sex</span>
+                                                    <span>:</span>
+                                                    <span
+                                                        class="patient-col-value">{{selectedAdvanceObj.AgeYear}}Y|{{selectedAdvanceObj.AgeMonth}}M|{{selectedAdvanceObj.AgeDay}}
+                                                        D | {{selectedAdvanceObj.GenderName}}</span>
+                                                </div>
+                                                <div class="patient-col gap-1" fxFlex="30%">
+                                                    <span class="patient-col-key">Doctor Name</span>
+                                                    <span>:</span>
+                                                    <span
+                                                        class="patient-col-value">{{selectedAdvanceObj.Doctorname}}</span>
+                                                </div>
+                                                <div class="patient-col gap-1" fxFlex="30%">
+                                                    <span class="patient-col-key">Ward Name | Bed</span>
+                                                    <span>:</span>
+                                                    <span class="patient-col-value">{{selectedAdvanceObj.RoomName}} |
+                                                        {{selectedAdvanceObj.BedName}}</span>
+                                                </div>
+                                                <div class="patient-col gap-1" fxFlex="30%">
+                                                    <span class="patient-col-key"> Department Name</span>
+                                                    <span>:</span>
+                                                    <span
+                                                        class="patient-col-value">{{selectedAdvanceObj.DepartmentName}}</span>
+                                                </div>
+
+                                                <div class="patient-col gap-1" fxFlex="30%">
+                                                    <span class="patient-col-key">Patient Type</span>
+                                                    <span>:</span>
+                                                    <span
+                                                        class="patient-col-value">{{selectedAdvanceObj.PatientType}}-{{selectedAdvanceObj.TariffName}}</span>
+                                                </div>
+                                                <div class="patient-col gap-1" fxFlex="30%">
+                                                    <span class="patient-col-key">Ref Dr.Name</span>
+                                                    <span>:</span>
+                                                    <span
+                                                        class="patient-col-value">{{selectedAdvanceObj.RefDocName}}</span>
+                                                </div>
+                                                <div class="patient-col gap-1" fxFlex="30%">
+                                                    <span class="patient-col-key">Company</span>
+                                                    <span>:</span>
+                                                    <span class="patient-col-value"
+                                                        style="color: orange;">{{selectedAdvanceObj.CompanyName}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <form [formGroup]="hospitalFormGroup" fxLayout="column" style="padding: 0 10px;">
+                <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px"
+                    class="top-header accent heading-container h-40 border-radius-4">
+                    <span style="font-size:15px;font-weight: bolder; color:white;padding:7px;">Hospital
+                        Details</span>
+                </div>
+                <mat-card>
+                    <div fxFlex="100" fxLayout="row wrap" fxLayoutGap="12px grid" style="padding: 10px 0;">
+
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Patient Type</mat-label>
+                            <input matAutocompletePosition="below" type="text" placeholder="Select Patient Type"
+                                matInput #ptype (keydown)="onEnterptype($event)" formControlName="PatientTypeID"
+                                [matAutocomplete]="autoPatientTypeID">
+                            <span matSuffix style="display: flex;">
+                                <mat-icon class="mat-icon-close"
+                                    (click)="hospitalFormGroup.get('PatientTypeID').setValue(''); ispatienttypeSelected = false;">close</mat-icon>
+                                <mat-icon class="mat-icon-close"
+                                    (click)="hospitalFormGroup.get('PatientTypeID').setValue(''); ispatienttypeSelected = false;">search</mat-icon>
+                            </span>
+                            <mat-autocomplete #autoPatientTypeID="matAutocomplete"
+                                [displayWith]="getOptionTextpatienttype">
+                                <mat-option *ngFor="let option of filteredOptionsPatientType | async" [value]="option"
+                                    (onSelectionChange)="onChangePatient(option)">
+                                    {{option.PatientType}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+
+                        <!-- <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Patient Type</mat-label>
+                            <input matAutocompletePosition="below" type="text" placeholder="Select PatientTypeID" matInput #ptype (keydown)="onEnterptype($event)" formControlName="PatientTypeID" [matAutocomplete]="autoPatientTypeID" required>
+                            <span matSuffix style="display: flex;">
+                                <mat-icon class="mat-icon-close" (click)="hospitalFormGroup.get('PatientTypeID').setValue(''); ispatienttypeSelected = false;">close</mat-icon>
+                                <mat-icon class="mat-icon-close" (click)="hospitalFormGroup.get('PatientTypeID').setValue(''); ispatienttypeSelected = false;">search</mat-icon>
+                            </span>
+                            <mat-autocomplete #autoPatientTypeID="matAutocomplete" [displayWith]="getOptionTextpatienttype">
+                                <mat-option *ngFor="let option of filteredOptionsPatientType | async" [value]="option" (onSelectionChange)="onChangePatient(option)">
+                                    {{option.PatientType}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+
+
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Tariff Name</mat-label>
+                            <input matAutocompletePosition="below" type="text" placeholder="Select Patient Type"
+                                matInput #tariff (keydown)="onEnterptariff($event)" formControlName="TariffId"
+                                [matAutocomplete]="autoTariffId">
+                            <span matSuffix style="display: flex;">
+                                <mat-icon class="mat-icon-close"
+                                    (click)="hospitalFormGroup.get('TariffId').setValue(''); isTariffIdSelected = false;">close</mat-icon>
+                                <mat-icon class="mat-icon-close"
+                                    (click)="hospitalFormGroup.get('TariffId').setValue(''); isTariffIdSelected = false;">search</mat-icon>
+                            </span>
+                            <mat-autocomplete #autoTariffId="matAutocomplete" [displayWith]="getOptionTextTariff">
+                                <mat-option *ngFor="let option of filteredOptionsTarrif | async" [value]="option">
+                                    {{option.TariffName}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-label>Department</mat-label>
+                            <input matAutocompletePosition="below" type="text" placeholder="Select Department" matInput
+                                #dept (keydown)="onEnterdept($event)" formControlName="Departmentid"
+                                [matAutocomplete]="autoDep" required>
+                            <span matSuffix style="display: flex;">
+                                <mat-icon class="mat-icon-close"
+                                    (click)="hospitalFormGroup.get('Departmentid').setValue(''); isDepartmentSelected = false;">close</mat-icon>
+                                <mat-icon class="mat-icon-close"
+                                    (click)="hospitalFormGroup.get('Departmentid').setValue(''); isDepartmentSelected = false;">search</mat-icon>
+                            </span>
+                            <mat-autocomplete #autoDep="matAutocomplete" [displayWith]="getOptionTextDep">
+                                <mat-option *ngFor="let option of filteredOptionsDep | async" [value]="option"
+                                    (onSelectionChange)="OnChangeDoctorList(option)">
+                                    {{option.DepartmentName}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-label>Doctor Name</mat-label>
+                            <input matAutocompletePosition="below" type="text" placeholder="Select Doctor Name" matInput #deptdoc
+                                formControlName="DoctorId" [matAutocomplete]="autoDoctor" required>
+                            <span matSuffix style="display: flex;">
+                                <mat-icon class="mat-icon-close"
+                                    (click)="hospitalFormGroup.get('DoctorId').setValue(''); isDoctorSelected = false;">close</mat-icon>
+                                <mat-icon class="mat-icon-close"
+                                    (click)="hospitalFormGroup.get('DoctorId').setValue(''); isDoctorSelected = false;">search</mat-icon>
+                            </span>
+                    
+                            <mat-autocomplete #autoDoctor="matAutocomplete" [displayWith]="getOptionTextDoc">
+                                <mat-option *ngFor="let option of filteredOptionsDoc | async" [value]="option"
+                                    (onSelectionChange)="isDoctorSelected = true;">
+                                    {{option.Doctorname }} <b>|</b> {{option.DepartmentName }} <b>|</b>
+                                    {{option.DoctorId}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                        <!-- <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Doc Name</mat-label>
+                            <input matAutocompletePosition="below" type="text" placeholder="Select Religion" matInput #religion (keydown)="onEnterdeptdoc($event)" formControlName="DoctorId" [matAutocomplete]="autoReligion">
+                            <span matSuffix style="display: flex;">
+                                <mat-icon class="mat-icon-close" (click)="hospitalFormGroup.get('DoctorId').setValue(''); isDoctorSelected = false;">close</mat-icon>
+                                <mat-icon class="mat-icon-close" (click)="hospitalFormGroup.get('DoctorId').setValue(''); isDoctorSelected = false;">search</mat-icon>
+                            </span>
+                            <mat-autocomplete #autoReligion="matAutocomplete" [displayWith]="getOptionTextDoc">
+                                <mat-option *ngFor="let option of filteredOptionsDoctorname | async" [value]="option">
+                                    {{option.Doctorname}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+
+                        <mat-form-field appearance="outline" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-label>Admitted Doctor 1</mat-label>
+                            <input matAutocompletePosition="below" type="text" placeholder="Select Admitted Doctor 1"
+                                matInput #admitdoc1 (keydown)="onEnteradmitdoc1($event)"
+                                formControlName="admittedDoctor1" [matAutocomplete]="autoAddoc1">
+                            <span matSuffix style="display: flex;">
+                                <mat-icon class="mat-icon-close"
+                                    (click)="hospitalFormGroup.get('admittedDoctor1').setValue(''); isAdmittedDoctor1Selected = false;">close</mat-icon>
+                                <mat-icon class="mat-icon-close"
+                                    (click)="hospitalFormGroup.get('admittedDoctor1').setValue(''); isAdmittedDoctor1Selected = false;">search</mat-icon>
+                            </span>
+                            <mat-autocomplete #autoAddoc1="matAutocomplete" [displayWith]="getOptionTextRefDoc">
+                                <mat-option *ngFor="let option of filteredOptionsDoc1 | async" [value]="option">
+                                    {{option.Doctorname}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                        
+
+                        <mat-form-field appearance="outline" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-label>Admitted Doctor 2</mat-label>
+                            <input matAutocompletePosition="below" type="text" placeholder="Select Admitted Doctor 2 "
+                                matInput formControlName="admittedDoctor2" [matAutocomplete]="autodoc2" #admitdoc2
+                                (keydown)="onEnteradmitdoc2($event)">
+                            <span matSuffix style="display: flex;">
+                                <mat-icon class="mat-icon-close"
+                                    (click)="hospitalFormGroup.get('admittedDoctor2').setValue(''); isAdmittedDoctor2Selected = false;">close</mat-icon>
+                                <mat-icon class="mat-icon-close"
+                                    (click)="hospitalFormGroup.get('admittedDoctor2').setValue(''); isAdmittedDoctor2Selected = false;">search</mat-icon>
+                            </span>
+                            <mat-autocomplete #autodoc2="matAutocomplete" [displayWith]="getOptionTextDoc2">
+                                <mat-option *ngFor="let option of filteredOptionsDoc2 | async" [value]="option">
+                                    {{option.Doctorname}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-label>Ref Doctor Name</mat-label>
+                            <input matAutocompletePosition="below" type="text" placeholder="Select Ref Doctor " matInput
+                                #refdoc (keydown)="onEnterrefdoc($event)" formControlName="refDoctorId"
+                                [matAutocomplete]="autorefdoc">
+                            <span matSuffix style="display: flex;">
+                                <mat-icon class="mat-icon-close"
+                                    (click)="hospitalFormGroup.get('refDoctorId').setValue(''); isRefDoctorSelected = false;">close</mat-icon>
+                                <mat-icon class="mat-icon-close"
+                                    (click)="hospitalFormGroup.get('refDoctorId').setValue(''); isRefDoctorSelected = false;">search</mat-icon>
+                            </span>
+                            <mat-autocomplete #autorefdoc="matAutocomplete" [displayWith]="getOptionTextRefDoc">
+                                <mat-option *ngFor="let option of filteredOptionsRefrenceDoc | async" [value]="option">
+                                    {{option.Doctorname}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                        <ng-container *ngIf="isCompanySelected">
+                            <mat-form-field appearance="outline" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                                <mat-label>Company Name </mat-label>
+                                <input matAutocompletePosition="below" type="text" placeholder="Select Company" matInput
+                                    formControlName="CompanyId" [matAutocomplete]="autoCompany">
+                                <span matSuffix style="display: flex;">
+                                    <mat-icon class="mat-icon-close"
+                                        (click)="hospitalFormGroup.get('CompanyId').setValue(''); isCompanyselected = false;">close</mat-icon>
+                                    <mat-icon class="mat-icon-close"
+                                        (click)="hospitalFormGroup.get('CompanyId').setValue(''); isCompanyselected = false;">search</mat-icon>
+                                </span>
+                                <mat-autocomplete #autoCompany="matAutocomplete" [displayWith]="getOptionTextCompany">
+                                    <mat-option *ngFor="let option of filteredOptionsCompany | async" [value]="option">
+                                        {{option.CompanyName}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                                <mat-error *ngIf="hospitalFormGroup.get('CompanyId').hasError('required')">
+                                    Required field cannot be left blank
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                                <mat-label>Sub Company Name </mat-label>
+                                <input matAutocompletePosition="below" type="text" placeholder="Select SubCompany"
+                                    matInput formControlName="SubCompanyId" [matAutocomplete]="autoSubCompany" required>
+                                <span matSuffix style="display: flex;">
+                                    <mat-icon class="mat-icon-close"
+                                        (click)="hospitalFormGroup.get('SubCompanyId').setValue(''); isSubCompanySelected = false;">close</mat-icon>
+                                    <mat-icon class="mat-icon-close"
+                                        (click)="hospitalFormGroup.get('SubCompanyId').setValue(''); isSubCompanySelected = false;">search</mat-icon>
+                                </span>
+                                <mat-autocomplete #autoSubCompany="matAutocomplete"
+                                    [displayWith]="getOptionTextSubCompany">
+                                    <mat-option *ngFor="let option of filteredOptionsSubCompany | async"
+                                        [value]="option">
+                                        {{option.CompanyName}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                                <mat-error *ngIf="hospitalFormGroup.get('SubCompanyId').hasError('required')">
+                                    Required field cannot be left blank
+                                </mat-error>
+                            </mat-form-field>
+                        </ng-container>
+                    </div>
+                </mat-card>
+            </form>
+            <br>
+
+            <mat-card>
+                <form [formGroup]="otherFormGroup" fxLayout="column" style="padding: 0 10px;">
+                    <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="4px"
+                        class="top-header accent heading-container h-40 border-radius-4">
+                        <span style="font-size:15px; font-weight: bolder; color:white;padding:7px;">Other
+                            Details</span>
+                    </div>
+
+                    <div fxFlex="100" fxLayout="row wrap" fxLayoutGap="12px grid" style="padding: 10px 0;">
+                        <mat-form-field appearance="outline" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <input name="RelativeName" formControlName="RelativeName" placeholder="Relative Name"
+                                matInput [(ngModel)]="vRelativeName" #relativename
+                                (keydown)="onEnterrelativename($event)">
+                            <mat-error
+                                *ngIf="otherFormGroup.get('RelativeName').invalid && otherFormGroup.get('RelativeName').touched">
+                                Please enter Relative Name </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-label>Address</mat-label>
+                            <input name="RelativeAddress" formControlName="RelativeAddress" placeholder="Address"
+                                matInput [(ngModel)]="vRelativeAddress" #relativeadd
+                                (keydown)="onEnterrelativeadd($event)">
+                        </mat-form-field>
+
+                        <!-- [(ngModel)]="vRelatvieMobileNo" -->
+                        <mat-form-field appearance="outline" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-label>Relatvie MobileNo </mat-label>
+                            <input name="RelatvieMobileNo" formControlName="RelatvieMobileNo"
+                                placeholder="Mobile Number" matInput #mobile (keydown)="onEnterrelativemobile($event)"
+                                 [(ngModel)]="registerObj1.RelatvieMobileNo"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1').slice(0, 10);"
+                                type="number" value="9876658688" #relativemobile>
+                            <mat-error class="error"
+                                *ngIf="otherFormGroup.get('RelatvieMobileNo').invalid && otherFormGroup.get('RelatvieMobileNo').touched">10
+                                digits Mobile number is
+                                required</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%">
+                            <mat-label>Relationship Name</mat-label>
+                            <input matAutocompletePosition="below" type="text" placeholder="Select Relationship"
+                                matInput #relation formControlName="RelationshipId" [(ngModel)]="vRelationshipId"
+                                [matAutocomplete]="autoRelation">
+                            <span matSuffix style="display: flex;">
+                                <mat-icon class="mat-icon-close"
+                                    (click)="otherFormGroup.get('RelationshipId').setValue(''); isRelationshipSelected = false;">close</mat-icon>
+                                <mat-icon class="mat-icon-close"
+                                    (click)="otherFormGroup.get('RelationshipId').setValue(''); isRelationshipSelected = false;">search</mat-icon>
+                            </span>
+                            <mat-autocomplete #autoRelation="matAutocomplete" [displayWith]="getOptionTextRelationship">
+                                <mat-option *ngFor="let option of filteredOptionsRelation | async" [value]="option">
+                                    {{option.RelationshipName}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="footer-navigation-container mb-4" fxLayout="row wrap"
+                        fxLayoutAlign="space-between center">
+                        <div class="checkbox-container">
+                           
+
+                            <mat-checkbox class="example-margin" name="IsMLC" formControlName="IsMLC"
+                            [(ngModel)]="registerObj1.IsMLC" style="margin-right: 10px;">
+                            IsMLC</mat-checkbox>
+
+                            <mat-checkbox formControlName="OPIPChange" style="margin-right: 10px;"
+                            [(ngModel)]="registerObj1.IsOpToIPconv">OPIPChange
+                           </mat-checkbox>
+
+                           <mat-checkbox formControlName="IsCharity" style="margin-right: 10px;"
+                           [(ngModel)]="registerObj1.IsCharity">IsCharity
+                          </mat-checkbox>
+                        
+                          <mat-checkbox formControlName="IsSenior" style="margin-right: 10px;"
+                          [(ngModel)]="registerObj1.IsSeniorCitizen">IsSenior
+                          </mat-checkbox>
+                           
+
+                        </div>
+                        <div class="next-div button-row-group">
+
+                            <button class="btn btn-danger-outline" (click)="Close()">Close</button>
+                            <button class="btn btn-primary" color="accent" (click)="onNewSave()"
+                                [disabled]=" hospitalFormGroup.invalid || otherFormGroup.invalid">
+                                <span>Save</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </mat-card>
+
+            <!-- / CONTENT -->
+        </div>
+        <!-- / CENTER -->
+    </div>
+    <!-- / CONTENT-->
+
+</div>
+
+<!-- <div class="patient-col gap-3" fxFlex="10%" fxFlex.gt-sm="15%"> -->

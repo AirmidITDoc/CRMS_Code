@@ -1,0 +1,80 @@
+<div class="modal-wrapper grid-container">
+    <!-- Modal header -->
+    <div class="modal-header accent">
+        <div class="modal-header-content">
+            <div class="modal-header-title">
+                <span [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">Role Permission</span>
+            </div>
+            <div class="modal-header-right">
+                <div class="close-icon">
+                    <button mat-icon-button tabIndex="-1" (click)="onClose()" aria-label="Close dialog">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal body -->
+    <div class="modal-body" fusePerfectScrollbar>
+        <div class="modal-body-container">
+            <div fxLayout="column" class="gap-12">
+                <div class="modal-card-container">
+                    <mat-card>
+                        <div class="table-wrapper border-radius-4">
+                            <mat-table mat-table [dataSource]="dataSource" class="w-100-p">
+                                <ng-container matColumnDef="name">
+                                    <mat-header-cell mat-header-cell *matHeaderCellDef>
+                                        <span [style.paddingLeft.px]="40"> Title </span>
+                                    </mat-header-cell>
+                                    <mat-cell mat-cell *matCellDef="let data">
+                                        <div (click)="treeControl.toggle(data)">
+                                            <button mat-icon-button [style.visibility]="!data.expandable ? 'hidden' : ''" [style.marginLeft.px]="data.level * 32">
+                                                <mat-icon class="mat-icon-rtl-mirror">
+                                                    {{treeControl.isExpanded(data) ? 'expand_more' : 'chevron_right'}}
+                                                </mat-icon>
+                                            </button>
+                                            {{data.title}}
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="count">
+                                    <mat-header-cell mat-header-cell *matHeaderCellDef> Permissions </mat-header-cell>
+                                    <mat-cell mat-cell *matCellDef="let data">
+                                        <div class="checkbox-section">
+                                            <div class="checkbox-list gap-16" fxLayout="row">
+                                                <div class="checkbox-item">
+                                                    <mat-checkbox class="checklist-leaf-node" (change)="updatePermission(data,'view',$event)" [checked]="data.isView">View</mat-checkbox>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <mat-checkbox class="checklist-leaf-node" (change)="updatePermission(data,'add',$event)" [checked]="data.isAdd">Add</mat-checkbox>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <mat-checkbox class="checklist-leaf-node" (change)="updatePermission(data,'edit',$event)" [checked]="data.isEdit">Edit</mat-checkbox>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <mat-checkbox class="checklist-leaf-node" (change)="updatePermission(data,'delete',$event)" [checked]="data.isDelete">Delete</mat-checkbox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                            </mat-table>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal footer -->
+    <div class="modal-footer">
+        <div class="footer-navigation-container">
+            <div class="modal-footer-buttons">
+                <button class="btn btn-primary" (click)="onSubmit()">Save</button>
+                <button class="btn btn-danger-outline" id="btncancel" (click)="onClose()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

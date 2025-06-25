@@ -1,0 +1,248 @@
+// app-service-master {
+//     .mat-header-row {
+//         width: 1900px;
+//         max-width: 1900px;
+//         min-width: 1900px;
+//         font-weight: bold;
+//     }
+//     .mat-row {
+//         width: 1900px;
+//         max-width: 1900px;
+//         min-width: 1900px;
+//     }
+
+//     .mat-column-ServiceId {
+//         width: 90px;
+//         max-width: 90px;
+//         min-width: 90px;
+//     }
+
+    .mat-column-ServiceName {
+        width: 230px;
+        max-width: 230px;
+        min-width: 230px;
+        text-align: left;
+        justify-content: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow: hidden !important;
+        display: inline-flex;
+        display: inline; 
+    }
+
+    .mat-column-ServiceShortDesc {
+        width: 180px;
+        max-width: 180px;
+        min-width: 180px;
+        text-align: left;
+        justify-content: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow: hidden !important;
+        display: inline-flex;
+        display: inline; 
+    }
+    .mat-column-GroupName {
+        width: 160px;
+        max-width: 160px;
+        min-width: 160px;
+        text-align: left;
+        justify-content: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow: hidden !important;
+        display: inline-flex;
+        display: inline; 
+    }
+    .mat-column-TariffName {
+        width: 160px;
+        max-width: 160px;
+        min-width: 160px;
+        text-align: left;
+        justify-content: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow: hidden !important;
+        display: inline-flex;
+        display: inline; 
+    }
+    .mat-column-IsEditable {
+        text-align: center;
+        justify-content: center;
+    }
+    .mat-column-CreditedtoDoctor {
+        text-align: center;
+        justify-content: center;
+    }
+    .mat-column-IsPathology {
+        text-align: center;
+        justify-content: center;
+    }
+    .mat-column-IsRadiology {
+        text-align: center;
+        justify-content: center;
+    }
+    .mat-column-Ispackage {
+        text-align: center;
+        justify-content: center;
+    }
+        .mat-column-IsDeleted { 
+        text-align: center;
+        justify-content: center;
+    }
+//     .mat-column-DoctorId {
+//         width: 90px;
+//         max-width: 90px;
+//         min-width: 90px;
+//     }
+//     .mat-column-IsDocEditable {
+//         width: 90px;
+//         max-width: 90px;
+//         min-width: 90px;
+//     }
+//     .mat-column-TariffId {
+//         width: 90px;
+//         max-width: 90px;
+//         min-width: 90px;
+//     }
+//     .mat-column-SubGroupId {
+//         width: 90px;
+//         max-width: 90px;
+//         min-width: 90px;
+//     }
+
+//     .mat-column-PrintOrder {
+//         width: 90px;
+//         max-width: 90px;
+//         min-width: 90px;
+//     }
+
+//     .mat-column-EmgAmt {
+//         width: 90px;
+//         max-width: 90px;
+//         min-width: 90px;
+//     }
+
+//     .mat-column-EmgPer {
+//         width: 90px;
+//         max-width: 90px;
+//         min-width: 90px;
+//     }
+
+//     .mat-column-Price {
+//         width: 80px;
+//         max-width: 80px;
+//         min-width: 80px;
+//     }
+
+
+
+//     .mat-column-action {
+//         // color: white !important;
+//         width: 100px;
+//         max-width: 100px;
+//         min-width: 100px;
+//         text-align: right;
+//         justify-content: right;
+//     }
+//     .mat-icon-button {
+//         padding: 0;
+//         min-width: 0;
+//         width: 40px;
+//         height: 20px;
+//         flex-shrink: 0;
+//         line-height: 20px;
+//         border-radius: 50%;
+//     }
+//     .clearbutton {
+//         padding-right: 5px;
+//         padding-left: 5px;
+//         float: right;
+//         color: blue;
+//         width: 27%;
+//         margin-top: 20px;
+//         margin-bottom: 20px;
+//         margin: 5px;
+//         font-size: 17px;
+//         border: 1px solid #808080;
+//         height: 40px;
+//     }
+
+//     .cleariconbutton {
+//         font-size: 30px;
+//         text-align: center;
+//         margin: 10 10 10 10 px;
+//         // margin-bottom: 35px;
+//         // margin-right: 13px;
+
+//         color: blue;
+//     }
+
+//     .searchButton {
+//         padding-right: 5px;
+//         padding-left: 5px;
+//         float: right;
+//         color: blue;
+//         width: 27%;
+//         margin-top: 20px;
+//         margin-bottom: 20px;
+//         margin: 5px;
+//         font-size: 17px;
+//         border: 1px solid #808080;
+//         height: 40px;
+//     }
+
+//     .searchiconbutton {
+//         font-size: 30px;
+//         text-align: center;
+//         margin: 10 10 10 10 px;
+//         // margin-bottom: 35px;
+//         // margin-right: 10px;
+//         color: blue;
+//     }
+// }
+
+// //sidebar
+// #toggle,
+// #container .e-btn.e-info:hover,
+// #toggle:focus {
+//     /* csslint allow: adjoining-classes*/
+//     background: #00695c;
+//     box-shadow: none;
+//     border-radius: 0;
+//     height: 39px;
+//     width: 100px;
+// }
+
+// #close,
+// #close:hover,
+// #close:active,
+// #close:focus {
+//     /* csslint allow: adjoining-classes*/
+//     background: #fafafa;
+//     color: black;
+// }
+
+// #toggle,
+// #container .e-btn.e-info:hover,
+// #toggle:focus {
+//     /* csslint allow: adjoining-classes*/
+//     background: #00695c;
+//     box-shadow: none;
+//     border-radius: 0;
+//     height: 39px;
+//     width: 100px;
+// }
+
+// #close,
+// #close:hover,
+// #close:active,
+// #close:focus {
+//     /* csslint allow: adjoining-classes*/
+//     background: #fafafa;
+//     color: black;
+// }

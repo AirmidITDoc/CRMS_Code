@@ -1,0 +1,35 @@
+.mat-typography {
+    .mat-button,
+    .mat-raised-button {
+        font-family: inherit;
+        @include font-size(13px);
+        .mat-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .mat-icon-button {
+        &.mat-button-disabled {
+        }
+    }
+    @include themed() {
+        .mat-raised-button {
+            background-color: t($ngt-card);
+            color: t($text-color);
+            &:not([class*=mat-elevation-z]){
+                // @include box-shadow-small(2px);
+
+            }
+            .mat-icon {
+            }
+        }
+
+        .mat-icon-button {
+            &.mat-button-disabled.mat-button-disabled {
+                color: inherit;
+                opacity: 0.4;
+            }
+        }
+    }
+}

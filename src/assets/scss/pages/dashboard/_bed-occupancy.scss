@@ -1,0 +1,28 @@
+.bed-occupancy-section {
+    .ward-dashboard-container {
+        .layout-content-container {
+            height: calc(100vh - 130px);
+            .ward-card-container {
+                cursor: pointer;
+                .ward-card {
+                    transition: 0.2s;
+                }
+            }
+        }
+    }
+    @include themed() {
+        .ward-dashboard-container {
+            .layout-content-container {
+                .ward-card-container {
+                    cursor: pointer;
+                    .ward-card {
+                        &.active,
+                        &:hover {
+                            background-color: t($ngt-primary-50);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,103 @@
+$layout-gap: 12px;
+.page-layout {
+    width: 100%;
+    .center {
+        .header {
+            .welcome-message {
+                @include font-size(20px);
+            }
+            .header-row {
+                width: 100%;
+            }
+        }
+        .content-card {
+            position: relative;
+        }
+    }
+    .top-header,
+    > .header,
+    > .mat-toolbar {
+        height: auto;
+        max-height: 45px;
+        min-height: 45px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 16px;
+        @include themed() {
+            background-color: t($ngt-primary);
+            color: t($ngt-primary-text);
+        }
+        .top-header-info {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: 8px;
+            .top-header-title {
+                @include font-size(17px);
+            }
+            .common-date-container {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+        }
+        .top-header-right {
+        }
+        .date-time-container,
+        .comman-date-container {
+            .mat-form-field {
+                .mat-form-field-wrapper {
+                    margin: 0;
+                    padding: 0;
+                    .mat-form-field-flex {
+                        .mat-form-field-infix {
+                            padding: 0.7em 0;
+                        }
+                    }
+                }
+                svg {
+                    path {
+                        fill: $gray-200;
+                    }
+                }
+                .material-icons {
+                    color: $gray-200;
+                }
+            }
+            &.padding-div {
+                padding: 0;
+            }
+        }
+        .mat-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo-text {
+            @include font-size(17px);
+        }
+    }
+    .layout-body {
+        &.with-sidebar {
+            display: grid;
+            grid-template-columns: auto 1fr;
+        }
+        .layout-body-container {
+            padding: $layout-gap;
+        }
+    }
+    .layout-footer {
+        padding: 0 $layout-gap $layout-gap $layout-gap;
+        .layout-footer-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+    }
+    &.grid-container {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        height: 100%;
+    }
+}

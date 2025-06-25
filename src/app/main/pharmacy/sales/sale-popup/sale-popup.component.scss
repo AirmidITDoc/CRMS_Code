@@ -1,0 +1,89 @@
+.sale-table{
+    height: 300px!important;
+}
+
+app-sale-popup{
+    .mat-header-row {
+    width:200;
+    min-width: 700px;
+    min-height: 30px;
+  }
+
+  .mat-row {
+    width: 100%;
+    //max-width: 1600px;
+    min-width: 700px;
+    min-height: 30px;
+   
+  }
+
+ 
+  .mat-column-BatchNo {
+    width: 80px;
+    max-width: 80px;
+    min-width: 80px;
+    text-align: left;
+  }
+
+    .mat-column-BatchExpDate {
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
+      align-items: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      overflow: hidden !important;
+      justify-content: left;
+    }
+  
+  .mat-column-BalanceQty {
+    width: 100px;
+    max-width: 100px;
+    min-width: 100px;
+    text-align: left;
+  }
+ 
+  .mat-column-MRP {
+    width: 100px;
+    max-width: 100px;
+    min-width: 100px;
+    text-align: left;
+  }
+
+  .mat-column-PurPrice {
+    width: 100px;
+    max-width: 100px;
+    min-width: 100px;
+    text-align: left;
+  }
+
+  .mat-column-LandedRate {
+    width: 100px;
+    max-width: 100px;
+    min-width: 100px;
+    text-align: left;
+  }
+
+  .mat-column-ConversionFactor {
+    width: 80px;
+    max-width: 80px;
+    min-width: 80px;
+    text-align: left;
+  }
+  .mat-column-DrugTypeName {
+    width: 140px;
+    max-width: 140px;
+    min-width: 140px;
+    text-align: left;
+  }
+  .mat-header-cell {
+    color: white !important; 
+  }
+
+// .table-row:selected {
+
+//   background-color: rebeccapurple;
+// }
+
+}

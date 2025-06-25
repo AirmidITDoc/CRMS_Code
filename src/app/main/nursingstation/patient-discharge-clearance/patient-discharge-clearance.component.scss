@@ -1,0 +1,67 @@
+ 
+.green-row {
+	background-color: green; /* Use !important to override default styles */
+	color: white; /* Optional: Change text color for better visibility */
+  }  
+  .red-row {
+    background-color: red; /* Use !important to override default styles */
+    color: white; /* Optional: Change text color for better visibility */
+    } 
+.stepper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  padding: 20px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.step-number {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #6e0fe3;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  position: relative;
+  z-index: 1; /* Ensure number is above the line */
+}
+
+.step-content {
+  margin-left: 10px;
+}
+
+.step-title {
+  font-weight: bold;
+  margin-top: 20px;
+}
+.step-icon {
+  font-weight: bold;
+  color: #6e0fe3;;
+  margin-top: 16px;
+}
+
+.step-line {
+  position: absolute;
+  left: 15px; /* Align with the step number */
+  top: 30px; /* Position below the step number */
+  width: 2px;
+  height: 70px; /* Adjust height as needed */
+  background-color: #7e09f3ed;
+  z-index: 0; /* Behind the step number */
+}
+
+ 
+
+
+
+ 

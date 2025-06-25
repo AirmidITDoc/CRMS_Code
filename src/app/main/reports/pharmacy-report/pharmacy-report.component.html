@@ -1,0 +1,845 @@
+<div id="contacts" fusePerfectScrollbar class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <!-- HEADER -->
+
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+        fxLayoutAlign.gt-xs="space-between center ">
+
+        <!-- APP TITLE -->
+        <div fxLayout="row" fxLayoutAlign="space-between center " style="width: 100%;">
+
+            <span [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
+                style="font-size: 20px;width: 70%; font-weight: 400;">
+                PHARMACY REPORTS
+            </span>
+
+            <div fxLayout="column" fxLayout.gt-xs="row">
+
+                <span class="material-icons" style="cursor: pointer; margin-top: 18px; color: #fff;"
+                    (click)="onClose()">
+                    close
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- CONTENT -->
+    <div class="content" style="width: 100% !important; height: 100% !important;">
+        <!-- CENTER -->
+        <div class="center p-24 pb-56" style="width: 100% !important; height: 100% !important;">
+            <!-- CONTENT -->
+            <div class="content-card" style="width: 100% !important; height: 100% !important;">
+                <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="5px">
+                    <div fxlayout="column" style="width: 40%;">
+                        <!-- style="width: 100%;" -->
+                        <div fxFlex.gt-sm="100%" style="width: 99%;">
+                            <!-- <div matColumnDef="loading" [ngClass]="{'hide': !(sIsLoading == 'loading-data')}"
+                            class="backgroundBlur" style="height: 100%;"> -->
+                            <!-- <div class="spinner-border text-danger"></div>
+                             </div> -->
+
+                            <mat-table matSort [dataSource]="dataSource" [@animateStagger]="{value:'50'}">
+                                <ng-container matColumnDef="ReportName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Report
+                                        Name
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> {{element.ReportName}}
+                                    </mat-cell>
+                                </ng-container>
+
+
+
+                                <ng-container matColumnDef="loading">
+                                    <mat-footer-cell *matFooterCellDef colspan="6">
+                                        no data found...
+                                    </mat-footer-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="noData">
+                                    <mat-footer-cell *matFooterCellDef colspan="6">
+                                        <mat-spinner style="float:left;" *ngIf="isLoadingStr=='loading'"
+                                            [diameter]='30'>
+                                        </mat-spinner>
+                                        <span *ngIf="isLoadingStr=='no-data'">No data found...</span>
+                                    </mat-footer-cell>
+                                </ng-container>
+
+
+                                <mat-header-row class="accent" *matHeaderRowDef="displayedColumns; sticky: true">
+                                </mat-header-row>
+                                <mat-row *matRowDef="let contact; columns: displayedColumns;" class="contact"
+                                    [@animate]="{value:'*',params:{y:'100%'}}"
+                                    (click)="ReportSelection(contact)"></mat-row>
+                                <mat-footer-row *matFooterRowDef="['loading']"
+                                    [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
+                                <mat-footer-row *matFooterRowDef="['noData']"
+                                    [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
+                            </mat-table>
+
+                        </div>
+
+                    </div>
+
+                    <div>
+
+                        <div class="dialog-content-wrapper" style="width: 100%;">
+                            <!-- ================================ LABEL HEADER  -->
+                            <form [formGroup]="_PharmacyreportService.userForm" style="padding: 6px 6px 5px 5px;"
+                                fusePerfectScrollbar>
+                                <div>
+                                    <span
+                                        style="font-family: 'Times New Roman', Times, serif;font-size: medium;color: rgb(80, 6, 30);padding: 10px;">Selected
+                                        Report : {{ReportName}}</span>
+
+                                    <span
+                                        style="font-family: 'Times New Roman', Times, serif;font-size: medium;color: rgb(80, 6, 30);float: right;">Current
+                                        User : {{UserId}} | {{UserName}}</span>
+                                </div>
+                                <br />
+                                <div fxLayout="row" fxLayoutAlign="start none">
+                                    <br />
+
+                                    <mat-form-field appearance="outline" style="margin-left: 2%; width: 300px;">
+                                        <mat-label>Enter a date range</mat-label>
+                                        <mat-date-range-input [rangePicker]="picker">
+                                            <input matStartDate formControlName="startdate" placeholder="Start date">
+                                            <input matEndDate formControlName="enddate" placeholder="End date">
+                                        </mat-date-range-input>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-date-range-picker #picker></mat-date-range-picker>
+                                    </mat-form-field>
+
+
+                                </div>
+
+                                <div fxLayout="row" *ngIf="FlagUserSelected" style="margin-left: 2%; width: 300px;">
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>User</mat-label>
+                                        <input matAutocompletePosition="below" type="text" placeholder="Select User"
+                                            matInput formControlName="UserId" [matAutocomplete]="autoUser">
+                                        <span matSuffix style="display: flex;">
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('UserId').setValue(''); isUserSelected = false;">close</mat-icon>
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('UserId').setValue(''); isUserSelected = false;">search</mat-icon>
+                                        </span>
+                                        <mat-autocomplete #autoUser="matAutocomplete" [displayWith]="getOptionTextUser">
+                                            <mat-option *ngFor="let option of filteredOptionsUser | async"
+                                                [value]="option" (onSelectionChange)="userChk(option)">
+                                                {{option.UserName}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="row" *ngIf="FlagPaymentSelected" style="margin-left: 2%; width: 300px;">
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>PayemntMode</mat-label>
+                                        <input matAutocompletePosition="below" type="text"
+                                            placeholder="Select PaymentMode" matInput formControlName="PaymentMode"
+                                            [matAutocomplete]="autoPayment">
+                                        <span matSuffix style="display: flex;">
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('PaymentMode').setValue(''); isPaymentSelected = false;">close</mat-icon>
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('PaymentMode').setValue(''); isPaymentSelected = false;">search</mat-icon>
+                                        </span>
+                                        <mat-autocomplete #autoPayment="matAutocomplete"
+                                            [displayWith]="getOptionTextPaymentMode">
+                                            <mat-option *ngFor="let option of filteredOptionsPaymentmode | async"  [value]="option"  >
+                                                {{option.PaymentMode}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="row" *ngIf="FlagStoreSelected" style="margin-left: 2%; width: 300px;">
+                                    <!-- <mat-form-field appearance="outline" fxFlex="60%;">
+                                        <mat-label>Store Name</mat-label>
+                                        <mat-select formControlName="StoreId" name="StoreId1" required>
+                                            <mat-option></mat-option>
+                                            <mat-option *ngFor="let m of StoreList" [value]="m">
+                                                {{m.StoreName}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field> -->
+
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Store Name</mat-label>
+                                        <input matAutocompletePosition="below" type="text"
+                                            placeholder="Select Store Name" matInput formControlName="StoreId"
+                                            [matAutocomplete]="autoStoreName">
+                                        <span matSuffix style="display: flex;">
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('StoreId').setValue(''); isstoreSelected = false;">close</mat-icon>
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('StoreId').setValue(''); isstoreSelected = false;">search</mat-icon>
+                                        </span>
+                                        <mat-autocomplete #autoStoreName="matAutocomplete"
+                                            [displayWith]="getOptionstoreText" (optionSelected)='getSelectedPharobjNew($event.option.value)'>
+                                            <mat-option *ngFor="let option of filteredOptionsStore | async"
+                                                [value]="option">
+                                                {{option.StoreName}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- added by raksha -->
+                                <div fxLayout="row" *ngIf="FlagPatientSelected" style="margin-left: 2%; width: 300px;">
+
+                                    <mat-form-field class=searchRegId appearance="outline" fxFlex>
+                                        <mat-label>Registered Patient</mat-label>
+                                        <input type="text" name="RegID" formControlName="RegID"
+                                            placeholder="Patient Name (enter 2 char) " matInput [matAutocomplete]="RegisteredAuto"
+                                            (input)="getSearchList()" maxlength="10">
+                                        <span matSuffix style="display: flex;">
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('RegID').setValue(''); isRegIdSelected = false;">close</mat-icon>
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('RegID').setValue(''); isRegIdSelected = false;">search</mat-icon>
+                                        </span>
+                                        <mat-autocomplete #RegisteredAuto="matAutocomplete" [displayWith]="getOptionText"
+                                            (optionSelected)='getSelectedObjNew($event.option.value)'>
+                                            <mat-option *ngFor="let option of PatientListfilteredOptions"
+                                                [value]="option">
+                                                {{option.FirstName}} {{option.MiddleName}} {{option.LastName}} |
+                                                {{option.RegNo}} |
+                                                {{option.MobileNo}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                       
+                                    </mat-form-field>
+                                </div>
+
+                                
+                                <!-- end -->
+
+                                <div fxLayout="row" *ngIf="FlagItemSelected" style="margin-left: 2%; width: 300px;">
+                                    <!-- <mat-form-field appearance="outline" fxFlex="60%;">
+                                        <mat-label>ItemName</mat-label>
+                                        <input type="text" name="ItemId" formControlName="ItemId"
+                                            placeholder="Item Name " matInput [matAutocomplete]="auto">
+                                        <span matSuffix style="display: flex;">
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('ItemId').setValue(''); isItemIdSelected = false;">
+                                                close </mat-icon>
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('ItemId').setValue(''); isItemIdSelected = false;">search</mat-icon>
+                                        </span>
+                                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionItemText">
+                                            <mat-option *ngFor="let option of filteredOptionsItem" [value]="option">
+                                                {{option.ItemName}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                      
+                                    </mat-form-field> -->
+
+
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <input type="text" name="ItemId" formControlName="ItemId"
+                                            placeholder="ItemName" matInput [matAutocomplete]="auto"
+                                            (input)="getSearchItemList()" maxlength="10">
+                                        <span matSuffix style="display: flex;">
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('ItemId').setValue(''); isItemIdSelected = false;">close</mat-icon>
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('ItemId').setValue(''); isItemIdSelected = false;">search</mat-icon>
+                                        </span>
+                                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionItemText">
+                                            <mat-option *ngFor="let option of filteredOptionsItem"
+                                                [value]="option">
+                                                {{option.ItemName}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                      
+                                    </mat-form-field>
+
+                                </div>
+
+                                <div fxLayout="row" *ngIf="FlagDrugTypeIdSelected" style="margin-left: 2%; width: 300px;">
+
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Drug TYpe</mat-label>
+                                        <input matAutocompletePosition="below" type="text" placeholder="Select DrugType"
+                                            matInput formControlName="DrugTypeId" [matAutocomplete]="autoDrugType">
+                                        <span matSuffix style="display: flex;">
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('DrugTypeId').setValue(''); isDugtypeSelected = false;">close</mat-icon>
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('DrugTypeId').setValue(''); isDugtypeSelected = false;">search</mat-icon>
+                                        </span>
+                                        <mat-autocomplete #autoDrugType="matAutocomplete"
+                                            [displayWith]="getOptionDrugtypeText">
+                                            <mat-option *ngFor="let option of filteredOptionsDrugtype | async"
+                                                [value]="option">
+                                                {{option.DrugTypeName}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="row" *ngIf="FlagDoctorIDSelected" style="margin-left: 2%; width: 300px;">
+
+
+                                    <mat-form-field appearance="outline" *ngIf="FlagDoctorIDSelected" fxFlex>
+                                        <mat-label>Doctor Name</mat-label>
+                                        <input matAutocompletePosition="below" type="text" placeholder="Select Doctor"
+                                            matInput formControlName="DoctorID" (input)="getDoctorList()"
+                                             [matAutocomplete]="autosearchDoctor">
+                                        <span matSuffix style="display: flex;">
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('DoctorID').setValue(''); isSearchdoctorSelected = false;">close</mat-icon>
+                                            <mat-icon class="mat-icon-close"
+                                                (click)="_PharmacyreportService.userForm.get('DoctorID').setValue(''); isSearchdoctorSelected = false;">search</mat-icon>
+                                        </span>
+                                        <mat-autocomplete #autosearchDoctor="matAutocomplete"
+                                            [displayWith]="getOptionTextsearchDoctor">
+                                            <mat-option *ngFor="let option of filteredOptionssearchDoctor | async"
+                                                [value]="option">
+                                                {{option.Doctorname}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </div>
+
+                                <div fxLayout="row" *ngIf="FlagRegNoSelected" style="margin-left: 2%; width: 300px;">
+
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>RegNo</mat-label>
+                                        <input name="RegNo" formControlName="RegNo" placeholder="RegNo" matInput>
+
+                                    </mat-form-field>
+                                </div>
+                                <!-- <div fxLayout="row" *ngIf="FlaOPIPTypeSelected" style="margin-left:2%;">
+                                    <span *ngIf="FlaOPIPTypeSelected" style="font-weight: bold;margin-left: 2%;">Patient
+                                        Type</span>
+                                    <mat-radio-group aria-label="Select an option" formControlName="OPIPType"
+                                        *ngIf="FlaOPIPTypeSelected" style="margin-left:2%;" name="OPIPType">
+
+                                        <mat-radio-button value="2">All
+                                        </mat-radio-button>
+                                        <mat-radio-button value="0">OP
+                                        </mat-radio-button>
+                                        <mat-radio-button value="1">IP</mat-radio-button>
+                                    </mat-radio-group> -->
+                                    <!-- <span *ngIf="SpinLoading" style="width:60px;height: 60px;margin-left:10px;">
+                                        Processing..... <i class="fa-solid fa-spinner fa-spin loading-spinner"></i>
+                                    </span> -->
+
+                                    <!-- <button mat-raised-button class="searchButton" matTooltip="Print"
+                                        style="width: 400px;margin-left: 50px;background-color: rgb(3, 38, 59);border-radius: 16px;color: azure;width: 400px;"
+                                        (click)="viewDailyCollectionPdf()"> Print New By 
+                                    </button>
+
+                                    <button mat-raised-button class="searchButton" matTooltip="Print"
+                                    style="width: 400px;margin-left: 50px;background-color: rgb(3, 38, 59);border-radius: 16px;color: azure;width: 400px;"
+                                    (click)="viewDailyCollectionSummaryPdf()">
+                                    Print New Daily Collection Summary
+                                </button> -->
+
+                                <!-- </div> -->
+                                <div fxLayout="row" *ngIf="FlaOPIPTypeSelected" style="margin-left: 2%; margin-bottom: 3%;">
+                                    <span style="font-weight: bold;margin-left: 2%;">Patient Type</span>
+                                    <mat-radio-group aria-label="Select an option" formControlName="OPIPType"
+                                        style="margin-left:2%;" name="OPIPType">
+                                
+                                        <mat-radio-button value="2">All
+                                        </mat-radio-button>
+                                        <mat-radio-button value="0">OP
+                                        </mat-radio-button>
+                                        <mat-radio-button value="1">IP</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="start none">
+                                    <button class="btn btn-primary " color="accent" (click)="getPrint()"
+                                        style="margin-left:2%;">
+                                        <span>Print</span>
+                                    </button>
+                                    <button type="button" mat-raised-button (click)="getExcelData()" >
+                                        Export Excel
+                                    </button> 
+
+                                </div>
+                            </form>
+
+
+                            <!-- ================================ LABEL HEADER  -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- / CONTENT -->
+    </div>
+    <!-- / CENTER -->
+</div>
+
+
+
+
+<div hidden class="bill-template-wrapper" style="font-size: 30.25%;" #SalesDailycollectiontemplate>
+
+
+    <div style="margin-top:2px;">
+
+        <div style="font-weight:700;font-size:18px;text-align:center;margin-left:18%;width:500px;">KESHAWAH
+            PHARMACY</div>
+
+        <div style="color:#464343;text-align:center;margin-left:6%;width:700px;">
+            Plot No CS.NO 272/2 Ramwadi Raod Modikhna Solapur-413021
+            Call:9898767876,9089786567</div>
+
+        <div style="color:#464343;text-align:center;margin-left:18%;width:500px;">
+            EmailId:hospital@113@gmail.com,WWW.Kheshav@gmail.com
+        </div>
+    </div>
+
+    <div style="border:1px solid grey;text-align:center;padding:2px;background-color: gray;">
+
+        <div style="display:flex; align-items: center;">
+            <div style="font-weight:400;font-size:18px;text-align:center;margin-left:18%;width:500px;">PHARMACY
+                DAILY COLLECTION</div>
+            <span style="font-size: 9px;font-weight: 700;width: 20%;">PrintDate : {{currentDate | date: 'short'}}</span>
+        </div>
+
+    </div>
+    <div style="margin-top:2px;">
+        <div style="font-weight: bold;">From Date : {{FromDate}} -- To Date :{{Todate}}</div>
+    </div>
+    <table class="table" style="width:100%;border-collapse:collapse">
+        <tbody>
+
+            <tr style="font-size:10px;background-color: rgb(127, 174, 255);">
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Sr No.</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Date</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Sales No</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:70px">
+                    Patient Name</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Cash Pay</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Card Pay</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:40px">
+                    Cheque Pay</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    NEFT Pay</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    PayTM</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Adv.Used </td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Bal Amt</td>
+            </tr>
+
+
+            <!-- <tr *ngFor="let item1 of reportPrintObjListTest;" style="font-size:10px;border-bottom: 1px;">
+                <tr><td>{{item1?.Label}}</td></tr> -->
+
+            <tr *ngFor="let item of reportPrintObjList; let indx = index;" style="font-size:10px;border-bottom: 1px;">
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{indx+1}} {{item?.Label}}</td>
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.Date | date:'shortDate'}}</td>
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.SalesNo}}</td>
+
+                <td
+                    style="border-left:1px solid #000;padding:0;height:10px;vertical-align:middle;text-align: left;margin-left: 5px;">
+                    {{item?.PatientName}}
+                </td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;text-align:center;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.CashPayAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;vertical-align:middle;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.CardPayAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.ChequePayAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;text-align:center;padding:0;height:10px;vertical-align:middle">
+                    {{item?.NEFTPayAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;padding:0;height:10px;vertical-align:middle">
+                    {{item?.PayTMAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.AdvanceUsedAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.BalanceAmount}}</td>
+            </tr>
+            <hr>
+            <tr style="border: 1px solid black;">
+
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalCashpay}}</td>
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalCardpay}}</td>
+
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;text-align:center;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalChequepay}}</td>
+                <td
+                    style="border-left:1px solid #000;vertical-align:middle;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalNeftpay}}</td>
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalPayTmpay}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;text-align:center;padding:0;height:10px;vertical-align:middle">
+                    {{TotalAdvUsed}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;padding:0;height:10px;vertical-align:middle">
+                    {{TotalNETAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;padding:0;height:10px;vertical-align:middle">
+                    {{TotalBalancepay}}</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+
+
+<div hidden class="bill-template-wrapper" style="font-size: 30.25%;" #SalescollectiontSummaryemplate>
+
+
+    <div style="margin-top:2px;">
+
+        <div style="font-weight:700;font-size:18px;text-align:center;margin-left:18%;width:500px;">KESHAWAH
+            PHARMACY</div>
+
+        <div style="color:#464343;text-align:center;margin-left:6%;width:700px;">
+            Plot No CS.NO 272/2 Ramwadi Raod Modikhna Solapur-413021
+            Call:9898767876,9089786567</div>
+
+        <div style="color:#464343;text-align:center;margin-left:18%;width:500px;">
+            EmailId:hospital@113@gmail.com,WWW.Kheshav@gmail.com
+        </div>
+    </div>
+
+    <div style="border:1px solid grey;text-align:center;padding:2px;background-color: gray;">
+
+        <div style="display:flex; align-items: center;">
+            <div style="font-weight:400;font-size:15px;text-align:center;margin-left:18%;width:500px;">PHARMACY
+                COLLECTION SUMMARY</div>
+            <span style="font-size: 9px;font-weight: 700;width: 20%;">PrintDate : {{currentDate | date: 'short'}}</span>
+        </div>
+
+    </div>
+    <div style="margin-top:2px;">
+        <div style="font-weight: bold;">From Date : {{FromDate}} -- To Date :{{Todate}}</div>
+    </div>
+    <table class="table" style="width:100%;border-collapse:collapse">
+        <tbody>
+
+            <tr style="font-size:10px;background-color: rgb(127, 174, 255);">
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                </td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:20px">
+                    PAY Date</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:25px">
+                    Bill Amt</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:25px">
+                    Disc Amt</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:25px">
+                    Net Amt</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:25px">
+                    Bal Amt</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:25px">
+                    Paid Amt</td>
+
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:25px">
+                    Cash Amt</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:25px">
+                    Card Amt</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:25px">
+                    Cheque PAY</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:25px">
+                    NEFT PAY</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:25px">
+                    UPI PAY</td>
+
+            </tr>
+
+            <tr *ngFor="let item of reportPrintObjList; let indx = index;" style="font-size:10px;">
+
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.Label}}</td>
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.PaymentDate | date:'shortDate'}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;text-align:center;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.TotalBillAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;text-align:center;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.DiscAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;text-align:center;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.NetAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.BalAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.PaidAmount}}</td>
+
+                <td
+                    style="border-left:1px solid #000;vertical-align:middle;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.CashPay}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;text-align:center;padding:0;height:10px;vertical-align:middle">
+                    {{item?.CardPay}}</td>
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.ChequePay}}</td>
+
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;padding:0;height:10px;vertical-align:middle">
+                    {{item?.NEFTPay}}</td>
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.OnlinePay}}</td>
+
+            </tr>
+            <tr style="border: 1px solid black;font-size: 14px;font-weight: 400;">
+
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                </td>
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    Total Amt. </td>
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalBillAmount}}</td>
+
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalDiscAmount}}</td>
+
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalNETAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;padding:0;height:10px;vertical-align:middle">
+                    {{TotalBalAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;text-align:center;padding:0;height:10px;vertical-align:middle">
+                    {{TotalPaidAmount}}</td>
+
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalCashAmount}}</td>
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalCardpay}}</td>
+
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;text-align:center;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalChequepay}}</td>
+                <td
+                    style="border-left:1px solid #000;vertical-align:middle;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalNeftpay}}</td>
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalPayTmpay}}</td>
+
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+
+</div>
+
+
+<div hidden class="bill-template-wrapper" style="font-size: 30.25%;" #SalesReturntemplate>
+
+
+    <div>
+        <div style="display:flex">
+
+        </div>
+    </div>
+    <div style="border:1px solid grey;border-radius:16px;text-align:center;padding:8px;margin-top:5px">
+        <h3 style="text-transform: uppercase;font-weight: 500;margin:0;;width: 99%;text-align: center;">SALES RETURN
+        </h3>
+        <div style="display:flex;width:700px;">
+            <div style="width:90px;font-weight:700;font-size:small;margin-left:400px">PrintDate</div>
+            <div style="width:10px;font-weight:700">:</div>
+            <div style="margin-left:20px;font-size:small">{{currentDate | date: 'medium'}}</div>
+        </div>
+    </div>
+    <table class="table" style="width:100%;border-collapse:collapse">
+        <tbody>
+
+            <tr style="font-size:10px;background-color: rgb(127, 174, 255);">
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:15px;">
+                    Sr No.</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:15px;">
+                    SalesReturnId</td>
+
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:35px">
+                    Patient Name</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:15px;">
+                    Total Amt</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:15px;">
+                    Vat Amt</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:15px;">
+                    Disc Amt</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:15px;">
+                    Net Amt</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:15px;">
+                    CGST Amt</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:15px;">
+                    SGST Amt</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:15px;">
+                    IGST Amt</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:15px;">
+                    Bal.Amt</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Store Name</td>
+            </tr>
+
+            <tr *ngFor="let item of reportPrintObjList1; let indx = index;" style="font-size:10px;">
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{indx+1}}</td>
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.SalesReturnId}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;text-align:center;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.PatientName}}</td>
+                <td
+                    style="border-left:1px solid #000;vertical-align:middle;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.TotalAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.VatAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;text-align:center;padding:0;height:10px;vertical-align:middle">
+                    {{item?.DiscAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;padding:0;height:10px;vertical-align:middle">
+                    {{item?.NetAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.CGSTAmt}}</td>
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.SGSTAmt}}</td>
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.IGSTAmt}}</td>
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.IGSTAmt}}</td>
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{item?.PrintStoreName}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <hr>
+    <table class="table1" style="width:100%;border-collapse:collapse;padding-bottom: 10px;padding-top: 10px;">
+        <tbody>
+
+            <tr style="font-size:10px;border: 1px solid black;background-color: rgb(127, 174, 255);">
+
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Total Amount</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Total VATAmount</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Total DiscAmount</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Total NETAmount</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Total BalAmount</td>
+
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Total CGSTAmount</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Total SGSTAmount</td>
+                <td
+                    style="border:1px solid #000;font-weight:700;text-align:center;vertical-align:middle;padding:5px 5px;width:30px">
+                    Total IGSTAmount</td>
+            </tr>
+            <tr style="border: 1px solid black;">
+
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalAmount}}</td>
+                <td style="border-left:1px solid #000;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalVatAmount}}</td>
+
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;text-align:center;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalDiscAmount}}</td>
+                <td
+                    style="border-left:1px solid #000;vertical-align:middle;padding:0;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalNETAmount}}</td>
+
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;text-align:center;padding:0;height:10px;vertical-align:middle">
+                    {{TotalBalancepay}}</td>
+
+                <td
+                    style="border-left:1px solid #000;border-right:1px solid #000;vertical-align:middle;padding:3px;height:10px;text-align:center;vertical-align:middle">
+                    {{TotalCGST}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;text-align:center;padding:0;height:10px;vertical-align:middle">
+                    {{TotalSGST}}</td>
+                <td
+                    style="border-left:1px solid #000;text-align:center;vertical-align:middle;padding:0;height:10px;vertical-align:middle">
+                    {{TotalIGST}}</td>
+
+
+            </tr>
+
+        </tbody>
+    </table>
+</div>

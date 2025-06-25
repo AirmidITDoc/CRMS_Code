@@ -1,0 +1,24 @@
+
+.ip-billing-section {
+    .billing-header-content{
+        display: grid;
+        gap: 8px 4px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+.mat-option-panel
+ {
+    width: 300px; 
+/* Set the desired width */
+
+}
+.red-row {
+	background-color: rgb(245, 186, 195) !important; /* Use !important to override default styles */
+	//color: white; /* Optional: Change text color for better visibility */
+  }
+
+
+  .package-auto-complete {
+    min-width: 300px !important;
+    max-width: 300px !important;
+}

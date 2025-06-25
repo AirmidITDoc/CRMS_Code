@@ -1,0 +1,58 @@
+<!-- <mat-form-field appearance="outline" fxFlex *ngIf="!IsMultiPle">
+    <mat-label>{{label}}</mat-label>
+    <mat-select [formControl]="control" placeholder="Search..." #singleSelect (selectionChange)="onDdlChange($event)"
+        [(ngModel)]="value"  [debounceTime]="300" [threshold]="'10%'" msInfiniteScroll >
+        <mat-option>
+            <ngx-mat-select-search [formControl]="ddlFilterCtrl" placeholderLabel="Search..."
+                noEntriesFoundLabel="No results found"></ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let ddl of filteredDdls | async" [value]="ddl.value">
+            {{ddl.text}}
+        </mat-option>
+    </mat-select>
+    <div *ngIf="formGroup.controls[formControlName]?.invalid&& control?.touched && validations?.length>0">
+        <div *ngFor="let item of validations">
+            <mat-error *ngIf="formGroup.get(formControlName).hasError(item.name)">
+                {{item.Message}}
+            </mat-error>
+        </div>
+    </div>
+</mat-form-field>
+<mat-form-field appearance="outline" fxFlex *ngIf="IsMultiPle">
+    <mat-label>{{label}}</mat-label>
+    <mat-select [formControl]="control" placeholder="Search..." #singleSelect (selectionChange)="onDdlChange($event)"
+        [(ngModel)]="value" ariaDescribedby="ValueField" aria-label="{{ValueField}}" [debounceTime]="300" [threshold]="'10%'"  [compareWith]="comparer" msInfiniteScroll multiple>
+        <mat-option>
+            <ngx-mat-select-search [formControl]="ddlFilterCtrl" placeholderLabel="Search..."
+                noEntriesFoundLabel="No results found"></ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let ddl of filteredDdls | async" [value]="ddl">
+            {{ddl[TextField]}}
+        </mat-option>
+    </mat-select>
+    <div *ngIf="formGroup.controls[formControlName]?.invalid&& control?.touched && validations?.length>0">
+        <div *ngFor="let item of validations">
+            <mat-error *ngIf="formGroup.get(formControlName).hasError(item.name)">
+                {{item.Message}}
+            </mat-error>
+        </div>
+    </div>
+</mat-form-field> -->
+
+
+<mat-form-field appearance="outline" fxFlex>
+    <mat-label>{{ label }}</mat-label>
+    <input matAutocompletePosition="below" type="text" [placeholder]="placeholder" matInput
+      [formControl]="control" [matAutocomplete]="auto">
+    <span matSuffix style="display: flex;">
+      <mat-icon class="mat-icon-close" (click)="clearSelection()">clear</mat-icon>
+      <mat-icon class="mat-icon-close">search</mat-icon>
+    </span>
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option"
+        (click)="emitSelectionChange(option)">
+        {{ displayFn(option) }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  

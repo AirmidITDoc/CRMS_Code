@@ -1,0 +1,338 @@
+<div id="contact" class="simple page-layout inner-scroll inner-sidebar right-sidebar">
+    <mat-toolbar style="height: 50px;justify-content: space-between;width: 100%;">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <button mat-icon-button class="sidebar-toggle mr-12" style="color: white;">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
+                style="color: white;">account_box
+            </mat-icon>
+            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" style="color: white;">
+                Payment Information
+            </span>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+            <button mat-icon-button (click)="onClose()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+    <div class="content">
+        <div class="center p-12 pb-56">
+            <div class="content-card">
+                <div fxLayout="row" fxLayout="column" fxLayoutGap="10px">
+                    <mat-card fxFlex.gt-sm="100%" fxFlex style="padding: 6px;">
+                        <div class="customer-info my-8">
+                            <div class="customer-patient-info-title">
+                                <span style="font-weight: 700;">
+                                    Customer Information
+                                </span>
+                            </div>
+                            <hr>
+                            <div class="customer-patient-info" fxFlexFill fxLayout="row"
+                                fxLayoutAlign="space-between center" class="patient-info">
+                                <div class="patient-sub">
+                                    <div class="patient-info-row patient-info-1-111 pt-8" fxLayout="row"
+                                        fxLayoutAlign="space-between">
+
+                                        <div fxLayout="column" fxLayoutGap="6px">
+
+                                            <div class="patient-col">
+                                                <span class="patient-col-key">Customer Name
+                                                </span>
+                                                <span>:</span>
+                                                <span
+                                                    class="patient-col-value">{{selectedAdvanceObj.CustomerName}}</span>
+                                            </div>
+
+                                            <div class="patient-col">
+                                                <span class="patient-col-key">Address</span>
+                                                <span>:</span>
+                                                <span
+                                                    class="patient-col-value">{{selectedAdvanceObj.CustomerAddress}}</span>
+                                            </div>
+
+
+                                        </div>
+                                        <div fxLayout="column" fxLayoutGap="6px">
+                                            <div class="patient-col">
+                                                <span class="patient-col-key">InstallationDate
+                                                </span>
+                                                <span>:</span>
+                                                <span class="patient-col-value">{{selectedAdvanceObj.InstallationDate |
+                                                    date:'dd/MM/YYYY'}}
+                                                </span>
+                                            </div>
+
+                                            <div class="patient-col">
+                                                <span class="patient-col-key">MobileNo</span>
+                                                <span>:</span>
+                                                <span
+                                                    class="patient-col-value">{{selectedAdvanceObj.CustomerMobileNo}}</span>
+                                            </div>
+
+                                        </div>
+                                        <div fxLayout="column" fxLayoutGap="6px">
+
+                                            <div class="patient-col">
+                                                <span class="patient-col-key">ContactPersonName</span>
+                                                <span>:</span>
+                                                <span
+                                                    class="patient-col-value">{{selectedAdvanceObj.ContactPersonName}}</span>
+                                            </div>
+
+                                            <div class="patient-col">
+                                                <span class="patient-col-key">ContactPersonMobileNo
+                                                </span>
+                                                <span>:</span>
+                                                <span
+                                                    class="patient-col-value">{{selectedAdvanceObj.ContactPersonMobileNo}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+
+                    <mat-card style="padding: 6px;">
+                        <div fxLayout="column" fxFlex="100%" fxFlex.sm="50%" fxFlex.gt-sm="100%">
+                            <div class="investigation-title" fxLayoutAlign="space-between">
+                                <span style="font-weight: 700;">
+                                    AMC Details
+                                </span>
+                                <button mat-raised-button (click)="newAmc()"
+                                style="background-color: white;color: brown;">
+                                New AMC
+                            </button>
+                            </div>
+                            <div style="border: 1px solid rgb(203, 203, 203);width: 100%;"></div>
+                            <mat-table #table matSort [dataSource]="dsAMCDetList" [@animateStagger]="{value:'50'}"
+                                style="overflow: auto;">
+                                <ng-container matColumnDef="CustomerName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                        Customer Name
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                        <span> {{contact.CustomerName}}</span>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="AMCStartDate">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                        Start Date
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                        <span> {{contact.AMCStartDate | date:'dd/MM/YYYY'}}</span>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="AMCEndDate">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                        End Date
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                        <span> {{contact.AMCEndDate | date:'dd/MM/YYYY'}}</span>
+                                    </mat-cell>
+                                </ng-container>
+
+                                
+                                <ng-container matColumnDef="AMCDuration">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                        AMC Duration
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                        <span> {{contact.AMCDuration}}</span>
+                                    </mat-cell>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="AMCAmount">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                        AMC Amount
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                        <span> {{contact.AMCDueAmount | currency:'INR'}}</span>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="AMCPaidDate">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                       Paid Date
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                        <span> {{contact.PaymentDate | date:'dd/MM/YYYY'}}</span>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="PaymentId">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                        Pay Status
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                        
+                                        
+
+                                        <button mat-icon-button>
+                                            <mat-icon matTooltip="Paid" *ngIf="contact.PayStatus == Paid"
+                                                class="active-icon green-500 s-16">check_circle</mat-icon>
+                                            <mat-icon matTooltip="Pending" *ngIf="contact.PayStatus == 'Pending'"
+                                                class="active-icon red-500 s-16">hourglass_empty</mat-icon>
+                                        </button>
+
+                                        <button mat-icon-button matTooltip="Payment" (click)="PayAMtamt(contact)" 
+                                            *ngIf="contact.PayStatus == 'Pending' && contact.IsCancelled!==0">
+                                            <mat-icon>payment</mat-icon>
+                                        </button>
+
+                                        <button mat-icon-button matTooltip="Edit" *ngIf="contact.PayStatus == 'Pending' || contact.IsCancelled!==0" 
+                                        (click)="OnEditAMC(contact)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+
+                                        <button mat-icon-button matTooltip="print" *ngIf="contact.IsCancelled!==0">
+                                            <mat-icon title="Print Menu" [disabled]="contact.IsCancelled" class="disabled-icon">
+                                                print</mat-icon>
+                                        </button>
+                                        
+                                        <button mat-icon-button (click)="CancleAMCInformation(contact)" *ngIf="contact.PayStatus == 'Pending'" color="warn">
+                                            <mat-icon>delete_outline</mat-icon>
+                                        </button>
+
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="loading">
+                                    <mat-footer-cell *matFooterCellDef colspan="6">
+                                        loading data...
+                                    </mat-footer-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="noData">
+                                    <mat-footer-cell *matFooterCellDef colspan="6">
+                                        <span>No Data Found</span>
+                                    </mat-footer-cell>
+                                </ng-container>
+
+                                <mat-header-row class="accent" *matHeaderRowDef="displayedColumns; sticky: true">
+                                </mat-header-row>
+                                <mat-row *matRowDef="let contact; columns: displayedColumns;"
+                                    [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+                                <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dsAMCDetList !=null}">
+                                </mat-footer-row>
+                                <mat-footer-row *matFooterRowDef="['noData']"
+                                    [ngClass]="{'hide':!(dsAMCDetList!=null && dsAMCDetList.data.length==0)}">
+                                </mat-footer-row>
+                            </mat-table>
+                            <mat-paginator #paginator [pageSizeOptions]="[10, 25, 50, 100]" [pageSize]="5"
+                                showFirstLastButtons>
+                            </mat-paginator>
+                        </div>
+                    </mat-card>
+
+                    <mat-card style="padding: 6px;">
+                        <div fxLayout="column" fxFlex="100%" fxFlex.sm="100%" fxFlex.gt-sm="100%">
+                            <div class="investigation-title" fxLayoutAlign="space-between">
+                                <span style="font-weight: 700;">
+                                    Bill List
+                                </span>
+
+                                <button mat-raised-button (click)="newBillRise()"
+                                    style="background-color: white;color: brown;">
+                                    Bill Raise
+                                </button>
+                            </div>
+                            <div style="border: 1px solid rgb(203, 203, 203);width: 100%;"></div>
+                         
+
+                            <mat-table #table1 matSort [dataSource]="dsBillRiseList"
+                            [@animateStagger]="{value:'50'}" style="overflow: auto;">  
+ 
+
+                            <ng-container matColumnDef="InvoiceDate">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                    Invoice Date </mat-header-cell>
+                                <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                    {{contact.InvDate | date: 'dd/MM/yyyy'}}
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="CustomerName">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                    Customer Name</mat-header-cell>
+                                <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                    {{contact.CustomerName}}
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Amount">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                    Amount</mat-header-cell>
+                                <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                    {{contact.AMCDueAmount}}
+                                </mat-cell>
+                            </ng-container> 
+
+                            <ng-container matColumnDef="CreatedBy">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>
+                                    Created By</mat-header-cell>
+                                <mat-cell *matCellDef="let contact" fxShow.gt-sm>
+                                    {{contact.CreatedBy}}
+                                </mat-cell>
+                            </ng-container> 
+
+                            <ng-container matColumnDef="Action">
+                                <mat-header-cell *matHeaderCellDef fxShow.gt-sm style="color: white;">Action
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let contact">
+                                    <button mat-icon-button matTooltip="Payment" (click)="PayAMtamt(contact)">
+                                        <mat-icon>payment</mat-icon>
+                                    </button>
+                            
+                                    <button mat-icon-button matTooltip="Edit" (click)="OnEditBillRise(contact)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                    <button mat-icon-button (click)="deleteTableRow(row)" color="warn">
+                                        <mat-icon>delete_outline</mat-icon>
+                                    </button>
+                            
+                                    <button mat-icon-button matTooltip="print" *ngIf="contact.IsCancelled==0">
+                                        <mat-icon title="Print Menu" [disabled]="contact.IsCancelled" class="disabled-icon">
+                                            print</mat-icon>
+                                    </button>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="loading">
+                                <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
+                                </mat-header-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="noData">
+                                <mat-footer-cell *matFooterCellDef colspan="6">
+                                    no data found...
+                                </mat-footer-cell>
+                            </ng-container>
+
+                            <mat-header-row class="accent" *matHeaderRowDef="displayedColumnsBillRise; sticky: true">
+                            </mat-header-row>
+                            <mat-row *matRowDef="let contact; columns: displayedColumnsBillRise;" class="contact"
+                                [@animate]="{value:'*',params:{y:'100%'}}" ></mat-row>
+                            <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide': dsBillRiseList!=null}">
+                            </mat-footer-row>
+                            <mat-footer-row *matFooterRowDef="['noData']"
+                                [ngClass]="{'hide':!(dsBillRiseList!=null && dsBillRiseList.data.length==0)}">
+                            </mat-footer-row>
+                            </mat-table>  
+                            <mat-paginator #paginator [pageSizeOptions]="[10, 25, 50, 100]" [pageSize]="5"
+                            showFirstLastButtons>
+                            </mat-paginator>
+ 
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

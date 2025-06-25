@@ -1,0 +1,198 @@
+<div class="page-layout simple inner-scroll inner-sidebar left-sidebar" dynamicTableHeight>
+
+    <mat-toolbar class="accent" style="width: 100%;justify-content: space-between;height: 50px;">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <button mat-icon-button class="sidebar-toggle mr-12" style="color: white;">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
+                style="color: white;">account_box
+            </mat-icon>
+            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" style="color: white;">
+                Patient Discharge Clearance
+            </span>
+        </div>
+       
+    </mat-toolbar> 
+
+    <div class="content">
+        <div class="center p-12 pb-56" style="border-radius: 4px;">
+            <div class="content-card">
+                <div  fxLayout="column" fxLayout="row" fxLayoutGap="10px">
+
+                    <div fxFlex="65%" fxLayoutGap="8px">  
+                        <mat-card style="padding: 5px;">
+
+                            <mat-table class="table" matSort [dataSource]="dspatientlist_1"
+                                [@animateStagger]="{value:'50'}" style="overflow: auto;">
+    
+                                <ng-container matColumnDef="RegNo">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                                        RegNo </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                        {{element.RegNo}} </mat-cell>
+                                </ng-container>
+    
+                                <ng-container matColumnDef="PatientName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                                        Patient Name</mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                        {{element.PatientName}} </mat-cell>
+                                </ng-container>
+    
+                                <ng-container matColumnDef="IPDNo">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                                        IPD No </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                        {{element.IPDNo}} </mat-cell>
+                                </ng-container>
+    
+                                <!-- <ng-container matColumnDef="Action">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                                        Action </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm> 
+                                      <button mat-icon-button (click)="PatietnClearanceOption(element)" color="warn">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                    
+                                    </mat-cell>
+                                </ng-container> -->
+    
+                                <ng-container matColumnDef="loading">
+                                    <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
+                                    </mat-header-cell>
+                                </ng-container>
+    
+                                <ng-container matColumnDef="noData">
+                                    <mat-footer-cell *matFooterCellDef colspan="6">
+                                        no data found...
+                                    </mat-footer-cell>
+                                </ng-container>
+    
+                                <mat-header-row class="accent" *matHeaderRowDef="displayedColumns; sticky: true">
+                                </mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;" class="element"
+                                    [@animate]="{value:'*',params:{y:'100%'}}"
+                                    (click)="getPatietnapprovelist(row)"></mat-row>
+                                <mat-footer-row *matFooterRowDef="['noData']"
+                                    [ngClass]="{'hide':!(dspatientlist_1!=null && dspatientlist_1.data.length==0)}">
+                                </mat-footer-row>
+                            </mat-table>
+                            <mat-paginator #paginator [pageSizeOptions]="[10, 25, 50, 100]" [pageSize]="10"
+                                showFirstLastButtons>
+                            </mat-paginator>
+
+                            <!-- <mat-table class="table" matSort [dataSource]="dspatientlist_2"
+                            [@animateStagger]="{value:'50'}" style="overflow: auto;">
+
+                            <ng-container matColumnDef="DepartmentName">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                                    Department Name </mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    {{element.DepartmentName}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="IsApproved">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                                    IsApproved</mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    {{element.IsApproved}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="IsApprovedBy">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                                    IsApprovedBy</mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    {{element.ApprovedBy}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="IsNoDues">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                                    IsNoDues </mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    {{element.IsNoDues}} </mat-cell>
+                            </ng-container> 
+                            
+                            <ng-container matColumnDef="Comments">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                                    Comments </mat-header-cell>
+                                <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm>
+                                    {{element.Comments}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="loading">
+                                <mat-header-cell *matFooterCellDef colspan="6" style="display: none;">
+                                </mat-header-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="noData">
+                                <mat-footer-cell *matFooterCellDef colspan="6">
+                                    no data found...
+                                </mat-footer-cell>
+                            </ng-container>
+
+                            <mat-header-row class="accent" *matHeaderRowDef="displayedColumns2; sticky: true">
+                            </mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns2;" class="element"
+                                [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+                            <mat-footer-row *matFooterRowDef="['noData']"
+                                [ngClass]="{'hide':!(dspatientlist_2!=null && dspatientlist_2.data.length==0)}">
+                            </mat-footer-row>
+                        </mat-table> -->
+                         
+                        </mat-card> 
+                    </div>
+
+                    <div  fxFlex="35%" fxLayoutGap="8px"> 
+                       
+                            <!-- <mat-vertical-stepper linear style="background-color:  rgb(238, 245, 245);">
+                                <mat-step *ngFor="let department of DepartmentList; let i = index"  
+                                [ngClass]="{'red-row ': department.IsApproved === 'true'}">
+                                  <ng-template matStepLabel>{{department.DepartmentName}} {{ i + 1 }}</ng-template> 
+                                  <p>DepartmentName: {{ department.DepartmentName }} </p>
+                                  <p>ApprovedByName: {{ department.ApprovedByName }} </p>  
+                                </mat-step>
+                              </mat-vertical-stepper> -->
+                              
+                         
+
+                                <!-- <div  *ngFor="let department of DepartmentList; let i = index" >
+                                    <div fxLayout="column" style="padding: 10px;">
+                                        <span [ngClass]="{'red-row ': department.ApprovedByName !== ''}"  > 
+                                            <strong> {{ i + 1 }} - {{department.DepartmentName}} </strong> </span> 
+                                        <span> DepartmentName : {{ department.DepartmentName }} </span>
+                                        <span> ApprovedByName : {{ department.ApprovedByName }} </span>  
+                                    </div>
+                                </div> -->
+
+
+                                <div class="stepper">
+                                    <div class="step" *ngFor="let department of DepartmentList; let i = index">
+                                        <div class="step-number">{{ i + 1 }}</div>
+                                        <div class="step-content">
+                                            <div fxLayout="row" fxLayoutGap="4px">
+                                                <span class="step-title">
+                                                    {{ department.DepartmentName }}
+                                                </span> 
+                                                <span class="step-icon">
+                                                    <button mat-icon-button matTooltip="Give Approval"  (click)="PatietnClearanceOption(department)"
+                                                    *ngIf="department.ApprovedByName === '' && department.DepartmentID === accountService.currentUserValue.user.storeId">
+                                                    <mat-icon>edit</mat-icon></button>
+                                                </span>
+                                             
+                                            </div> 
+                                            <div>Department Name : {{ department.DepartmentName }} </div>
+                                            <div [ngClass]="{'green-row ': department.ApprovedByName !== '' ,
+                                                             'red-row ': department.ApprovedByName === ''  }"
+                                            >ApprovedBy Name : {{ department.ApprovedByName || 'Pending' }}</div>
+                                        </div>
+                                        <div class="step-line" *ngIf="i < DepartmentList.length - 1"></div>
+                                    </div>
+                                </div>
+                       
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>

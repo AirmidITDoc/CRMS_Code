@@ -1,0 +1,223 @@
+<div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll" fusePerfectScrollbar
+    dynamicTableHeight>
+
+    <mat-toolbar class="accent" style="height:50px; justify-content: space-between;width: 100%;">
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+            <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
+                style="color: white;">account_box
+            </mat-icon>
+            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                Supplier Master
+            </span>
+        </div>
+        <div fxLayout="row">
+            <button mat-raised-button (click)="onAdd()" style="background-color: aliceblue;color: brown;">
+                <mat-icon>add</mat-icon>Add
+            </button>
+        </div>
+    </mat-toolbar>
+
+    <div class="content">
+
+        <!-- SIDEBAR -->
+        <fuse-sidebar name="app-main" position="left" lockedOpen="gt-sm" class="fuse-search-sidebar">
+            <!-- SIDEBAR HEADER -->
+            <div class="sidebar-content">
+
+                <div class="accent sidebar-header" fxLayout="row" fxLayoutAlign="start center">
+                    <span class="search-title">Search Facility</span>
+                    <!-- / USER -->
+                </div>
+                <!-- / SIDEBAR HEADER -->
+                <!-- SIDEBAR CONTENT -->
+                <div class="nav material2">
+                    <form [formGroup]="_supplierService.myformSearch">
+                        <div fxLayout="column" fxLayoutAlign="start none">
+                
+                            <mat-form-field appearance="outline">
+                                <mat-label>Search Supplier Name</mat-label>
+                                <input matInput placeholder="Search Supplier Name" autocomplete="off"
+                                                name="SupplierNameSearch" formControlName="SupplierNameSearch"
+                                                (keyup)="onSearch()" />
+                            </mat-form-field>
+                        
+                            <mat-radio-group name="IsDeletedSearch" formControlName="IsDeletedSearch"
+                                            (change)="onFilterChange()">
+                                            <mat-radio-button (click)="toggle(2)" [checked]="true"
+                                                value="2">All</mat-radio-button>
+                                            <mat-radio-button mat-fab value="1"
+                                                (click)="toggle(1)">IsActive</mat-radio-button>
+                                            <mat-radio-button (click)="toggle(0)"
+                                                value="0">IsDeactive</mat-radio-button>
+                                        </mat-radio-group>
+
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <button mat-raised-button (click)="onSearchClear()" class="clearbutton" matTooltip="close">
+                                <mat-icon class="cleariconbutton">close</mat-icon>
+                            </button>&nbsp;
+                            <button mat-raised-button class="searchButton" (click)="getSupplierMasterList()"
+                                matTooltip="search">
+                                <mat-icon class="searchiconbutton">search</mat-icon>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </fuse-sidebar>
+        <!-- / SIDEBAR -->
+
+        <!-- CENTER -->
+        <div class="center p-12 pb-56" fxFlexAlign="height: fit-content;">
+            <!-- CONTENT -->
+            <div class="content-card" style="border-radius:4px;">
+                <div fxFlexFill fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="30px">
+                    <div fxFlex.gt-sm="100%" fxFlex>
+                        <mat-card style="padding: 8px;">
+
+                            <div style="width: 100%;">
+                                <mat-table #table matSort [dataSource]="DSSupplierMaster"
+                                    [@animateStagger]="{value:'50'}" style="overflow: auto;">
+
+                                    <ng-container matColumnDef="SupplierId" sticky>
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-sm>Code
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.SupplierId}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="ContactPerson" sticky>
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> ContactPerson
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.ContactPerson}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="SupplierName" sticky>
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header class="w-200"> Supplier
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm class="w-200">
+                                            {{element.SupplierName}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Address">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxShow.gt-md class="w-180">
+                                            Address
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let contact" fxShow.gt-md class="w-250 ellipsis"
+                                            matTooltip="{{contact.Address}}">
+                                            {{contact.Address}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="CityName">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> CityName
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.CityName}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Mobile">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> Mobile
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.Mobile}}
+                                        </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Phone">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> Phone </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.Phone}}
+                                        </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Fax">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> Fax </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.Fax}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Email">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.Email}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="GSTNo">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> GSTNo </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.GSTNo}}
+                                        </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="PanNo">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> PanNo </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.PanNo}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="AddedBy">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> User Name
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxShow.gt-sm> {{element.AddedBy}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="IsDeleted" stickyEnd>
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm
+                                            class="w-60"> IsActive
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" fxHide fxShow.gt-sm class="w-60">
+                                            <mat-icon *ngIf="element.IsDeleted"
+                                                class="active-icon green-600 s-16">check_circle</mat-icon>
+                                            <mat-icon *ngIf="!element.IsDeleted"
+                                                class="active-icon red-500 s-16">close</mat-icon>
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="action" stickyEnd>
+                                        <mat-header-cell *matHeaderCellDef class="table-actions" style="color: white;">
+                                            Action
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element">
+                                            <button mat-icon-button (click)="onEdit(element)"><mat-icon
+                                                    title="Edit Menu" *ngIf="element.IsDeleted">edit</mat-icon></button>
+                                            <button mat-icon-button *ngIf="!element.IsDeleted"><mat-icon
+                                                    title="Edit Menu">highlight_off</mat-icon></button>
+                                            <button mat-icon-button (click)="onDeactive(element.SupplierId)"
+                                                color="warn"><mat-icon>delete_outline</mat-icon></button>
+
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="loading">
+                                        <mat-footer-cell *matFooterCellDef colspan="6">
+                                            loading data...
+                                        </mat-footer-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="noData">
+                                        <mat-footer-cell *matFooterCellDef colspan="6">
+                                            no data found...
+                                        </mat-footer-cell>
+                                    </ng-container>
+
+                                    <mat-header-row class="accent min-width-2400"
+                                        *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;"
+                                        class="element min-width-2400"
+                                        [@animate]="{value:'*',params:{y:'100%'}}"></mat-row>
+                                    <mat-footer-row *matFooterRowDef="['loading']"
+                                        [ngClass]="{'hide':DSSupplierMaster!=null}"></mat-footer-row>
+                                    <mat-footer-row *matFooterRowDef="['noData']"
+                                        [ngClass]="{'hide':!(DSSupplierMaster!=null && DSSupplierMaster.data.length==0)}"></mat-footer-row>
+                                </mat-table>
+                                <mat-paginator [pageSizeOptions]="[10, 25, 35, 100]" [pageSize]="30"
+                                    showFirstLastButtons (page)="getSupplierMasterList()">
+                                    
+                                </mat-paginator>
+                            </div>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

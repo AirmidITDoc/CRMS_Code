@@ -1,0 +1,88 @@
+.p-sm-24 {
+    padding: 10px !important;
+}
+
+app-doctortype-master {
+    .mat-header-row {
+        width: 800px;
+        max-width: 800px;
+        min-width: 800px;
+        font-weight: bold;
+    }
+
+    .mat-row {
+        width: 800px;
+        max-width: 800px;
+        min-width: 800px;
+    }
+
+    .mat-column-Id {
+        width: 120px;
+        max-width: 120px;
+        min-width: 120px;
+    }
+
+    .mat-column-DoctorType {
+        width: 300px;
+        max-width: 300px;
+        min-width: 300px;
+        text-align: left;
+        justify-content: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow: hidden !important;
+        display: inline-flex;
+        display: inline;
+        margin-right: 20px;
+        margin-top: 20px;
+    }
+   .mat-column-AddedByName {
+        width: 190px;
+        max-width: 190px;
+        min-width: 190px;
+        text-align: left;
+        justify-content: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow: hidden !important;
+        display: inline-flex;
+        display: inline;
+        margin-right: 20px;
+        margin-top: 20px;
+    }
+    .mat-column-IsDeleted {
+        width: 150px;
+        max-width: 150px;
+        min-width: 150px;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .mat-column-action {
+        // color: white !important;
+        width: 150px;
+        max-width: 150px;
+        min-width: 150px;
+        text-align: right;
+        justify-content: right;
+    }
+    .mat-icon-button {
+        padding: 0;
+        min-width: 0;
+        width: 40px;
+        height: 20px;
+        flex-shrink: 0;
+        line-height: 20px;
+        border-radius: 50%;
+    }
+}
+
+// .button-row button{
+//     margin: 5px;
+// }
+// .mat-radio-group{
+//     margin: 7px;
+//     margin-bottom: 10px;
+// }

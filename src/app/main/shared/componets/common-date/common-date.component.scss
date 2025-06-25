@@ -1,0 +1,37 @@
+.date-time-container {
+    display: flex;
+}
+
+.padding-div {
+    padding: 7px 20px 0 0;
+}
+.date-field, .time-field {
+    margin-right: 8px;
+}
+
+.dateField ::ng-deep .mat-form-field-flex {
+    // height: 42px;
+    height: auto;
+    width: 130px;
+    align-items: center;
+}
+
+.timeField ::ng-deep .mat-form-field-flex {
+    // height: 42px;
+    height: auto;
+    width: 119px;
+    align-items: center;
+}
+
+// app-common-date {
+::ng-deep.mat-dialog-container {
+    overflow: hidden;
+}
+// }
+.mat-form-field {
+    .material-icons {
+        color: #989898;
+        cursor: pointer;
+        font-size: 18px;
+    }
+}
